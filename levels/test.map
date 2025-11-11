@@ -1,0 +1,124 @@
+// Game: Godot
+// Format: Standard
+// entity 0
+{
+"_tb_textures" "textures;textures/Color Maps;textures/light-plank-flooring-unity"
+"classname" "worldspawn"
+// brush 0
+{
+( -128 -64 -16 ) ( -128 -63 -16 ) ( -128 -64 -15 ) "Color Maps/concrete_3" 0 0 0 1 1
+( -64 -128 -16 ) ( -64 -128 -15 ) ( -63 -128 -16 ) "Color Maps/concrete_3" 0 0 0 1 1
+( -64 -64 -16 ) ( -63 -64 -16 ) ( -64 -63 -16 ) "Color Maps/concrete_3" 0 0 0 1 1
+( 64 64 0 ) ( 64 65 0 ) ( 65 64 0 ) "Color Maps/concrete_3" 0 0 0 1 1
+( 64 128 16 ) ( 65 128 16 ) ( 64 128 17 ) "Color Maps/concrete_3" 0 0 0 1 1
+( 128 64 16 ) ( 128 64 17 ) ( 128 65 16 ) "Color Maps/concrete_3" 0 0 0 1 1
+}
+// brush 1
+{
+( 128 -128 -16 ) ( 128 -127 -16 ) ( 128 -128 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 128 -128 -16 ) ( 128 -128 -15 ) ( 129 -128 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 128 -128 -16 ) ( 129 -128 -16 ) ( 128 -127 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 128 112 ) ( 144 129 112 ) ( 145 128 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 128 0 ) ( 145 128 0 ) ( 144 128 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 128 0 ) ( 144 128 1 ) ( 144 129 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 2
+{
+( -144 -128 -16 ) ( -144 -127 -16 ) ( -144 -128 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -144 -128 -16 ) ( -144 -128 -15 ) ( -143 -128 -16 ) "Color Maps/brick_wall_tx_3" 272 0 0 1 1
+( -144 -128 -16 ) ( -143 -128 -16 ) ( -144 -127 -16 ) "Color Maps/brick_wall_tx_3" 272 0 0 1 1
+( -128 128 112 ) ( -128 129 112 ) ( -127 128 112 ) "Color Maps/brick_wall_tx_3" 272 0 0 1 1
+( -128 128 0 ) ( -127 128 0 ) ( -128 128 1 ) "Color Maps/brick_wall_tx_3" 272 0 0 1 1
+( -128 128 0 ) ( -128 128 1 ) ( -128 129 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 3
+{
+( -144 -144 -16 ) ( -144 -143 -16 ) ( -144 -144 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -144 -144 -16 ) ( -144 -144 -15 ) ( -143 -144 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -144 -144 -16 ) ( -143 -144 -16 ) ( -144 -143 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 -128 112 ) ( 144 -127 112 ) ( 145 -128 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 -128 0 ) ( 145 -128 0 ) ( 144 -128 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 -128 0 ) ( 144 -128 1 ) ( 144 -127 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 4
+{
+( -32 128 -16 ) ( -32 129 -16 ) ( -32 128 -15 ) "Color Maps/concrete_5" 0 0 0 1 1
+( -32 128 -16 ) ( -32 128 -15 ) ( -31 128 -16 ) "Color Maps/concrete_5" 0 0 0 1 1
+( -32 128 -16 ) ( -31 128 -16 ) ( -32 129 -16 ) "Color Maps/concrete_5" 0 0 0 1 1
+( 32 224 0 ) ( 32 225 0 ) ( 33 224 0 ) "Color Maps/concrete_5" 0 0 0 1 1
+( 32 224 0 ) ( 33 224 0 ) ( 32 224 1 ) "Color Maps/concrete_5" 0 0 0 1 1
+( 32 224 0 ) ( 32 224 1 ) ( 32 225 0 ) "Color Maps/concrete_5" 0 0 0 1 1
+}
+// brush 5
+{
+( 32 128 -16 ) ( 32 129 -16 ) ( 32 128 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 32 128 -16 ) ( 32 128 -15 ) ( 33 128 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 32 128 -16 ) ( 33 128 -16 ) ( 32 129 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 144 112 ) ( 144 145 112 ) ( 145 144 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 144 0 ) ( 145 144 0 ) ( 144 144 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 144 0 ) ( 144 144 1 ) ( 144 145 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 6
+{
+( -144 128 -16 ) ( -144 129 -16 ) ( -144 128 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -144 128 -16 ) ( -144 128 -15 ) ( -143 128 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -144 128 -16 ) ( -143 128 -16 ) ( -144 129 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 144 112 ) ( -32 145 112 ) ( -31 144 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 144 0 ) ( -31 144 0 ) ( -32 144 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 144 0 ) ( -32 144 1 ) ( -32 145 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 7
+{
+( -128 224 -16 ) ( -128 225 -16 ) ( -128 224 -15 ) "Color Maps/concrete_5" 0 0 0 1 1
+( -128 224 -16 ) ( -128 224 -15 ) ( -127 224 -16 ) "Color Maps/concrete_5" 0 0 0 1 1
+( -128 224 -16 ) ( -127 224 -16 ) ( -128 225 -16 ) "Color Maps/concrete_5" 0 0 0 1 1
+( 32 352 0 ) ( 32 353 0 ) ( 33 352 0 ) "Color Maps/concrete_5" 0 0 0 1 1
+( 32 432 0 ) ( 33 432 0 ) ( 32 432 1 ) "Color Maps/concrete_5" 0 0 0 1 1
+( 128 352 0 ) ( 128 352 1 ) ( 128 353 0 ) "Color Maps/concrete_5" 0 0 0 1 1
+}
+// brush 8
+{
+( -128 208 -16 ) ( -128 209 -16 ) ( -128 208 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -128 208 -16 ) ( -128 208 -15 ) ( -127 208 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -128 208 -16 ) ( -127 208 -16 ) ( -128 209 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 224 96 ) ( -32 225 96 ) ( -31 224 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 224 0 ) ( -31 224 0 ) ( -32 224 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 224 0 ) ( -32 224 1 ) ( -32 225 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 9
+{
+( 32 208 -16 ) ( 32 209 -16 ) ( 32 208 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 32 208 -16 ) ( 32 208 -15 ) ( 33 208 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 32 208 -16 ) ( 33 208 -16 ) ( 32 209 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 128 224 96 ) ( 128 225 96 ) ( 129 224 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 128 224 0 ) ( 129 224 0 ) ( 128 224 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 128 224 0 ) ( 128 224 1 ) ( 128 225 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 10
+{
+( 128 208 -16 ) ( 128 209 -16 ) ( 128 208 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 128 208 -16 ) ( 128 208 -15 ) ( 129 208 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 128 208 -16 ) ( 129 208 -16 ) ( 128 209 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 432 96 ) ( 144 433 96 ) ( 145 432 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 432 0 ) ( 145 432 0 ) ( 144 432 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 432 0 ) ( 144 432 1 ) ( 144 433 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 11
+{
+( -144 208 -16 ) ( -144 209 -16 ) ( -144 208 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -144 208 -16 ) ( -144 208 -15 ) ( -143 208 -16 ) "Color Maps/brick_wall_tx_3" 272 0 0 1 1
+( -144 208 -16 ) ( -143 208 -16 ) ( -144 209 -16 ) "Color Maps/brick_wall_tx_3" 272 0 0 1 1
+( -128 432 96 ) ( -128 433 96 ) ( -127 432 96 ) "Color Maps/brick_wall_tx_3" 272 0 0 1 1
+( -128 432 0 ) ( -127 432 0 ) ( -128 432 1 ) "Color Maps/brick_wall_tx_3" 272 0 0 1 1
+( -128 432 0 ) ( -128 432 1 ) ( -128 433 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 12
+{
+( -144 432 -16 ) ( -144 433 -16 ) ( -144 432 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -144 432 -16 ) ( -144 432 -15 ) ( -143 432 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -144 432 -16 ) ( -143 432 -16 ) ( -144 433 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 448 96 ) ( 144 449 96 ) ( 145 448 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 448 0 ) ( 145 448 0 ) ( 144 448 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 448 0 ) ( 144 448 1 ) ( 144 449 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+}
