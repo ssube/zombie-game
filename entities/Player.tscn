@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://busds31ha5tx1"]
+[gd_scene load_steps=12 format=3 uid="uid://busds31ha5tx1"]
 
 [ext_resource type="Script" uid="uid://dyudolkkkb4ut" path="res://scripts/ZE_Player.gd" id="1_ks8m5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_l1ths"]
+[ext_resource type="Script" uid="uid://cllu7i7unqk6u" path="res://scripts/ZC_Player.gd" id="4_25mxy"]
 [ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/ZC_Velocity.gd" id="5_a1f57"]
 [ext_resource type="Script" uid="uid://dlu5li3mn8w5y" path="res://scripts/ZC_Transform.gd" id="6_25mxy"]
+[ext_resource type="Script" uid="uid://cxm3pspus34o7" path="res://scripts/ZC_Input.gd" id="6_a1f57"]
 
 [sub_resource type="Resource" id="Resource_ks8m5"]
 script = ExtResource("6_25mxy")
@@ -15,11 +17,19 @@ script = ExtResource("5_a1f57")
 linear_velocity = Vector3(1, 0, 0)
 metadata/_custom_type_script = "uid://cixmecjncarw5"
 
+[sub_resource type="Resource" id="Resource_25mxy"]
+script = ExtResource("4_25mxy")
+metadata/_custom_type_script = "uid://cllu7i7unqk6u"
+
+[sub_resource type="Resource" id="Resource_dv4ir"]
+script = ExtResource("6_a1f57")
+metadata/_custom_type_script = "uid://cxm3pspus34o7"
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ks8m5"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ks8m5")
-component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_ks8m5"), SubResource("Resource_l1ths")])
+component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_ks8m5"), SubResource("Resource_l1ths"), SubResource("Resource_25mxy"), SubResource("Resource_dv4ir")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_ks8m5")
@@ -27,5 +37,5 @@ shape = SubResource("CylinderShape3D_ks8m5")
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1596278, -0.23529094)
 current = true

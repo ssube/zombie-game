@@ -3,7 +3,7 @@ extends System
 
 func query():
 	# Find all entities that have both transform and velocity
-	return q.with_all([ZC_Transform, ZC_Velocity])
+	return q.with_all([ZC_Transform, ZC_Velocity]).with_none([ZC_Player, ZC_Input])
 
 func process(entities: Array[Entity], _components: Array, delta: float):
 	# Process each entity in the array

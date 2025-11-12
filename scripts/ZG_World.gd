@@ -9,9 +9,11 @@ func _ready():
 	var e_player = $"World/Entities/Player"
 	ECS.world.add_entity(e_player)  # Add to ECS world
 
-	# Create the movement system
-	var movement_system = %ZS_MovementSystem
-	ECS.world.add_system(movement_system)
+	# Create the systems
+	var system_root = %Systems
+	for child in system_root.get_children():
+		if child is System:
+			ECS.world.add_system(child)
 
 func _process(delta):
 	# Process all systems
