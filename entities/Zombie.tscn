@@ -1,0 +1,47 @@
+[gd_scene load_steps=16 format=3 uid="uid://ds0q1crcrv862"]
+
+[ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/ZE_Zombie.gd" id="1_rffgv"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_2yl8o"]
+[ext_resource type="Script" uid="uid://dvvgjajqy6hg3" path="res://scripts/ZC_Enemy.gd" id="3_nswy3"]
+[ext_resource type="Script" uid="uid://dlu5li3mn8w5y" path="res://scripts/ZC_Transform.gd" id="4_4bumh"]
+[ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/ZC_Velocity.gd" id="5_tseq0"]
+[ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/ZC_Health.gd" id="6_nswy3"]
+[ext_resource type="Material" uid="uid://d1jglv2507aak" path="res://materials/ZombieDead.tres" id="7_l1o5o"]
+[ext_resource type="Material" uid="uid://bajoa8ksbfb81" path="res://materials/ZombieLive.tres" id="8_tfdn2"]
+[ext_resource type="Script" uid="uid://b8oatb3tdywrh" path="res://scripts/ZC_Skin.gd" id="9_7tmu0"]
+
+[sub_resource type="Resource" id="Resource_l1o5o"]
+script = ExtResource("3_nswy3")
+metadata/_custom_type_script = "uid://dvvgjajqy6hg3"
+
+[sub_resource type="Resource" id="Resource_tfdn2"]
+script = ExtResource("4_4bumh")
+metadata/_custom_type_script = "uid://dlu5li3mn8w5y"
+
+[sub_resource type="Resource" id="Resource_7tmu0"]
+script = ExtResource("5_tseq0")
+metadata/_custom_type_script = "uid://cixmecjncarw5"
+
+[sub_resource type="Resource" id="Resource_4bumh"]
+script = ExtResource("6_nswy3")
+metadata/_custom_type_script = "uid://0ndifcnh0nsp"
+
+[sub_resource type="Resource" id="Resource_wwun5"]
+script = ExtResource("9_7tmu0")
+material_healthy = ExtResource("8_tfdn2")
+material_injured = ExtResource("7_l1o5o")
+material_dead = ExtResource("7_l1o5o")
+skin_shape = NodePath("CSGCylinder3D")
+metadata/_custom_type_script = "uid://b8oatb3tdywrh"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4vf4t"]
+
+[node name="Zombie" type="RigidBody3D"]
+script = ExtResource("1_rffgv")
+component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_4vf4t")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+material = ExtResource("8_tfdn2")

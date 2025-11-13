@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2xp0y8vxoff3"]
+
+[ext_resource type="Script" uid="uid://5u6m4k3jk7ws" path="res://scripts/ZE_Item.gd" id="1_52t4y"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_i8roh"]
+
+[sub_resource type="Gradient" id="Gradient_52t4y"]
+colors = PackedColorArray(0.37024897, 0.2010321, 0.44293854, 1, 0.49060726, 0.64023155, 0.92395324, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ld8am"]
+noise_type = 4
+frequency = 0.0406
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3ygn7"]
+noise = SubResource("FastNoiseLite_ld8am")
+color_ramp = SubResource("Gradient_52t4y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d61iy"]
+albedo_texture = SubResource("NoiseTexture2D_3ygn7")
+
+[node name="Ball" type="RigidBody3D"]
+script = ExtResource("1_52t4y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_i8roh")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+material = SubResource("StandardMaterial3D_d61iy")

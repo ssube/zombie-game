@@ -7,3 +7,4 @@ class_name ZC_Weapon_Ranged
 @export var recoil_time: float = 0.25
 @export var reload_time: float = 5.0
 @export var ammo_capacity: int = 10
+@export var projectile_scene: PackedScene = null
