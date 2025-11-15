@@ -19,6 +19,14 @@ func _ready():
 		else:
 			printerr("Child is not a system: ", child.get_path())
 
+	# Create the observers
+	var observer_root = %Observers
+	for child in observer_root.get_children():
+		if child is Observer:
+			ECS.world.add_observer(child)
+		else:
+			printerr("Child is not an observer: ", child)
+
 func _process(delta):
 	# Process all systems
 	if ECS.world:

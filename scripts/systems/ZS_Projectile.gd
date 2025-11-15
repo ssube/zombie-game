@@ -11,7 +11,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 
 		if ray != null and ray.is_colliding():
 			var target = ray.get_collider()
-			# print("Bullet is colliding with: ", target)
+			print("Bullet is colliding with: ", target)
 
 			if target is Entity:
 				projectile.piercing -= 1
@@ -24,9 +24,6 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 					if flammable.ignite_on_hit:
 						var fire = ZC_Effect_Burning.new()
 						target.add_component(fire)
-
-						var effect_node = target.get_node(flammable.effect_path) as Node3D
-						effect_node.visible = true
 
 			if projectile.piercing <= 0:
 				print("Bullet has expired: ", entity)

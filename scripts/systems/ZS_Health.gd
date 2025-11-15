@@ -33,6 +33,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 					root.add_child(explosion)
 
 					# Remove the exploded entity
+					print("Entity has exploded: ", entity)
 					root.remove_child(entity)
 					ECS.world.remove_entity(entity)
 

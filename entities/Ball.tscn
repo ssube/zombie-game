@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d2xp0y8vxoff3"]
 
-[ext_resource type="Script" uid="uid://5u6m4k3jk7ws" path="res://scripts/ZE_Item.gd" id="1_52t4y"]
+[ext_resource type="Script" uid="uid://5u6m4k3jk7ws" path="res://scripts/entities/ZE_Item.gd" id="1_52t4y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i8roh"]
 

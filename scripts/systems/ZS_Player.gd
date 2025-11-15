@@ -37,8 +37,9 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		velocity.linear_velocity += velocity.gravity * delta
 
 		# Apply jump
-		if input.move_jump and abs(velocity.linear_velocity.y) < 0.1:
-			velocity.linear_velocity.y = input.jump_speed
+		if input.move_jump:
+				if abs(velocity.linear_velocity.y) < 0.1:
+					velocity.linear_velocity.y = input.jump_speed
 
 		# TODO: move this input the MovementSystem
 		# Sync to CharacterBody3D (Node assumed attached to entity)

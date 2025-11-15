@@ -13,13 +13,14 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 	if accumulated_delta < delta_interval:
 		return
 
-	accumulated_delta = 0.0
 	for entity in entities:
 		var burning := entity.get_component(ZC_Effect_Burning) as ZC_Effect_Burning
-		burning.time_remaining -= delta
+		burning.time_remaining -= accumulated_delta
 
 		var damage := ZC_Damage.new(burning.damage_per_second)
 		entity.add_component(damage)
 
 		if burning.time_remaining < 0:
 			entity.remove_component(ZC_Effect_Burning)
+
+	accumulated_delta = 0.0

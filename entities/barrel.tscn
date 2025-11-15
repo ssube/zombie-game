@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cq0idhwb5f2oq"]
+[gd_scene load_steps=11 format=3 uid="uid://cq0idhwb5f2oq"]
 
-[ext_resource type="Script" uid="uid://dhsuals8autq1" path="res://scripts/ZE_Barrel.gd" id="1_o8a62"]
+[ext_resource type="Script" uid="uid://dhsuals8autq1" path="res://scripts/entities/ZE_Barrel.gd" id="1_o8a62"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wrl38"]
-[ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/ZC_Flammable.gd" id="3_dwmog"]
+[ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/ZC_Flammable.gd" id="3_dwmog"]
 [ext_resource type="PackedScene" uid="uid://dqfrsv8nlncwj" path="res://effects/barrel_explosion.tscn" id="3_wrl38"]
-[ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/ZC_Health.gd" id="4_vlq2d"]
+[ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="4_vlq2d"]
+[ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="6_dwmog"]
 
 [sub_resource type="Resource" id="Resource_kpq4c"]
 script = ExtResource("3_dwmog")
@@ -27,18 +28,6 @@ albedo_color = Color(1, 0.24000001, 0.24000001, 1)
 height = 1.0
 radius = 0.4
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8a62"]
-transparency = 1
-albedo_color = Color(1, 0.20999998, 0.20999998, 0.5294118)
-billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="QuadMesh" id="QuadMesh_wrl38"]
-material = SubResource("StandardMaterial3D_o8a62")
-size = Vector2(0.5, 0.5)
-
 [node name="Barrel" type="RigidBody3D"]
 script = ExtResource("1_o8a62")
 component_resources = Array[ExtResource("2_wrl38")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl")])
@@ -54,12 +43,4 @@ shape = SubResource("CylinderShape3D_fn03q")
 
 [node name="Effects" type="Node3D" parent="."]
 
-[node name="FireEffect" type="Node3D" parent="Effects"]
-visible = false
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="Effects/FireEffect"]
-mesh = SubResource("QuadMesh_wrl38")
-emission_shape = 1
-emission_sphere_radius = 0.8
-gravity = Vector3(0, 1.5, 0)
-color = Color(1, 0.16000003, 0.16000003, 1)
+[node name="FireEffect" parent="Effects" instance=ExtResource("6_dwmog")]

@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqfrsv8nlncwj"]
+[gd_scene load_steps=7 format=3 uid="uid://dqfrsv8nlncwj"]
 
-[ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/EmitOnReady.gd" id="1_ma1qw"]
+[ext_resource type="Script" uid="uid://2b0anfdfvkft" path="res://scripts/events/EV_RemoveAfter.gd" id="1_ikohy"]
+[ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/events/EV_EmitOnReady.gd" id="1_ma1qw"]
+[ext_resource type="Script" uid="uid://yae4sdiptdy8" path="res://scripts/events/EV_BurnOnEnter.gd" id="3_34a0c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_148r6"]
 transparency = 1
@@ -11,10 +13,15 @@ material = SubResource("StandardMaterial3D_148r6")
 radius = 0.25
 height = 0.5
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_ma1qw"]
+radius = 10.0
+
 [node name="BarrelExplosion" type="Node3D"]
+script = ExtResource("1_ikohy")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 emitting = false
+amount = 20
 one_shot = true
 explosiveness = 0.5
 mesh = SubResource("CapsuleMesh_ma1qw")
@@ -23,3 +30,11 @@ gravity = Vector3(0, -4.5, 0)
 initial_velocity_min = 0.5
 initial_velocity_max = 4.0
 script = ExtResource("1_ma1qw")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("3_34a0c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_ma1qw")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
