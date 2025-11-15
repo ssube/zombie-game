@@ -20,6 +20,22 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			if skin != null and skin.material_dead != null:
 				var shape = entity.get_node(skin.skin_shape) as GeometryInstance3D
 				shape.material_override = skin.material_dead
+
+			if entity.has_component(ZC_Flammable):
+				var flammable: ZC_Flammable = entity.get_component(ZC_Flammable)
+				if flammable.explode_on_death:
+					var explosion = flammable.explosion_scene.instantiate() as Node3D
+					var entity_node: Node3D = entity.get_node(".") as Node3D
+
+					# Place the explosion at the same position as the entity
+					var root = entity.get_parent()
+					explosion.global_transform = entity_node.global_transform
+					root.add_child(explosion)
+
+					# Remove the exploded entity
+					root.remove_child(entity)
+					ECS.world.remove_entity(entity)
+
 		elif health.current_health < health.max_health:
 			if skin != null and skin.material_injured != null:
 				var shape = entity.get_node(skin.skin_shape) as GeometryInstance3D

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqfrsv8nlncwj"]
+
+[ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/EmitOnReady.gd" id="1_ma1qw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_148r6"]
+transparency = 1
+albedo_color = Color(1, 0.5176471, 0.23921569, 0.6627451)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ma1qw"]
+material = SubResource("StandardMaterial3D_148r6")
+radius = 0.25
+height = 0.5
+
+[node name="BarrelExplosion" type="Node3D"]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+emitting = false
+one_shot = true
+explosiveness = 0.5
+mesh = SubResource("CapsuleMesh_ma1qw")
+spread = 180.0
+gravity = Vector3(0, -4.5, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 4.0
+script = ExtResource("1_ma1qw")

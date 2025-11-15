@@ -1,9 +1,7 @@
 extends Node
 
-@onready var world: World = $"World"
-
 func _ready():
-	ECS.world = world
+	ECS.world = %World
 
 	# Create the entities
 	var entity_root = %Entities

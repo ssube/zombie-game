@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://c32dl721ugeb0"]
+[gd_scene load_steps=21 format=4 uid="uid://c32dl721ugeb0"]
 
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/ZG_World.gd" id="1_7ti0h"]
 [ext_resource type="Texture2D" uid="uid://bj7wuhjch143w" path="res://textures/Color Maps/concrete_3.png" id="1_ydrvd"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" uid="uid://cq8j5lp5vrtpp" path="res://scripts/ZS_Player.gd" id="8_j8ow8"]
 [ext_resource type="Script" uid="uid://cxrhjwcd6iqpy" path="res://scripts/ZS_Projectile.gd" id="9_fxog4"]
 [ext_resource type="Script" uid="uid://11pcc0wodow7" path="res://scripts/ZS_Health.gd" id="10_ydrvd"]
+[ext_resource type="Script" uid="uid://c803vhdp1tlj5" path="res://scripts/ZS_Fire.gd" id="11_mk7mw"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/Ball.tscn" id="13_7ti0h"]
+[ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/barrel.tscn" id="15_hg28n"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/Zombie.tscn" id="15_i8roh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8roh"]
@@ -70,31 +72,32 @@ unique_name_in_owner = true
 script = ExtResource("6_wpfpi")
 metadata/_custom_type_script = "uid://cdu5tlyk72uu4"
 
-[node name="TBLoader" type="TBLoader" parent="World"]
+[node name="Level" type="TBLoader" parent="World"]
 map_resource = "res://levels/test.map"
 
-[node name="Default Layer" type="Node3D" parent="World/TBLoader"]
+[node name="Default Layer" type="Node3D" parent="World/Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.346154, 2, 0)
 
-[node name="entity_0_geometry" type="MeshInstance3D" parent="World/TBLoader/Default Layer"]
+[node name="entity_0_geometry" type="MeshInstance3D" parent="World/Level/Default Layer"]
 mesh = SubResource("ArrayMesh_hq1ly")
 
-[node name="entity_0_geometry_col" type="StaticBody3D" parent="World/TBLoader/Default Layer"]
+[node name="entity_0_geometry_col" type="StaticBody3D" parent="World/Level/Default Layer"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/TBLoader/Default Layer/entity_0_geometry_col"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Level/Default Layer/entity_0_geometry_col"]
 shape = SubResource("ConcavePolygonShape3D_sndmc")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44136214, 4.1510324, 3.2275496)
-light_color = Color(0.62, 1, 0.639, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44136214, 4.1510324, 3.7576027)
+light_color = Color(0.62, 0.65800005, 1, 1)
+light_energy = 2.5
 shadow_enabled = true
 omni_range = 24.0
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.780468, 4.1510324, 2.7612)
-light_color = Color(1, 0.44, 0.44, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.780468, 4.1510324, 3.4046593)
+light_energy = 2.5
 shadow_enabled = true
-omni_range = 14.735896
+omni_range = 14.736
 
 [node name="Systems" type="Node" parent="World"]
 unique_name_in_owner = true
@@ -119,6 +122,9 @@ metadata/_custom_type_script = "uid://cxrhjwcd6iqpy"
 [node name="ZS_HealthSystem" type="Node" parent="World/Systems"]
 script = ExtResource("10_ydrvd")
 
+[node name="ZS_FireSystem" type="Node" parent="World/Systems"]
+script = ExtResource("11_mk7mw")
+
 [node name="Entities" type="Node" parent="World"]
 unique_name_in_owner = true
 
@@ -126,13 +132,28 @@ unique_name_in_owner = true
 transform = Transform3D(-0.11398348, 0, -0.99348265, 0, 1, 0, 0.99348265, 0, -0.11398348, 0, 1.3329782, 0)
 
 [node name="Zombie" parent="World/Entities" instance=ExtResource("15_i8roh")]
-transform = Transform3D(1, 0, 0, 0, 0.7285623, -0.68497956, 0, 0.68497956, 0.7285623, 21.816628, 1.802968, -4.1025686)
+transform = Transform3D(1, 0, 0, 0, 0.90627825, -0.42268148, 0, 0.42268148, 0.90627825, 21.816628, 1.802968, -5.1025686)
+
+[node name="Zombie3" parent="World/Entities" instance=ExtResource("15_i8roh")]
+transform = Transform3D(1, 0, 0, 0, 0.99732083, 0.07315123, 0, -0.07315123, 0.99732083, 17.698277, 1.802968, -4.392784)
+
+[node name="Zombie4" parent="World/Entities" instance=ExtResource("15_i8roh")]
+transform = Transform3D(1, 0, 0, 0, 0.99732083, 0.07315123, 0, -0.07315123, 0.99732083, 24.382843, 1.802968, -2.9252882)
+
+[node name="Zombie5" parent="World/Entities" instance=ExtResource("15_i8roh")]
+transform = Transform3D(1, 0, 0, 0, 0.99732083, 0.07315123, 0, -0.07315123, 0.99732083, 24.411306, 1.802968, 4.4887066)
+
+[node name="Zombie6" parent="World/Entities" instance=ExtResource("15_i8roh")]
+transform = Transform3D(1, 0, 0, 0, 0.99732083, 0.07315123, 0, -0.07315123, 0.99732083, 16.468351, 1.802968, 4.715388)
 
 [node name="Zombie2" parent="World/Entities" instance=ExtResource("15_i8roh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.09933, 1.1265125, 4.2439933)
+transform = Transform3D(1, 0, 0, 0, 0.97516483, 0.22148041, 0, -0.22148041, 0.97516483, 20.559465, 1.1265125, 5.062609)
 
 [node name="Ball" parent="World/Entities" instance=ExtResource("13_7ti0h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.531044, 1.6354523, -0.10224354)
 
 [node name="Ball2" parent="World/Entities" instance=ExtResource("13_7ti0h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0457096, 1.4698086, -4.500613)
+
+[node name="Barrel" parent="World/Entities" instance=ExtResource("15_hg28n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.740712, 1.5573654, -3.619173)
