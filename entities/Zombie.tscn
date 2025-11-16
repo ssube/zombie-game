@@ -94,7 +94,7 @@ metadata/_custom_type_script = "uid://c84st521ytmk3"
 script = ExtResource("16_s140b")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
-[node name="ZB_IfSelfAlive" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive"]
+[node name="CheckHealth" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive"]
 script = ExtResource("17_t553y")
 
 [node name="AttackOrWander" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive"]
@@ -155,3 +155,4 @@ script = ExtResource("22_cw5iy")
 
 [node name="ZB_MoveToTarget" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander"]
 script = ExtResource("23_bihbe")
+move_speed = null

@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://qwwlyenuba3g"]
+
+[ext_resource type="Script" uid="uid://m5nxypqqfkd" path="res://scripts/entities/ZE_Door.gd" id="1_qm17t"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wyt2q"]
+[ext_resource type="Script" uid="uid://drtcgjkt6bpf" path="res://scripts/components/ZC_Door_Rotate.gd" id="3_auxoi"]
+
+[sub_resource type="Resource" id="Resource_q8gv4"]
+script = ExtResource("3_auxoi")
+open_rotation_2 = Vector3(0, 90, 0)
+metadata/_custom_type_script = "uid://drtcgjkt6bpf"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nynkh"]
+size = Vector3(3, 4, 0.2)
+
+[node name="Door" type="StaticBody3D"]
+script = ExtResource("1_qm17t")
+component_resources = Array[ExtResource("2_wyt2q")]([SubResource("Resource_q8gv4")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
+shape = SubResource("BoxShape3D_nynkh")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
+size = Vector3(3, 4, 0.2)

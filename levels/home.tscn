@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://c32dl721ugeb0"]
+[gd_scene load_steps=24 format=4 uid="uid://c32dl721ugeb0"]
 
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/ZG_World.gd" id="1_7ti0h"]
 [ext_resource type="Texture2D" uid="uid://bj7wuhjch143w" path="res://textures/Color Maps/concrete_3.png" id="1_ydrvd"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/Ball.tscn" id="13_7ti0h"]
 [ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/barrel.tscn" id="15_hg28n"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/Zombie.tscn" id="15_i8roh"]
+[ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/Door.tscn" id="17_bk7mf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8roh"]
 albedo_texture = ExtResource("1_ydrvd")
@@ -181,3 +182,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.310673, 1.5573654, -2.3214
 
 [node name="Barrel3" parent="World/Entities" instance=ExtResource("15_hg28n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.35758, 1.5573654, 2.0149539)
+
+[node name="Door" parent="World/Entities" instance=ExtResource("17_bk7mf")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.5, 0, 1.352)
