@@ -1,6 +1,8 @@
 class_name ZS_PlayerSystem
 extends System
 
+var last_shimmer: Entity = null
+
 func query():
 	return q.with_all([ZC_Transform, ZC_Velocity, ZC_Player, ZC_Input])
 
@@ -8,6 +10,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 	for entity in entities:
 		var transform = entity.get_component(ZC_Transform) as ZC_Transform
 		var velocity = entity.get_component(ZC_Velocity) as ZC_Velocity
+		var player = entity.get_component(ZC_Player) as ZC_Player
 		var input = entity.get_component(ZC_Input) as ZC_Input
 
 		var body := entity.get_node(".") as CharacterBody3D
@@ -50,6 +53,25 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		# Spawn projectiles
 		if input.use_attack:
 			_spawn_projectile(entity, body)
+
+		# Highlight interactive items
+		var ray = entity.get_node(player.view_ray) as RayCast3D
+		if ray.is_colliding():
+			var collider = ray.get_collider()
+			if collider is Entity and collider != last_shimmer:
+				if last_shimmer != null:
+					last_shimmer.remove_component(ZC_Shimmer)
+					last_shimmer = null
+
+				if collider.has_component(ZC_Interactive) and not collider.has_component(ZC_Shimmer):
+					var interactive = collider.get_component(ZC_Interactive) as ZC_Interactive
+					var shimmer = ZC_Shimmer.from_interactive(interactive)
+					collider.add_component(shimmer)
+					last_shimmer = collider
+		else:
+			if last_shimmer != null:
+				last_shimmer.remove_component(ZC_Shimmer)
+				last_shimmer = null
 
 		# Update ECS transform from actual node position
 		transform.position = body.global_position

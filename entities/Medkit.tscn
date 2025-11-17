@@ -1,6 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbt0pagry5h5w"]
+[gd_scene load_steps=8 format=3 uid="uid://bbt0pagry5h5w"]
 
 [ext_resource type="Script" uid="uid://diqnbh8glii7x" path="res://scripts/entities/ZE_Food.gd" id="1_u378d"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_hvtkh"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/ZC_Interactive.gd" id="3_402fv"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/Highlight.tres" id="4_u378d"]
+
+[sub_resource type="Resource" id="Resource_hvtkh"]
+script = ExtResource("3_402fv")
+shimmer_material = ExtResource("4_u378d")
+shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
+metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_miylq"]
 albedo_color = Color(0.14999998, 0.6883334, 1, 1)
@@ -10,6 +19,7 @@ size = Vector3(0.5, 0.1, 0.5)
 
 [node name="Medkit" type="RigidBody3D"]
 script = ExtResource("1_u378d")
+component_resources = Array[ExtResource("2_hvtkh")]([SubResource("Resource_hvtkh")])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 size = Vector3(0.5, 0.1, 0.5)

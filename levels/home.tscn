@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://c32dl721ugeb0"]
+[gd_scene load_steps=26 format=4 uid="uid://c32dl721ugeb0"]
 
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/ZG_World.gd" id="1_7ti0h"]
 [ext_resource type="Texture2D" uid="uid://bj7wuhjch143w" path="res://textures/Color Maps/concrete_3.png" id="1_ydrvd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cdu5tlyk72uu4" path="res://addons/gecs/ecs/world.gd" id="6_wpfpi"]
 [ext_resource type="Script" uid="uid://ccykut6yrev33" path="res://scripts/systems/ZS_Movement.gd" id="7_4q61s"]
 [ext_resource type="Script" uid="uid://dtr4nknl4vi2g" path="res://scripts/systems/ZS_Input.gd" id="7_l4aka"]
+[ext_resource type="Script" uid="uid://bk1lb8nw4ojex" path="res://scripts/observers/ZO_Shimmer.gd" id="7_sndmc"]
 [ext_resource type="Script" uid="uid://cq8j5lp5vrtpp" path="res://scripts/systems/ZS_Player.gd" id="8_j8ow8"]
 [ext_resource type="Script" uid="uid://cxrhjwcd6iqpy" path="res://scripts/systems/ZS_Projectile.gd" id="9_fxog4"]
 [ext_resource type="Script" uid="uid://11pcc0wodow7" path="res://scripts/systems/ZS_Health.gd" id="10_ydrvd"]
@@ -17,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/barrel.tscn" id="15_hg28n"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/Zombie.tscn" id="15_i8roh"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/Door.tscn" id="17_bk7mf"]
+[ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/Medkit.tscn" id="18_hq1ly"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8roh"]
 albedo_texture = ExtResource("1_ydrvd")
@@ -118,6 +120,9 @@ unique_name_in_owner = true
 [node name="ZO_FireObserver" type="Node" parent="World/Observers"]
 script = ExtResource("6_hg28n")
 
+[node name="ZO_ShimmerObserver" type="Node" parent="World/Observers"]
+script = ExtResource("7_sndmc")
+
 [node name="Systems" type="Node" parent="World"]
 unique_name_in_owner = true
 
@@ -184,4 +189,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.310673, 1.5573654, -2.3214
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.35758, 1.5573654, 2.0149539)
 
 [node name="Door" parent="World/Entities" instance=ExtResource("17_bk7mf")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.5, 0, 1.352)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.5, 0, 1.5)
+
+[node name="Medkit" parent="World/Entities" instance=ExtResource("18_hq1ly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.392788, 0.13761882, 5.1092467)

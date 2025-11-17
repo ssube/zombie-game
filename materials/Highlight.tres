@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bvab0lnhkpasr"]
+
+[ext_resource type="Shader" uid="uid://7jsdh7grpbqu" path="res://shaders/highlight.gdshader" id="1_f87ip"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_f87ip")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_speed = 0.50000002375
+shader_parameter/shine_width = 1.0
+shader_parameter/cycle_interval = 3.0000001425
+shader_parameter/angle_fade = 1.0
+shader_parameter/x_direction = 0.5000000712500001
+shader_parameter/y_direction = 0.0
+shader_parameter/z_direction = 1.0
