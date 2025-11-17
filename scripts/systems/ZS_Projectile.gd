@@ -27,6 +27,6 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 
 			if projectile.piercing <= 0:
 				print("Bullet has expired: ", entity)
+				ECS.world.remove_entity(entity)
 				var root := entity.get_parent()
 				root.remove_child(entity)
-				ECS.world.remove_entity(entity)

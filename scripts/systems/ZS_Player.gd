@@ -1,7 +1,7 @@
 class_name ZS_PlayerSystem
 extends System
 
-var last_shimmer: Entity = null
+var last_shimmer: Dictionary = {} # dict for multiplayer
 
 func query():
 	return q.with_all([ZC_Transform, ZC_Velocity, ZC_Player, ZC_Input])
@@ -58,20 +58,46 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		var ray = entity.get_node(player.view_ray) as RayCast3D
 		if ray.is_colliding():
 			var collider = ray.get_collider()
-			if collider is Entity and collider != last_shimmer:
-				if last_shimmer != null:
-					last_shimmer.remove_component(ZC_Shimmer)
-					last_shimmer = null
 
-				if collider.has_component(ZC_Interactive) and not collider.has_component(ZC_Shimmer):
-					var interactive = collider.get_component(ZC_Interactive) as ZC_Interactive
-					var shimmer = ZC_Shimmer.from_interactive(interactive)
-					collider.add_component(shimmer)
-					last_shimmer = collider
+			# Use interactive items
+			if collider is Entity:
+				if input.use_interact and collider.has_component(ZC_Interactive):
+					if collider.has_component(ZC_Key):
+						var key = collider.get_component(ZC_Key)
+						player.add_key(key.name)
+						print("got key: ", key.name)
+
+					if collider.has_component(ZC_Door):
+						var door = collider.get_component(ZC_Door) as ZC_Door
+						if door.is_locked:
+							if player.has_key(door.key_name):
+								door.is_locked = false
+								print("used key: ", door.key_name)
+							else:
+								print("need key: ", door.key_name)
+
+						if door.open_on_use and not door.is_locked:
+							if collider.has_component(ZC_Open):
+								collider.remove_component(ZC_Open)
+							else:
+								collider.add_component(ZC_Open.new())
+
+							print("door is open: ", collider.has_component(ZC_Open))
+
+				if collider != last_shimmer.get(entity):
+					if entity in last_shimmer:
+						last_shimmer[entity].remove_component(ZC_Shimmer)
+						last_shimmer.erase(entity)
+
+					if collider.has_component(ZC_Interactive) and not collider.has_component(ZC_Shimmer):
+						var interactive = collider.get_component(ZC_Interactive) as ZC_Interactive
+						var shimmer = ZC_Shimmer.from_interactive(interactive)
+						collider.add_component(shimmer)
+						last_shimmer[entity] = collider
 		else:
-			if last_shimmer != null:
-				last_shimmer.remove_component(ZC_Shimmer)
-				last_shimmer = null
+			if entity in last_shimmer:
+				last_shimmer[entity].remove_component(ZC_Shimmer)
+				last_shimmer.erase(entity)
 
 		# Update ECS transform from actual node position
 		transform.position = body.global_position

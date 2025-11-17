@@ -1,0 +1,35 @@
+[gd_scene load_steps=10 format=3 uid="uid://kod7e8o8xpep"]
+
+[ext_resource type="Script" uid="uid://vgk3yi0ub4yr" path="res://scripts/entities/ZE_Key.gd" id="1_lwijo"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_xagmd"]
+[ext_resource type="Script" uid="uid://q5lsf8fn6s2" path="res://scripts/components/ZC_Key.gd" id="3_478x2"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/ZC_Interactive.gd" id="4_nq5s6"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/Highlight.tres" id="5_r17xf"]
+
+[sub_resource type="Resource" id="Resource_nq5s6"]
+script = ExtResource("3_478x2")
+name = "door"
+metadata/_custom_type_script = "uid://q5lsf8fn6s2"
+
+[sub_resource type="Resource" id="Resource_g03v2"]
+script = ExtResource("4_nq5s6")
+shimmer_material = ExtResource("5_r17xf")
+shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
+metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2nk70"]
+size = Vector3(0.8, 0.2, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xagmd"]
+albedo_color = Color(1, 0.6509804, 0, 1)
+
+[node name="Key" type="RigidBody3D"]
+script = ExtResource("1_lwijo")
+component_resources = Array[ExtResource("2_xagmd")]([SubResource("Resource_nq5s6"), SubResource("Resource_g03v2")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_2nk70")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.8, 0.2, 0.8)
+material = SubResource("StandardMaterial3D_xagmd")

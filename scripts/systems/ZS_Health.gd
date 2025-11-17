@@ -34,8 +34,8 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 
 					# Remove the exploded entity
 					print("Entity has exploded: ", entity)
-					root.remove_child(entity)
 					ECS.world.remove_entity(entity)
+					root.remove_child(entity)
 
 		elif health.current_health < health.max_health:
 			if skin != null and skin.material_injured != null:

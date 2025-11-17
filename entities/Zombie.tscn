@@ -59,7 +59,7 @@ metadata/_custom_type_script = "uid://jokkv7skgimj"
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4vf4t"]
 
-[node name="Zombie" type="CharacterBody3D"]
+[node name="Zombie" type="RigidBody3D"]
 script = ExtResource("1_rffgv")
 component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd")])
 
@@ -75,15 +75,12 @@ material = ExtResource("8_tfdn2")
 
 [node name="Blackboard" type="Node" parent="."]
 script = ExtResource("13_1if3s")
-blackboard = {
-"x": false
-}
 metadata/_custom_type_script = "uid://dme5f24l0edsf"
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("14_ods0y")
 blackboard = NodePath("../Blackboard")
-actor = NodePath("..")
+actor = NodePath("")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 
 [node name="UntilFailDecorator" type="Node" parent="BeehaveTree"]
@@ -155,4 +152,3 @@ script = ExtResource("22_cw5iy")
 
 [node name="ZB_MoveToTarget" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander"]
 script = ExtResource("23_bihbe")
-move_speed = null

@@ -33,6 +33,10 @@ enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/chara
 
 import/blender/enabled=false
 
+[gecs]
+
+settings/debug_mode=true
+
 [input]
 
 move_forward={
