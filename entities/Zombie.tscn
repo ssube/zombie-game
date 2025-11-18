@@ -80,7 +80,7 @@ metadata/_custom_type_script = "uid://dme5f24l0edsf"
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("14_ods0y")
 blackboard = NodePath("../Blackboard")
-actor = NodePath("")
+actor = NodePath("..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 
 [node name="UntilFailDecorator" type="Node" parent="BeehaveTree"]
@@ -102,12 +102,9 @@ metadata/_custom_type_script = "uid://8hn4kne15ac5"
 script = ExtResource("16_s140b")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
-[node name="ZB_IfTargetNearby" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/AttackNearbyPlayer"]
-script = ExtResource("20_kv3li")
-
 [node name="ZB_IfPlayerNearby" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/AttackNearbyPlayer"]
 script = ExtResource("17_7t0nl")
-detection_range = 1.0
+detection_range = 2.0
 
 [node name="ZB_AttackVisiblePlayer" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/AttackNearbyPlayer"]
 script = ExtResource("21_8mkit")
@@ -125,6 +122,10 @@ metadata/_custom_type_script = "uid://dyb15yih6xr3a"
 
 [node name="ZB_TargetVisiblePlayer" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/TargetNearestPlayer"]
 script = ExtResource("19_t553y")
+
+[node name="ZB_MoveToTarget" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/TargetNearestPlayer"]
+script = ExtResource("23_bihbe")
+metadata/_custom_type_script = "uid://uapjco86iuf3"
 
 [node name="ResetRandomWander" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander"]
 script = ExtResource("16_s140b")
@@ -152,3 +153,4 @@ script = ExtResource("22_cw5iy")
 
 [node name="ZB_MoveToTarget" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander"]
 script = ExtResource("23_bihbe")
+metadata/_custom_type_script = "uid://uapjco86iuf3"

@@ -14,11 +14,14 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		var target_offset = target_position - actor3d.global_position
 
 		if actor3d is RigidBody3D:
-			actor3d.apply_force((target_position - actor3d.global_position) * force_multiplier)
+			actor3d.apply_force(target_offset * force_multiplier)
 			return SUCCESS
 		elif actor3d is CharacterBody3D:
 			actor3d.velocity = target_offset.max(max_move_vector) * force_multiplier
 			# actor3d.move_and_slide()
 			# print("TODO: move character by: ", actor3d.velocity)
+			return SUCCESS
+		else:
+			printerr("Unknown player type: ", actor3d.get_class())
 
 	return FAILURE

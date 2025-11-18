@@ -13,6 +13,9 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			var target = ray.get_collider()
 			print("Bullet is colliding with: ", target)
 
+			if target is RigidBody3D:
+				print("TODO: handle collision forces")
+
 			if target is Entity:
 				projectile.piercing -= 1
 				if target.has_component(ZC_Health):

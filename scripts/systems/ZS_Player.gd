@@ -50,6 +50,10 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		body.move_and_slide()
 		_handle_collisions(body, delta)
 
+		# Pause menu
+		if input.game_pause:
+			%Hud.toggle_pause()
+
 		# Spawn projectiles
 		if input.use_attack:
 			_spawn_projectile(entity, body)
@@ -62,9 +66,22 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			# Use interactive items
 			if collider is Entity:
 				if input.use_interact and collider.has_component(ZC_Interactive):
+					if collider.has_component(ZC_Food):
+						var food = collider.get_component(ZC_Food) as ZC_Food
+						var health = entity.get_component(ZC_Health) as ZC_Health
+						health.current_health = min(health.max_health, health.current_health + food.health)
+
 					if collider.has_component(ZC_Key):
 						var key = collider.get_component(ZC_Key)
 						player.add_key(key.name)
+
+						for shimmer_key in last_shimmer.keys():
+							var shimmer_node = last_shimmer[shimmer_key]
+							if collider == shimmer_node:
+								last_shimmer.erase(shimmer_key)
+
+						ECS.world.remove_entity(collider)
+						collider.get_parent().remove_child(collider)
 						print("got key: ", key.name)
 
 					if collider.has_component(ZC_Door):

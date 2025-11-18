@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://c32dl721ugeb0"]
+[gd_scene load_steps=36 format=4 uid="uid://c32dl721ugeb0"]
 
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/ZG_World.gd" id="1_7ti0h"]
 [ext_resource type="Texture2D" uid="uid://bj7wuhjch143w" path="res://textures/Color Maps/concrete_3.png" id="1_ydrvd"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cq8j5lp5vrtpp" path="res://scripts/systems/ZS_Player.gd" id="8_j8ow8"]
 [ext_resource type="PackedScene" uid="uid://kod7e8o8xpep" path="res://entities/key.tscn" id="9_6dign"]
 [ext_resource type="Script" uid="uid://cxrhjwcd6iqpy" path="res://scripts/systems/ZS_Projectile.gd" id="9_fxog4"]
+[ext_resource type="Script" uid="uid://65x3uh6mv2rn" path="res://scripts/observers/ZO_Hud.gd" id="9_o1gi5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="10_mk7mw"]
 [ext_resource type="Script" uid="uid://11pcc0wodow7" path="res://scripts/systems/ZS_Health.gd" id="10_ydrvd"]
 [ext_resource type="Script" uid="uid://c803vhdp1tlj5" path="res://scripts/systems/ZS_Fire.gd" id="11_mk7mw"]
@@ -23,8 +24,9 @@
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/Door.tscn" id="17_bk7mf"]
 [ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/Medkit.tscn" id="18_hq1ly"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/ZC_Interactive.gd" id="21_ly2mq"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/Highlight.tres" id="22_ohs1m"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/DoorHighlight.tres" id="22_ohs1m"]
 [ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/ZC_Door.gd" id="23_o1gi5"]
+[ext_resource type="PackedScene" uid="uid://vcyq2fbg0dts" path="res://menus/hud.tscn" id="26_ohs1m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8roh"]
 albedo_texture = ExtResource("1_ydrvd")
@@ -145,6 +147,9 @@ script = ExtResource("7_sndmc")
 [node name="ZO_DoorObserver" type="Node" parent="World/Observers"]
 script = ExtResource("8_0w67r")
 
+[node name="ZO_HudObserver" type="Node" parent="World/Observers"]
+script = ExtResource("9_o1gi5")
+
 [node name="Systems" type="Node" parent="World"]
 unique_name_in_owner = true
 
@@ -154,6 +159,11 @@ metadata/_custom_type_script = "uid://dtr4nknl4vi2g"
 
 [node name="ZS_PlayerSystem" type="Node" parent="World/Systems"]
 script = ExtResource("8_j8ow8")
+group = null
+process_empty = null
+active = null
+parallel_processing = null
+parallel_threshold = null
 metadata/_custom_type_script = "uid://cq8j5lp5vrtpp"
 
 [node name="ZS_MovementSystem" type="Node" parent="World/Systems"]
@@ -219,3 +229,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.392788, 0.13761882, 5.1092
 
 [node name="Key" parent="World/Entities" instance=ExtResource("9_6dign")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1653585, 0.100000955, 4.86876)
+
+[node name="Hud" parent="." instance=ExtResource("26_ohs1m")]
+unique_name_in_owner = true

@@ -36,6 +36,8 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		else:
 			input.turn_direction.z = 0
 
+		input.game_pause = Input.is_action_just_pressed("game_pause")
+
 		input.move_jump = Input.is_action_just_pressed("move_jump")
 		input.move_crouch = Input.is_action_pressed("move_crouch")
 		input.move_sprint = Input.is_action_pressed("move_sprint")
