@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://c32dl721ugeb0"]
+[gd_scene load_steps=39 format=4 uid="uid://c32dl721ugeb0"]
 
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/ZG_World.gd" id="1_7ti0h"]
 [ext_resource type="Texture2D" uid="uid://bj7wuhjch143w" path="res://textures/Color Maps/concrete_3.png" id="1_ydrvd"]
@@ -84,6 +84,20 @@ geometry_source_group_name = &"nav"
 region_merge_size = 5.0
 filter_ledge_spans = true
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o1gi5"]
+sky_top_color = Color(0.35032377, 0.43960616, 0.67056155, 1)
+sky_horizon_color = Color(0.6, 0.6784314, 0.6313726, 1)
+ground_horizon_color = Color(0.6, 0.6784314, 0.6313726, 1)
+ground_curve = 0.05
+
+[sub_resource type="Sky" id="Sky_b6wpd"]
+sky_material = SubResource("ProceduralSkyMaterial_o1gi5")
+
+[sub_resource type="Environment" id="Environment_u1aa1"]
+background_mode = 2
+sky = SubResource("Sky_b6wpd")
+ambient_light_source = 3
+
 [sub_resource type="Resource" id="Resource_auxoi"]
 script = ExtResource("21_ly2mq")
 shimmer_material = ExtResource("22_ohs1m")
@@ -134,6 +148,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.780468, 4.1510324, 3.40465
 light_energy = 2.5
 shadow_enabled = true
 omni_range = 14.736
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_u1aa1")
 
 [node name="Observers" type="Node" parent="World"]
 unique_name_in_owner = true
@@ -220,10 +237,10 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.5
 component_resources = Array[ExtResource("10_mk7mw")]([SubResource("Resource_auxoi"), SubResource("Resource_b6wpd")])
 
 [node name="Medkit" parent="World/Entities" instance=ExtResource("18_hq1ly")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.392788, 0.13761882, 5.1092467)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.392788, 0.5398429, 5.1092467)
 
 [node name="Key" parent="World/Entities" instance=ExtResource("9_6dign")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1653585, 0.100000955, 4.86876)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1653585, 0.54704344, 4.86876)
 
 [node name="Hud" parent="." instance=ExtResource("26_ohs1m")]
 unique_name_in_owner = true

@@ -69,6 +69,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			var collider = ray.get_collider()
 
 			if collider != last_shimmer.get(entity):
+				%Hud.reset_crosshair_color()
 				remove_shimmer(entity)
 
 			# Use interactive items

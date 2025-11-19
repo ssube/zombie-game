@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s4e23"]
 albedo_color = Color(1, 0.24000001, 0.24000001, 1)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_fn03q"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dwmog"]
 height = 1.0
 radius = 0.4
 
@@ -39,8 +39,9 @@ sides = 6
 material = SubResource("StandardMaterial3D_s4e23")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_fn03q")
+shape = SubResource("CylinderShape3D_dwmog")
 
 [node name="Effects" type="Node3D" parent="."]
 
 [node name="FireEffect" parent="Effects" instance=ExtResource("6_dwmog")]
+visible = false

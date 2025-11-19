@@ -40,6 +40,7 @@ current_health = 50
 metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_idcse"]
+height = 2.25
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ks8m5")
@@ -52,16 +53,17 @@ shape = SubResource("CapsuleShape3D_idcse")
 sides = 6
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1596278, -0.23529094)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1596278, -0.19284528)
 current = true
 
 [node name="ProjectileMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6388678, -0.89382267)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6388678, -1.004184)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.542)
 target_position = Vector3(0, 0, -2)
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1.5207441)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1.4085677)
 radius = 0.1
+sides = 6

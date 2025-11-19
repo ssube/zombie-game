@@ -9,6 +9,9 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		var damage := entity.get_component(ZC_Damage) as ZC_Damage
 		var health := entity.get_component(ZC_Health) as ZC_Health
 		var skin := entity.get_component(ZC_Skin) as ZC_Skin
+		
+		if damage == null:
+			continue
 
 		health.current_health -= floor(damage.amount)
 		entity.remove_component(damage)

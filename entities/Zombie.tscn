@@ -72,6 +72,7 @@ material = ExtResource("8_tfdn2")
 [node name="Effects" type="Node3D" parent="."]
 
 [node name="FireEffect" parent="Effects" instance=ExtResource("11_7tmu0")]
+visible = false
 
 [node name="Blackboard" type="Node" parent="."]
 script = ExtResource("13_1if3s")

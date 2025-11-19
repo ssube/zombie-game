@@ -20,14 +20,14 @@ metadata/_custom_type_script = "uid://c4bbaiyswechl"
 albedo_color = Color(0.14999998, 0.6883334, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_60dmo"]
-size = Vector3(0.8, 0.1, 0.8)
+size = Vector3(0.8, 0.2, 0.8)
 
 [node name="Medkit" type="RigidBody3D"]
 script = ExtResource("1_u378d")
 component_resources = Array[ExtResource("2_hvtkh")]([SubResource("Resource_hvtkh"), SubResource("Resource_402fv")])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-size = Vector3(0.8, 0.1, 0.8)
+size = Vector3(0.8, 0.2, 0.8)
 material = SubResource("StandardMaterial3D_miylq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
