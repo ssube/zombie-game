@@ -159,11 +159,6 @@ metadata/_custom_type_script = "uid://dtr4nknl4vi2g"
 
 [node name="ZS_PlayerSystem" type="Node" parent="World/Systems"]
 script = ExtResource("8_j8ow8")
-group = null
-process_empty = null
-active = null
-parallel_processing = null
-parallel_threshold = null
 metadata/_custom_type_script = "uid://cq8j5lp5vrtpp"
 
 [node name="ZS_MovementSystem" type="Node" parent="World/Systems"]
@@ -221,7 +216,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.310673, 1.5573654, -2.3214
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.35758, 1.5573654, 2.0149539)
 
 [node name="Door" parent="World/Entities" instance=ExtResource("17_bk7mf")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.5, 0, 1.5)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.5, 0, 2)
 component_resources = Array[ExtResource("10_mk7mw")]([SubResource("Resource_auxoi"), SubResource("Resource_b6wpd")])
 
 [node name="Medkit" parent="World/Entities" instance=ExtResource("18_hq1ly")]

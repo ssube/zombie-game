@@ -39,16 +39,17 @@ script = ExtResource("9_idcse")
 current_health = 50
 metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ks8m5"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_idcse"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ks8m5")
 component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_ks8m5"), SubResource("Resource_l1ths"), SubResource("Resource_25mxy"), SubResource("Resource_dv4ir"), SubResource("Resource_idcse"), SubResource("Resource_p37y2")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_ks8m5")
+shape = SubResource("CapsuleShape3D_idcse")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+sides = 6
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1596278, -0.23529094)

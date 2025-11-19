@@ -1,12 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://vcyq2fbg0dts"]
 
 [ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/menus/ZM_Hud.gd" id="1_633jc"]
+[ext_resource type="Texture2D" uid="uid://dwp1uqi51ytw3" path="res://textures/crosshair.png" id="2_rglhv"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_633jc"]
-width = 64
-height = 64
-
-[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar")]
+[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "crosshair")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +11,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_633jc")
-health_bar = NodePath("GameHud/ProgressBar")
+health_bar = NodePath("GameHud/HealthBar")
+crosshair = NodePath("GameHud/CenterContainer/Crosshair")
 
 [node name="GameHud" type="AspectRatioContainer" parent="."]
 process_mode = 1
@@ -25,14 +23,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="GameHud"]
+[node name="HealthBar" type="ProgressBar" parent="GameHud"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 8
 value = 25.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="GameHud/ProgressBar"]
+[node name="Label" type="Label" parent="GameHud/HealthBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,11 +46,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="GameHud/CenterContainer"]
+[node name="Crosshair" type="TextureRect" parent="GameHud/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = SubResource("NoiseTexture2D_633jc")
+texture = ExtResource("2_rglhv")
 stretch_mode = 3
 
 [node name="StartMenu" type="AspectRatioContainer" parent="."]
@@ -74,6 +72,7 @@ theme_override_constants/margin_bottom = 64
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/v_separation = 16
+alignment = 1
 
 [node name="Label" type="Label" parent="StartMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
@@ -110,6 +109,7 @@ theme_override_constants/margin_bottom = 64
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/v_separation = 16
+alignment = 1
 
 [node name="Resume" type="Button" parent="PauseMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
@@ -146,6 +146,7 @@ theme_override_constants/margin_bottom = 64
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/v_separation = 16
+alignment = 1
 
 [node name="Save1" type="Button" parent="LoadMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
@@ -182,6 +183,7 @@ theme_override_constants/margin_bottom = 64
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/v_separation = 16
+alignment = 1
 
 [node name="NewSave" type="Button" parent="SaveMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
@@ -199,6 +201,40 @@ text = "Save 3"
 layout_mode = 2
 text = "Back"
 
+[node name="GameOverMenu" type="AspectRatioContainer" parent="."]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOverMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VFlowContainer" type="VFlowContainer" parent="GameOverMenu/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/v_separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="GameOverMenu/MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Game Over"
+
+[node name="NewGame" type="Button" parent="GameOverMenu/MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "New Game"
+
+[node name="Exit" type="Button" parent="GameOverMenu/MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Exit"
+
 [connection signal="pressed" from="StartMenu/MarginContainer/VFlowContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="StartMenu/MarginContainer/VFlowContainer/LoadGame" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="StartMenu/MarginContainer/VFlowContainer/Exit" to="." method="_on_exit_pressed"]
@@ -214,3 +250,5 @@ text = "Back"
 [connection signal="pressed" from="SaveMenu/MarginContainer/VFlowContainer/Save2" to="." method="_on_save_game_pressed"]
 [connection signal="pressed" from="SaveMenu/MarginContainer/VFlowContainer/Save3" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="SaveMenu/MarginContainer/VFlowContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="GameOverMenu/MarginContainer/VFlowContainer/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="GameOverMenu/MarginContainer/VFlowContainer/Exit" to="." method="_on_exit_pressed"]

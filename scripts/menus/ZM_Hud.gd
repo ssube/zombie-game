@@ -3,6 +3,7 @@ extends Node
 enum HudMenu {
 	START_MENU,
 	PAUSE_MENU,
+	GAME_OVER_MENU,
 	LOAD_MENU,
 	SAVE_MENU,
 	OPTIONS_MENU,
@@ -10,10 +11,18 @@ enum HudMenu {
 }
 
 @export var health_bar: ProgressBar = null
+@export var crosshair: TextureRect = null
+@onready var crosshair_default_color: Color = crosshair.modulate
 
 var health_tween: Tween = null
 var visible_menu: HudMenu = HudMenu.NONE
 var previous_menu: HudMenu = HudMenu.START_MENU
+
+func set_crosshair_color(color: Color) -> void:
+	crosshair.modulate = color
+
+func reset_crosshair_color() -> void:
+	crosshair.modulate = crosshair_default_color # Color.WHITE
 
 func set_health(value: int, instant: bool = false) -> void:
 	if health_tween != null:
@@ -24,6 +33,13 @@ func set_health(value: int, instant: bool = false) -> void:
 	else:
 		health_tween = health_bar.create_tween()
 		health_tween.tween_property(health_bar, "value", value, 1.0)
+		health_tween.tween_callback(health_callback.bind(value))
+
+
+func health_callback(value: int) -> void:
+	if value <= 0:
+		set_pause(true)
+		show_menu(HudMenu.GAME_OVER_MENU)
 
 
 func set_pause(pause: bool) -> void:
@@ -48,6 +64,7 @@ func show_menu(menu: HudMenu) -> void:
 		$GameHud.visible = (menu == HudMenu.NONE)
 		$StartMenu.visible = (menu == HudMenu.START_MENU)
 		$PauseMenu.visible = (menu == HudMenu.PAUSE_MENU)
+		$GameOverMenu.visible = (menu == HudMenu.GAME_OVER_MENU)
 		$LoadMenu.visible = (menu == HudMenu.LOAD_MENU)
 		$SaveMenu.visible = (menu == HudMenu.SAVE_MENU)
 

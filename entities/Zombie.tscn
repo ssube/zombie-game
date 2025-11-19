@@ -57,14 +57,14 @@ script = ExtResource("10_tfdn2")
 effect_path = NodePath("Effects/FireEffect")
 metadata/_custom_type_script = "uid://jokkv7skgimj"
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_4vf4t"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t553y"]
 
 [node name="Zombie" type="RigidBody3D"]
 script = ExtResource("1_rffgv")
 component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_4vf4t")
+shape = SubResource("CapsuleShape3D_t553y")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 material = ExtResource("8_tfdn2")
