@@ -95,6 +95,12 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 						%Hud.set_crosshair_color(Color.DODGER_BLUE)
 						if input.use_interact:
 							use_door(collider, player)
+
+					if collider.has_component(ZC_Objective):
+						%Hud.set_crosshair_color(Color.GOLD)
+						if input.use_interact:
+							use_objective(collider, player)
+
 		else:
 			%Hud.reset_crosshair_color()
 			remove_shimmer(entity)
@@ -141,9 +147,9 @@ func use_door(entity: Entity, player: ZC_Player) -> void:
 	if door.is_locked:
 		if player.has_key(door.key_name):
 			door.is_locked = false
-			print("used key: ", door.key_name)
+			print("Used key: ", door.key_name)
 		else:
-			print("need key: ", door.key_name)
+			print("Need key: ", door.key_name)
 
 	if door.open_on_use and not door.is_locked:
 		door.is_open = !door.is_open
@@ -152,14 +158,14 @@ func use_door(entity: Entity, player: ZC_Player) -> void:
 		else:
 			entity.add_component(ZC_Open.new())
 
-		print("door is open: ", door.is_open)
+		print("Door is open: ", door.is_open)
 
 
 func use_food(entity: Entity, player_entity: Entity) -> void:
 	var food = entity.get_component(ZC_Food) as ZC_Food
 	var health = player_entity.get_component(ZC_Health) as ZC_Health
 	health.current_health = min(health.max_health, health.current_health + food.health)
-	print("used food: ", entity)
+	print("Used food: ", entity)
 
 	remove_entity(entity)
 
@@ -167,9 +173,16 @@ func use_food(entity: Entity, player_entity: Entity) -> void:
 func use_key(entity: Entity, player: ZC_Player) -> void:
 	var key = entity.get_component(ZC_Key)
 	player.add_key(key.name)
-	print("got key: ", key.name)
+	print("Added key: ", key.name)
 
 	remove_entity(entity)
+
+
+func use_objective(entity: Entity, _player: ZC_Player) -> void:
+	var objective = entity.get_component(ZC_Objective) as ZC_Objective
+	if objective.is_active:
+		objective.is_complete = true
+		print("Completed objective: ", objective)
 
 
 func remove_entity(entity: Entity) -> void:
@@ -180,9 +193,15 @@ func remove_entity(entity: Entity) -> void:
 
 	ECS.world.remove_entity(entity)
 	entity.get_parent().remove_child(entity)
+	entity.queue_free()
 
 
 func remove_shimmer(entity: Entity) -> void:
 	if entity in last_shimmer:
-		last_shimmer[entity].remove_component(ZC_Shimmer)
+		var last_target = last_shimmer.get(entity)
 		last_shimmer.erase(entity)
+
+		if last_target == null:
+			printerr("Removing shimmer from null entity: ", entity, last_target)
+		else:
+			last_target.remove_component(ZC_Shimmer)

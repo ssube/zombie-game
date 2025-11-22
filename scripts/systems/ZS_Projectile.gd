@@ -33,3 +33,4 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 				ECS.world.remove_entity(entity)
 				var root := entity.get_parent()
 				root.remove_child(entity)
+				entity.queue_free()

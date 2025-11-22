@@ -1,15 +1,14 @@
 extends Node
 
+signal level_loading
+signal level_loaded
+
+@export var level_scenes: Dictionary[String, Resource] = {}
+@export var start_level: String = ''
+@onready var last_level: String = start_level
+
 func _ready():
 	ECS.world = %World
-
-	# Create the entities
-	var entity_root = %Entities
-	for child in entity_root.get_children():
-		if child is Entity:
-			ECS.world.add_entity(child)
-		else:
-			printerr("Child is not an entity: ", child.get_path())
 
 	# Create the systems
 	var system_root = %Systems
@@ -27,7 +26,75 @@ func _ready():
 		else:
 			printerr("Child is not an observer: ", child)
 
+	# Create the root entities
+	var entity_root = %Entities
+	for child in entity_root.get_children():
+		if child is Entity:
+			ECS.world.add_entity(child)
+		else:
+			printerr("Child is not an entity: ", child.get_path())
+
+	_register_level_entities()
+
 func _process(delta):
 	# Process all systems
 	if ECS.world:
 		ECS.process(delta)
+
+## Add the level entities to the ECS world
+func _register_level_entities() -> void:
+	var level_node = self.find_child("Level", false)
+	if level_node == null:
+		printerr("Missing level node!")
+		return
+
+	var level_entity_root = level_node.get_child(0).get_node("Entities")
+	if level_entity_root == null:
+		printerr("Level is missing Entities node!")
+
+	for child in level_entity_root.get_children():
+		if child is Entity:
+			ECS.world.add_entity(child)
+		else:
+			printerr("Child is not an entity: ", child)
+
+func clear_world() -> void:
+	var entity_list := ECS.world.entities.duplicate()
+	for entity in entity_list:
+		if entity == null:
+			printerr("Remove null node from ECS: ", entity)
+			continue
+
+		if entity.is_queued_for_deletion() or not entity.is_inside_tree():
+			printerr("Tried to remove invalid node: ", entity, entity.is_queued_for_deletion(), entity.is_inside_tree())
+			continue
+
+		if entity.has_component(ZC_Player):
+			continue
+
+		ECS.world.remove_entity(entity)
+
+	for child in %Level.get_children():
+		%Level.remove_child(child)
+		child.queue_free()
+
+
+func load_level(level_name: String) -> void:
+	# TODO: use ResourceLoader.load_threaded_get
+
+	var level_scene = level_scenes.get(level_name) as PackedScene
+	if level_scene == null:
+		printerr("Invalid level name: ", level_name)
+		return
+
+	level_loading.emit(last_level, level_name)
+	clear_world()
+
+	# var level_scene := ResourceLoader.load_threaded_get(level_path.resource_path) as PackedScene
+	var next_level := level_scene.instantiate()
+
+	%Level.add_child(next_level)
+	_register_level_entities()
+
+	level_loaded.emit(last_level, level_name)
+	last_level = level_name

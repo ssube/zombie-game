@@ -16,3 +16,4 @@ func _process(delta: float) -> void:
 
 		var parent = self.get_parent()
 		parent.remove_child(self)
+		self.queue_free()

@@ -9,7 +9,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		var damage := entity.get_component(ZC_Damage) as ZC_Damage
 		var health := entity.get_component(ZC_Health) as ZC_Health
 		var skin := entity.get_component(ZC_Skin) as ZC_Skin
-		
+
 		if damage == null:
 			continue
 
@@ -39,6 +39,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 					print("Entity has exploded: ", entity)
 					ECS.world.remove_entity(entity)
 					root.remove_child(entity)
+					entity.queue_free()
 
 		elif health.current_health < health.max_health:
 			if skin != null and skin.material_injured != null:

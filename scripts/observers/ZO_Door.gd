@@ -10,13 +10,13 @@ func on_component_changed(entity: Entity, door: Resource, property: String, new_
 		var tween := entity3d.create_tween()
 
 		if new_value:
-			print("open door")
+			print("Opening door")
 			#if entity3d.position != door.open_position:
 			#	tween.tween_property(entity3d, "position", door.open_position, 2.0)
 			if entity3d.rotation != door.open_rotation:
 				tween.tween_property(entity3d, "rotation", door.open_rotation, 2.0)
 		else:
-			print("close door")
+			print("Closing door")
 			#if entity3d.position != door.close_position:
 			#	tween.tween_property(entity3d, "position", door.close_position, 2.0)
 			if entity3d.rotation != door.close_rotation:

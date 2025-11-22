@@ -3,6 +3,7 @@ extends Node
 enum HudMenu {
 	START_MENU,
 	PAUSE_MENU,
+	LOADING_MENU,
 	GAME_OVER_MENU,
 	LOAD_MENU,
 	SAVE_MENU,
@@ -61,12 +62,13 @@ func show_menu(menu: HudMenu) -> void:
 		previous_menu = visible_menu
 		visible_menu = menu
 
-		$GameHud.visible = (menu == HudMenu.NONE)
-		$StartMenu.visible = (menu == HudMenu.START_MENU)
-		$PauseMenu.visible = (menu == HudMenu.PAUSE_MENU)
-		$GameOverMenu.visible = (menu == HudMenu.GAME_OVER_MENU)
-		$LoadMenu.visible = (menu == HudMenu.LOAD_MENU)
-		$SaveMenu.visible = (menu == HudMenu.SAVE_MENU)
+		$HudLayer/GameHud.visible = (menu == HudMenu.NONE)
+		$HudLayer/StartMenu.visible = (menu == HudMenu.START_MENU)
+		$HudLayer/LoadingMenu.visible = (menu == HudMenu.LOADING_MENU)
+		$HudLayer/PauseMenu.visible = (menu == HudMenu.PAUSE_MENU)
+		$HudLayer/GameOverMenu.visible = (menu == HudMenu.GAME_OVER_MENU)
+		$HudLayer/LoadMenu.visible = (menu == HudMenu.LOAD_MENU)
+		$HudLayer/SaveMenu.visible = (menu == HudMenu.SAVE_MENU)
 
 
 func _on_new_game_pressed() -> void:
@@ -96,3 +98,15 @@ func _on_save_game_pressed() -> void:
 
 func _on_back_pressed() -> void:
 	show_menu(previous_menu)
+
+
+func _on_level_loading(_old_level: String, _new_level: String) -> void:
+	show_menu(HudMenu.LOADING_MENU)
+
+
+func _on_level_loaded(_old_level: String, _new_level: String) -> void:
+	show_menu(HudMenu.NONE)
+
+
+func _on_check_box_toggled(toggled_on: bool) -> void:
+	$GameLayer.visible = toggled_on
