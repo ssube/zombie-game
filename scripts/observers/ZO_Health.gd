@@ -1,5 +1,5 @@
 extends Observer
-class_name ZO_HudObserver
+class_name ZO_HealthObserver
 
 func watch() -> Resource:
 	return ZC_Health

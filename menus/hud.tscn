@@ -35,9 +35,9 @@ script = ExtResource("1_633jc")
 health_bar = NodePath("HudLayer/GameHud/HealthBar")
 crosshair = NodePath("HudLayer/GameHud/CenterContainer/Crosshair")
 
-[node name="GameLayer" type="CanvasLayer" parent="."]
+[node name="PostLayer" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="GameLayer"]
+[node name="ColorRect" type="ColorRect" parent="PostLayer"]
 material = SubResource("ShaderMaterial_pua1y")
 anchors_preset = 15
 anchor_right = 1.0

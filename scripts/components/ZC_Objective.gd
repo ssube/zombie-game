@@ -1,10 +1,9 @@
 extends Component
 class_name ZC_Objective
 
-@export var end_game: bool = false
-@export var win_game: bool = false
-@export var load_level: bool = true
-@export var next_level: String = ''
+enum GameState { NONE, WIN, LOSE }
+
+@export var game_state: GameState = GameState.NONE
 
 @export var is_active: bool = false:
   set(value):

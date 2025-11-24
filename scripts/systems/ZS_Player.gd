@@ -14,7 +14,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		var input = entity.get_component(ZC_Input) as ZC_Input
 
 		var body := entity.get_node(".") as CharacterBody3D
-		body.rotation = input.turn_direction
+		#body.rotation = input.turn_direction
 
 		var forward = -body.global_transform.basis.z.normalized()
 		var right = body.global_transform.basis.x.normalized()
@@ -101,6 +101,11 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 						if input.use_interact:
 							use_objective(collider, player)
 
+					if collider.has_component(ZC_Portal):
+						%Hud.set_crosshair_color(Color.GOLD)
+						if input.use_interact:
+							use_portal(collider, entity)
+
 		else:
 			%Hud.reset_crosshair_color()
 			remove_shimmer(entity)
@@ -123,7 +128,7 @@ func _handle_collisions(body: CharacterBody3D, delta: float) -> void:
 
 
 func _spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
-	var marker = body.get_node("./ProjectileMarker") as Node3D
+	var marker = body.get_node("./Head/ProjectileMarker") as Node3D
 	var weapon = entity.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
 
 	if marker != null and weapon != null:
@@ -183,6 +188,13 @@ func use_objective(entity: Entity, _player: ZC_Player) -> void:
 	if objective.is_active:
 		objective.is_complete = true
 		print("Completed objective: ", objective)
+
+
+func use_portal(entity: Entity, player_entity: Entity) -> void:
+	var portal = entity.get_component(ZC_Portal) as ZC_Portal
+	if portal.is_open:
+		portal.is_active = true
+		print("Activated portal: ", portal)
 
 
 func remove_entity(entity: Entity) -> void:

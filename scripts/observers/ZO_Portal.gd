@@ -1,18 +1,17 @@
 extends Observer
-class_name ZO_ObjectiveObserver
+class_name ZO_PortalObserver
 
 
 @onready var main_node: Node = get_tree().root.get_node("/root/Game")
 
 
 func watch() -> Resource:
-	return ZC_Objective
+	return ZC_Portal
 
 
 func on_component_changed(_entity: Entity, component: Resource, property: String, new_value: Variant, _old_value: Variant):
-	var objective := component as ZC_Objective
-	if property == 'is_complete':
+	var portal := component as ZC_Portal
+	if property == 'is_active':
 		if new_value:
-			print("objective completed")
-			if objective.load_level:
-				main_node.load_level(objective.next_level)
+			print("Portal is active")
+			main_node.load_level(portal.next_level, portal.spawn_point)

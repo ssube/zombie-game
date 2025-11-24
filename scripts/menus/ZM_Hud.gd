@@ -109,4 +109,4 @@ func _on_level_loaded(_old_level: String, _new_level: String) -> void:
 
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
-	$GameLayer.visible = toggled_on
+	$PostLayer.visible = toggled_on

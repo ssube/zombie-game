@@ -79,7 +79,7 @@ func clear_world() -> void:
 		child.queue_free()
 
 
-func load_level(level_name: String) -> void:
+func load_level(level_name: String, spawn_point: String) -> void:
 	# TODO: use ResourceLoader.load_threaded_get
 
 	var level_scene = level_scenes.get(level_name) as PackedScene
@@ -98,3 +98,21 @@ func load_level(level_name: String) -> void:
 
 	level_loaded.emit(last_level, level_name)
 	last_level = level_name
+
+	var spawn_node := next_level.get_node(spawn_point) as Node3D
+	if spawn_node == null:
+		printerr("Invalid spawn point: ", spawn_point)
+		return
+
+	var players: Array[Entity] = QueryBuilder.new(ECS.world).with_all([ZC_Player]).execute()
+	for player in players:
+		var transform := player.get_component(ZC_Transform) as ZC_Transform
+		transform.position = spawn_node.global_position
+		transform.rotation = spawn_node.global_rotation
+
+		var input := player.get_component(ZC_Input) as ZC_Input
+		input.turn_direction = spawn_node.global_rotation
+
+		var player3d := player.get_node(".") as Node3D
+		player3d.global_position = spawn_node.global_position
+		player3d.global_rotation = spawn_node.global_rotation

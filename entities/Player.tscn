@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://busds31ha5tx1"]
+[gd_scene load_steps=18 format=3 uid="uid://busds31ha5tx1"]
 
 [ext_resource type="Script" uid="uid://dyudolkkkb4ut" path="res://scripts/entities/ZE_Player.gd" id="1_ks8m5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_l1ths"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/ZC_Weapon_Ranged.gd" id="7_25mxy"]
 [ext_resource type="PackedScene" uid="uid://blxc4fcjrrpa2" path="res://entities/Bullet.tscn" id="7_dv4ir"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="9_idcse"]
+[ext_resource type="Script" uid="uid://c01mmquxj5ukg" path="res://scripts/ZN_Mouse.gd" id="10_p37y2"]
 
 [sub_resource type="Resource" id="Resource_ks8m5"]
 script = ExtResource("6_25mxy")
@@ -22,7 +23,7 @@ metadata/_custom_type_script = "uid://cixmecjncarw5"
 
 [sub_resource type="Resource" id="Resource_25mxy"]
 script = ExtResource("4_25mxy")
-view_ray = NodePath("RayCast3D")
+view_ray = NodePath("Head/RayCast3D")
 metadata/_custom_type_script = "uid://cllu7i7unqk6u"
 
 [sub_resource type="Resource" id="Resource_dv4ir"]
@@ -52,18 +53,27 @@ shape = SubResource("CapsuleShape3D_idcse")
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 sides = 6
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1596278, -0.19284528)
+[node name="ZN_MouseInput" type="Node" parent="." node_paths=PackedStringArray("character", "head")]
+script = ExtResource("10_p37y2")
+character = NodePath("..")
+head = NodePath("../Head")
+mouse_sensitivity = 75
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
 current = true
 
-[node name="ProjectileMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6388678, -1.004184)
+[node name="ProjectileMarker" type="Marker3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.542)
-target_position = Vector3(0, 0, -2)
+[node name="RayCast3D" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -2.5)
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1.4085677)
-radius = 0.1
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, -0.325, -1.2)
+radius = 0.05
+height = 2.5
 sides = 6
+cone = true

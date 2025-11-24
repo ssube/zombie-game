@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=32 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Texture2D" uid="uid://bj7wuhjch143w" path="res://textures/Color Maps/concrete_3.png" id="1_iss0w"]
 [ext_resource type="Texture2D" uid="uid://bpxtjbi1yv77e" path="res://textures/Color Maps/brick_wall_tx_3.png" id="2_yi3jx"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/ZC_Door.gd" id="12_osodt"]
 [ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/Medkit.tscn" id="13_vfwqd"]
 [ext_resource type="PackedScene" uid="uid://kod7e8o8xpep" path="res://entities/key.tscn" id="14_juy1h"]
+[ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/ZC_Portal.gd" id="14_qgvj7"]
 [ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/Objective.tscn" id="15_7di2q"]
 [ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/KeyHighlight.tres" id="16_2sfss"]
 [ext_resource type="Script" uid="uid://bdl3b6gan30l0" path="res://scripts/components/ZC_Objective.gd" id="17_x1db4"]
@@ -37,9 +38,14 @@ metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_0x0hl"]
 script = ExtResource("17_x1db4")
-next_level = "1"
 is_active = true
 metadata/_custom_type_script = "uid://bdl3b6gan30l0"
+
+[sub_resource type="Resource" id="Resource_fv0x7"]
+script = ExtResource("14_qgvj7")
+next_level = "1"
+spawn_point = "Markers/MainSpawn"
+metadata/_custom_type_script = "uid://cn8mtbap6uudk"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yi3jx"]
 sky_top_color = Color(0.35032377, 0.43960616, 0.67056155, 1)
@@ -161,7 +167,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1653585, 0.54704344, 4.8687
 
 [node name="Objective" parent="Entities" instance=ExtResource("15_7di2q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.801977, 1.9073486e-06, 0.011570454)
-component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_6y5fu"), SubResource("Resource_0x0hl")])
+component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_6y5fu"), SubResource("Resource_0x0hl"), SubResource("Resource_fv0x7")])
 
 [node name="Lights" type="Node" parent="."]
 
@@ -194,6 +200,11 @@ mesh = SubResource("ArrayMesh_hq1ly")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Default Layer/entity_0_geometry_col"]
 shape = SubResource("ConcavePolygonShape3D_sndmc")
+
+[node name="Markers" type="Node" parent="."]
+
+[node name="Start" type="Marker3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.035326, 0)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_iss0w")

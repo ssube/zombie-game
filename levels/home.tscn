@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://c32dl721ugeb0"]
+[gd_scene load_steps=19 format=3 uid="uid://c32dl721ugeb0"]
 
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/ZG_World.gd" id="1_7ti0h"]
 [ext_resource type="PackedScene" uid="uid://2631yqe4y8ki" path="res://levels/zone_1.tscn" id="3_bk7mf"]
+[ext_resource type="PackedScene" uid="uid://bv4ooq3kct6wv" path="res://levels/zone_1_hotel.tscn" id="4_hq1ly"]
 [ext_resource type="PackedScene" uid="uid://busds31ha5tx1" path="res://entities/Player.tscn" id="5_b84gv"]
 [ext_resource type="Script" uid="uid://0smt4eys5v7u" path="res://scripts/observers/ZO_Fire.gd" id="6_hg28n"]
 [ext_resource type="Script" uid="uid://cdu5tlyk72uu4" path="res://addons/gecs/ecs/world.gd" id="6_wpfpi"]
@@ -9,10 +10,10 @@
 [ext_resource type="Script" uid="uid://dtr4nknl4vi2g" path="res://scripts/systems/ZS_Input.gd" id="7_l4aka"]
 [ext_resource type="Script" uid="uid://bk1lb8nw4ojex" path="res://scripts/observers/ZO_Shimmer.gd" id="7_sndmc"]
 [ext_resource type="Script" uid="uid://bc5umfwkofevw" path="res://scripts/observers/ZO_Door.gd" id="8_0w67r"]
-[ext_resource type="Script" uid="uid://knoqxsqkogbl" path="res://scripts/observers/ZO_Objective.gd" id="8_hg28n"]
+[ext_resource type="Script" uid="uid://knoqxsqkogbl" path="res://scripts/observers/ZO_Portal.gd" id="8_hg28n"]
 [ext_resource type="Script" uid="uid://cq8j5lp5vrtpp" path="res://scripts/systems/ZS_Player.gd" id="8_j8ow8"]
 [ext_resource type="Script" uid="uid://cxrhjwcd6iqpy" path="res://scripts/systems/ZS_Projectile.gd" id="9_fxog4"]
-[ext_resource type="Script" uid="uid://65x3uh6mv2rn" path="res://scripts/observers/ZO_Hud.gd" id="9_o1gi5"]
+[ext_resource type="Script" uid="uid://65x3uh6mv2rn" path="res://scripts/observers/ZO_Health.gd" id="9_o1gi5"]
 [ext_resource type="Script" uid="uid://11pcc0wodow7" path="res://scripts/systems/ZS_Health.gd" id="10_ydrvd"]
 [ext_resource type="Script" uid="uid://c803vhdp1tlj5" path="res://scripts/systems/ZS_Fire.gd" id="11_mk7mw"]
 [ext_resource type="PackedScene" uid="uid://vcyq2fbg0dts" path="res://menus/hud.tscn" id="26_ohs1m"]
@@ -22,7 +23,8 @@
 script = ExtResource("1_7ti0h")
 level_scenes = Dictionary[String, Resource]({
 "0": ExtResource("28_u1aa1"),
-"1": ExtResource("3_bk7mf")
+"1": ExtResource("3_bk7mf"),
+"1_hotel": ExtResource("4_hq1ly")
 })
 
 [node name="World" type="Node" parent="."]
@@ -39,10 +41,10 @@ script = ExtResource("8_0w67r")
 [node name="ZO_FireObserver" type="Node" parent="World/Observers"]
 script = ExtResource("6_hg28n")
 
-[node name="ZO_HudObserver" type="Node" parent="World/Observers"]
+[node name="ZO_HealthObserver" type="Node" parent="World/Observers"]
 script = ExtResource("9_o1gi5")
 
-[node name="ZO_ObjectiveObserver" type="Node" parent="World/Observers"]
+[node name="ZO_PortalObserver" type="Node" parent="World/Observers"]
 script = ExtResource("8_hg28n")
 
 [node name="ZO_ShimmerObserver" type="Node" parent="World/Observers"]
