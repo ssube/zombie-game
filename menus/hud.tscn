@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://vcyq2fbg0dts"]
 
-[ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/menus/ZM_Hud.gd" id="1_633jc"]
+[ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/nodes/ZN_Menu.gd" id="1_633jc"]
 [ext_resource type="Shader" uid="uid://ckydjmdamo2fo" path="res://menus/post_crt.gdshader" id="2_jew8s"]
 [ext_resource type="Texture2D" uid="uid://dwp1uqi51ytw3" path="res://textures/crosshair.png" id="2_rglhv"]
 

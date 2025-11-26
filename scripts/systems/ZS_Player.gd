@@ -63,6 +63,9 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		if input.use_attack:
 			_spawn_projectile(entity, body)
 
+		if input.use_light:
+			toggle_flashlight(entity, body)
+
 		# Highlight interactive items
 		var ray = entity.get_node(player.view_ray) as RayCast3D
 		if ray.is_colliding():
@@ -128,7 +131,7 @@ func _handle_collisions(body: CharacterBody3D, delta: float) -> void:
 
 
 func _spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
-	var marker = body.get_node("./Head/ProjectileMarker") as Node3D
+	var marker = body.get_node("./Head/Hands/ProjectileMarker") as Node3D
 	var weapon = entity.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
 
 	if marker != null and weapon != null:
@@ -145,6 +148,13 @@ func _spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 		new_projectile.global_position = marker.global_position
 		new_projectile.global_rotation = marker.global_rotation
 		new_projectile.apply_impulse(forward * weapon.muzzle_velocity, body.global_position)
+
+
+func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
+	var light = body.get_node("./Head/Hands/Flashlight") as SpotLight3D
+	if light != null:
+		light.visible = not light.visible
+
 
 
 func use_door(entity: Entity, player: ZC_Player) -> void:
@@ -190,7 +200,7 @@ func use_objective(entity: Entity, _player: ZC_Player) -> void:
 		print("Completed objective: ", objective)
 
 
-func use_portal(entity: Entity, player_entity: Entity) -> void:
+func use_portal(entity: Entity, _player_entity: Entity) -> void:
 	var portal = entity.get_component(ZC_Portal) as ZC_Portal
 	if portal.is_open:
 		portal.is_active = true

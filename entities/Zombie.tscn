@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://ds0q1crcrv862"]
+[gd_scene load_steps=41 format=3 uid="uid://ds0q1crcrv862"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/ZE_Zombie.gd" id="1_rffgv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_2yl8o"]
@@ -12,21 +12,25 @@
 [ext_resource type="Material" uid="uid://rmfci1rvpdo4" path="res://materials/ZombieHurt.tres" id="9_wwun5"]
 [ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/ZC_Flammable.gd" id="10_tfdn2"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="11_7tmu0"]
+[ext_resource type="Script" uid="uid://cmgcelj1qxg8o" path="res://addons/tattomoosa.vision_cone_3d/src/VisionCone3D.gd" id="12_kv3li"]
 [ext_resource type="Script" uid="uid://dme5f24l0edsf" path="res://addons/beehave/blackboard.gd" id="13_1if3s"]
+[ext_resource type="Script" uid="uid://c84st521ytmk3" path="res://addons/beehave/nodes/decorators/until_fail.gd" id="14_8mkit"]
 [ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="14_ods0y"]
 [ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="15_3vjcm"]
-[ext_resource type="Script" uid="uid://c84st521ytmk3" path="res://addons/beehave/nodes/decorators/until_fail.gd" id="15_pdlj2"]
+[ext_resource type="Script" uid="uid://dcojdhvj8qcw0" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="15_bihbe"]
+[ext_resource type="Script" uid="uid://bkr7qj44253ue" path="res://addons/beehave/nodes/composites/simple_parallel.gd" id="15_t553y"]
 [ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="16_s140b"]
-[ext_resource type="Script" uid="uid://bp8kk4kmch5fg" path="res://scripts/behavior/ZB_IfPlayerNearby.gd" id="17_7t0nl"]
-[ext_resource type="Script" uid="uid://ci05qw1bjtwp6" path="res://scripts/behavior/ZB_IfSelfAlive.gd" id="17_t553y"]
-[ext_resource type="Script" uid="uid://dyb15yih6xr3a" path="res://scripts/behavior/ZB_IfPlayerVisible.gd" id="18_t516e"]
-[ext_resource type="Script" uid="uid://chfam3p08kr8a" path="res://scripts/behavior/ZB_TargetVisiblePlayer.gd" id="19_t553y"]
-[ext_resource type="Script" uid="uid://ds26skxm8j2yd" path="res://scripts/behavior/ZB_IfTargetNearby.gd" id="20_kv3li"]
-[ext_resource type="Script" uid="uid://c02dwlsmip51f" path="res://scripts/behavior/ZB_AttackVisiblePlayer.gd" id="21_8mkit"]
-[ext_resource type="Script" uid="uid://b3g8aobks1cq0" path="res://scripts/behavior/ZB_PickRandomTarget.gd" id="22_cw5iy"]
-[ext_resource type="Script" uid="uid://crkjak4kyv56m" path="res://addons/beehave/nodes/decorators/inverter.gd" id="23_7t0nl"]
-[ext_resource type="Script" uid="uid://uapjco86iuf3" path="res://scripts/behavior/ZB_MoveToTarget.gd" id="23_bihbe"]
-[ext_resource type="Script" uid="uid://dovfdmtg4ln7n" path="res://scripts/behavior/ZB_IfTargetSet.gd" id="24_t516e"]
+[ext_resource type="Script" uid="uid://bp8kk4kmch5fg" path="res://scripts/behavior/conditions/ZB_IsPlayerInArea.gd" id="17_7t0nl"]
+[ext_resource type="Script" uid="uid://ci05qw1bjtwp6" path="res://scripts/behavior/conditions/ZB_IsActorAlive.gd" id="17_t553y"]
+[ext_resource type="Script" uid="uid://2qri6rrfv8ui" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="20_cw5iy"]
+[ext_resource type="Script" uid="uid://b34mnfn8y84d" path="res://scripts/behavior/actions/ZB_AttackTarget.gd" id="20_s140b"]
+[ext_resource type="Script" uid="uid://be86tdntixt6r" path="res://scripts/behavior/actions/ZB_LookAtTarget.gd" id="21_7t0nl"]
+[ext_resource type="Script" uid="uid://b3g8aobks1cq0" path="res://scripts/behavior/actions/ZB_PickRandomTarget.gd" id="22_cw5iy"]
+[ext_resource type="Script" uid="uid://we22430vcb44" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="22_j8wr1"]
+[ext_resource type="Script" uid="uid://uapjco86iuf3" path="res://scripts/behavior/actions/ZB_MoveToTarget.gd" id="23_bihbe"]
+[ext_resource type="Script" uid="uid://dovfdmtg4ln7n" path="res://scripts/behavior/conditions/ZB_HasTargetPosition.gd" id="24_t516e"]
+[ext_resource type="Script" uid="uid://chfam3p08kr8a" path="res://scripts/behavior/actions/ZB_UpdateTargetPosition.gd" id="24_t553y"]
+[ext_resource type="Script" uid="uid://cev10q58r3q8s" path="res://scripts/behavior/actions/ZB_UpdateTargetPath.gd" id="25_kv3li"]
 
 [sub_resource type="Resource" id="Resource_l1o5o"]
 script = ExtResource("3_nswy3")
@@ -59,6 +63,12 @@ metadata/_custom_type_script = "uid://jokkv7skgimj"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t553y"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_8mkit"]
+radius = 20.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kv3li"]
+radius = 3.0
+
 [node name="Zombie" type="RigidBody3D"]
 script = ExtResource("1_rffgv")
 component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd")])
@@ -69,92 +79,224 @@ shape = SubResource("CapsuleShape3D_t553y")
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 material = ExtResource("8_tfdn2")
 
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+simplify_path = true
+
+[node name="Behavior" type="Node3D" parent="."]
+
+[node name="Blackboard" type="Node" parent="Behavior"]
+script = ExtResource("13_1if3s")
+metadata/_custom_type_script = "uid://dme5f24l0edsf"
+
+[node name="BeehaveTree2" type="Node" parent="Behavior" node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("14_ods0y")
+blackboard = NodePath("../Blackboard")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
+
+[node name="UntilFailDecorator" type="Node" parent="Behavior/BeehaveTree2"]
+script = ExtResource("14_8mkit")
+metadata/_custom_type_script = "uid://c84st521ytmk3"
+
+[node name="SequenceComposite" type="Node" parent="Behavior/BeehaveTree2/UntilFailDecorator"]
+script = ExtResource("15_bihbe")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="ZB_IsActorAlive" type="Node" parent="Behavior/BeehaveTree2/UntilFailDecorator/SequenceComposite"]
+script = ExtResource("17_t553y")
+metadata/_custom_type_script = "uid://ci05qw1bjtwp6"
+
+[node name="ChasePlayer" type="Node" parent="Behavior/BeehaveTree2/UntilFailDecorator/SequenceComposite"]
+script = ExtResource("15_bihbe")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/BeehaveTree2/UntilFailDecorator/SequenceComposite/ChasePlayer" node_paths=PackedStringArray("detection_area")]
+script = ExtResource("17_7t0nl")
+detection_area = NodePath("../../../../../DetectionArea3D")
+metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
+
+[node name="ZB_UpdateTargetPosition" type="Node" parent="Behavior/BeehaveTree2/UntilFailDecorator/SequenceComposite/ChasePlayer"]
+script = ExtResource("24_t553y")
+metadata/_custom_type_script = "uid://chfam3p08kr8a"
+
+[node name="CooldownDecorator" type="Node" parent="Behavior/BeehaveTree2/UntilFailDecorator/SequenceComposite/ChasePlayer"]
+script = ExtResource("20_cw5iy")
+wait_time = 1.0
+metadata/_custom_type_script = "uid://2qri6rrfv8ui"
+
+[node name="ZB_UpdateTargetPath" type="Node" parent="Behavior/BeehaveTree2/UntilFailDecorator/SequenceComposite/ChasePlayer/CooldownDecorator"]
+script = ExtResource("25_kv3li")
+metadata/_custom_type_script = "uid://cev10q58r3q8s"
+
+[node name="MoveLook" type="Node" parent="Behavior/BeehaveTree2/UntilFailDecorator/SequenceComposite/ChasePlayer"]
+script = ExtResource("15_t553y")
+metadata/_custom_type_script = "uid://bkr7qj44253ue"
+
+[node name="ZB_MoveToTarget" type="Node" parent="Behavior/BeehaveTree2/UntilFailDecorator/SequenceComposite/ChasePlayer/MoveLook"]
+script = ExtResource("23_bihbe")
+metadata/_custom_type_script = "uid://uapjco86iuf3"
+
+[node name="ZB_FaceTarget" type="Node" parent="Behavior/BeehaveTree2/UntilFailDecorator/SequenceComposite/ChasePlayer/MoveLook"]
+script = ExtResource("21_7t0nl")
+metadata/_custom_type_script = "uid://be86tdntixt6r"
+
+[node name="BeehaveTree" type="Node" parent="Behavior" node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("14_ods0y")
+enabled = false
+blackboard = NodePath("../Blackboard")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
+
+[node name="UntilFailDecorator" type="Node" parent="Behavior/BeehaveTree"]
+script = ExtResource("14_8mkit")
+metadata/_custom_type_script = "uid://c84st521ytmk3"
+
+[node name="SequenceComposite" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator"]
+script = ExtResource("15_bihbe")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="ZB_IsActorAlive" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite"]
+script = ExtResource("17_t553y")
+metadata/_custom_type_script = "uid://ci05qw1bjtwp6"
+
+[node name="SelectorComposite" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite"]
+script = ExtResource("15_3vjcm")
+metadata/_custom_type_script = "uid://8hn4kne15ac5"
+
+[node name="AttackPlayer" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite"]
+script = ExtResource("16_s140b")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/AttackPlayer" node_paths=PackedStringArray("detection_area")]
+script = ExtResource("17_7t0nl")
+detection_area = NodePath("../../../../../../AttackArea3D")
+metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
+
+[node name="AttackLook" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/AttackPlayer"]
+script = ExtResource("15_t553y")
+metadata/_custom_type_script = "uid://bkr7qj44253ue"
+
+[node name="AttackCooldown" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/AttackPlayer/AttackLook"]
+script = ExtResource("20_cw5iy")
+wait_time = 5.0
+metadata/_custom_type_script = "uid://2qri6rrfv8ui"
+
+[node name="ZB_AttackTarget" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/AttackPlayer/AttackLook/AttackCooldown"]
+script = ExtResource("20_s140b")
+metadata/_custom_type_script = "uid://b34mnfn8y84d"
+
+[node name="ZB_FaceTarget" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/AttackPlayer/AttackLook"]
+script = ExtResource("21_7t0nl")
+metadata/_custom_type_script = "uid://be86tdntixt6r"
+
+[node name="ChasePlayer" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite"]
+script = ExtResource("16_s140b")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/ChasePlayer" node_paths=PackedStringArray("detection_area")]
+script = ExtResource("17_7t0nl")
+detection_area = NodePath("../../../../../../DetectionArea3D")
+metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
+
+[node name="ZB_UpdateTargetPosition" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/ChasePlayer"]
+script = ExtResource("24_t553y")
+metadata/_custom_type_script = "uid://chfam3p08kr8a"
+
+[node name="ZB_UpdateTargetPath" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/ChasePlayer"]
+script = ExtResource("25_kv3li")
+metadata/_custom_type_script = "uid://cev10q58r3q8s"
+
+[node name="ChaseTimer" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/ChasePlayer"]
+script = ExtResource("22_j8wr1")
+wait_time = 15.0
+metadata/_custom_type_script = "uid://we22430vcb44"
+
+[node name="MoveLook" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/ChasePlayer/ChaseTimer"]
+script = ExtResource("15_t553y")
+metadata/_custom_type_script = "uid://bkr7qj44253ue"
+
+[node name="ZB_MoveToTarget" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/ChasePlayer/ChaseTimer/MoveLook"]
+script = ExtResource("23_bihbe")
+metadata/_custom_type_script = "uid://uapjco86iuf3"
+
+[node name="ZB_FaceTarget" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/ChasePlayer/ChaseTimer/MoveLook"]
+script = ExtResource("21_7t0nl")
+metadata/_custom_type_script = "uid://be86tdntixt6r"
+
+[node name="MoveToTarget" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite"]
+script = ExtResource("16_s140b")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="ZB_HasTargetPosition" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/MoveToTarget"]
+script = ExtResource("24_t516e")
+metadata/_custom_type_script = "uid://dovfdmtg4ln7n"
+
+[node name="ZB_UpdateTargetPath" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/MoveToTarget"]
+script = ExtResource("25_kv3li")
+metadata/_custom_type_script = "uid://cev10q58r3q8s"
+
+[node name="PathTimer" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/MoveToTarget"]
+script = ExtResource("22_j8wr1")
+wait_time = 15.0
+metadata/_custom_type_script = "uid://we22430vcb44"
+
+[node name="MoveLook" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/MoveToTarget/PathTimer"]
+script = ExtResource("15_t553y")
+metadata/_custom_type_script = "uid://bkr7qj44253ue"
+
+[node name="ZB_MoveToTarget" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/MoveToTarget/PathTimer/MoveLook"]
+script = ExtResource("23_bihbe")
+metadata/_custom_type_script = "uid://uapjco86iuf3"
+
+[node name="ZB_FaceTarget" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/MoveToTarget/PathTimer/MoveLook"]
+script = ExtResource("21_7t0nl")
+metadata/_custom_type_script = "uid://be86tdntixt6r"
+
+[node name="RandomWander" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite"]
+script = ExtResource("16_s140b")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="ZB_PickRandomTarget" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/RandomWander"]
+script = ExtResource("22_cw5iy")
+metadata/_custom_type_script = "uid://b3g8aobks1cq0"
+
+[node name="ZB_UpdateTargetPath" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/RandomWander"]
+script = ExtResource("25_kv3li")
+metadata/_custom_type_script = "uid://cev10q58r3q8s"
+
+[node name="WanderTimer" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/RandomWander"]
+script = ExtResource("22_j8wr1")
+wait_time = 15.0
+metadata/_custom_type_script = "uid://we22430vcb44"
+
+[node name="MoveLook" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/RandomWander/WanderTimer"]
+script = ExtResource("15_t553y")
+metadata/_custom_type_script = "uid://bkr7qj44253ue"
+
+[node name="ZB_MoveToTarget" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/RandomWander/WanderTimer/MoveLook"]
+script = ExtResource("23_bihbe")
+metadata/_custom_type_script = "uid://uapjco86iuf3"
+
+[node name="ZB_FaceTarget" type="Node" parent="Behavior/BeehaveTree/UntilFailDecorator/SequenceComposite/SelectorComposite/RandomWander/WanderTimer/MoveLook"]
+script = ExtResource("21_7t0nl")
+metadata/_custom_type_script = "uid://be86tdntixt6r"
+
+[node name="VisionCone3D" type="Area3D" parent="Behavior"]
+script = ExtResource("12_kv3li")
+metadata/_custom_type_script = "uid://cmgcelj1qxg8o"
+
+[node name="DetectionArea3D" type="Area3D" parent="Behavior"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Behavior/DetectionArea3D"]
+shape = SubResource("SphereShape3D_8mkit")
+
+[node name="AttackArea3D" type="Area3D" parent="Behavior"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Behavior/AttackArea3D"]
+shape = SubResource("SphereShape3D_kv3li")
+debug_color = Color(0.7, 0, 0, 0.41960785)
+
 [node name="Effects" type="Node3D" parent="."]
 
 [node name="FireEffect" parent="Effects" instance=ExtResource("11_7tmu0")]
 visible = false
-
-[node name="Blackboard" type="Node" parent="."]
-script = ExtResource("13_1if3s")
-metadata/_custom_type_script = "uid://dme5f24l0edsf"
-
-[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
-script = ExtResource("14_ods0y")
-blackboard = NodePath("../Blackboard")
-actor = NodePath("..")
-metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
-
-[node name="UntilFailDecorator" type="Node" parent="BeehaveTree"]
-script = ExtResource("15_pdlj2")
-metadata/_custom_type_script = "uid://c84st521ytmk3"
-
-[node name="WhileAlive" type="Node" parent="BeehaveTree/UntilFailDecorator"]
-script = ExtResource("16_s140b")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="CheckHealth" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive"]
-script = ExtResource("17_t553y")
-
-[node name="AttackOrWander" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive"]
-script = ExtResource("15_3vjcm")
-metadata/_custom_type_script = "uid://8hn4kne15ac5"
-
-[node name="AttackNearbyPlayer" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander"]
-script = ExtResource("16_s140b")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="ZB_IfPlayerNearby" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/AttackNearbyPlayer"]
-script = ExtResource("17_7t0nl")
-detection_range = 2.0
-
-[node name="ZB_AttackVisiblePlayer" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/AttackNearbyPlayer"]
-script = ExtResource("21_8mkit")
-
-[node name="TargetNearestPlayer" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander"]
-script = ExtResource("16_s140b")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="ZB_IfPlayerNearby" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/TargetNearestPlayer"]
-script = ExtResource("17_7t0nl")
-
-[node name="ZB_IfPlayerVisible" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/TargetNearestPlayer"]
-script = ExtResource("18_t516e")
-metadata/_custom_type_script = "uid://dyb15yih6xr3a"
-
-[node name="ZB_TargetVisiblePlayer" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/TargetNearestPlayer"]
-script = ExtResource("19_t553y")
-
-[node name="ZB_MoveToTarget" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/TargetNearestPlayer"]
-script = ExtResource("23_bihbe")
-metadata/_custom_type_script = "uid://uapjco86iuf3"
-
-[node name="ResetRandomWander" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander"]
-script = ExtResource("16_s140b")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="ZB_IfTargetNearby" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/ResetRandomWander"]
-script = ExtResource("20_kv3li")
-
-[node name="ZB_PickRandomTarget" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/ResetRandomWander"]
-script = ExtResource("22_cw5iy")
-
-[node name="SetInitialWander" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander"]
-script = ExtResource("16_s140b")
-metadata/_custom_type_script = "uid://cg016dbe7gs1x"
-
-[node name="IfTargetMissing" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/SetInitialWander"]
-script = ExtResource("23_7t0nl")
-metadata/_custom_type_script = "uid://crkjak4kyv56m"
-
-[node name="ZB_IfTargetSet" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/SetInitialWander/IfTargetMissing"]
-script = ExtResource("24_t516e")
-
-[node name="ZB_PickRandomTarget" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander/SetInitialWander"]
-script = ExtResource("22_cw5iy")
-
-[node name="ZB_MoveToTarget" type="Node" parent="BeehaveTree/UntilFailDecorator/WhileAlive/AttackOrWander"]
-script = ExtResource("23_bihbe")
-metadata/_custom_type_script = "uid://uapjco86iuf3"
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-simplify_path = true

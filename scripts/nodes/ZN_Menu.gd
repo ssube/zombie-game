@@ -19,6 +19,10 @@ var health_tween: Tween = null
 var visible_menu: HudMenu = HudMenu.NONE
 var previous_menu: HudMenu = HudMenu.START_MENU
 
+func _ready() -> void:
+	reset_crosshair_color()
+	update_mouse_mode()
+
 func set_crosshair_color(color: Color) -> void:
 	crosshair.modulate = color
 
@@ -31,6 +35,7 @@ func set_health(value: int, instant: bool = false) -> void:
 
 	if instant:
 		health_bar.value = value
+		health_callback(value)
 	else:
 		health_tween = health_bar.create_tween()
 		health_tween.tween_property(health_bar, "value", value, 1.0)
@@ -41,6 +46,13 @@ func health_callback(value: int) -> void:
 	if value <= 0:
 		set_pause(true)
 		show_menu(HudMenu.GAME_OVER_MENU)
+
+
+func update_mouse_mode() -> void:
+	if visible_menu == HudMenu.NONE:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func set_pause(pause: bool) -> void:
@@ -69,6 +81,8 @@ func show_menu(menu: HudMenu) -> void:
 		$HudLayer/GameOverMenu.visible = (menu == HudMenu.GAME_OVER_MENU)
 		$HudLayer/LoadMenu.visible = (menu == HudMenu.LOAD_MENU)
 		$HudLayer/SaveMenu.visible = (menu == HudMenu.SAVE_MENU)
+
+		update_mouse_mode()
 
 
 func _on_new_game_pressed() -> void:

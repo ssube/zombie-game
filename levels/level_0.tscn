@@ -123,22 +123,7 @@ filter_ledge_spans = true
 unique_name_in_owner = true
 
 [node name="Zombie" parent="Entities" instance=ExtResource("5_fv0x7")]
-transform = Transform3D(1, 0, 0, 0, 0.90627825, -0.42268148, 0, 0.42268148, 0.90627825, 21.816628, 1.802968, -5.1025686)
-
-[node name="Zombie3" parent="Entities" instance=ExtResource("5_fv0x7")]
-transform = Transform3D(1, 0, 0, 0, 0.99732083, 0.07315123, 0, -0.07315123, 0.99732083, 17.698277, 1.802968, -4.392784)
-
-[node name="Zombie4" parent="Entities" instance=ExtResource("5_fv0x7")]
-transform = Transform3D(1, 0, 0, 0, 0.99732083, 0.07315123, 0, -0.07315123, 0.99732083, 24.382843, 1.802968, -2.9252882)
-
-[node name="Zombie5" parent="Entities" instance=ExtResource("5_fv0x7")]
-transform = Transform3D(1, 0, 0, 0, 0.99732083, 0.07315123, 0, -0.07315123, 0.99732083, 24.411306, 1.802968, 4.4887066)
-
-[node name="Zombie6" parent="Entities" instance=ExtResource("5_fv0x7")]
-transform = Transform3D(1, 0, 0, 0, 0.99732083, 0.07315123, 0, -0.07315123, 0.99732083, 16.468351, 1.802968, 4.715388)
-
-[node name="Zombie2" parent="Entities" instance=ExtResource("5_fv0x7")]
-transform = Transform3D(1, 0, 0, 0, 0.97516483, 0.22148041, 0, -0.22148041, 0.97516483, 20.559465, 1.1265125, 5.062609)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 22.600622, 1.8029675, -1.7444568)
 
 [node name="Ball" parent="Entities" instance=ExtResource("6_owf05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.531044, 1.6354523, -0.10224354)

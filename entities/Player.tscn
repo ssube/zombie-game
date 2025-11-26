@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/ZC_Weapon_Ranged.gd" id="7_25mxy"]
 [ext_resource type="PackedScene" uid="uid://blxc4fcjrrpa2" path="res://entities/Bullet.tscn" id="7_dv4ir"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="9_idcse"]
-[ext_resource type="Script" uid="uid://c01mmquxj5ukg" path="res://scripts/ZN_Mouse.gd" id="10_p37y2"]
+[ext_resource type="Script" uid="uid://c01mmquxj5ukg" path="res://scripts/nodes/ZN_Mouse.gd" id="10_p37y2"]
 
 [sub_resource type="Resource" id="Resource_ks8m5"]
 script = ExtResource("6_25mxy")
@@ -58,15 +58,14 @@ script = ExtResource("10_p37y2")
 character = NodePath("..")
 head = NodePath("../Head")
 mouse_sensitivity = 75
+max_pitch = 80.0
+min_pitch = -80.0
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 current = true
-
-[node name="ProjectileMarker" type="Marker3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="RayCast3D" type="RayCast3D" parent="Head"]
 target_position = Vector3(0, 0, -2.5)
@@ -77,3 +76,14 @@ radius = 0.05
 height = 2.5
 sides = 6
 cone = true
+
+[node name="Hands" type="Node3D" parent="Head"]
+
+[node name="ProjectileMarker" type="Marker3D" parent="Head/Hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flashlight" type="SpotLight3D" parent="Head/Hands"]
+transform = Transform3D(1, 0, 0, 0, 0.9975641, -0.06975647, 0, 0.06975647, 0.9975641, 0, 0, 0)
+light_size = 0.2
+spot_range = 15.0
+spot_angle = 30.0

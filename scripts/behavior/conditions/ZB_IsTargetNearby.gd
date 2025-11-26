@@ -1,6 +1,6 @@
 @tool
 extends ConditionLeaf
-class_name ZB_IfTargetNearby
+class_name ZB_IsTargetNearby
 
 @export var target_range: float = 1.0
 @onready var target_range_squared: float = target_range ** 2

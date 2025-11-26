@@ -32,7 +32,7 @@ window/size/viewport_height=1024
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/character_controller/plugin.cfg", "res://addons/gecs/plugin.cfg", "res://addons/tbloader/plugin.cfg")
+enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/character_controller/plugin.cfg", "res://addons/gecs/plugin.cfg", "res://addons/tattomoosa.vision_cone_3d/plugin.cfg", "res://addons/tbloader/plugin.cfg")
 
 [filesystem]
 
