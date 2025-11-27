@@ -230,9 +230,10 @@ metadata/_custom_type_script = "uid://uapjco86iuf3"
 script = ExtResource("21_7t0nl")
 metadata/_custom_type_script = "uid://be86tdntixt6r"
 
-[node name="ZombieBehavior" type="Node" parent="Behavior" node_paths=PackedStringArray("actor", "vision_area", "attack_area", "detection_area")]
+[node name="ZombieBehavior" type="Node" parent="Behavior" node_paths=PackedStringArray("actor_node", "actor_entity", "vision_area", "attack_area", "detection_area")]
 script = ExtResource("30_j8wr1")
-actor = NodePath("../..")
+actor_node = NodePath("../..")
+actor_entity = NodePath("../..")
 vision_area = NodePath("../VisionCone3D")
 attack_area = NodePath("../AttackArea3D")
 detection_area = NodePath("../DetectionArea3D")
