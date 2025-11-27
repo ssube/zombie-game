@@ -20,7 +20,8 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 				projectile.piercing -= 1
 				if target.has_component(ZC_Health):
 					var damage = ZC_Damage.new(projectile.damage)
-					target.add_component(damage)
+					# target.add_component(damage)
+					target.add_relationship(Relationship.new(ZC_Damaged.new(), damage))
 
 				if target.has_component(ZC_Flammable):
 					var flammable: ZC_Flammable = target.get_component(ZC_Flammable)

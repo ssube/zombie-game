@@ -18,7 +18,8 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		burning.time_remaining -= accumulated_delta
 
 		var damage := ZC_Damage.new(burning.damage_per_second)
-		entity.add_component(damage)
+		# entity.add_component(damage)
+		entity.add_relationship(Relationship.new(ZC_Damaged.new(), damage))
 
 		if burning.time_remaining < 0:
 			entity.remove_component(ZC_Effect_Burning)

@@ -21,7 +21,7 @@ enum State {
 @export var wander_interval: float = 15.0
 
 @export_group("Areas")
-@export var vision_area: Area3D
+@export var vision_area: VisionCone3D
 @export var attack_area: Area3D
 @export var detection_area: Area3D
 
@@ -65,6 +65,7 @@ func _process(delta: float):
 
 	if not is_actor_active():
 		# disable area monitoring for performance
+		vision_area.debug_draw = false
 		vision_area.monitoring = false
 		attack_area.monitoring = false
 		detection_area.monitoring = false
@@ -117,9 +118,12 @@ func do_attack(_delta: float):
 	if attack_timer > 0.0:
 		return
 
+	look_at_target(target_player.global_position)
 	print("Zombie attacks player! ", target_player)
+
 	var player_entity: Entity = target_player.get_node(".") as Entity
-	player_entity.add_component(ZC_Damage.new(10))
+	# player_entity.add_component(ZC_Damage.new(10))
+	player_entity.add_relationship(Relationship.new(ZC_Damaged.new(), ZC_Damage.new(10)))
 	attack_timer = attack_cooldown
 
 func do_idle(_delta: float):
@@ -181,13 +185,15 @@ func do_chase(_delta: float):
 	else:
 		print("Zombie failed to update navigation path.")
 
-func move_to_target(target_pos: Vector3, look_target_pos: Vector3) -> void:
-	# print("Zombie moving to target position: ", target_pos)
-
+func look_at_target(look_target_pos: Vector3) -> void:
 	# rotate to face target
 	var look_pos := Vector3(look_target_pos.x, actor_node.global_position.y, look_target_pos.z)
 	if not is_zero_approx((look_pos - actor_node.global_position).length()):
 		actor_node.look_at(look_pos)
+
+func move_to_target(target_pos: Vector3, look_target_pos: Vector3) -> void:
+	# print("Zombie moving to target position: ", target_pos)
+	look_at_target(look_target_pos)
 
 	# move toward target
 	var target_offset: Vector3 = target_pos - actor_node.global_position

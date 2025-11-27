@@ -2,20 +2,24 @@ class_name ZS_HealthSystem
 extends System
 
 func query():
-	return q.with_all([ZC_Damage, ZC_Health])
+	return q.with_all([ZC_Health])
 
 func process(entities: Array[Entity], _components: Array, _delta: float):
 	for entity in entities:
-		var damage := entity.get_component(ZC_Damage) as ZC_Damage
 		var health := entity.get_component(ZC_Health) as ZC_Health
-		var skin := entity.get_component(ZC_Skin) as ZC_Skin
 
-		if damage == null:
+		# var damage := entity.get_component(ZC_Damage) as ZC_Damage
+		var damages := entity.get_relationships(Relationship.new(ZC_Damaged.new(), null)) as Array[Relationship]
+		if damages.size() == 0:
 			continue
 
-		health.current_health -= floor(damage.amount)
-		entity.remove_component(damage)
+		for damage_rel in damages:
+			var damage: ZC_Damage = damage_rel.target as ZC_Damage
+			health.current_health -= floor(damage.amount)
+			entity.remove_relationship(damage_rel)
+		# entity.remove_component(damage)
 
+		var skin := entity.get_component(ZC_Skin) as ZC_Skin
 		if health.current_health <= 0:
 			health.current_health = 0
 			print("Entity has perished: ", entity)
@@ -40,7 +44,6 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 					ECS.world.remove_entity(entity)
 					root.remove_child(entity)
 					entity.queue_free()
-
 		elif health.current_health < health.max_health:
 			if skin != null and skin.material_injured != null:
 				var shape = entity.get_node(skin.skin_shape) as GeometryInstance3D
