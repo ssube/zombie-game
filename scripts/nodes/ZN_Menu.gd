@@ -38,7 +38,7 @@ func set_health(value: int, instant: bool = false) -> void:
 		health_callback(value)
 	else:
 		health_tween = health_bar.create_tween()
-		health_tween.tween_property(health_bar, "value", value, 1.0)
+		health_tween.tween_property(health_bar, "value", value, 0.5)
 		health_tween.tween_callback(health_callback.bind(value))
 
 

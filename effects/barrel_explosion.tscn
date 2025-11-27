@@ -2,16 +2,14 @@
 
 [ext_resource type="Script" uid="uid://2b0anfdfvkft" path="res://scripts/events/EV_RemoveAfter.gd" id="1_ikohy"]
 [ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/events/EV_EmitOnReady.gd" id="1_ma1qw"]
+[ext_resource type="QuadMesh" uid="uid://cltad2jeupalx" path="res://effects/fire_particle.tres" id="2_n1k4f"]
 [ext_resource type="Script" uid="uid://yae4sdiptdy8" path="res://scripts/events/EV_BurnOnEnter.gd" id="3_34a0c"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_148r6"]
-transparency = 1
-albedo_color = Color(1, 0.5176471, 0.23921569, 0.6627451)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ma1qw"]
-material = SubResource("StandardMaterial3D_148r6")
-radius = 0.25
-height = 0.5
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o8st4"]
+spread = 180.0
+initial_velocity_min = 0.5
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ma1qw"]
 radius = 10.0
@@ -19,16 +17,14 @@ radius = 10.0
 [node name="BarrelExplosion" type="Node3D"]
 script = ExtResource("1_ikohy")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="CPUParticles3D" type="GPUParticles3D" parent="."]
 emitting = false
 amount = 20
 one_shot = true
 explosiveness = 0.5
-mesh = SubResource("CapsuleMesh_ma1qw")
-spread = 180.0
-gravity = Vector3(0, -4.5, 0)
-initial_velocity_min = 0.5
-initial_velocity_max = 4.0
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_o8st4")
+draw_pass_1 = ExtResource("2_n1k4f")
 script = ExtResource("1_ma1qw")
 
 [node name="Area3D" type="Area3D" parent="."]

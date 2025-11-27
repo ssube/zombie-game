@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://2631yqe4y8ki"]
+[gd_scene load_steps=36 format=4 uid="uid://2631yqe4y8ki"]
 
 [ext_resource type="Texture2D" uid="uid://bo5t03igocsyg" path="res://textures/Color Maps/concrete_tx_6.png" id="2_0b37p"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/Zombie.tscn" id="2_1pddc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/ZC_Portal.gd" id="6_xrb85"]
 [ext_resource type="Texture2D" uid="uid://b7dgivuvq2cvg" path="res://textures/Color Maps/stone_hell_8.png" id="8_1pddc"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/Door.tscn" id="8_4uioy"]
+[ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/barrel.tscn" id="8_ebfu5"]
 [ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/ZC_Door.gd" id="9_1ytwx"]
 [ext_resource type="Texture2D" uid="uid://eghqsrlvdmer" path="res://textures/Color Maps/stone_alien_1.png" id="9_uv2rs"]
 [ext_resource type="Material" uid="uid://c67ov6fslkehf" path="res://textures/Color Maps/water_1.tres" id="10_1pddc"]
@@ -212,6 +213,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.858704, 1.0000153, 31.467
 [node name="Door" parent="Entities" instance=ExtResource("8_4uioy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6)
 component_resources = Array[ExtResource("2_w5fjf")]([SubResource("Resource_q8gv4"), SubResource("Resource_auxoi"), SubResource("Resource_wks3y")])
+
+[node name="Barrel" parent="Entities" instance=ExtResource("8_ebfu5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0691018, 2.9999635, 20.1361)
+
+[node name="Barrel2" parent="Entities" instance=ExtResource("8_ebfu5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.848629, 2.9999635, 26.766321)
 
 [node name="Lights" type="Node" parent="."]
 

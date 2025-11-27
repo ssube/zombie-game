@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://busds31ha5tx1"]
+[gd_scene load_steps=21 format=3 uid="uid://busds31ha5tx1"]
 
 [ext_resource type="Script" uid="uid://dyudolkkkb4ut" path="res://scripts/entities/ZE_Player.gd" id="1_ks8m5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_l1ths"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://blxc4fcjrrpa2" path="res://entities/Bullet.tscn" id="7_dv4ir"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="9_idcse"]
 [ext_resource type="Script" uid="uid://c01mmquxj5ukg" path="res://scripts/nodes/ZN_Mouse.gd" id="10_p37y2"]
+[ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/ZC_Flammable.gd" id="10_vkqcq"]
+[ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="12_b4uku"]
 
 [sub_resource type="Resource" id="Resource_ks8m5"]
 script = ExtResource("6_25mxy")
@@ -32,20 +34,25 @@ metadata/_custom_type_script = "uid://cxm3pspus34o7"
 
 [sub_resource type="Resource" id="Resource_idcse"]
 script = ExtResource("7_25mxy")
+muzzle_velocity = 50.0
 projectile_scene = ExtResource("7_dv4ir")
 metadata/_custom_type_script = "uid://dwsqxsqwtloma"
 
 [sub_resource type="Resource" id="Resource_p37y2"]
 script = ExtResource("9_idcse")
-current_health = 50
 metadata/_custom_type_script = "uid://0ndifcnh0nsp"
+
+[sub_resource type="Resource" id="Resource_b4uku"]
+script = ExtResource("10_vkqcq")
+effect_path = NodePath("Effects/FireEffect")
+metadata/_custom_type_script = "uid://jokkv7skgimj"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_idcse"]
 height = 2.25
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ks8m5")
-component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_ks8m5"), SubResource("Resource_l1ths"), SubResource("Resource_25mxy"), SubResource("Resource_dv4ir"), SubResource("Resource_idcse"), SubResource("Resource_p37y2")])
+component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_ks8m5"), SubResource("Resource_l1ths"), SubResource("Resource_25mxy"), SubResource("Resource_dv4ir"), SubResource("Resource_idcse"), SubResource("Resource_p37y2"), SubResource("Resource_b4uku")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_idcse")
@@ -87,3 +94,8 @@ transform = Transform3D(1, 0, 0, 0, 0.9975641, -0.06975647, 0, 0.06975647, 0.997
 light_size = 0.2
 spot_range = 15.0
 spot_angle = 30.0
+
+[node name="Effects" type="Node3D" parent="."]
+
+[node name="FireEffect" parent="Effects" instance=ExtResource("12_b4uku")]
+visible = false
