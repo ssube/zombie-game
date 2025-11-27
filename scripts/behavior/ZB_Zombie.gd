@@ -68,6 +68,7 @@ func _process(delta: float):
 		vision_area.monitoring = false
 		attack_area.monitoring = false
 		detection_area.monitoring = false
+		set_actor_velocity(Vector3.ZERO)
 		return
 
 	if current_state == State.IDLE:
@@ -117,11 +118,12 @@ func do_attack(_delta: float):
 		return
 
 	print("Zombie attacks player! ", target_player)
+	var player_entity: Entity = target_player.get_node(".") as Entity
+	player_entity.add_component(ZC_Damage.new(10))
 	attack_timer = attack_cooldown
 
 func do_idle(_delta: float):
-	if actor_node is CharacterBody3D:
-		actor_node.velocity = Vector3.ZERO
+	set_actor_velocity(Vector3.ZERO)
 
 	if idle_timer > 0.0:
 		# print("Zombie is idling.")
@@ -140,6 +142,7 @@ func do_wander(_delta: float):
 		nav_path.clear()
 		update_navigation_path(actor_node.global_position, target_position)
 
+	# TODO: follow nav path
 	move_to_target(target_position, target_position)
 
 	if wander_timer > 0.0:
@@ -189,11 +192,13 @@ func move_to_target(target_pos: Vector3, look_target_pos: Vector3) -> void:
 	# move toward target
 	var target_offset: Vector3 = target_pos - actor_node.global_position
 	target_offset = target_offset.normalized() * move_speed
+	set_actor_velocity(target_offset)
 
+func set_actor_velocity(target_velocity: Vector3) -> void:
 	if actor_node is RigidBody3D:
-		velocity = target_offset
+		velocity = target_velocity
 	elif actor_node is CharacterBody3D:
-		actor_node.velocity = target_offset
+		actor_node.velocity = target_velocity
 	else:
 		printerr("Unknown actor type: ", actor_node.get_class())
 
