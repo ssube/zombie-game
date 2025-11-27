@@ -57,6 +57,13 @@ func _process(delta: float):
 	elif current_state == State.WANDERING:
 		do_wander(delta)
 
+func _physics_process(_delta: float) -> void:
+	if actor is CharacterBody3D:
+		if current_state == State.CHASING:
+			actor.move_and_slide()
+		elif current_state == State.WANDERING:
+			actor.move_and_slide()
+
 func _on_vision_area_body_entered(body: Node) -> void:
 	print("Zombie saw body: ", body.name)
 	if is_player(body):
@@ -87,10 +94,10 @@ func do_attack(delta: float):
 	print("Zombie attacks player! ", target_player)
 	attack_timer = attack_cooldown
 
-func do_idle(delta: float):
+func do_idle(_delta: float):
 	pass # print("Zombie is idling.")
 
-func do_wander(delta: float):
+func do_wander(_delta: float):
 	print("Zombie is wandering.")
 
 func do_chase(delta: float):
@@ -108,7 +115,7 @@ func do_chase(delta: float):
 			nav_path.remove_at(0)
 		else:
 			print("Zombie moving to next nav point: ", next_point)
-			move_to_target(next_point)
+			move_to_target(next_point, target_position)
 
 	if nav_timer > 0.0:
 		nav_timer -= delta
@@ -121,16 +128,19 @@ func do_chase(delta: float):
 	else:
 		print("Zombie failed to update navigation path.")
 
-func move_to_target(target_pos: Vector3) -> void:
+func move_to_target(target_pos: Vector3, look_target_pos: Vector3) -> void:
 	print("Zombie moving to target position: ", target_pos)
 	var target_offset: Vector3 = target_pos - actor.global_position
+
+	# rotate to face target
+	var look_pos := Vector3(look_target_pos.x, actor.global_position.y, look_target_pos.z)
+	if not is_zero_approx((look_pos - actor.global_position).length()):
+		actor.look_at(look_pos)
 
 	if actor is RigidBody3D:
 		actor.apply_force(target_offset)
 	elif actor is CharacterBody3D:
 		actor.velocity = target_offset
-		# actor.move_and_slide()
-		# print("TODO: move character by: ", actor.velocity)
 	else:
 		printerr("Unknown actor type: ", actor.get_class())
 

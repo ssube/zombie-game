@@ -68,9 +68,9 @@ metadata/_custom_type_script = "uid://jokkv7skgimj"
 radius = 20.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kv3li"]
-radius = 3.0
+radius = 2.0
 
-[node name="Zombie" type="RigidBody3D"]
+[node name="Zombie" type="CharacterBody3D"]
 script = ExtResource("1_rffgv")
 component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd")])
 
@@ -93,7 +93,7 @@ metadata/_custom_type_script = "uid://dme5f24l0edsf"
 script = ExtResource("14_ods0y")
 enabled = false
 blackboard = NodePath("../Blackboard")
-actor = NodePath("../..")
+actor = NodePath("")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 
 [node name="UntilFailDecorator" type="Node" parent="Behavior/BeehaveTree"]
