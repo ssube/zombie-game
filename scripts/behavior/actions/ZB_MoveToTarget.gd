@@ -10,6 +10,7 @@ class_name ZB_MoveToTarget
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	var actor3d = actor as Node3D
+	print("ticking move to target")
 
 	if not blackboard.has_value("target_position"):
 		return FAILURE
@@ -31,11 +32,14 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		var nav_proximity: float = actor3d.global_position.distance_to(next_point)
 		while nav_proximity < success_proximity and len(nav_path) > 0:
 			nav_path.remove_at(0)
-			if len(nav_path) > 0:
-				blackboard.set_value("nav_path", nav_path)
-				next_point = nav_path[0]
-				nav_proximity = actor3d.global_position.distance_to(next_point)
+			if len(nav_path) == 0:
+				return SUCCESS
+				
+			blackboard.set_value("nav_path", nav_path)
+			next_point = nav_path[0]
+			nav_proximity = actor3d.global_position.distance_to(next_point)
 
+		target_position = next_point
 		target_offset = next_point - actor3d.global_position
 
 	target_proximity = actor3d.global_position.distance_to(target_position)
