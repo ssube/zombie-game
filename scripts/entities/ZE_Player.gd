@@ -3,7 +3,21 @@ extends ZE_Base
 class_name ZE_Player
 
 func on_ready():
-	# Sync transform from scene to component
+	sync_health()
+	sync_transform()
+
+
+## Sync health from component to menu
+func sync_health():
+	var c_health = get_component(ZC_Health) as ZC_Health
+	if not c_health:
+		return
+
+	%Hud.set_health(c_health.current_health, true)
+
+
+## Sync transform from scene to component
+func sync_transform():
 	var c_trs = get_component(ZC_Transform) as ZC_Transform
 	if not c_trs:
 		return
