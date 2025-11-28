@@ -188,37 +188,48 @@ filter_ledge_spans = true
 
 [node name="Zombie" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.127886, 1.0000134, 15.3177595)
+id = "Zone1_ZE_Zombie_1764359804_82086"
 
 [node name="Zombie7" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.545622, 2.0000136, -9.311912)
+id = "Zone1_ZE_Zombie_1764359906_15336"
 
 [node name="Zombie8" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.287119, 2.0000136, 15.586232)
+id = "Zone1_ZE_Zombie_1764359911_46060"
 
 [node name="Zombie2" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.45008, 1.0000134, 17.328136)
+id = "Zone1_ZE_Zombie_1764359915_42456"
 
 [node name="Zombie3" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.328658, 1.0000134, 4.4163055)
+id = "Zone1_ZE_Zombie_1764359917_32210"
 
 [node name="Zombie4" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.657818, 1.0000134, -12.796621)
+id = "Zone1_ZE_Zombie_1764359918_85025"
 
 [node name="Zombie5" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.222485, 1.0000134, -2.9260883)
+id = "Zone1_ZE_Zombie_1764359921_10639"
 
 [node name="Zombie6" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.858704, 1.0000153, 31.467766)
+id = "Zone1_ZE_Zombie_1764359922_7242"
 
 [node name="Door" parent="Entities" instance=ExtResource("8_4uioy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6)
+id = "Zone1_ZE_Door_1764359926_28357"
 component_resources = Array[ExtResource("2_w5fjf")]([SubResource("Resource_q8gv4"), SubResource("Resource_auxoi"), SubResource("Resource_wks3y")])
 
 [node name="Barrel" parent="Entities" instance=ExtResource("8_ebfu5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0691018, 2.9999635, 20.1361)
+id = "Zone1_ZE_Barrel_1764359928_37198"
 
 [node name="Barrel2" parent="Entities" instance=ExtResource("8_ebfu5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.848629, 2.9999635, 26.766321)
+id = "Zone1_ZE_Barrel_1764359929_24781"
 
 [node name="Lights" type="Node" parent="."]
 

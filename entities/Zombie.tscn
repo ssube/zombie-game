@@ -93,7 +93,7 @@ metadata/_custom_type_script = "uid://dme5f24l0edsf"
 script = ExtResource("14_ods0y")
 enabled = false
 blackboard = NodePath("../Blackboard")
-actor = NodePath("")
+actor = NodePath("..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 
 [node name="UntilFailDecorator" type="Node" parent="Behavior/BeehaveTree"]
@@ -232,6 +232,14 @@ metadata/_custom_type_script = "uid://be86tdntixt6r"
 
 [node name="ZombieBehavior" type="Node" parent="Behavior" node_paths=PackedStringArray("actor_node", "actor_entity", "vision_area", "attack_area", "detection_area")]
 script = ExtResource("30_j8wr1")
+starting_state = null
+attack_cooldown = null
+chase_timeout = null
+navigation_interval = null
+wander_radius = null
+wander_interval = null
+move_speed = null
+force_multiplier = null
 actor_node = NodePath("../..")
 actor_entity = NodePath("../..")
 vision_area = NodePath("../VisionCone3D")
@@ -240,7 +248,6 @@ detection_area = NodePath("../DetectionArea3D")
 
 [node name="VisionCone3D" type="Area3D" parent="Behavior"]
 script = ExtResource("12_kv3li")
-debug_draw = true
 metadata/_custom_type_script = "uid://cmgcelj1qxg8o"
 
 [node name="DetectionArea3D" type="Area3D" parent="Behavior"]

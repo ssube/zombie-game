@@ -19,7 +19,6 @@ metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_nmsli"]
 script = ExtResource("8_aerfg")
-next_level = "0"
 is_active = true
 metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 
@@ -112,10 +111,12 @@ unique_name_in_owner = true
 
 [node name="Objective" parent="Entities" instance=ExtResource("4_l53as")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.965708, 1.9073486e-06, 0.011570454)
+id = "Level1_ZE_Objective_1764359962_34782"
 component_resources = Array[ExtResource("5_3sk1a")]([SubResource("Resource_6y5fu"), SubResource("Resource_nmsli")])
 
 [node name="Door" parent="Entities" instance=ExtResource("9_3sk1a")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.5, 0, 2)
+id = "Level1_ZE_Door_1764359963_36890"
 component_resources = Array[ExtResource("5_3sk1a")]([SubResource("Resource_auxoi"), SubResource("Resource_betor")])
 
 [node name="Lights" type="Node" parent="."]
