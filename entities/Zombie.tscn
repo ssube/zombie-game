@@ -54,7 +54,7 @@ script = ExtResource("9_7tmu0")
 material_healthy = ExtResource("8_tfdn2")
 material_injured = ExtResource("9_wwun5")
 material_dead = ExtResource("7_l1o5o")
-skin_shape = NodePath("CSGCylinder3D")
+skin_shapes = Array[NodePath]([NodePath("CSGCylinder3D"), NodePath("CSGSphere3D")])
 metadata/_custom_type_script = "uid://b8oatb3tdywrh"
 
 [sub_resource type="Resource" id="Resource_jpnnd"]
@@ -78,6 +78,11 @@ component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o
 shape = SubResource("CapsuleShape3D_t553y")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+material = ExtResource("8_tfdn2")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6505964, -0.48937953)
+radius = 0.25
 material = ExtResource("8_tfdn2")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -232,19 +237,19 @@ metadata/_custom_type_script = "uid://be86tdntixt6r"
 
 [node name="ZombieBehavior" type="Node" parent="Behavior" node_paths=PackedStringArray("actor_node", "actor_entity", "vision_area", "attack_area", "detection_area")]
 script = ExtResource("30_j8wr1")
+actor_node = NodePath("../..")
+actor_entity = NodePath("../..")
 starting_state = null
 attack_cooldown = null
 chase_timeout = null
 navigation_interval = null
 wander_radius = null
 wander_interval = null
-move_speed = null
-force_multiplier = null
-actor_node = NodePath("../..")
-actor_entity = NodePath("../..")
 vision_area = NodePath("../VisionCone3D")
 attack_area = NodePath("../AttackArea3D")
 detection_area = NodePath("../DetectionArea3D")
+move_speed = null
+force_multiplier = null
 
 [node name="VisionCone3D" type="Area3D" parent="Behavior"]
 script = ExtResource("12_kv3li")

@@ -183,7 +183,6 @@ func update_wander_target() -> void:
 	var random_pos := pick_random_position(actor_node.global_position)
 	print("Zombie picked new wander target position: ", random_pos)
 	target_position = random_pos
-	navigation_path.clear()
 	update_navigation_path(actor_node.global_position, target_position)
 
 func look_at_target(look_target_pos: Vector3) -> void:

@@ -25,8 +25,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			print("Entity has perished: ", entity)
 
 			if skin != null and skin.material_dead != null:
-				var shape = entity.get_node(skin.skin_shape) as GeometryInstance3D
-				shape.material_override = skin.material_dead
+				update_skin_material(entity, skin, skin.material_dead)
 
 			if entity.has_component(ZC_Flammable):
 				var flammable: ZC_Flammable = entity.get_component(ZC_Flammable)
@@ -46,5 +45,9 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 					entity.queue_free()
 		elif health.current_health < health.max_health:
 			if skin != null and skin.material_injured != null:
-				var shape = entity.get_node(skin.skin_shape) as GeometryInstance3D
-				shape.material_override = skin.material_injured
+				update_skin_material(entity, skin, skin.material_injured)
+
+func update_skin_material(entity: Node, skin: ZC_Skin, material: BaseMaterial3D):
+	for shape_path in skin.skin_shapes:
+		var shape = entity.get_node(shape_path) as GeometryInstance3D
+		shape.material_overlay = material
