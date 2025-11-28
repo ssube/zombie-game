@@ -32,9 +32,13 @@ enum State {
 @export_group("Navigation")
 @export var point_proximity: float = 1.0
 
+@export_group("Attack")
+@export var attack_damage: int = 10 # TODO: move to melee weapon component
+
 @onready var current_state := starting_state
 
 var entity_health: ZC_Health
+
 var attack_timer: float = 0.0
 var idle_timer: float = 0.0
 var navigation_timer: float = 0.0
@@ -125,8 +129,7 @@ func do_attack(_delta: float):
 	print("Zombie attacks player! ", target_player)
 
 	var player_entity: Entity = target_player.get_node(".") as Entity
-	# player_entity.add_component(ZC_Damage.new(10))
-	player_entity.add_relationship(Relationship.new(ZC_Damaged.new(), ZC_Damage.new(10)))
+	player_entity.add_relationship(RelationshipUtils.add_damage(attack_damage))
 	attack_timer = attack_cooldown
 
 func do_idle(_delta: float):

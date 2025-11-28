@@ -1,2 +1,0 @@
-extends Component
-class_name ZC_Open

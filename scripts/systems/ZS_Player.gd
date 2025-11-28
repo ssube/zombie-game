@@ -168,10 +168,6 @@ func use_door(entity: Entity, player: ZC_Player) -> void:
 
 	if door.open_on_use and not door.is_locked:
 		door.is_open = !door.is_open
-		if entity.has_component(ZC_Open):
-			entity.remove_component(ZC_Open)
-		else:
-			entity.add_component(ZC_Open.new())
 
 		print("Door is open: ", door.is_open)
 

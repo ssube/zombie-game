@@ -1,2 +1,0 @@
-extends Relationship
-class_name ZR_Damaged
