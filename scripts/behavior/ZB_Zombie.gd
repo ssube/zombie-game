@@ -29,14 +29,17 @@ enum State {
 @export var move_speed: float = 2.0
 @export var force_multiplier: float = 1.0
 
+@export_group("Navigation")
+@export var point_proximity: float = 1.0
+
 @onready var current_state := starting_state
 
 var entity_health: ZC_Health
 var attack_timer: float = 0.0
 var idle_timer: float = 0.0
-var nav_timer: float = 0.0
+var navigation_timer: float = 0.0
 var wander_timer: float = 0.0
-var nav_path: PackedVector3Array = PackedVector3Array()
+var navigation_path: PackedVector3Array = PackedVector3Array()
 var target_player: Node3D = null
 var target_position: Vector3 = Vector3.ZERO
 var velocity: Vector3 = Vector3.ZERO
@@ -139,25 +142,18 @@ func do_idle(_delta: float):
 
 func do_wander(_delta: float):
 	# print("Zombie is wandering.")
-	if target_position == Vector3.ZERO or is_point_nearby(target_position, 1.0):
-		var random_pos := pick_random_position(actor_node.global_position)
-		print("Zombie picked new wander target position: ", random_pos)
-		target_position = random_pos
-		nav_path.clear()
-		update_navigation_path(actor_node.global_position, target_position)
+	if target_position == Vector3.ZERO or is_point_nearby(target_position, point_proximity):
+		update_wander_target()
 
-	# TODO: follow nav path
-	move_to_target(target_position, target_position)
+	# follow nav path
+	follow_navigation_path()
 
 	if wander_timer > 0.0:
 		return
 
 	wander_timer = wander_interval
-	var random_pos := pick_random_position(actor_node.global_position)
-	print("Zombie wander timed out, picked new target position: ", random_pos)
-	target_position = random_pos
-	nav_path.clear()
-	update_navigation_path(actor_node.global_position, target_position)
+	update_wander_target()
+	print("Zombie wander timed out, picked new target position: ", target_position)
 
 func do_chase(_delta: float):
 	if target_player == null:
@@ -167,23 +163,25 @@ func do_chase(_delta: float):
 	target_position = target_player.global_position
 	# print("Zombie is chasing player at position: ", target_position)
 
-	if len(nav_path) > 0:
-		var next_point := nav_path[0]
-		if is_point_nearby(next_point, 1.0):
-			nav_path.remove_at(0)
-		else:
-			# print("Zombie moving to next nav point: ", next_point)
-			move_to_target(next_point, target_position)
+	follow_navigation_path()
+	update_navigation_path(actor_node.global_position, target_position)
 
-	if nav_timer > 0.0:
+func follow_navigation_path() -> void:
+	if len(navigation_path) == 0:
 		return
 
-	var success := update_navigation_path(actor_node.global_position, target_position)
-	nav_timer = navigation_interval
-	if success:
-		print("Zombie got new navigation path with ", len(nav_path), " points.")
+	var next_point := navigation_path[0]
+	if is_point_nearby(next_point, point_proximity):
+		navigation_path.remove_at(0)
 	else:
-		print("Zombie failed to update navigation path.")
+		move_to_target(next_point, target_position)
+
+func update_wander_target() -> void:
+	var random_pos := pick_random_position(actor_node.global_position)
+	print("Zombie picked new wander target position: ", random_pos)
+	target_position = random_pos
+	navigation_path.clear()
+	update_navigation_path(actor_node.global_position, target_position)
 
 func look_at_target(look_target_pos: Vector3) -> void:
 	# rotate to face target
@@ -234,12 +232,15 @@ func update_timers(delta: float) -> void:
 		attack_timer -= delta
 	if idle_timer > 0.0:
 		idle_timer -= delta
-	if nav_timer > 0.0:
-		nav_timer -= delta
+	if navigation_timer > 0.0:
+		navigation_timer -= delta
 	if wander_timer > 0.0:
 		wander_timer -= delta
 
 func update_navigation_path(nav_start_position: Vector3, nav_target_position: Vector3) -> bool:
+	if navigation_timer > 0.0:
+		return false
+
 	if actor_node == null:
 		return false
 
@@ -247,14 +248,15 @@ func update_navigation_path(nav_start_position: Vector3, nav_target_position: Ve
 		return false
 
 	var default_map_rid: RID = actor_node.get_world_3d().get_navigation_map()
-	nav_path = NavigationServer3D.map_get_path(
+	navigation_path = NavigationServer3D.map_get_path(
 		default_map_rid,
 		nav_start_position,
 		nav_target_position,
 		true
 	)
+	navigation_timer = navigation_interval
 
-	if len(nav_path) == 0:
+	if len(navigation_path) == 0:
 		return false
 
 	return true
