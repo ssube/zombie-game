@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://vcyq2fbg0dts"]
 
 [ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/nodes/ZN_Menu.gd" id="1_633jc"]
-[ext_resource type="Shader" uid="uid://ckydjmdamo2fo" path="res://menus/post_crt.gdshader" id="2_jew8s"]
+[ext_resource type="Shader" uid="uid://ckydjmdamo2fo" path="res://shaders/post_crt.gdshader" id="2_jew8s"]
 [ext_resource type="Texture2D" uid="uid://dwp1uqi51ytw3" path="res://textures/crosshair.png" id="2_rglhv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pua1y"]
@@ -54,13 +54,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="CheckBox" type="CheckBox" parent="HudLayer/GameHud"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-button_pressed = true
-text = "Post Shader"
 
 [node name="HealthBar" type="ProgressBar" parent="HudLayer/GameHud"]
 custom_minimum_size = Vector2(0, 32)
@@ -148,6 +141,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/v_separation = 16
 alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="HudLayer/PauseMenu/MarginContainer/VFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+button_pressed = true
+text = "Post Shader"
 
 [node name="Resume" type="Button" parent="HudLayer/PauseMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
@@ -295,10 +295,10 @@ alignment = 1
 layout_mode = 2
 text = "Loading..."
 
-[connection signal="toggled" from="HudLayer/GameHud/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="pressed" from="HudLayer/StartMenu/MarginContainer/VFlowContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="HudLayer/StartMenu/MarginContainer/VFlowContainer/LoadGame" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="HudLayer/StartMenu/MarginContainer/VFlowContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="toggled" from="HudLayer/PauseMenu/MarginContainer/VFlowContainer/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="pressed" from="HudLayer/PauseMenu/MarginContainer/VFlowContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="HudLayer/PauseMenu/MarginContainer/VFlowContainer/SaveGame" to="." method="_on_save_game_pressed"]
 [connection signal="pressed" from="HudLayer/PauseMenu/MarginContainer/VFlowContainer/LoadGame" to="." method="_on_load_game_pressed"]

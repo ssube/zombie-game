@@ -97,8 +97,9 @@ metadata/_custom_type_script = "uid://dme5f24l0edsf"
 [node name="BeehaveTree" type="Node" parent="Behavior" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("14_ods0y")
 enabled = false
+actor_node_path = NodePath("../..")
 blackboard = NodePath("../Blackboard")
-actor = NodePath("..")
+actor = NodePath("../..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 
 [node name="UntilFailDecorator" type="Node" parent="Behavior/BeehaveTree"]
