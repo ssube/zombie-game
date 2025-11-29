@@ -201,9 +201,9 @@ func update_wander_target() -> void:
 
 func look_at_target(look_target_position: Vector3) -> void:
 	# rotate to face target
-	var target_offset: Vector3 = look_target_position - actor_node.global_position
+	# var target_offset: Vector3 = look_target_position - actor_node.global_position
 	# if not is_zero_approx(target_offset.length_squared()):
-	actor_node.set_look_direction(target_offset)
+	actor_node.set_look_direction(look_target_position)
 
 func move_to_target(move_target_position: Vector3) -> void:
 	# move toward target
