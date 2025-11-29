@@ -124,3 +124,15 @@ func _on_level_loaded(_old_level: String, _new_level: String) -> void:
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
 	$PostLayer.visible = toggled_on
+
+
+func _on_new_save_pressed() -> void:
+	var query = ECS.world.query.with_all([C_Persistent])
+	var data = ECS.serialize(query)
+
+	var user_dir := DirAccess.open("user://")
+	if not user_dir.dir_exists("saves"):
+		user_dir.make_dir("saves")
+
+	if ECS.save(data, "user://saves/test.tres"):
+		print("Saved %d entities!" % data.entities.size())

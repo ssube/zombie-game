@@ -9,14 +9,15 @@ enum State {
 }
 
 @export_group("Actor")
-@export var actor_node: Node3D
-@export var actor_entity: Entity
+@export var actor_node: RigidBody3D
 
 @export_group("Behavior")
 @export var starting_state: State = State.IDLE
-@export var attack_cooldown: float = 5.0
+
+@export_subgroup("Chasing")
 @export var chase_timeout: float = 10.0
-@export var navigation_interval: float = 1.0
+
+@export_subgroup("Wandering")
 @export var wander_radius: float = 10.0
 @export var wander_interval: float = 15.0
 
@@ -27,26 +28,32 @@ enum State {
 
 @export_group("Movement")
 @export var move_speed: float = 2.0
+@export var acceleration: float = 15.0
+@export var friction: float = 10.0
 @export var force_multiplier: float = 1.0
 
 @export_group("Navigation")
+@export var navigation_interval: float = 1.0
 @export var point_proximity: float = 1.0
-
-@export_group("Attack")
-@export var attack_damage: int = 10 # TODO: move to melee weapon component
 
 @onready var current_state := starting_state
 
+# Components
+var actor_entity: Entity
 var entity_health: ZC_Health
+var entity_weapon: ZC_Weapon_Melee
+var entity_velocity: ZC_Velocity
 
+# Timers
 var attack_timer: float = 0.0
 var idle_timer: float = 0.0
 var navigation_timer: float = 0.0
 var wander_timer: float = 0.0
+
+# Movement
 var navigation_path: PackedVector3Array = PackedVector3Array()
 var target_player: Node3D = null
 var target_position: Vector3 = Vector3.ZERO
-var velocity: Vector3 = Vector3.ZERO
 
 func _ready():
 	if vision_area != null:
@@ -57,20 +64,28 @@ func _ready():
 	if attack_area != null:
 		attack_area.monitoring = true
 		attack_area.body_entered.connect(_on_attack_area_body_entered)
+		attack_area.body_exited.connect(_on_attack_area_body_exited)
 
 	if detection_area != null:
 		detection_area.monitoring = true
 		detection_area.body_entered.connect(_on_detection_area_body_entered)
 
-	if actor_entity != null:
-		entity_health = actor_entity.get_component(ZC_Health)
+	# lock zombie node rotation
+	actor_node.axis_lock_angular_x = true
+	actor_node.axis_lock_angular_z = true
 
 	print("Zombie ready")
+
+func on_ready(entity: Entity) -> void:
+	actor_entity = entity
+	entity_health = actor_entity.get_component(ZC_Health)
+	entity_weapon = actor_entity.get_component(ZC_Weapon_Melee)
+	entity_velocity = actor_entity.get_component(ZC_Velocity)
 
 func _process(delta: float):
 	update_timers(delta)
 
-	if not is_actor_active():
+	if false: # not is_actor_active():
 		# disable area monitoring for performance
 		vision_area.debug_draw = false
 		vision_area.monitoring = false
@@ -80,23 +95,13 @@ func _process(delta: float):
 		return
 
 	if current_state == State.IDLE:
-		do_idle(delta)
+		do_idle()
 	elif current_state == State.CHASING:
-		do_chase(delta)
+		do_chase()
 	elif current_state == State.ATTACKING:
-		do_attack(delta)
+		do_attack()
 	elif current_state == State.WANDERING:
-		do_wander(delta)
-
-func _physics_process(_delta: float) -> void:
-	if actor_node is CharacterBody3D:
-		if current_state == State.CHASING:
-			actor_node.move_and_slide()
-		elif current_state == State.WANDERING:
-			actor_node.move_and_slide()
-	elif actor_node is RigidBody3D:
-		if not is_zero_approx(velocity.length()):
-			actor_node.apply_force(velocity * force_multiplier)
+		do_wander()
 
 func _on_vision_area_body_entered(body: Node) -> void:
 	print("Zombie saw body: ", body.name)
@@ -118,37 +123,45 @@ func _on_attack_area_body_entered(body: Node) -> void:
 		target_player = body as Node3D
 		current_state = State.ATTACKING
 
+func _on_attack_area_body_exited(body: Node) -> void:
+	print("Zombie can no longer attack body: ", body.name)
+	if body == target_player:
+		# continue chasing
+		current_state = State.CHASING
+
 func _on_detection_area_body_entered(body: Node) -> void:
 	print("Zombie detected body: ", body.name)
 
-func do_attack(_delta: float):
+func do_attack():
+	look_at_target(target_player.global_position)
+
 	if attack_timer > 0.0:
 		return
 
-	look_at_target(target_player.global_position)
 	print("Zombie attacks player! ", target_player)
 
 	var player_entity: Entity = target_player.get_node(".") as Entity
-	player_entity.add_relationship(RelationshipUtils.add_damage(attack_damage))
-	attack_timer = attack_cooldown
+	player_entity.add_relationship(RelationshipUtils.add_damage(entity_weapon.damage))
+	attack_timer = entity_weapon.cooldown_time
 
-func do_idle(_delta: float):
+func do_idle():
+	print("Zombie is idling.")
 	set_actor_velocity(Vector3.ZERO)
 
 	if idle_timer > 0.0:
-		# print("Zombie is idling.")
 		# TODO: random idle animation
 		# TODO: turn towards random direction
 		return
 
 	current_state = State.WANDERING
 
-func do_wander(_delta: float):
-	# print("Zombie is wandering.")
+func do_wander():
+	print("Zombie is wandering.")
 	if target_position == Vector3.ZERO or is_point_nearby(target_position, point_proximity):
 		update_wander_target()
 
 	# follow nav path
+	look_at_target(target_position)
 	follow_navigation_path()
 
 	if wander_timer > 0.0:
@@ -158,16 +171,17 @@ func do_wander(_delta: float):
 	update_wander_target()
 	print("Zombie wander timed out, picked new target position: ", target_position)
 
-func do_chase(_delta: float):
+func do_chase():
 	if target_player == null:
 		current_state = State.WANDERING
 		return
 
 	target_position = target_player.global_position
-	# print("Zombie is chasing player at position: ", target_position)
+	print("Zombie is chasing player at position: ", target_position)
 
-	follow_navigation_path()
+	look_at_target(target_position)
 	update_navigation_path(actor_node.global_position, target_position)
+	follow_navigation_path()
 
 func follow_navigation_path() -> void:
 	if len(navigation_path) == 0:
@@ -177,7 +191,7 @@ func follow_navigation_path() -> void:
 	if is_point_nearby(next_point, point_proximity):
 		navigation_path.remove_at(0)
 	else:
-		move_to_target(next_point, target_position)
+		move_to_target(next_point)
 
 func update_wander_target() -> void:
 	var random_pos := pick_random_position(actor_node.global_position)
@@ -185,28 +199,24 @@ func update_wander_target() -> void:
 	target_position = random_pos
 	update_navigation_path(actor_node.global_position, target_position)
 
-func look_at_target(look_target_pos: Vector3) -> void:
+func look_at_target(look_target_position: Vector3) -> void:
 	# rotate to face target
-	var look_pos := Vector3(look_target_pos.x, actor_node.global_position.y, look_target_pos.z)
-	if not is_zero_approx((look_pos - actor_node.global_position).length()):
-		actor_node.look_at(look_pos)
+	var target_offset: Vector3 = look_target_position - actor_node.global_position
+	# if not is_zero_approx(target_offset.length_squared()):
+	actor_node.set_look_direction(target_offset)
 
-func move_to_target(target_pos: Vector3, look_target_pos: Vector3) -> void:
-	# print("Zombie moving to target position: ", target_pos)
-	look_at_target(look_target_pos)
-
+func move_to_target(move_target_position: Vector3) -> void:
 	# move toward target
-	var target_offset: Vector3 = target_pos - actor_node.global_position
-	target_offset = target_offset.normalized() * move_speed
+	var target_offset: Vector3 = move_target_position - actor_node.global_position
+	target_offset = target_offset.normalized() * move_speed * entity_velocity.speed_modifier
 	set_actor_velocity(target_offset)
 
 func set_actor_velocity(target_velocity: Vector3) -> void:
-	if actor_node is RigidBody3D:
-		velocity = target_velocity
-	elif actor_node is CharacterBody3D:
-		actor_node.velocity = target_velocity
-	else:
-		printerr("Unknown actor type: ", actor_node.get_class())
+	if is_zero_approx(target_velocity.length_squared()):
+		return
+
+	# print("Setting actor velocity to: ", target_velocity)
+	actor_node.set_movement_direction(target_velocity)
 
 func is_actor_active() -> bool:
 	if actor_entity:

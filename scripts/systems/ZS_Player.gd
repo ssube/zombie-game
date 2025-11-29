@@ -41,17 +41,15 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		# TODO: fix infinite gravity
 		if velocity.linear_velocity.y < 0:
 			velocity.linear_velocity.y = max(velocity.gravity.y, velocity.linear_velocity.y)
-		elif velocity.linear_velocity.y > 0:
-			velocity.linear_velocity.y = min(velocity.gravity.y, velocity.linear_velocity.y)
 
 		# Apply jump
 		if input.move_jump:
-				if abs(velocity.linear_velocity.y) < 0.1:
-					velocity.linear_velocity.y = input.jump_speed
+			if body.is_on_floor():
+				velocity.linear_velocity.y = input.jump_speed
 
 		# TODO: move this input the MovementSystem
 		# Sync to CharacterBody3D (Node assumed attached to entity)
-		body.velocity = velocity.linear_velocity
+		body.velocity = velocity.linear_velocity * velocity.speed_modifier
 		body.move_and_slide()
 		_handle_collisions(body, delta)
 
@@ -61,7 +59,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 		# Spawn projectiles
 		if input.use_attack:
-			_spawn_projectile(entity, body)
+			spawn_projectile(entity, body)
 
 		if input.use_light:
 			toggle_flashlight(entity, body)
@@ -130,7 +128,7 @@ func _handle_collisions(body: CharacterBody3D, delta: float) -> void:
 			collider.apply_impulse(push_direction * 50 * delta, push_position)
 
 
-func _spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
+func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	var marker = body.get_node("./Head/Hands/ProjectileMarker") as Node3D
 	var weapon = entity.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
 
@@ -154,7 +152,6 @@ func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
 	var light = body.get_node("./Head/Hands/Flashlight") as SpotLight3D
 	if light != null:
 		light.visible = not light.visible
-
 
 
 func use_door(entity: Entity, player: ZC_Player) -> void:
