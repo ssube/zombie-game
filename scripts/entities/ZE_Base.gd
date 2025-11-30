@@ -2,10 +2,10 @@
 extends Entity
 class_name ZE_Base
 
-@export_tool_button("Generate ID")
-var generate_id = _generate_id
+@export_tool_button("Generate Instance ID")
+var generate_instance_id = _generate_instance_id
 
-func _generate_id() -> void:
+func _generate_instance_id() -> void:
 	var root := self.owner
 	if root == null:
 		push_error("Owner is null, cannot generate ID.")
@@ -17,15 +17,15 @@ func _generate_id() -> void:
 	var time: int = floor(Time.get_unix_time_from_system())
 	var salt: int = randi() % 100000
 
-	var id_parts = [
+	var parts = [
 		owner.name,
 		type,
 		str(time),
 		str(salt)
 	]
-	self.id = "_".join(id_parts)
+	self.id = "_".join(parts)
 	print("Generated new entity ID: ", self.id)
 
 func on_ready() -> void:
 	if self.id == "":
-		printerr("Entity ID is empty, will not persist in saved state: ", self)
+		printerr("Entity instance ID is empty, will not persist in saved state: ", self)

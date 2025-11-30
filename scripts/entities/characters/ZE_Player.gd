@@ -2,6 +2,8 @@
 extends ZE_Base
 class_name ZE_Player
 
+@export var weapon: ZE_Weapon = null
+
 func on_ready():
 	sync_health()
 	sync_transform()

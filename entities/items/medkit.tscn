@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://bbt0pagry5h5w"]
 
-[ext_resource type="Script" uid="uid://diqnbh8glii7x" path="res://scripts/entities/ZE_Food.gd" id="1_u378d"]
+[ext_resource type="Script" uid="uid://diqnbh8glii7x" path="res://scripts/entities/props/ZE_Food.gd" id="1_u378d"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_hvtkh"]
-[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/ZC_Interactive.gd" id="3_402fv"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_402fv"]
 [ext_resource type="Material" uid="uid://duorhhvkpiuvo" path="res://materials/effects/shimmer_food.tres" id="4_u378d"]
-[ext_resource type="Script" uid="uid://c4bbaiyswechl" path="res://scripts/components/ZC_Food.gd" id="5_hvtkh"]
+[ext_resource type="Script" uid="uid://c4bbaiyswechl" path="res://scripts/components/props/ZC_Food.gd" id="5_hvtkh"]
 
 [sub_resource type="Resource" id="Resource_hvtkh"]
 script = ExtResource("3_402fv")

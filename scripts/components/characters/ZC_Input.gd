@@ -22,3 +22,7 @@ class_name ZC_Input
 @export var sprint_multiplier := 1.5
 @export var crouch_multiplier := 0.5
 @export var jump_speed := 5.0
+
+@export_group("Weapon")
+@export var weapon_next: bool = false
+@export var weapon_previous: bool = false

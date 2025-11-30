@@ -128,24 +128,42 @@ func _handle_collisions(body: CharacterBody3D, delta: float) -> void:
 			collider.apply_impulse(push_direction * 50 * delta, push_position)
 
 
+func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
+	var weapon = entity.weapon as ZE_Weapon
+	if weapon == null:
+		return
+
+	var weapon_component = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
+	var swing_node = weapon.get_node(weapon_component.swing_path) as PathFollow3D
+	swing_node.progress_ratio = 0.0
+
+	var tween = weapon.create_tween()
+	tween.tween_property(swing_node, "progress_ratio", 1.0, weapon_component.swing_time)
+
+
 func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
+	# var weapon = entity.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	var weapon = entity.weapon as ZE_Weapon
+	if weapon == null:
+		return
+
 	var marker = body.get_node("./Head/Hands/ProjectileMarker") as Node3D
-	var weapon = entity.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	if marker == null:
+		return
 
-	if marker != null and weapon != null:
-		var forward = -marker.global_transform.basis.z.normalized()
+	var forward = -marker.global_transform.basis.z.normalized()
 
-		var new_projectile = weapon.projectile_scene.instantiate() as RigidBody3D
-		body.get_parent().add_child(new_projectile)
+	var new_projectile = weapon.projectile_scene.instantiate() as RigidBody3D
+	body.get_parent().add_child(new_projectile)
 
-		if new_projectile is Entity:
-			ECS.world.add_entity(new_projectile)
-		else:
-			printerr("Projectile is not an entity: ", new_projectile)
+	if new_projectile is Entity:
+		ECS.world.add_entity(new_projectile)
+	else:
+		printerr("Projectile is not an entity: ", new_projectile)
 
-		new_projectile.global_position = marker.global_position
-		new_projectile.global_rotation = marker.global_rotation
-		new_projectile.apply_impulse(forward * weapon.muzzle_velocity, body.global_position)
+	new_projectile.global_position = marker.global_position
+	new_projectile.global_rotation = marker.global_rotation
+	new_projectile.apply_impulse(forward * weapon.muzzle_velocity, body.global_position)
 
 
 func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:

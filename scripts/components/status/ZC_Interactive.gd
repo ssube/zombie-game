@@ -7,3 +7,5 @@ class_name ZC_Interactive
 @export var shimmer_range: float = 5.0
 @export var shimmer_material: Material = null
 @export var shimmer_nodes: Array[NodePath] = []
+
+@export var name: String = "Interactive Object"

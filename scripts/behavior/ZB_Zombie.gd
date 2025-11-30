@@ -98,8 +98,7 @@ func _process(delta: float):
 		vision_area.monitoring = false
 		attack_area.monitoring = false
 		detection_area.monitoring = false
-		# TODO: lerp to zero velocity
-		# set_actor_velocity(Vector3.ZERO)
+		# lerp to zero velocity
 		lerp_actor_velocity(Vector3.ZERO, delta)
 		return
 
@@ -164,11 +163,7 @@ func do_idle():
 		# TODO: random idle animation
 		return
 
-	var next_state = randi() % 2
-	if next_state == 0:
-		current_state = State.IDLE
-	else:
-		current_state = State.WANDERING
+	idle_or_wander()
 
 func do_wander():
 	# print("Zombie is wandering.")
@@ -182,14 +177,8 @@ func do_wander():
 	if wander_timer > 0.0:
 		return
 
-	var next_state = randi() % 2
-	if next_state == 0:
-		current_state = State.IDLE
-	else:
-		current_state = State.WANDERING
-		wander_timer = wander_interval
-		update_wander_target()
-		print("Zombie wander timed out, picked new target position: ", target_position)
+	idle_or_wander()
+	print("Zombie wander timed out, picking new state: ", current_state)
 
 func do_chase():
 	if target_player == null:
@@ -202,6 +191,15 @@ func do_chase():
 	look_at_target(target_position)
 	update_navigation_path(actor_node.global_position, target_position)
 	follow_navigation_path()
+
+func idle_or_wander():
+	var next_state = randi() % 2
+	if next_state == 0:
+		current_state = State.IDLE
+	else:
+		current_state = State.WANDERING
+		wander_timer = wander_interval
+		update_wander_target()
 
 func follow_navigation_path() -> void:
 	if len(navigation_path) == 0:

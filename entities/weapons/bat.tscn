@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://tna8f01ql67u"]
 
-[ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/ZE_Weapon.gd" id="1_i61yn"]
-[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_jlji6"]
-[ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/ZC_Weapon_Melee.gd" id="3_86b8h"]
+[ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aigh8"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_dy0dc"]
+[ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="3_ee0de"]
 
 [sub_resource type="Resource" id="Resource_72xai"]
-script = ExtResource("3_86b8h")
+script = ExtResource("3_ee0de")
 swing_path = NodePath("Path3D/PathFollow3D")
 name = "Baseball Bat"
 damage = 10
@@ -23,8 +23,8 @@ radius = 0.1
 height = 0.6
 
 [node name="WeaponBat" type="Node"]
-script = ExtResource("1_i61yn")
-component_resources = Array[ExtResource("2_jlji6")]([SubResource("Resource_72xai")])
+script = ExtResource("1_aigh8")
+component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_72xai")])
 metadata/_custom_type_script = "uid://b5t1ema7rumub"
 
 [node name="Path3D" type="Path3D" parent="."]

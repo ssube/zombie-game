@@ -3,6 +3,8 @@ extends ZE_Base
 class_name ZE_Zombie
 
 @export var behavior: NodePath
+@export var weapon: ZE_Weapon
+
 @export var look_speed: float = 5.0
 @export var move_speed: float = 5.0
 @export var look_acceleration: float = 10.0
@@ -23,17 +25,13 @@ var movement_direction: Vector3 = Vector3.ZERO:
 func on_ready():
 	# Sync transform from scene to component
 	var transform = get_component(ZC_Transform) as ZC_Transform
-	if not transform:
-		return
-
-	transform.position = root_3d.global_position
-	transform.rotation = root_3d.global_rotation
+	if transform:
+		transform.position = root_3d.global_position
+		transform.rotation = root_3d.global_rotation
 
 	var behavior_node = get_node(behavior) as Node
 	if behavior_node != null:
 		behavior_node.on_ready(self)
-
-	print("Zombie class: ", self.get_class())
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -71,8 +69,8 @@ func apply_look_torque(_delta: float, current_transform: Transform3D, target_pos
 	var to_target := (target_position - current_transform.origin)
 	to_target.y = 0  # Only rotate on Y axis
 
-	if to_target.length_squared() < 0.001:
-			return
+	if is_zero_approx(to_target.length_squared()):
+		return
 
 	to_target = to_target.normalized()
 	forward_dir.y = 0
