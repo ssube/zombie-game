@@ -36,7 +36,12 @@ enum State {
 @export var navigation_interval: float = 1.0
 @export var point_proximity: float = 1.0
 
-@onready var current_state := starting_state
+@onready var current_state := starting_state:
+	set(value):
+		var old_state = current_state
+		current_state = value
+		print("Zombie state changed from ", old_state, " to ", current_state)
+		state_changed.emit(current_state, old_state)
 
 # Components
 var actor_entity: Entity
@@ -54,6 +59,8 @@ var wander_timer: float = 0.0
 var navigation_path: PackedVector3Array = PackedVector3Array()
 var target_player: Node3D = null
 var target_position: Vector3 = Vector3.ZERO
+
+signal state_changed(new_state: State, old_state: State)
 
 func _ready():
 	if vision_area != null:
@@ -147,18 +154,24 @@ func do_attack():
 	attack_timer = entity_weapon.cooldown_time
 
 func do_idle():
-	print("Zombie is idling.")
+	# print("Zombie is idling.")
 	set_actor_velocity(Vector3.ZERO)
 
 	if idle_timer > 0.0:
+		# turn towards random direction
+		var look_direction := pick_random_position(actor_node.global_position)
+		look_at_target(look_direction)
 		# TODO: random idle animation
-		# TODO: turn towards random direction
 		return
 
-	current_state = State.WANDERING
+	var next_state = randi() % 2
+	if next_state == 0:
+		current_state = State.IDLE
+	else:
+		current_state = State.WANDERING
 
 func do_wander():
-	print("Zombie is wandering.")
+	# print("Zombie is wandering.")
 	if target_position == Vector3.ZERO or is_point_nearby(target_position, point_proximity):
 		update_wander_target()
 
@@ -169,9 +182,14 @@ func do_wander():
 	if wander_timer > 0.0:
 		return
 
-	wander_timer = wander_interval
-	update_wander_target()
-	print("Zombie wander timed out, picked new target position: ", target_position)
+	var next_state = randi() % 2
+	if next_state == 0:
+		current_state = State.IDLE
+	else:
+		current_state = State.WANDERING
+		wander_timer = wander_interval
+		update_wander_target()
+		print("Zombie wander timed out, picked new target position: ", target_position)
 
 func do_chase():
 	if target_player == null:

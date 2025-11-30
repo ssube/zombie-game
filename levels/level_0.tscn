@@ -125,13 +125,7 @@ unique_name_in_owner = true
 [node name="Zombie" parent="Entities" instance=ExtResource("5_fv0x7")]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 22.600622, 1.8029675, -1.7444568)
 linear_velocity = Vector3(1, 0, 0)
-look_speed = null
-move_speed = 5.0
-id = "Level0_ZE_Zombie_1764359940_94833"
-
-[node name="Zombie2" parent="Entities" instance=ExtResource("5_fv0x7")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 5.600622, 1.8029675, 1.2555432)
-linear_velocity = Vector3(1, 0, 0)
+look_speed = 5.0
 move_speed = 5.0
 id = "Level0_ZE_Zombie_1764359940_94833"
 
