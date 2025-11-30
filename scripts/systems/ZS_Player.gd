@@ -208,21 +208,21 @@ func use_door(entity: Entity, player: ZC_Player) -> void:
 	if door.is_locked:
 		if player.has_key(door.key_name):
 			door.is_locked = false
-			print("Used key: ", door.key_name)
+			%Hud.push_action("Used key: %s" % door.key_name)
 		else:
-			print("Need key: ", door.key_name)
+			%Hud.push_action("Need key: %s" % door.key_name)
 
 	if door.open_on_use and not door.is_locked:
 		door.is_open = !door.is_open
-
-		print("Door is open: ", door.is_open)
+		print("Door is open: ", door)
 
 
 func use_food(entity: Entity, player_entity: Entity) -> void:
 	var food = entity.get_component(ZC_Food) as ZC_Food
+	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
 	var health = player_entity.get_component(ZC_Health) as ZC_Health
 	health.current_health = min(health.max_health, health.current_health + food.health)
-	print("Used food: ", entity)
+	%Hud.push_action("Used food: %s" % interactive.name)
 
 	remove_entity(entity)
 
@@ -230,7 +230,7 @@ func use_food(entity: Entity, player_entity: Entity) -> void:
 func use_key(entity: Entity, player: ZC_Player) -> void:
 	var key = entity.get_component(ZC_Key)
 	player.add_key(key.name)
-	print("Added key: ", key.name)
+	%Hud.push_action("Picked up key: %s" % key.name)
 
 	remove_entity(entity)
 
@@ -268,6 +268,9 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 	weapon_body.linear_velocity = Vector3.ZERO
 	weapon_body.angular_velocity = Vector3.ZERO
 	weapon_body.transform = Transform3D.IDENTITY
+
+	var interactive = weapon.get_component(ZC_Interactive) as ZC_Interactive
+	%Hud.push_action("Picked up weapon: %s" % interactive.name)
 
 	var player = player_entity as ZE_Player
 	switch_weapon(player, weapon)
@@ -324,7 +327,10 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 	entity.current_weapon = new_weapon
 	new_weapon.get_parent().remove_child(new_weapon)
 	entity.hands_node.add_child(new_weapon)
-	print("Equipped weapon: ", new_weapon)
+
+	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
+	# %Hud.set_weapon_label(c_interactive.name)
+	%Hud.push_action("Switched to weapon: %s" % c_interactive.name)
 
 
 func release_weapon(entity: Entity) -> void:

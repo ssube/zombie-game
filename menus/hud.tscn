@@ -26,7 +26,7 @@ shader_parameter/warble_speed = 0.50000002375
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jew8s"]
 
-[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "crosshair", "target_label")]
+[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "crosshair", "target_label", "action_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,6 +37,7 @@ script = ExtResource("1_633jc")
 health_bar = NodePath("HudLayer/GameHud/VBoxContainer/HealthBar")
 crosshair = NodePath("HudLayer/GameHud/CenterContainer/Crosshair")
 target_label = NodePath("HudLayer/GameHud/VBoxContainer/TargetLabel")
+action_label = NodePath("HudLayer/GameHud/VBoxContainer2/ActionLabel")
 
 [node name="PostLayer" type="CanvasLayer" parent="."]
 
@@ -102,6 +103,14 @@ grow_vertical = 2
 text = "Health"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HudLayer/GameHud"]
+layout_mode = 2
+
+[node name="ActionLabel" type="Label" parent="HudLayer/GameHud/VBoxContainer2"]
+layout_mode = 2
+text = "Recent Actions"
+horizontal_alignment = 1
 
 [node name="StartMenu" type="AspectRatioContainer" parent="HudLayer"]
 process_mode = 2

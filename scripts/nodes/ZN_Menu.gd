@@ -14,9 +14,15 @@ enum HudMenu {
 @export var health_bar: ProgressBar = null
 @export var crosshair: TextureRect = null
 @export var target_label: Label = null
+@export var weapon_label: Label = null
+@export var action_label: Label = null
+@export var action_limit: int = 5
+@export var action_timeout: float = 5.0
 
 @onready var crosshair_default_color: Color = crosshair.modulate
 
+var action_queue: Array[String] = []
+var action_timer: float = 0.0
 var health_tween: Tween = null
 var visible_menu: HudMenu = HudMenu.NONE
 var previous_menu: HudMenu = HudMenu.START_MENU
@@ -25,17 +31,36 @@ func _ready() -> void:
 	reset_crosshair_color()
 	update_mouse_mode()
 
+func _process(delta: float) -> void:
+	if action_queue.size() > 0:
+		action_timer += delta
+		if action_timer >= action_timeout:
+			action_timer = 0.0
+			action_queue.pop_front()
+			update_action_queue.call_deferred()
+
 func set_crosshair_color(color: Color) -> void:
 	crosshair.modulate = color
 
 func reset_crosshair_color() -> void:
 	crosshair.modulate = crosshair_default_color # Color.WHITE
 
+func push_action(action: String) -> void:
+	action_queue.append(action)
+	if action_queue.size() > action_limit:
+		action_queue.pop_front()
+
+	action_timer = 0.0
+	update_action_queue()
+
 func clear_target_label() -> void:
 	target_label.text = ""
 
 func set_target_label(text: String) -> void:
 	target_label.text = text
+
+func set_weapon_label(_text: String) -> void:
+	pass # TODO: update the weapon label UI element
 
 func set_health(value: int, instant: bool = false) -> void:
 	if health_tween != null:
@@ -61,6 +86,13 @@ func update_mouse_mode() -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func update_action_queue() -> void:
+	if action_queue.size() > 0:
+		action_label.text = "\n".join(action_queue)
+	else:
+		action_label.text = ""
 
 
 func set_pause(pause: bool) -> void:

@@ -59,6 +59,7 @@ radius = 20.0
 radius = 2.0
 
 [node name="Zombie" type="RigidBody3D"]
+mass = 20.0
 script = ExtResource("1_rffgv")
 behavior = NodePath("Behavior/ZombieBehavior")
 component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_lkxn3")])

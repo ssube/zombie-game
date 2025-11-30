@@ -107,6 +107,7 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	%Level.add_child(next_level)
 	_register_level_entities()
 
+	%Hud.push_action("Loaded level: %s" % level_name)
 	level_loaded.emit(last_level, level_name)
 	last_level = level_name
 
