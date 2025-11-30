@@ -14,7 +14,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			print("Bullet is colliding with: ", target)
 
 			if target is RigidBody3D:
-				print("TODO: handle collision forces")
+				target.apply_impulse(ray.get_collision_normal() * -projectile.mass, ray.get_collision_point())
 
 			if target is Entity:
 				projectile.piercing -= 1

@@ -7,3 +7,4 @@ class_name ZC_Projectile
 @export var lifetime: float = 5.0
 @export var collision_ray: NodePath = "."
 @export var piercing: int = 0
+@export var mass: float = 1.0

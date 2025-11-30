@@ -65,8 +65,8 @@ signal state_changed(new_state: State, old_state: State)
 func _ready():
 	if vision_area != null:
 		vision_area.monitoring = true
-		vision_area.body_entered.connect(_on_vision_area_body_entered)
-		vision_area.body_exited.connect(_on_vision_area_body_exited)
+		vision_area.body_sighted.connect(_on_vision_area_body_sighted)
+		vision_area.body_hidden.connect(_on_vision_area_body_hidden)
 
 	if attack_area != null:
 		attack_area.monitoring = true
@@ -111,14 +111,14 @@ func _process(delta: float):
 	elif current_state == State.WANDERING:
 		do_wander()
 
-func _on_vision_area_body_entered(body: Node) -> void:
+func _on_vision_area_body_sighted(body: Node) -> void:
 	print("Zombie saw body: ", body.name)
 	if is_body_player(body):
 		target_player = body as Node3D
 		target_position = target_player.global_position
 		current_state = State.CHASING
 
-func _on_vision_area_body_exited(body: Node) -> void:
+func _on_vision_area_body_hidden(body: Node) -> void:
 	print("Zombie lost sight of body: ", body.name)
 	if body == target_player:
 		# clear target and continue wandering to the last known position
