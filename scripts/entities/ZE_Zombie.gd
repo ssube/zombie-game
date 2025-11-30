@@ -36,6 +36,9 @@ func on_ready():
 	print("Zombie class: ", self.get_class())
 
 func _physics_process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+
 	apply_movement_force(delta)
 	apply_look_torque(delta, root_3d.global_transform, look_direction)
 
