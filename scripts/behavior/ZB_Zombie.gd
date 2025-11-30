@@ -85,13 +85,15 @@ func on_ready(entity: Entity) -> void:
 func _process(delta: float):
 	update_timers(delta)
 
-	if false: # not is_actor_active():
+	if not is_actor_active():
 		# disable area monitoring for performance
 		vision_area.debug_draw = false
 		vision_area.monitoring = false
 		attack_area.monitoring = false
 		detection_area.monitoring = false
-		set_actor_velocity(Vector3.ZERO)
+		# TODO: lerp to zero velocity
+		# set_actor_velocity(Vector3.ZERO)
+		lerp_actor_velocity(Vector3.ZERO, delta)
 		return
 
 	if current_state == State.IDLE:
@@ -199,24 +201,28 @@ func update_wander_target() -> void:
 	target_position = random_pos
 	update_navigation_path(actor_node.global_position, target_position)
 
+## Rotate to face target position
 func look_at_target(look_target_position: Vector3) -> void:
-	# rotate to face target
-	# var target_offset: Vector3 = look_target_position - actor_node.global_position
-	# if not is_zero_approx(target_offset.length_squared()):
-	actor_node.set_look_direction(look_target_position)
+	actor_node.look_direction = look_target_position
 
+## Move toward target position
 func move_to_target(move_target_position: Vector3) -> void:
-	# move toward target
 	var target_offset: Vector3 = move_target_position - actor_node.global_position
 	target_offset = target_offset.normalized() * move_speed * entity_velocity.speed_modifier
 	set_actor_velocity(target_offset)
 
+## Update the physics velocity of the actor node
 func set_actor_velocity(target_velocity: Vector3) -> void:
-	if is_zero_approx(target_velocity.length_squared()):
-		return
-
 	# print("Setting actor velocity to: ", target_velocity)
-	actor_node.set_movement_direction(target_velocity)
+	actor_node.movement_direction = target_velocity
+
+func lerp_actor_velocity(target_velocity: Vector3, delta: float) -> void:
+	var current_velocity: Vector3 = actor_node.movement_direction
+	var new_velocity: Vector3 = current_velocity.lerp(target_velocity, minf(delta, 1.0))
+	if new_velocity.length_squared() < 1.0:
+		new_velocity = Vector3.ZERO
+
+	actor_node.movement_direction = new_velocity
 
 func is_actor_active() -> bool:
 	if actor_entity:
