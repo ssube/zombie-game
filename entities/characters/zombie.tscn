@@ -47,6 +47,7 @@ metadata/_custom_type_script = "uid://jokkv7skgimj"
 
 [sub_resource type="Resource" id="Resource_lkxn3"]
 script = ExtResource("12_k72ww")
+damage = 10
 metadata/_custom_type_script = "uid://c86wth8kvlbt7"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwqt7"]

@@ -58,14 +58,16 @@ func _register_level_entities() -> void:
 		else:
 			printerr("Child is not an entity: ", child)
 
-func clear_world() -> void:
+func clear_world(keep_players: bool = true) -> void:
 	var keepers: Array[Entity] = []
-	var players: Array[Entity] = QueryBuilder.new(ECS.world).with_all([ZC_Player]).execute()
-	keepers.append_array(players)
-	for player in players:
-		var weapon = player.weapon
-		if weapon != null:
-			keepers.append(weapon)
+
+	if keep_players:
+		var players: Array[Entity] = QueryBuilder.new(ECS.world).with_all([ZC_Player]).execute()
+		keepers.append_array(players)
+		for player in players:
+			var weapon = player.weapon
+			if weapon != null:
+				keepers.append(weapon)
 
 	var entity_list := ECS.world.entities.duplicate()
 	for entity in entity_list:
