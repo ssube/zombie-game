@@ -1,28 +1,75 @@
-[gd_scene load_steps=8 format=3 uid="uid://dirupaj1q5imr"]
+[gd_scene load_steps=15 format=3 uid="uid://dirupaj1q5imr"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_2kns5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_17hxq"]
 [ext_resource type="PackedScene" uid="uid://blxc4fcjrrpa2" path="res://entities/weapons/bullet.tscn" id="3_7rb10"]
 [ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/weapons/ZC_Weapon_Ranged.gd" id="4_xq6m6"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="5_17hxq"]
+[ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="6_7rb10"]
+[ext_resource type="Texture2D" uid="uid://cm5mhpoe8joro" path="res://textures/fire1_ 07.png" id="7_xq6m6"]
 
-[sub_resource type="Resource" id="Resource_e2xev"]
-script = ExtResource("4_xq6m6")
-projectile_scene = ExtResource("3_7rb10")
-metadata/_custom_type_script = "uid://dwsqxsqwtloma"
-
-[sub_resource type="Resource" id="Resource_7rb10"]
+[sub_resource type="Resource" id="Resource_17hxq"]
 script = ExtResource("5_17hxq")
+shimmer_material = ExtResource("6_7rb10")
+shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
 name = "Shotgun"
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
-[node name="Shotgun" type="Node"]
-script = ExtResource("1_2kns5")
-component_resources = Array[ExtResource("2_17hxq")]([SubResource("Resource_e2xev"), SubResource("Resource_7rb10")])
-metadata/_custom_type_script = "uid://b5t1ema7rumub"
+[sub_resource type="Resource" id="Resource_7rb10"]
+script = ExtResource("4_xq6m6")
+muzzle_velocity = 50.0
+projectile_scene = ExtResource("3_7rb10")
+metadata/_custom_type_script = "uid://dwsqxsqwtloma"
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7rb10"]
+cull_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_17vin"]
 size = Vector3(0.1, 0.1, 1)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e2xev"]
+direction = Vector3(0, 0, -1)
+spread = 15.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvydq"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("7_xq6m6")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_nm3yu"]
+material = SubResource("StandardMaterial3D_hvydq")
+size = Vector2(0.25, 0.25)
+
+[node name="WeaponShotgun" type="RigidBody3D"]
+collision_layer = 3
+script = ExtResource("1_2kns5")
+component_resources = Array[ExtResource("2_17hxq")]([SubResource("Resource_17hxq"), SubResource("Resource_7rb10")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.75)
+size = Vector3(0.1, 0.1, 1)
+material = SubResource("StandardMaterial3D_7rb10")
+
 [node name="ProjectileMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -1.25)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.75)
+shape = SubResource("BoxShape3D_17vin")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -1.2977276)
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_e2xev")
+draw_pass_1 = SubResource("QuadMesh_nm3yu")

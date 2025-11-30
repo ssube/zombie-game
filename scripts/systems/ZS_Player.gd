@@ -53,13 +53,22 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		body.move_and_slide()
 		_handle_collisions(body, delta)
 
+		if entity.weapon != null:
+			var hands_node = body.get_node("./Head/Hands") as Node3D
+			var weapon_body = entity.weapon.get_node(".") as RigidBody3D
+			weapon_body.global_transform = hands_node.global_transform
+
 		# Pause menu
 		if input.game_pause:
 			%Hud.toggle_pause()
 
 		# Spawn projectiles
 		if input.use_attack:
-			spawn_projectile(entity, body)
+			if entity.weapon != null:
+				if entity.weapon.has_component(ZC_Weapon_Melee):
+					swing_weapon(entity, body)
+				elif entity.weapon.has_component(ZC_Weapon_Ranged):
+					spawn_projectile(entity, body)
 
 		if input.use_light:
 			toggle_flashlight(entity, body)
@@ -110,6 +119,16 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 						if input.use_interact:
 							use_portal(collider, entity)
 
+					if collider.has_component(ZC_Weapon_Melee):
+						%Hud.set_crosshair_color(Color.ORANGE)
+						if input.use_interact:
+							use_weapon(collider, entity)
+
+					if collider.has_component(ZC_Weapon_Ranged):
+						%Hud.set_crosshair_color(Color.ORANGE)
+						if input.use_interact:
+							use_weapon(collider, entity)
+
 		else:
 			%Hud.clear_target_label()
 			%Hud.reset_crosshair_color()
@@ -143,10 +162,10 @@ func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
 
 	var tween = weapon.create_tween()
 	tween.tween_property(swing_node, "progress_ratio", 1.0, weapon_component.swing_time)
+	tween.tween_property(swing_node, "progress_ratio", 0.0, weapon_component.cooldown_time)
 
 
 func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
-	# var weapon = entity.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
 	var weapon = entity.weapon as ZE_Weapon
 	if weapon == null:
 		return
@@ -157,7 +176,8 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 
 	var forward = -marker.global_transform.basis.z.normalized()
 
-	var new_projectile = weapon.projectile_scene.instantiate() as RigidBody3D
+	var c_weapon = entity.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	var new_projectile = c_weapon.projectile_scene.instantiate() as RigidBody3D
 	body.get_parent().add_child(new_projectile)
 
 	if new_projectile is Entity:
@@ -167,7 +187,7 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 
 	new_projectile.global_position = marker.global_position
 	new_projectile.global_rotation = marker.global_rotation
-	new_projectile.apply_impulse(forward * weapon.muzzle_velocity, body.global_position)
+	new_projectile.apply_impulse(forward * c_weapon.muzzle_velocity, body.global_position)
 
 
 func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
@@ -220,6 +240,33 @@ func use_portal(entity: Entity, _player_entity: Entity) -> void:
 	if portal.is_open:
 		portal.is_active = true
 		print("Activated portal: ", portal)
+
+
+func use_weapon(entity: Entity, player_entity: Entity) -> void:
+	var weapon = entity as ZE_Weapon
+	if weapon == null:
+		return
+
+	# remove target shimmer
+	for shimmer_key in last_shimmer.keys():
+		var shimmer_node = last_shimmer[shimmer_key]
+		if entity == shimmer_node:
+			last_shimmer.erase(shimmer_key)
+
+	# reparent weapon to player
+	var player_body = player_entity.get_node(".") as CharacterBody3D
+	var hands_node = player_body.get_node("./Head/Hands") as Node3D
+	var weapon_body = weapon.get_node(".") as RigidBody3D
+	weapon_body.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+	weapon_body.freeze = true
+	weapon_body.linear_velocity = Vector3.ZERO
+	weapon_body.angular_velocity = Vector3.ZERO
+	weapon_body.transform = Transform3D.IDENTITY
+
+	entity.get_parent().remove_child(entity)
+	hands_node.add_child(entity)
+	player_entity.weapon = weapon
+	print("Equipped weapon: ", weapon)
 
 
 func remove_entity(entity: Entity) -> void:
