@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dlu5li3mn8w5y" path="res://scripts/components/ZC_Transform.gd" id="6_25mxy"]
 [ext_resource type="Script" uid="uid://cxm3pspus34o7" path="res://scripts/components/ZC_Input.gd" id="6_a1f57"]
 [ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/ZC_Weapon_Ranged.gd" id="7_25mxy"]
-[ext_resource type="PackedScene" uid="uid://blxc4fcjrrpa2" path="res://entities/Bullet.tscn" id="7_dv4ir"]
+[ext_resource type="PackedScene" uid="uid://blxc4fcjrrpa2" path="res://entities/weapons/bullet.tscn" id="7_dv4ir"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="9_idcse"]
 [ext_resource type="Script" uid="uid://c01mmquxj5ukg" path="res://scripts/nodes/ZN_Mouse.gd" id="10_p37y2"]
 [ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/ZC_Flammable.gd" id="10_vkqcq"]

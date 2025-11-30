@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://tna8f01ql67u"]
+
+[ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/ZE_Weapon.gd" id="1_i61yn"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_jlji6"]
+[ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/ZC_Weapon_Melee.gd" id="3_86b8h"]
+
+[sub_resource type="Resource" id="Resource_72xai"]
+script = ExtResource("3_86b8h")
+swing_path = NodePath("Path3D/PathFollow3D")
+name = "Baseball Bat"
+damage = 10
+metadata/_custom_type_script = "uid://c86wth8kvlbt7"
+
+[sub_resource type="Curve3D" id="Curve3D_xieuc"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.7398019, -0.59114224, 0.2882812, 0.6312755, 0.0024660826, 0.044305444, -0.6312755, -0.0024660826, -0.044305444, -0.004025027, -0.27858347, 0.11056697, 0, 0, 0, 0, 0, 0, -0.7903473, -0.62559724, 0.1922524),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b6mco"]
+radius = 0.1
+height = 0.6
+
+[node name="WeaponBat" type="Node"]
+script = ExtResource("1_i61yn")
+component_resources = Array[ExtResource("2_jlji6")]([SubResource("Resource_72xai")])
+metadata/_custom_type_script = "uid://b5t1ema7rumub"
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_xieuc")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.76432097, 0.5640355, 0.31251228, -5.9604254e-08, 0.4846433, -0.87470335, -0.6448258, 0.668559, 0.3704252, 0.7398019, -0.59114224, 0.2882812)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+remote_path = NodePath("../../../Node3D")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(0.76432097, 0.5640355, 0.31251228, -5.9604254e-08, 0.4846433, -0.87470335, -0.6448258, 0.668559, 0.3704252, 0.7398019, -0.59114224, 0.2882812)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D"]
+radius = 0.1
+height = 0.5
+
+[node name="Area3D" type="Area3D" parent="Node3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Area3D"]
+shape = SubResource("CapsuleShape3D_b6mco")
