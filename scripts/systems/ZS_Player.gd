@@ -170,13 +170,12 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	if weapon == null:
 		return
 
-	var marker = body.get_node("./Head/Hands/ProjectileMarker") as Node3D
+	var c_weapon = weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	var marker = weapon.get_node(c_weapon.muzzle_marker) as Marker3D
 	if marker == null:
+		printerr("Muzzle marker not found: ", c_weapon.muzzle_marker)
 		return
 
-	var forward = -marker.global_transform.basis.z.normalized()
-
-	var c_weapon = entity.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
 	var new_projectile = c_weapon.projectile_scene.instantiate() as RigidBody3D
 	body.get_parent().add_child(new_projectile)
 
@@ -187,7 +186,9 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 
 	new_projectile.global_position = marker.global_position
 	new_projectile.global_rotation = marker.global_rotation
-	new_projectile.apply_impulse(forward * c_weapon.muzzle_velocity, body.global_position)
+
+	var forward = -marker.global_transform.basis.z.normalized()
+	new_projectile.apply_impulse(forward * c_weapon.muzzle_velocity, marker.global_position)
 
 
 func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
@@ -300,8 +301,11 @@ func release_weapon(entity: Entity) -> void:
 		return
 
 	entity.weapon = null
+
+	var weapon_position = weapon.global_position
 	weapon.get_parent().remove_child(weapon)
 	entity.get_parent().add_child(weapon)
 
 	var weapon_body = weapon.get_node(".") as RigidBody3D
 	weapon_body.freeze = false
+	weapon_body.global_position = weapon_position

@@ -5,6 +5,9 @@ extends Area3D
 
 func _on_body_entered(body: Node) -> void:
 	if body is Entity:
+		if body.has_component(ZC_Player):
+			return  # Don't damage the player
+
 		if body.has_component(ZC_Health):
 			body.add_relationship(RelationshipUtils.add_damage(damage_amount))
 			print("Applied ", damage_amount, " damage to ", body)

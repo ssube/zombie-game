@@ -35,6 +35,8 @@ _surfaces = [{
 points = PackedVector3Array(-0.5, -1, -9.787083e-05, -0.35356304, -1, -0.35356304, -0.35356304, -1, 0.35346514, 0, 1, 0, 0, -1, -0.5, -9.787083e-05, -1, 0.5, 0.35346514, -1, 0.35346514, 0.5, -1, 0, 0.35346514, -1, -0.35356304)
 
 [node name="Objective" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_gq75p")
 component_resources = Array[ExtResource("2_ko3gf")]([SubResource("Resource_6y5fu"), SubResource("Resource_lfpnt")])
 
