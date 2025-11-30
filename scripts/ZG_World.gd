@@ -59,6 +59,14 @@ func _register_level_entities() -> void:
 			printerr("Child is not an entity: ", child)
 
 func clear_world() -> void:
+	var keepers: Array[Entity] = []
+	var players: Array[Entity] = QueryBuilder.new(ECS.world).with_all([ZC_Player]).execute()
+	keepers.append_array(players)
+	for player in players:
+		var weapon = player.weapon
+		if weapon != null:
+			keepers.append(weapon)
+
 	var entity_list := ECS.world.entities.duplicate()
 	for entity in entity_list:
 		if entity == null:
@@ -69,7 +77,7 @@ func clear_world() -> void:
 			printerr("Tried to remove invalid node: ", entity, entity.is_queued_for_deletion(), entity.is_inside_tree())
 			continue
 
-		if entity.has_component(ZC_Player):
+		if entity in keepers:
 			continue
 
 		ECS.world.remove_entity(entity)

@@ -24,6 +24,7 @@
 script = ExtResource("10_8mki0")
 shimmer_material = ExtResource("11_gxks1")
 shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
+name = "Door"
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_b6wpd"]
