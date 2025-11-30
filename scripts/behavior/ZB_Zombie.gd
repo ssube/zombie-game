@@ -98,6 +98,9 @@ func _process(delta: float):
 		vision_area.monitoring = false
 		attack_area.monitoring = false
 		detection_area.monitoring = false
+		# unlock rotation and let ragdoll physics take over
+		actor_node.axis_lock_angular_x = false
+		actor_node.axis_lock_angular_z = false
 		# lerp to zero velocity
 		lerp_actor_velocity(Vector3.ZERO, delta)
 		return

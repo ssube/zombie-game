@@ -53,21 +53,27 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		body.move_and_slide()
 		_handle_collisions(body, delta)
 
-		if entity.weapon != null:
-			var hands_node = body.get_node("./Head/Hands") as Node3D
-			var weapon_body = entity.weapon.get_node(".") as RigidBody3D
-			weapon_body.global_transform = hands_node.global_transform
+		# Move weapon to follow hands
+		if entity.current_weapon != null:
+			var weapon_body = entity.current_weapon.get_node(".") as RigidBody3D
+			weapon_body.global_transform = entity.hands_node.global_transform
 
 		# Pause menu
 		if input.game_pause:
 			%Hud.toggle_pause()
 
+		# Weapon switching
+		if input.weapon_next:
+			equip_next_weapon(entity as ZE_Player)
+		elif input.weapon_previous:
+			equip_previous_weapon(entity as ZE_Player)
+
 		# Spawn projectiles
 		if input.use_attack:
-			if entity.weapon != null:
-				if entity.weapon.has_component(ZC_Weapon_Melee):
+			if entity.current_weapon != null:
+				if entity.current_weapon.has_component(ZC_Weapon_Melee):
 					swing_weapon(entity, body)
-				elif entity.weapon.has_component(ZC_Weapon_Ranged):
+				elif entity.current_weapon.has_component(ZC_Weapon_Ranged):
 					spawn_projectile(entity, body)
 
 		if input.use_light:
@@ -78,13 +84,13 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		if ray.is_colliding():
 			var collider = ray.get_collider()
 
-			if collider != last_shimmer.get(entity) and collider != entity.weapon:
+			if collider != last_shimmer.get(entity) and collider != entity.current_weapon:
 				%Hud.clear_target_label()
 				%Hud.reset_crosshair_color()
 				remove_shimmer(entity)
 
 			# Use interactive items
-			if collider is Entity and collider != entity.weapon:
+			if collider is Entity and collider != entity.current_weapon:
 				if collider.has_component(ZC_Interactive):
 					var interactive = collider.get_component(ZC_Interactive) as ZC_Interactive
 					%Hud.set_target_label(interactive.name)
@@ -152,7 +158,7 @@ func _handle_collisions(body: CharacterBody3D, delta: float) -> void:
 
 
 func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
-	var weapon = entity.weapon as ZE_Weapon
+	var weapon = entity.current_weapon as ZE_Weapon
 	if weapon == null:
 		return
 
@@ -166,7 +172,7 @@ func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
 
 
 func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
-	var weapon = entity.weapon as ZE_Weapon
+	var weapon = entity.current_weapon as ZE_Weapon
 	if weapon == null:
 		return
 
@@ -248,8 +254,6 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 	if weapon == null:
 		return
 
-	release_weapon(player_entity)
-
 	# remove target shimmer
 	for shimmer_key in last_shimmer.keys():
 		var shimmer_node = last_shimmer[shimmer_key]
@@ -258,8 +262,6 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 			weapon.remove_component(ZC_Shimmer)
 
 	# reparent weapon to player
-	var player_body = player_entity.get_node(".") as CharacterBody3D
-	var hands_node = player_body.get_node("./Head/Hands") as Node3D
 	var weapon_body = weapon.get_node(".") as RigidBody3D
 	weapon_body.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
 	weapon_body.freeze = true
@@ -267,10 +269,8 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 	weapon_body.angular_velocity = Vector3.ZERO
 	weapon_body.transform = Transform3D.IDENTITY
 
-	entity.get_parent().remove_child(entity)
-	hands_node.add_child(entity)
-	player_entity.weapon = weapon
-	print("Equipped weapon: ", weapon)
+	var player = player_entity as ZE_Player
+	switch_weapon(player, weapon)
 
 
 func remove_entity(entity: Entity) -> void:
@@ -295,12 +295,44 @@ func remove_shimmer(entity: Entity) -> void:
 			last_target.remove_component(ZC_Shimmer)
 
 
+## Equip the next weapon (always the first weapon in the player's inventory)
+func equip_next_weapon(entity: ZE_Player) -> void:
+	var inventory = entity.get_inventory()
+	if inventory.size() == 0:
+		return
+
+	var next_weapon = inventory[0] as ZE_Weapon
+	switch_weapon(entity, next_weapon)
+
+
+func equip_previous_weapon(entity: ZE_Player) -> void:
+	var inventory = entity.get_inventory()
+	if inventory.size() == 0:
+		return
+
+	var previous_index = inventory.size() - 1
+	var previous_weapon = inventory[previous_index] as ZE_Weapon
+	switch_weapon(entity, previous_weapon)
+
+
+func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
+	if entity.current_weapon != null:
+		var weapon = entity.current_weapon
+		weapon.get_parent().remove_child(weapon)
+		entity.inventory_node.add_child(weapon)
+
+	entity.current_weapon = new_weapon
+	new_weapon.get_parent().remove_child(new_weapon)
+	entity.hands_node.add_child(new_weapon)
+	print("Equipped weapon: ", new_weapon)
+
+
 func release_weapon(entity: Entity) -> void:
-	var weapon = entity.weapon
+	var weapon = entity.current_weapon
 	if weapon == null:
 		return
 
-	entity.weapon = null
+	entity.current_weapon = null
 
 	var weapon_position = weapon.global_position
 	weapon.get_parent().remove_child(weapon)

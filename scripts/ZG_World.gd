@@ -64,8 +64,9 @@ func clear_world(keep_players: bool = true) -> void:
 	if keep_players:
 		var players: Array[Entity] = QueryBuilder.new(ECS.world).with_all([ZC_Player]).execute()
 		keepers.append_array(players)
-		for player in players:
-			var weapon = player.weapon
+		for player: ZE_Player in players:
+			keepers.append_array(player.get_inventory())
+			var weapon = player.current_weapon
 			if weapon != null:
 				keepers.append(weapon)
 
