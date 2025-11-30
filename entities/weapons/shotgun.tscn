@@ -49,7 +49,8 @@ material = SubResource("StandardMaterial3D_hvydq")
 size = Vector2(0.25, 0.25)
 
 [node name="WeaponShotgun" type="RigidBody3D"]
-collision_layer = 3
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_2kns5")
 component_resources = Array[ExtResource("2_17hxq")]([SubResource("Resource_17hxq"), SubResource("Resource_7rb10")])
 

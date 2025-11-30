@@ -31,18 +31,19 @@ height = 1.2
 
 [sub_resource type="Curve3D" id="Curve3D_xieuc"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.7398019, -0.59114224, 0.2882812, 0.6312755, 0.0024660826, 0.044305444, -0.6312755, -0.0024660826, -0.044305444, -0.004025027, -0.27858347, 0.11056697, 0, 0, 0, 0, 0, 0, -0.7903473, -0.62559724, 0.1922524, 0, 0, 0, 0, 0, 0, -0.8663883, -0.5678705, 0.7872019),
-"tilts": PackedFloat32Array(0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.7398019, -0.59114224, 0.2882812, 0.6312755, 0.0024660826, 0.044305444, -0.6312755, -0.0024660826, -0.044305444, -0.004025027, -0.27858347, 0.11056697, 0, 0, 0, 0, 0, 0, -0.7903473, -0.62559724, 0.1922524),
+"tilts": PackedFloat32Array(0, 0, 0)
 }
-point_count = 4
+point_count = 3
 
 [node name="WeaponBat" type="RigidBody3D"]
-collision_layer = 3
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_aigh8")
 component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_dy0dc"), SubResource("Resource_ee0de")])
 
 [node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(0.7643189, 0.5640331, 0.31251076, 0, 0.48464134, -0.8746991, -0.64482397, 0.6685564, 0.3704234, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.76431555, 0.56403494, 0.31251195, 0, 0.48464295, -0.87470245, -0.64482117, 0.6685586, 0.37042484, 0.7398019, -0.59114224, -0.7246001)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D"]
 radius = 0.1
@@ -54,7 +55,7 @@ height = 1.0
 shape = SubResource("CapsuleShape3D_b6mco")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.7643189, 0.5640331, 0.31251076, 0, 0.48464134, -0.8746991, -0.64482397, 0.6685564, 0.3704234, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.76431555, 0.56403494, 0.31251195, 0, 0.48464295, -0.87470245, -0.64482117, 0.6685586, 0.37042484, 0.7398019, -0.59114224, -0.7246001)
 shape = SubResource("CapsuleShape3D_r1fv1")
 
 [node name="SwingPath" type="Path3D" parent="."]
@@ -62,7 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0128813)
 curve = SubResource("Curve3D_xieuc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="SwingPath"]
-transform = Transform3D(0.7643189, 0.5640331, 0.31251076, 0, 0.48464134, -0.8746991, -0.64482397, 0.6685564, 0.3704234, 0.7398019, -0.59114224, 0.2882812)
+transform = Transform3D(0.76431555, 0.56403494, 0.31251195, 0, 0.48464295, -0.87470245, -0.64482117, 0.6685586, 0.37042484, 0.7398019, -0.59114224, 0.2882812)
 rotation_mode = 4
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="SwingPath/PathFollow3D"]

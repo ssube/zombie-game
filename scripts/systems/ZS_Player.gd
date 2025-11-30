@@ -247,6 +247,8 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 	if weapon == null:
 		return
 
+	release_weapon(player_entity)
+
 	# remove target shimmer
 	for shimmer_key in last_shimmer.keys():
 		var shimmer_node = last_shimmer[shimmer_key]
@@ -289,3 +291,16 @@ func remove_shimmer(entity: Entity) -> void:
 			printerr("Removing shimmer from null entity: ", entity, last_target)
 		else:
 			last_target.remove_component(ZC_Shimmer)
+
+
+func release_weapon(entity: Entity) -> void:
+	var weapon = entity.weapon
+	if weapon == null:
+		return
+
+	entity.weapon = null
+	weapon.get_parent().remove_child(weapon)
+	entity.get_parent().add_child(weapon)
+
+	var weapon_body = weapon.get_node(".") as RigidBody3D
+	weapon_body.freeze = false
