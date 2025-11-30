@@ -78,13 +78,13 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		if ray.is_colliding():
 			var collider = ray.get_collider()
 
-			if collider != last_shimmer.get(entity):
+			if collider != last_shimmer.get(entity) and collider != entity.weapon:
 				%Hud.clear_target_label()
 				%Hud.reset_crosshair_color()
 				remove_shimmer(entity)
 
 			# Use interactive items
-			if collider is Entity:
+			if collider is Entity and collider != entity.weapon:
 				if collider.has_component(ZC_Interactive):
 					var interactive = collider.get_component(ZC_Interactive) as ZC_Interactive
 					%Hud.set_target_label(interactive.name)
@@ -252,8 +252,9 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 	# remove target shimmer
 	for shimmer_key in last_shimmer.keys():
 		var shimmer_node = last_shimmer[shimmer_key]
-		if entity == shimmer_node:
+		if weapon == shimmer_node:
 			last_shimmer.erase(shimmer_key)
+			weapon.remove_component(ZC_Shimmer)
 
 	# reparent weapon to player
 	var player_body = player_entity.get_node(".") as CharacterBody3D

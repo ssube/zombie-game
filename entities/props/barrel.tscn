@@ -34,16 +34,18 @@ metadata/_custom_type_script = "uid://0dld8iow0suh"
 albedo_color = Color(1, 0.24000001, 0.24000001, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_dwmog"]
-height = 1.0
+height = 1.5
 radius = 0.4
 
 [node name="Barrel" type="RigidBody3D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_o8a62")
 component_resources = Array[ExtResource("2_wrl38")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl"), SubResource("Resource_0kgpt")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 radius = 0.4
-height = 1.0
+height = 1.5
 sides = 6
 material = SubResource("StandardMaterial3D_s4e23")
 

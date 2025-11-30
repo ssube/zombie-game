@@ -18,6 +18,7 @@ metadata/_custom_type_script = "uid://0dld8iow0suh"
 [sub_resource type="Resource" id="Resource_7rb10"]
 script = ExtResource("4_xq6m6")
 muzzle_velocity = 50.0
+muzzle_marker = NodePath("ProjectileMarker")
 projectile_scene = ExtResource("3_7rb10")
 metadata/_custom_type_script = "uid://dwsqxsqwtloma"
 

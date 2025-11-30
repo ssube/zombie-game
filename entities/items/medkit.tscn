@@ -24,6 +24,8 @@ albedo_color = Color(0.14999998, 0.6883334, 1, 1)
 size = Vector3(0.8, 0.2, 0.8)
 
 [node name="Medkit" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_u378d")
 component_resources = Array[ExtResource("2_hvtkh")]([SubResource("Resource_hvtkh"), SubResource("Resource_402fv")])
 
