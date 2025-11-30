@@ -13,6 +13,8 @@ enum HudMenu {
 
 @export var health_bar: ProgressBar = null
 @export var crosshair: TextureRect = null
+@export var target_label: Label = null
+
 @onready var crosshair_default_color: Color = crosshair.modulate
 
 var health_tween: Tween = null
@@ -28,6 +30,12 @@ func set_crosshair_color(color: Color) -> void:
 
 func reset_crosshair_color() -> void:
 	crosshair.modulate = crosshair_default_color # Color.WHITE
+
+func clear_target_label() -> void:
+	target_label.text = ""
+
+func set_target_label(text: String) -> void:
+	target_label.text = text
 
 func set_health(value: int, instant: bool = false) -> void:
 	if health_tween != null:

@@ -70,14 +70,17 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			var collider = ray.get_collider()
 
 			if collider != last_shimmer.get(entity):
+				%Hud.clear_target_label()
 				%Hud.reset_crosshair_color()
 				remove_shimmer(entity)
 
 			# Use interactive items
 			if collider is Entity:
 				if collider.has_component(ZC_Interactive):
+					var interactive = collider.get_component(ZC_Interactive) as ZC_Interactive
+					%Hud.set_target_label(interactive.name)
+
 					if not collider.has_component(ZC_Shimmer):
-						var interactive = collider.get_component(ZC_Interactive) as ZC_Interactive
 						var shimmer = ZC_Shimmer.from_interactive(interactive)
 						collider.add_component(shimmer)
 						last_shimmer[entity] = collider
@@ -108,6 +111,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 							use_portal(collider, entity)
 
 		else:
+			%Hud.clear_target_label()
 			%Hud.reset_crosshair_color()
 			remove_shimmer(entity)
 

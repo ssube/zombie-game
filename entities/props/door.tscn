@@ -15,6 +15,7 @@ metadata/_custom_type_script = "uid://qjr7o31fiedq"
 script = ExtResource("4_wyt2q")
 shimmer_material = ExtResource("5_auxoi")
 shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
+name = "Door"
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nynkh"]

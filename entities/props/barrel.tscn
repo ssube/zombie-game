@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cq0idhwb5f2oq"]
+[gd_scene load_steps=14 format=3 uid="uid://cq0idhwb5f2oq"]
 
 [ext_resource type="Script" uid="uid://dhsuals8autq1" path="res://scripts/entities/props/ZE_Barrel.gd" id="1_o8a62"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wrl38"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dqfrsv8nlncwj" path="res://effects/barrel_explosion.tscn" id="3_wrl38"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="4_vlq2d"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="6_dwmog"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="6_k4gqj"]
+[ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="7_bv25f"]
 
 [sub_resource type="Resource" id="Resource_kpq4c"]
 script = ExtResource("3_dwmog")
@@ -21,6 +23,13 @@ max_health = 50
 current_health = 50
 metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
+[sub_resource type="Resource" id="Resource_0kgpt"]
+script = ExtResource("6_k4gqj")
+shimmer_material = ExtResource("7_bv25f")
+shimmer_nodes = Array[NodePath]([NodePath("CSGCylinder3D")])
+name = "Explosive Barrel"
+metadata/_custom_type_script = "uid://0dld8iow0suh"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s4e23"]
 albedo_color = Color(1, 0.24000001, 0.24000001, 1)
 
@@ -30,7 +39,7 @@ radius = 0.4
 
 [node name="Barrel" type="RigidBody3D"]
 script = ExtResource("1_o8a62")
-component_resources = Array[ExtResource("2_wrl38")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl")])
+component_resources = Array[ExtResource("2_wrl38")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl"), SubResource("Resource_0kgpt")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 radius = 0.4

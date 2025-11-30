@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://vcyq2fbg0dts"]
+[gd_scene load_steps=6 format=3 uid="uid://vcyq2fbg0dts"]
 
 [ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/nodes/ZN_Menu.gd" id="1_633jc"]
 [ext_resource type="Shader" uid="uid://ckydjmdamo2fo" path="res://shaders/post_crt.gdshader" id="2_jew8s"]
@@ -24,7 +24,9 @@ shader_parameter/color_quant_steps = 32.0
 shader_parameter/warble_amount = 0.00400000019
 shader_parameter/warble_speed = 0.50000002375
 
-[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "crosshair")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jew8s"]
+
+[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "crosshair", "target_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,8 +34,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_633jc")
-health_bar = NodePath("HudLayer/GameHud/HealthBar")
+health_bar = NodePath("HudLayer/GameHud/VBoxContainer/HealthBar")
 crosshair = NodePath("HudLayer/GameHud/CenterContainer/Crosshair")
+target_label = NodePath("HudLayer/GameHud/VBoxContainer/TargetLabel")
 
 [node name="PostLayer" type="CanvasLayer" parent="."]
 
@@ -55,24 +58,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HealthBar" type="ProgressBar" parent="HudLayer/GameHud"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-size_flags_vertical = 8
-value = 25.0
-show_percentage = false
-
-[node name="Label" type="Label" parent="HudLayer/GameHud/HealthBar"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Health"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="CenterContainer" type="CenterContainer" parent="HudLayer/GameHud"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -85,6 +70,38 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_rglhv")
 stretch_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HudLayer/GameHud"]
+layout_mode = 2
+alignment = 2
+
+[node name="TargetLabel" type="Label" parent="HudLayer/GameHud/VBoxContainer"]
+layout_mode = 2
+text = "Target Name"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HudLayer/GameHud/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
+
+[node name="HealthBar" type="ProgressBar" parent="HudLayer/GameHud/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 8
+value = 25.0
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="HudLayer/GameHud/VBoxContainer/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Health"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StartMenu" type="AspectRatioContainer" parent="HudLayer"]
 process_mode = 2
