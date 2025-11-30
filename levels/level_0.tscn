@@ -3,19 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://bj7wuhjch143w" path="res://textures/Color Maps/concrete_3.png" id="1_iss0w"]
 [ext_resource type="Texture2D" uid="uid://bpxtjbi1yv77e" path="res://textures/Color Maps/brick_wall_tx_3.png" id="2_yi3jx"]
 [ext_resource type="Texture2D" uid="uid://dqlt8wc1y5ac3" path="res://textures/Color Maps/concrete_5.png" id="3_foxie"]
-[ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/Zombie.tscn" id="5_fv0x7"]
-[ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/Ball.tscn" id="6_owf05"]
-[ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/barrel.tscn" id="7_uuq13"]
-[ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/Door.tscn" id="8_58gyl"]
+[ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
+[ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
+[ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="7_uuq13"]
+[ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door.tscn" id="8_58gyl"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="9_ggct0"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/ZC_Interactive.gd" id="10_8mki0"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/DoorHighlight.tres" id="11_gxks1"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="11_gxks1"]
 [ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/ZC_Door.gd" id="12_osodt"]
-[ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/Medkit.tscn" id="13_vfwqd"]
-[ext_resource type="PackedScene" uid="uid://kod7e8o8xpep" path="res://entities/key.tscn" id="14_juy1h"]
+[ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/items/medkit.tscn" id="13_vfwqd"]
+[ext_resource type="PackedScene" uid="uid://kod7e8o8xpep" path="res://entities/items/key.tscn" id="14_juy1h"]
 [ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/ZC_Portal.gd" id="14_qgvj7"]
-[ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/Objective.tscn" id="15_7di2q"]
-[ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/KeyHighlight.tres" id="16_2sfss"]
+[ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/props/objective.tscn" id="15_7di2q"]
+[ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_key.tres" id="16_2sfss"]
 [ext_resource type="Script" uid="uid://bdl3b6gan30l0" path="res://scripts/components/ZC_Objective.gd" id="17_x1db4"]
 
 [sub_resource type="Resource" id="Resource_auxoi"]
@@ -124,8 +124,6 @@ unique_name_in_owner = true
 
 [node name="Zombie" parent="Entities" instance=ExtResource("5_fv0x7")]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 22.600622, 1.8029675, -1.7444568)
-look_speed = 5.0
-move_speed = 5.0
 id = "Level0_ZE_Zombie_1764359940_94833"
 
 [node name="Ball" parent="Entities" instance=ExtResource("6_owf05")]

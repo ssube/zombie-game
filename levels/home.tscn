@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/ZG_World.gd" id="1_7ti0h"]
 [ext_resource type="PackedScene" uid="uid://2631yqe4y8ki" path="res://levels/zone_1.tscn" id="3_bk7mf"]
 [ext_resource type="PackedScene" uid="uid://bv4ooq3kct6wv" path="res://levels/zone_1_hotel.tscn" id="4_hq1ly"]
-[ext_resource type="PackedScene" uid="uid://busds31ha5tx1" path="res://entities/Player.tscn" id="5_b84gv"]
+[ext_resource type="PackedScene" uid="uid://busds31ha5tx1" path="res://entities/characters/player.tscn" id="5_b84gv"]
 [ext_resource type="Script" uid="uid://0smt4eys5v7u" path="res://scripts/observers/ZO_Fire.gd" id="6_hg28n"]
 [ext_resource type="Script" uid="uid://cdu5tlyk72uu4" path="res://addons/gecs/ecs/world.gd" id="6_wpfpi"]
 [ext_resource type="Script" uid="uid://ccykut6yrev33" path="res://scripts/systems/ZS_Movement.gd" id="7_4q61s"]

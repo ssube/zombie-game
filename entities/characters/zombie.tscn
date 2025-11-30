@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://dlu5li3mn8w5y" path="res://scripts/components/ZC_Transform.gd" id="4_4bumh"]
 [ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="5_tseq0"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="6_nswy3"]
-[ext_resource type="Material" uid="uid://d1jglv2507aak" path="res://materials/ZombieDead.tres" id="7_l1o5o"]
-[ext_resource type="Material" uid="uid://bajoa8ksbfb81" path="res://materials/ZombieLive.tres" id="8_tfdn2"]
+[ext_resource type="Material" uid="uid://d1jglv2507aak" path="res://materials/skins/zombie_dead.tres" id="7_l1o5o"]
+[ext_resource type="Material" uid="uid://bajoa8ksbfb81" path="res://materials/skins/zombie_healthy.tres" id="8_tfdn2"]
 [ext_resource type="Script" uid="uid://b8oatb3tdywrh" path="res://scripts/components/ZC_Skin.gd" id="9_7tmu0"]
-[ext_resource type="Material" uid="uid://rmfci1rvpdo4" path="res://materials/ZombieHurt.tres" id="9_wwun5"]
+[ext_resource type="Material" uid="uid://rmfci1rvpdo4" path="res://materials/skins/zombie_hurt.tres" id="9_wwun5"]
 [ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/ZC_Flammable.gd" id="10_tfdn2"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="11_7tmu0"]
 [ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/ZC_Weapon_Melee.gd" id="12_k72ww"]
@@ -60,8 +60,6 @@ radius = 2.0
 [node name="Zombie" type="RigidBody3D"]
 script = ExtResource("1_rffgv")
 behavior = NodePath("Behavior/ZombieBehavior")
-look_speed = null
-move_speed = null
 component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_lkxn3")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

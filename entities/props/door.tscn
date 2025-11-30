@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wyt2q"]
 [ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/ZC_Door.gd" id="3_auxoi"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/ZC_Interactive.gd" id="4_wyt2q"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/DoorHighlight.tres" id="5_auxoi"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_auxoi"]
 
 [sub_resource type="Resource" id="Resource_q8gv4"]
 script = ExtResource("3_auxoi")

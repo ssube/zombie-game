@@ -1,7 +1,7 @@
 [gd_scene load_steps=38 format=4 uid="uid://2631yqe4y8ki"]
 
 [ext_resource type="Texture2D" uid="uid://bo5t03igocsyg" path="res://textures/Color Maps/concrete_tx_6.png" id="2_0b37p"]
-[ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/Zombie.tscn" id="2_1pddc"]
+[ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="2_1pddc"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_w5fjf"]
 [ext_resource type="Texture2D" uid="uid://cdd6bj50r5mtf" path="res://textures/Color Maps/grass_1.png" id="3_384l5"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/ZC_Interactive.gd" id="3_xrb85"]
@@ -10,12 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://bwlwfbnn7jog4" path="res://textures/Color Maps/concrete_wall_12.png" id="6_uv2rs"]
 [ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/ZC_Portal.gd" id="6_xrb85"]
 [ext_resource type="Texture2D" uid="uid://b7dgivuvq2cvg" path="res://textures/Color Maps/stone_hell_8.png" id="8_1pddc"]
-[ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/Door.tscn" id="8_4uioy"]
-[ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/barrel.tscn" id="8_ebfu5"]
+[ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door.tscn" id="8_4uioy"]
+[ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="8_ebfu5"]
 [ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/ZC_Door.gd" id="9_1ytwx"]
 [ext_resource type="Texture2D" uid="uid://eghqsrlvdmer" path="res://textures/Color Maps/stone_alien_1.png" id="9_uv2rs"]
 [ext_resource type="Material" uid="uid://c67ov6fslkehf" path="res://textures/Color Maps/water_1.tres" id="10_1pddc"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/DoorHighlight.tres" id="10_i7led"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="10_i7led"]
 [ext_resource type="Script" uid="uid://bhgbf8ykucy2n" path="res://scripts/events/EV_SlowOnEnter.gd" id="17_32bcm"]
 
 [sub_resource type="Resource" id="Resource_q8gv4"]
@@ -192,34 +192,50 @@ size = Vector3(12, 1, 64)
 
 [node name="Zombie" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.127886, 1.0000134, 15.3177595)
+look_speed = 5.0
+move_speed = 5.0
 id = "Zone1_ZE_Zombie_1764359804_82086"
 
 [node name="Zombie7" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.545622, 2.0000136, -9.311912)
+look_speed = 5.0
+move_speed = 5.0
 id = "Zone1_ZE_Zombie_1764359906_15336"
 
 [node name="Zombie8" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.287119, 2.0000136, 15.586232)
+look_speed = 5.0
+move_speed = 5.0
 id = "Zone1_ZE_Zombie_1764359911_46060"
 
 [node name="Zombie2" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.45008, 1.0000134, 17.328136)
+look_speed = 5.0
+move_speed = 5.0
 id = "Zone1_ZE_Zombie_1764359915_42456"
 
 [node name="Zombie3" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.328658, 1.0000134, 4.4163055)
+look_speed = 5.0
+move_speed = 5.0
 id = "Zone1_ZE_Zombie_1764359917_32210"
 
 [node name="Zombie4" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.657818, 1.0000134, -12.796621)
+look_speed = 5.0
+move_speed = 5.0
 id = "Zone1_ZE_Zombie_1764359918_85025"
 
 [node name="Zombie5" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.222485, 1.0000134, -2.9260883)
+look_speed = 5.0
+move_speed = 5.0
 id = "Zone1_ZE_Zombie_1764359921_10639"
 
 [node name="Zombie6" parent="Entities" instance=ExtResource("2_1pddc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.858704, 1.0000153, 31.467766)
+look_speed = 5.0
+move_speed = 5.0
 id = "Zone1_ZE_Zombie_1764359922_7242"
 
 [node name="Door" parent="Entities" instance=ExtResource("8_4uioy")]
