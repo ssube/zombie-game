@@ -32,3 +32,11 @@ material = SubResource("StandardMaterial3D_cqlhk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_n8xfw")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+radius = 0.75
+height = 2.0
+vertices = PackedVector3Array(0.019589901, 0, -0.6446769, 0.35418716, 0, -0.5060098, 0.5473344, 0, -0.26485074, 0.60717785, 0, 0.009822607, 0.49963364, 0, 0.32822895, 0.27294397, 0, 0.5147185, 0.007929623, 0, 0.59741837, -0.3112143, 0, 0.49840117, -0.4871815, 0, 0.31656432, -0.5810312, 0, -0.0065938234, -0.5137526, 0, -0.34577906, -0.25038758, 0, -0.6010318)
+affect_navigation_mesh = true
+carve_navigation_mesh = true

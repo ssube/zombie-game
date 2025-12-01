@@ -152,7 +152,7 @@ func do_attack():
 	print("Zombie attacks player! ", target_player)
 
 	var player_entity: Entity = target_player.get_node(".") as Entity
-	player_entity.add_relationship(RelationshipUtils.add_damage(entity_weapon.damage))
+	player_entity.add_relationship(RelationshipUtils.make_damage(entity_weapon.damage))
 	attack_timer = entity_weapon.cooldown_time
 
 func do_idle():

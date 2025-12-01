@@ -80,7 +80,7 @@ metadata/_custom_type_script = "uid://cxrhjwcd6iqpy"
 unique_name_in_owner = true
 
 [node name="Player" parent="World/Entities" instance=ExtResource("5_b84gv")]
-transform = Transform3D(-0.11398348, 0, -0.99348265, 0, 1, 0, 0.99348265, 0, -0.11398348, 0, 1.3329782, 0)
+transform = Transform3D(0.7582368, 0, -0.6519793, 0, 1, 0, 0.6519793, 0, 0.7582368, 0, 1.3329782, 0)
 
 [node name="Hud" parent="." instance=ExtResource("26_ohs1m")]
 unique_name_in_owner = true

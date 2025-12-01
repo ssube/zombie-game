@@ -273,6 +273,7 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 	%Hud.push_action("Picked up weapon: %s" % interactive.name)
 
 	var player = player_entity as ZE_Player
+	player.add_relationship(RelationshipUtils.make_holding(weapon))
 	switch_weapon(player, weapon)
 
 
@@ -323,10 +324,12 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 		var weapon = entity.current_weapon
 		weapon.get_parent().remove_child(weapon)
 		entity.inventory_node.add_child(weapon)
+		entity.remove_relationship(RelationshipUtils.make_equipped(weapon))
 
 	entity.current_weapon = new_weapon
 	new_weapon.get_parent().remove_child(new_weapon)
 	entity.hands_node.add_child(new_weapon)
+	entity.add_relationship(RelationshipUtils.make_equipped(new_weapon))
 
 	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
 	# %Hud.set_weapon_label(c_interactive.name)
@@ -343,6 +346,8 @@ func release_weapon(entity: Entity) -> void:
 	var weapon_position = weapon.global_position
 	weapon.get_parent().remove_child(weapon)
 	entity.get_parent().add_child(weapon)
+	entity.remove_relationship(RelationshipUtils.make_equipped(weapon))
+	entity.remove_relationship(RelationshipUtils.make_holding(weapon))
 
 	var weapon_body = weapon.get_node(".") as RigidBody3D
 	weapon_body.freeze = false
