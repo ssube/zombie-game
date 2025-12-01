@@ -34,10 +34,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_633jc")
-health_bar = NodePath("HudLayer/GameHud/VBoxContainer/HealthBar")
+health_bar = NodePath("HudLayer/GameHud/BottomContainer/HealthBar")
 crosshair = NodePath("HudLayer/GameHud/CenterContainer/Crosshair")
-target_label = NodePath("HudLayer/GameHud/VBoxContainer/TargetLabel")
-action_label = NodePath("HudLayer/GameHud/VBoxContainer2/ActionLabel")
+target_label = NodePath("HudLayer/GameHud/BottomContainer/TargetLabel")
+action_label = NodePath("HudLayer/GameHud/TopContainer/ActionLabel")
 
 [node name="PostLayer" type="CanvasLayer" parent="."]
 
@@ -72,28 +72,28 @@ size_flags_vertical = 4
 texture = ExtResource("2_rglhv")
 stretch_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HudLayer/GameHud"]
+[node name="BottomContainer" type="VBoxContainer" parent="HudLayer/GameHud"]
 layout_mode = 2
 alignment = 2
 
-[node name="TargetLabel" type="Label" parent="HudLayer/GameHud/VBoxContainer"]
+[node name="TargetLabel" type="Label" parent="HudLayer/GameHud/BottomContainer"]
 layout_mode = 2
 text = "Target Name"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="HudLayer/GameHud/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HudLayer/GameHud/BottomContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
 
-[node name="HealthBar" type="ProgressBar" parent="HudLayer/GameHud/VBoxContainer"]
+[node name="HealthBar" type="ProgressBar" parent="HudLayer/GameHud/BottomContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 8
 value = 25.0
 show_percentage = false
 
-[node name="HealthLabel" type="Label" parent="HudLayer/GameHud/VBoxContainer/HealthBar"]
+[node name="HealthLabel" type="Label" parent="HudLayer/GameHud/BottomContainer/HealthBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -104,12 +104,11 @@ text = "Health"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HudLayer/GameHud"]
+[node name="TopContainer" type="VBoxContainer" parent="HudLayer/GameHud"]
 layout_mode = 2
 
-[node name="ActionLabel" type="Label" parent="HudLayer/GameHud/VBoxContainer2"]
+[node name="ActionLabel" type="Label" parent="HudLayer/GameHud/TopContainer"]
 layout_mode = 2
-text = "Recent Actions"
 horizontal_alignment = 1
 
 [node name="StartMenu" type="AspectRatioContainer" parent="HudLayer"]

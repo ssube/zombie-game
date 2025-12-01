@@ -163,7 +163,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1653585, 0.54704344, 4.8687
 id = "Level0_ZE_Key_1764359955_57861"
 
 [node name="Objective" parent="Entities" instance=ExtResource("15_7di2q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.801977, 1.9073486e-06, 0.011570454)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.802, 1.5, 0.012)
 id = "Level0_ZE_Objective_1764359957_76643"
 component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_6y5fu"), SubResource("Resource_0x0hl"), SubResource("Resource_fv0x7")])
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://nk5gadv88ni7"]
+[gd_scene load_steps=10 format=3 uid="uid://nk5gadv88ni7"]
 
 [ext_resource type="Script" uid="uid://dkpj2gjyqwbtk" path="res://scripts/entities/props/ZE_Objective.gd" id="1_gq75p"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_ko3gf"]
@@ -19,20 +19,7 @@ metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqlhk"]
 albedo_color = Color(1, 0.27999997, 0.27999997, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_wi63k"]
-_surfaces = [{
-"aabb": AABB(-0.5, -1, -0.5, 1, 2, 1),
-"attribute_data": PackedByteArray("GPYVPgAAAAAAAAAAAAAAAAAAAD8AAAA/AAAAPwAAAAAAACA/AAAAAAAAID8AAIA/AAAAPwAAAAAY9hU+AAAAAAAAAD8AAAA/AAAgPwAAAAAAAEA/AAAAAAAAQD8AAIA/AAAAAAAAAAAa9hU+AAAAAAAAAD8AAAA/AADAPgAAAAAAAAA/AAAAAAAAAD8AAIA/GvYVPgAAAAD///8+AAAAAAAAAD8AAAA/AACAPgAAAAAAAMA+AAAAAAAAwD4AAIA/eIJaPwAAAAAAAAA/AAAAAAAAAD8AAAA/AABAPwAAAAAAAGA/AAAAAAAAYD8AAIA/AACAPwAAAAB4glo/AAAAAAAAAD8AAAA/AABgPwAAAAAAAAAAAAAAAAAAAAAAAIA/////PgAAAAB6glo/AAAAAAAAAD8AAAA/AAAAPgAAAAAAAIA+AAAAAAAAgD4AAIA/eoJaPwAAAAAAAIA/AAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA+AAAAAAAAAD4AAIA/"),
-"format": 34359738391,
-"material": SubResource("StandardMaterial3D_cqlhk"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 48,
-"vertex_data": PackedByteArray("9AS1vgAAgL/yBLW+AAAAvwAAgL8uvTuzAAAAAAAAgL8AAAAAAAAAvwAAgL8uvTuz9AS1vgAAgL/yBLW+AAAAAAAAgD8AAAAALt7MMQAAgL8AAAC/9AS1vgAAgL/yBLW+AAAAAAAAgL8AAAAA9AS1vgAAgL/yBLW+Lt7MMQAAgL8AAAC/AAAAAAAAgD8AAAAAAAAAvwAAgL8uvTuz8wS1vgAAgL/zBLU+AAAAAAAAgL8AAAAA8wS1vgAAgL/zBLU+AAAAvwAAgL8uvTuzAAAAAAAAgD8AAAAA8wS1vgAAgL/zBLU+Lr27sgAAgL8AAAA/AAAAAAAAgL8AAAAALr27sgAAgL8AAAA/8wS1vgAAgL/zBLU+AAAAAAAAgD8AAAAA8QS1PgAAgL/1BLW+Lt7MMQAAgL8AAAC/AAAAAAAAgL8AAAAALt7MMQAAgL8AAAC/8QS1PgAAgL/1BLW+AAAAAAAAgD8AAAAAAAAAPwAAgL8AAAAA8QS1PgAAgL/1BLW+AAAAAAAAgL8AAAAA8QS1PgAAgL/1BLW+AAAAPwAAgL8AAAAAAAAAAAAAgD8AAAAALr27sgAAgL8AAAA/8wS1PgAAgL/zBLU+AAAAAAAAgL8AAAAA8wS1PgAAgL/zBLU+Lr27sgAAgL8AAAA/AAAAAAAAgD8AAAAA8wS1PgAAgL/zBLU+AAAAPwAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAPwAAgL8AAAAA8wS1PgAAgL/zBLU+AAAAAAAAgD8AAAAA/38AAP///x//fwAA//++Ev9/AAD///8/mRmZmeD0m/46E5zJvvc0nf9//v///76S/38AAP///z//fwAA////H/9/AAD///8/OhOcyb73VOGZGf//4PQMuf9//v///73S/38AAHyl/7//fwAA/7//v/9/AAD///+/nEk5k0AIyuKZGZmZHgtjgf9//v8AAL6S/38AAP+//7//fwAA////v/9/AAD///+//3+ZmR4L8sacSTmTQAipnv9//v8AAECt/38AAP+//z//fwAA////P/9/AAD///8/mRn//xjyjsXE7JzJVL3eu/9//v+B2v+//38AAHyl/z//fwAA/7//P/9/AAD///8/xOycyUAIymJl5pmZHgtjAf9//v8AAEBt/38AAP///7//fwAA////3/9/AAD///+/YrY5k6pCH8T/f5mZ5g1vuv9//v99Jf+//38AAP///9//fwAA//9A7f9/AAD///+/ZeaZmTd9jsVitjmTlUXeu/9//v+CWv+/")
-}]
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_oh06t"]
-points = PackedVector3Array(-0.5, -1, -9.787083e-05, -0.35356304, -1, -0.35356304, -0.35356304, -1, 0.35346514, 0, 1, 0, 0, -1, -0.5, -9.787083e-05, -1, 0.5, 0.35346514, -1, 0.35346514, 0.5, -1, 0, 0.35346514, -1, -0.35356304)
+[sub_resource type="SphereShape3D" id="SphereShape3D_n8xfw"]
 
 [node name="Objective" type="StaticBody3D"]
 collision_layer = 3
@@ -40,15 +27,8 @@ collision_mask = 3
 script = ExtResource("1_gq75p")
 component_resources = Array[ExtResource("2_ko3gf")]([SubResource("Resource_6y5fu"), SubResource("Resource_lfpnt")])
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-cone = true
-
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("ArrayMesh_wi63k")
+[node name="CSGCylinder3D" type="CSGSphere3D" parent="."]
+material = SubResource("StandardMaterial3D_cqlhk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("ConvexPolygonShape3D_oh06t")
+shape = SubResource("SphereShape3D_n8xfw")
