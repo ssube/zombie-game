@@ -14,12 +14,14 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			print("Bullet is colliding with: ", target)
 
 			if target is RigidBody3D:
-				target.apply_impulse(ray.get_collision_normal() * -projectile.mass, ray.get_collision_point())
+				var impact_vector: Vector3 = ray.get_collision_normal() * -projectile.mass
+				print("Applying impulse to target: ", target, " with force: ", impact_vector)
+				target.apply_impulse(impact_vector) # ray.get_collision_point())
 
 			if target is Entity:
 				projectile.piercing -= 1
 				if target.has_component(ZC_Health):
-					var damage = ZC_Damage.new(projectile.damage)
+					# var damage = ZC_Damage.new(projectile.damage)
 					target.add_relationship(RelationshipUtils.make_damage(projectile.damage))
 
 				if target.has_component(ZC_Flammable):
