@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4406rbr42a1e"]
+[gd_scene load_steps=10 format=3 uid="uid://b4406rbr42a1e"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_n0ht5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_3pflf"]
 [ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="3_82ul1"]
-[ext_resource type="Script" uid="uid://b8uyvu6k51kor" path="res://scripts/events/EV_DamageOnCollision.gd" id="4_3pflf"]
+[ext_resource type="Script" uid="uid://b8uyvu6k51kor" path="res://scripts/events/EV_DamageOnEnter.gd" id="4_3pflf"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="5_82ul1"]
 
 [sub_resource type="Resource" id="Resource_lu3nb"]
 script = ExtResource("3_82ul1")
@@ -22,6 +23,8 @@ point_count = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3voqo"]
 radius = 0.25
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_lu3nb"]
 
 [node name="ZombieMelee" type="Node3D"]
 script = ExtResource("1_n0ht5")
@@ -44,3 +47,7 @@ shape = SubResource("SphereShape3D_3voqo")
 radius = 0.25
 radial_segments = 8
 rings = 4
+
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamGenerator_lu3nb")
+script = ExtResource("5_82ul1")

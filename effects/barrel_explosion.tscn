@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dqfrsv8nlncwj"]
 
-[ext_resource type="Script" uid="uid://2b0anfdfvkft" path="res://scripts/events/EV_RemoveAfter.gd" id="1_ikohy"]
+[ext_resource type="Script" uid="uid://2b0anfdfvkft" path="res://scripts/events/EV_RemoveAfterTimer.gd" id="1_ikohy"]
 [ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/events/EV_EmitOnReady.gd" id="1_ma1qw"]
 [ext_resource type="QuadMesh" uid="uid://cltad2jeupalx" path="res://effects/fire_particle.tres" id="2_n1k4f"]
 [ext_resource type="Script" uid="uid://yae4sdiptdy8" path="res://scripts/events/EV_BurnOnEnter.gd" id="3_34a0c"]
