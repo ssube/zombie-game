@@ -1,9 +1,8 @@
-@tool
-extends ConditionLeaf
+extends ZB_Condition
 class_name ZB_HasTargetPosition
 
-func tick(_actor: Node, blackboard: Blackboard) -> int:
+func test(_actor: Node, _delta: float, blackboard: ZB_Blackboard) -> bool:
 	if blackboard.has_value("target_position"):
-		return SUCCESS
+		return true
 
-	return FAILURE
+	return false

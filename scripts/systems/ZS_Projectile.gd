@@ -15,13 +15,10 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 
 			if target is RigidBody3D:
 				var impact_vector: Vector3 = ray.get_collision_normal() * -projectile.mass
-				print("Applying impulse to target: ", target, " with force: ", impact_vector)
-				target.apply_impulse(impact_vector) # ray.get_collision_point())
+				target.apply_impulse(impact_vector)
 
 			if target is Entity:
-				projectile.piercing -= 1
 				if target.has_component(ZC_Health):
-					# var damage = ZC_Damage.new(projectile.damage)
 					target.add_relationship(RelationshipUtils.make_damage(projectile.damage))
 
 				if target.has_component(ZC_Flammable):
@@ -30,6 +27,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 						var fire = ZC_Effect_Burning.new()
 						target.add_component(fire)
 
+			projectile.piercing -= 1
 			if projectile.piercing <= 0:
 				print("Bullet has expired: ", entity)
 				ECS.world.remove_entity(entity)

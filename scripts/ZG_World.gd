@@ -55,6 +55,11 @@ func _register_level_entities() -> void:
 	for child in level_entity_root.get_children():
 		if child is Entity:
 			ECS.world.add_entity(child)
+			if "inventory_node" in child:
+				var items = child.inventory_node.get_children()
+				for item in items:
+					if item is Entity:
+						ECS.world.add_entity(item)
 		else:
 			printerr("Child is not an entity: ", child)
 

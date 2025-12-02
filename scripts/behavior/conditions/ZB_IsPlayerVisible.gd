@@ -1,15 +1,14 @@
-@tool
-extends ConditionLeaf
+extends ZB_Condition
 class_name ZB_IsPlayerVisible
 
 @export var vision_cone: Area3D = null
 
-func tick(actor: Node, blackboard: Blackboard) -> int:
+func test(actor: Node, _delta: float, blackboard: ZB_Blackboard) -> bool:
 	if ECS.world == null:
-		return FAILURE
+		return false
 
 	if not actor.is_inside_tree():
-		return FAILURE
+		return false
 
 	var visible: Array = []
 	if vision_cone is VisionCone3D:
@@ -24,6 +23,6 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 				blackboard.set_value("visible_player", body)
 				# blackboard.set_value("target_player", body)
 				# blackboard.set_value("target_position", body.global_position)
-				return SUCCESS
+				return true
 
-	return FAILURE
+	return false

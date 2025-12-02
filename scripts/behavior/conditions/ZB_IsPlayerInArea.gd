@@ -1,11 +1,10 @@
-@tool
-extends ConditionLeaf
+extends ZB_Condition
 class_name ZB_IsPlayerInArea
 
 enum DetectionMode { FIRST, NEAREST }
 
-@export var detection_mode: DetectionMode = DetectionMode.FIRST
 @export var detection_area: Area3D = null
+@export var detection_mode: DetectionMode = DetectionMode.FIRST
 
 
 func _ready() -> void:
@@ -13,12 +12,12 @@ func _ready() -> void:
 		printerr("Behavior node missing detection area: ", self)
 
 
-func tick(actor: Node, blackboard: Blackboard) -> int:
+func test(actor: Node, _delta: float, blackboard: ZB_Blackboard) -> bool:
 	if ECS.world == null:
-		return FAILURE
+		return false
 
 	if detection_area == null:
-		return FAILURE
+		return false
 
 	var actor3d = actor as Node3D
 	var target_player: Node3D = null
@@ -31,10 +30,10 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		printerr("Unknown detection mode: ", detection_mode)
 
 	if target_player == null:
-		return FAILURE
+		return false
 
 	blackboard.set_value("target_player", target_player)
-	return SUCCESS
+	return true
 
 
 func find_players() -> Array[Node3D]:

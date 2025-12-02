@@ -1,10 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://dawivvun8p2eu"]
+[gd_scene load_steps=6 format=3 uid="uid://bdjw7s7pgc46r"]
 
-[ext_resource type="Script" uid="uid://egg5ox6qpvlq" path="res://levels/test.gd" id="1_72lju"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="2_lkjt4"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nfdnw"]
 data = PackedVector3Array(-5, -0.5, 5, -5, -0.5, -5, -5, 0.5, -5, 5, -0.5, -5, -5, -0.5, -5, -5, -0.5, 5, -5, 0.5, -5, -5, -0.5, -5, 5, -0.5, -5, -5, 0.5, -5, -5, 0.5, 5, -5, -0.5, 5, -5, -0.5, 5, -5, 0.5, 5, 5, 0.5, 5, 5, 0.5, 5, -5, 0.5, 5, -5, 0.5, -5, -5, -0.5, 5, 5, -0.5, 5, 5, -0.5, -5, 5, 0.5, 5, 5, -0.5, 5, -5, -0.5, 5, 5, -0.5, -5, 5, -0.5, 5, 5, 0.5, 5, 5, -0.5, -5, 5, 0.5, -5, -5, 0.5, -5, -5, 0.5, -5, 5, 0.5, -5, 5, 0.5, 5, 5, 0.5, 5, 5, 0.5, -5, 5, -0.5, -5)
+
+[sub_resource type="GDScript" id="GDScript_72lju"]
+script/source = "extends RigidBody3D
+
+func _ready():
+	contact_monitor = true
+	max_contacts_reported = 4
+	axis_lock_angular_x = true
+	axis_lock_angular_z = true
+
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	state.linear_velocity = Vector3(1, state.linear_velocity.y, 0)
+	
+	print(\"Contact count: \", state.get_contact_count())
+	for i in state.get_contact_count():
+		print(\"  Contact \", i, \": \", state.get_contact_collider(i), \" normal: \", state.get_contact_local_normal(i))
+	
+	print(\"Pos: \", state.transform.origin, \" | Vel: \", state.linear_velocity)
+"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_72lju"]
 size = Vector3(1, 2, 1)
@@ -27,9 +45,10 @@ shape = SubResource("ConcavePolygonShape3D_nfdnw")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("1_72lju")
+script = SubResource("GDScript_72lju")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.13990426)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_72lju")
@@ -42,9 +61,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 omni_range = 15.0
 
 [node name="Zombie" parent="." instance=ExtResource("2_lkjt4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1161674, 1.0298679, 2.4999225)
-linear_velocity = Vector3(1, 0, 0)
-move_speed = 5.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7932085, 1.0298679, 2.3819642)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_lkjt4")

@@ -10,6 +10,7 @@
 script = ExtResource("3_jngwf")
 damage = 25.0
 collision_ray = NodePath("RayCast3D")
+piercing = 1
 metadata/_custom_type_script = "uid://d2o34b8fqmhd3"
 
 [sub_resource type="Resource" id="Resource_a6wvd"]

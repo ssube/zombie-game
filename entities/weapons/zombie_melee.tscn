@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4406rbr42a1e"]
+
+[ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_n0ht5"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_3pflf"]
+[ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="3_82ul1"]
+[ext_resource type="Script" uid="uid://b8uyvu6k51kor" path="res://scripts/events/EV_DamageOnCollision.gd" id="4_3pflf"]
+
+[sub_resource type="Resource" id="Resource_lu3nb"]
+script = ExtResource("3_82ul1")
+swing_path = NodePath("Path3D/PathFollow3D")
+swing_time = 1.0
+cooldown_time = 0.5
+damage = 10
+metadata/_custom_type_script = "uid://c86wth8kvlbt7"
+
+[sub_resource type="Curve3D" id="Curve3D_4d0u4"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3voqo"]
+radius = 0.25
+
+[node name="ZombieMelee" type="Node3D"]
+script = ExtResource("1_n0ht5")
+component_resources = Array[ExtResource("2_3pflf")]([SubResource("Resource_lu3nb")])
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_4d0u4")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+
+[node name="Area3D" type="Area3D" parent="Path3D/PathFollow3D"]
+script = ExtResource("4_3pflf")
+damage_player = true
+damage_enemy = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Area3D"]
+shape = SubResource("SphereShape3D_3voqo")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Path3D/PathFollow3D"]
+radius = 0.25
+radial_segments = 8
+rings = 4

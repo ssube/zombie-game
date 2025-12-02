@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ds0q1crcrv862"]
+[gd_scene load_steps=38 format=3 uid="uid://ds0q1crcrv862"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_rffgv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_2yl8o"]
@@ -14,7 +14,19 @@
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="11_7tmu0"]
 [ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="12_k72ww"]
 [ext_resource type="Script" uid="uid://cmgcelj1qxg8o" path="res://addons/tattomoosa.vision_cone_3d/src/VisionCone3D.gd" id="12_kv3li"]
-[ext_resource type="Script" uid="uid://cwxhmhhcchnk5" path="res://scripts/behavior/ZB_Zombie.gd" id="30_j8wr1"]
+[ext_resource type="Script" uid="uid://di74g8tmachs3" path="res://scripts/behavior/fsm/ZB_StateMachine.gd" id="15_u1ccf"]
+[ext_resource type="Script" uid="uid://cwxhmhhcchnk5" path="res://scripts/behavior/events/ZB_Zombie.gd" id="16_3lyvt"]
+[ext_resource type="Script" uid="uid://420evxa6jy8r" path="res://scripts/behavior/fsm/ZB_Blackboard.gd" id="16_u1ccf"]
+[ext_resource type="Script" uid="uid://df075dj3mhif5" path="res://scripts/behavior/states/ZB_Attack.gd" id="17_qjub6"]
+[ext_resource type="Script" uid="uid://c6pla5ya01llv" path="res://scripts/behavior/fsm/ZB_Transition.gd" id="18_bf4rb"]
+[ext_resource type="Script" uid="uid://spbk6hwrc5ow" path="res://scripts/behavior/states/ZB_Wander.gd" id="18_hann2"]
+[ext_resource type="Script" uid="uid://cyplr8cytq8s7" path="res://scripts/behavior/states/ZB_Chase.gd" id="18_wtse8"]
+[ext_resource type="Script" uid="uid://4mkf4oytommo" path="res://scripts/behavior/states/ZB_Idle.gd" id="19_3lyvt"]
+[ext_resource type="Script" uid="uid://bp8kk4kmch5fg" path="res://scripts/behavior/conditions/ZB_IsPlayerInArea.gd" id="22_qpdga"]
+[ext_resource type="Script" uid="uid://dyb15yih6xr3a" path="res://scripts/behavior/conditions/ZB_IsPlayerVisible.gd" id="23_j7lgi"]
+[ext_resource type="Script" uid="uid://ccjqwf2jo717o" path="res://scripts/behavior/conditions/utils/ZB_Random.gd" id="24_3lyvt"]
+[ext_resource type="Script" uid="uid://dicdllgowu6ov" path="res://scripts/behavior/conditions/utils/ZB_Throttle.gd" id="24_j7lgi"]
+[ext_resource type="PackedScene" uid="uid://b4406rbr42a1e" path="res://entities/weapons/zombie_melee.tscn" id="27_j7lgi"]
 
 [sub_resource type="Resource" id="Resource_l1o5o"]
 script = ExtResource("3_nswy3")
@@ -58,10 +70,15 @@ radius = 20.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_kv3li"]
 radius = 2.0
 
-[node name="Zombie" type="RigidBody3D"]
+[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("current_weapon", "inventory_node", "events")]
 mass = 20.0
 script = ExtResource("1_rffgv")
-behavior = NodePath("Behavior/ZombieBehavior")
+current_weapon = NodePath("Inventory/ZombieMelee")
+inventory_node = NodePath("Inventory")
+events = NodePath("Behavior/ZombieBehavior/Events")
+look_speed = null
+move_speed = 2.5
+move_acceleration = null
 component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_lkxn3")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -80,13 +97,6 @@ simplify_path = true
 
 [node name="Behavior" type="Node3D" parent="."]
 
-[node name="ZombieBehavior" type="Node" parent="Behavior" node_paths=PackedStringArray("actor_node", "vision_area", "attack_area", "detection_area")]
-script = ExtResource("30_j8wr1")
-actor_node = NodePath("../..")
-vision_area = NodePath("../VisionCone3D")
-attack_area = NodePath("../AttackArea3D")
-detection_area = NodePath("../DetectionArea3D")
-
 [node name="VisionCone3D" type="Area3D" parent="Behavior"]
 script = ExtResource("12_kv3li")
 metadata/_custom_type_script = "uid://cmgcelj1qxg8o"
@@ -102,7 +112,113 @@ shape = SubResource("SphereShape3D_8mkit")
 shape = SubResource("SphereShape3D_kv3li")
 debug_color = Color(0.7, 0, 0, 0.41960785)
 
+[node name="ZombieBehavior" type="Node" parent="Behavior" node_paths=PackedStringArray("blackboard", "default_state", "entity")]
+script = ExtResource("15_u1ccf")
+debug = false
+blackboard = NodePath("Blackboard")
+default_state = NodePath("States/ZB_State_Wander")
+entity = NodePath("../..")
+metadata/_custom_type_script = "uid://di74g8tmachs3"
+
+[node name="Blackboard" type="Node" parent="Behavior/ZombieBehavior"]
+script = ExtResource("16_u1ccf")
+metadata/_custom_type_script = "uid://420evxa6jy8r"
+
+[node name="Events" type="Node" parent="Behavior/ZombieBehavior" node_paths=PackedStringArray("actor_node", "vision_area", "attack_area", "detection_area", "blackboard", "state_machine", "state_attack", "state_chase", "state_wander")]
+script = ExtResource("16_3lyvt")
+actor_node = NodePath("../../..")
+vision_area = NodePath("../../VisionCone3D")
+attack_area = NodePath("../../AttackArea3D")
+detection_area = NodePath("../../DetectionArea3D")
+blackboard = NodePath("../Blackboard")
+state_machine = NodePath("..")
+state_attack = NodePath("../States/ZB_State_Attack")
+state_chase = NodePath("../States/ZB_State_Chase")
+state_wander = NodePath("../States/ZB_State_Wander")
+metadata/_custom_type_script = "uid://cwxhmhhcchnk5"
+
+[node name="States" type="Node" parent="Behavior/ZombieBehavior"]
+
+[node name="ZB_State_Attack" type="Node" parent="Behavior/ZombieBehavior/States"]
+script = ExtResource("17_qjub6")
+metadata/_custom_type_script = "uid://df075dj3mhif5"
+
+[node name="ZB_State_Chase" type="Node" parent="Behavior/ZombieBehavior/States"]
+script = ExtResource("18_wtse8")
+metadata/_custom_type_script = "uid://cyplr8cytq8s7"
+
+[node name="ZB_State_Idle" type="Node" parent="Behavior/ZombieBehavior/States"]
+script = ExtResource("19_3lyvt")
+metadata/_custom_type_script = "uid://4mkf4oytommo"
+
+[node name="ZB_State_Wander" type="Node" parent="Behavior/ZombieBehavior/States"]
+script = ExtResource("18_hann2")
+metadata/_custom_type_script = "uid://spbk6hwrc5ow"
+
+[node name="Transitions" type="Node" parent="Behavior/ZombieBehavior"]
+
+[node name="Any_Attack" type="Node" parent="Behavior/ZombieBehavior/Transitions" node_paths=PackedStringArray("target_state")]
+script = ExtResource("18_bf4rb")
+any_source = true
+target_state = NodePath("../../States/ZB_State_Attack")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/ZombieBehavior/Transitions/Any_Attack" node_paths=PackedStringArray("detection_area")]
+script = ExtResource("22_qpdga")
+detection_area = NodePath("../../../../AttackArea3D")
+metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
+
+[node name="Any_Chase" type="Node" parent="Behavior/ZombieBehavior/Transitions" node_paths=PackedStringArray("target_state")]
+script = ExtResource("18_bf4rb")
+any_source = true
+target_state = NodePath("../../States/ZB_State_Chase")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="ZB_IsPlayerVisible" type="Node" parent="Behavior/ZombieBehavior/Transitions/Any_Chase" node_paths=PackedStringArray("vision_cone")]
+script = ExtResource("23_j7lgi")
+vision_cone = NodePath("../../../../VisionCone3D")
+metadata/_custom_type_script = "uid://dyb15yih6xr3a"
+
+[node name="Attack_Idle" type="Node" parent="Behavior/ZombieBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]
+script = ExtResource("18_bf4rb")
+source_state = NodePath("../../States/ZB_State_Attack")
+target_state = NodePath("../../States/ZB_State_Idle")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="Idle_Wander" type="Node" parent="Behavior/ZombieBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]
+script = ExtResource("18_bf4rb")
+source_state = NodePath("../../States/ZB_State_Idle")
+target_state = NodePath("../../States/ZB_State_Wander")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="ZB_Condition_Throttle" type="Node" parent="Behavior/ZombieBehavior/Transitions/Idle_Wander"]
+script = ExtResource("24_j7lgi")
+interval = 1.0
+
+[node name="ZB_Condition_Random" type="Node" parent="Behavior/ZombieBehavior/Transitions/Idle_Wander"]
+script = ExtResource("24_3lyvt")
+metadata/_custom_type_script = "uid://ccjqwf2jo717o"
+
+[node name="Wander_Idle" type="Node" parent="Behavior/ZombieBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]
+script = ExtResource("18_bf4rb")
+source_state = NodePath("../../States/ZB_State_Wander")
+target_state = NodePath("../../States/ZB_State_Idle")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="ZB_Condition_Throttle" type="Node" parent="Behavior/ZombieBehavior/Transitions/Wander_Idle"]
+script = ExtResource("24_j7lgi")
+interval = 1.0
+
+[node name="ZB_Condition_Random" type="Node" parent="Behavior/ZombieBehavior/Transitions/Wander_Idle"]
+script = ExtResource("24_3lyvt")
+metadata/_custom_type_script = "uid://ccjqwf2jo717o"
+
 [node name="Effects" type="Node3D" parent="."]
 
 [node name="FireEffect" parent="Effects" instance=ExtResource("11_7tmu0")]
 visible = false
+
+[node name="Inventory" type="Node3D" parent="."]
+
+[node name="ZombieMelee" parent="Inventory" instance=ExtResource("27_j7lgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5514579)

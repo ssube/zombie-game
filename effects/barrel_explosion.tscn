@@ -10,6 +10,7 @@ spread = 180.0
 initial_velocity_min = 0.5
 initial_velocity_max = 4.0
 gravity = Vector3(0, 0, 0)
+collision_mode = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ma1qw"]
 radius = 10.0
@@ -17,7 +18,7 @@ radius = 10.0
 [node name="BarrelExplosion" type="Node3D"]
 script = ExtResource("1_ikohy")
 
-[node name="CPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="FireParticles" type="GPUParticles3D" parent="."]
 emitting = false
 amount = 20
 one_shot = true
