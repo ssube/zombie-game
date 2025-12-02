@@ -28,6 +28,8 @@ var visible_menu: HudMenu = HudMenu.NONE
 var previous_menu: HudMenu = HudMenu.START_MENU
 
 func _ready() -> void:
+	clear_target_label()
+	clear_weapon_label()
 	reset_crosshair_color()
 	update_mouse_mode()
 
@@ -59,8 +61,11 @@ func clear_target_label() -> void:
 func set_target_label(text: String) -> void:
 	target_label.text = text
 
-func set_weapon_label(_text: String) -> void:
-	pass # TODO: update the weapon label UI element
+func clear_weapon_label() -> void:
+	weapon_label.text = ""
+
+func set_weapon_label(text: String) -> void:
+	weapon_label.text = text
 
 func set_health(value: int, instant: bool = false) -> void:
 	if health_tween != null:

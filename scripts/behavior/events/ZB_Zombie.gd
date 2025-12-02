@@ -1,3 +1,4 @@
+@icon("res://textures/icons/fsm_trigger.svg")
 extends Node
 class_name ZB_ZombieEvents
 

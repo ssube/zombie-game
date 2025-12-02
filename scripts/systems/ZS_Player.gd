@@ -332,7 +332,7 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 	entity.add_relationship(RelationshipUtils.make_equipped(new_weapon))
 
 	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
-	# %Hud.set_weapon_label(c_interactive.name)
+	%Hud.set_weapon_label(c_interactive.name)
 	%Hud.push_action("Switched to weapon: %s" % c_interactive.name)
 
 

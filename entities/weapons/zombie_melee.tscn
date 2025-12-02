@@ -34,8 +34,8 @@ curve = SubResource("Curve3D_4d0u4")
 
 [node name="Area3D" type="Area3D" parent="Path3D/PathFollow3D"]
 script = ExtResource("4_3pflf")
-damage_player = true
-damage_enemy = false
+damage_players = true
+damage_enemies = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Area3D"]
 shape = SubResource("SphereShape3D_3voqo")

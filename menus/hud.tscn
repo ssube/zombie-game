@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://vcyq2fbg0dts"]
+[gd_scene load_steps=7 format=3 uid="uid://vcyq2fbg0dts"]
 
 [ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/nodes/ZN_Menu.gd" id="1_633jc"]
 [ext_resource type="Shader" uid="uid://ckydjmdamo2fo" path="res://shaders/post_crt.gdshader" id="2_jew8s"]
@@ -26,7 +26,19 @@ shader_parameter/warble_speed = 0.50000002375
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jew8s"]
 
-[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "crosshair", "target_label", "action_label")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jew8s"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0, 0, 0.5019608)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "crosshair", "target_label", "weapon_label", "action_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,6 +49,7 @@ script = ExtResource("1_633jc")
 health_bar = NodePath("HudLayer/GameHud/BottomContainer/HealthBar")
 crosshair = NodePath("HudLayer/GameHud/CenterContainer/Crosshair")
 target_label = NodePath("HudLayer/GameHud/BottomContainer/TargetLabel")
+weapon_label = NodePath("HudLayer/GameHud/BottomContainer/WeaponLabel")
 action_label = NodePath("HudLayer/GameHud/TopContainer/ActionLabel")
 
 [node name="PostLayer" type="CanvasLayer" parent="."]
@@ -78,10 +91,20 @@ alignment = 2
 
 [node name="TargetLabel" type="Label" parent="HudLayer/GameHud/BottomContainer"]
 layout_mode = 2
-text = "Target Name"
+text = "Interactive Target"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="HudLayer/GameHud/BottomContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
+
+[node name="WeaponLabel" type="Label" parent="HudLayer/GameHud/BottomContainer"]
+layout_mode = 2
+text = "Current Weapon"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="HudLayer/GameHud/BottomContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
@@ -90,6 +113,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_styles/fill = SubResource("StyleBoxFlat_jew8s")
 value = 25.0
 show_percentage = false
 
