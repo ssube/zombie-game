@@ -33,5 +33,3 @@ script = ExtResource("3_34a0c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_ma1qw")
-
-[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

@@ -7,6 +7,10 @@ var body_queue: Array[Node] = []
 var sight_queue: Array[Node] = []
 
 
+func _ready() -> void:
+	body_entered.connect(_on_body_entered)
+
+
 func _on_body_entered(body: Node) -> void:
 	if require_line_of_sight:
 		if body not in body_queue:

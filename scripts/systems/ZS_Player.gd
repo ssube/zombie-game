@@ -2,6 +2,7 @@ class_name ZS_PlayerSystem
 extends System
 
 var last_shimmer: Dictionary = {} # dict for multiplayer
+var modifier_relationship = Relationship.new(ZC_Modifier.new(), null)
 
 func query():
 	return q.with_all([ZC_Transform, ZC_Velocity, ZC_Player, ZC_Input])
@@ -12,11 +13,14 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		var velocity = entity.get_component(ZC_Velocity) as ZC_Velocity
 		var player = entity.get_component(ZC_Player) as ZC_Player
 		var input = entity.get_component(ZC_Input) as ZC_Input
+		var modifiers = entity.get_relationships(modifier_relationship)
+
+		var speed_multiplier := 1.0
+		for modifier: Relationship in modifiers:
+			if modifier.target is ZC_Effect_Speed:
+				speed_multiplier *= modifier.target.multiplier
 
 		var body := entity.get_node(".") as CharacterBody3D
-		# leaning only
-		# body.rotation.z = input.turn_direction.z
-		# TODO: fix keyboard looking
 		body.rotation.x += input.turn_direction.x
 		body.rotation.y += input.turn_direction.y
 		body.rotation.z = input.turn_direction.z
@@ -54,7 +58,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 		# TODO: move this input the MovementSystem
 		# Sync to CharacterBody3D (Node assumed attached to entity)
-		body.velocity = velocity.linear_velocity * velocity.speed_modifier
+		body.velocity = velocity.linear_velocity * speed_multiplier
 		body.move_and_slide()
 		_handle_collisions(body, delta)
 

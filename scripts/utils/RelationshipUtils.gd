@@ -12,3 +12,8 @@ static func make_equipped(item: Entity) -> Relationship:
 static func make_holding(item: Entity) -> Relationship:
 	var holding_component := ZC_Holding.new()
 	return Relationship.new(holding_component, item)
+
+static func make_modifier_speed(multiplier: float) -> Relationship:
+	var speed_modifier := ZC_Effect_Speed.new(multiplier)
+	var link = ZC_Modifier.new()
+	return Relationship.new(link, speed_modifier)

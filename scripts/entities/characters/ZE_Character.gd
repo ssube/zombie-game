@@ -12,6 +12,8 @@ class_name ZE_Character
 
 @onready var root_3d := get_node(".") as RigidBody3D
 
+var modifier_relationship = Relationship.new(ZC_Modifier.new(), null)
+
 var look_direction: Vector3 = Vector3.ZERO:
 	set(value):
 		look_direction = value
@@ -35,9 +37,15 @@ func look_at_target(look_target_position: Vector3) -> void:
 
 ## Move toward target position
 func move_to_target(move_target_position: Vector3) -> void:
-	var c_velocity = self.get_component(ZC_Velocity) as ZC_Velocity
+	var modifiers = self.get_relationships(modifier_relationship)
+
+	var speed_multiplier := 1.0
+	for modifier: Relationship in modifiers:
+		if modifier.target is ZC_Effect_Speed:
+			speed_multiplier *= modifier.target.multiplier
+
 	var target_offset: Vector3 = move_target_position - root_3d.global_position
-	target_offset = target_offset.normalized() * move_speed * c_velocity.speed_modifier
+	target_offset = target_offset.normalized() * move_speed * speed_multiplier
 	set_actor_velocity(target_offset)
 
 ## Update the physics velocity of the actor node
