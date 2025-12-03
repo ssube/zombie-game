@@ -13,8 +13,13 @@ enum HudMenu {
 
 @export var health_bar: ProgressBar = null
 @export var crosshair: TextureRect = null
+
+@export_group("Labels")
+@export var objective_label: Label = null
 @export var target_label: Label = null
 @export var weapon_label: Label = null
+
+@export_group("Actions")
 @export var action_label: Label = null
 @export var action_limit: int = 5
 @export var action_timeout: float = 5.0
@@ -28,6 +33,7 @@ var visible_menu: HudMenu = HudMenu.NONE
 var previous_menu: HudMenu = HudMenu.START_MENU
 
 func _ready() -> void:
+	clear_objective_label()
 	clear_target_label()
 	clear_weapon_label()
 	reset_crosshair_color()
@@ -54,6 +60,12 @@ func push_action(action: String) -> void:
 
 	action_timer = 0.0
 	update_action_queue()
+
+func clear_objective_label() -> void:
+	objective_label.text = ""
+
+func set_objective_label(text: String) -> void:
+	objective_label.text = text
 
 func clear_target_label() -> void:
 	target_label.text = ""

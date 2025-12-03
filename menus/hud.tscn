@@ -38,7 +38,7 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 6
 
-[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "crosshair", "target_label", "weapon_label", "action_label")]
+[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "crosshair", "objective_label", "target_label", "weapon_label", "action_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,6 +48,7 @@ grow_vertical = 2
 script = ExtResource("1_633jc")
 health_bar = NodePath("HudLayer/GameHud/BottomContainer/HealthBar")
 crosshair = NodePath("HudLayer/GameHud/CenterContainer/Crosshair")
+objective_label = NodePath("HudLayer/GameHud/TopContainer/ObjectiveLabel")
 target_label = NodePath("HudLayer/GameHud/BottomContainer/TargetLabel")
 weapon_label = NodePath("HudLayer/GameHud/BottomContainer/WeaponLabel")
 action_label = NodePath("HudLayer/GameHud/TopContainer/ActionLabel")
@@ -130,6 +131,16 @@ vertical_alignment = 1
 
 [node name="TopContainer" type="VBoxContainer" parent="HudLayer/GameHud"]
 layout_mode = 2
+
+[node name="ObjectiveLabel" type="Label" parent="HudLayer/GameHud/TopContainer"]
+layout_mode = 2
+text = "Current Objective"
+horizontal_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="HudLayer/GameHud/TopContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
 
 [node name="ActionLabel" type="Label" parent="HudLayer/GameHud/TopContainer"]
 layout_mode = 2

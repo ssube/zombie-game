@@ -14,7 +14,12 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		var input = entity.get_component(ZC_Input) as ZC_Input
 
 		var body := entity.get_node(".") as CharacterBody3D
-		#body.rotation = input.turn_direction
+		# leaning only
+		# body.rotation.z = input.turn_direction.z
+		# TODO: fix keyboard looking
+		body.rotation.x += input.turn_direction.x
+		body.rotation.y += input.turn_direction.y
+		body.rotation.z = input.turn_direction.z
 
 		var forward = -body.global_transform.basis.z.normalized()
 		var right = body.global_transform.basis.x.normalized()

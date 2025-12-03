@@ -76,9 +76,7 @@ script = ExtResource("1_rffgv")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
 events = NodePath("Behavior/ZombieBehavior/Events")
-look_speed = null
 move_speed = 2.5
-move_acceleration = null
 component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_lkxn3")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -114,7 +112,6 @@ debug_color = Color(0.7, 0, 0, 0.41960785)
 
 [node name="ZombieBehavior" type="Node" parent="Behavior" node_paths=PackedStringArray("blackboard", "default_state", "entity")]
 script = ExtResource("15_u1ccf")
-debug = false
 blackboard = NodePath("Blackboard")
 default_state = NodePath("States/ZB_State_Wander")
 entity = NodePath("../..")
@@ -222,3 +219,4 @@ visible = false
 
 [node name="ZombieMelee" parent="Inventory" instance=ExtResource("27_j7lgi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5514579)
+visible = false

@@ -1,6 +1,9 @@
 extends System
 class_name ZS_InputSystem
 
+@export_range(0.0, 1.0) var turn_factor: float = 0.05
+@export_range(0.0, 1.0) var max_lean: float = 0.2
+
 func query():
 	return q.with_all([ZC_Input])
 
@@ -8,31 +11,27 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 	for entity in entities:
 		var input = entity.get_component(ZC_Input) as ZC_Input
 
-		input.move_direction = Vector2.ZERO
-		if Input.is_action_pressed("move_backward"):
-			input.move_direction.y -= 1
-		if Input.is_action_pressed("move_forward"):
-			input.move_direction.y += 1
-		if Input.is_action_pressed("move_left"):
-			input.move_direction.x -= 1
-		if Input.is_action_pressed("move_right"):
-			input.move_direction.x += 1
+		input.move_direction = Input.get_vector("move_left", "move_right", "move_backward", "move_forward")
 
-		input.move_direction = input.move_direction.normalized()
+		var turn_input = Input.get_vector("look_down", "look_up", "look_right", "look_left")
+		turn_input *= turn_factor
+		turn_input = turn_input.clampf(-turn_factor, +turn_factor)
+		# print("turn input: ", turn_input)
 
-		if Input.is_action_pressed("look_right"):
-			input.turn_direction.y -= 0.1
-		if Input.is_action_pressed("look_left"):
-			input.turn_direction.y += 0.1
-		if Input.is_action_pressed("look_up"):
-			input.turn_direction.x += 0.1
-		if Input.is_action_pressed("look_down"):
-			input.turn_direction.x -= 0.1
+		#input.turn_direction = Vector3.ZERO
+		input.turn_direction.x = turn_input.x
+		input.turn_direction.y = turn_input.y
 
+		var leaning = false
 		if Input.is_action_pressed("lean_right"):
-			input.turn_direction.z = -0.25
-		elif Input.is_action_pressed("lean_left"):
-			input.turn_direction.z = +0.25
+			input.turn_direction.z -= turn_factor
+			leaning = true
+		if Input.is_action_pressed("lean_left"):
+			input.turn_direction.z += turn_factor
+			leaning = true
+
+		if leaning:
+			input.turn_direction.z = clampf(input.turn_direction.z, -max_lean, max_lean)
 		else:
 			input.turn_direction.z = 0
 
