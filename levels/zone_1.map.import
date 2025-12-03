@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://odcmf5hwcrcj"
+path="res://.godot/imported/zone_1.map-5989ce03e13ec809c57a54ba4df3c0df.tres"
+
+[deps]
+
+source_file="res://levels/zone_1.map"
+dest_files=["res://.godot/imported/zone_1.map-5989ce03e13ec809c57a54ba4df3c0df.tres"]
+
+[params]
+

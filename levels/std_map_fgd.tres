@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=10 format=3 uid="uid://c43qe8hw6af7j"]
+
+[ext_resource type="Resource" uid="uid://nayxb8n7see2" path="res://addons/func_godot/fgd/phong_base.tres" id="1_t5iii"]
+[ext_resource type="Resource" uid="uid://doo4ly322b4jc" path="res://addons/func_godot/fgd/vertex_merge_distance_base.tres" id="2_nkshj"]
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="3_t5iii"]
+[ext_resource type="Resource" uid="uid://b70vf4t5dc70t" path="res://addons/func_godot/fgd/func_geo.tres" id="4_6mk24"]
+[ext_resource type="Resource" uid="uid://cxy7jnh6d7msn" path="res://addons/func_godot/fgd/func_detail.tres" id="5_8s6e8"]
+[ext_resource type="Resource" uid="uid://ch3e0dix85uhb" path="res://addons/func_godot/fgd/func_detail_illusionary.tres" id="6_76sv6"]
+[ext_resource type="Resource" uid="uid://dg5x44cc7flew" path="res://addons/func_godot/fgd/func_illusionary.tres" id="7_6vxc2"]
+[ext_resource type="Script" uid="uid://drlmgulwbjwqu" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="8_a46fw"]
+
+[sub_resource type="Resource" id="Resource_nkshj"]
+script = ExtResource("3_t5iii")
+spawn_type = 0
+origin_type = 1
+build_occlusion = true
+collision_mask = 0
+classname = "worldspawn"
+description = "Default static world geometry. Builds a StaticBody3D with a single MeshInstance3D and a single convex CollisionShape3D shape."
+base_classes = Array[Resource]([ExtResource("2_nkshj")])
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.8, 0.8, 0.8, 1)
+})
+node_class = "StaticBody3D"
+
+[resource]
+script = ExtResource("8_a46fw")
+entity_definitions = Array[Resource]([ExtResource("1_t5iii"), ExtResource("2_nkshj"), SubResource("Resource_nkshj"), ExtResource("4_6mk24"), ExtResource("5_8s6e8"), ExtResource("6_76sv6"), ExtResource("7_6vxc2")])

@@ -2,18 +2,25 @@ extends Area3D
 
 @export var active: bool = true
 @export var damage_amount: int = 10
+@export var damage_interval: float = 1.0
 @export var damage_players: bool = false
 @export var damage_enemies: bool = true
 
-func _ready() -> void:
-	body_entered.connect(_on_body_entered)
+@onready var damage_timer = damage_interval
 
-func _on_body_entered(body: Node) -> void:
+func _process(delta: float) -> void:
 	if not active:
 		return
 
-	if body is Entity:
-		apply_damage(body)
+	damage_timer -= delta
+	if damage_timer > 0.0:
+		return
+
+	damage_timer = damage_interval
+	var bodies = get_overlapping_bodies()
+	for body in bodies:
+		if body is Entity:
+			apply_damage(body)
 
 func apply_damage(body: Entity) -> void:
 	if body.has_component(ZC_Player):

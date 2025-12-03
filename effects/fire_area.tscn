@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnaekqfrdu382"]
+
+[ext_resource type="Script" uid="uid://rn3a62dj6dj6" path="res://scripts/events/EV_BurnOnTimer.gd" id="1_aewav"]
+[ext_resource type="QuadMesh" uid="uid://cltad2jeupalx" path="res://effects/fire_particle.tres" id="1_rbltl"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aewav"]
+emission_shape = 3
+emission_box_extents = Vector3(2, 0.2, 2)
+gravity = Vector3(0, 1, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aewav"]
+size = Vector3(5, 2, 5)
+
+[node name="FireArea" type="Area3D"]
+script = ExtResource("1_aewav")
+damage_players = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 12
+visibility_aabb = AABB(-2.5, -1, -2.5, 5, 5, 5)
+process_material = SubResource("ParticleProcessMaterial_aewav")
+draw_pass_1 = ExtResource("1_rbltl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.32156864, 0.32156864, 1)
+light_size = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_aewav")

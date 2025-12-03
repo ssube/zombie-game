@@ -62,6 +62,8 @@ omni_range = 15.0
 
 [node name="Zombie" parent="." instance=ExtResource("2_lkjt4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7932085, 1.0298679, 2.3819642)
+look_speed = 5.0
+move_acceleration = 2.0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_lkjt4")
