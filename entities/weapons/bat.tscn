@@ -45,7 +45,7 @@ script = ExtResource("1_aigh8")
 component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_dy0dc"), SubResource("Resource_ee0de")])
 
 [node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(0.7643147, 0.5640352, 0.31251243, 0, 0.48464313, -0.87470376, -0.64482045, 0.66855884, 0.37042537, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.7643147, 0.5640352, 0.3125124, 0, 0.48464313, -0.87470365, -0.6448204, 0.66855884, 0.37042534, 0.7398019, -0.59114224, -0.7246001)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D"]
 radius = 0.1
@@ -57,7 +57,7 @@ height = 1.0
 shape = SubResource("CapsuleShape3D_b6mco")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.7643147, 0.5640352, 0.31251243, 0, 0.48464313, -0.87470376, -0.64482045, 0.66855884, 0.37042537, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.7643147, 0.5640352, 0.3125124, 0, 0.48464313, -0.87470365, -0.6448204, 0.66855884, 0.37042534, 0.7398019, -0.59114224, -0.7246001)
 shape = SubResource("CapsuleShape3D_r1fv1")
 
 [node name="SwingPath" type="Path3D" parent="."]
@@ -65,7 +65,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0128813)
 curve = SubResource("Curve3D_xieuc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="SwingPath"]
-transform = Transform3D(0.7643147, 0.5640352, 0.31251243, 0, 0.48464313, -0.87470376, -0.64482045, 0.66855884, 0.37042537, 0.7398019, -0.59114224, 0.2882812)
+transform = Transform3D(0.7643147, 0.5640352, 0.3125124, 0, 0.48464313, -0.87470365, -0.6448204, 0.66855884, 0.37042534, 0.7398019, -0.59114224, 0.2882812)
 rotation_mode = 4
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="SwingPath/PathFollow3D"]
@@ -81,7 +81,7 @@ process_mode = 4
 remote_path = NodePath("../../../Area3D")
 
 [node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(0.7643147, 0.5640352, 0.31251243, 0, 0.48464313, -0.87470376, -0.64482045, 0.66855884, 0.37042537, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.7643147, 0.5640352, 0.3125124, 0, 0.48464313, -0.87470365, -0.6448204, 0.66855884, 0.37042534, 0.7398019, -0.59114224, -0.7246001)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("6_fnw7o")
@@ -89,5 +89,3 @@ script = ExtResource("6_fnw7o")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(0.9999863, 0, 0, 0, 0.99999243, 0, 0, 0, 0.9999912, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_r1fv1")
-
-[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
