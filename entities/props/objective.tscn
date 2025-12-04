@@ -22,7 +22,8 @@ albedo_color = Color(1, 0.27999997, 0.27999997, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_n8xfw"]
 
 [node name="Objective" type="StaticBody3D"]
-collision_mask = 7
+collision_layer = 2
+collision_mask = 15
 script = ExtResource("1_gq75p")
 component_resources = Array[ExtResource("2_ko3gf")]([SubResource("Resource_6y5fu"), SubResource("Resource_lfpnt")])
 
