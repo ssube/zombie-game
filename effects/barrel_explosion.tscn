@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://2b0anfdfvkft" path="res://scripts/events/EV_RemoveAfterTimer.gd" id="1_ikohy"]
 [ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/events/EV_EmitOnReady.gd" id="1_ma1qw"]
 [ext_resource type="QuadMesh" uid="uid://cltad2jeupalx" path="res://effects/fire_particle.tres" id="2_n1k4f"]
-[ext_resource type="Script" uid="uid://yae4sdiptdy8" path="res://scripts/events/EV_BurnOnEnter.gd" id="3_34a0c"]
+[ext_resource type="Script" uid="uid://b8uyvu6k51kor" path="res://scripts/events/EV_DamageOnEnter.gd" id="4_n1k4f"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o8st4"]
 spread = 180.0
@@ -29,7 +29,9 @@ draw_pass_1 = ExtResource("2_n1k4f")
 script = ExtResource("1_ma1qw")
 
 [node name="Area3D" type="Area3D" parent="."]
-script = ExtResource("3_34a0c")
+script = ExtResource("4_n1k4f")
+damage_amount = 25
+apply_fire = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_ma1qw")

@@ -23,10 +23,4 @@ func play_subtitle(from_position: float = 0.0) -> void:
 	if playing:
 		super.stop()
 
-	if ECS.world:
-		var players = ECS.world.query.with_all([ZC_Player]).execute()
-		for player: Node3D in players:
-			if player.global_position.distance_squared_to(self.global_position) < radius_squared:
-				%Hud.push_action(subtitle_tag)
-
 	super.play(from_position)

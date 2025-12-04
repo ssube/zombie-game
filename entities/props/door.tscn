@@ -25,8 +25,8 @@ size = Vector3(4, 6, 0.2)
 albedo_color = Color(0.51, 0.51, 0.51, 1)
 
 [node name="Door" type="StaticBody3D"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
+collision_mask = 31
 script = ExtResource("1_qm17t")
 component_resources = Array[ExtResource("2_wyt2q")]([SubResource("Resource_q8gv4"), SubResource("Resource_auxoi")])
 

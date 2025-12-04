@@ -15,9 +15,8 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 
 		for damage_rel in damages:
 			var damage: ZC_Damage = damage_rel.target as ZC_Damage
-			health.current_health -= floor(damage.amount)
+			health.current_health = max(0, health.current_health - floor(damage.amount))
 			entity.remove_relationship(damage_rel)
-		# entity.remove_component(damage)
 
 		var skin := entity.get_component(ZC_Skin) as ZC_Skin
 		if health.current_health <= 0:
@@ -39,6 +38,8 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 					root.add_child(explosion)
 
 					# Remove the exploded entity
+					# TODO: this is cutting off explosion sounds
+					# entity.visible = false
 					print("Entity has exploded: ", entity)
 					ECS.world.remove_entity(entity)
 					root.remove_child(entity)

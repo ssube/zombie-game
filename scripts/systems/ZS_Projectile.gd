@@ -1,6 +1,8 @@
 class_name ZS_ProjectileSystem
 extends System
 
+var impact_sound = preload("res://effects/impacts/impact_bullet_metal.tscn")
+
 func query():
 	return q.with_all([ZC_Projectile])
 
@@ -13,6 +15,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			var target = ray.get_collider()
 			print("Bullet is colliding with: ", target)
 			apply_decal(ray, target)
+			apply_sound(ray, target)
 
 			if target is RigidBody3D:
 				var impact_vector: Vector3 = ray.get_collision_normal() * -projectile.mass
@@ -54,3 +57,13 @@ func apply_decal(ray: RayCast3D, collider: Node3D) -> void:
 
 	# Spawn the decal via the manager singleton.
 	DecalManager.spawn_decal(surface_type, collider, collision_point, collision_normal)
+
+func apply_sound(ray: RayCast3D, collider: Node3D) -> void:
+	# Obtain collision info
+	var collision_point = ray.get_collision_point()
+
+	var sound_node = impact_sound.instantiate() as ZN_AudioSubtitle3D
+	collider.add_child(sound_node)
+	sound_node.global_position = collision_point
+	%Hud.push_action(sound_node.subtitle_tag)
+	sound_node.play_subtitle()

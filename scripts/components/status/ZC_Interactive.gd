@@ -9,3 +9,4 @@ class_name ZC_Interactive
 @export var shimmer_nodes: Array[NodePath] = []
 
 @export var name: String = "Interactive Object"
+@export var pickup_sound: NodePath

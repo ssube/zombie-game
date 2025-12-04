@@ -1,7 +1,7 @@
 class_name ZS_PlayerSystem
 extends System
 
-var last_shimmer: Dictionary = {} # dict for multiplayer
+var last_shimmer: Dictionary[Entity, Entity] = {} # dict for multiplayer
 
 func query():
 	return q.with_all([ZC_Transform, ZC_Velocity, ZC_Player, ZC_Input])
@@ -204,6 +204,14 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	var forward = -marker.global_transform.basis.z.normalized()
 	new_projectile.apply_impulse(forward * c_weapon.muzzle_velocity, marker.global_position)
 
+	var sound_node = weapon.get_node(c_weapon.projectile_sound) as ZN_AudioSubtitle3D
+	if sound_node == null:
+		printerr("Weapon sound not found: ", c_weapon.projectile_sound)
+		return
+
+	var sound = ZC_Noise.from_node(sound_node)
+	entity.add_component(sound)
+
 
 func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
 	var light = body.get_node("./Head/Hands/Flashlight") as SpotLight3D
@@ -228,6 +236,13 @@ func use_door(entity: Entity, player: ZC_Player) -> void:
 func use_food(entity: Entity, player_entity: Entity) -> void:
 	var food = entity.get_component(ZC_Food) as ZC_Food
 	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
+	var sound_node = entity.get_node(interactive.pickup_sound) as ZN_AudioSubtitle3D
+	if sound_node != null:
+		sound_node = sound_node.duplicate() # TODO: make sure this works correctly
+		player_entity.add_child(sound_node)
+		sound_node.play_subtitle()
+		%Hud.push_action(sound_node.subtitle_tag)
+
 	var health = player_entity.get_component(ZC_Health) as ZC_Health
 	health.current_health = min(health.max_health, health.current_health + food.health)
 	%Hud.push_action("Used food: %s" % interactive.name)

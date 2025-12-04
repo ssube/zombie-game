@@ -19,7 +19,8 @@ color_ramp = SubResource("Gradient_52t4y")
 albedo_texture = SubResource("NoiseTexture2D_3ygn7")
 
 [node name="Ball" type="RigidBody3D"]
-collision_mask = 3
+collision_layer = 2
+collision_mask = 31
 script = ExtResource("1_52t4y")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

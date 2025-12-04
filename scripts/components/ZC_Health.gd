@@ -6,7 +6,11 @@ class_name ZC_Health
 	set(value):
 		var last_health := current_health
 		current_health = value
-		property_changed.emit(self, "current_health", last_health, current_health)
+		if last_health != current_health:
+			property_changed.emit(self, "current_health", last_health, current_health)
+
+@export var hurt_sound: NodePath
+@export var death_sound: NodePath
 
 func _init(init_health: int = 100):
 	max_health = init_health

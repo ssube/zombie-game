@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://cq0idhwb5f2oq"]
+[gd_scene load_steps=19 format=4 uid="uid://cq0idhwb5f2oq"]
 
 [ext_resource type="Script" uid="uid://dhsuals8autq1" path="res://scripts/entities/props/ZE_Barrel.gd" id="1_o8a62"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wrl38"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="6_k4gqj"]
 [ext_resource type="Material" uid="uid://d4bmgb0pkgmpm" path="res://materials/effects/shimmer_danger.tres" id="7_bv25f"]
 [ext_resource type="Texture2D" uid="uid://duo2qqruxq60g" path="res://assets/Barrels/Textures/Red.png" id="8_bv25f"]
+[ext_resource type="AudioStream" uid="uid://cedq4twkuc4vs" path="res://sounds/Sound Effects/Explosions/explosion_close_short_ufx_3.ogg" id="10_rox5l"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="11_vddsl"]
 
 [sub_resource type="Resource" id="Resource_kpq4c"]
 script = ExtResource("3_dwmog")
@@ -22,6 +24,7 @@ metadata/_custom_type_script = "uid://jokkv7skgimj"
 script = ExtResource("4_vlq2d")
 max_health = 50
 current_health = 50
+death_sound = NodePath("ZN_AudioSubtitle3D")
 metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
 [sub_resource type="Resource" id="Resource_0kgpt"]
@@ -78,8 +81,8 @@ height = 1.8
 radius = 0.65
 
 [node name="Barrel" type="RigidBody3D"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
+collision_mask = 31
 mass = 5.0
 script = ExtResource("1_o8a62")
 component_resources = Array[ExtResource("2_wrl38")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl"), SubResource("Resource_0kgpt")])
@@ -99,3 +102,10 @@ visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_bv25f")
+
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_rox5l")
+script = ExtResource("11_vddsl")
+subtitle_text = "Explosion"
+subtitle_radius = 25.0
+metadata/_custom_type_script = "uid://mcuf24u8q14t"

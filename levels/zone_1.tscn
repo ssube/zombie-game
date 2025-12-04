@@ -18,7 +18,7 @@
 [ext_resource type="Material" uid="uid://b6b7t3qv6dnry" path="res://textures/Color Maps/grass_1.tres" id="15_3wwps"]
 [ext_resource type="Material" uid="uid://dyp1fuggnjhni" path="res://textures/Color Maps/grass_11.tres" id="16_cem8g"]
 [ext_resource type="Material" uid="uid://dk6tau17b5f76" path="res://textures/Color Maps/concrete_tx_6.tres" id="17_1u2y2"]
-[ext_resource type="Script" uid="uid://bhgbf8ykucy2n" path="res://scripts/events/EV_SlowOnEnter.gd" id="17_32bcm"]
+[ext_resource type="Script" uid="uid://bhgbf8ykucy2n" path="res://scripts/events/EV_SpeedOnEnter.gd" id="17_32bcm"]
 [ext_resource type="Texture2D" uid="uid://cb82d7rwpb5s2" path="res://textures/Color Maps/dirt_4.png" id="17_wks3y"]
 [ext_resource type="Material" uid="uid://bdascxdveffr4" path="res://textures/Color Maps/concrete_wall_12.tres" id="19_chfad"]
 
