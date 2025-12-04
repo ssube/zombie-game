@@ -9,7 +9,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		var health := entity.get_component(ZC_Health) as ZC_Health
 
 		# var damage := entity.get_component(ZC_Damage) as ZC_Damage
-		var damages := entity.get_relationships(Relationship.new(ZC_Damaged.new(), null)) as Array[Relationship]
+		var damages := entity.get_relationships(RelationshipUtils.any_damage) as Array[Relationship]
 		if damages.size() == 0:
 			continue
 

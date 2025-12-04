@@ -63,6 +63,12 @@ func _process(delta: float):
 		actor_node.axis_lock_angular_z = false
 		# lerp to zero velocity
 		actor_node.lerp_actor_velocity(Vector3.ZERO, delta)
+		# delete zombie weapon
+		if actor_entity.current_weapon:
+			ECS.world.remove_entity(actor_entity.current_weapon)
+			actor_entity.current_weapon.queue_free()
+			actor_entity.current_weapon = null
+
 		return
 
 func _on_vision_area_body_sighted(body: Node) -> void:

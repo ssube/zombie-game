@@ -2,7 +2,6 @@ class_name ZS_PlayerSystem
 extends System
 
 var last_shimmer: Dictionary = {} # dict for multiplayer
-var modifier_relationship = Relationship.new(ZC_Modifier.new(), null)
 
 func query():
 	return q.with_all([ZC_Transform, ZC_Velocity, ZC_Player, ZC_Input])
@@ -13,7 +12,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		var velocity = entity.get_component(ZC_Velocity) as ZC_Velocity
 		var player = entity.get_component(ZC_Player) as ZC_Player
 		var input = entity.get_component(ZC_Input) as ZC_Input
-		var modifiers = entity.get_relationships(modifier_relationship)
+		var modifiers = entity.get_relationships(RelationshipUtils.any_modifier)
 
 		var speed_multiplier := 1.0
 		for modifier: Relationship in modifiers:
