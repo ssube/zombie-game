@@ -39,5 +39,6 @@ material = SubResource("StandardMaterial3D_eco2l")
 shape = SubResource("SphereShape3D_k50w0")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.09277043)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
 target_position = Vector3(0, 0, -1)
+hit_back_faces = false

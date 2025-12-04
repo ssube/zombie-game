@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbt0pagry5h5w"]
+[gd_scene load_steps=14 format=4 uid="uid://bbt0pagry5h5w"]
 
 [ext_resource type="Script" uid="uid://diqnbh8glii7x" path="res://scripts/entities/props/ZE_Food.gd" id="1_u378d"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_hvtkh"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_402fv"]
 [ext_resource type="Material" uid="uid://duorhhvkpiuvo" path="res://materials/effects/shimmer_food.tres" id="4_u378d"]
 [ext_resource type="Script" uid="uid://c4bbaiyswechl" path="res://scripts/components/props/ZC_Food.gd" id="5_hvtkh"]
+[ext_resource type="Texture2D" uid="uid://5ydgfpdxio6o" path="res://assets/ZombieApocalypsePack/FirstAidKit/first_aid_kit_texture.png" id="6_kd0dt"]
 
 [sub_resource type="Resource" id="Resource_hvtkh"]
 script = ExtResource("3_402fv")
@@ -21,7 +22,49 @@ metadata/_custom_type_script = "uid://c4bbaiyswechl"
 albedo_color = Color(0.14999998, 0.6883334, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_60dmo"]
-size = Vector3(0.8, 0.2, 0.8)
+size = Vector3(1.25, 0.5, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_krbgc"]
+resource_name = "Material"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("6_kd0dt")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_w3hxt"]
+_surfaces = [{
+"aabb": AABB(-0.004468504, -0.0061759925, -0.0061759925, 0.008937008, 0.012351985, 0.012351985),
+"format": 34359742465,
+"index_count": 84,
+"index_data": PackedByteArray("AAABAAgACQAIAAEACAAKAAAABAAKAAgAAAAKAAQACAACAAQACQACAAgACwAEAAIAAAAEAAsAAgAMAAsACQAMAAIABwALAAwAAAALAAcADAAGAAcACQAGAAwABwAGAAkAAAAHAA0ACQANAAcAAAANAAUABQANAAkAAAAFAA4ACQADAAUADgAFAAMACQAPAAMAAwAPAA4AAAAOAA8ACQABAA8ADwABAAAA"),
+"lods": [0.007923233, PackedByteArray("AAABAAIAAwACAAEAAwABAAAAAgAEAAAAAAAFAAMAAwAGAAIAAAAHAAUAAwAFAAcAAAAEAAcABwAGAAMABwAEAAIAAgAGAAcA")],
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("h2ySu/tfyrszj6g7h2ySO/tfyrszj6g7h2ySOzOPqLv7X8q7h2ySOzOPqDv7X8o7h2ySuzOPqLv7X8q7h2ySuzOPqDv7X8o7h2ySO/tfyjszj6i7h2ySu/tfyjszj6i7h2ySO/tfyrszj6i7h2ySO/tfyjszj6g7h2ySu/tfyrszj6i7h2ySuzOPqDv7X8q7h2ySOzOPqDv7X8q7h2ySu/tfyjszj6g7h2ySuzOPqLv7X8o7h2ySOzOPqLv7X8o7")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ua4vo"]
+resource_name = "Cube_002"
+_surfaces = [{
+"aabb": AABB(-0.004468504, -0.0061759925, -0.0061759925, 0.008937008, 0.012351985, 0.012351985),
+"attribute_data": PackedByteArray("sz7UPlYPIz9RFS0/Vg8jP1EVLT8FFHs/sz7UPgUUez9Z8MI+nlhzPyZ2Sj0FFHs/Un+dPDxDJj+KebM+1IcePw4eOD8FFHs/Dx44P1YPIz8GFHs/Vg8jPwYUez8GFHs/WX+dPHb0DD8udko9sI5gPlnwwj5QfH8+iXmzPt6vFD/+/tU+YmWCPnb1LT9iZYI+dvUtP2A3GT/9/tU+YDcZPw4eOD9gNxk/Dh44P2Jlgj4GFHs/YmWCPgYUez9gNxk/URUtP7gkcD+zPtQ+tyRwP4l5sz4GFHs/S3+dPJ1Ycz8qdko91IceP1rwwj48QyY/Dh44P7gkcD8GFHs/uCRwP4l5sz6wjmA+WH+dPFB8fz5Z8MI+dvQMPy92Sj3erxQ//v7VPvxDmD529S0//kOYPgYUez/+Q5g+Dx44P/5DmD4="),
+"format": 34359742487,
+"index_count": 84,
+"index_data": PackedByteArray("AAABABgAGAAZAAAAAwAZABgAGAACAAMAGgAbAAYAGgAFABsAGgAGABwAGgAcAAcAGgAHAB0AGgAdAAQAHgAJAAoACgAfAB4ACAAeAB8AHwALAAgADAANACAADAAhAA0ADAAgAA4ADAAOACIADAAiAA8ADAAPACMAJAAlABIAEgATACQAEQAlACQAJAAQABEAFgAmACcAJwAVABYAFAAnACYAJgAXABQA"),
+"lods": [0.007923233, PackedByteArray("AAABAAIAAgADAAAABAAFAAYABAAGAAcACAAJAAoACgALAAgADAANAA4ADAAOAA8AEAARABIAEgATABAAFAAVABYAFgAXABQA")],
+"material": SubResource("StandardMaterial3D_krbgc"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("h2ySu/tfyrszj6g7h2ySO/tfyrszj6g7h2ySOzOPqLv7X8q7h2ySuzOPqLv7X8q7h2ySOzOPqDv7X8o7h2ySO/tfyjszj6i7h2ySOzOPqLv7X8q7h2ySO/tfyrszj6g7h2ySu/tfyrszj6g7h2ySuzOPqDv7X8o7h2ySOzOPqDv7X8o7h2ySO/tfyrszj6g7h2ySu/tfyrszj6g7h2ySuzOPqLv7X8q7h2ySu/tfyjszj6i7h2ySuzOPqDv7X8o7h2ySOzOPqDv7X8o7h2ySuzOPqDv7X8o7h2ySu/tfyjszj6i7h2ySO/tfyjszj6i7h2ySOzOPqLv7X8q7h2ySO/tfyjszj6i7h2ySu/tfyjszj6i7h2ySuzOPqLv7X8q7h2ySO/tfyrszj6i7h2ySu/tfyrszj6i7h2ySO/tfyjszj6g7h2ySOzOPqDv7X8q7h2ySO/tfyrszj6i7h2ySOzOPqLv7X8o7h2ySuzOPqLv7X8o7h2ySOzOPqLv7X8o7h2ySuzOPqDv7X8q7h2ySu/tfyrszj6i7h2ySu/tfyjszj6g7h2ySuzOPqLv7X8o7h2ySO/tfyjszj6g7h2ySu/tfyjszj6g7h2ySuzOPqDv7X8q7h2ySOzOPqDv7X8q78k4sSB2+tKgMsSxIadHw4N/oDDEdvqXJHxcMMbPsDp8MsR+XtU0ktCzI8s5DkmTK3+gMMUmyJLQMsSxIu21kyvJOLEgdvrSo8k4flx2+pckMsR+Xs+wOnwyxLEhp0fDg8k4sSLVN/9ofFwwx8Fjc9tM38s5Jsv/a8k4flw6n3PYMsR+X4UGlyfJOH5dLEw6f0zfyzuFBtKgsyPLOlS7w4N/oDDFLEw6fLMjyzpUu8ODTN/LO4UG0qB8XDDHhQaXJLMgMMR2+StfTNwwxadEOnwyx0re7bZq13+jyzkmy2cssyAwxQ5KatQyx32i1TdnL8k7faB2+WbYMsd9os+zw4B8X8s5Dknfs0zcMMQE22ubyTtK3/cna5vJO32i7bXfsDLHSt+FBStfyTtK3lS4Onx8X8s7hQVm23+jyzksT8OA=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_w3hxt")
 
 [node name="Medkit" type="RigidBody3D"]
 collision_layer = 2
@@ -35,3 +78,11 @@ material = SubResource("StandardMaterial3D_miylq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_60dmo")
+
+[node name="first_aid_kit" type="Node3D" parent="."]
+transform = Transform3D(-2.1855694e-08, -1, 0, 0.5, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Cube" type="MeshInstance3D" parent="first_aid_kit"]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+mesh = SubResource("ArrayMesh_ua4vo")
+skeleton = NodePath("")

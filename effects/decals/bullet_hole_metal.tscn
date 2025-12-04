@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3gee3bnjkfl7"]
+
+[ext_resource type="Texture2D" uid="uid://cmpugrrinf3bw" path="res://textures/bullet_hole_32px.png" id="1_xwty4"]
+
+[node name="BulletHoleMetal" type="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+modulate = Color(0.8, 0.94666666, 1, 1)
+texture = ExtResource("1_xwty4")

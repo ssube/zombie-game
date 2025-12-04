@@ -81,7 +81,7 @@
 ( -128 208 -16 ) ( -128 209 -16 ) ( -128 208 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( -128 208 -16 ) ( -128 208 -15 ) ( -127 208 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( -128 208 -16 ) ( -127 208 -16 ) ( -128 209 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
-( -32 224 96 ) ( -32 225 96 ) ( -31 224 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 224 112 ) ( -32 225 112 ) ( -31 224 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( -32 224 0 ) ( -31 224 0 ) ( -32 224 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( -32 224 0 ) ( -32 224 1 ) ( -32 225 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 }
@@ -90,7 +90,7 @@
 ( 32 208 -16 ) ( 32 209 -16 ) ( 32 208 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( 32 208 -16 ) ( 32 208 -15 ) ( 33 208 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( 32 208 -16 ) ( 33 208 -16 ) ( 32 209 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
-( 128 224 96 ) ( 128 225 96 ) ( 129 224 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 128 224 112 ) ( 128 225 112 ) ( 129 224 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( 128 224 0 ) ( 129 224 0 ) ( 128 224 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( 128 224 0 ) ( 128 224 1 ) ( 128 225 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 }
@@ -99,7 +99,7 @@
 ( 128 208 -16 ) ( 128 209 -16 ) ( 128 208 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( 128 208 -16 ) ( 128 208 -15 ) ( 129 208 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( 128 208 -16 ) ( 129 208 -16 ) ( 128 209 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
-( 144 432 96 ) ( 144 433 96 ) ( 145 432 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 432 112 ) ( 144 433 112 ) ( 145 432 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( 144 432 0 ) ( 145 432 0 ) ( 144 432 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( 144 432 0 ) ( 144 432 1 ) ( 144 433 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 }
@@ -108,7 +108,7 @@
 ( -144 208 -16 ) ( -144 209 -16 ) ( -144 208 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( -144 208 -16 ) ( -144 208 -15 ) ( -143 208 -16 ) "Color Maps/brick_wall_tx_3" 272 0 0 1 1
 ( -144 208 -16 ) ( -143 208 -16 ) ( -144 209 -16 ) "Color Maps/brick_wall_tx_3" 272 0 0 1 1
-( -128 432 96 ) ( -128 433 96 ) ( -127 432 96 ) "Color Maps/brick_wall_tx_3" 272 0 0 1 1
+( -128 432 112 ) ( -128 433 112 ) ( -127 432 112 ) "Color Maps/brick_wall_tx_3" 16 0 0 1 1
 ( -128 432 0 ) ( -127 432 0 ) ( -128 432 1 ) "Color Maps/brick_wall_tx_3" 272 0 0 1 1
 ( -128 432 0 ) ( -128 432 1 ) ( -128 433 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 }
@@ -117,8 +117,62 @@
 ( -144 432 -16 ) ( -144 433 -16 ) ( -144 432 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( -144 432 -16 ) ( -144 432 -15 ) ( -143 432 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( -144 432 -16 ) ( -143 432 -16 ) ( -144 433 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
-( 144 448 96 ) ( 144 449 96 ) ( 145 448 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 144 448 112 ) ( 144 449 112 ) ( 145 448 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( 144 448 0 ) ( 145 448 0 ) ( 144 448 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 ( 144 448 0 ) ( 144 448 1 ) ( 144 449 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 13
+{
+( -32 112 96 ) ( -32 113 96 ) ( -32 112 97 ) "Color Maps/brick_wall_tx_3" 16 0 0 1 1
+( -32 128 96 ) ( -32 128 97 ) ( -31 128 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 112 96 ) ( -31 112 96 ) ( -32 113 96 ) "Color Maps/brick_wall_tx_3" 0 -16 0 1 1
+( 32 144 112 ) ( 32 145 112 ) ( 33 144 112 ) "Color Maps/brick_wall_tx_3" 0 -16 0 1 1
+( 32 144 112 ) ( 33 144 112 ) ( 32 144 113 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 32 144 112 ) ( 32 144 113 ) ( 32 145 112 ) "Color Maps/brick_wall_tx_3" 16 0 0 1 1
+}
+// brush 14
+{
+( -48 144 -16 ) ( -48 145 -16 ) ( -48 144 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -48 144 -16 ) ( -48 144 -15 ) ( -47 144 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -48 144 -16 ) ( -47 144 -16 ) ( -48 145 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 208 16 ) ( -32 209 16 ) ( -31 208 16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 208 0 ) ( -31 208 0 ) ( -32 208 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 208 0 ) ( -32 208 1 ) ( -32 209 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 15
+{
+( 32 144 -16 ) ( 32 145 -16 ) ( 32 144 -15 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 32 144 -16 ) ( 32 144 -15 ) ( 33 144 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 32 144 -16 ) ( 33 144 -16 ) ( 32 145 -16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 48 208 16 ) ( 48 209 16 ) ( 49 208 16 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 48 208 0 ) ( 49 208 0 ) ( 48 208 1 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 48 208 0 ) ( 48 208 1 ) ( 48 209 0 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 16
+{
+( -32 208 96 ) ( -32 209 96 ) ( -32 208 97 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 208 96 ) ( -32 208 97 ) ( -31 208 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 208 96 ) ( -31 208 96 ) ( -32 209 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 32 224 112 ) ( 32 225 112 ) ( 33 224 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 32 224 112 ) ( 33 224 112 ) ( 32 224 113 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 32 224 112 ) ( 32 224 113 ) ( 32 225 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 17
+{
+( 32 144 96 ) ( 32 145 96 ) ( 32 144 97 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 32 144 96 ) ( 32 144 97 ) ( 33 144 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 32 144 96 ) ( 33 144 96 ) ( 32 145 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 48 208 112 ) ( 48 209 112 ) ( 49 208 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 48 208 112 ) ( 49 208 112 ) ( 48 208 113 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( 48 208 112 ) ( 48 208 113 ) ( 48 209 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+}
+// brush 18
+{
+( -48 144 96 ) ( -48 145 96 ) ( -48 144 97 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -48 144 96 ) ( -48 144 97 ) ( -47 144 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -48 144 96 ) ( -47 144 96 ) ( -48 145 96 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 208 112 ) ( -32 209 112 ) ( -31 208 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 208 112 ) ( -31 208 112 ) ( -32 208 113 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
+( -32 208 112 ) ( -32 208 113 ) ( -32 209 112 ) "Color Maps/brick_wall_tx_3" 0 0 0 1 1
 }
 }

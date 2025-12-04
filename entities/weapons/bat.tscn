@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://tna8f01ql67u"]
+[gd_scene load_steps=13 format=3 uid="uid://tna8f01ql67u"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aigh8"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_dy0dc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_ee0de"]
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="5_fnw7o"]
 [ext_resource type="Script" uid="uid://b8uyvu6k51kor" path="res://scripts/events/EV_DamageOnEnter.gd" id="6_fnw7o"]
+[ext_resource type="PackedScene" uid="uid://dr8uc21hxvdkw" path="res://assets/ZombieApocalypsePack/Bat/bat.fbx" id="6_jaqrl"]
 
 [sub_resource type="Resource" id="Resource_dy0dc"]
 script = ExtResource("4_ee0de")
@@ -24,11 +25,11 @@ metadata/_custom_type_script = "uid://c86wth8kvlbt7"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b6mco"]
 radius = 0.1
-height = 1.2
+height = 1.25
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1fv1"]
 radius = 0.1
-height = 1.2
+height = 1.25
 
 [sub_resource type="Curve3D" id="Curve3D_xieuc"]
 _data = {
@@ -45,19 +46,24 @@ script = ExtResource("1_aigh8")
 component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_dy0dc"), SubResource("Resource_ee0de")])
 
 [node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(0.7643147, 0.5640352, 0.3125124, 0, 0.48464313, -0.87470365, -0.6448204, 0.66855884, 0.37042534, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464546, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, -0.7246001)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D"]
+visible = false
 radius = 0.1
 height = 1.0
 
 [node name="Area3D" type="Area3D" parent="Node3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Area3D"]
+transform = Transform3D(1, 2.0861626e-07, 4.917383e-07, -2.9802322e-08, 1.0000002, 6.556511e-07, -1.4901161e-08, -3.1292439e-07, 1.000001, 0, 0.03, 0)
 shape = SubResource("CapsuleShape3D_b6mco")
 
+[node name="bat" parent="Node3D" instance=ExtResource("6_jaqrl")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.1, 0)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.7643147, 0.5640352, 0.3125124, 0, 0.48464313, -0.87470365, -0.6448204, 0.66855884, 0.37042534, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464546, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.74085677, -0.59114224, -0.70727736)
 shape = SubResource("CapsuleShape3D_r1fv1")
 
 [node name="SwingPath" type="Path3D" parent="."]
@@ -65,7 +71,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0128813)
 curve = SubResource("Curve3D_xieuc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="SwingPath"]
-transform = Transform3D(0.7643147, 0.5640352, 0.3125124, 0, 0.48464313, -0.87470365, -0.6448204, 0.66855884, 0.37042534, 0.7398019, -0.59114224, 0.2882812)
+transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464546, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, 0.2882812)
 rotation_mode = 4
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="SwingPath/PathFollow3D"]
@@ -81,11 +87,11 @@ process_mode = 4
 remote_path = NodePath("../../../Area3D")
 
 [node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(0.7643147, 0.5640352, 0.3125124, 0, 0.48464313, -0.87470365, -0.6448204, 0.66855884, 0.37042534, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464546, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, -0.7246001)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("6_fnw7o")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(0.9999863, 0, 0, 0, 0.99999243, 0, 0, 0, 0.9999912, 0, 0, 0)
+transform = Transform3D(0.9999856, 2.9802322e-07, -2.9802322e-08, -6.2584877e-07, 0.9999917, -1.0430813e-07, 1.0430813e-07, -7.003546e-07, 0.9999913, 0, 0.03, 0)
 shape = SubResource("CapsuleShape3D_r1fv1")

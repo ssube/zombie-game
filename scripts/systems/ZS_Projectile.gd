@@ -12,6 +12,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		if ray != null and ray.is_colliding():
 			var target = ray.get_collider()
 			print("Bullet is colliding with: ", target)
+			apply_decal(ray, target)
 
 			if target is RigidBody3D:
 				var impact_vector: Vector3 = ray.get_collision_normal() * -projectile.mass
@@ -34,3 +35,22 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 				var root := entity.get_parent()
 				root.remove_child(entity)
 				entity.queue_free()
+
+func apply_decal(ray: RayCast3D, collider: Node3D) -> void:
+	# Obtain collision info
+	var collision_point = ray.get_collision_point()
+	var collision_normal = ray.get_collision_normal()
+
+	# Determine surface type. This example uses node groups.
+	var surface_type = ""
+	if collider.is_in_group("wood"):
+			surface_type = "wood"
+	elif collider.is_in_group("metal"):
+			surface_type = "metal"
+	elif collider.is_in_group("stone"):
+			surface_type = "stone"
+	else:
+			surface_type = "default"
+
+	# Spawn the decal via the manager singleton.
+	DecalManager.spawn_decal(surface_type, collider, collision_point, collision_normal)
