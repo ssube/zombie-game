@@ -493,7 +493,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.858704, 1.0000153, 31.467
 id = "Zone1_ZE_Zombie_1764359922_7242"
 
 [node name="Door" parent="Entities" instance=ExtResource("8_4uioy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 7)
 id = "Zone1_ZE_Door_1764359926_28357"
 component_resources = Array[ExtResource("2_w5fjf")]([SubResource("Resource_q8gv4"), SubResource("Resource_auxoi"), SubResource("Resource_wks3y")])
 

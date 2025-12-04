@@ -32,7 +32,7 @@ size = Vector3(8, 0.5, 8)
 [node name="Entities" type="Node" parent="."]
 
 [node name="Objective" parent="Entities" instance=ExtResource("1_f0mjp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 2)
 id = "Level1Hotel_ZE_Objective_1764359975_65456"
 component_resources = Array[ExtResource("2_4pkqh")]([SubResource("Resource_6y5fu"), SubResource("Resource_lfpnt"), SubResource("Resource_po5r0")])
 

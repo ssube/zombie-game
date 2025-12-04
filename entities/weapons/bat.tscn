@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://tna8f01ql67u"]
+[gd_scene load_steps=16 format=4 uid="uid://tna8f01ql67u"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aigh8"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_dy0dc"]
@@ -6,12 +6,12 @@
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_ee0de"]
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="5_fnw7o"]
 [ext_resource type="Script" uid="uid://b8uyvu6k51kor" path="res://scripts/events/EV_DamageOnEnter.gd" id="6_fnw7o"]
-[ext_resource type="PackedScene" uid="uid://dr8uc21hxvdkw" path="res://assets/ZombieApocalypsePack/Bat/bat.fbx" id="6_jaqrl"]
+[ext_resource type="Texture2D" uid="uid://dpc8jknfhigal" path="res://assets/ZombieApocalypsePack/Bat/bat_texture.png" id="6_jaqrl"]
 
 [sub_resource type="Resource" id="Resource_dy0dc"]
 script = ExtResource("4_ee0de")
 shimmer_material = ExtResource("5_fnw7o")
-shimmer_nodes = Array[NodePath]([NodePath("Node3D/CSGCylinder3D")])
+shimmer_nodes = Array[NodePath]([NodePath("Node3D/bat/Cube")])
 name = "Baseball Bat"
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
@@ -26,6 +26,46 @@ metadata/_custom_type_script = "uid://c86wth8kvlbt7"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b6mco"]
 radius = 0.1
 height = 1.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00uot"]
+resource_name = "Material"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("6_jaqrl")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hodwd"]
+_surfaces = [{
+"aabb": AABB(-0.0034961211, -0.0034961211, -0.023676457, 0.0069922423, 0.0069922423, 0.060565487),
+"format": 34359742465,
+"index_count": 156,
+"index_data": PackedByteArray("AAABAAIAAwABAAAAAQADAAQAAAAFAAMABgAEAAMAAwAFAAYABQAAAAcABwAGAAUACAAEAAYABgAHAAgABAAIAAEABwAAAAkAAgAJAAAACAAHAAoACQAKAAcAAQAIAAsACgALAAgACwACAAEADAALAAoADQACAAsACwAMAA0ADgAJAAIAAgANAA4ADwAKAAkACQAOAA8ACgAPAAwAEAAPAA4ADAAPABAAEQAOAA0ADgARABAAEgANAAwADQASABEADAATABIAEAATAAwAEQASABQAFAASABMAFQATABAAEwAVABQAEAAWABUAFgAQABEAFwAUABUAGAAVABYAFQAYABcAFgAZABgAEQAaABYAGQAWABoAFAAaABEAGAAZABsAGwAXABgAGgAbABkAFAAXABsAGwAaABQA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 28,
+"vertex_data": PackedByteArray("Lh9luy4fZTtF8BA9Lh9luy4fZbtF8BA9rnUwu651MLtqBww8ver6ur3q+rr0GBc9ver6Or3q+rr0GBc9ver6ur3q+jr0GBc9ver6Or3q+jr0GBc9Lh9lOy4fZTtF8BA9Lh9lOy4fZbtF8BA9rnUwu651MDtqBww8rnUwO651MDtqBww8rnUwO651MLtqBww8dkuKOnZLirr3Sz68dkuKunZLirr3Sz68dkuKunZLijr3Sz68dkuKOnZLijr3Sz68wXRcOsB0XDrxHbq8wXRcusB0XDrxHbq8wXRcusN0XLrxHbq8wXRcOsN0XLrxHbq8qhLhuqoS4boa3bq8qhLhOqoS4boa3bq8qhLhOqoS4Toa3bq8qhLhuqoS4boh9cG8qhLhOqoS4boh9cG8qhLhOqoS4Toh9cG8qhLhuqoS4Toa3bq8qhLhuqoS4Toh9cG8")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_j1wg2"]
+resource_name = "Cube_001"
+_surfaces = [{
+"aabb": AABB(-0.0034961211, -0.0034961211, -0.023676457, 0.0069922423, 0.0069922423, 0.060565487),
+"attribute_data": PackedByteArray("jcAmP6rwKT/BgSU/F41TP5OJuzyy/Ek/ISc/PF3raT+CxiE/YwN9P1Q62jyp8Ck/wYElPz5UAD+pibs8oOQJP4XGIT/ku60+eSc/PObr0z65rkw/KmD4PrmuTD/AQVc8q6NsPwBpvjyBNFk/Lmf6PvEoQD8uZ/o+xrksPwBpvjyH6b0+zsyHPju/0D5yyaE+sfl6PnDJoT6QUpA+zMyHPtSrbD6Copo+26tsPkTADj6UUpA+tGs0PoXpvT6wazQ+K+bXPoSimj4r5tc+QMAOPj2/0D5kcgA+tPl6PmByAD7laBg+GqGgPlybIj4AnmM97MZUPmA8bz3hZUA+csmhPl654D1GPqA+YLngPQC+Xz3voJA9GqGgPgp4eD0AnmM9Oyc/PGA8bz30TQE9csmhPrmuTD/h/3s/ua5MP9IsAz+ro2w/E8MFP4E0WT9jA30/8ShAP2MDfT/HuSw/E8MFP7nEdz+EHlQ/ZAN9P/hVWT9kA30/gFljP7nEdz/zkGg/ZAN9P2jIbT9kA30/78t3P7nEdz9jA30/5pxyP/OQaD/mnHI/YwN9P+qccj+EHlQ/6pxyPxSsPz+9xHc/FKw/P2QDfT8Q504/ZAN9P4jjRD/qnHI/pTkrP73Edz+mOSs/ZAN9PxhxMD9kA30/onQ6P6DY4z5yyaE+o9jjPiTJcT6/XgY/JMlxPr9eBj9yyaE+"),
+"format": 34359742487,
+"index_count": 156,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAQAEAAMAAgAFAAAABgAAAAUABQAHAAYACAAGAAcABwAJAAgACgALAAwADAANAAoACwAKAA4ADgAPAAsAEAARABIAEgATABAAEwAUABUAFQAWABMAEAATABYAFgAXABAAGAAQABcAFwAZABgAGgAXABYAFgAbABoAHAAdAB4AHgAfABwAHQAcACAAIAAhAB0AIQAgACIAIgAjACEAJAAjACIAIgAlACQAJgAnACgAKAApACYAJwAmACoAKgArACcALAAtAC4ALgAvACwALwAwADEAMQAyAC8AMwAvADIAMgA0ADMALwAzADUANQAsAC8ALAA1ADYANgA3ACwAOAAsADcANwA5ADgANwA2ADoAOgA7ADcANwA7ADwAPAA9ADcAPgA/AEAAQABBAD4A"),
+"material": SubResource("StandardMaterial3D_00uot"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 66,
+"vertex_data": PackedByteArray("Lh9luy4fZTtF8BA9Lh9luy4fZbtF8BA9rnUwu651MLtqBww8rnUwO651MLtqBww8Lh9lOy4fZbtF8BA9rnUwu651MDtqBww8Lh9lOy4fZTtF8BA9rnUwO651MDtqBww8Lh9lOy4fZbtF8BA9rnUwO651MLtqBww8dkuKunZLirr3Sz68rnUwu651MLtqBww8rnUwO651MLtqBww8dkuKOnZLirr3Sz68dkuKunZLijr3Sz68rnUwu651MDtqBww8ver6Or3q+jr0GBc9Lh9lOy4fZTtF8BA9Lh9lOy4fZbtF8BA9ver6Or3q+rr0GBc9Lh9lOy4fZbtF8BA9Lh9luy4fZbtF8BA9ver6ur3q+rr0GBc9ver6ur3q+jr0GBc9Lh9lOy4fZTtF8BA9Lh9luy4fZTtF8BA9Lh9luy4fZTtF8BA9Lh9luy4fZbtF8BA9wXRcusN0XLrxHbq8dkuKunZLirr3Sz68dkuKOnZLirr3Sz68wXRcOsN0XLrxHbq8wXRcusB0XDrxHbq8dkuKunZLijr3Sz68wXRcOsB0XDrxHbq8dkuKOnZLijr3Sz68dkuKOnZLirr3Sz68wXRcOsN0XLrxHbq8dkuKOnZLijr3Sz68rnUwO651MDtqBww8rnUwu651MDtqBww8dkuKunZLijr3Sz68dkuKOnZLirr3Sz68rnUwO651MLtqBww8qhLhOqoS4boa3bq8wXRcOsN0XLrxHbq8wXRcOsB0XDrxHbq8qhLhOqoS4Toa3bq8wXRcOsB0XDrxHbq8wXRcusB0XDrxHbq8qhLhuqoS4Toa3bq8qhLhOqoS4Toh9cG8qhLhuqoS4Toh9cG8qhLhOqoS4boh9cG8qhLhuqoS4boh9cG8qhLhuqoS4boa3bq8wXRcOsN0XLrxHbq8wXRcusN0XLrxHbq8qhLhuqoS4Toh9cG8qhLhuqoS4Toa3bq8wXRcusB0XDrxHbq8wXRcusN0XLrxHbq8qhLhOqoS4boh9cG8qhLhOqoS4Toh9cG8qhLhuqoS4Toh9cG8qhLhuqoS4boh9cG8bk6QsY2XOLRuTm5OqZQ4za88rzw5dpS+T8OvPFJ/bLmQsW5O3WL8yK88T8OxeSbDkLGQsY1lqrVPw0/D1ILixJCxbk4FbpDOT8OvPCWNVcDiPOI8/7//n688rzz/v/+fT8OvPC65wdscw+I8SLnf2+I8HMNIOd+brzxPwy85wZvlmOWYvWCo/5CxkLGrOhfqkLFuTs+rVd3lmBlnq4Be8JCxbk7Yix3Zbk5uTiZ0HdkaZxlnU39e8Bpn5ZhBn6j/kLGQsTwyEvpuTpCxws0S+m5OkLFTxRfqbk5uTi9UVd2uY65jecCMoOI84jxkvQ6hHMPiPF26itxQnK5jc/Ia1a5jUJz/P/+f4jwcw/8//59QnFCceUCM4BzDHMNkPQ7hHMPiPKDFdONQnK5ji43k6hzDHMP/P//fT8NPw/8//9+vPE/D0EY9pOI8HMO2Rh6kHMPiPLbGHuRPw688z8Y95Gerl1TWYJPPUJyuYwoovLtQnFCcCihCxGerZ6vWYGqwUJxQnIWIBJSuY1CceXcElJdUZ6vKjDunVNVU1f+f/8+qKlTV/1//z1TVqir/n/+vqiqqKv9f/6+XVJdUKJ+Tz1CcrmOFiPnrrmOuY3l3+euqKlTV/1//z5dUZ6uGsZm5rmNQnPTXQsSuY65j9Ne8u1TVqir/H/+fVNVU1f8f/9+qKlTV/z//r6oqqir/P//P")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_hodwd")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1fv1"]
 radius = 0.1
@@ -46,7 +86,7 @@ script = ExtResource("1_aigh8")
 component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_dy0dc"), SubResource("Resource_ee0de")])
 
 [node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464546, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464543, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, -0.7246001)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D"]
 visible = false
@@ -59,11 +99,16 @@ height = 1.0
 transform = Transform3D(1, 2.0861626e-07, 4.917383e-07, -2.9802322e-08, 1.0000002, 6.556511e-07, -1.4901161e-08, -3.1292439e-07, 1.000001, 0, 0.03, 0)
 shape = SubResource("CapsuleShape3D_b6mco")
 
-[node name="bat" parent="Node3D" instance=ExtResource("6_jaqrl")]
+[node name="bat" type="Node3D" parent="Node3D"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.1, 0)
 
+[node name="Cube" type="MeshInstance3D" parent="Node3D/bat"]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+mesh = SubResource("ArrayMesh_j1wg2")
+skeleton = NodePath("")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464546, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.74085677, -0.59114224, -0.70727736)
+transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464543, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, -0.7246001)
 shape = SubResource("CapsuleShape3D_r1fv1")
 
 [node name="SwingPath" type="Path3D" parent="."]
@@ -71,7 +116,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0128813)
 curve = SubResource("Curve3D_xieuc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="SwingPath"]
-transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464546, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, 0.2882812)
+transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464543, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, 0.2882812)
 rotation_mode = 4
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="SwingPath/PathFollow3D"]
@@ -87,7 +132,7 @@ process_mode = 4
 remote_path = NodePath("../../../Area3D")
 
 [node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464546, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464543, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, -0.7246001)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("6_fnw7o")

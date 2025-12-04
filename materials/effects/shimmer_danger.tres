@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d4bmgb0pkgmpm"]
+
+[ext_resource type="Shader" uid="uid://7jsdh7grpbqu" path="res://shaders/highlight.gdshader" id="1_k8qoa"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_k8qoa")
+shader_parameter/shine_color = Color(1, 0.27999997, 0.27999997, 0.5019608)
+shader_parameter/shine_speed = 0.50000002375
+shader_parameter/shine_width = 1.0
+shader_parameter/cycle_interval = 1.10000005225
+shader_parameter/angle_fade = 1.0
+shader_parameter/x_direction = 0.5000000712500001
+shader_parameter/y_direction = 0.0
+shader_parameter/z_direction = 1.0

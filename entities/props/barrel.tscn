@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="4_vlq2d"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="6_dwmog"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="6_k4gqj"]
-[ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="7_bv25f"]
+[ext_resource type="Material" uid="uid://d4bmgb0pkgmpm" path="res://materials/effects/shimmer_danger.tres" id="7_bv25f"]
 [ext_resource type="Texture2D" uid="uid://duo2qqruxq60g" path="res://assets/Barrels/Textures/Red.png" id="8_bv25f"]
 
 [sub_resource type="Resource" id="Resource_kpq4c"]
@@ -27,7 +27,7 @@ metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 [sub_resource type="Resource" id="Resource_0kgpt"]
 script = ExtResource("6_k4gqj")
 shimmer_material = ExtResource("7_bv25f")
-shimmer_nodes = Array[NodePath]([NodePath("")])
+shimmer_nodes = Array[NodePath]([NodePath("Barrel/Barrel")])
 name = "Explosive Barrel"
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 

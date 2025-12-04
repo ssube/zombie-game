@@ -1,5 +1,8 @@
 class_name RelationshipUtils
 
+static var any_damage = Relationship.new(ZC_Damaged.new(), null)
+static var any_modifier = Relationship.new(ZC_Modifier.new(), null)
+
 static func make_damage(damage_amount: int) -> Relationship:
 	var damage_component := ZC_Damage.new(damage_amount)
 	var damaged_component := ZC_Damaged.new()

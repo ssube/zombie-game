@@ -1,8 +1,9 @@
-[gd_scene load_steps=43 format=4 uid="uid://bse6riebwmfln"]
+[gd_scene load_steps=45 format=4 uid="uid://bse6riebwmfln"]
 
 [ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/props/objective.tscn" id="4_l53as"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="5_3sk1a"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="6_08mmt"]
+[ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/props/ZC_Portal.gd" id="6_betor"]
 [ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_key.tres" id="7_5ot28"]
 [ext_resource type="Script" uid="uid://bdl3b6gan30l0" path="res://scripts/components/status/ZC_Objective.gd" id="8_aerfg"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door.tscn" id="9_3sk1a"]
@@ -17,12 +18,18 @@
 [sub_resource type="Resource" id="Resource_6y5fu"]
 script = ExtResource("6_08mmt")
 shimmer_material = ExtResource("7_5ot28")
+name = "Teleport"
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_nmsli"]
 script = ExtResource("8_aerfg")
 is_active = true
 metadata/_custom_type_script = "uid://bdl3b6gan30l0"
+
+[sub_resource type="Resource" id="Resource_vjtdm"]
+script = ExtResource("6_betor")
+next_level = "0"
+metadata/_custom_type_script = "uid://cn8mtbap6uudk"
 
 [sub_resource type="Resource" id="Resource_auxoi"]
 script = ExtResource("6_08mmt")
@@ -164,9 +171,9 @@ filter_ledge_spans = true
 unique_name_in_owner = true
 
 [node name="Objective" parent="Entities" instance=ExtResource("4_l53as")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.965708, 1.9073486e-06, 0.011570454)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.965708, 1.0000019, 0.011570454)
 id = "Level1_ZE_Objective_1764359962_34782"
-component_resources = Array[ExtResource("5_3sk1a")]([SubResource("Resource_6y5fu"), SubResource("Resource_nmsli")])
+component_resources = Array[ExtResource("5_3sk1a")]([SubResource("Resource_6y5fu"), SubResource("Resource_nmsli"), SubResource("Resource_vjtdm")])
 
 [node name="Door" parent="Entities" instance=ExtResource("9_3sk1a")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.5, 0, 2)
