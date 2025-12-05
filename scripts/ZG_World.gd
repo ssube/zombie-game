@@ -29,6 +29,7 @@ func _ready():
 	# Create the root entities
 	var entity_root = %Entities
 	for child in entity_root.get_children():
+		# TODO: recursive into sub-child nodes if the child is a regular node (not 3D)
 		if child is Entity:
 			ECS.world.add_entity(child)
 		else:

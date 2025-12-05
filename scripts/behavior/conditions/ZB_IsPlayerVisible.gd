@@ -19,7 +19,7 @@ func test(actor: Node, _delta: float, blackboard: ZB_Blackboard) -> bool:
 	for body: Node3D in visible:
 		var body_root = body.get_node(".")
 		if body_root is Entity:
-			if body_root.has_component(ZC_Player):
+			if EntityUtils.is_player(body_root):
 				blackboard.set_value("visible_player", body)
 				# blackboard.set_value("target_player", body)
 				# blackboard.set_value("target_position", body.global_position)

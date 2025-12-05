@@ -26,7 +26,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			if skin != null and skin.material_dead != null:
 				update_skin_material(entity, skin, skin.material_dead)
 
-			if entity.has_component(ZC_Flammable):
+			if EntityUtils.is_flammable(entity):
 				var flammable: ZC_Flammable = entity.get_component(ZC_Flammable)
 				if flammable.explode_on_death:
 					var explosion = flammable.explosion_scene.instantiate() as Node3D

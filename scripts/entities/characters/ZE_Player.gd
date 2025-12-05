@@ -46,7 +46,7 @@ func get_inventory() -> Array[Entity]:
 func equip_weapon(weapon_name: String) -> bool:
 	var entity_inventory = get_inventory()
 	for entity in entity_inventory:
-		if entity.has_component(ZC_Interactive):
+		if EntityUtils.is_interactive(entity):
 			var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
 			if interactive.name == weapon_name:
 				current_weapon = entity as ZE_Weapon
@@ -59,7 +59,7 @@ func equip_weapon(weapon_name: String) -> bool:
 func has_weapon(weapon_name: String) -> bool:
 	var entity_inventory = get_inventory()
 	for entity in entity_inventory:
-		if entity.has_component(ZC_Interactive):
+		if EntityUtils.is_interactive(entity):
 			var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
 			if interactive.name == weapon_name:
 				return true

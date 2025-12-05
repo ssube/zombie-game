@@ -99,11 +99,11 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 			# Use interactive items
 			if collider is Entity and collider != entity.current_weapon:
-				if collider.has_component(ZC_Interactive):
+				if EntityUtils.is_interactive(collider):
 					var interactive = collider.get_component(ZC_Interactive) as ZC_Interactive
 					%Hud.set_target_label(interactive.name)
 
-					if not collider.has_component(ZC_Shimmer):
+					if not EntityUtils.has_shimmer(collider):
 						var shimmer = ZC_Shimmer.from_interactive(interactive)
 						collider.add_component(shimmer)
 						last_shimmer[entity] = collider

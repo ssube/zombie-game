@@ -73,7 +73,7 @@ func _process(delta: float):
 
 func _on_vision_area_body_sighted(body: Node) -> void:
 	print("Zombie saw body: ", body.name)
-	if is_body_player(body):
+	if EntityUtils.is_player(body):
 		blackboard.set_value(BehaviorUtils.target_player, body)
 		blackboard.set_value(BehaviorUtils.target_position, body.global_position)
 		state_machine.set_state(state_chase.name)
@@ -88,7 +88,7 @@ func _on_vision_area_body_hidden(body: Node) -> void:
 
 func _on_attack_area_body_entered(body: Node) -> void:
 	print("Zombie can attack body: ", body.name)
-	if is_body_player(body):
+	if EntityUtils.is_player(body):
 		blackboard.set_value(BehaviorUtils.target_player, body)
 		state_machine.set_state(state_attack.name)
 
@@ -102,7 +102,7 @@ func _on_attack_area_body_exited(body: Node) -> void:
 func _on_detection_area_body_entered(body: Node) -> void:
 	print("Zombie detected body: ", body.name)
 	var target_player = blackboard.get_value(BehaviorUtils.target_player)
-	if is_body_player(body) and target_player == null:
+	if EntityUtils.is_player(body) and target_player == null:
 		blackboard.set_value(BehaviorUtils.target_position, body.global_position)
 
 func is_actor_active() -> bool:
@@ -113,8 +113,3 @@ func is_actor_active() -> bool:
 		return false
 
 	return entity_health.current_health > 0
-
-func is_body_player(body: Node) -> bool:
-	if body is Entity:
-		return body.has_component(ZC_Player)
-	return false

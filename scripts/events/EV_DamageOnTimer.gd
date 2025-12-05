@@ -23,13 +23,13 @@ func _process(delta: float) -> void:
 			apply_damage(body)
 
 func apply_damage(body: Entity) -> void:
-	if body.has_component(ZC_Player):
+	if EntityUtils.is_player(body):
 		if not damage_players:
 			return # Don't damage the player
 	else:
 		if not damage_enemies:
 			return # Don't damage enemies
 
-	if body.has_component(ZC_Health):
+	if EntityUtils.has_health(body):
 		body.add_relationship(RelationshipUtils.make_damage(damage_amount))
 		print("Applied ", damage_amount, " damage to ", body)

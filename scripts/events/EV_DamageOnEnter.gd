@@ -71,7 +71,7 @@ func apply_effects(body: Node) -> void:
 		physics_force(body)
 
 	if body is Entity:
-		if body.has_component(ZC_Player):
+		if EntityUtils.is_player(body):
 			if not damage_players:
 				return # Don't damage the player
 		else:
@@ -86,13 +86,13 @@ func apply_effects(body: Node) -> void:
 
 
 func regular_damage(body: Entity) -> void:
-	if body.has_component(ZC_Health):
+	if EntityUtils.has_health(body):
 		body.add_relationship(RelationshipUtils.make_damage(damage_amount))
 		print("Applied ", damage_amount, " damage to ", body)
 
 
 func fire_damage(body: Entity) -> void:
-	if body.has_component(ZC_Flammable):
+	if EntityUtils.is_flammable(body):
 		var fire := ZC_Effect_Burning.new()
 		fire.time_remaining = fire_duration
 		body.add_component(fire)

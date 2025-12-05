@@ -41,7 +41,7 @@ func find_players() -> Array[Node3D]:
 	for body in detection_area.get_overlapping_bodies():
 		var body_root = body.get_node(".")
 		if body_root is Entity:
-			if body_root.has_component(ZC_Player):
+			if EntityUtils.is_player(body_root):
 				players.append(body)
 
 	return players

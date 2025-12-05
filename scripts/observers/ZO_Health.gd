@@ -25,7 +25,7 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 			var c_noise := ZC_Noise.from_node(sound_node)
 			entity.add_component(c_noise)
 
-	if entity.has_component(ZC_Player):
+	if EntityUtils.is_player(entity):
 		print("Health changed: ", property, " from ", old_value, " to ", new_value)
 		if new_value != old_value:
 			call_deferred("update_hud", new_value)

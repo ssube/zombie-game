@@ -22,14 +22,14 @@ func _process(delta: float) -> void:
 			apply_damage(body)
 
 func apply_damage(body: Entity) -> void:
-	if body.has_component(ZC_Player):
+	if EntityUtils.is_player(body):
 		if not damage_players:
 			return # Don't damage the player
 	else:
 		if not damage_enemies:
 			return # Don't damage enemies
 
-	if body.has_component(ZC_Flammable):
+	if EntityUtils.is_flammable(body):
 		var fire := ZC_Effect_Burning.new()
 		body.add_component(fire)
 		print("Fire spread to: ", body)
