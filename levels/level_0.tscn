@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=53 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door.tscn" id="8_58gyl"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="9_ggct0"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="10_8mki0"]
+[ext_resource type="PackedScene" uid="uid://bq6a52tvj60bq" path="res://entities/characters/hotel_clerk.tscn" id="11_ggct0"]
 [ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="11_gxks1"]
 [ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/props/ZC_Door.gd" id="12_osodt"]
 [ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/items/medkit.tscn" id="13_vfwqd"]
@@ -199,10 +200,6 @@ id = "Level0_ZE_Item_1764549460_25901"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0457096, 2.9881763, -4.500613)
 id = "Level0_ZE_Item_1764549462_6468"
 
-[node name="Barrel" parent="Entities/Room1" instance=ExtResource("7_uuq13")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7836394, 0.9629582, -3.619173)
-id = "Level0_ZE_Barrel_1764359946_22534"
-
 [node name="Medkit" parent="Entities/Room1" instance=ExtResource("13_vfwqd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.392788, 0.25, 5.1092467)
 id = "Level0_ZE_Food_1764359954_81099"
@@ -216,6 +213,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.584343, 1.1126956, 0)
 
 [node name="WeaponShotgun" parent="Entities/Room1" instance=ExtResource("16_uuq13")]
 transform = Transform3D(-4.371139e-08, 0, -1, -1, -4.371139e-08, 4.371139e-08, -4.371139e-08, 1, 1.9106855e-15, 0.009268761, 0.38109618, 5.273236)
+
+[node name="HotelClerk" parent="Entities/Room1" instance=ExtResource("11_ggct0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.557784, 9.536743e-07, -5.2670026)
 
 [node name="Room2" type="Node" parent="Entities"]
 

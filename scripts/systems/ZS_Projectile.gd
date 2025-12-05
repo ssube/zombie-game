@@ -34,10 +34,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			projectile.piercing -= 1
 			if projectile.piercing <= 0:
 				print("Bullet has expired: ", entity)
-				ECS.world.remove_entity(entity)
-				var root := entity.get_parent()
-				root.remove_child(entity)
-				entity.queue_free()
+				EntityUtils.remove(entity)
 
 func apply_decal(ray: RayCast3D, collider: Node3D) -> void:
 	# Obtain collision info

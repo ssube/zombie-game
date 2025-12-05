@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bjknld1sg8tq0"
+path="res://.godot/imported/hotel_clerk.dialogue-6518554e0807090d4380963810e54bfb.tres"
+
+[deps]
+
+source_file="res://dialogue/hotel_clerk.dialogue"
+dest_files=["res://.godot/imported/hotel_clerk.dialogue-6518554e0807090d4380963810e54bfb.tres"]
+
+[params]
+
+defaults=true

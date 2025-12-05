@@ -26,6 +26,9 @@ func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 
+	if root_3d == null:
+		return
+
 	apply_movement_force(delta)
 	apply_look_torque(delta, root_3d.global_transform, look_direction)
 

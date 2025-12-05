@@ -65,8 +65,7 @@ func _process(delta: float):
 		actor_node.lerp_actor_velocity(Vector3.ZERO, delta)
 		# delete zombie weapon
 		if actor_entity.current_weapon:
-			ECS.world.remove_entity(actor_entity.current_weapon)
-			actor_entity.current_weapon.queue_free()
+			EntityUtils.remove(actor_entity.current_weapon)
 			actor_entity.current_weapon = null
 
 		return

@@ -11,9 +11,4 @@ func _process(delta: float) -> void:
 		if self_node is Node3D:
 			self.visible = false
 
-		if self_node is Entity:
-			ECS.world.remove_entity(self)
-
-		var parent = self.get_parent()
-		parent.remove_child(self)
-		self.queue_free()
+		EntityUtils.remove(self)

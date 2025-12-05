@@ -44,3 +44,13 @@ static func has_health(entity: Node) -> bool:
 		return false
 
 	return entity.has_component(ZC_Health)
+
+static func remove(entity: Node) -> void:
+	if entity is Entity:
+		ECS.world.remove_entity(entity)
+
+	var parent = entity.get_parent()
+	if parent:
+		parent.remove_child(entity)
+
+	entity.queue_free()

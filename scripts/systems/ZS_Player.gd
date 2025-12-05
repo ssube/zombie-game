@@ -108,6 +108,10 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 						collider.add_component(shimmer)
 						last_shimmer[entity] = collider
 
+					if collider is ZE_Character:
+						if input.use_interact:
+							use_character(collider)
+
 					if collider.has_component(ZC_Food):
 						%Hud.set_crosshair_color(Color.GREEN)
 						if input.use_interact:
@@ -213,6 +217,11 @@ func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
 		light.visible = not light.visible
 
 
+func use_character(entity: Entity) -> void:
+	var dialogue = entity.get_component(ZC_Dialogue)
+	DialogueManager.show_dialogue_balloon(dialogue.dialogue_tree, dialogue.start_title)
+
+
 func use_door(entity: Entity, player: ZC_Player) -> void:
 	var door = entity.get_component(ZC_Door) as ZC_Door
 	if door.is_locked:
@@ -300,9 +309,7 @@ func remove_entity(entity: Entity) -> void:
 		if entity == shimmer_node:
 			last_shimmer.erase(shimmer_key)
 
-	ECS.world.remove_entity(entity)
-	entity.get_parent().remove_child(entity)
-	entity.queue_free()
+	EntityUtils.remove(entity)
 
 
 func remove_shimmer(entity: Entity) -> void:
