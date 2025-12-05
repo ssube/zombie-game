@@ -81,7 +81,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			if entity.current_weapon != null:
 				if entity.current_weapon.has_component(ZC_Weapon_Melee):
 					swing_weapon(entity, body)
-				elif entity.current_weapon.has_component(ZC_Weapon_Ranged):
+				if entity.current_weapon.has_component(ZC_Weapon_Ranged):
 					spawn_projectile(entity, body)
 
 		if input.use_light:
@@ -133,16 +133,10 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 						if input.use_interact:
 							use_portal(collider, entity)
 
-					if collider.has_component(ZC_Weapon_Melee):
+					if EntityUtils.is_weapon(collider):
 						%Hud.set_crosshair_color(Color.ORANGE)
 						if input.use_interact:
 							use_weapon(collider, entity)
-
-					if collider.has_component(ZC_Weapon_Ranged):
-						%Hud.set_crosshair_color(Color.ORANGE)
-						if input.use_interact:
-							use_weapon(collider, entity)
-
 		else:
 			%Hud.clear_target_label()
 			%Hud.reset_crosshair_color()
