@@ -532,11 +532,12 @@ transform = Transform3D(-0.9989903, 0, 0.0449271, 0, 1, 0, -0.0449271, 0, -0.998
 
 [node name="Areas" type="Node" parent="."]
 
-[node name="RiverArea3D" type="Area3D" parent="Areas"]
+[node name="RiverArea" type="Area3D" parent="Areas"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.46095, 0, 0)
 script = ExtResource("17_32bcm")
+metadata/_custom_type_script = "uid://bhgbf8ykucy2n"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/RiverArea3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/RiverArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 7)
 shape = SubResource("BoxShape3D_ebfu5")
 
