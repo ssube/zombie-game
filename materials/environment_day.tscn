@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf8xh1my8wn0y"]
+
+[ext_resource type="Environment" uid="uid://kf7a6fgi45r1" path="res://materials/std_env_day.tres" id="1_mfber"]
+
+[node name="EnvironmentDay" type="WorldEnvironment"]
+environment = ExtResource("1_mfber")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.25881904, 0.9659258, 0, -0.9659258, -0.25881904, 0, 0, 0)
