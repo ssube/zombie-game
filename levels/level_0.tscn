@@ -180,77 +180,81 @@ filter_ledge_spans = true
 [node name="Entities" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="Zombie" parent="Entities" instance=ExtResource("5_fv0x7")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 22.600622, 1.038658, -1.7444568)
-id = "Level0_ZE_Zombie_1764359940_94833"
-
-[node name="Ball" parent="Entities" instance=ExtResource("6_owf05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.531044, 0.6708808, -0.10224354)
-id = "Level0_ZE_Item_1764549474_27673"
-
-[node name="Ball3" parent="Entities" instance=ExtResource("6_owf05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.91964, 0.6708808, 1.7382463)
-id = "Level0_ZE_Item_1764549472_58076"
-
-[node name="Ball4" parent="Entities" instance=ExtResource("6_owf05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.007, 0.6708808, -4.253092)
-id = "Level0_ZE_Item_1764549479_90855"
-
-[node name="Ball8" parent="Entities" instance=ExtResource("6_owf05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.007, 0.6708808, -4.253092)
-id = "Level0_ZE_Item_1764549479_90855"
-
-[node name="Ball5" parent="Entities" instance=ExtResource("6_owf05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.345255, 0.6708808, -2.5855742)
-id = "Level0_ZE_Item_1764549477_24626"
-
-[node name="Ball2" parent="Entities" instance=ExtResource("6_owf05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0457096, 0.5000001, -4.500613)
-id = "Level0_ZE_Item_1764359944_58575"
-
-[node name="Ball6" parent="Entities" instance=ExtResource("6_owf05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0457096, 1.7801024, -4.500613)
-id = "Level0_ZE_Item_1764549460_25901"
-
-[node name="Ball7" parent="Entities" instance=ExtResource("6_owf05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0457096, 2.9881763, -4.500613)
-id = "Level0_ZE_Item_1764549462_6468"
-
-[node name="Barrel" parent="Entities" instance=ExtResource("7_uuq13")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7836394, 0.9629582, -3.619173)
-id = "Level0_ZE_Barrel_1764359946_22534"
-
-[node name="Barrel2" parent="Entities" instance=ExtResource("7_uuq13")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.310673, 0.77290213, -2.3214378)
-id = "Level0_ZE_Barrel_1764359948_35477"
-
-[node name="Barrel3" parent="Entities" instance=ExtResource("7_uuq13")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.35758, 0.78174114, 2.0149539)
-id = "Level0_ZE_Barrel_1764359950_30156"
-
 [node name="Door" parent="Entities" instance=ExtResource("8_58gyl")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.5, 0, 2)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.5, 0, 1)
 id = "Level0_ZE_Door_1764359952_8926"
 component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_auxoi"), SubResource("Resource_b6wpd")])
 
-[node name="Medkit" parent="Entities" instance=ExtResource("13_vfwqd")]
+[node name="Room1" type="Node" parent="Entities"]
+
+[node name="Ball2" parent="Entities/Room1" instance=ExtResource("6_owf05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0457096, 0.5000001, -4.500613)
+id = "Level0_ZE_Item_1764359944_58575"
+
+[node name="Ball6" parent="Entities/Room1" instance=ExtResource("6_owf05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0457096, 1.7801024, -4.500613)
+id = "Level0_ZE_Item_1764549460_25901"
+
+[node name="Ball7" parent="Entities/Room1" instance=ExtResource("6_owf05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0457096, 2.9881763, -4.500613)
+id = "Level0_ZE_Item_1764549462_6468"
+
+[node name="Barrel" parent="Entities/Room1" instance=ExtResource("7_uuq13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7836394, 0.9629582, -3.619173)
+id = "Level0_ZE_Barrel_1764359946_22534"
+
+[node name="Medkit" parent="Entities/Room1" instance=ExtResource("13_vfwqd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.392788, 0.25, 5.1092467)
 id = "Level0_ZE_Food_1764359954_81099"
 
-[node name="Key" parent="Entities" instance=ExtResource("14_juy1h")]
+[node name="Key" parent="Entities/Room1" instance=ExtResource("14_juy1h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1653585, 0.4356786, 4.86876)
 id = "Level0_ZE_Key_1764359955_57861"
 
-[node name="Objective" parent="Entities" groups=["nav"] instance=ExtResource("15_7di2q")]
+[node name="WeaponBat" parent="Entities/Room1" instance=ExtResource("15_owf05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.584343, 1.1126956, 0)
+
+[node name="WeaponShotgun" parent="Entities/Room1" instance=ExtResource("16_uuq13")]
+transform = Transform3D(-4.371139e-08, 0, -1, -1, -4.371139e-08, 4.371139e-08, -4.371139e-08, 1, 1.9106855e-15, 0.009268761, 0.38109618, 5.273236)
+
+[node name="Room2" type="Node" parent="Entities"]
+
+[node name="Zombie" parent="Entities/Room2" instance=ExtResource("5_fv0x7")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 22.600622, 1.038658, -1.7444568)
+id = "Level0_ZE_Zombie_1764359940_94833"
+
+[node name="Ball" parent="Entities/Room2" instance=ExtResource("6_owf05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.531044, 0.6708808, -0.10224354)
+id = "Level0_ZE_Item_1764549474_27673"
+
+[node name="Ball3" parent="Entities/Room2" instance=ExtResource("6_owf05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.91964, 0.6708808, 1.7382463)
+id = "Level0_ZE_Item_1764549472_58076"
+
+[node name="Ball4" parent="Entities/Room2" instance=ExtResource("6_owf05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.007, 0.6708808, -4.253092)
+id = "Level0_ZE_Item_1764549479_90855"
+
+[node name="Ball5" parent="Entities/Room2" instance=ExtResource("6_owf05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.345255, 0.6708808, -2.5855742)
+id = "Level0_ZE_Item_1764549477_24626"
+
+[node name="Barrel2" parent="Entities/Room2" instance=ExtResource("7_uuq13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.310673, 0.77290213, -2.3214378)
+id = "Level0_ZE_Barrel_1764359948_35477"
+
+[node name="Barrel3" parent="Entities/Room2" instance=ExtResource("7_uuq13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.35758, 0.78174114, 2.0149539)
+id = "Level0_ZE_Barrel_1764359950_30156"
+
+[node name="Objective" parent="Entities/Room2" groups=["nav"] instance=ExtResource("15_7di2q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.802, 1.7864187, 0.012)
 id = "Level0_ZE_Objective_1764359957_76643"
 component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_6y5fu"), SubResource("Resource_0x0hl"), SubResource("Resource_fv0x7")])
 
-[node name="WeaponBat" parent="Entities" instance=ExtResource("15_owf05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.584343, 1.1126956, 0)
-
-[node name="WeaponShotgun" parent="Entities" instance=ExtResource("16_uuq13")]
-transform = Transform3D(-4.371139e-08, 0, -1, -1, -4.371139e-08, 4.371139e-08, -4.371139e-08, 1, 1.9106855e-15, 0.009268761, 0.38109618, 5.273236)
+[node name="Ball8" parent="Entities/Room2" instance=ExtResource("6_owf05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.007, 0.6708808, -4.253092)
+id = "Level0_ZE_Item_1764549479_90855"
 
 [node name="Lights" type="Node" parent="."]
 

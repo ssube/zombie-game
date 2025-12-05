@@ -1601,28 +1601,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 2, 59)
 shadow_enabled = true
 omni_range = 25.0
 
-[node name="OmniLight3D9" type="OmniLight3D" parent="Lights"]
+[node name="Lobby" type="Node" parent="Lights"]
+
+[node name="OmniLight3D9" type="OmniLight3D" parent="Lights/Lobby"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.433517, 2.718563, 35.5)
 shadow_enabled = true
 omni_range = 25.0
 
-[node name="OmniLight3D12" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.433517, 2.718563, 31.5)
-shadow_enabled = true
-omni_range = 25.0
-
-[node name="OmniLight3D13" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.433517, 2.718563, 39.5)
-shadow_enabled = true
-omni_range = 25.0
-
-[node name="OmniLight3D11" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D11" type="OmniLight3D" parent="Lights/Lobby"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.433517, 2.718563, 28.5)
 shadow_enabled = true
 omni_range = 25.0
 
-[node name="OmniLight3D10" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D10" type="OmniLight3D" parent="Lights/Lobby"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.433517, 2.718563, 42.5)
+shadow_enabled = true
+omni_range = 25.0
+
+[node name="OmniLight3D12" type="OmniLight3D" parent="Lights/Lobby"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.433517, 2.718563, 31.5)
+shadow_enabled = true
+omni_range = 25.0
+
+[node name="OmniLight3D13" type="OmniLight3D" parent="Lights/Lobby"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.433517, 2.718563, 39.5)
 shadow_enabled = true
 omni_range = 25.0
 

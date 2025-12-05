@@ -29,11 +29,7 @@ func _ready():
 	# Create the root entities
 	var entity_root = %Entities
 	for child in entity_root.get_children():
-		# TODO: recursive into sub-child nodes if the child is a regular node (not 3D)
-		if child is Entity:
-			ECS.world.add_entity(child)
-		else:
-			printerr("Child is not an entity: ", child.get_path())
+		add_entity(child)
 
 	_register_level_entities()
 
@@ -54,15 +50,13 @@ func _register_level_entities() -> void:
 		printerr("Level is missing Entities node!")
 
 	for child in level_entity_root.get_children():
-		if child is Entity:
-			ECS.world.add_entity(child)
-			if "inventory_node" in child:
-				var items = child.inventory_node.get_children()
-				for item in items:
-					if item is Entity:
-						ECS.world.add_entity(item)
-		else:
-			printerr("Child is not an entity: ", child)
+		add_entity(child)
+		if "inventory_node" in child:
+			var items = child.inventory_node.get_children()
+			for item in items:
+				if item is Entity:
+					ECS.world.add_entity(item)
+
 
 func clear_world(keep_players: bool = true) -> void:
 	var keepers: Array[Entity] = []
@@ -134,3 +128,15 @@ func load_level(level_name: String, spawn_point: String) -> void:
 		var player3d := player.get_node(".") as Node3D
 		player3d.global_position = spawn_node.global_position
 		player3d.global_rotation = spawn_node.global_rotation
+
+
+func add_entity(node: Node) -> void:
+	if node is Entity:
+		ECS.world.add_entity(node)
+	elif node is Node3D:
+		printerr("Entities within Node3D children will not be added: ", node.get_path())
+	elif node is Node:
+		for child in node.get_children():
+			add_entity(child)
+	else:
+		printerr("Child is not an entity: ", node.get_path(), node.get_class())
