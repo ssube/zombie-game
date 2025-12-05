@@ -1,5 +1,5 @@
 extends Area3D
-class_name TriggerArea3D
+class_name ZN_TriggerArea3D
 
 @export var active: bool = true
 @export var interval: float = 1.0

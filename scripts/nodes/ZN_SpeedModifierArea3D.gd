@@ -1,4 +1,5 @@
 extends Area3D
+class_name ZN_SpeedModifierArea3D
 
 @export var speed_modifier: float = 0.5
 
