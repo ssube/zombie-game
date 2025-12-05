@@ -7,5 +7,4 @@
 
 [resource]
 script = ExtResource("3_ogk7f")
-inverse_scale_factor = 16.0
 use_groups_hierarchy = true
