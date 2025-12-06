@@ -21,4 +21,5 @@ set speaker.look_direction = speaker.global_position + Vector3(-10, 0, 0)
 ~ leave
 {{dialogue.character_name}}: Please leave.
 set dialogue.start_title = "start"
+set speaker.look_direction = markers["Start"].global_position
 => END

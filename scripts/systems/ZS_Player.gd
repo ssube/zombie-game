@@ -217,14 +217,34 @@ func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
 		light.visible = not light.visible
 
 
+func _get_level_markers(root: Node = null) -> Dictionary[String, Marker3D]:
+	var markers: Dictionary[String, Marker3D] = {}
+
+	if root == null:
+		root = %Level
+
+	for child in root.get_children():
+		if child is Marker3D:
+			markers[child.name] = child
+		elif child is Entity:
+			continue # skip markers within entities
+		else:
+			# recurse into the world to find markers
+			markers.merge(_get_level_markers(child))
+
+	return markers
+
+
 func use_character(entity: Entity, player_entity: Entity) -> void:
+	# get level markers
+	var markers := _get_level_markers()
+
 	# start dialogue
 	var dialogue = entity.get_component(ZC_Dialogue)
 	DialogueManager.show_dialogue_balloon(dialogue.dialogue_tree, dialogue.start_title, [
 		{
 			"dialogue" = dialogue,
-			# TODO: pass dictionary of markers
-			"markers" = {},
+			"markers" = markers,
 			"player" = player_entity,
 			"speaker" = entity,
 		}
