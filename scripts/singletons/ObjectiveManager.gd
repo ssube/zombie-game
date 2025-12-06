@@ -35,7 +35,10 @@ func activate_children(objective: ZN_BaseObjective) -> void:
 
 func _activate_objective(objective: ZN_BaseObjective) -> void:
 	if menu_node:
-		menu_node.set_objective_label(objective.title)
+		var title := objective.title
+		if objective.optional:
+			title = "* %s" % title
+		menu_node.set_objective_label(title)
 
 	objective.active = true
 	active_objectives[objective.key] = objective
@@ -218,14 +221,14 @@ func print_objective_subtree(objective: ZN_BaseObjective, indent: String = "") -
 	var bullet: String = "-"
 	if objective.active:
 		bullet = "="
-	elif objective.is_completed():
+	if objective.is_completed():
 		bullet = "+"
 
 	var optional := ""
 	if objective.optional:
 		optional = "*"
 
-	subtree.append("%s%s %s%s" % [indent, bullet, optional, objective.title])
+	subtree.append("%s%s%s %s" % [indent, bullet, optional, objective.title])
 
 	var child_indent := indent + "  "
 	for child in objective.get_children():
@@ -246,3 +249,32 @@ func print_objective_tree() -> String:
 		subtrees.append(print_objective_subtree(objective))
 
 	return "\n".join(subtrees)
+
+
+func save(path: String) -> bool:
+	var saved := ZP_SavedObjectives.from_manager(self)
+	var error := ResourceSaver.save(saved, path)
+	if error != OK:
+		printerr("Error saving objectives: ", error)
+		return false
+
+	return true
+
+
+func load(path: String) -> int:
+	var loaded := ResourceLoader.load(path, "ZP_SavedObjectives") as ZP_SavedObjectives
+	var counter := 0
+
+	for count_key in loaded.counts:
+		var objective := find_objective(count_key)
+		if objective is ZN_CountObjective:
+			objective.current_count = loaded.counts[count_key]
+			counter += 1
+
+	for flag_key in loaded.flags:
+		var objective := find_objective(flag_key)
+		if objective is ZN_FlagObjective:
+			objective.current_value = loaded.flags[flag_key]
+			counter += 1
+
+	return counter
