@@ -112,6 +112,11 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 						if input.use_interact:
 							use_character(collider, entity)
 
+					if collider.has_component(ZC_Objective):
+						%Hud.set_crosshair_color(Color.GOLD)
+						if input.use_interact:
+							use_objective(collider, player)
+
 					if collider.has_component(ZC_Food):
 						%Hud.set_crosshair_color(Color.GREEN)
 						if input.use_interact:
@@ -126,11 +131,6 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 						%Hud.set_crosshair_color(Color.DODGER_BLUE)
 						if input.use_interact:
 							use_door(collider, player)
-
-					if collider.has_component(ZC_Objective):
-						%Hud.set_crosshair_color(Color.GOLD)
-						if input.use_interact:
-							use_objective(collider, player)
 
 					if collider.has_component(ZC_Portal):
 						%Hud.set_crosshair_color(Color.GOLD)

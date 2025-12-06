@@ -1,10 +1,11 @@
-[gd_scene load_steps=54 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=59 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
 [ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="7_uuq13"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door.tscn" id="8_58gyl"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="9_ggct0"]
+[ext_resource type="Script" uid="uid://q5lsf8fn6s2" path="res://scripts/components/props/ZC_Key.gd" id="9_gxks1"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="10_8mki0"]
 [ext_resource type="PackedScene" uid="uid://bq6a52tvj60bq" path="res://entities/characters/hotel_clerk.tscn" id="11_ggct0"]
 [ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="11_gxks1"]
@@ -37,6 +38,30 @@ is_locked = true
 key_name = "door"
 close_rotation = Vector3(0, 1.57, 0)
 metadata/_custom_type_script = "uid://qjr7o31fiedq"
+
+[sub_resource type="Resource" id="Resource_gxks1"]
+script = ExtResource("17_x1db4")
+key = "open_door"
+is_active = true
+metadata/_custom_type_script = "uid://bdl3b6gan30l0"
+
+[sub_resource type="Resource" id="Resource_nq5s6"]
+script = ExtResource("9_gxks1")
+name = "door"
+metadata/_custom_type_script = "uid://q5lsf8fn6s2"
+
+[sub_resource type="Resource" id="Resource_g03v2"]
+script = ExtResource("10_8mki0")
+shimmer_material = ExtResource("16_2sfss")
+shimmer_nodes = Array[NodePath]([NodePath("TrafficCone/TrafficCone")])
+name = "Key"
+metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_osodt"]
+script = ExtResource("17_x1db4")
+key = "find_key"
+is_active = true
+metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 
 [sub_resource type="Resource" id="Resource_6y5fu"]
 script = ExtResource("10_8mki0")
@@ -185,7 +210,7 @@ unique_name_in_owner = true
 [node name="Door" parent="Entities" instance=ExtResource("8_58gyl")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.5, 0, 1)
 id = "Level0_ZE_Door_1764359952_8926"
-component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_auxoi"), SubResource("Resource_b6wpd")])
+component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_auxoi"), SubResource("Resource_b6wpd"), SubResource("Resource_gxks1")])
 
 [node name="Room1" type="Node" parent="Entities"]
 
@@ -208,6 +233,7 @@ id = "Level0_ZE_Food_1764359954_81099"
 [node name="Key" parent="Entities/Room1" instance=ExtResource("14_juy1h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1653585, 0.4356786, 4.86876)
 id = "Level0_ZE_Key_1764359955_57861"
+component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_nq5s6"), SubResource("Resource_g03v2"), SubResource("Resource_osodt")])
 
 [node name="WeaponBat" parent="Entities/Room1" instance=ExtResource("15_owf05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.584343, 1.1126956, 0)
@@ -364,16 +390,19 @@ navigation_mesh = SubResource("NavigationMesh_iss0w")
 [node name="KeyObjective" type="Node" parent="Objectives"]
 script = ExtResource("23_8mki0")
 active = true
+key = "find_key"
 title = "Find the Key"
 metadata/_custom_type_script = "uid://b560n5psxwkuk"
 
 [node name="DoorObjective" type="Node" parent="Objectives/KeyObjective"]
 script = ExtResource("23_8mki0")
+key = "open_door"
 title = "Use the Door"
 metadata/_custom_type_script = "uid://b560n5psxwkuk"
 
 [node name="ZombieObjective" type="Node" parent="Objectives/KeyObjective/DoorObjective"]
 script = ExtResource("23_8mki0")
+key = "shoot_zombie"
 title = "Shoot the Zombie"
-optional = true
+game_state = 1
 metadata/_custom_type_script = "uid://b560n5psxwkuk"

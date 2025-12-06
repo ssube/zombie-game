@@ -1,31 +1,32 @@
 extends Node
 # class_name ObjectiveManager
 
-enum ObjectiveStatus {
-	NEW,
-	PENDING,
-	PROGRESS,
-	COMPLETED,
-	FAILED,
-}
+# enum ObjectiveStatus {
+# 	NEW,
+# 	PENDING,
+# 	PROGRESS,
+# 	COMPLETED,
+# 	FAILED,
+# }
 
 #@export var counts: Dictionary[String, bool] = {}
 #@export var flags: Dictionary[String, bool] = {}
 
 var menu_node: Node = null
-var objectives: Array[ZN_BaseObjective] = []
-var active_objectives: Array[ZN_BaseObjective] = []
+var objectives: Dictionary[String, ZN_BaseObjective] = {}
+var active_objectives: Dictionary[String, ZN_BaseObjective] = {}
 
-signal flag_changed(name: String, old_value: bool, new_value: bool)
-signal count_changed(name: String, old_value: int, new_value: int)
+signal flag_changed(objective: ZN_FlagObjective, old_value: bool, new_value: bool)
+signal count_changed(objective: ZN_CountObjective, old_value: int, new_value: int)
 signal objective_activated(objective: ZN_BaseObjective)
 signal objective_changed(objective: ZN_BaseObjective)
 
 
 func activate_children(objective: ZN_BaseObjective) -> void:
-	for child in objective.get_children():
+	var children := objective.get_children()
+	for child in children:
 		if child is ZN_BaseObjective:
-			objectives.append(child)
+			objectives[child.key] = child
 			_activate_objective(child)
 
 
@@ -34,12 +35,12 @@ func _activate_objective(objective: ZN_BaseObjective) -> void:
 		menu_node.set_objective_label(objective.title)
 
 	objective.active = true
-	active_objectives.append(objective)
+	active_objectives[objective.key] = objective
 	objective_activated.emit(objective)
 
 
-func activate_objective(title: String) -> bool:
-	var objective := find_objective(title)
+func activate_objective(key: String) -> bool:
+	var objective := find_objective(key)
 	if objective == null:
 		return false
 
@@ -47,22 +48,18 @@ func activate_objective(title: String) -> bool:
 	return true
 
 
-func deactivate_objective(title: String) -> bool:
-	var objective := find_objective(title)
+func deactivate_objective(key: String) -> bool:
+	var objective := find_objective(key)
 	if objective == null:
 		return false
 
 	objective.active = false
-	active_objectives.erase(objective)
+	active_objectives.erase(objective.key)
 	return true
 
 
-func find_objective(title: String) -> ZN_BaseObjective:
-	for objective in objectives:
-		if objective.title == title:
-			return objective
-
-	return null
+func find_objective(key: String) -> ZN_BaseObjective:
+	return objectives.get(key)
 
 
 func set_objectives(new_objectives: Array[ZN_BaseObjective] = []) -> void:
@@ -74,7 +71,7 @@ func set_objectives(new_objectives: Array[ZN_BaseObjective] = []) -> void:
 
 
 func add_objective(objective: ZN_BaseObjective) -> void:
-	objectives.append(objective)
+	objectives[objective.key] = objective
 
 	if objective.active:
 		_activate_objective(objective)
@@ -85,7 +82,7 @@ func add_objective(objective: ZN_BaseObjective) -> void:
 
 
 func reset_all() -> void:
-	for objective in objectives:
+	for objective in objectives.values():
 		if objective is ZN_CountObjective:
 			_set_count(objective, objective.starting_count)
 		elif objective is ZN_FlagObjective:
@@ -97,19 +94,19 @@ func _set_flag(objective: ZN_FlagObjective, value: bool) -> void:
 	objective.current_value = value
 
 	if old_value != value:
-		flag_changed.emit(objective.title, old_value, value)
+		flag_changed.emit(objective, old_value, value)
 		objective_changed.emit(objective)
 
 
-func set_flag(title: String, value: bool = true) -> bool:
-	var objective := find_objective(title)
+func set_flag(key: String, value: bool = true) -> bool:
+	var objective := find_objective(key)
 	if objective == null:
 		return false
 
 	if objective is ZN_FlagObjective:
 		_set_flag(objective, value)
 		if objective.is_completed():
-			active_objectives.erase(objective)
+			active_objectives.erase(objective.key)
 			activate_children(objective)
 
 	return false
@@ -120,12 +117,12 @@ func _set_count(objective: ZN_CountObjective, value: int) -> void:
 	objective.current_value = value
 
 	if old_value != value:
-		count_changed.emit(objective.title, old_value, value)
+		count_changed.emit(objective, old_value, value)
 		objective_changed.emit(objective)
 
 
-func set_count(title: String, value: int) -> bool:
-	var objective := find_objective(title)
+func set_count(key: String, value: int) -> bool:
+	var objective := find_objective(key)
 	if objective == null:
 		return false
 
@@ -137,8 +134,8 @@ func set_count(title: String, value: int) -> bool:
 	return false
 
 
-func add_count(title: String, value: int = 1) -> int:
-	var objective := find_objective(title)
+func increment_count(key: String, value: int = 1) -> int:
+	var objective := find_objective(key)
 	if objective == null:
 		return 0
 
