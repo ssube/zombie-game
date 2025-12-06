@@ -50,12 +50,12 @@ metadata/_custom_type_script = "uid://jokkv7skgimj"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_idcse"]
 height = 2.25
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("inventory_node", "hands_node")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("hands_node", "inventory_node")]
 collision_layer = 8
 collision_mask = 27
 script = ExtResource("1_ks8m5")
-inventory_node = NodePath("Inventory")
 hands_node = NodePath("Head/Hands")
+inventory_node = NodePath("Inventory")
 component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_ks8m5"), SubResource("Resource_l1ths"), SubResource("Resource_25mxy"), SubResource("Resource_dv4ir"), SubResource("Resource_idcse"), SubResource("Resource_p37y2"), SubResource("Resource_b4uku")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

@@ -41,6 +41,10 @@ albedo_color = Color(0.43, 0.9430001, 1, 1)
 collision_layer = 8
 collision_mask = 31
 script = ExtResource("1_0qnp1")
+look_speed = null
+look_acceleration = null
+move_speed = 0.0
+move_acceleration = 0.0
 component_resources = Array[ExtResource("2_0wy0w")]([SubResource("Resource_4sttm"), SubResource("Resource_y41co")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]

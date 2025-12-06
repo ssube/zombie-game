@@ -20,9 +20,6 @@ func activate_children(objective: ZN_BaseObjective) -> void:
 			objectives[child.key] = child
 			_activate_objective(child)
 
-		if child is ZN_BaseAction:
-			child.run(null)
-
 
 func _activate_objective(objective: ZN_BaseObjective) -> void:
 	if menu_node:
@@ -124,10 +121,14 @@ func add_objective(objective: ZN_BaseObjective) -> void:
 			add_objective(child)
 
 
-func _complete_objective(objective: ZN_BaseObjective) -> void:
+func _complete_objective(objective: ZN_BaseObjective, actor: Entity = null) -> void:
 	objective.active = false
 	activate_children(objective)
 	objective_completed.emit(objective)
+
+	for child in objective.get_children():
+		if child is ZN_BaseAction:
+			child.run(actor)
 
 	match objective.game_state:
 		ZN_BaseObjective.GameState.NONE:

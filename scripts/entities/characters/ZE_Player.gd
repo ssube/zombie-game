@@ -1,9 +1,7 @@
 @tool
-extends ZE_Base
+extends ZE_Character
 class_name ZE_Player
 
-@export var current_weapon: ZE_Weapon = null
-@export var inventory_node: Node = null
 @export var hands_node: Node3D = null
 
 func on_ready():

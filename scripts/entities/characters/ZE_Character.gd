@@ -2,6 +2,10 @@
 extends ZE_Base
 class_name ZE_Character
 
+@export_group("Inventory")
+@export var current_weapon: ZE_Weapon = null
+@export var inventory_node: Node = null
+
 @export_group("Looking")
 @export var look_speed: float = 5.0
 @export var look_acceleration: float = 10.0

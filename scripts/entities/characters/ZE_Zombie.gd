@@ -2,8 +2,6 @@
 extends ZE_Character
 class_name ZE_Zombie
 
-@export var current_weapon: ZE_Weapon = null
-@export var inventory_node: Node = null
 @export var events: ZB_ZombieEvents = null
 
 func on_ready():

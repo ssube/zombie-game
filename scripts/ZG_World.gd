@@ -144,7 +144,8 @@ func add_entity(node: Node) -> void:
 		print_debug("Registering entity: ", node)
 		ECS.world.add_entity(node)
 		if "inventory_node" in node:
-			add_entity(node.inventory_node)
+			if node.inventory_node != null:
+				add_entity(node.inventory_node)
 	elif node is Node3D:
 		for child in node.get_children():
 			add_entity(child)
