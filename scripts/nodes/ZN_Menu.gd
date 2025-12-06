@@ -38,6 +38,7 @@ func _ready() -> void:
 	clear_weapon_label()
 	reset_crosshair_color()
 	update_mouse_mode()
+	ObjectiveManager.set_menu(self)
 
 func _process(delta: float) -> void:
 	if action_queue.size() > 0:

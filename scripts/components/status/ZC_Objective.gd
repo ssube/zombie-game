@@ -4,6 +4,7 @@ class_name ZC_Objective
 enum GameState { NONE, WIN, LOSE }
 
 @export var game_state: GameState = GameState.NONE
+@export var title: String
 
 @export var is_active: bool = false:
   set(value):

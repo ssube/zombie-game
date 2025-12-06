@@ -2,9 +2,9 @@
 {{dialogue.character_name}}: [[Hi|Hello|Howdy]], welcome to the hotel.
 {{dialogue.character_name}}: Here are some choices.
 - First one
-	Nathan: You picked the first one.
+	{{dialogue.character_name}}: You picked the first one.
 - Second one
-	Nathan: You picked the second one.
+	{{dialogue.character_name}}: You picked the second one.
 - Start again => start
 - End the conversation => END
 {{dialogue.character_name}}: For more information see the online documentation.
@@ -13,4 +13,5 @@ set dialogue.start_title = "leave"
 
 ~ leave
 {{dialogue.character_name}}: Please leave.
+set dialogue.start_title = "start"
 => END

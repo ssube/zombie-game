@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=54 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
@@ -22,6 +22,7 @@
 [ext_resource type="Material" uid="uid://b7hn4t4hgmaod" path="res://textures/Color Maps/concrete_3.tres" id="19_8mki0"]
 [ext_resource type="Material" uid="uid://bmxolsa17xlkl" path="res://textures/Color Maps/brick_wall_tx_3.tres" id="20_58gyl"]
 [ext_resource type="Material" uid="uid://bc3b71ottph3s" path="res://textures/Color Maps/concrete_5.tres" id="21_ggct0"]
+[ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="23_8mki0"]
 
 [sub_resource type="Resource" id="Resource_auxoi"]
 script = ExtResource("10_8mki0")
@@ -216,6 +217,10 @@ transform = Transform3D(-4.371139e-08, 0, -1, -1, -4.371139e-08, 4.371139e-08, -
 
 [node name="HotelClerk" parent="Entities/Room1" instance=ExtResource("11_ggct0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.557784, 9.536743e-07, -5.2670026)
+look_speed = 0.0
+look_acceleration = 0.0
+move_speed = 0.0
+move_acceleration = 0.0
 
 [node name="Room2" type="Node" parent="Entities"]
 
@@ -353,3 +358,22 @@ shape = SubResource("ConvexPolygonShape3D_r7enh")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_iss0w")
+
+[node name="Objectives" type="Node" parent="."]
+
+[node name="KeyObjective" type="Node" parent="Objectives"]
+script = ExtResource("23_8mki0")
+active = true
+title = "Find the Key"
+metadata/_custom_type_script = "uid://b560n5psxwkuk"
+
+[node name="DoorObjective" type="Node" parent="Objectives/KeyObjective"]
+script = ExtResource("23_8mki0")
+title = "Use the Door"
+metadata/_custom_type_script = "uid://b560n5psxwkuk"
+
+[node name="ZombieObjective" type="Node" parent="Objectives/KeyObjective/DoorObjective"]
+script = ExtResource("23_8mki0")
+title = "Shoot the Zombie"
+optional = true
+metadata/_custom_type_script = "uid://b560n5psxwkuk"

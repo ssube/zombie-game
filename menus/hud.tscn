@@ -132,6 +132,11 @@ vertical_alignment = 1
 [node name="TopContainer" type="VBoxContainer" parent="HudLayer/GameHud"]
 layout_mode = 2
 
+[node name="HSeparator4" type="HSeparator" parent="HudLayer/GameHud/TopContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
+
 [node name="ObjectiveLabel" type="Label" parent="HudLayer/GameHud/TopContainer"]
 layout_mode = 2
 text = "Current Objective"

@@ -112,6 +112,7 @@ func load_level(level_name: String, spawn_point: String) -> void:
 
 	%Level.add_child(next_level)
 	_register_level_entities()
+	_register_level_objectives()
 
 	%Hud.push_action("Loaded level: %s" % level_name)
 	level_loaded.emit(last_level, level_name)
@@ -150,3 +151,22 @@ func add_entity(node: Node) -> void:
 			add_entity(child)
 	else:
 		printerr("Child is not an entity: ", node.get_path(), node.get_class())
+
+
+func _register_level_objectives() -> void:
+	var level_node = self.find_child("Level", false)
+	if level_node == null:
+		printerr("Missing level node!")
+		return
+
+	var level_objective_root = level_node.get_child(0).get_node("Objectives")
+	if level_objective_root == null:
+		printerr("Level is missing Entities node!")
+
+	var objectives: Array[ZN_BaseObjective] = []
+	for child in level_objective_root.get_children():
+		if child is ZN_BaseObjective:
+			objectives.append(child)
+
+	print("Loading %d objectives" % objectives.size())
+	ObjectiveManager.set_objectives(objectives)

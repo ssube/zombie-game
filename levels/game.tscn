@@ -28,9 +28,9 @@ level_scenes = Dictionary[String, Resource]({
 "debug": ExtResource("28_u1aa1")
 })
 start_level = "1"
-start_marker = "Start"
+start_marker = "Markers/Start"
 debug_level = "debug"
-debug_marker = "Start"
+debug_marker = "Markers/Start"
 
 [node name="World" type="Node" parent="."]
 unique_name_in_owner = true

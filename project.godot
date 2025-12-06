@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 ECS="*res://addons/gecs/ecs/ecs.gd"
 DecalManager="*res://scripts/singletons/DecalManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+ObjectiveManager="*res://scripts/singletons/ObjectiveManager.gd"
 
 [debug_draw_3d]
 
