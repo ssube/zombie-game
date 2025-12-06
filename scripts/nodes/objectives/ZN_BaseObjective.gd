@@ -1,4 +1,5 @@
 @abstract
+@icon("res://textures/icons/obj_objective.svg")
 extends Node
 class_name ZN_BaseObjective
 

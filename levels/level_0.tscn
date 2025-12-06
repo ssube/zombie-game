@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=111 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
@@ -34,6 +34,7 @@
 [ext_resource type="Material" uid="uid://bc3b71ottph3s" path="res://textures/Color Maps/concrete_5.tres" id="21_ggct0"]
 [ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="21_r7enh"]
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="23_8mki0"]
+[ext_resource type="Script" uid="uid://bn1fw86ypw3a6" path="res://scripts/nodes/actions/ZN_PortalAction.gd" id="35_q6gno"]
 
 [sub_resource type="Resource" id="Resource_nq5s6"]
 script = ExtResource("9_gxks1")
@@ -109,6 +110,7 @@ metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 
 [sub_resource type="Resource" id="Resource_fv0x7"]
 script = ExtResource("14_qgvj7")
+is_open = false
 next_level = "1"
 spawn_point = "Markers/MainSpawn"
 metadata/_custom_type_script = "uid://cn8mtbap6uudk"
@@ -699,3 +701,9 @@ title = "Shoot the Zombie"
 optional = true
 game_state = 1
 metadata/_custom_type_script = "uid://b560n5psxwkuk"
+
+[node name="OpenPortal" type="Node" parent="Objectives/KeyObjective/DoorObjective" node_paths=PackedStringArray("target")]
+script = ExtResource("35_q6gno")
+target = NodePath("../../../../Entities/Room2/Objective")
+open = 1
+metadata/_custom_type_script = "uid://bn1fw86ypw3a6"

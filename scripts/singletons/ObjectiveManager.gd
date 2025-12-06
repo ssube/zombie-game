@@ -32,6 +32,9 @@ func activate_children(objective: ZN_BaseObjective) -> void:
 			objectives[child.key] = child
 			_activate_objective(child)
 
+		if child is ZN_BaseAction:
+			child.run(null)
+
 
 func _activate_objective(objective: ZN_BaseObjective) -> void:
 	if menu_node:
