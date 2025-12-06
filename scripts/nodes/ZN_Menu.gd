@@ -20,7 +20,8 @@ enum HudMenu {
 @export var objective_label: Label = null
 @export var target_label: Label = null
 @export var weapon_label: Label = null
-@export var objective_tree_label: Label = null
+@export var inventory_list: Label = null
+@export var objective_tree: Label = null
 
 @export_group("Actions")
 @export var action_label: Label = null
@@ -154,6 +155,7 @@ func show_menu(menu: HudMenu) -> void:
 		$HudLayer/StartMenu.visible = (menu == HudMenu.START_MENU)
 		$HudLayer/LoadingMenu.visible = (menu == HudMenu.LOADING_MENU)
 		$HudLayer/PauseMenu.visible = (menu == HudMenu.PAUSE_MENU)
+		$HudLayer/InventoryMenu.visible = (menu == HudMenu.INVENTORY_MENU)
 		$HudLayer/ObjectivesMenu.visible = (menu == HudMenu.OBJECTIVES_MENU)
 		$HudLayer/GameOverMenu.visible = (menu == HudMenu.GAME_OVER_MENU)
 		$HudLayer/LoadMenu.visible = (menu == HudMenu.LOAD_MENU)
@@ -212,10 +214,50 @@ func _on_new_save_pressed() -> void:
 	if not user_dir.dir_exists("saves"):
 		user_dir.make_dir("saves")
 
-	if ECS.save(data, "user://saves/test.tres"):
+	if ECS.save(data, "user://saves/test_entities.tres"):
 		print("Saved %d entities!" % data.entities.size())
+		
+	if ObjectiveManager.save("user://saves/test_objectives.tres"):
+		print("Saved %d objectives!" % ObjectiveManager.objectives.size())
 
 
 func _on_objectives_pressed() -> void:
-	objective_tree_label.text = ObjectiveManager.print_objective_tree()
+	objective_tree.text = ObjectiveManager.print_objective_tree()
 	show_menu(HudMenu.OBJECTIVES_MENU)
+
+
+func _on_inventory_pressed() -> void:
+	var players: Array[Entity] = ECS.world.query.with_all([ZC_Player]).execute()
+	var inventory: Array[Entity] = []
+	var keys: Array[String] = []
+	for player in players:
+		var c_player := player.get_component(ZC_Player) as ZC_Player
+		keys.append_array(c_player.held_keys)
+
+		if "current_weapon" in player:
+			var player_weapon = player.current_weapon as Node
+			if player_weapon != null and player_weapon is Entity:
+				inventory.append(player_weapon)
+
+		if "inventory_node" in player:
+			var player_inventory = player.inventory_node.get_children()
+			for item in player_inventory:
+				if item is Entity:
+					inventory.append(item)
+
+	var item_names: Array[String] = []
+	for item in inventory:
+		item_names.append(item.name)
+
+	if keys.size() > 0:
+		var key_list = ", ".join(keys)
+		item_names.append("Keys: " + key_list)
+	else:
+		item_names.append("No Keys")
+
+	if item_names.size() == 0:
+		inventory_list.text = "Empty"
+	else:
+		inventory_list.text = "\n".join(item_names)
+
+	show_menu(HudMenu.INVENTORY_MENU)
