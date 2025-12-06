@@ -62,6 +62,14 @@ func find_objective(key: String) -> ZN_BaseObjective:
 	return objectives.get(key)
 
 
+func get_active_objectives() -> Array[ZN_BaseObjective]:
+	return active_objectives.values()
+
+
+func get_objectives() -> Array[ZN_BaseObjective]:
+	return objectives.values()
+
+
 func set_objectives(new_objectives: Array[ZN_BaseObjective] = []) -> void:
 	objectives.clear()
 	active_objectives.clear()
