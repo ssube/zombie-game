@@ -10,7 +10,8 @@ class_name ZE_Character
 @export var move_speed: float = 5.0
 @export var move_acceleration: float = 2.0
 
-@onready var root_3d := get_node(".") as RigidBody3D
+@onready var physics_3d := get_node(".") as RigidBody3D
+@onready var root_3d := get_node(".") as Node3D
 
 var look_direction: Vector3 = Vector3.ZERO:
 	set(value):
@@ -26,11 +27,11 @@ func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 
-	if root_3d == null:
+	if physics_3d == null:
 		return
 
 	apply_movement_force(delta)
-	apply_look_torque(delta, root_3d.global_transform, look_direction)
+	apply_look_torque(delta, physics_3d.global_transform, look_direction)
 
 ## Rotate to face target position
 func look_at_target(look_target_position: Vector3) -> void:
@@ -45,7 +46,7 @@ func move_to_target(move_target_position: Vector3) -> void:
 		if modifier.target is ZC_Effect_Speed:
 			speed_multiplier *= modifier.target.multiplier
 
-	var target_offset: Vector3 = move_target_position - root_3d.global_position
+	var target_offset: Vector3 = move_target_position - physics_3d.global_position
 	target_offset = target_offset.normalized() * move_speed * speed_multiplier
 	set_actor_velocity(target_offset)
 
@@ -64,7 +65,7 @@ func lerp_actor_velocity(target_velocity: Vector3, delta: float) -> void:
 	movement_direction = new_velocity
 
 func apply_movement_force(_delta: float) -> void:
-	var current_vel := root_3d.linear_velocity
+	var current_vel := physics_3d.linear_velocity
 	var current_horizontal := Vector3(current_vel.x, 0, current_vel.z)
 
 	# Target horizontal velocity
@@ -75,9 +76,9 @@ func apply_movement_force(_delta: float) -> void:
 
 	# Apply force proportional to difference (same pattern as torque calculation)
 	# F = m * a, where we want acceleration proportional to velocity error
-	var force := velocity_diff * root_3d.mass * move_acceleration
+	var force := velocity_diff * physics_3d.mass * move_acceleration
 
-	root_3d.apply_central_force(force)
+	physics_3d.apply_central_force(force)
 
 func apply_look_torque(_delta: float, current_transform: Transform3D, target_position: Vector3) -> void:
 	var forward_dir := -current_transform.basis.z  # Forward is -Z in Godot
@@ -98,10 +99,10 @@ func apply_look_torque(_delta: float, current_transform: Transform3D, target_pos
 
 	# Calculate desired angular velocity (proportional control with damping)
 	var desired_angular_vel := angle_diff * look_speed
-	var current_angular_vel := root_3d.angular_velocity.y
+	var current_angular_vel := physics_3d.angular_velocity.y
 
 	# Apply torque to reach desired angular velocity (with built-in damping)
 	var angular_diff := desired_angular_vel - current_angular_vel
-	var torque_strength := angular_diff * root_3d.mass * look_acceleration
+	var torque_strength := angular_diff * physics_3d.mass * look_acceleration
 
-	root_3d.apply_torque(Vector3(0, torque_strength, 0))
+	physics_3d.apply_torque(Vector3(0, torque_strength, 0))

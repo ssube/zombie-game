@@ -8,4 +8,9 @@
 - Start again => start
 - End the conversation => END
 {{dialogue.character_name}}: For more information see the online documentation.
+set dialogue.start_title = "leave"
+=> END
+
+~ leave
+{{dialogue.character_name}}: Please leave.
 => END

@@ -62,11 +62,6 @@ func _register_level_entities() -> void:
 
 	for child in level_entity_root.get_children():
 		add_entity(child)
-		if "inventory_node" in child:
-			var items = child.inventory_node.get_children()
-			for item in items:
-				if item is Entity:
-					ECS.world.add_entity(item)
 
 
 func clear_world(keep_players: bool = true) -> void:
@@ -143,9 +138,13 @@ func load_level(level_name: String, spawn_point: String) -> void:
 
 func add_entity(node: Node) -> void:
 	if node is Entity:
+		print_debug("Registering entity: ", node)
 		ECS.world.add_entity(node)
+		if "inventory_node" in node:
+			add_entity(node.inventory_node)
 	elif node is Node3D:
-		printerr("Entities within Node3D children will not be added: ", node.get_path())
+		for child in node.get_children():
+			add_entity(child)
 	elif node is Node:
 		for child in node.get_children():
 			add_entity(child)

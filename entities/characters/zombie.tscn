@@ -98,15 +98,23 @@ simplify_path = true
 [node name="Behavior" type="Node3D" parent="."]
 
 [node name="VisionCone3D" type="Area3D" parent="Behavior"]
+collision_layer = 16
+collision_mask = 27
 script = ExtResource("12_kv3li")
+collision_layer_ = 16
+collision_mask_ = 27
 metadata/_custom_type_script = "uid://cmgcelj1qxg8o"
 
 [node name="DetectionArea3D" type="Area3D" parent="Behavior"]
+collision_layer = 16
+collision_mask = 24
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Behavior/DetectionArea3D"]
 shape = SubResource("SphereShape3D_8mkit")
 
 [node name="AttackArea3D" type="Area3D" parent="Behavior"]
+collision_layer = 16
+collision_mask = 24
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Behavior/AttackArea3D"]
 shape = SubResource("SphereShape3D_kv3li")
