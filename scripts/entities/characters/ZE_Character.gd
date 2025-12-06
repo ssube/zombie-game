@@ -10,8 +10,12 @@ class_name ZE_Character
 @export var move_speed: float = 5.0
 @export var move_acceleration: float = 2.0
 
-@onready var physics_3d := get_node(".") as RigidBody3D
+@onready var rigid_3d := get_node(".") as RigidBody3D
+@onready var static_3d := get_node(".") as StaticBody3D
 @onready var root_3d := get_node(".") as Node3D
+
+var look_tween: Tween
+var move_tween: Tween
 
 var look_direction: Vector3 = Vector3.ZERO:
 	set(value):
@@ -27,11 +31,13 @@ func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 
-	if physics_3d == null:
-		return
+	if rigid_3d != null:
+		apply_movement_force(delta)
+		apply_look_torque(delta, rigid_3d.global_transform, look_direction)
 
-	apply_movement_force(delta)
-	apply_look_torque(delta, physics_3d.global_transform, look_direction)
+	if static_3d != null:
+		apply_movement_tween(delta)
+		apply_look_tween(delta, static_3d.global_transform, look_direction)
 
 ## Rotate to face target position
 func look_at_target(look_target_position: Vector3) -> void:
@@ -46,7 +52,7 @@ func move_to_target(move_target_position: Vector3) -> void:
 		if modifier.target is ZC_Effect_Speed:
 			speed_multiplier *= modifier.target.multiplier
 
-	var target_offset: Vector3 = move_target_position - physics_3d.global_position
+	var target_offset: Vector3 = move_target_position - rigid_3d.global_position
 	target_offset = target_offset.normalized() * move_speed * speed_multiplier
 	set_actor_velocity(target_offset)
 
@@ -65,7 +71,7 @@ func lerp_actor_velocity(target_velocity: Vector3, delta: float) -> void:
 	movement_direction = new_velocity
 
 func apply_movement_force(_delta: float) -> void:
-	var current_vel := physics_3d.linear_velocity
+	var current_vel := rigid_3d.linear_velocity
 	var current_horizontal := Vector3(current_vel.x, 0, current_vel.z)
 
 	# Target horizontal velocity
@@ -76,9 +82,9 @@ func apply_movement_force(_delta: float) -> void:
 
 	# Apply force proportional to difference (same pattern as torque calculation)
 	# F = m * a, where we want acceleration proportional to velocity error
-	var force := velocity_diff * physics_3d.mass * move_acceleration
+	var force := velocity_diff * rigid_3d.mass * move_acceleration
 
-	physics_3d.apply_central_force(force)
+	rigid_3d.apply_central_force(force)
 
 func apply_look_torque(_delta: float, current_transform: Transform3D, target_position: Vector3) -> void:
 	var forward_dir := -current_transform.basis.z  # Forward is -Z in Godot
@@ -99,10 +105,37 @@ func apply_look_torque(_delta: float, current_transform: Transform3D, target_pos
 
 	# Calculate desired angular velocity (proportional control with damping)
 	var desired_angular_vel := angle_diff * look_speed
-	var current_angular_vel := physics_3d.angular_velocity.y
+	var current_angular_vel := rigid_3d.angular_velocity.y
 
 	# Apply torque to reach desired angular velocity (with built-in damping)
 	var angular_diff := desired_angular_vel - current_angular_vel
-	var torque_strength := angular_diff * physics_3d.mass * look_acceleration
+	var torque_strength := angular_diff * rigid_3d.mass * look_acceleration
 
-	physics_3d.apply_torque(Vector3(0, torque_strength, 0))
+	rigid_3d.apply_torque(Vector3(0, torque_strength, 0))
+
+func apply_movement_tween(_delta: float) -> void:
+	if move_tween and move_tween.is_running():
+		return
+
+	var movement_duration := movement_direction.length()
+	movement_duration = maxf(movement_duration, 5.0)
+
+	if is_zero_approx(movement_direction.length_squared()):
+		return
+
+	move_tween = create_tween()
+	move_tween.tween_property(root_3d, "global_position", movement_direction, movement_duration).as_relative()
+
+func apply_look_tween(_delta: float, current_transform: Transform3D, target_position: Vector3) -> void:
+	if look_tween and look_tween.is_running():
+		return
+
+	var look_transform := current_transform.looking_at(target_position, Vector3.UP, true)
+	var look_rotation := look_transform.basis.get_euler()
+	var current_rotation := current_transform.basis.get_euler()
+
+	if is_zero_approx(current_rotation.distance_squared_to(look_rotation)):
+		return
+
+	look_tween = create_tween()
+	look_tween.tween_property(root_3d, "rotation", look_rotation, 0.5)

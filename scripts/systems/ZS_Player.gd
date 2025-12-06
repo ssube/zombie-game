@@ -218,25 +218,15 @@ func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
 
 
 func use_character(entity: Entity, player_entity: Entity) -> void:
-	# turn to face player
-	#if entity is ZE_Character:
-	#	entity.look_at_target(player_entity.global_position)
-
-	var node_3d := entity.get_node(".") as Node3D
-	var forward = player_entity.global_position - node_3d.global_position
-	forward.y = 0
-	var look_basis = Basis.looking_at(forward, Vector3.UP, true)
-	var look_transform = Transform3D(look_basis, node_3d.position)
-
-	var tween := node_3d.create_tween()
-	tween.tween_property(node_3d, "transform", look_transform, 1.0)
-
 	# start dialogue
 	var dialogue = entity.get_component(ZC_Dialogue)
 	DialogueManager.show_dialogue_balloon(dialogue.dialogue_tree, dialogue.start_title, [
 		{
 			"dialogue" = dialogue,
-			"entity" = entity,
+			# TODO: pass dictionary of markers
+			"markers" = {},
+			"player" = player_entity,
+			"speaker" = entity,
 		}
 	])
 

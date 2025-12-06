@@ -10,8 +10,8 @@ func on_ready():
 	# Sync transform from scene to component
 	var transform = get_component(ZC_Transform) as ZC_Transform
 	if transform:
-		transform.position = physics_3d.global_position
-		transform.rotation = physics_3d.global_rotation
+		transform.position = rigid_3d.global_position
+		transform.rotation = rigid_3d.global_rotation
 
 	if events:
 		events.on_ready(self)
