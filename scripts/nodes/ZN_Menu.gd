@@ -236,10 +236,17 @@ func _format_bool(value: bool) -> String:
 	else:
 		return "No"
 
+func _format_completed(objective: ZN_BaseObjective) -> String:
+	if not objective.active:
+		return "Not Active"
+
+	return _format_bool(objective.is_completed())
+
 func _add_objective_children(objective: ZN_BaseObjective, item: TreeItem) -> void:
 	var child_item = item.create_child()
 	child_item.set_text(0, objective.title)
 	child_item.set_text(1, _format_bool(objective.optional))
+	child_item.set_text(2, _format_completed(objective))
 
 	for child in objective.get_children():
 		if child is ZN_BaseObjective:
@@ -251,17 +258,20 @@ func _on_objectives_pressed() -> void:
 	objective_tree.clear()
 	objective_tree.set_column_title(0, "Objective")
 	objective_tree.set_column_title(1, "Optional")
-	#objective_tree.set_column_expand(0, true)
+	objective_tree.set_column_title(2, "Completed")
 	objective_tree.set_column_title_alignment(0, HorizontalAlignment.HORIZONTAL_ALIGNMENT_CENTER)
 	objective_tree.set_column_title_alignment(1, HorizontalAlignment.HORIZONTAL_ALIGNMENT_CENTER)
-	objective_tree.set_column_custom_minimum_width(0, floor(objective_tree.get_rect().size.x * 0.7))
-	#objective_tree.update_minimum_size()
+	objective_tree.set_column_title_alignment(2, HorizontalAlignment.HORIZONTAL_ALIGNMENT_CENTER)
+	objective_tree.set_column_custom_minimum_width(0, floor(objective_tree.get_rect().size.x * 0.5))
+	objective_tree.set_column_custom_minimum_width(1, floor(objective_tree.get_rect().size.x * 0.2))
+	objective_tree.set_column_custom_minimum_width(1, floor(objective_tree.get_rect().size.x * 0.2))
 
 	var root_objectives := ObjectiveManager.get_root_objectives()
 	for objective in root_objectives:
 		var item = objective_tree.create_item()
 		item.set_text(0, objective.title)
 		item.set_text(1, _format_bool(objective.optional))
+		item.set_text(2, _format_completed(objective))
 
 		for child in objective.get_children():
 			if child is ZN_BaseObjective:

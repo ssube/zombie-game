@@ -304,9 +304,9 @@ text = "Objectives"
 horizontal_alignment = 1
 
 [node name="ObjectiveTree" type="Tree" parent="HudLayer/ObjectivesMenu/MarginContainer/VFlowContainer"]
-custom_minimum_size = Vector2(400, 300)
+custom_minimum_size = Vector2(500, 300)
 layout_mode = 2
-columns = 2
+columns = 3
 column_titles_visible = true
 
 [node name="Back" type="Button" parent="HudLayer/ObjectivesMenu/MarginContainer/VFlowContainer"]
