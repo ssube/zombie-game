@@ -56,8 +56,18 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		return
 
-	if event.is_action_pressed("game_pause"):
+	if event.is_action_pressed("menu_pause"):
 		toggle_pause()
+		get_viewport().set_input_as_handled()
+
+	if event.is_action_pressed("menu_inventory"):
+		set_pause(true)
+		_on_inventory_pressed()
+		get_viewport().set_input_as_handled()
+
+	if event.is_action_pressed("menu_objectives"):
+		set_pause(true)
+		_on_objectives_pressed()
 		get_viewport().set_input_as_handled()
 
 func set_crosshair_color(color: Color) -> void:

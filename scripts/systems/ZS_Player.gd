@@ -67,7 +67,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			weapon_body.global_transform = entity.hands_node.global_transform
 
 		# Pause menu
-		if input.game_pause:
+		if input.menu_pause:
 			%Hud.toggle_pause()
 
 		# Weapon switching

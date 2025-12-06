@@ -689,7 +689,7 @@ metadata/_custom_type_script = "uid://b560n5psxwkuk"
 [node name="DoorObjective" type="Node" parent="Objectives/KeyObjective"]
 script = ExtResource("23_8mki0")
 key = "open_door"
-title = "Use the Door"
+title = "Open the Door"
 metadata/_custom_type_script = "uid://b560n5psxwkuk"
 
 [node name="ZombieObjective" type="Node" parent="Objectives/KeyObjective/DoorObjective"]

@@ -14,8 +14,10 @@ class_name ZC_Input
 @export var use_light: bool = false
 @export var use_heal: bool = false
 
-@export_group("Game")
-@export var game_pause: bool = false
+@export_group("Menus")
+@export var menu_pause: bool = false
+@export var menu_inventory: bool = false
+@export var menu_objectives: bool = false
 
 @export_group("Speed")
 @export var walk_speed := 5.0
