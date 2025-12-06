@@ -63,9 +63,14 @@ func push_action(action: String) -> void:
 
 func clear_objective_label() -> void:
 	objective_label.text = ""
+	set_objective_visible(false)
 
 func set_objective_label(text: String) -> void:
 	objective_label.text = text
+	set_objective_visible(text != "")
+
+func set_objective_visible(visible: bool = true) -> void:
+	objective_label.visible = visible
 
 func clear_target_label() -> void:
 	target_label.text = ""

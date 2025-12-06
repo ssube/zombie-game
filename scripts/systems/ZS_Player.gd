@@ -218,8 +218,14 @@ func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
 
 
 func use_character(entity: Entity) -> void:
+	# TODO: turn to face player
 	var dialogue = entity.get_component(ZC_Dialogue)
-	DialogueManager.show_dialogue_balloon(dialogue.dialogue_tree, dialogue.start_title)
+	DialogueManager.show_dialogue_balloon(dialogue.dialogue_tree, dialogue.start_title, [
+		{
+			"dialogue" = dialogue,
+			"entity" = entity,
+		}
+	])
 
 
 func use_door(entity: Entity, player: ZC_Player) -> void:

@@ -1,11 +1,11 @@
 ~ start
-Nathan: [[Hi|Hello|Howdy]], welcome to the hotel.
-Nathan: Here are some choices.
+{{dialogue.character_name}}: [[Hi|Hello|Howdy]], welcome to the hotel.
+{{dialogue.character_name}}: Here are some choices.
 - First one
 	Nathan: You picked the first one.
 - Second one
 	Nathan: You picked the second one.
 - Start again => start
 - End the conversation => END
-Nathan: For more information see the online documentation.
+{{dialogue.character_name}}: For more information see the online documentation.
 => END

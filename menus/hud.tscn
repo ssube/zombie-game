@@ -144,6 +144,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
 
 [node name="ActionLabel" type="Label" parent="HudLayer/GameHud/TopContainer"]
 layout_mode = 2
+text = "Recent Actions"
 horizontal_alignment = 1
 
 [node name="StartMenu" type="AspectRatioContainer" parent="HudLayer"]

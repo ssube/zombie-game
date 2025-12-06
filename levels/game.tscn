@@ -23,10 +23,14 @@
 [node name="Game" type="Node3D"]
 script = ExtResource("1_7ti0h")
 level_scenes = Dictionary[String, Resource]({
-"0": ExtResource("28_u1aa1"),
 "1": ExtResource("3_bk7mf"),
-"1_hotel": ExtResource("4_hq1ly")
+"1_hotel": ExtResource("4_hq1ly"),
+"debug": ExtResource("28_u1aa1")
 })
+start_level = "1"
+start_marker = "Start"
+debug_level = "debug"
+debug_marker = "Start"
 
 [node name="World" type="Node" parent="."]
 unique_name_in_owner = true
@@ -91,8 +95,6 @@ unique_name_in_owner = true
 
 [node name="Level" type="Node3D" parent="."]
 unique_name_in_owner = true
-
-[node name="Level0" parent="Level" instance=ExtResource("28_u1aa1")]
 
 [connection signal="level_loaded" from="." to="Hud" method="_on_level_loaded"]
 [connection signal="level_loading" from="." to="Hud" method="_on_level_loading"]

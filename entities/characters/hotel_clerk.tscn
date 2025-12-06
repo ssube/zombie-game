@@ -10,6 +10,7 @@
 [sub_resource type="Resource" id="Resource_4sttm"]
 script = ExtResource("4_jkcq6")
 dialogue_tree = ExtResource("3_eirhj")
+character_name = "Hotel Clerk"
 metadata/_custom_type_script = "uid://b0eipv08nprbd"
 
 [sub_resource type="Resource" id="Resource_y41co"]

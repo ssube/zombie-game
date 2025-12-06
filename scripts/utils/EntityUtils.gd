@@ -12,6 +12,12 @@ static func is_zombie(entity: Node) -> bool:
 
 	return entity.has_component(ZC_Enemy)
 
+static func is_explosive(entity: Node) -> bool:
+	if entity is not Entity:
+		return false
+
+	return entity.has_component(ZC_Explosive)
+
 static func is_flammable(entity: Node) -> bool:
 	if entity is not Entity:
 		return false

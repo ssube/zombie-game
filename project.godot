@@ -25,6 +25,10 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 settings/addon_root_folder="res://addons/debug_draw_3d"
 
+[dialogue_manager]
+
+runtime/balloon_path="res://dialogue/balloon.tscn"
+
 [display]
 
 window/size/viewport_width=1280
@@ -37,6 +41,10 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://add
 [filesystem]
 
 import/blender/enabled=false
+
+[func_godot]
+
+default_map_settings="uid://dkql5djyx2s23"
 
 [gecs]
 

@@ -4,7 +4,15 @@ signal level_loading
 signal level_loaded
 
 @export var level_scenes: Dictionary[String, Resource] = {}
+
+@export_group("Start")
 @export var start_level: String = ''
+@export var start_marker: String = ''
+
+@export_group("Debug")
+@export var debug_level: String = ''
+@export var debug_marker: String = ''
+
 @onready var last_level: String = start_level
 
 func _ready():
@@ -31,7 +39,10 @@ func _ready():
 	for child in entity_root.get_children():
 		add_entity(child)
 
-	_register_level_entities()
+	if OS.is_debug_build():
+		load_level(debug_level, debug_marker)
+	else:
+		load_level(start_level, start_marker)
 
 func _process(delta):
 	# Process all systems

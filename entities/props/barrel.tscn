@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cq0idhwb5f2oq"]
+[gd_scene load_steps=21 format=4 uid="uid://cq0idhwb5f2oq"]
 
 [ext_resource type="Script" uid="uid://dhsuals8autq1" path="res://scripts/entities/props/ZE_Barrel.gd" id="1_o8a62"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wrl38"]
@@ -9,15 +9,14 @@
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="6_k4gqj"]
 [ext_resource type="Material" uid="uid://d4bmgb0pkgmpm" path="res://materials/effects/shimmer_danger.tres" id="7_bv25f"]
 [ext_resource type="Texture2D" uid="uid://duo2qqruxq60g" path="res://assets/Barrels/Textures/Red.png" id="8_bv25f"]
+[ext_resource type="Script" uid="uid://1g2x62biipwl" path="res://scripts/components/status/ZC_Explosive.gd" id="8_vddsl"]
 [ext_resource type="AudioStream" uid="uid://cedq4twkuc4vs" path="res://sounds/Sound Effects/Explosions/explosion_close_short_ufx_3.ogg" id="10_rox5l"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="11_vddsl"]
 
 [sub_resource type="Resource" id="Resource_kpq4c"]
 script = ExtResource("3_dwmog")
-ignite_on_hit = true
-explode_on_death = true
 effect_path = NodePath("Effects/FireEffect")
-explosion_scene = ExtResource("3_wrl38")
+ignite_on_hit = true
 metadata/_custom_type_script = "uid://jokkv7skgimj"
 
 [sub_resource type="Resource" id="Resource_506tl"]
@@ -33,6 +32,12 @@ shimmer_material = ExtResource("7_bv25f")
 shimmer_nodes = Array[NodePath]([NodePath("Barrel/Barrel")])
 name = "Explosive Barrel"
 metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_r7jr2"]
+script = ExtResource("8_vddsl")
+explosion_scene = ExtResource("3_wrl38")
+explode_on_death = true
+metadata/_custom_type_script = "uid://1g2x62biipwl"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dkbv7"]
 resource_name = "BarrelRed"
@@ -85,7 +90,7 @@ collision_layer = 2
 collision_mask = 31
 mass = 5.0
 script = ExtResource("1_o8a62")
-component_resources = Array[ExtResource("2_wrl38")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl"), SubResource("Resource_0kgpt")])
+component_resources = Array[ExtResource("2_wrl38")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl"), SubResource("Resource_0kgpt"), SubResource("Resource_r7jr2")])
 
 [node name="Barrel" type="Node3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

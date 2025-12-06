@@ -6,9 +6,12 @@ func query():
 
 func process(entities: Array[Entity], _components: Array, _delta: float):
 	for entity in entities:
+		if entity == null:
+			printerr("Processing null entity")
+			continue 
+			
 		var health := entity.get_component(ZC_Health) as ZC_Health
 
-		# var damage := entity.get_component(ZC_Damage) as ZC_Damage
 		var damages := entity.get_relationships(RelationshipUtils.any_damage) as Array[Relationship]
 		if damages.size() == 0:
 			continue
@@ -26,10 +29,10 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			if skin != null and skin.material_dead != null:
 				update_skin_material(entity, skin, skin.material_dead)
 
-			if EntityUtils.is_flammable(entity):
-				var flammable: ZC_Flammable = entity.get_component(ZC_Flammable)
-				if flammable.explode_on_death:
-					var explosion = flammable.explosion_scene.instantiate() as Node3D
+			if EntityUtils.is_explosive(entity):
+				var explosive: ZC_Explosive = entity.get_component(ZC_Explosive)
+				if explosive.explode_on_death:
+					var explosion = explosive.explosion_scene.instantiate() as Node3D
 					var entity_node: Node3D = entity.get_node(".") as Node3D
 
 					# Place the explosion at the same position as the entity

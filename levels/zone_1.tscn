@@ -527,7 +527,7 @@ environment = SubResource("Environment_384l5")
 
 [node name="Markers" type="Node" parent="."]
 
-[node name="MainSpawn" type="Marker3D" parent="Markers"]
+[node name="Start" type="Marker3D" parent="Markers"]
 transform = Transform3D(-0.9989903, 0, 0.0449271, 0, 1, 0, -0.0449271, 0, -0.9989903, -18.739, 1, -18.209)
 
 [node name="Areas" type="Node" parent="."]
