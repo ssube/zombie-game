@@ -6,9 +6,13 @@
 - Second one
 	{{dialogue.character_name}}: You picked the second one.
 - Start again => start
-- End the conversation => END
+- End the conversation => goodbye
 {{dialogue.character_name}}: For more information see the online documentation.
 set dialogue.start_title = "leave"
+=> END
+
+~ goodbye
+{{dialogue.character_name}}: Goodbye
 => END
 
 ~ leave
