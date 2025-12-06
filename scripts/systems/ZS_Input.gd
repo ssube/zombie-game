@@ -16,9 +16,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		var turn_input = Input.get_vector("look_down", "look_up", "look_right", "look_left")
 		turn_input *= turn_factor
 		turn_input = turn_input.clampf(-turn_factor, +turn_factor)
-		# print("turn input: ", turn_input)
 
-		#input.turn_direction = Vector3.ZERO
 		input.turn_direction.x = turn_input.x
 		input.turn_direction.y = turn_input.y
 
@@ -35,7 +33,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		else:
 			input.turn_direction.z = 0
 
-		input.game_pause = Input.is_action_just_pressed("game_pause")
+		input.game_pause = false # Input.is_action_just_pressed("game_pause")
 
 		input.move_jump = Input.is_action_just_pressed("move_jump")
 		input.move_crouch = Input.is_action_pressed("move_crouch")

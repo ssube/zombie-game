@@ -48,6 +48,14 @@ func _process(delta: float) -> void:
 			action_queue.pop_front()
 			update_action_queue.call_deferred()
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		return
+
+	if event.is_action_pressed("game_pause"):
+		toggle_pause()
+		get_viewport().set_input_as_handled()
+
 func set_crosshair_color(color: Color) -> void:
 	crosshair.modulate = color
 
@@ -122,6 +130,8 @@ func set_pause(pause: bool) -> void:
 	get_tree().paused = pause
 	if pause:
 		show_menu(HudMenu.PAUSE_MENU)
+	else:
+		show_menu(HudMenu.NONE)
 
 
 func toggle_pause() -> void:
