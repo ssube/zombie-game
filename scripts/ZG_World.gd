@@ -22,6 +22,7 @@ func _ready():
 	var system_root = %Systems
 	for child in system_root.get_children():
 		if child is System:
+			print_debug("Registering system: ", child.get_path())
 			ECS.world.add_system(child)
 		else:
 			printerr("Child is not a system: ", child.get_path())
@@ -30,6 +31,7 @@ func _ready():
 	var observer_root = %Observers
 	for child in observer_root.get_children():
 		if child is Observer:
+			print_debug("Registering observer: ", child.get_path())
 			ECS.world.add_observer(child)
 		else:
 			printerr("Child is not an observer: ", child)
@@ -162,6 +164,7 @@ func _register_level_objectives() -> void:
 	var level_objective_root = level_node.get_child(0).get_node("Objectives")
 	if level_objective_root == null:
 		printerr("Level is missing Entities node!")
+		return
 
 	var objectives: Array[ZN_BaseObjective] = []
 	for child in level_objective_root.get_children():
