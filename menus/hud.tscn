@@ -193,6 +193,7 @@ text = "Exit"
 
 [node name="PauseMenu" type="AspectRatioContainer" parent="HudLayer"]
 process_mode = 2
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -243,6 +244,7 @@ text = "Exit"
 
 [node name="InventoryMenu" type="AspectRatioContainer" parent="HudLayer"]
 process_mode = 2
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -263,10 +265,14 @@ alignment = 1
 [node name="InventoryHeader" type="Label" parent="HudLayer/InventoryMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "Inventory"
+horizontal_alignment = 1
 
-[node name="InventoryList" type="Label" parent="HudLayer/InventoryMenu/MarginContainer/VFlowContainer"]
+[node name="InventoryList" type="ItemList" parent="HudLayer/InventoryMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
-text = "Inventory List"
+auto_width = true
+auto_height = true
+item_count = 1
+item_0/text = "Inventory Items"
 
 [node name="Back" type="Button" parent="HudLayer/InventoryMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
@@ -293,11 +299,14 @@ alignment = 1
 
 [node name="ObjectiveHeader" type="Label" parent="HudLayer/ObjectivesMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
-text = "Objective Header"
+text = "Objectives"
+horizontal_alignment = 1
 
-[node name="ObjectiveTree" type="Label" parent="HudLayer/ObjectivesMenu/MarginContainer/VFlowContainer"]
+[node name="ObjectiveTree" type="Tree" parent="HudLayer/ObjectivesMenu/MarginContainer/VFlowContainer"]
+custom_minimum_size = Vector2(400, 300)
 layout_mode = 2
-text = "Objective Tree"
+columns = 2
+column_titles_visible = true
 
 [node name="Back" type="Button" parent="HudLayer/ObjectivesMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2

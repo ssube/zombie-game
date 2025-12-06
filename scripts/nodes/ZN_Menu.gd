@@ -20,8 +20,8 @@ enum HudMenu {
 @export var objective_label: Label = null
 @export var target_label: Label = null
 @export var weapon_label: Label = null
-@export var inventory_list: Label = null
-@export var objective_tree: Label = null
+@export var inventory_list: ItemList = null
+@export var objective_tree: Tree = null
 
 @export_group("Actions")
 @export var action_label: Label = null
@@ -216,13 +216,47 @@ func _on_new_save_pressed() -> void:
 
 	if ECS.save(data, "user://saves/test_entities.tres"):
 		print("Saved %d entities!" % data.entities.size())
-		
+
 	if ObjectiveManager.save("user://saves/test_objectives.tres"):
 		print("Saved %d objectives!" % ObjectiveManager.objectives.size())
 
+func _format_bool(value: bool) -> String:
+	if value:
+		return "Yes"
+	else:
+		return "No"
+
+func _add_objective_children(objective: ZN_BaseObjective, item: TreeItem) -> void:
+	var child_item = item.create_child()
+	child_item.set_text(0, objective.title)
+	child_item.set_text(1, _format_bool(objective.optional))
+
+	for child in objective.get_children():
+		if child is ZN_BaseObjective:
+			_add_objective_children(child, child_item)
+
 
 func _on_objectives_pressed() -> void:
-	objective_tree.text = ObjectiveManager.print_objective_tree()
+	# objective_tree.text = ObjectiveManager.print_objective_tree()
+	objective_tree.clear()
+	objective_tree.set_column_title(0, "Objective")
+	objective_tree.set_column_title(1, "Optional")
+	#objective_tree.set_column_expand(0, true)
+	objective_tree.set_column_title_alignment(0, HorizontalAlignment.HORIZONTAL_ALIGNMENT_CENTER)
+	objective_tree.set_column_title_alignment(1, HorizontalAlignment.HORIZONTAL_ALIGNMENT_CENTER)
+	objective_tree.set_column_custom_minimum_width(0, floor(objective_tree.get_rect().size.x * 0.7))
+	#objective_tree.update_minimum_size()
+
+	var root_objectives := ObjectiveManager.get_root_objectives()
+	for objective in root_objectives:
+		var item = objective_tree.create_item()
+		item.set_text(0, objective.title)
+		item.set_text(1, _format_bool(objective.optional))
+
+		for child in objective.get_children():
+			if child is ZN_BaseObjective:
+				_add_objective_children(child, item)
+
 	show_menu(HudMenu.OBJECTIVES_MENU)
 
 
@@ -245,19 +279,18 @@ func _on_inventory_pressed() -> void:
 				if item is Entity:
 					inventory.append(item)
 
-	var item_names: Array[String] = []
-	for item in inventory:
-		item_names.append(item.name)
-
-	if keys.size() > 0:
-		var key_list = ", ".join(keys)
-		item_names.append("Keys: " + key_list)
+	inventory_list.clear()
+	if inventory.size() == 0:
+		inventory_list.add_item("No Items", null, false)
 	else:
-		item_names.append("No Keys")
+		for item in inventory:
+			var interactive := item.get_component(ZC_Interactive) as ZC_Interactive
+			inventory_list.add_item(interactive.name)
 
-	if item_names.size() == 0:
-		inventory_list.text = "Empty"
+	if keys.size() == 0:
+		inventory_list.add_item("No Keys", null, false)
 	else:
-		inventory_list.text = "\n".join(item_names)
+		for key in keys:
+			inventory_list.add_item("Key: " + key)
 
 	show_menu(HudMenu.INVENTORY_MENU)

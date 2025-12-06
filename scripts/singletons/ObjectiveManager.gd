@@ -85,6 +85,15 @@ func get_completed_objectives() -> Array[ZN_BaseObjective]:
 	return completed
 
 
+func get_root_objectives() -> Array[ZN_BaseObjective]:
+	var roots: Array[ZN_BaseObjective] = []
+	for objective in objectives.values():
+		if objective.get_parent() is not ZN_BaseObjective:
+			roots.append(objective)
+
+	return roots
+
+
 func get_objectives() -> Array[ZN_BaseObjective]:
 	return objectives.values()
 
