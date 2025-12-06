@@ -226,10 +226,10 @@ func use_character(entity: Entity, player_entity: Entity) -> void:
 	var forward = player_entity.global_position - node_3d.global_position
 	forward.y = 0
 	var look_basis = Basis.looking_at(forward, Vector3.UP, true)
-	var look_transform = Transform3D(look_basis, node_3d.global_position)
+	var look_transform = Transform3D(look_basis, node_3d.position)
 
 	var tween := node_3d.create_tween()
-	tween.tween_property(node_3d, "transform", look_transform, 1.0) # .as_relative()
+	tween.tween_property(node_3d, "transform", look_transform, 1.0)
 
 	# start dialogue
 	var dialogue = entity.get_component(ZC_Dialogue)
