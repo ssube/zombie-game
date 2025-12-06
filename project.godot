@@ -21,6 +21,7 @@ ECS="*res://addons/gecs/ecs/ecs.gd"
 DecalManager="*res://scripts/singletons/DecalManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 ObjectiveManager="*res://scripts/singletons/ObjectiveManager.gd"
+DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [debug_draw_3d]
 
@@ -37,7 +38,7 @@ window/size/viewport_height=1024
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/func_godot/plugin.cfg", "res://addons/gecs/plugin.cfg", "res://addons/tattomoosa.vision_cone_3d/plugin.cfg", "res://addons/tbloader/plugin.cfg", "res://addons/zombie_tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/func_godot/plugin.cfg", "res://addons/gecs/plugin.cfg", "res://addons/tattomoosa.vision_cone_3d/plugin.cfg", "res://addons/zombie_tools/plugin.cfg")
 
 [filesystem]
 
