@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=110 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
@@ -10,19 +10,29 @@
 [ext_resource type="PackedScene" uid="uid://bq6a52tvj60bq" path="res://entities/characters/hotel_clerk.tscn" id="11_ggct0"]
 [ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="11_gxks1"]
 [ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/props/ZC_Door.gd" id="12_osodt"]
+[ext_resource type="Script" uid="uid://dvvgjajqy6hg3" path="res://scripts/components/characters/ZC_Enemy.gd" id="12_w633q"]
+[ext_resource type="Script" uid="uid://dlu5li3mn8w5y" path="res://scripts/components/ZC_Transform.gd" id="13_q6gno"]
 [ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/items/medkit.tscn" id="13_vfwqd"]
 [ext_resource type="PackedScene" uid="uid://kod7e8o8xpep" path="res://entities/items/key.tscn" id="14_juy1h"]
+[ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="14_lf4l6"]
 [ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/props/ZC_Portal.gd" id="14_qgvj7"]
 [ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/props/objective.tscn" id="15_7di2q"]
+[ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="15_m8bfh"]
 [ext_resource type="PackedScene" uid="uid://tna8f01ql67u" path="res://entities/weapons/bat.tscn" id="15_owf05"]
 [ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_key.tres" id="16_2sfss"]
+[ext_resource type="Material" uid="uid://d1jglv2507aak" path="res://materials/skins/zombie_dead.tres" id="16_g1jay"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="16_uuq13"]
+[ext_resource type="Material" uid="uid://bajoa8ksbfb81" path="res://materials/skins/zombie_healthy.tres" id="17_2fv0q"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="17_58gyl"]
 [ext_resource type="Script" uid="uid://bdl3b6gan30l0" path="res://scripts/components/status/ZC_Objective.gd" id="17_x1db4"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="18_ggct0"]
+[ext_resource type="Material" uid="uid://rmfci1rvpdo4" path="res://materials/skins/zombie_hurt.tres" id="18_jawnq"]
 [ext_resource type="Material" uid="uid://b7hn4t4hgmaod" path="res://textures/Color Maps/concrete_3.tres" id="19_8mki0"]
+[ext_resource type="Script" uid="uid://b8oatb3tdywrh" path="res://scripts/components/characters/ZC_Skin.gd" id="19_66alr"]
 [ext_resource type="Material" uid="uid://bmxolsa17xlkl" path="res://textures/Color Maps/brick_wall_tx_3.tres" id="20_58gyl"]
+[ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="20_ijfse"]
 [ext_resource type="Material" uid="uid://bc3b71ottph3s" path="res://textures/Color Maps/concrete_5.tres" id="21_ggct0"]
+[ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="21_r7enh"]
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="23_8mki0"]
 
 [sub_resource type="Resource" id="Resource_nq5s6"]
@@ -41,6 +51,49 @@ metadata/_custom_type_script = "uid://0dld8iow0suh"
 script = ExtResource("17_x1db4")
 key = "find_key"
 is_active = true
+metadata/_custom_type_script = "uid://bdl3b6gan30l0"
+
+[sub_resource type="Resource" id="Resource_l1o5o"]
+script = ExtResource("12_w633q")
+metadata/_custom_type_script = "uid://dvvgjajqy6hg3"
+
+[sub_resource type="Resource" id="Resource_tfdn2"]
+script = ExtResource("13_q6gno")
+metadata/_custom_type_script = "uid://dlu5li3mn8w5y"
+
+[sub_resource type="Resource" id="Resource_7tmu0"]
+script = ExtResource("14_lf4l6")
+metadata/_custom_type_script = "uid://cixmecjncarw5"
+
+[sub_resource type="Resource" id="Resource_4bumh"]
+script = ExtResource("15_m8bfh")
+metadata/_custom_type_script = "uid://0ndifcnh0nsp"
+
+[sub_resource type="Resource" id="Resource_wwun5"]
+script = ExtResource("19_66alr")
+material_healthy = ExtResource("17_2fv0q")
+material_injured = ExtResource("18_jawnq")
+material_dead = ExtResource("16_g1jay")
+skin_shapes = Array[NodePath]([NodePath("CSGCylinder3D"), NodePath("CSGSphere3D")])
+metadata/_custom_type_script = "uid://b8oatb3tdywrh"
+
+[sub_resource type="Resource" id="Resource_jpnnd"]
+script = ExtResource("20_ijfse")
+effect_path = NodePath("Effects/FireEffect")
+metadata/_custom_type_script = "uid://jokkv7skgimj"
+
+[sub_resource type="Resource" id="Resource_lkxn3"]
+script = ExtResource("21_r7enh")
+damage = 10
+metadata/_custom_type_script = "uid://c86wth8kvlbt7"
+
+[sub_resource type="Resource" id="Resource_ukt1r"]
+script = ExtResource("17_x1db4")
+key = "shoot_zombie"
+is_active = true
+complete_on_interaction = false
+complete_on_damage = true
+complete_on_death = true
 metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 
 [sub_resource type="Resource" id="Resource_6y5fu"]
@@ -351,6 +404,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 4)
 [node name="Zombie" parent="Entities/Room2" instance=ExtResource("5_fv0x7")]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 3.6006222, 1.038658, 0.25554276)
 id = "Level0_ZE_Zombie_1764359940_94833"
+component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_lkxn3"), SubResource("Resource_ukt1r")])
 
 [node name="Ball" parent="Entities/Room2" instance=ExtResource("6_owf05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.531044, 0.6708808, 1.8977566)
@@ -642,5 +696,6 @@ metadata/_custom_type_script = "uid://b560n5psxwkuk"
 script = ExtResource("23_8mki0")
 key = "shoot_zombie"
 title = "Shoot the Zombie"
+optional = true
 game_state = 1
 metadata/_custom_type_script = "uid://b560n5psxwkuk"

@@ -30,6 +30,12 @@ static func is_interactive(entity: Node) -> bool:
 
 	return entity.has_component(ZC_Interactive)
 
+static func is_objective(entity: Node) -> bool:
+	if entity is not Entity:
+		return false
+
+	return entity.has_component(ZC_Objective)
+
 static func is_weapon(entity: Node) -> bool:
 	if entity is not Entity:
 		return false

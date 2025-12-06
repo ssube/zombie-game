@@ -8,13 +8,23 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 	for entity in entities:
 		if entity == null:
 			printerr("Processing null entity")
-			continue 
-			
+			continue
+
 		var health := entity.get_component(ZC_Health) as ZC_Health
 
 		var damages := entity.get_relationships(RelationshipUtils.any_damage) as Array[Relationship]
 		if damages.size() == 0:
 			continue
+
+		var total_damage := 0
+		for damage_rel in damages:
+			var damage := damage_rel.target as ZC_Damage
+			total_damage += floor(damage.amount)
+
+		if total_damage > 0 and EntityUtils.is_objective(entity):
+			var objective: ZC_Objective = entity.get_component(ZC_Objective)
+			if objective.is_active and objective.complete_on_damage:
+				objective.is_complete = true
 
 		for damage_rel in damages:
 			var damage: ZC_Damage = damage_rel.target as ZC_Damage
@@ -28,6 +38,11 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 
 			if skin != null and skin.material_dead != null:
 				update_skin_material(entity, skin, skin.material_dead)
+
+			if EntityUtils.is_objective(entity):
+				var objective: ZC_Objective = entity.get_component(ZC_Objective)
+				if objective.is_active and objective.complete_on_death:
+					objective.is_complete = true
 
 			if EntityUtils.is_explosive(entity):
 				var explosive: ZC_Explosive = entity.get_component(ZC_Explosive)

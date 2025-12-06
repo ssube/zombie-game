@@ -282,9 +282,9 @@ func use_key(entity: Entity, player: ZC_Player) -> void:
 
 func use_objective(entity: Entity, _player: ZC_Player) -> void:
 	var objective = entity.get_component(ZC_Objective) as ZC_Objective
-	if objective.is_active:
+	if objective.is_active and objective.complete_on_interaction:
 		objective.is_complete = true
-		print("Completed objective: ", objective)
+		print("Completed objective: ", objective.key)
 
 
 func use_portal(entity: Entity, _player_entity: Entity) -> void:

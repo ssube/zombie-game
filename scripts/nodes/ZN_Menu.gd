@@ -1,14 +1,16 @@
 extends Node
 
 enum HudMenu {
+	NONE,
 	START_MENU,
 	PAUSE_MENU,
+	INVENTORY_MENU,
+	OBJECTIVES_MENU,
 	LOADING_MENU,
 	GAME_OVER_MENU,
 	LOAD_MENU,
 	SAVE_MENU,
 	OPTIONS_MENU,
-	NONE
 }
 
 @export var health_bar: ProgressBar = null
@@ -18,6 +20,7 @@ enum HudMenu {
 @export var objective_label: Label = null
 @export var target_label: Label = null
 @export var weapon_label: Label = null
+@export var objective_tree_label: Label = null
 
 @export_group("Actions")
 @export var action_label: Label = null
@@ -151,6 +154,7 @@ func show_menu(menu: HudMenu) -> void:
 		$HudLayer/StartMenu.visible = (menu == HudMenu.START_MENU)
 		$HudLayer/LoadingMenu.visible = (menu == HudMenu.LOADING_MENU)
 		$HudLayer/PauseMenu.visible = (menu == HudMenu.PAUSE_MENU)
+		$HudLayer/ObjectivesMenu.visible = (menu == HudMenu.OBJECTIVES_MENU)
 		$HudLayer/GameOverMenu.visible = (menu == HudMenu.GAME_OVER_MENU)
 		$HudLayer/LoadMenu.visible = (menu == HudMenu.LOAD_MENU)
 		$HudLayer/SaveMenu.visible = (menu == HudMenu.SAVE_MENU)
@@ -200,6 +204,7 @@ func _on_check_box_toggled(toggled_on: bool) -> void:
 
 
 func _on_new_save_pressed() -> void:
+	# TODO: move to save manager singleton
 	var query = ECS.world.query.with_all([C_Persistent])
 	var data = ECS.serialize(query)
 
@@ -209,3 +214,8 @@ func _on_new_save_pressed() -> void:
 
 	if ECS.save(data, "user://saves/test.tres"):
 		print("Saved %d entities!" % data.entities.size())
+
+
+func _on_objectives_pressed() -> void:
+	objective_tree_label.text = ObjectiveManager.print_objective_tree()
+	show_menu(HudMenu.OBJECTIVES_MENU)

@@ -20,5 +20,5 @@ class_name ZC_Objective
 
 @export_group("Triggers")
 @export var complete_on_interaction: bool = true
-@export var complete_on_hit: bool = false
+@export var complete_on_damage: bool = false
 @export var complete_on_death: bool = false
