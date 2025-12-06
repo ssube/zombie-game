@@ -1,20 +1,8 @@
 extends Node
 # class_name ObjectiveManager
 
-# enum ObjectiveStatus {
-# 	NEW,
-# 	PENDING,
-# 	PROGRESS,
-# 	COMPLETED,
-# 	FAILED,
-# }
-
-#@export var counts: Dictionary[String, bool] = {}
-#@export var flags: Dictionary[String, bool] = {}
-
 var menu_node: Node = null
 var objectives: Dictionary[String, ZN_BaseObjective] = {}
-var active_objectives: Dictionary[String, ZN_BaseObjective] = {}
 var current_objective: ZN_BaseObjective = null
 
 signal flag_changed(objective: ZN_FlagObjective, old_value: bool, new_value: bool)
@@ -44,7 +32,6 @@ func _activate_objective(objective: ZN_BaseObjective) -> void:
 		menu_node.set_objective_label(title)
 
 	objective.active = true
-	active_objectives[objective.key] = objective
 	objective_activated.emit(objective)
 
 
@@ -63,7 +50,6 @@ func deactivate_objective(key: String) -> bool:
 		return false
 
 	objective.active = false
-	active_objectives.erase(objective.key)
 	return true
 
 
@@ -72,7 +58,12 @@ func find_objective(key: String) -> ZN_BaseObjective:
 
 
 func get_active_objectives() -> Array[ZN_BaseObjective]:
-	return active_objectives.values()
+	var active: Array[ZN_BaseObjective] = []
+	for objective: ZN_BaseObjective in objectives.values():
+		if objective.active:
+			active.append(objective)
+
+	return active
 
 
 func get_current_objective() -> ZN_BaseObjective:
@@ -103,7 +94,6 @@ func get_objectives() -> Array[ZN_BaseObjective]:
 
 func set_objectives(new_objectives: Array[ZN_BaseObjective] = []) -> void:
 	objectives.clear()
-	active_objectives.clear()
 
 	for objective in new_objectives:
 		add_objective(objective)
@@ -136,7 +126,6 @@ func add_objective(objective: ZN_BaseObjective) -> void:
 
 func _complete_objective(objective: ZN_BaseObjective) -> void:
 	objective.active = false
-	active_objectives.erase(objective.key)
 	activate_children(objective)
 	objective_completed.emit(objective)
 
