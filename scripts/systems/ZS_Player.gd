@@ -95,7 +95,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			if collider != last_shimmer.get(entity) and collider != entity.current_weapon:
 				%Hud.clear_target_label()
 				%Hud.reset_crosshair_color()
-				remove_shimmer(entity)
+				remove_shimmer_key(entity)
 
 			# Use interactive items
 			if collider is Entity and collider != entity.current_weapon:
@@ -149,7 +149,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		else:
 			%Hud.clear_target_label()
 			%Hud.reset_crosshair_color()
-			remove_shimmer(entity)
+			remove_shimmer_key(entity)
 
 		# Update ECS transform from actual node position
 		transform.position = body.global_position
@@ -338,12 +338,7 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 	if weapon == null:
 		return
 
-	# remove target shimmer
-	for shimmer_key in last_shimmer.keys():
-		var shimmer_node = last_shimmer[shimmer_key]
-		if weapon == shimmer_node:
-			last_shimmer.erase(shimmer_key)
-			weapon.remove_component(ZC_Shimmer)
+	remove_shimmer_target(weapon)
 
 	# reparent weapon to player
 	var weapon_body = weapon.get_node(".") as RigidBody3D
@@ -362,15 +357,11 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 
 
 func remove_entity(entity: Entity) -> void:
-	for shimmer_key in last_shimmer.keys():
-		var shimmer_node = last_shimmer[shimmer_key]
-		if entity == shimmer_node:
-			last_shimmer.erase(shimmer_key)
-
+	remove_shimmer_target(entity)
 	EntityUtils.remove(entity)
 
 
-func remove_shimmer(entity: Entity) -> void:
+func remove_shimmer_key(entity: Entity) -> void:
 	if entity in last_shimmer:
 		var last_target = last_shimmer.get(entity)
 		last_shimmer.erase(entity)
@@ -379,6 +370,16 @@ func remove_shimmer(entity: Entity) -> void:
 			printerr("Removing shimmer from null entity: ", entity, last_target)
 		else:
 			last_target.remove_component(ZC_Shimmer)
+
+
+func remove_shimmer_target(entity: Entity) -> void:
+	for shimmer_key in last_shimmer.keys():
+		var shimmer_node = last_shimmer[shimmer_key]
+		if entity == shimmer_node:
+			last_shimmer.erase(shimmer_key)
+
+			if entity != null:
+				entity.remove_component(ZC_Shimmer)
 
 
 ## Equip the next weapon (always the first weapon in the player's inventory)
