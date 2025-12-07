@@ -315,8 +315,17 @@ func use_door(entity: Entity, player: ZC_Player) -> void:
 
 
 func use_food(entity: Entity, player_entity: Entity) -> void:
+	var health = player_entity.get_component(ZC_Health) as ZC_Health
+	if health.current_health >= health.max_health:
+		pickup_item(entity, player_entity)
+		return
+
 	var food = entity.get_component(ZC_Food) as ZC_Food
+	health.current_health = min(health.max_health, health.current_health + food.health)
+
 	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
+	%Hud.push_action("Used food: %s" % interactive.name)
+
 	var sound_node = entity.get_node(interactive.pickup_sound) as ZN_AudioSubtitle3D
 	if sound_node != null:
 		sound_node = sound_node.duplicate() # TODO: make sure this works correctly
@@ -324,17 +333,13 @@ func use_food(entity: Entity, player_entity: Entity) -> void:
 		sound_node.play_subtitle()
 		%Hud.push_action(sound_node.subtitle_tag)
 
-	var health = player_entity.get_component(ZC_Health) as ZC_Health
-	health.current_health = min(health.max_health, health.current_health + food.health)
-	%Hud.push_action("Used food: %s" % interactive.name)
-
 	remove_entity(entity)
 
 
 func use_key(entity: Entity, player: ZC_Player) -> void:
 	var key = entity.get_component(ZC_Key)
 	player.add_key(key.name)
-	%Hud.push_action("Picked up key: %s" % key.name)
+	%Hud.push_action("Found key: %s" % key.name)
 
 	remove_entity(entity)
 
@@ -369,7 +374,7 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 	weapon_body.transform = Transform3D.IDENTITY
 
 	var interactive = weapon.get_component(ZC_Interactive) as ZC_Interactive
-	%Hud.push_action("Picked up weapon: %s" % interactive.name)
+	%Hud.push_action("Found new weapon: %s" % interactive.name)
 
 	var player = player_entity as ZE_Player
 	player.add_relationship(RelationshipUtils.make_holding(weapon))
