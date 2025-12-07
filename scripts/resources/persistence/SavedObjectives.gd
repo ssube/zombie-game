@@ -18,3 +18,8 @@ static func from_manager(manager: ObjectiveManager) -> ZP_SavedObjectives:
 			saved.flags[objective.key] = objective.current_value
 
 	return saved
+
+static func load_path(_path: String) -> ZP_SavedObjectives:
+	assert(false, "TODO: implement this")
+	var saved := ZP_SavedObjectives.new()
+	return saved
