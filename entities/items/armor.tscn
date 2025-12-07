@@ -1,0 +1,38 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8tswr23gn5mg"]
+
+[ext_resource type="Script" uid="uid://bx51blxd4jc27" path="res://scripts/entities/items/ZE_Armor.gd" id="1_w1tgt"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_7qc5y"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_4fhfx"]
+[ext_resource type="Material" uid="uid://duorhhvkpiuvo" path="res://materials/effects/shimmer_food.tres" id="4_6fhcv"]
+[ext_resource type="Script" uid="uid://ch1alymfwwn07" path="res://scripts/components/effects/ZC_Effect_Armor.gd" id="5_xbars"]
+
+[sub_resource type="Resource" id="Resource_yjsqk"]
+script = ExtResource("3_4fhfx")
+shimmer_material = ExtResource("4_6fhcv")
+shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
+name = "Armor"
+metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_rx52j"]
+script = ExtResource("5_xbars")
+multiplier = 0.5
+metadata/_custom_type_script = "uid://ch1alymfwwn07"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5j7rg"]
+albedo_color = Color(0.110000014, 1, 0.46600008, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_swkvo"]
+size = Vector3(0.5, 0.2, 0.5)
+
+[node name="Armor" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("1_w1tgt")
+component_resources = Array[ExtResource("2_7qc5y")]([SubResource("Resource_yjsqk"), SubResource("Resource_rx52j")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.5, 0.2, 0.5)
+material = SubResource("StandardMaterial3D_5j7rg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_swkvo")

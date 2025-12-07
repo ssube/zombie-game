@@ -121,11 +121,15 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 						%Hud.set_crosshair_color(Color.GREEN)
 						if input.use_interact:
 							use_armor(collider, entity)
+						elif input.use_pickup:
+							pickup_item(collider, entity)
 
 					if collider.has_component(ZC_Food):
 						%Hud.set_crosshair_color(Color.GREEN)
 						if input.use_interact:
 							use_food(collider, entity)
+						elif input.use_pickup:
+							pickup_item(collider, entity)
 
 					if collider.has_component(ZC_Key):
 						%Hud.set_crosshair_color(Color.YELLOW)
@@ -146,6 +150,9 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 						%Hud.set_crosshair_color(Color.ORANGE)
 						if input.use_interact:
 							use_weapon(collider, entity)
+						elif input.use_pickup:
+							pickup_item(collider, entity)
+
 		else:
 			%Hud.clear_target_label()
 			%Hud.reset_crosshair_color()
@@ -244,6 +251,19 @@ func _get_level_markers(root: Node = null) -> Dictionary[String, Marker3D]:
 			markers.merge(_get_level_markers(child))
 
 	return markers
+
+
+func pickup_item(entity: Entity, player_entity: Entity) -> void:
+	remove_shimmer_target(entity)
+
+	entity.get_parent().remove_child(entity)
+	entity.visible = false
+
+	var player := player_entity as ZE_Player
+	player.inventory_node.add_child(entity)
+
+	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
+	%Hud.push_action("Picked up item: %s" % interactive.name)
 
 
 func use_character(entity: Entity, player_entity: Entity) -> void:
