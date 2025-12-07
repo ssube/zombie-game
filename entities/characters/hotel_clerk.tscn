@@ -1,24 +1,29 @@
-[gd_scene load_steps=12 format=4 uid="uid://bq6a52tvj60bq"]
+[gd_scene load_steps=17 format=4 uid="uid://bq6a52tvj60bq"]
 
-[ext_resource type="Script" uid="uid://d2ww1flmd4yo4" path="res://scripts/entities/characters/ZE_Survivor.gd" id="1_0qnp1"]
-[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_0wy0w"]
-[ext_resource type="Resource" uid="uid://bjknld1sg8tq0" path="res://dialogue/hotel_clerk.dialogue" id="3_eirhj"]
-[ext_resource type="Script" uid="uid://b0eipv08nprbd" path="res://scripts/components/characters/ZC_Dialogue.gd" id="4_jkcq6"]
-[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="5_04tpt"]
-[ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_key.tres" id="6_w7go0"]
+[ext_resource type="Script" uid="uid://d2ww1flmd4yo4" path="res://scripts/entities/characters/ZE_Survivor.gd" id="1_61xi3"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_ig744"]
+[ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="3_ci84u"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_0wy0w"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_eirhj"]
+[ext_resource type="Resource" uid="uid://bjknld1sg8tq0" path="res://dialogue/hotel_clerk.dialogue" id="6_jkcq6"]
+[ext_resource type="Script" uid="uid://b0eipv08nprbd" path="res://scripts/components/characters/ZC_Dialogue.gd" id="7_04tpt"]
+
+[sub_resource type="Resource" id="Resource_0qnp1"]
+script = ExtResource("3_ci84u")
+metadata/_custom_type_script = "uid://0ndifcnh0nsp"
+
+[sub_resource type="Resource" id="Resource_w7go0"]
+script = ExtResource("4_0wy0w")
+shimmer_material = ExtResource("5_eirhj")
+shimmer_nodes = Array[NodePath]([NodePath("CSGBakedMeshInstance3D"), NodePath("CSGSphere3D")])
+name = "Hotel Clerk"
+metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_4sttm"]
-script = ExtResource("4_jkcq6")
-dialogue_tree = ExtResource("3_eirhj")
+script = ExtResource("7_04tpt")
+dialogue_tree = ExtResource("6_jkcq6")
 character_name = "Hotel Clerk"
 metadata/_custom_type_script = "uid://b0eipv08nprbd"
-
-[sub_resource type="Resource" id="Resource_y41co"]
-script = ExtResource("5_04tpt")
-shimmer_material = ExtResource("6_w7go0")
-shimmer_nodes = Array[NodePath]([NodePath("CSGBakedMeshInstance3D")])
-name = "Clerk"
-metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2n0ki"]
 _surfaces = [{
@@ -37,15 +42,32 @@ points = PackedVector3Array(-0.5, -1, -9.787083e-05, -0.35356304, -1, -0.3535630
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qnp1"]
 albedo_color = Color(0.43, 0.9430001, 1, 1)
 
+[sub_resource type="Animation" id="Animation_0wy0w"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_0qnp1"]
+resource_name = "new_animation"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBakedMeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.5, 1, 0, 1, 0, 1, 1, 0, 1.2, 0, 1.5, 1, 0, 1.2, 0, 2, 1, 0, 1, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eirhj"]
+_data = {
+&"RESET": SubResource("Animation_0wy0w"),
+&"new_animation": SubResource("Animation_0qnp1")
+}
+
 [node name="HotelClerk" type="StaticBody3D"]
 collision_layer = 8
 collision_mask = 31
-script = ExtResource("1_0qnp1")
-look_speed = null
-look_acceleration = null
-move_speed = 0.0
-move_acceleration = 0.0
-component_resources = Array[ExtResource("2_0wy0w")]([SubResource("Resource_4sttm"), SubResource("Resource_y41co")])
+script = ExtResource("1_61xi3")
+component_resources = Array[ExtResource("2_ig744")]([SubResource("Resource_0qnp1"), SubResource("Resource_w7go0"), SubResource("Resource_4sttm")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -62,3 +84,9 @@ shape = SubResource("ConvexPolygonShape3D_qtjoq")
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.25)
 material = SubResource("StandardMaterial3D_0qnp1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_eirhj")
+}
+autoplay = "new_animation"
