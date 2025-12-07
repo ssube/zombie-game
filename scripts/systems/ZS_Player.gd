@@ -139,7 +139,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 					if collider.has_component(ZC_Door):
 						%Hud.set_crosshair_color(Color.DODGER_BLUE)
 						if input.use_interact:
-							use_door(collider, player)
+							use_door(collider, entity)
 
 					if collider.has_component(ZC_Portal):
 						%Hud.set_crosshair_color(Color.GOLD)
@@ -253,6 +253,13 @@ func _get_level_markers(root: Node = null) -> Dictionary[String, Marker3D]:
 	return markers
 
 
+## TODO: should this be part of the audio observer?
+func _add_sound(sound: ZN_AudioSubtitle3D, player_entity: Entity) -> void:
+	player_entity.add_child(sound)
+	sound.play_subtitle()
+	%Hud.push_action(sound.subtitle_tag)
+
+
 func pickup_item(entity: Entity, player_entity: Entity) -> void:
 	remove_shimmer_target(entity)
 
@@ -264,6 +271,10 @@ func pickup_item(entity: Entity, player_entity: Entity) -> void:
 
 	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
 	%Hud.push_action("Picked up item: %s" % interactive.name)
+
+	if interactive.pickup_sound:
+		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
+		_add_sound(sound, player_entity)
 
 
 func use_character(entity: Entity, player_entity: Entity) -> void:
@@ -289,9 +300,6 @@ func use_armor(entity: Entity, player_entity: Entity) -> void:
 
 	remove_shimmer_target(armor)
 
-	var interactive = armor.get_component(ZC_Interactive) as ZC_Interactive
-	%Hud.push_action("Picked up armor: %s" % interactive.name)
-
 	var modifier := armor.get_component(ZC_Effect_Armor) as ZC_Effect_Armor
 	var player = player_entity as ZE_Player
 	player.add_relationship(RelationshipUtils.make_modifier_damage(modifier.multiplier))
@@ -299,9 +307,17 @@ func use_armor(entity: Entity, player_entity: Entity) -> void:
 
 	player.current_armor = entity
 
+	var interactive = armor.get_component(ZC_Interactive) as ZC_Interactive
+	%Hud.push_action("Picked up armor: %s" % interactive.name)
 
-func use_door(entity: Entity, player: ZC_Player) -> void:
+	if interactive.pickup_sound:
+		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
+		_add_sound(sound, player_entity)
+
+
+func use_door(entity: Entity, player_entity: Entity) -> void:
 	var door = entity.get_component(ZC_Door) as ZC_Door
+	var player = player_entity.get_component(ZC_Player) as ZC_Player
 	if door.is_locked:
 		if player.has_key(door.key_name):
 			door.is_locked = false
@@ -312,6 +328,11 @@ func use_door(entity: Entity, player: ZC_Player) -> void:
 	if door.open_on_use and not door.is_locked:
 		door.is_open = !door.is_open
 		print("Door is open: ", door)
+
+		var interactive := entity.get_component(ZC_Interactive) as ZC_Interactive
+		if interactive.use_sound:
+			var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
+			_add_sound(sound, entity)
 
 
 func use_food(entity: Entity, player_entity: Entity) -> void:
@@ -326,12 +347,14 @@ func use_food(entity: Entity, player_entity: Entity) -> void:
 	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
 	%Hud.push_action("Used food: %s" % interactive.name)
 
-	var sound_node = entity.get_node(interactive.pickup_sound) as ZN_AudioSubtitle3D
-	if sound_node != null:
-		sound_node = sound_node.duplicate() # TODO: make sure this works correctly
-		player_entity.add_child(sound_node)
-		sound_node.play_subtitle()
-		%Hud.push_action(sound_node.subtitle_tag)
+	#var sounds := EntityUtils.keep_sounds(entity, player_entity)
+	#for sound in sounds:
+	#	sound.play_subtitle()
+	#	%Hud.push_action(sound.subtitle_tag)
+
+	if interactive.use_sound:
+		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
+		_add_sound(sound, player_entity)
 
 	remove_entity(entity)
 
@@ -350,12 +373,22 @@ func use_objective(entity: Entity, _player: ZC_Player) -> void:
 		objective.is_complete = true
 		print("Completed objective: ", objective.key)
 
+		var interactive := entity.get_component(ZC_Interactive) as ZC_Interactive
+		if interactive.use_sound:
+			var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
+			_add_sound(sound, entity)
+
 
 func use_portal(entity: Entity, _player_entity: Entity) -> void:
 	var portal = entity.get_component(ZC_Portal) as ZC_Portal
 	if portal.is_open:
 		portal.is_active = true
 		print("Activated portal: ", portal)
+
+		var interactive := entity.get_component(ZC_Interactive) as ZC_Interactive
+		if interactive.use_sound:
+			var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
+			_add_sound(sound, entity)
 
 
 func use_weapon(entity: Entity, player_entity: Entity) -> void:
@@ -373,16 +406,21 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 	weapon_body.angular_velocity = Vector3.ZERO
 	weapon_body.transform = Transform3D.IDENTITY
 
-	var interactive = weapon.get_component(ZC_Interactive) as ZC_Interactive
-	%Hud.push_action("Found new weapon: %s" % interactive.name)
-
 	var player = player_entity as ZE_Player
 	player.add_relationship(RelationshipUtils.make_holding(weapon))
 	switch_weapon(player, weapon)
 
+	var interactive = weapon.get_component(ZC_Interactive) as ZC_Interactive
+	%Hud.push_action("Found new weapon: %s" % interactive.name)
+
+	if interactive.use_sound:
+		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
+		_add_sound(sound, entity)
+
 
 func remove_entity(entity: Entity) -> void:
 	remove_shimmer_target(entity)
+	EntityUtils.keep_sounds(entity)
 	EntityUtils.remove(entity)
 
 

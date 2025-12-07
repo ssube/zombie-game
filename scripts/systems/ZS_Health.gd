@@ -59,6 +59,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 					# TODO: this is cutting off explosion sounds
 					# entity.visible = false
 					print("Entity has exploded: ", entity)
+					EntityUtils.keep_sounds(entity)
 					EntityUtils.remove(entity)
 		elif health.current_health < health.max_health:
 			if skin != null and skin.material_injured != null:

@@ -117,3 +117,38 @@ static func remove(entity: Node) -> void:
 		parent.remove_child(entity)
 
 	entity.queue_free()
+
+
+static func _find_sounds(entity: Node3D) -> Array[ZN_AudioSubtitle3D]:
+	if entity is ZN_AudioSubtitle3D:
+		return [entity]
+
+	var results: Array[ZN_AudioSubtitle3D] = []
+	for child in entity.get_children():
+		if child is ZN_AudioSubtitle3D:
+			results.append(child)
+		elif child is Node3D:
+			results.append_array(EntityUtils._find_sounds(child))
+
+	return results
+
+static func keep_sounds(entity: Node, target: Node = null, remove_on_finish: bool = true) -> Array[ZN_AudioSubtitle3D]:
+	assert(entity is Node3D, "entity must be a 3D node")
+	if target == null:
+		target = entity.get_parent()
+	assert(target != null, "target must not be null")
+	assert(target is Node3D, "target must be 3D node")
+
+	var sounds := _find_sounds(entity)
+	for sound in sounds:
+		var sound_position = sound.global_position
+		var sound_rotation = sound.global_rotation
+		sound.get_parent().remove_child(sound)
+		target.add_child(sound)
+		sound.global_position = sound_position
+		sound.global_rotation = sound_rotation
+
+		if remove_on_finish:
+			sound.finished.connect(sound.queue_free)
+
+	return sounds

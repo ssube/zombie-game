@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=4 uid="uid://dirupaj1q5imr"]
+[gd_scene load_steps=25 format=4 uid="uid://dirupaj1q5imr"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_2kns5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_17hxq"]
+[ext_resource type="PackedScene" uid="uid://bbtud7vqwa7qs" path="res://effects/sounds/weapon_pickup.tscn" id="3_04vgk"]
 [ext_resource type="PackedScene" uid="uid://blxc4fcjrrpa2" path="res://entities/weapons/bullet.tscn" id="3_7rb10"]
 [ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/weapons/ZC_Weapon_Ranged.gd" id="4_xq6m6"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="5_17hxq"]
@@ -14,9 +15,10 @@
 
 [sub_resource type="Resource" id="Resource_17hxq"]
 script = ExtResource("5_17hxq")
+name = "Shotgun"
 shimmer_material = ExtResource("6_7rb10")
 shimmer_nodes = Array[NodePath]([NodePath("Shotgun/Shotgun"), NodePath("Shotgun/Shotgun-Detach")])
-name = "Shotgun"
+pickup_sound = ExtResource("3_04vgk")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_7rb10"]
