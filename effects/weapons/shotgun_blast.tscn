@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dktd2ekufselm"]
+[gd_scene load_steps=10 format=3 uid="uid://dktd2ekufselm"]
 
 [ext_resource type="Script" uid="uid://2b0anfdfvkft" path="res://scripts/events/EV_RemoveAfterTimer.gd" id="1_nlgyr"]
+[ext_resource type="AudioStream" uid="uid://cbh3us2kncrl0" path="res://sounds/Sound Effects/Firearms/Fire/shotgun_fire_ufx_1.ogg" id="2_nx8m0"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="3_jplj4"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nlgyr"]
 direction = Vector3(0, 0, -1)
@@ -44,3 +46,12 @@ draw_pass_1 = SubResource("BoxMesh_nlgyr")
 [node name="Smoke" type="GPUParticles3D" parent="."]
 process_material = SubResource("ParticleProcessMaterial_kmwy0")
 draw_pass_1 = SubResource("SphereMesh_25lki")
+
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_nx8m0")
+max_distance = 10.0
+script = ExtResource("3_jplj4")
+play_on_ready = true
+subtitle_text = "Shotgun Blast"
+subtitle_radius = 10.0
+metadata/_custom_type_script = "uid://mcuf24u8q14t"

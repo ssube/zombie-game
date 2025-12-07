@@ -76,12 +76,13 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		elif input.weapon_previous:
 			equip_previous_weapon(entity as ZE_Player)
 
-		# Spawn projectiles
+		# Attack with weapon
 		if input.use_attack:
 			if entity.current_weapon != null:
-				if entity.current_weapon.has_component(ZC_Weapon_Melee):
+				# Weapons can have both types
+				if EntityUtils.is_melee_weapon(entity.current_weapon):
 					swing_weapon(entity, body)
-				if entity.current_weapon.has_component(ZC_Weapon_Ranged):
+				if EntityUtils.is_ranged_weapon(entity.current_weapon):
 					spawn_projectile(entity, body)
 
 		if input.use_light:
@@ -214,19 +215,13 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	var forward = -marker.global_transform.basis.z.normalized()
 	new_projectile.apply_impulse(forward * c_weapon.muzzle_velocity, marker.global_position)
 
-	if c_weapon.projectile_effect:
-		var effect_scene = c_weapon.projectile_effect.instantiate() as Node3D
-		marker.add_child(effect_scene)
-		effect_scene.global_position = marker.global_position
-		effect_scene.global_rotation = marker.global_rotation
+	weapon.apply_effects(ZR_Weapon_Effect.EffectType.MUZZLE_FIRE)
 
-	var sound_node = weapon.get_node(c_weapon.projectile_sound) as ZN_AudioSubtitle3D
-	if sound_node == null:
-		printerr("Weapon sound not found: ", c_weapon.projectile_sound)
-		return
-
-	var sound = ZC_Noise.from_node(sound_node)
-	entity.add_component(sound)
+	#if c_weapon.projectile_effect:
+	#	var effect_scene = c_weapon.projectile_effect.instantiate() as Node3D
+	#	marker.add_child(effect_scene)
+	#	effect_scene.global_position = marker.global_position
+	#	effect_scene.global_rotation = marker.global_rotation
 
 
 func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:

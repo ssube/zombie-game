@@ -8,10 +8,9 @@
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="5_17hxq"]
 [ext_resource type="PackedScene" uid="uid://dktd2ekufselm" path="res://effects/weapons/shotgun_blast.tscn" id="5_l5ox4"]
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="6_7rb10"]
+[ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="6_l5ox4"]
 [ext_resource type="Texture2D" uid="uid://cm5mhpoe8joro" path="res://textures/fire1_ 07.png" id="7_xq6m6"]
 [ext_resource type="Texture2D" uid="uid://dm8xysr4gal26" path="res://assets/PSX-Shotgun/Shotgun_Textures/Shotgun_Texture_2.png" id="8_e2xev"]
-[ext_resource type="AudioStream" uid="uid://cbh3us2kncrl0" path="res://sounds/Sound Effects/Firearms/Fire/shotgun_fire_ufx_1.ogg" id="9_nm3yu"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="10_l5ox4"]
 
 [sub_resource type="Resource" id="Resource_17hxq"]
 script = ExtResource("5_17hxq")
@@ -21,13 +20,20 @@ shimmer_nodes = Array[NodePath]([NodePath("Shotgun/Shotgun"), NodePath("Shotgun/
 pickup_sound = ExtResource("3_04vgk")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
+[sub_resource type="Resource" id="Resource_l5ox4"]
+script = ExtResource("6_l5ox4")
+effect_type = 1
+marker = NodePath("ProjectileMarker")
+effect_scene = ExtResource("5_l5ox4")
+metadata/_custom_type_script = "uid://d3sex4y0oww04"
+
 [sub_resource type="Resource" id="Resource_7rb10"]
 script = ExtResource("4_xq6m6")
 muzzle_velocity = 50.0
 muzzle_marker = NodePath("ProjectileMarker")
+recoil_marker = NodePath("ProjectileMarker")
 projectile_scene = ExtResource("3_7rb10")
-projectile_sound = NodePath("ZN_AudioSubtitle3D")
-projectile_effect = ExtResource("5_l5ox4")
+effects = Array[ExtResource("6_l5ox4")]([SubResource("Resource_l5ox4")])
 metadata/_custom_type_script = "uid://dwsqxsqwtloma"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dhvf"]
@@ -169,11 +175,3 @@ shape = SubResource("BoxShape3D_e2xev")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.98501915, -0.17244488, 0, 0.17244488, 0.98501915, -0.0017776489, -0.2026367, 0.095379725)
 shape = SubResource("BoxShape3D_hvydq")
-
-[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("9_nm3yu")
-max_distance = 10.0
-script = ExtResource("10_l5ox4")
-subtitle_text = "Shotgun Blast"
-subtitle_radius = 10.0
-metadata/_custom_type_script = "uid://mcuf24u8q14t"

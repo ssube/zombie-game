@@ -66,6 +66,20 @@ static func is_weapon(entity: Node) -> bool:
 	)
 
 
+static func is_melee_weapon(entity: Node) -> bool:
+	if entity is not Entity:
+		return false
+
+	return entity.has_component(ZC_Weapon_Melee)
+
+
+static func is_ranged_weapon(entity: Node) -> bool:
+	if entity is not Entity:
+		return false
+
+	return entity.has_component(ZC_Weapon_Ranged)
+
+
 static func has_shimmer(entity: Node) -> bool:
 	if entity is not Entity:
 		return false

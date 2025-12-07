@@ -56,8 +56,6 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 					root.add_child(explosion)
 
 					# Remove the exploded entity
-					# TODO: this is cutting off explosion sounds
-					# entity.visible = false
 					print("Entity has exploded: ", entity)
 					EntityUtils.keep_sounds(entity)
 					EntityUtils.remove(entity)
