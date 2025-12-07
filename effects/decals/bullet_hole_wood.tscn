@@ -1,8 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://yf1xc23rqo27"]
+[gd_scene load_steps=4 format=3 uid="uid://yf1xc23rqo27"]
 
 [ext_resource type="Texture2D" uid="uid://cmpugrrinf3bw" path="res://textures/bullet_hole_32px.png" id="1_qnpub"]
+[ext_resource type="AudioStream" uid="uid://0w6ilyin7ah4" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/IMPACTS and CONTACTS/Short Contact Sounds/sfx_short_contact_sound_230.wav" id="2_m026x"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="3_vagcv"]
 
 [node name="BulletHoleWood" type="Sprite3D"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 modulate = Color(1, 0.66400003, 0.44, 1)
 texture = ExtResource("1_qnpub")
+
+[node name="ImpactBulletMetal" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_m026x")
+script = ExtResource("3_vagcv")
+play_on_ready = true
+subtitle_text = "Bullet Impact"
+subtitle_radius = 3.0
+metadata/_custom_type_script = "uid://mcuf24u8q14t"

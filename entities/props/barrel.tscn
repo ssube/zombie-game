@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dhsuals8autq1" path="res://scripts/entities/props/ZE_Barrel.gd" id="1_o8a62"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wrl38"]
 [ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="3_dwmog"]
-[ext_resource type="PackedScene" uid="uid://dqfrsv8nlncwj" path="res://effects/barrel_explosion.tscn" id="3_wrl38"]
+[ext_resource type="PackedScene" uid="uid://dqfrsv8nlncwj" path="res://effects/props/barrel_explosion.tscn" id="3_wrl38"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="4_vlq2d"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="6_dwmog"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="6_k4gqj"]

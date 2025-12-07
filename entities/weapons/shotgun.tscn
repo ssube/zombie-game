@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://blxc4fcjrrpa2" path="res://entities/weapons/bullet.tscn" id="3_7rb10"]
 [ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/weapons/ZC_Weapon_Ranged.gd" id="4_xq6m6"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="5_17hxq"]
-[ext_resource type="PackedScene" uid="uid://dktd2ekufselm" path="res://effects/shotgun_blast.tscn" id="5_l5ox4"]
+[ext_resource type="PackedScene" uid="uid://dktd2ekufselm" path="res://effects/weapons/shotgun_blast.tscn" id="5_l5ox4"]
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="6_7rb10"]
 [ext_resource type="Texture2D" uid="uid://cm5mhpoe8joro" path="res://textures/fire1_ 07.png" id="7_xq6m6"]
 [ext_resource type="Texture2D" uid="uid://dm8xysr4gal26" path="res://assets/PSX-Shotgun/Shotgun_Textures/Shotgun_Texture_2.png" id="8_e2xev"]
