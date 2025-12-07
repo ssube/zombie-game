@@ -1,6 +1,7 @@
 extends Resource
 class_name ZP_SavedObjectives
 
+@export var active: Dictionary[String, bool] = {}
 @export var counts: Dictionary[String, int] = {}
 @export var flags: Dictionary[String, bool] = {}
 
@@ -8,6 +9,8 @@ static func from_manager(manager: ObjectiveManager) -> ZP_SavedObjectives:
 	var saved := ZP_SavedObjectives.new()
 
 	for objective in manager.objectives.values():
+		saved.active[objective.key] = objective.active
+
 		if objective is ZN_CountObjective:
 			saved.counts[objective.key] = objective.current_count
 

@@ -279,4 +279,8 @@ func load(path: String) -> int:
 			objective.current_value = loaded.flags[flag_key]
 			counter += 1
 
+	for active_key in loaded.active:
+		var objective := find_objective(active_key)
+		objective.active = loaded.active[active_key]
+
 	return counter
