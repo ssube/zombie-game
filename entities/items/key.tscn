@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=4 uid="uid://kod7e8o8xpep"]
 
-[ext_resource type="Script" uid="uid://vgk3yi0ub4yr" path="res://scripts/entities/props/ZE_Key.gd" id="1_lwijo"]
+[ext_resource type="Script" uid="uid://vgk3yi0ub4yr" path="res://scripts/entities/items/ZE_Key.gd" id="1_lwijo"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_xagmd"]
 [ext_resource type="Script" uid="uid://q5lsf8fn6s2" path="res://scripts/components/props/ZC_Key.gd" id="3_478x2"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_nq5s6"]

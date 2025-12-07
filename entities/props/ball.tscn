@@ -1,6 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2xp0y8vxoff3"]
-
-[ext_resource type="Script" uid="uid://5u6m4k3jk7ws" path="res://scripts/entities/props/ZE_Item.gd" id="1_52t4y"]
+[gd_scene load_steps=6 format=3 uid="uid://d2xp0y8vxoff3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i8roh"]
 
@@ -21,7 +19,6 @@ albedo_texture = SubResource("NoiseTexture2D_3ygn7")
 [node name="Ball" type="RigidBody3D"]
 collision_layer = 2
 collision_mask = 31
-script = ExtResource("1_52t4y")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_i8roh")
