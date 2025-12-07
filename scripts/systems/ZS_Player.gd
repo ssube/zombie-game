@@ -117,6 +117,11 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 						if input.use_interact:
 							use_objective(collider, player)
 
+					if collider.has_component(ZC_Effect_Armor):
+						%Hud.set_crosshair_color(Color.GREEN)
+						if input.use_interact:
+							use_armor(collider, entity)
+
 					if collider.has_component(ZC_Food):
 						%Hud.set_crosshair_color(Color.GREEN)
 						if input.use_interact:
@@ -255,6 +260,24 @@ func use_character(entity: Entity, player_entity: Entity) -> void:
 			"speaker" = entity,
 		}
 	])
+
+
+func use_armor(entity: Entity, player_entity: Entity) -> void:
+	var armor = entity as ZE_Armor
+	if armor == null:
+		return
+
+	remove_shimmer_target(armor)
+
+	var interactive = armor.get_component(ZC_Interactive) as ZC_Interactive
+	%Hud.push_action("Picked up armor: %s" % interactive.name)
+
+	var modifier := armor.get_component(ZC_Effect_Armor) as ZC_Effect_Armor
+	var player = player_entity as ZE_Player
+	player.add_relationship(RelationshipUtils.make_modifier_damage(modifier.multiplier))
+	player.add_relationship(RelationshipUtils.make_wearing(armor))
+
+	player.current_armor = entity
 
 
 func use_door(entity: Entity, player: ZC_Player) -> void:

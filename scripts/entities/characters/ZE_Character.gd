@@ -3,6 +3,7 @@ extends ZE_Base
 class_name ZE_Character
 
 @export_group("Inventory")
+@export var current_armor: ZE_Armor = null
 @export var current_weapon: ZE_Weapon = null
 @export var inventory_node: Node = null
 

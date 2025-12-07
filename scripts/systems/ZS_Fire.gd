@@ -17,6 +17,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		var burning := entity.get_component(ZC_Effect_Burning) as ZC_Effect_Burning
 		burning.time_remaining -= accumulated_delta
 
+		# Fire bypasses armor for now
 		entity.add_relationship(RelationshipUtils.make_damage(burning.damage_per_second))
 
 		if burning.time_remaining < 0:

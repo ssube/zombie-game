@@ -16,6 +16,15 @@ static func make_holding(item: Entity) -> Relationship:
 	var holding_component := ZC_Holding.new()
 	return Relationship.new(holding_component, item)
 
+static func make_wearing(item: Entity) -> Relationship:
+	var wearing_component := ZC_Wearing.new()
+	return Relationship.new(wearing_component, item)
+
+static func make_modifier_damage(multiplier: float) -> Relationship:
+	var damage_modifier := ZC_Effect_Armor.new(multiplier)
+	var link = ZC_Modifier.new()
+	return Relationship.new(link, damage_modifier)
+
 static func make_modifier_speed(multiplier: float) -> Relationship:
 	var speed_modifier := ZC_Effect_Speed.new(multiplier)
 	var link = ZC_Modifier.new()

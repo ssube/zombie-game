@@ -86,9 +86,8 @@ func apply_effects(body: Node) -> void:
 
 
 func regular_damage(body: Entity) -> void:
-	if EntityUtils.has_health(body):
-		body.add_relationship(RelationshipUtils.make_damage(damage_amount))
-		print("Applied ", damage_amount, " damage to ", body)
+	var damage := EntityUtils.apply_damage(body, damage_amount)
+	print("Applied ", damage, " damage to ", body)
 
 
 func fire_damage(body: Entity) -> void:

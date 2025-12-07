@@ -30,6 +30,5 @@ func apply_damage(body: Entity) -> void:
 		if not damage_enemies:
 			return # Don't damage enemies
 
-	if EntityUtils.has_health(body):
-		body.add_relationship(RelationshipUtils.make_damage(damage_amount))
-		print("Applied ", damage_amount, " damage to ", body)
+	var damage := EntityUtils.apply_damage(body, damage_amount)
+	print("Applied ", damage, " damage to ", body)

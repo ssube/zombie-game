@@ -22,8 +22,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 				target.apply_impulse(impact_vector)
 
 			if target is Entity:
-				if EntityUtils.has_health(target):
-					target.add_relationship(RelationshipUtils.make_damage(projectile.damage))
+				EntityUtils.apply_damage(target, projectile.damage)
 
 				if EntityUtils.is_flammable(target):
 					var flammable: ZC_Flammable = target.get_component(ZC_Flammable)
