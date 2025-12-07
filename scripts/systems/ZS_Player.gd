@@ -202,6 +202,12 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	var forward = -marker.global_transform.basis.z.normalized()
 	new_projectile.apply_impulse(forward * c_weapon.muzzle_velocity, marker.global_position)
 
+	if c_weapon.projectile_effect:
+		var effect_scene = c_weapon.projectile_effect.instantiate() as Node3D
+		marker.add_child(effect_scene)
+		effect_scene.global_position = marker.global_position
+		effect_scene.global_rotation = marker.global_rotation
+
 	var sound_node = weapon.get_node(c_weapon.projectile_sound) as ZN_AudioSubtitle3D
 	if sound_node == null:
 		printerr("Weapon sound not found: ", c_weapon.projectile_sound)
