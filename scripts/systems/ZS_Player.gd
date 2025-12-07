@@ -217,6 +217,13 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 
 	weapon.apply_effects(ZR_Weapon_Effect.EffectType.MUZZLE_FIRE)
 
+	# tween along recoil path
+	if c_weapon.recoil_path:
+		var recoil_path := c_weapon.recoil_path as PathFollow3D
+		var recoil_tween := weapon.create_tween()
+		recoil_tween.tween_property(recoil_path, "progress_ratio", c_weapon.recoil_per_shot, c_weapon.recoil_time)
+		recoil_tween.tween_property(recoil_path, "progress_ratio", 0.0, c_weapon.recoil_time)
+
 	#if c_weapon.projectile_effect:
 	#	var effect_scene = c_weapon.projectile_effect.instantiate() as Node3D
 	#	marker.add_child(effect_scene)
