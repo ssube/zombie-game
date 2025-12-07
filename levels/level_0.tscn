@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=113 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
@@ -151,12 +151,6 @@ is_locked = true
 key_name = "door"
 close_rotation = Vector3(0, 1.57, 0)
 metadata/_custom_type_script = "uid://qjr7o31fiedq"
-
-[sub_resource type="Resource" id="Resource_7di2q"]
-script = ExtResource("17_x1db4")
-key = "open_door"
-is_active = true
-metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yi3jx"]
 sky_top_color = Color(0.35032377, 0.43960616, 0.67056155, 1)
@@ -456,7 +450,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -11)
 [node name="Door2" parent="Entities/Room4" instance=ExtResource("8_58gyl")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.25, 0, 1)
 id = "Level0_ZE_Door_1765041779_53284"
-component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_vfwqd"), SubResource("Resource_juy1h"), SubResource("Resource_7di2q")])
+component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_vfwqd"), SubResource("Resource_juy1h")])
 
 [node name="Lights" type="Node" parent="."]
 
