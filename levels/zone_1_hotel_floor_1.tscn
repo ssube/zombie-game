@@ -1,4 +1,4 @@
-[gd_scene load_steps=394 format=4 uid="uid://bv4ooq3kct6wv"]
+[gd_scene load_steps=395 format=4 uid="uid://bv4ooq3kct6wv"]
 
 [ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/props/objective.tscn" id="1_5waeb"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_7w2j4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/props/ZC_Portal.gd" id="6_a0yg2"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="7_2038p"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door.tscn" id="7_s4smc"]
+[ext_resource type="PackedScene" uid="uid://bq6a52tvj60bq" path="res://entities/characters/hotel_clerk.tscn" id="8_72jfg"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="8_lpxg8"]
 [ext_resource type="Material" uid="uid://q11wc28gwgth" path="res://textures/Color Maps/wood_5.tres" id="10_s4smc"]
 [ext_resource type="Material" uid="uid://b6lsikrvoffh2" path="res://textures/Color Maps/carpet_pt_1_2.tres" id="12_hxnah"]
@@ -1570,6 +1571,9 @@ transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, -18,
 
 [node name="Door4" parent="Entities" instance=ExtResource("7_s4smc")]
 transform = Transform3D(7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, -32, 0, 34)
+
+[node name="HotelClerk" parent="Entities" instance=ExtResource("8_72jfg")]
+transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, -25.071104, 0.14203715, 32.914597)
 
 [node name="Markers" type="Node" parent="."]
 
