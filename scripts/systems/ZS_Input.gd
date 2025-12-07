@@ -43,6 +43,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		input.use_heal = Input.is_action_just_pressed("use_heal")
 		input.use_interact = Input.is_action_just_pressed("use_interact")
 		input.use_light = Input.is_action_just_pressed("use_light")
+		input.use_pickup = Input.is_action_just_pressed("use_pickup")
 
 		input.weapon_next = Input.is_action_just_pressed("weapon_next")
 		input.weapon_previous = Input.is_action_just_pressed("weapon_previous")
