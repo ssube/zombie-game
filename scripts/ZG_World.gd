@@ -172,5 +172,5 @@ func _register_level_objectives() -> void:
 		if child is ZN_BaseObjective:
 			objectives.append(child)
 
-	print("Loading %d objectives" % objectives.size())
+	print("Loading %d root objectives" % objectives.size())
 	ObjectiveManager.set_objectives(objectives)

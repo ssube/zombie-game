@@ -1,3 +1,3 @@
 @tool
-extends ZE_Item
+extends ZE_Base
 class_name ZE_Weapon

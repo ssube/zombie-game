@@ -21,7 +21,6 @@ func tick(entity: Entity, delta: float, blackboard: ZB_Blackboard) -> TickResult
 
 	var weapon = entity.current_weapon as ZE_Weapon
 	var c_weapon = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
-	# target_player.add_relationship(RelationshipUtils.make_damage(c_weapon.damage))
 	attack_timer = c_weapon.cooldown_time
 
 	var swing_node = weapon.get_node(c_weapon.swing_path) as PathFollow3D
