@@ -1,0 +1,185 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyv5b48xquqot"]
+
+[ext_resource type="Script" uid="uid://dr0t3qprbbuke" path="res://scripts/nodes/ZN_Options.gd" id="1_p3s2b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_labby"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p3s2b")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 2
+
+[node name="Gameplay" type="ScrollContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="GridContainer3" type="GridContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Gameplay"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Gameplay/GridContainer3"]
+layout_mode = 2
+text = "    "
+
+[node name="PhysicalShellsBox" type="CheckBox" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Gameplay/GridContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Physical Shell Casings"
+
+[node name="Label2" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Gameplay/GridContainer3"]
+layout_mode = 2
+text = "    "
+
+[node name="PhysicalMagsBox" type="CheckBox" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Gameplay/GridContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Physical Empty Magazines"
+
+[node name="Graphics" type="ScrollContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="GridContainer2" type="GridContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Graphics"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer2"]
+layout_mode = 2
+text = "    "
+
+[node name="CRTShader" type="CheckBox" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "CRT Shader"
+
+[node name="Label2" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer2"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="ResolutionMenu" type="OptionButton" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 8
+popup/item_0/text = "640x480"
+popup/item_0/id = 0
+popup/item_1/text = "800x600"
+popup/item_1/id = 1
+popup/item_2/text = "1024x768"
+popup/item_2/id = 2
+popup/item_3/text = "1280x800"
+popup/item_3/id = 5
+popup/item_4/text = "1280x1024"
+popup/item_4/id = 3
+popup/item_5/text = "1920x1080"
+popup/item_5/id = 4
+popup/item_6/text = "2560x1440"
+popup/item_6/id = 6
+popup/item_7/text = "3440x1440"
+popup/item_7/id = 7
+
+[node name="Audio" type="ScrollContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="MainVolumeLabel" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio/GridContainer"]
+layout_mode = 2
+text = "Main Volume"
+
+[node name="MainVolumeSlider" type="HSlider" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tick_count = 5
+ticks_on_borders = true
+
+[node name="MusicVolumeLabel" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio/GridContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tick_count = 5
+ticks_on_borders = true
+
+[node name="EffectsVolumeLabel" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio/GridContainer"]
+layout_mode = 2
+text = "Effects Volume"
+
+[node name="EffectsVolumeSlider" type="HSlider" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tick_count = 5
+ticks_on_borders = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="BackButton" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="HSeparator" type="HSeparator" parent="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+theme_override_styles/separator = SubResource("StyleBoxEmpty_labby")
+
+[node name="ApplyButton" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Apply"
+
+[connection signal="toggled" from="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Gameplay/GridContainer3/PhysicalShellsBox" to="." method="_on_physical_shells_box_toggled"]
+[connection signal="toggled" from="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Gameplay/GridContainer3/PhysicalMagsBox" to="." method="_on_physical_mags_box_toggled"]
+[connection signal="toggled" from="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer2/CRTShader" to="." method="_on_crt_shader_toggled"]
+[connection signal="item_selected" from="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer2/ResolutionMenu" to="." method="_on_resolution_menu_item_selected"]
+[connection signal="value_changed" from="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio/GridContainer/MainVolumeSlider" to="." method="_on_main_volume_slider_value_changed"]
+[connection signal="value_changed" from="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio/GridContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio/GridContainer/EffectsVolumeSlider" to="." method="_on_effects_volume_slider_value_changed"]
+[connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]

@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://vcyq2fbg0dts"]
+[gd_scene load_steps=9 format=3 uid="uid://vcyq2fbg0dts"]
 
 [ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/nodes/ZN_Menu.gd" id="1_633jc"]
 [ext_resource type="Shader" uid="uid://ckydjmdamo2fo" path="res://shaders/post_crt.gdshader" id="2_jew8s"]
 [ext_resource type="Texture2D" uid="uid://dwp1uqi51ytw3" path="res://textures/crosshair.png" id="2_rglhv"]
+[ext_resource type="PackedScene" uid="uid://dyv5b48xquqot" path="res://menus/options.tscn" id="4_d51vb"]
+[ext_resource type="Script" uid="uid://dr0t3qprbbuke" path="res://scripts/nodes/ZN_Options.gd" id="5_kldf2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pua1y"]
 shader = ExtResource("2_jew8s")
@@ -238,6 +240,10 @@ text = "Save Game"
 layout_mode = 2
 text = "Load Game"
 
+[node name="Options" type="Button" parent="HudLayer/PauseMenu/MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Options"
+
 [node name="Exit" type="Button" parent="HudLayer/PauseMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "Exit"
@@ -443,6 +449,10 @@ alignment = 1
 layout_mode = 2
 text = "Loading..."
 
+[node name="OptionsMenu" parent="HudLayer" instance=ExtResource("4_d51vb")]
+visible = false
+script = ExtResource("5_kldf2")
+
 [connection signal="pressed" from="HudLayer/StartMenu/MarginContainer/VFlowContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="HudLayer/StartMenu/MarginContainer/VFlowContainer/LoadGame" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="HudLayer/StartMenu/MarginContainer/VFlowContainer/Exit" to="." method="_on_exit_pressed"]
@@ -452,6 +462,7 @@ text = "Loading..."
 [connection signal="pressed" from="HudLayer/PauseMenu/MarginContainer/VFlowContainer/Objectives" to="." method="_on_objectives_pressed"]
 [connection signal="pressed" from="HudLayer/PauseMenu/MarginContainer/VFlowContainer/SaveGame" to="." method="_on_save_game_pressed"]
 [connection signal="pressed" from="HudLayer/PauseMenu/MarginContainer/VFlowContainer/LoadGame" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="HudLayer/PauseMenu/MarginContainer/VFlowContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="HudLayer/PauseMenu/MarginContainer/VFlowContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="HudLayer/InventoryMenu/MarginContainer/VFlowContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="HudLayer/ObjectivesMenu/MarginContainer/VFlowContainer/Back" to="." method="_on_back_pressed"]
@@ -460,3 +471,4 @@ text = "Loading..."
 [connection signal="pressed" from="HudLayer/SaveMenu/MarginContainer/VFlowContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="HudLayer/GameOverMenu/MarginContainer/VFlowContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="HudLayer/GameOverMenu/MarginContainer/VFlowContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="back_pressed" from="HudLayer/OptionsMenu" to="." method="_on_back_pressed"]

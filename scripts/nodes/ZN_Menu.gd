@@ -170,8 +170,13 @@ func show_menu(menu: HudMenu) -> void:
 		$HudLayer/GameOverMenu.visible = (menu == HudMenu.GAME_OVER_MENU)
 		$HudLayer/LoadMenu.visible = (menu == HudMenu.LOAD_MENU)
 		$HudLayer/SaveMenu.visible = (menu == HudMenu.SAVE_MENU)
+		$HudLayer/OptionsMenu.visible = (menu == HudMenu.OPTIONS_MENU)
 
 		update_mouse_mode()
+
+		if menu == HudMenu.OPTIONS_MENU:
+			$HudLayer/OptionsMenu.on_show()
+			$HudLayer/OptionsMenu.on_update()
 
 
 func _on_new_game_pressed() -> void:
@@ -314,3 +319,7 @@ func _on_inventory_pressed() -> void:
 			inventory_list.add_item("Key: " + key)
 
 	show_menu(HudMenu.INVENTORY_MENU)
+
+
+func _on_options_pressed() -> void:
+	show_menu(HudMenu.OPTIONS_MENU)
