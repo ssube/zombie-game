@@ -117,3 +117,8 @@ func _on_music_volume_slider_value_changed(value: float) -> void:
 func _on_effects_volume_slider_value_changed(value: float) -> void:
 	dirty = true
 	options.effects_volume = value
+
+
+func _on_window_mode_menu_item_selected(_index: int) -> void:
+	dirty = true
+	# TODO: add to options
