@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=4 uid="uid://2631yqe4y8ki"]
+[gd_scene load_steps=88 format=4 uid="uid://2631yqe4y8ki"]
 
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="2_1pddc"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_w5fjf"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://bhgbf8ykucy2n" path="res://scripts/nodes/ZN_SpeedModifierArea3D.gd" id="17_32bcm"]
 [ext_resource type="Material" uid="uid://bgup5h01w7ndg" path="res://textures/Color Maps/dirt_4.tres" id="17_wks3y"]
 [ext_resource type="Material" uid="uid://bdascxdveffr4" path="res://textures/Color Maps/concrete_wall_12.tres" id="19_chfad"]
+[ext_resource type="PackedScene" uid="uid://cf8xh1my8wn0y" path="res://materials/environment_day.tscn" id="22_3ioyf"]
 
 [sub_resource type="Resource" id="Resource_q8gv4"]
 script = ExtResource("9_1ytwx")
@@ -38,21 +39,6 @@ script = ExtResource("6_xrb85")
 next_level = "1_hotel"
 spawn_point = "Markers/FrontDoor"
 metadata/_custom_type_script = "uid://cn8mtbap6uudk"
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pfnxa"]
-sky_top_color = Color(0.6901961, 0.73333335, 0.8392157, 1)
-sky_horizon_color = Color(0.6, 0.6784314, 0.6313726, 1)
-ground_horizon_color = Color(0.6, 0.6784314, 0.6313726, 1)
-ground_curve = 0.05
-
-[sub_resource type="Sky" id="Sky_0b37p"]
-sky_material = SubResource("ProceduralSkyMaterial_pfnxa")
-
-[sub_resource type="Environment" id="Environment_384l5"]
-background_mode = 2
-sky = SubResource("Sky_0b37p")
-ambient_light_source = 3
-ambient_light_color = Color(0.5529556, 0.55295557, 0.55295557, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ebfu5"]
 size = Vector3(12, 1, 58)
@@ -511,9 +497,6 @@ light_energy = 2.5
 shadow_enabled = true
 omni_range = 24.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Lights"]
-environment = SubResource("Environment_384l5")
-
 [node name="Markers" type="Node" parent="."]
 
 [node name="Start" type="Marker3D" parent="Markers"]
@@ -523,6 +506,7 @@ transform = Transform3D(-0.9989903, 0, 0.0449271, 0, 1, 0, -0.0449271, 0, -0.998
 
 [node name="RiverArea" type="Area3D" parent="Areas"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.46095, 0, 0)
+collision_mask = 24
 script = ExtResource("17_32bcm")
 metadata/_custom_type_script = "uid://bhgbf8ykucy2n"
 
@@ -776,3 +760,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
 height = 3.0
 vertices = PackedVector3Array(7, 0, 7, 7, 0, -7, -7, 0, -7, -7, 0, 7)
 affect_navigation_mesh = true
+
+[node name="EnvironmentDay" parent="." instance=ExtResource("22_3ioyf")]
