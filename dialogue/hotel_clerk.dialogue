@@ -1,5 +1,9 @@
 ~ start
 set speaker.look_direction = player.global_position
+if player.current_weapon != null:
+	{{dialogue.character_name}}: Please put your weapon down before entering the hotel.
+	=> END
+
 {{dialogue.character_name}}: [[Hi|Hello|Howdy]], welcome to the hotel.
 {{dialogue.character_name}}: Here are some choices.
 - First one
