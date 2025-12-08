@@ -762,3 +762,5 @@ vertices = PackedVector3Array(7, 0, 7, 7, 0, -7, -7, 0, -7, -7, 0, 7)
 affect_navigation_mesh = true
 
 [node name="EnvironmentDay" parent="." instance=ExtResource("22_3ioyf")]
+
+[node name="Objectives" type="Node" parent="."]
