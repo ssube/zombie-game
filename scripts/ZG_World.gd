@@ -157,6 +157,8 @@ func add_entity(node: Node) -> void:
 
 
 func _register_level_objectives() -> void:
+	ObjectiveManager.clear_objectives()
+	
 	var level_node = self.find_child("Level", false)
 	if level_node == null:
 		printerr("Missing level node!")
@@ -164,7 +166,7 @@ func _register_level_objectives() -> void:
 
 	var level_objective_root = level_node.get_child(0).get_node("Objectives")
 	if level_objective_root == null:
-		printerr("Level is missing Entities node!")
+		printerr("Level is missing Objectives node!")
 		return
 
 	var objectives: Array[ZN_BaseObjective] = []

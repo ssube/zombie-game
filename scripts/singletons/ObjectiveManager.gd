@@ -50,6 +50,10 @@ func deactivate_objective(key: String) -> bool:
 	return true
 
 
+func clear_objectives() -> void:
+	objectives.clear()
+
+
 func find_objective(key: String) -> ZN_BaseObjective:
 	return objectives.get(key)
 
@@ -90,7 +94,7 @@ func get_objectives() -> Array[ZN_BaseObjective]:
 
 
 func set_objectives(new_objectives: Array[ZN_BaseObjective] = []) -> void:
-	objectives.clear()
+	clear_objectives()
 
 	for objective in new_objectives:
 		add_objective(objective)

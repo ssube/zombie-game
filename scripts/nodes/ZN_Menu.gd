@@ -316,7 +316,7 @@ func _on_inventory_pressed() -> void:
 		inventory_list.add_item("No Keys", null, false)
 	else:
 		for key in keys:
-			inventory_list.add_item("Key: " + key)
+			inventory_list.add_item("Key: " + key, null, false)
 
 	show_menu(HudMenu.INVENTORY_MENU)
 
