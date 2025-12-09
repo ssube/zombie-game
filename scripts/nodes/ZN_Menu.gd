@@ -20,6 +20,7 @@ enum HudMenu {
 @export var objective_label: Label = null
 @export var target_label: Label = null
 @export var weapon_label: Label = null
+@export var ammo_label: Label = null
 @export var inventory_list: ItemList = null
 @export var objective_tree: Tree = null
 
@@ -40,6 +41,7 @@ func _ready() -> void:
 	clear_objective_label()
 	clear_target_label()
 	clear_weapon_label()
+	clear_ammo_label()
 	reset_crosshair_color()
 	update_mouse_mode()
 	ObjectiveManager.set_menu(self)
@@ -106,6 +108,12 @@ func clear_weapon_label() -> void:
 
 func set_weapon_label(text: String) -> void:
 	weapon_label.text = text
+
+func clear_ammo_label() -> void:
+	ammo_label.text = ""
+
+func set_ammo_label(text: String) -> void:
+	ammo_label.text = text
 
 func set_health(value: int, instant: bool = false) -> void:
 	if health_tween != null:
