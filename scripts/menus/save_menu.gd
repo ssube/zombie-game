@@ -19,4 +19,7 @@ func _on_back_pressed() -> void:
 
 
 func on_update() -> void:
-	pass
+	var saves := SaveManager.list_saves()
+	save_list.clear()
+	for save in saves:
+		save_list.add_item(save)

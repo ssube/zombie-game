@@ -24,6 +24,7 @@ theme_override_constants/v_separation = 16
 alignment = 1
 
 [node name="SavedGames" type="ItemList" parent="MarginContainer/VFlowContainer"]
+custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
 
 [node name="Back" type="Button" parent="MarginContainer/VFlowContainer"]

@@ -8,8 +8,10 @@ signal game_loaded(name: String)
 
 
 func on_update() -> void:
-	# TODO: update the list of saved games
-	pass
+	var saves := SaveManager.list_saves()
+	save_list.clear()
+	for save in saves:
+		save_list.add_item(save)
 
 
 func _on_saved_games_item_activated(index: int) -> void:

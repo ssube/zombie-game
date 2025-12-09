@@ -10,9 +10,23 @@ static func create_path() -> bool:
 
 
 static func list_saves() -> Array[String]:
-	assert(false, "TODO: implement this")
 	SaveManager.create_path()
-	return []
+	var save_dir: DirAccess = DirAccess.open("user://saves")
+	var save_names: Dictionary[String, bool] = {}
+
+	save_dir.list_dir_begin()
+	var file_name = save_dir.get_next()
+	while file_name != "":
+		if save_dir.current_is_dir():
+			printerr("Nested save folders are not supported!")
+		else:
+			print("Found save: ", file_name)
+			var clean_name = file_name.replace("_entities.tres", "").replace("_objectives.tres", "").replace(".tres", "")
+			save_names[clean_name] = true
+
+		file_name = save_dir.get_next()
+
+	return save_names.keys()
 
 
 static func save_game(name: String) -> bool:

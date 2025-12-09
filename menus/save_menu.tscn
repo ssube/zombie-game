@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b1r47a8u2balb" path="res://scripts/menus/save_menu.gd" id="1_x4sum"]
 
-[node name="SaveMenu" type="AspectRatioContainer"]
+[node name="SaveMenu" type="AspectRatioContainer" node_paths=PackedStringArray("save_list")]
 process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,6 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x4sum")
+save_list = NodePath("MarginContainer/VFlowContainer/SavedGames")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -27,6 +28,7 @@ layout_mode = 2
 text = "New Save"
 
 [node name="SavedGames" type="ItemList" parent="MarginContainer/VFlowContainer"]
+custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
 
 [node name="Back" type="Button" parent="MarginContainer/VFlowContainer"]
