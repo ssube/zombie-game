@@ -58,6 +58,14 @@ func find_objective(key: String) -> ZN_BaseObjective:
 	return objectives.get(key)
 
 
+func find_objective_title(title: String) -> ZN_BaseObjective:
+	for objective in objectives.values():
+		if objective.title == title:
+			return objective
+
+	return null
+
+
 func get_active_objectives() -> Array[ZN_BaseObjective]:
 	var active: Array[ZN_BaseObjective] = []
 	for objective: ZN_BaseObjective in objectives.values():

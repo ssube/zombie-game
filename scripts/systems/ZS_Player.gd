@@ -283,22 +283,6 @@ func pickup_item(entity: Entity, player_entity: Entity) -> void:
 		_add_sound(sound, player_entity)
 
 
-func use_character(entity: Entity, player_entity: Entity) -> void:
-	# get level markers
-	var markers := _get_level_markers()
-
-	# start dialogue
-	var dialogue = entity.get_component(ZC_Dialogue)
-	DialogueManager.show_dialogue_balloon(dialogue.dialogue_tree, dialogue.start_title, [
-		{
-			"dialogue" = dialogue,
-			"markers" = markers,
-			"player" = player_entity,
-			"speaker" = entity,
-		}
-	])
-
-
 func use_armor(entity: Entity, player_entity: Entity) -> void:
 	var armor = entity as ZE_Armor
 	if armor == null:
@@ -319,6 +303,22 @@ func use_armor(entity: Entity, player_entity: Entity) -> void:
 	if interactive.pickup_sound:
 		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
 		_add_sound(sound, player_entity)
+
+
+func use_character(entity: Entity, player_entity: Entity) -> void:
+	# get level markers
+	var markers := _get_level_markers()
+
+	# start dialogue
+	var dialogue = entity.get_component(ZC_Dialogue)
+	DialogueManager.show_dialogue_balloon(dialogue.dialogue_tree, dialogue.start_title, [
+		{
+			"dialogue" = dialogue,
+			"markers" = markers,
+			"player" = player_entity,
+			"speaker" = entity,
+		}
+	])
 
 
 func use_door(entity: Entity, player_entity: Entity) -> void:
