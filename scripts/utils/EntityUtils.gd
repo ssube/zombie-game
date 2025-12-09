@@ -1,7 +1,7 @@
 class_name EntityUtils
 
 
-static func apply_damage(entity: Node, base_damage: int) -> int:
+static func apply_damage(entity: Node, base_damage: int, base_multiplier: float = 1.0) -> int:
 	if entity is not Entity:
 		return 0
 
@@ -9,6 +9,8 @@ static func apply_damage(entity: Node, base_damage: int) -> int:
 		return 0
 
 	var multiplier: float = EntityUtils.get_damage_multiplier(entity)
+	multiplier *= base_multiplier
+
 	var damage: int = floor(base_damage * multiplier)
 	entity.add_relationship(RelationshipUtils.make_damage(damage))
 	return damage
@@ -151,7 +153,10 @@ static func keep_sounds(entity: Node, target: Node = null, remove_on_finish: boo
 	if target == null:
 		target = entity.get_parent()
 	assert(target != null, "target must not be null")
-	assert(target is Node3D, "target must be 3D node")
+
+	# TODO: make sure sound position works correctly with non-3D parent
+	# assert(target is Node3D, "target must be 3D node")
+	assert(target is Node, "target must be a node")
 
 	var sounds := _find_sounds(entity)
 	for sound in sounds:

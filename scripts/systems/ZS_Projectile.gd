@@ -12,23 +12,34 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		var ray = entity.get_node(projectile.collision_ray) as RayCast3D
 
 		if ray != null and ray.is_colliding():
-			var target = ray.get_collider()
-			print("Bullet is colliding with: ", target)
-			apply_decal(ray, target)
-			apply_sound(ray, target)
+			var target_object = ray.get_collider()
+			var target_shape = CollisionUtils.get_collision_shape(ray)
 
-			if target is RigidBody3D:
+			print("Bullet is colliding with: ", target_object, ", ", target_shape)
+			apply_decal(ray, target_object)
+			apply_sound(ray, target_object)
+
+			if target_object is RigidBody3D:
 				var impact_vector: Vector3 = ray.get_collision_normal() * -projectile.mass
-				target.apply_impulse(impact_vector)
+				target_object.apply_impulse(impact_vector)
 
-			if target is Entity:
-				EntityUtils.apply_damage(target, projectile.damage)
+			if target_object is Entity:
+				var body_regions = target_object.get_component(ZC_Body_Regions) as ZC_Body_Regions
 
-				if EntityUtils.is_flammable(target):
-					var flammable: ZC_Flammable = target.get_component(ZC_Flammable)
+				var region_multiplier := 1.0
+				if body_regions:
+					for region in body_regions.regions:
+						var region_shape = target_object.get_node(region)
+						if target_shape == region_shape:
+							region_multiplier *= body_regions.regions[region]
+
+				EntityUtils.apply_damage(target_object, projectile.damage, region_multiplier)
+
+				if EntityUtils.is_flammable(target_object):
+					var flammable: ZC_Flammable = target_object.get_component(ZC_Flammable)
 					if flammable.ignite_on_hit:
 						var fire = ZC_Effect_Burning.new()
-						target.add_component(fire)
+						target_object.add_component(fire)
 
 			projectile.piercing -= 1
 			if projectile.piercing <= 0:

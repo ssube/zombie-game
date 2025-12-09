@@ -31,13 +31,13 @@
 [ext_resource type="Script" uid="uid://b8oatb3tdywrh" path="res://scripts/components/characters/ZC_Skin.gd" id="19_66alr"]
 [ext_resource type="Material" uid="uid://bmxolsa17xlkl" path="res://textures/Color Maps/brick_wall_tx_3.tres" id="20_58gyl"]
 [ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="20_ijfse"]
-[ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="21_2fv0q"]
+[ext_resource type="Script" uid="uid://boehksdg08i5l" path="res://scripts/components/characters/ZC_Body_Regions.gd" id="21_g1jay"]
 [ext_resource type="Material" uid="uid://bc3b71ottph3s" path="res://textures/Color Maps/concrete_5.tres" id="21_ggct0"]
-[ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="21_r7enh"]
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="23_8mki0"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="35_lf4l6"]
 [ext_resource type="Script" uid="uid://bn1fw86ypw3a6" path="res://scripts/nodes/actions/ZN_PortalAction.gd" id="35_q6gno"]
 [ext_resource type="Script" uid="uid://cpgnglttfputx" path="res://scripts/nodes/actions/ZN_DoorAction.gd" id="36_m8bfh"]
+[ext_resource type="Script" uid="uid://cpxac3i6p71x0" path="res://scripts/nodes/objectives/ZN_CountObjective.gd" id="38_2fv0q"]
 [ext_resource type="PackedScene" uid="uid://c8tswr23gn5mg" path="res://entities/items/armor.tscn" id="38_g1jay"]
 
 [sub_resource type="Resource" id="Resource_nq5s6"]
@@ -87,14 +87,17 @@ script = ExtResource("20_ijfse")
 effect_path = NodePath("Effects/FireEffect")
 metadata/_custom_type_script = "uid://jokkv7skgimj"
 
-[sub_resource type="Resource" id="Resource_lkxn3"]
-script = ExtResource("21_r7enh")
-damage = 10
-metadata/_custom_type_script = "uid://c86wth8kvlbt7"
+[sub_resource type="Resource" id="Resource_8aduj"]
+script = ExtResource("21_g1jay")
+regions = Dictionary[NodePath, float]({
+NodePath("HeadShape"): 5.0
+})
+metadata/_custom_type_script = "uid://boehksdg08i5l"
 
-[sub_resource type="Resource" id="Resource_ukt1r"]
+[sub_resource type="Resource" id="Resource_2fv0q"]
 script = ExtResource("17_x1db4")
 key = "shoot_zombie"
+score = 1
 is_active = true
 complete_on_interaction = false
 complete_on_damage = true
@@ -401,7 +404,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 4)
 [node name="Zombie" parent="Entities/Room2" instance=ExtResource("5_fv0x7")]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 3.6006222, 1.038658, 0.25554276)
 id = "Level0_ZE_Zombie_1764359940_94833"
-component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_lkxn3"), SubResource("Resource_ukt1r")])
+component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj"), SubResource("Resource_2fv0q")])
 
 [node name="Ball" parent="Entities/Room2" instance=ExtResource("6_owf05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.531044, 0.6708808, 1.8977566)
@@ -696,12 +699,13 @@ unlock = 1
 open = 1
 
 [node name="ZombieObjective" type="Node" parent="Objectives/KeyObjective/DoorObjective"]
-script = ExtResource("23_8mki0")
+script = ExtResource("38_2fv0q")
+target_count = 3
 key = "shoot_zombie"
 title = "Shoot the Zombie"
 optional = true
 game_state = 1
-metadata/_custom_type_script = "uid://b560n5psxwkuk"
+metadata/_custom_type_script = "uid://cpxac3i6p71x0"
 
 [node name="RemoveClerk" type="Node" parent="Objectives/KeyObjective/DoorObjective/ZombieObjective" node_paths=PackedStringArray("target")]
 script = ExtResource("35_lf4l6")

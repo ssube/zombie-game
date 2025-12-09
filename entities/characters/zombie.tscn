@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://ds0q1crcrv862"]
+[gd_scene load_steps=39 format=3 uid="uid://ds0q1crcrv862"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_rffgv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_2yl8o"]
@@ -12,7 +12,7 @@
 [ext_resource type="Material" uid="uid://rmfci1rvpdo4" path="res://materials/skins/zombie_hurt.tres" id="9_wwun5"]
 [ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="10_tfdn2"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="11_7tmu0"]
-[ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="12_k72ww"]
+[ext_resource type="Script" uid="uid://boehksdg08i5l" path="res://scripts/components/characters/ZC_Body_Regions.gd" id="12_j7lgi"]
 [ext_resource type="Script" uid="uid://cmgcelj1qxg8o" path="res://addons/tattomoosa.vision_cone_3d/src/VisionCone3D.gd" id="12_kv3li"]
 [ext_resource type="Script" uid="uid://di74g8tmachs3" path="res://scripts/behavior/fsm/ZB_StateMachine.gd" id="15_u1ccf"]
 [ext_resource type="Script" uid="uid://cwxhmhhcchnk5" path="res://scripts/behavior/events/ZB_Zombie.gd" id="16_3lyvt"]
@@ -57,12 +57,17 @@ script = ExtResource("10_tfdn2")
 effect_path = NodePath("Effects/FireEffect")
 metadata/_custom_type_script = "uid://jokkv7skgimj"
 
-[sub_resource type="Resource" id="Resource_lkxn3"]
-script = ExtResource("12_k72ww")
-damage = 10
-metadata/_custom_type_script = "uid://c86wth8kvlbt7"
+[sub_resource type="Resource" id="Resource_8aduj"]
+script = ExtResource("12_j7lgi")
+regions = Dictionary[NodePath, float]({
+NodePath("HeadShape"): 5.0
+})
+metadata/_custom_type_script = "uid://boehksdg08i5l"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwqt7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uqboj"]
+radius = 0.25
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8mkit"]
 radius = 20.0
@@ -70,27 +75,31 @@ radius = 20.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_kv3li"]
 radius = 2.0
 
-[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("current_weapon", "inventory_node", "events")]
+[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("events", "current_weapon", "inventory_node")]
 collision_layer = 16
 collision_mask = 31
 mass = 20.0
 script = ExtResource("1_rffgv")
+events = NodePath("Behavior/ZombieBehavior/Events")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
-events = NodePath("Behavior/ZombieBehavior/Events")
 move_speed = 2.5
-component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_lkxn3")])
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_iwqt7")
+component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 material = ExtResource("8_tfdn2")
 
+[node name="BodyShape" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_iwqt7")
+
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6505964, -0.48937953)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
 radius = 0.25
 material = ExtResource("8_tfdn2")
+
+[node name="HeadShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
+shape = SubResource("SphereShape3D_uqboj")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 simplify_path = true

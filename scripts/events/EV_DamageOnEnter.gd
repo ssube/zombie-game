@@ -53,7 +53,6 @@ func _physics_process(_delta: float) -> void:
 
 			print("Colliding with: ", collider)
 			if collider == body:
-				# TODO: handle child nodes
 				sight_queue.append(body)
 
 	body_queue.clear()
