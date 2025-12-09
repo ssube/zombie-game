@@ -5,7 +5,7 @@ class_name ZN_CountObjective
 @export var target_count: int = 10
 @export var increment: int = 1
 @export var allow_more: bool = true
-@export var allow_less: bool = true
+@export var allow_less: bool = false
 
 @onready var current_count: int = starting_count
 

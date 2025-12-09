@@ -167,6 +167,8 @@ func _set_flag(objective: ZN_FlagObjective, value: bool) -> void:
 	if old_value != value:
 		flag_changed.emit(objective, old_value, value)
 		objective_changed.emit(objective)
+		if objective.is_completed():
+			_complete_objective(objective)
 
 
 func set_flag(key: String, value: bool = true) -> bool:
@@ -176,19 +178,19 @@ func set_flag(key: String, value: bool = true) -> bool:
 
 	if objective is ZN_FlagObjective:
 		_set_flag(objective, value)
-		if objective.is_completed():
-			_complete_objective(objective)
 
 	return false
 
 
 func _set_count(objective: ZN_CountObjective, value: int) -> void:
-	var old_value = objective.current_value
-	objective.current_value = value
+	var old_value = objective.current_count
+	objective.current_count = value
 
 	if old_value != value:
 		count_changed.emit(objective, old_value, value)
 		objective_changed.emit(objective)
+		if objective.is_completed():
+			_complete_objective(objective)
 
 
 func set_count(key: String, value: int) -> bool:
@@ -198,8 +200,6 @@ func set_count(key: String, value: int) -> bool:
 
 	if objective is ZN_CountObjective:
 		_set_count(objective, value)
-		if objective.is_completed():
-			_complete_objective(objective)
 
 	return false
 
@@ -216,6 +216,17 @@ func increment_count(key: String, value: int = 1) -> int:
 		return new_value
 
 	return 0
+
+
+func set_flag_or_increment(key: String, flag: bool, count: int) -> void:
+	var objective := find_objective(key)
+	if objective == null:
+		return
+
+	if objective is ZN_FlagObjective:
+		_set_flag(objective, flag)
+	if objective is ZN_CountObjective:
+		_set_count(objective, objective.current_count + count)
 
 
 func set_menu(node: Node) -> void:

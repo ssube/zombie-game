@@ -15,4 +15,4 @@ func on_component_changed(
 			ObjectiveManager.deactivate_objective(objective.key)
 
 	if property == "is_complete":
-		ObjectiveManager.set_flag(objective.key, new_value)
+		ObjectiveManager.set_flag_or_increment(objective.key, new_value, objective.score)

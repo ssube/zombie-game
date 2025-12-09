@@ -2,6 +2,7 @@ extends Component
 class_name ZC_Objective
 
 @export var key: String
+@export var score: int
 
 @export_group("State")
 @export var is_active: bool = false:
