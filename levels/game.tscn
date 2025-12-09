@@ -94,11 +94,11 @@ unique_name_in_owner = true
 [node name="Player" parent="World/Entities" instance=ExtResource("5_b84gv")]
 transform = Transform3D(0.7582368, 0, -0.6519793, 0, 1, 0, 0.6519793, 0, 0.7582368, 0, 1.3329782, 0)
 
-[node name="Hud" parent="." instance=ExtResource("26_ohs1m")]
+[node name="Menu" parent="." instance=ExtResource("26_ohs1m")]
 unique_name_in_owner = true
 
 [node name="Level" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[connection signal="level_loaded" from="." to="Hud" method="_on_level_loaded"]
-[connection signal="level_loading" from="." to="Hud" method="_on_level_loading"]
+[connection signal="level_loaded" from="." to="Menu" method="_on_level_loaded"]
+[connection signal="level_loading" from="." to="Menu" method="_on_level_loading"]

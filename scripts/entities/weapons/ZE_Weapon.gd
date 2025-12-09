@@ -2,7 +2,7 @@
 extends ZE_Base
 class_name ZE_Weapon
 
-# TODO: game settings
+# TODO: move to game settings
 var physical_shells: bool = true
 var physical_mags: bool = true
 

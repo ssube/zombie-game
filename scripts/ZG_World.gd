@@ -116,7 +116,7 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	_register_level_entities()
 	_register_level_objectives()
 
-	%Hud.push_action("Loaded level: %s" % level_name)
+	%Menu.push_action("Loaded level: %s" % level_name)
 	level_loaded.emit(last_level, level_name)
 	last_level = level_name
 
@@ -158,7 +158,7 @@ func add_entity(node: Node) -> void:
 
 func _register_level_objectives() -> void:
 	ObjectiveManager.clear_objectives()
-	
+
 	var level_node = self.find_child("Level", false)
 	if level_node == null:
 		printerr("Missing level node!")

@@ -68,7 +68,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 		# Pause menu
 		if input.menu_pause:
-			%Hud.toggle_pause()
+			%Menu.toggle_pause()
 
 		# Weapon switching
 		if input.weapon_next:
@@ -94,15 +94,15 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			var collider = ray.get_collider()
 
 			if collider != last_shimmer.get(entity) and collider != entity.current_weapon:
-				%Hud.clear_target_label()
-				%Hud.reset_crosshair_color()
+				%Menu.clear_target_label()
+				%Menu.reset_crosshair_color()
 				remove_shimmer_key(entity)
 
 			# Use interactive items
 			if collider is Entity and collider != entity.current_weapon:
 				if EntityUtils.is_interactive(collider):
 					var interactive = collider.get_component(ZC_Interactive) as ZC_Interactive
-					%Hud.set_target_label(interactive.name)
+					%Menu.set_target_label(interactive.name)
 
 					if not EntityUtils.has_shimmer(collider):
 						var shimmer = ZC_Shimmer.from_interactive(interactive)
@@ -114,49 +114,49 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 							use_character(collider, entity)
 
 					if collider.has_component(ZC_Objective):
-						%Hud.set_crosshair_color(Color.GOLD)
+						%Menu.set_crosshair_color(Color.GOLD)
 						if input.use_interact:
 							use_objective(collider, player)
 
 					if collider.has_component(ZC_Effect_Armor):
-						%Hud.set_crosshair_color(Color.GREEN)
+						%Menu.set_crosshair_color(Color.GREEN)
 						if input.use_interact:
 							use_armor(collider, entity)
 						elif input.use_pickup:
 							pickup_item(collider, entity)
 
 					if collider.has_component(ZC_Food):
-						%Hud.set_crosshair_color(Color.GREEN)
+						%Menu.set_crosshair_color(Color.GREEN)
 						if input.use_interact:
 							use_food(collider, entity)
 						elif input.use_pickup:
 							pickup_item(collider, entity)
 
 					if collider.has_component(ZC_Key):
-						%Hud.set_crosshair_color(Color.YELLOW)
+						%Menu.set_crosshair_color(Color.YELLOW)
 						if input.use_interact:
 							use_key(collider, player)
 
 					if collider.has_component(ZC_Door):
-						%Hud.set_crosshair_color(Color.DODGER_BLUE)
+						%Menu.set_crosshair_color(Color.DODGER_BLUE)
 						if input.use_interact:
 							use_door(collider, entity)
 
 					if collider.has_component(ZC_Portal):
-						%Hud.set_crosshair_color(Color.GOLD)
+						%Menu.set_crosshair_color(Color.GOLD)
 						if input.use_interact:
 							use_portal(collider, entity)
 
 					if EntityUtils.is_weapon(collider):
-						%Hud.set_crosshair_color(Color.ORANGE)
+						%Menu.set_crosshair_color(Color.ORANGE)
 						if input.use_interact:
 							use_weapon(collider, entity)
 						elif input.use_pickup:
 							pickup_item(collider, entity)
 
 		else:
-			%Hud.clear_target_label()
-			%Hud.reset_crosshair_color()
+			%Menu.clear_target_label()
+			%Menu.reset_crosshair_color()
 			remove_shimmer_key(entity)
 
 		# Update ECS transform from actual node position
@@ -263,7 +263,7 @@ func _get_level_markers(root: Node = null) -> Dictionary[String, Marker3D]:
 func _add_sound(sound: ZN_AudioSubtitle3D, player_entity: Entity) -> void:
 	player_entity.add_child(sound)
 	sound.play_subtitle()
-	%Hud.push_action(sound.subtitle_tag)
+	%Menu.push_action(sound.subtitle_tag)
 
 
 func pickup_item(entity: Entity, player_entity: Entity) -> void:
@@ -276,7 +276,7 @@ func pickup_item(entity: Entity, player_entity: Entity) -> void:
 	player.inventory_node.add_child(entity)
 
 	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
-	%Hud.push_action("Picked up item: %s" % interactive.name)
+	%Menu.push_action("Picked up item: %s" % interactive.name)
 
 	if interactive.pickup_sound:
 		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
@@ -314,7 +314,7 @@ func use_armor(entity: Entity, player_entity: Entity) -> void:
 	player.current_armor = entity
 
 	var interactive = armor.get_component(ZC_Interactive) as ZC_Interactive
-	%Hud.push_action("Picked up armor: %s" % interactive.name)
+	%Menu.push_action("Picked up armor: %s" % interactive.name)
 
 	if interactive.pickup_sound:
 		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
@@ -327,9 +327,9 @@ func use_door(entity: Entity, player_entity: Entity) -> void:
 	if door.is_locked:
 		if player.has_key(door.key_name):
 			door.is_locked = false
-			%Hud.push_action("Used key: %s" % door.key_name)
+			%Menu.push_action("Used key: %s" % door.key_name)
 		else:
-			%Hud.push_action("Need key: %s" % door.key_name)
+			%Menu.push_action("Need key: %s" % door.key_name)
 
 	if door.open_on_use and not door.is_locked:
 		door.is_open = !door.is_open
@@ -351,12 +351,12 @@ func use_food(entity: Entity, player_entity: Entity) -> void:
 	health.current_health = min(health.max_health, health.current_health + food.health)
 
 	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
-	%Hud.push_action("Used food: %s" % interactive.name)
+	%Menu.push_action("Used food: %s" % interactive.name)
 
 	#var sounds := EntityUtils.keep_sounds(entity, player_entity)
 	#for sound in sounds:
 	#	sound.play_subtitle()
-	#	%Hud.push_action(sound.subtitle_tag)
+	#	%Menu.push_action(sound.subtitle_tag)
 
 	if interactive.use_sound:
 		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
@@ -368,7 +368,7 @@ func use_food(entity: Entity, player_entity: Entity) -> void:
 func use_key(entity: Entity, player: ZC_Player) -> void:
 	var key = entity.get_component(ZC_Key)
 	player.add_key(key.name)
-	%Hud.push_action("Found key: %s" % key.name)
+	%Menu.push_action("Found key: %s" % key.name)
 
 	remove_entity(entity)
 
@@ -417,7 +417,7 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 	switch_weapon(player, weapon)
 
 	var interactive = weapon.get_component(ZC_Interactive) as ZC_Interactive
-	%Hud.push_action("Found new weapon: %s" % interactive.name)
+	%Menu.push_action("Found new weapon: %s" % interactive.name)
 
 	if interactive.use_sound:
 		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
@@ -484,8 +484,10 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 	entity.add_relationship(RelationshipUtils.make_equipped(new_weapon))
 
 	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
-	%Hud.set_weapon_label(c_interactive.name)
-	%Hud.push_action("Switched to weapon: %s" % c_interactive.name)
+	%Menu.set_weapon_label(c_interactive.name)
+	# TODO: set ammo label to a real value
+	%Menu.set_ammo_label("Shells: 0/0")
+	%Menu.push_action("Switched to weapon: %s" % c_interactive.name)
 
 
 func release_weapon(entity: Entity) -> void:

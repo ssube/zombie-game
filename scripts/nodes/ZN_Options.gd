@@ -5,6 +5,7 @@ signal apply_pressed()
 signal back_pressed()
 
 
+var cheats: bool = true
 var dirty: bool = false
 var options: GameOptions = GameOptions.new()
 var applied_options: GameOptions = GameOptions.new()
@@ -30,8 +31,13 @@ func _apply_options() -> void:
 	applied_options = options.duplicate_deep()
 
 
+func _set_cheats_visible() -> void:
+	$AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer.set_tab_disabled(4, !cheats)
+	$AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer.set_tab_hidden(4, !cheats)
+
+
 func _ready() -> void:
-	options = GameOptions.load_path()
+	on_show()
 	_apply_options()
 
 
@@ -54,6 +60,7 @@ func _on_back_button_pressed() -> void:
 
 func on_show() -> void:
 	options = GameOptions.load_path()
+	_set_cheats_visible()
 
 
 func on_hide() -> void:
@@ -122,3 +129,13 @@ func _on_effects_volume_slider_value_changed(value: float) -> void:
 func _on_window_mode_menu_item_selected(_index: int) -> void:
 	dirty = true
 	# TODO: add to options
+
+
+func _on_no_clip_box_toggled(_toggled_on: bool) -> void:
+	if cheats:
+		printerr("TODO: implement noclip cheat")
+
+
+func _on_god_mode_box_toggled(_toggled_on: bool) -> void:
+	if cheats:
+		printerr("TODO: implement godmode cheat")

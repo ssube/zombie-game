@@ -34,10 +34,9 @@ layout_mode = 2
 [node name="TabContainer" type="TabContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 2
+current_tab = 0
 
 [node name="Controls" type="ScrollContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -56,7 +55,7 @@ text = "Move Forward"
 
 [node name="Label3" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "W"
+text = "W / Left Stick"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
@@ -65,7 +64,7 @@ text = "Move Backward"
 
 [node name="Label4" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "S"
+text = "S / Left Stick"
 horizontal_alignment = 1
 
 [node name="Label5" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
@@ -74,7 +73,7 @@ text = "Strafe Left"
 
 [node name="Label6" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "A"
+text = "A / Left Stick"
 horizontal_alignment = 1
 
 [node name="Label7" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
@@ -83,7 +82,7 @@ text = "Strafe Right"
 
 [node name="Label8" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "D"
+text = "D / Left Stick"
 horizontal_alignment = 1
 
 [node name="Label13" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
@@ -92,7 +91,7 @@ text = "Lean Left"
 
 [node name="Label14" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "Q"
+text = "Q / L1"
 horizontal_alignment = 1
 
 [node name="Label15" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
@@ -101,7 +100,7 @@ text = "Lean Right"
 
 [node name="Label16" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "E"
+text = "E / R1"
 horizontal_alignment = 1
 
 [node name="Label9" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
@@ -128,21 +127,21 @@ text = "Attack/Fire"
 
 [node name="Label18" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "LMB / V"
+text = "LMB / V / R2"
 horizontal_alignment = 1
 
 [node name="Label19" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "Interact/Use"
+text = "Interact/Use Item"
 
 [node name="Label20" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "RMB / F"
+text = "RMB / F / X Button"
 horizontal_alignment = 1
 
 [node name="Label27" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "Pickup Without Using"
+text = "Pickup Item"
 
 [node name="Label28" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
@@ -155,7 +154,7 @@ text = "Toggle Flashlight"
 
 [node name="Label22" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "L"
+text = "L / Y Button"
 horizontal_alignment = 1
 
 [node name="Label23" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
@@ -200,7 +199,43 @@ text = "Pause Menu"
 
 [node name="Label34" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "Escape"
+text = "Escape / Start"
+horizontal_alignment = 1
+
+[node name="Label35" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Look Up"
+
+[node name="Label36" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "T / Mouse / Right Stick"
+horizontal_alignment = 1
+
+[node name="Label37" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Look Down"
+
+[node name="Label38" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "G / Mouse / Right Stick"
+horizontal_alignment = 1
+
+[node name="Label39" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Look Left"
+
+[node name="Label40" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Z / Mouse / Right Stick"
+horizontal_alignment = 1
+
+[node name="Label41" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Look Right"
+
+[node name="Label42" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "X / Mouse / Right Stick"
 horizontal_alignment = 1
 
 [node name="Gameplay" type="ScrollContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer"]
@@ -221,7 +256,6 @@ columns = 2
 
 [node name="Label" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "    "
 
 [node name="PhysicalShellsBox" type="CheckBox" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3"]
 unique_name_in_owner = true
@@ -231,7 +265,6 @@ alignment = 1
 
 [node name="Label2" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "    "
 
 [node name="PhysicalMagsBox" type="CheckBox" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3"]
 unique_name_in_owner = true
@@ -240,6 +273,7 @@ text = "Physical Empty Magazines"
 alignment = 1
 
 [node name="Graphics" type="ScrollContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -359,6 +393,38 @@ size_flags_vertical = 4
 tick_count = 5
 ticks_on_borders = true
 
+[node name="Cheats" type="ScrollContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Cheats"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer3" type="GridContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+
+[node name="NoClipBox" type="CheckBox" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "No clip"
+alignment = 1
+
+[node name="Label2" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+
+[node name="GodModeBox" type="CheckBox" parent="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "God mode"
+alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 2
@@ -384,5 +450,7 @@ text = "Apply"
 [connection signal="value_changed" from="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/MainVolumeSlider" to="." method="_on_main_volume_slider_value_changed"]
 [connection signal="value_changed" from="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="value_changed" from="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/EffectsVolumeSlider" to="." method="_on_effects_volume_slider_value_changed"]
+[connection signal="toggled" from="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoClipBox" to="." method="_on_no_clip_box_toggled"]
+[connection signal="toggled" from="AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/GodModeBox" to="." method="_on_god_mode_box_toggled"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]

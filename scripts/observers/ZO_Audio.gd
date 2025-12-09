@@ -13,7 +13,7 @@ func on_component_added(entity: Entity, _component: Resource) -> void:
 	var players = ECS.world.query.with_all([ZC_Player]).execute()
 	for player: Node3D in players:
 		if player.global_position.distance_squared_to(audio_node.global_position) < audio_node.radius_squared:
-			%Hud.push_action(audio_node.subtitle_tag)
+			%Menu.push_action(audio_node.subtitle_tag)
 
 	audio_node.play_subtitle()
 	entity.remove_component(noise)

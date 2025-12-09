@@ -204,6 +204,10 @@ func _on_save_game_pressed() -> void:
 	show_menu(HudMenu.SAVE_MENU)
 
 
+func _on_options_pressed() -> void:
+	show_menu(HudMenu.OPTIONS_MENU)
+
+
 func _on_back_pressed() -> void:
 	show_menu(previous_menu)
 
@@ -241,11 +245,13 @@ func _format_bool(value: bool) -> String:
 	else:
 		return "No"
 
+
 func _format_completed(objective: ZN_BaseObjective) -> String:
 	if not objective.active:
 		return "Not Active"
 
 	return _format_bool(objective.is_completed())
+
 
 func _add_objective_children(objective: ZN_BaseObjective, item: TreeItem) -> void:
 	var child_item = item.create_child()
@@ -321,5 +327,33 @@ func _on_inventory_pressed() -> void:
 	show_menu(HudMenu.INVENTORY_MENU)
 
 
-func _on_options_pressed() -> void:
-	show_menu(HudMenu.OPTIONS_MENU)
+func _on_inventory_list_item_activated(index: int) -> void:
+	var list := $HudLayer/InventoryMenu/MarginContainer/VFlowContainer/InventoryList as ItemList
+	if list.is_item_selectable(index):
+		var item := list.get_item_text(index)
+		printerr("TODO: use inventory item: ", item)
+		# TODO: get player that is holding item and call ZS_Player.use_item
+		# var player := RelationshipUtils.get_holder(
+
+
+func _on_objective_tree_item_activated() -> void:
+	var tree := $HudLayer/ObjectivesMenu/MarginContainer/VFlowContainer/ObjectiveTree as Tree
+	var item := tree.get_selected() as TreeItem
+	var objective_title := item.get_text(0)
+
+	# update the current objective in the HUD
+	# check if objective is active and not completed - ready to select
+	var objective := ObjectiveManager.find_objective_title(objective_title)
+	if objective == null:
+		printerr("Objective not found: ", objective_title)
+		return
+
+	if not objective.active:
+		printerr("Objective is not active: ", objective_title)
+		return
+
+	if objective.is_completed():
+		printerr("Objective is already completed: ", objective_title)
+		return
+
+	objective_label.text = objective_title

@@ -31,4 +31,4 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 			call_deferred("update_hud", new_value)
 
 func update_hud(health: int) -> void:
-	%Hud.set_health(health)
+	%Menu.set_health(health)

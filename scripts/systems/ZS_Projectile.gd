@@ -72,5 +72,5 @@ func apply_sound(ray: RayCast3D, collider: Node3D) -> void:
 	var sound_node = impact_sound.instantiate() as ZN_AudioSubtitle3D
 	collider.add_child(sound_node)
 	sound_node.global_position = collision_point
-	%Hud.push_action(sound_node.subtitle_tag)
+	%Menu.push_action(sound_node.subtitle_tag)
 	sound_node.play_subtitle()

@@ -15,7 +15,7 @@ func sync_health():
 	if not c_health:
 		return
 
-	%Hud.set_health(c_health.current_health, true)
+	%Menu.set_health(c_health.current_health, true)
 
 
 ## Sync transform from scene to component

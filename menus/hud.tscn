@@ -4,7 +4,6 @@
 [ext_resource type="Shader" uid="uid://ckydjmdamo2fo" path="res://shaders/post_crt.gdshader" id="2_jew8s"]
 [ext_resource type="Texture2D" uid="uid://dwp1uqi51ytw3" path="res://textures/crosshair.png" id="2_rglhv"]
 [ext_resource type="PackedScene" uid="uid://dyv5b48xquqot" path="res://menus/options.tscn" id="4_d51vb"]
-[ext_resource type="Script" uid="uid://dr0t3qprbbuke" path="res://scripts/nodes/ZN_Options.gd" id="5_kldf2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pua1y"]
 shader = ExtResource("2_jew8s")
@@ -40,7 +39,19 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 6
 
-[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "crosshair", "objective_label", "target_label", "weapon_label", "inventory_list", "objective_tree", "action_label")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pua1y"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 1, 0.14901961, 0.5019608)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "crosshair", "objective_label", "target_label", "weapon_label", "ammo_label", "inventory_list", "objective_tree", "action_label")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -49,11 +60,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_633jc")
-health_bar = NodePath("HudLayer/GameHud/BottomContainer/HealthBar")
+health_bar = NodePath("HudLayer/GameHud/BottomContainer/HBoxContainer2/HealthBar")
 crosshair = NodePath("HudLayer/GameHud/CenterContainer/Crosshair")
 objective_label = NodePath("HudLayer/GameHud/TopContainer/ObjectiveLabel")
 target_label = NodePath("HudLayer/GameHud/BottomContainer/TargetLabel")
-weapon_label = NodePath("HudLayer/GameHud/BottomContainer/WeaponLabel")
+weapon_label = NodePath("HudLayer/GameHud/BottomContainer/HBoxContainer/WeaponLabel")
+ammo_label = NodePath("HudLayer/GameHud/BottomContainer/HBoxContainer/AmmoLabel")
 inventory_list = NodePath("HudLayer/InventoryMenu/MarginContainer/VFlowContainer/InventoryList")
 objective_tree = NodePath("HudLayer/ObjectivesMenu/MarginContainer/VFlowContainer/ObjectiveTree")
 action_label = NodePath("HudLayer/GameHud/TopContainer/ActionLabel")
@@ -97,7 +109,7 @@ alignment = 2
 
 [node name="TargetLabel" type="Label" parent="HudLayer/GameHud/BottomContainer"]
 layout_mode = 2
-text = "Interactive Target"
+text = "Interaction Target"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="HudLayer/GameHud/BottomContainer"]
@@ -105,9 +117,21 @@ layout_mode = 2
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
 
-[node name="WeaponLabel" type="Label" parent="HudLayer/GameHud/BottomContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HudLayer/GameHud/BottomContainer"]
 layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="WeaponLabel" type="Label" parent="HudLayer/GameHud/BottomContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Current Weapon"
+horizontal_alignment = 1
+
+[node name="AmmoLabel" type="Label" parent="HudLayer/GameHud/BottomContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ammo Count"
 horizontal_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="HudLayer/GameHud/BottomContainer"]
@@ -115,15 +139,19 @@ layout_mode = 2
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
 
-[node name="HealthBar" type="ProgressBar" parent="HudLayer/GameHud/BottomContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HudLayer/GameHud/BottomContainer"]
+layout_mode = 2
+
+[node name="HealthBar" type="ProgressBar" parent="HudLayer/GameHud/BottomContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_styles/fill = SubResource("StyleBoxFlat_jew8s")
 value = 25.0
 show_percentage = false
 
-[node name="HealthLabel" type="Label" parent="HudLayer/GameHud/BottomContainer/HealthBar"]
+[node name="HealthLabel" type="Label" parent="HudLayer/GameHud/BottomContainer/HBoxContainer2/HealthBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,6 +159,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Health"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StaminaBar" type="ProgressBar" parent="HudLayer/GameHud/BottomContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/fill = SubResource("StyleBoxFlat_pua1y")
+value = 25.0
+show_percentage = false
+
+[node name="StaminaLabel" type="Label" parent="HudLayer/GameHud/BottomContainer/HBoxContainer2/StaminaBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Stamina"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -451,7 +499,6 @@ text = "Loading..."
 
 [node name="OptionsMenu" parent="HudLayer" instance=ExtResource("4_d51vb")]
 visible = false
-script = ExtResource("5_kldf2")
 
 [connection signal="pressed" from="HudLayer/StartMenu/MarginContainer/VFlowContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="HudLayer/StartMenu/MarginContainer/VFlowContainer/LoadGame" to="." method="_on_load_game_pressed"]
@@ -464,7 +511,9 @@ script = ExtResource("5_kldf2")
 [connection signal="pressed" from="HudLayer/PauseMenu/MarginContainer/VFlowContainer/LoadGame" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="HudLayer/PauseMenu/MarginContainer/VFlowContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="HudLayer/PauseMenu/MarginContainer/VFlowContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="item_activated" from="HudLayer/InventoryMenu/MarginContainer/VFlowContainer/InventoryList" to="." method="_on_inventory_list_item_activated"]
 [connection signal="pressed" from="HudLayer/InventoryMenu/MarginContainer/VFlowContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="item_activated" from="HudLayer/ObjectivesMenu/MarginContainer/VFlowContainer/ObjectiveTree" to="." method="_on_objective_tree_item_activated"]
 [connection signal="pressed" from="HudLayer/ObjectivesMenu/MarginContainer/VFlowContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="HudLayer/LoadMenu/MarginContainer/VFlowContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="HudLayer/SaveMenu/MarginContainer/VFlowContainer/NewSave" to="." method="_on_new_save_pressed"]
