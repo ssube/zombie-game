@@ -1,7 +1,23 @@
 class_name RelationshipUtils
 
 static var any_damage = Relationship.new(ZC_Damaged.new(), null)
+static var any_holding = Relationship.new(ZC_Holding.new(), null)
 static var any_modifier = Relationship.new(ZC_Modifier.new(), null)
+static var any_wearing = Relationship.new(ZC_Wearing.new(), null)
+
+static func get_holder(item: Entity) -> Entity:
+	var relationships := ECS.world.query.with_reverse_relationship([
+		RelationshipUtils.make_holding(item)
+	]).execute() as Array[Relationship]
+	assert(relationships.size() <= 1, "Item has more than one entity holding it, relationships are leaking!")
+	return relationships.get(0)
+
+static func get_wearer(item: Entity) -> Entity:
+	var relationships := ECS.world.query.with_reverse_relationship([
+		RelationshipUtils.make_wearing(item)
+	]).execute() as Array[Relationship]
+	assert(relationships.size() <= 1, "Item has more than one entity wearing it, relationships are leaking!")
+	return relationships.get(0)
 
 static func make_damage(damage_amount: int) -> Relationship:
 	var damage_component := ZC_Damage.new(damage_amount)
