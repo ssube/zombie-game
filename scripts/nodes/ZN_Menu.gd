@@ -225,19 +225,8 @@ func _on_check_box_toggled(toggled_on: bool) -> void:
 
 
 func _on_new_save_pressed() -> void:
-	# TODO: move to save manager singleton
-	var query = ECS.world.query.with_all([C_Persistent])
-	var data = ECS.serialize(query)
+	SaveManager.save_game("test")
 
-	var user_dir := DirAccess.open("user://")
-	if not user_dir.dir_exists("saves"):
-		user_dir.make_dir("saves")
-
-	if ECS.save(data, "user://saves/test_entities.tres"):
-		print("Saved %d entities!" % data.entities.size())
-
-	if ObjectiveManager.save("user://saves/test_objectives.tres"):
-		print("Saved %d objectives!" % ObjectiveManager.objectives.size())
 
 func _format_bool(value: bool) -> String:
 	if value:
