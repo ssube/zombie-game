@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_l5ox4"]
 script = ExtResource("6_l5ox4")
-effect_type = 1
+effect_type = 2
 marker = NodePath("ProjectileMarker")
 effect_scene = ExtResource("5_l5ox4")
 metadata/_custom_type_script = "uid://d3sex4y0oww04"
