@@ -176,18 +176,28 @@ func _handle_collisions(body: CharacterBody3D, delta: float) -> void:
 			collider.apply_impulse(push_direction * 50 * delta, push_position)
 
 
+func _set_damage_areas(entity: Entity, weapon: ZC_Weapon_Melee, enable: bool) -> void:
+	print("Setting damage areas to ", enable, " for entity: ", entity)
+	for area_path in weapon.damage_areas:
+		var area = entity.get_node(area_path) as Area3D
+		if "active" in area:
+			area.active = enable
+
+
 func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
 	var weapon = entity.current_weapon as ZE_Weapon
 	if weapon == null:
 		return
 
-	var weapon_component = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
-	var swing_node = weapon.get_node(weapon_component.swing_path) as PathFollow3D
+	var c_weapon = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
+	var swing_node = weapon.get_node(c_weapon.swing_path) as PathFollow3D
 	swing_node.progress_ratio = 0.0
 
 	var tween = weapon.create_tween()
-	tween.tween_property(swing_node, "progress_ratio", 1.0, weapon_component.swing_time)
-	tween.tween_property(swing_node, "progress_ratio", 0.0, weapon_component.cooldown_time)
+	tween.tween_callback(_set_damage_areas.bind(weapon, c_weapon, true))
+	tween.tween_property(swing_node, "progress_ratio", 1.0, c_weapon.swing_time)
+	tween.tween_property(swing_node, "progress_ratio", 0.0, c_weapon.cooldown_time)
+	tween.tween_callback(_set_damage_areas.bind(weapon, c_weapon, false))
 
 
 func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
@@ -223,12 +233,6 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 		var recoil_tween := weapon.create_tween()
 		recoil_tween.tween_property(recoil_path, "progress_ratio", c_weapon.recoil_per_shot, c_weapon.recoil_time)
 		recoil_tween.tween_property(recoil_path, "progress_ratio", 0.0, c_weapon.recoil_time)
-
-	#if c_weapon.projectile_effect:
-	#	var effect_scene = c_weapon.projectile_effect.instantiate() as Node3D
-	#	marker.add_child(effect_scene)
-	#	effect_scene.global_position = marker.global_position
-	#	effect_scene.global_rotation = marker.global_rotation
 
 
 func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:

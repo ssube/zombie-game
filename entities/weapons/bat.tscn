@@ -5,14 +5,15 @@
 [ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="3_ee0de"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_ee0de"]
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="5_fnw7o"]
+[ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="5_xpimh"]
 [ext_resource type="Script" uid="uid://b8uyvu6k51kor" path="res://scripts/events/EV_DamageOnEnter.gd" id="6_fnw7o"]
 [ext_resource type="Texture2D" uid="uid://dpc8jknfhigal" path="res://assets/ZombieApocalypsePack/Bat/bat_texture.png" id="6_jaqrl"]
 
 [sub_resource type="Resource" id="Resource_dy0dc"]
 script = ExtResource("4_ee0de")
+name = "Baseball Bat"
 shimmer_material = ExtResource("5_fnw7o")
 shimmer_nodes = Array[NodePath]([NodePath("Node3D/bat/Cube")])
-name = "Baseball Bat"
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_ee0de"]
@@ -20,12 +21,9 @@ script = ExtResource("3_ee0de")
 swing_path = NodePath("SwingPath/PathFollow3D")
 swing_time = 0.5
 cooldown_time = 0.3
+damage_areas = Array[NodePath]([NodePath("Node3D/Area3D")])
 damage = 10
 metadata/_custom_type_script = "uid://c86wth8kvlbt7"
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b6mco"]
-radius = 0.1
-height = 1.25
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00uot"]
 resource_name = "Material"
@@ -88,19 +86,6 @@ component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_dy0dc
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464543, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, -0.7246001)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D"]
-visible = false
-radius = 0.1
-height = 1.0
-
-[node name="Area3D" type="Area3D" parent="Node3D"]
-collision_layer = 4
-collision_mask = 31
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Area3D"]
-transform = Transform3D(1, 2.0861626e-07, 4.917383e-07, -2.9802322e-08, 1.0000002, 6.556511e-07, -1.4901161e-08, -3.1292439e-07, 1.000001, 0, 0.03, 0)
-shape = SubResource("CapsuleShape3D_b6mco")
-
 [node name="bat" type="Node3D" parent="Node3D"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.1, 0)
 
@@ -109,8 +94,19 @@ transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1
 mesh = SubResource("ArrayMesh_j1wg2")
 skeleton = NodePath("")
 
+[node name="Area3D" type="Area3D" parent="Node3D"]
+transform = Transform3D(1, -5.9604645e-08, -2.9802322e-08, -2.9802322e-08, 0.99999994, -4.4703484e-08, 0, 0, 1, 0, 0, 0)
+collision_layer = 4
+collision_mask = 19
+script = ExtResource("6_fnw7o")
+damage_players = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Area3D"]
+transform = Transform3D(0.9999856, 2.9802322e-07, -2.9802322e-08, -6.2584877e-07, 0.9999917, -1.0430813e-07, 1.0430813e-07, -7.003546e-07, 0.9999913, 0, 0.03, 0)
+shape = SubResource("CapsuleShape3D_r1fv1")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464543, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.76432604, 0.56403923, 0.31251466, 0, 0.48464662, -0.87471, -0.64483, 0.66856366, 0.37042803, 0.7398019, -0.59114224, -0.7246001)
 shape = SubResource("CapsuleShape3D_r1fv1")
 
 [node name="SwingPath" type="Path3D" parent="."]
@@ -128,18 +124,3 @@ remote_path = NodePath("../../../Node3D")
 [node name="RemoteTransform3D2" type="RemoteTransform3D" parent="SwingPath/PathFollow3D"]
 process_mode = 4
 remote_path = NodePath("../../../CollisionShape3D")
-
-[node name="RemoteTransform3D3" type="RemoteTransform3D" parent="SwingPath/PathFollow3D"]
-process_mode = 4
-remote_path = NodePath("../../../Area3D")
-
-[node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464543, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, -0.7246001)
-collision_layer = 4
-collision_mask = 19
-script = ExtResource("6_fnw7o")
-damage_players = false
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(0.9999856, 2.9802322e-07, -2.9802322e-08, -6.2584877e-07, 0.9999917, -1.0430813e-07, 1.0430813e-07, -7.003546e-07, 0.9999913, 0, 0.03, 0)
-shape = SubResource("CapsuleShape3D_r1fv1")
