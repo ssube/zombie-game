@@ -1,0 +1,161 @@
+[gd_scene load_steps=6 format=3 uid="uid://vs3qkjinyhbb"]
+
+[ext_resource type="Script" uid="uid://3t4uubeiqa7r" path="res://scripts/menus/game_hud.gd" id="1_gjtvi"]
+[ext_resource type="Texture2D" uid="uid://dwp1uqi51ytw3" path="res://textures/crosshair.png" id="1_n7chs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jew8s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jew8s"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0, 0, 0.5019608)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pua1y"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 1, 0.14901961, 0.5019608)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[node name="GameHud" type="AspectRatioContainer" node_paths=PackedStringArray("health_bar", "crosshair", "objective_label", "target_label", "weapon_label", "ammo_label", "action_label")]
+process_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gjtvi")
+health_bar = NodePath("BottomContainer/HBoxContainer2/HealthBar")
+crosshair = NodePath("CenterContainer/Crosshair")
+objective_label = NodePath("TopContainer/ObjectiveLabel")
+target_label = NodePath("BottomContainer/TargetLabel")
+weapon_label = NodePath("BottomContainer/HBoxContainer/WeaponLabel")
+ammo_label = NodePath("BottomContainer/HBoxContainer/AmmoLabel")
+action_label = NodePath("TopContainer/ActionLabel")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Crosshair" type="TextureRect" parent="CenterContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_n7chs")
+stretch_mode = 3
+
+[node name="BottomContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 2
+
+[node name="TargetLabel" type="Label" parent="BottomContainer"]
+layout_mode = 2
+text = "Interaction Target"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="BottomContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="WeaponLabel" type="Label" parent="BottomContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Current Weapon"
+horizontal_alignment = 1
+
+[node name="AmmoLabel" type="Label" parent="BottomContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ammo Count"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="BottomContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="BottomContainer"]
+layout_mode = 2
+
+[node name="HealthBar" type="ProgressBar" parent="BottomContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/fill = SubResource("StyleBoxFlat_jew8s")
+value = 25.0
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="BottomContainer/HBoxContainer2/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Health"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StaminaBar" type="ProgressBar" parent="BottomContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/fill = SubResource("StyleBoxFlat_pua1y")
+value = 25.0
+show_percentage = false
+
+[node name="StaminaLabel" type="Label" parent="BottomContainer/HBoxContainer2/StaminaBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Stamina"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TopContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="TopContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
+
+[node name="ObjectiveLabel" type="Label" parent="TopContainer"]
+layout_mode = 2
+text = "Current Objective"
+horizontal_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="TopContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
+
+[node name="ActionLabel" type="Label" parent="TopContainer"]
+layout_mode = 2
+text = "Recent Actions"
+horizontal_alignment = 1

@@ -1,0 +1,121 @@
+[gd_scene load_steps=14 format=3 uid="uid://vcyq2fbg0dts"]
+
+[ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/menus/menu.gd" id="1_2d4ws"]
+[ext_resource type="Shader" uid="uid://ckydjmdamo2fo" path="res://shaders/post_crt.gdshader" id="2_jayei"]
+[ext_resource type="PackedScene" uid="uid://vs3qkjinyhbb" path="res://menus/game_hud.tscn" id="3_nonqb"]
+[ext_resource type="PackedScene" uid="uid://7wq8jy2v0e4b" path="res://menus/start_menu.tscn" id="4_t5x1p"]
+[ext_resource type="PackedScene" uid="uid://dyv5b48xquqot" path="res://menus/options_menu.tscn" id="4_tck7o"]
+[ext_resource type="PackedScene" uid="uid://sah33a6m5cm8" path="res://menus/pause_menu.tscn" id="5_j27vk"]
+[ext_resource type="PackedScene" uid="uid://b0lsnupsevvdt" path="res://menus/inventory_menu.tscn" id="6_w7kj8"]
+[ext_resource type="PackedScene" uid="uid://12llaao0w5gu" path="res://menus/objectives_menu.tscn" id="7_ss16q"]
+[ext_resource type="PackedScene" uid="uid://cuod00oetrc32" path="res://menus/load_menu.tscn" id="8_4vei7"]
+[ext_resource type="PackedScene" uid="uid://dixp3emrvmp7g" path="res://menus/save_menu.tscn" id="9_50hu0"]
+[ext_resource type="PackedScene" uid="uid://r5xbo2n5wsid" path="res://menus/game_over_menu.tscn" id="10_ph6eu"]
+[ext_resource type="PackedScene" uid="uid://445cu24k4j5g" path="res://menus/loading_menu.tscn" id="11_tvlqr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pua1y"]
+shader = ExtResource("2_jayei")
+shader_parameter/grain_intensity = 0.050000002375
+shader_parameter/min_lum = 0.0
+shader_parameter/max_lum = 1.0
+shader_parameter/time_scale = 0.5
+shader_parameter/vignette_darkness = 0.250000011875
+shader_parameter/vignette_outer_radius = 0.7
+shader_parameter/vignette_inner_radius = 0.2
+shader_parameter/scanline_intensity = 0.2
+shader_parameter/barrel_distortion = 0.0
+shader_parameter/chromatic_aberration = 0.0010000000475
+shader_parameter/crt_vignette_power = 1.0000000475
+shader_parameter/pixel_resolution_x = 640
+shader_parameter/pixel_resolution_y = 480
+shader_parameter/enable_color_quantization = true
+shader_parameter/color_quant_steps = 32.0
+shader_parameter/warble_amount = 0.00400000019
+shader_parameter/warble_speed = 0.50000002375
+
+[node name="Menu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2d4ws")
+
+[node name="PostLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="PostLayer"]
+material = SubResource("ShaderMaterial_pua1y")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+
+[node name="GameHud" parent="MenuLayer" instance=ExtResource("3_nonqb")]
+
+[node name="StartMenu" parent="MenuLayer" instance=ExtResource("4_t5x1p")]
+visible = false
+
+[node name="PauseMenu" parent="MenuLayer" instance=ExtResource("5_j27vk")]
+visible = false
+
+[node name="InventoryMenu" parent="MenuLayer" instance=ExtResource("6_w7kj8")]
+visible = false
+
+[node name="ObjectivesMenu" parent="MenuLayer" instance=ExtResource("7_ss16q")]
+visible = false
+
+[node name="LoadMenu" parent="MenuLayer" instance=ExtResource("8_4vei7")]
+visible = false
+
+[node name="SaveMenu" parent="MenuLayer" instance=ExtResource("9_50hu0")]
+visible = false
+
+[node name="GameOverMenu" parent="MenuLayer" instance=ExtResource("10_ph6eu")]
+visible = false
+
+[node name="LoadingMenu" parent="MenuLayer" instance=ExtResource("11_tvlqr")]
+visible = false
+
+[node name="OptionsMenu" parent="MenuLayer" instance=ExtResource("4_tck7o")]
+visible = false
+
+[connection signal="back_pressed" from="MenuLayer/GameHud" to="." method="_on_back_pressed"]
+[connection signal="menu_changed" from="MenuLayer/GameHud" to="." method="_on_menu_changed"]
+[connection signal="exit_pressed" from="MenuLayer/StartMenu" to="." method="_on_exit_pressed"]
+[connection signal="load_game_pressed" from="MenuLayer/StartMenu" to="." method="_on_load_game_pressed"]
+[connection signal="menu_changed" from="MenuLayer/StartMenu" to="." method="_on_menu_changed"]
+[connection signal="new_game_pressed" from="MenuLayer/StartMenu" to="." method="_on_new_game_pressed"]
+[connection signal="back_pressed" from="MenuLayer/PauseMenu" to="." method="_on_resume_pressed"]
+[connection signal="exit_pressed" from="MenuLayer/PauseMenu" to="." method="_on_exit_pressed"]
+[connection signal="inventory_pressed" from="MenuLayer/PauseMenu" to="." method="_on_inventory_pressed"]
+[connection signal="load_pressed" from="MenuLayer/PauseMenu" to="." method="_on_load_game_pressed"]
+[connection signal="menu_changed" from="MenuLayer/PauseMenu" to="." method="_on_menu_changed"]
+[connection signal="objectives_pressed" from="MenuLayer/PauseMenu" to="." method="_on_objectives_pressed"]
+[connection signal="options_pressed" from="MenuLayer/PauseMenu" to="." method="_on_options_pressed"]
+[connection signal="resume_pressed" from="MenuLayer/PauseMenu" to="." method="_on_resume_pressed"]
+[connection signal="save_pressed" from="MenuLayer/PauseMenu" to="." method="_on_save_game_pressed"]
+[connection signal="back_pressed" from="MenuLayer/InventoryMenu" to="." method="_on_back_pressed"]
+[connection signal="menu_changed" from="MenuLayer/InventoryMenu" to="." method="_on_menu_changed"]
+[connection signal="back_pressed" from="MenuLayer/ObjectivesMenu" to="." method="_on_back_pressed"]
+[connection signal="menu_changed" from="MenuLayer/ObjectivesMenu" to="." method="_on_menu_changed"]
+[connection signal="objective_changed" from="MenuLayer/ObjectivesMenu" to="." method="_on_objective_changed"]
+[connection signal="back_pressed" from="MenuLayer/LoadMenu" to="." method="_on_back_pressed"]
+[connection signal="game_loaded" from="MenuLayer/LoadMenu" to="." method="_on_game_loaded"]
+[connection signal="menu_changed" from="MenuLayer/LoadMenu" to="." method="_on_menu_changed"]
+[connection signal="back_pressed" from="MenuLayer/SaveMenu" to="." method="_on_back_pressed"]
+[connection signal="game_saved" from="MenuLayer/SaveMenu" to="." method="_on_game_saved"]
+[connection signal="menu_changed" from="MenuLayer/SaveMenu" to="." method="_on_menu_changed"]
+[connection signal="back_pressed" from="MenuLayer/GameOverMenu" to="." method="_on_back_pressed"]
+[connection signal="exit_pressed" from="MenuLayer/GameOverMenu" to="." method="_on_exit_pressed"]
+[connection signal="menu_changed" from="MenuLayer/GameOverMenu" to="." method="_on_menu_changed"]
+[connection signal="new_game_pressed" from="MenuLayer/GameOverMenu" to="." method="_on_new_game_pressed"]
+[connection signal="back_pressed" from="MenuLayer/LoadingMenu" to="." method="_on_back_pressed"]
+[connection signal="menu_changed" from="MenuLayer/LoadingMenu" to="." method="_on_menu_changed"]
+[connection signal="apply_pressed" from="MenuLayer/OptionsMenu" to="." method="_on_options_applied"]
+[connection signal="back_pressed" from="MenuLayer/OptionsMenu" to="." method="_on_back_pressed"]
+[connection signal="menu_changed" from="MenuLayer/OptionsMenu" to="." method="_on_menu_changed"]

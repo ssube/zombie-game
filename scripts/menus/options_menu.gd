@@ -1,9 +1,7 @@
-extends Node
+extends ZM_BaseMenu
 
-
-signal apply_pressed()
-signal back_pressed()
-
+@export var tab_container: TabContainer
+@export var cheats_tab := 4
 
 var cheats: bool = true
 var dirty: bool = false
@@ -32,8 +30,8 @@ func _apply_options() -> void:
 
 
 func _set_cheats_visible() -> void:
-	$AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer.set_tab_disabled(4, !cheats)
-	$AspectRatioContainer/MarginContainer/VBoxContainer/TabContainer.set_tab_hidden(4, !cheats)
+	tab_container.set_tab_disabled(cheats_tab, !cheats)
+	tab_container.set_tab_hidden(cheats_tab, !cheats)
 
 
 func _ready() -> void:
@@ -139,3 +137,7 @@ func _on_no_clip_box_toggled(_toggled_on: bool) -> void:
 func _on_god_mode_box_toggled(_toggled_on: bool) -> void:
 	if cheats:
 		printerr("TODO: implement godmode cheat")
+
+
+func _on_back_pressed() -> void:
+	back_pressed.emit()

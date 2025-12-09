@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0lsnupsevvdt"]
+
+[ext_resource type="Script" uid="uid://dlsl2pxtwq87y" path="res://scripts/menus/inventory_menu.gd" id="1_0fdhb"]
+
+[node name="InventoryMenu" type="AspectRatioContainer" node_paths=PackedStringArray("inventory_list")]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0fdhb")
+inventory_list = NodePath("MarginContainer/VFlowContainer/InventoryList")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VFlowContainer" type="VFlowContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/v_separation = 16
+alignment = 1
+
+[node name="InventoryHeader" type="Label" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="InventoryList" type="ItemList" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+auto_width = true
+auto_height = true
+item_count = 1
+item_0/text = "Inventory Items"
+
+[node name="Back" type="Button" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VFlowContainer/Back" to="." method="_on_back_pressed"]

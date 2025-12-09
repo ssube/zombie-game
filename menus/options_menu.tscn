@@ -1,0 +1,437 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyv5b48xquqot"]
+
+[ext_resource type="Script" uid="uid://dr0t3qprbbuke" path="res://scripts/menus/options_menu.gd" id="1_p3s2b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_labby"]
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" node_paths=PackedStringArray("tab_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p3s2b")
+tab_container = NodePath("MarginContainer/VBoxContainer/TabContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Controls" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer3" type="GridContainer" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Move Forward"
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "W / Left Stick"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Move Backward"
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "S / Left Stick"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Strafe Left"
+
+[node name="Label6" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "A / Left Stick"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Strafe Right"
+
+[node name="Label8" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "D / Left Stick"
+horizontal_alignment = 1
+
+[node name="Label13" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Lean Left"
+
+[node name="Label14" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Q / L1"
+horizontal_alignment = 1
+
+[node name="Label15" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Lean Right"
+
+[node name="Label16" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "E / R1"
+horizontal_alignment = 1
+
+[node name="Label9" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Sprint"
+
+[node name="Label10" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Shift"
+horizontal_alignment = 1
+
+[node name="Label11" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Jump"
+
+[node name="Label12" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Space"
+horizontal_alignment = 1
+
+[node name="Label17" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Attack/Fire"
+
+[node name="Label18" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "LMB / V / R2"
+horizontal_alignment = 1
+
+[node name="Label19" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Interact/Use Item"
+
+[node name="Label20" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "RMB / F / X Button"
+horizontal_alignment = 1
+
+[node name="Label27" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Pickup Item"
+
+[node name="Label28" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "B"
+horizontal_alignment = 1
+
+[node name="Label21" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Toggle Flashlight"
+
+[node name="Label22" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "L / Y Button"
+horizontal_alignment = 1
+
+[node name="Label23" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Next Weapon"
+
+[node name="Label24" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "[ / Mouse Wheel Down"
+horizontal_alignment = 1
+
+[node name="Label25" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Previous Weapon"
+
+[node name="Label26" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "] / Mouse Wheel Up"
+horizontal_alignment = 1
+
+[node name="Label29" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Inventory Menu"
+
+[node name="Label30" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "I"
+horizontal_alignment = 1
+
+[node name="Label31" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Objectives Menu"
+
+[node name="Label32" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "O"
+horizontal_alignment = 1
+
+[node name="Label33" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Pause Menu"
+
+[node name="Label34" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Escape / Start"
+horizontal_alignment = 1
+
+[node name="Label35" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Look Up"
+
+[node name="Label36" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "T / Mouse / Right Stick"
+horizontal_alignment = 1
+
+[node name="Label37" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Look Down"
+
+[node name="Label38" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "G / Mouse / Right Stick"
+horizontal_alignment = 1
+
+[node name="Label39" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Look Left"
+
+[node name="Label40" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Z / Mouse / Right Stick"
+horizontal_alignment = 1
+
+[node name="Label41" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Look Right"
+
+[node name="Label42" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "X / Mouse / Right Stick"
+horizontal_alignment = 1
+
+[node name="Gameplay" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer3" type="GridContainer" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3"]
+layout_mode = 2
+
+[node name="PhysicalShellsBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Physical Shell Casings"
+alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3"]
+layout_mode = 2
+
+[node name="PhysicalMagsBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Physical Empty Magazines"
+alignment = 1
+
+[node name="Graphics" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TabContainer/Graphics"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer2" type="GridContainer" parent="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2"]
+layout_mode = 2
+text = "    "
+
+[node name="CRTShader" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "CRT Shader"
+alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2"]
+layout_mode = 2
+text = "Window Resolution"
+
+[node name="ResolutionMenu" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+selected = 0
+item_count = 8
+popup/item_0/text = "640x480"
+popup/item_0/id = 0
+popup/item_1/text = "800x600"
+popup/item_1/id = 1
+popup/item_2/text = "1024x768"
+popup/item_2/id = 2
+popup/item_3/text = "1280x800"
+popup/item_3/id = 5
+popup/item_4/text = "1280x1024"
+popup/item_4/id = 3
+popup/item_5/text = "1920x1080"
+popup/item_5/id = 4
+popup/item_6/text = "2560x1440"
+popup/item_6/id = 6
+popup/item_7/text = "3440x1440"
+popup/item_7/id = 7
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2"]
+layout_mode = 2
+text = "Window Mode"
+
+[node name="WindowModeMenu" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "Borderless Window"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 1
+
+[node name="Audio" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="MainVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "Main Volume"
+
+[node name="MainVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tick_count = 5
+ticks_on_borders = true
+
+[node name="MusicVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tick_count = 5
+ticks_on_borders = true
+
+[node name="EffectsVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "Effects Volume"
+
+[node name="EffectsVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Cheats" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TabContainer/Cheats"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer3" type="GridContainer" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+
+[node name="NoClipBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "No clip"
+alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+
+[node name="GodModeBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "God mode"
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+theme_override_styles/separator = SubResource("StyleBoxEmpty_labby")
+
+[node name="ApplyButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Apply"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_pressed"]

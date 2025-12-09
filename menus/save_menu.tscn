@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://dixp3emrvmp7g"]
+
+[ext_resource type="Script" uid="uid://b1r47a8u2balb" path="res://scripts/menus/save_menu.gd" id="1_x4sum"]
+
+[node name="SaveMenu" type="AspectRatioContainer"]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x4sum")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VFlowContainer" type="VFlowContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/v_separation = 16
+alignment = 1
+
+[node name="NewSave" type="Button" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "New Save"
+
+[node name="SavedGames" type="ItemList" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+
+[node name="Back" type="Button" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VFlowContainer/NewSave" to="." method="_on_new_save_pressed"]
+[connection signal="item_activated" from="MarginContainer/VFlowContainer/SavedGames" to="." method="_on_saved_games_item_activated"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/Back" to="." method="_on_back_pressed"]

@@ -157,7 +157,7 @@ func _end_game(_state: bool = true) -> void:
 	await timer.timeout
 
 	menu_node.set_pause(true)
-	menu_node.show_menu(menu_node.HudMenu.GAME_OVER_MENU)
+	menu_node.show_menu(menu_node.Menus.GAME_OVER_MENU)
 
 
 func reset_all() -> void:

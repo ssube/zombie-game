@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://3pq2kwotp1dd" path="res://scripts/observers/ZO_Audio.gd" id="11_0u5wd"]
 [ext_resource type="Script" uid="uid://c803vhdp1tlj5" path="res://scripts/systems/ZS_Fire.gd" id="11_mk7mw"]
 [ext_resource type="Script" uid="uid://secirogvxx3a" path="res://scripts/observers/ZO_Objective.gd" id="12_fbo34"]
-[ext_resource type="PackedScene" uid="uid://vcyq2fbg0dts" path="res://menus/hud.tscn" id="26_ohs1m"]
+[ext_resource type="PackedScene" uid="uid://vcyq2fbg0dts" path="res://menus/menu.tscn" id="26_ohs1m"]
 [ext_resource type="PackedScene" uid="uid://yvupurpwmap4" path="res://levels/level_0.tscn" id="28_u1aa1"]
 
 [node name="Game" type="Node3D"]

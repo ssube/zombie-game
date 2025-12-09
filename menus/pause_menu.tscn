@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://sah33a6m5cm8"]
+
+[ext_resource type="Script" uid="uid://dh3b7tvyif2rj" path="res://scripts/menus/pause_menu.gd" id="1_s0u37"]
+
+[node name="PauseMenu" type="AspectRatioContainer"]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s0u37")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VFlowContainer" type="VFlowContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/v_separation = 16
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+button_pressed = true
+text = "Post Shader"
+
+[node name="Resume" type="Button" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Inventory" type="Button" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Inventory"
+
+[node name="Objectives" type="Button" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Objectives"
+
+[node name="SaveGame" type="Button" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Save Game"
+
+[node name="LoadGame" type="Button" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Load Game"
+
+[node name="Options" type="Button" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Exit" type="Button" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="MarginContainer/VFlowContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/Inventory" to="." method="_on_inventory_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/Objectives" to="." method="_on_objectives_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/SaveGame" to="." method="_on_save_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/LoadGame" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/Exit" to="." method="_on_exit_pressed"]
