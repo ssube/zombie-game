@@ -13,7 +13,9 @@ func apply_effects(effect_type: ZR_Weapon_Effect.EffectType) -> Array[ZR_Weapon_
 		var ranged := self.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
 		effects.append_array(ranged.effects)
 
-	# TODO: melee
+	if self.has_component(ZC_Weapon_Melee):
+		var melee := self.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
+		effects.append_array(melee.effects)
 
 	var use_projectile = false
 	match effect_type:
