@@ -85,6 +85,11 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 				if EntityUtils.is_ranged_weapon(entity.current_weapon):
 					spawn_projectile(entity, body)
 
+		# Holster weapon
+		if input.use_holster:
+			switch_weapon(entity, null)
+
+		# Toggle flashlight
 		if input.use_light:
 			toggle_flashlight(entity, body)
 
@@ -135,7 +140,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 					if collider.has_component(ZC_Key):
 						%Menu.set_crosshair_color(Color.YELLOW)
 						if input.use_interact:
-							use_key(collider, player)
+							use_key(collider, entity, player)
 
 					if collider.has_component(ZC_Door):
 						%Menu.set_crosshair_color(Color.DODGER_BLUE)
@@ -225,7 +230,10 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	var forward = -marker.global_transform.basis.z.normalized()
 	new_projectile.apply_impulse(forward * c_weapon.muzzle_velocity, marker.global_position)
 
-	weapon.apply_effects(ZR_Weapon_Effect.EffectType.MUZZLE_FIRE)
+	var effect_scenes := weapon.apply_effects(ZR_Weapon_Effect.EffectType.MUZZLE_FIRE)
+	for scene in effect_scenes:
+		for sound in EntityUtils.find_sounds(scene):
+			%Menu.push_action(sound.subtitle_tag)
 
 	# tween along recoil path
 	if c_weapon.recoil_path:
@@ -297,12 +305,17 @@ func use_armor(entity: Entity, player_entity: Entity) -> void:
 
 	player.current_armor = entity
 
+	entity.get_parent().remove_child(entity)
+	player.inventory_node.add_child(entity)
+
 	var interactive = armor.get_component(ZC_Interactive) as ZC_Interactive
 	%Menu.push_action("Picked up armor: %s" % interactive.name)
 
-	if interactive.pickup_sound:
-		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
+	if interactive.use_sound:
+		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
 		_add_sound(sound, player_entity)
+
+	# remove_entity(entity)
 
 
 func use_character(entity: Entity, player_entity: Entity) -> void:
@@ -353,11 +366,6 @@ func use_food(entity: Entity, player_entity: Entity) -> void:
 	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
 	%Menu.push_action("Used food: %s" % interactive.name)
 
-	#var sounds := EntityUtils.keep_sounds(entity, player_entity)
-	#for sound in sounds:
-	#	sound.play_subtitle()
-	#	%Menu.push_action(sound.subtitle_tag)
-
 	if interactive.use_sound:
 		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
 		_add_sound(sound, player_entity)
@@ -365,10 +373,15 @@ func use_food(entity: Entity, player_entity: Entity) -> void:
 	remove_entity(entity)
 
 
-func use_key(entity: Entity, player: ZC_Player) -> void:
+func use_key(entity: Entity, player_entity: Entity, player: ZC_Player) -> void:
 	var key = entity.get_component(ZC_Key)
 	player.add_key(key.name)
 	%Menu.push_action("Found key: %s" % key.name)
+
+	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
+	if interactive.pickup_sound:
+		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
+		_add_sound(sound, player_entity)
 
 	remove_entity(entity)
 
@@ -451,34 +464,54 @@ func remove_shimmer_target(entity: Entity) -> void:
 				entity.remove_component(ZC_Shimmer)
 
 
+func _list_player_weapons(entity: ZE_Player) -> Array[ZE_Weapon]:
+	var inventory = entity.get_inventory()
+	var weapons: Array[ZE_Weapon] = []
+	for item in inventory:
+		if item is ZE_Weapon:
+			weapons.append(item)
+
+	return weapons
+
+
 ## Equip the next weapon (always the first weapon in the player's inventory)
 func equip_next_weapon(entity: ZE_Player) -> void:
-	var inventory = entity.get_inventory()
-	if inventory.size() == 0:
+	var weapons := _list_player_weapons(entity)
+	if weapons.size() == 0:
 		return
 
-	var next_weapon = inventory[0] as ZE_Weapon
+	var next_weapon = weapons[0]
 	switch_weapon(entity, next_weapon)
 
 
 func equip_previous_weapon(entity: ZE_Player) -> void:
-	var inventory = entity.get_inventory()
-	if inventory.size() == 0:
+	var weapons := _list_player_weapons(entity)
+	if weapons.size() == 0:
 		return
 
-	var previous_index = inventory.size() - 1
-	var previous_weapon = inventory[previous_index] as ZE_Weapon
+	var previous_index = weapons.size() - 1
+	var previous_weapon = weapons[previous_index] as ZE_Weapon
 	switch_weapon(entity, previous_weapon)
 
 
 func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
-	if entity.current_weapon != null:
-		var weapon = entity.current_weapon
-		weapon.get_parent().remove_child(weapon)
-		entity.inventory_node.add_child(weapon)
-		entity.remove_relationship(RelationshipUtils.make_equipped(weapon))
+	var old_weapon = entity.current_weapon
+	if old_weapon != null:
+		old_weapon.get_parent().remove_child(old_weapon)
+		entity.inventory_node.add_child(old_weapon)
+		entity.remove_relationship(RelationshipUtils.make_equipped(old_weapon))
 
 	entity.current_weapon = new_weapon
+	if new_weapon == null:
+		%Menu.clear_weapon_label()
+		%Menu.clear_ammo_label()
+
+		if old_weapon != null:
+			var old_interactive := old_weapon.get_component(ZC_Interactive) as ZC_Interactive
+			%Menu.push_action("Holstered weapon: %s" % old_interactive.name)
+
+		return
+
 	new_weapon.get_parent().remove_child(new_weapon)
 	entity.hands_node.add_child(new_weapon)
 	entity.add_relationship(RelationshipUtils.make_equipped(new_weapon))
@@ -488,6 +521,10 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 	# TODO: set ammo label to a real value
 	%Menu.set_ammo_label("Shells: 0/0")
 	%Menu.push_action("Switched to weapon: %s" % c_interactive.name)
+
+	if c_interactive.use_sound:
+		var sound := c_interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
+		_add_sound(sound, entity)
 
 
 func release_weapon(entity: Entity) -> void:
