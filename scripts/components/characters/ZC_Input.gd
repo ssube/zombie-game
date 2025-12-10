@@ -13,7 +13,9 @@ class_name ZC_Input
 @export var use_interact: bool = false
 @export var use_light: bool = false
 @export var use_heal: bool = false
+@export var use_holster: bool = false
 @export var use_pickup: bool = false
+@export var use_reload: bool = false
 
 @export_group("Menus")
 @export var menu_pause: bool = false
