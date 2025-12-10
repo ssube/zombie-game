@@ -335,16 +335,19 @@ func use_character(entity: Entity, player_entity: Entity) -> void:
 
 
 func use_door(entity: Entity, player_entity: Entity) -> void:
-	var door = entity.get_component(ZC_Door) as ZC_Door
-	var player = player_entity.get_component(ZC_Player) as ZC_Player
-	if door.is_locked:
-		if player.has_key(door.key_name):
-			door.is_locked = false
-			%Menu.push_action("Used key: %s" % door.key_name)
-		else:
-			%Menu.push_action("Need key: %s" % door.key_name)
+	var door := entity.get_component(ZC_Door) as ZC_Door
+	var locked := entity.get_component(ZC_Locked) as ZC_Locked
+	var player := player_entity.get_component(ZC_Player) as ZC_Player
 
-	if door.open_on_use and not door.is_locked:
+	if EntityUtils.is_locked(entity):
+		if player.has_key(locked.key_name):
+			locked.is_locked = false
+			%Menu.push_action("Used key: %s" % locked.key_name)
+		else:
+			%Menu.push_action("Need key: %s" % locked.key_name)
+			return
+
+	if door.open_on_use and not EntityUtils.is_locked(entity):
 		door.is_open = !door.is_open
 		print("Door is open: ", door)
 

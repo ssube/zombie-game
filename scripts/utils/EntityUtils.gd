@@ -51,6 +51,18 @@ static func is_interactive(entity: Node) -> bool:
 	return entity.has_component(ZC_Interactive)
 
 
+## Checks if the entity has the locked component **and** the is_locked flag is true
+static func is_locked(entity: Node) -> bool:
+	if entity is not Entity:
+		return false
+
+	var locked := entity.get_component(ZC_Locked) as ZC_Locked
+	if locked == null:
+		return false
+
+	return locked.is_locked
+
+
 static func is_objective(entity: Node) -> bool:
 	if entity is not Entity:
 		return false
@@ -135,7 +147,7 @@ static func remove(entity: Node) -> void:
 	entity.queue_free()
 
 
-static func _find_sounds(entity: Node3D) -> Array[ZN_AudioSubtitle3D]:
+static func find_sounds(entity: Node3D) -> Array[ZN_AudioSubtitle3D]:
 	if entity is ZN_AudioSubtitle3D:
 		return [entity]
 
@@ -144,7 +156,7 @@ static func _find_sounds(entity: Node3D) -> Array[ZN_AudioSubtitle3D]:
 		if child is ZN_AudioSubtitle3D:
 			results.append(child)
 		elif child is Node3D:
-			results.append_array(EntityUtils._find_sounds(child))
+			results.append_array(EntityUtils.find_sounds(child))
 
 	return results
 
@@ -158,7 +170,7 @@ static func keep_sounds(entity: Node, target: Node = null, remove_on_finish: boo
 	# assert(target is Node3D, "target must be 3D node")
 	assert(target is Node, "target must be a node")
 
-	var sounds := _find_sounds(entity)
+	var sounds := find_sounds(entity)
 	for sound in sounds:
 		var sound_position = sound.global_position
 		var sound_rotation = sound.global_rotation

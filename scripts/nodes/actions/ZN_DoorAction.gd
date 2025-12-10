@@ -12,14 +12,6 @@ func run(_actor: Entity) -> void:
 		printerr("Target is not a door: ", target)
 		return
 
-	match unlock:
-		Tristate.NO_CHANGE:
-			pass
-		Tristate.SET_FALSE:
-			door.is_locked = false
-		Tristate.SET_TRUE:
-			door.is_locked = true
-
 	match open:
 		Tristate.NO_CHANGE:
 			pass
@@ -27,3 +19,15 @@ func run(_actor: Entity) -> void:
 			door.is_open = false
 		Tristate.SET_TRUE:
 			door.is_open = true
+
+	var locked := target.get_component(ZC_Locked) as ZC_Locked
+	if locked == null:
+		return
+
+	match unlock:
+		Tristate.NO_CHANGE:
+			pass
+		Tristate.SET_FALSE:
+			locked.is_locked = false
+		Tristate.SET_TRUE:
+			locked.is_locked = true
