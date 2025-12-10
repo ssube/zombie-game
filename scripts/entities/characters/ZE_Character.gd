@@ -22,6 +22,8 @@ class_name ZE_Character
 var look_tween: Tween
 var move_tween: Tween
 
+var max_look: float = deg_to_rad(180)
+
 var look_direction: Vector3 = Vector3.ZERO:
 	set(value):
 		look_direction = value
@@ -142,5 +144,9 @@ func apply_look_tween(_delta: float, current_transform: Transform3D, target_posi
 	if is_zero_approx(current_rotation.distance_squared_to(look_rotation)):
 		return
 
+	# Compute yaw delta (Y axis rotation) and wrap it to +/- PI
+	var delta_yaw := wrapf(look_rotation.y - current_rotation.y, -PI, PI)
+
+	# Run as a relative tween, only adjusting the Y axis
 	look_tween = create_tween()
-	look_tween.tween_property(root_3d, "rotation", look_rotation, 0.5)
+	look_tween.tween_property(root_3d, "rotation:y", delta_yaw, 0.5).as_relative()
