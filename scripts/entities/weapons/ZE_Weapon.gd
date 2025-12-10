@@ -6,7 +6,7 @@ class_name ZE_Weapon
 var physical_shells: bool = true
 var physical_mags: bool = true
 
-func apply_effects(effect_type: ZR_Weapon_Effect.EffectType) -> Array[ZR_Weapon_Effect]:
+func apply_effects(effect_type: ZR_Weapon_Effect.EffectType) -> Array[Node3D]:
 	var effects: Array[ZR_Weapon_Effect] = []
 
 	if self.has_component(ZC_Weapon_Ranged):
@@ -26,6 +26,7 @@ func apply_effects(effect_type: ZR_Weapon_Effect.EffectType) -> Array[ZR_Weapon_
 		ZR_Weapon_Effect.EffectType.RELOAD:
 			use_projectile = physical_mags
 
+	var effect_scenes: Array[Node3D] = []
 	for effect in effects:
 		if effect.effect_type == effect_type:
 			var effect_marker := self.get_node(effect.marker)
@@ -33,9 +34,11 @@ func apply_effects(effect_type: ZR_Weapon_Effect.EffectType) -> Array[ZR_Weapon_
 			if effect.effect_scene:
 				var effect_scene := effect.effect_scene.instantiate()
 				effect_marker.add_child(effect_scene)
+				effect_scenes.append(effect_scene)
 
 			if use_projectile and effect.projectile_scene:
 				var projectile_scene := effect.projectile_scene.instantiate()
 				effect_marker.add_child(projectile_scene)
+				effect_scenes.append(projectile_scene)
 
-	return effects
+	return effect_scenes
