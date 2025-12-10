@@ -6,5 +6,5 @@ addons/
 assets/
 examples_*/
 exports/
-sounds/
+/sounds/
 textures/
