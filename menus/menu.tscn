@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://vcyq2fbg0dts"]
+[gd_scene load_steps=15 format=3 uid="uid://vcyq2fbg0dts"]
 
 [ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/menus/menu.gd" id="1_2d4ws"]
 [ext_resource type="Shader" uid="uid://ckydjmdamo2fo" path="res://shaders/post_crt.gdshader" id="2_jayei"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dixp3emrvmp7g" path="res://menus/save_menu.tscn" id="9_50hu0"]
 [ext_resource type="PackedScene" uid="uid://r5xbo2n5wsid" path="res://menus/game_over_menu.tscn" id="10_ph6eu"]
 [ext_resource type="PackedScene" uid="uid://445cu24k4j5g" path="res://menus/loading_menu.tscn" id="11_tvlqr"]
+[ext_resource type="PackedScene" uid="uid://bc12xlkdaphu3" path="res://menus/dialogue_menu.tscn" id="13_t5x1p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pua1y"]
 shader = ExtResource("2_jayei")
@@ -82,6 +83,9 @@ visible = false
 visible = false
 
 [node name="OptionsMenu" parent="MenuLayer" instance=ExtResource("4_tck7o")]
+visible = false
+
+[node name="DialogueMenu" parent="MenuLayer" instance=ExtResource("13_t5x1p")]
 visible = false
 
 [connection signal="back_pressed" from="MenuLayer/GameHud" to="." method="_on_back_pressed"]

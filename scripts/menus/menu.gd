@@ -45,9 +45,14 @@ func push_action(action: String) -> void:
 	$MenuLayer/GameHud.push_action(action)
 
 
+func clear_ammo_label() -> void:
+	$MenuLayer/GameHud.clear_ammo_label()
+
 func clear_target_label() -> void:
 	$MenuLayer/GameHud.clear_target_label()
 
+func clear_weapon_label() -> void:
+	$MenuLayer/GameHud.clear_weapon_label()
 
 func reset_crosshair_color() -> void:
 	$MenuLayer/GameHud.reset_crosshair_color()

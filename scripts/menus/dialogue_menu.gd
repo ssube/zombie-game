@@ -86,11 +86,17 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if not self.visible:
+		return
+		
 	if is_instance_valid(dialogue_line):
 		progress.visible = not dialogue_label.is_typing and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
 
 
 func _unhandled_input(_event: InputEvent) -> void:
+	if not self.visible:
+		return
+		
 	# Only the balloon is allowed to handle input while it's showing
 	get_viewport().set_input_as_handled()
 

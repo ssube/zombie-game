@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bc12xlkdaphu3"]
 
-[ext_resource type="Script" uid="uid://btnxb54u3lksj" path="res://dialogue/balloon.gd" id="1_36de5"]
+[ext_resource type="Script" uid="uid://hyr2u8jujttn" path="res://scripts/menus/dialogue_menu.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
 
@@ -99,7 +99,7 @@ _data = {
 &"progress": SubResource("Animation_qkmqt")
 }
 
-[node name="ExampleBalloon" type="CanvasLayer"]
+[node name="DialogueMenu" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_36de5")
 
