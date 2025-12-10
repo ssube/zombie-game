@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://dirupaj1q5imr"]
+[gd_scene load_steps=26 format=4 uid="uid://dirupaj1q5imr"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_2kns5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_17hxq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/weapons/ZC_Weapon_Ranged.gd" id="4_xq6m6"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="5_17hxq"]
 [ext_resource type="PackedScene" uid="uid://dktd2ekufselm" path="res://effects/weapons/shotgun_blast.tscn" id="5_l5ox4"]
+[ext_resource type="PackedScene" uid="uid://bjwcu1vgbspmb" path="res://effects/sounds/shotgun_equip.tscn" id="6_04vgk"]
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="6_7rb10"]
 [ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="6_l5ox4"]
 [ext_resource type="Texture2D" uid="uid://cm5mhpoe8joro" path="res://textures/fire1_ 07.png" id="7_xq6m6"]
@@ -18,6 +19,7 @@ name = "Shotgun"
 shimmer_material = ExtResource("6_7rb10")
 shimmer_nodes = Array[NodePath]([NodePath("Shotgun/Shotgun"), NodePath("Shotgun/Shotgun-Detach")])
 pickup_sound = ExtResource("3_04vgk")
+use_sound = ExtResource("6_04vgk")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_l5ox4"]

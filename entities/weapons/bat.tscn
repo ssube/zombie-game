@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=4 uid="uid://tna8f01ql67u"]
+[gd_scene load_steps=17 format=4 uid="uid://tna8f01ql67u"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aigh8"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_dy0dc"]
 [ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="3_ee0de"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_ee0de"]
+[ext_resource type="PackedScene" uid="uid://dy4nxp8gacdao" path="res://effects/sounds/bat_equip.tscn" id="5_55xri"]
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="5_fnw7o"]
 [ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="5_xpimh"]
 [ext_resource type="Script" uid="uid://b8uyvu6k51kor" path="res://scripts/events/EV_DamageOnEnter.gd" id="6_fnw7o"]
@@ -14,6 +15,7 @@ script = ExtResource("4_ee0de")
 name = "Baseball Bat"
 shimmer_material = ExtResource("5_fnw7o")
 shimmer_nodes = Array[NodePath]([NodePath("Node3D/bat/Cube")])
+use_sound = ExtResource("5_55xri")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_ee0de"]
@@ -106,7 +108,7 @@ transform = Transform3D(0.9999856, 2.9802322e-07, -2.9802322e-08, -6.2584877e-07
 shape = SubResource("CapsuleShape3D_r1fv1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.76432604, 0.56403923, 0.31251466, 0, 0.48464662, -0.87471, -0.64483, 0.66856366, 0.37042803, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.7643131, 0.56403786, 0.31251365, 0, 0.48464543, -0.87470716, -0.6448191, 0.66856205, 0.3704268, 0.7398019, -0.59114224, -0.7246001)
 shape = SubResource("CapsuleShape3D_r1fv1")
 
 [node name="SwingPath" type="Path3D" parent="."]

@@ -5,6 +5,7 @@
 
 [node name="ImpactBulletMetal" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_sa7mc")
+volume_db = -20.0
 script = ExtResource("2_hc255")
 subtitle_text = "Bullet Impact"
 subtitle_radius = 3.0

@@ -3,18 +3,19 @@
 [ext_resource type="Script" uid="uid://diqnbh8glii7x" path="res://scripts/entities/items/ZE_Food.gd" id="1_u378d"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_hvtkh"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_402fv"]
+[ext_resource type="PackedScene" uid="uid://be8hsn7xg2ebr" path="res://effects/sounds/food_pickup.tscn" id="3_upnup"]
 [ext_resource type="Material" uid="uid://duorhhvkpiuvo" path="res://materials/effects/shimmer_food.tres" id="4_u378d"]
+[ext_resource type="PackedScene" uid="uid://y8lluykhb0lp" path="res://effects/sounds/food_use.tscn" id="5_fvwgj"]
 [ext_resource type="Script" uid="uid://c4bbaiyswechl" path="res://scripts/components/props/ZC_Food.gd" id="5_hvtkh"]
 [ext_resource type="Texture2D" uid="uid://5ydgfpdxio6o" path="res://assets/ZombieApocalypsePack/FirstAidKit/first_aid_kit_texture.png" id="6_kd0dt"]
-[ext_resource type="AudioStream" uid="uid://vaaxj41o4g5m" path="res://sounds/1000 Retro Sound Effects/General Sounds/Power Ups & Healing/sfx_heal5.wav" id="7_upnup"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="8_qcm1k"]
 
 [sub_resource type="Resource" id="Resource_hvtkh"]
 script = ExtResource("3_402fv")
+name = "Medkit"
 shimmer_material = ExtResource("4_u378d")
 shimmer_nodes = Array[NodePath]([NodePath("first_aid_kit/Cube")])
-name = "Medkit"
-pickup_sound = NodePath("ZN_AudioSubtitle3D")
+pickup_sound = ExtResource("3_upnup")
+use_sound = ExtResource("5_fvwgj")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_402fv"]
@@ -92,11 +93,3 @@ transform = Transform3D(-1.639177e-08, -0.75, 0, 0.375, -3.278354e-08, 0, 0, 0, 
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ua4vo")
 skeleton = NodePath("")
-
-[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("7_upnup")
-max_distance = 5.0
-script = ExtResource("8_qcm1k")
-subtitle_text = "Healing Effect"
-subtitle_radius = 5.0
-metadata/_custom_type_script = "uid://mcuf24u8q14t"
