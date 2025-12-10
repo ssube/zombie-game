@@ -9,10 +9,23 @@ static func create_path() -> bool:
 	return true
 
 
+static func _sort_by_value(a, b):
+	return a[1] < b[1]
+
+
+static func _sort_values(data: Dictionary) -> Array[Array]:
+	var sorted_pairs = []
+	for key in data.keys():
+		sorted_pairs.append([key, data[key]])
+
+	sorted_pairs.sort_custom(_sort_by_value)
+	return sorted_pairs
+
+
 static func list_saves() -> Array[String]:
 	SaveManager.create_path()
 	var save_dir: DirAccess = DirAccess.open("user://saves")
-	var save_names: Dictionary[String, bool] = {}
+	var save_names: Dictionary[String, int] = {}
 
 	save_dir.list_dir_begin()
 	var file_name = save_dir.get_next()
@@ -22,10 +35,13 @@ static func list_saves() -> Array[String]:
 		else:
 			print("Found save: ", file_name)
 			var clean_name = file_name.replace("_entities.tres", "").replace("_objectives.tres", "").replace(".tres", "")
-			save_names[clean_name] = true
+			var modified_at = FileAccess.get_modified_time(file_name)
+			save_names[clean_name] = modified_at
 
 		file_name = save_dir.get_next()
 
+	# TODO: sort by modified time
+	save_names.sort()
 	return save_names.keys()
 
 
