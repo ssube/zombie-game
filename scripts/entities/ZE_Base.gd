@@ -5,6 +5,8 @@ class_name ZE_Base
 @export_tool_button("Generate Instance ID")
 var generate_instance_id = _generate_instance_id
 
+@export var extra_components: Array[Component] = []
+
 func _generate_instance_id() -> void:
 	var root := self.owner
 	if root == null:
@@ -25,6 +27,11 @@ func _generate_instance_id() -> void:
 	]
 	self.id = "_".join(parts)
 	print("Generated new entity ID: ", self.id)
+
+
+func _ready() -> void:
+	self.component_resources.append_array(self.extra_components)
+
 
 func on_ready() -> void:
 	if self.id == "":
