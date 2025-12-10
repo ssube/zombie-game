@@ -19,22 +19,50 @@ metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqlhk"]
 albedo_color = Color(1, 0.27999997, 0.27999997, 1)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n8xfw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_012gx"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_n8xfw")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_66axx"]
+transparency = 1
+albedo_color = Color(1, 0.2784314, 0.2784314, 0.61960787)
+emission_enabled = true
+emission = Color(0.31, 0.052700005, 0.052700005, 1)
+normal_enabled = true
+normal_scale = 1.5
+normal_texture = SubResource("NoiseTexture2D_012gx")
+billboard_mode = 2
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_n8xfw"]
+radius = 0.75
 
 [node name="Objective" type="StaticBody3D"]
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_gq75p")
+extra_components = null
 component_resources = Array[ExtResource("2_ko3gf")]([SubResource("Resource_6y5fu"), SubResource("Resource_lfpnt")])
 
 [node name="CSGCylinder3D" type="CSGSphere3D" parent="."]
 material = SubResource("StandardMaterial3D_cqlhk")
+
+[node name="CSGCylinder3D2" type="CSGSphere3D" parent="."]
+radius = 0.75
+radial_segments = 16
+rings = 8
+material = SubResource("StandardMaterial3D_66axx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_n8xfw")
 
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+visible = false
 radius = 0.75
 height = 2.0
 vertices = PackedVector3Array(0.019589901, 0, -0.6446769, 0.35418716, 0, -0.5060098, 0.5473344, 0, -0.26485074, 0.60717785, 0, 0.009822607, 0.49963364, 0, 0.32822895, 0.27294397, 0, 0.5147185, 0.007929623, 0, 0.59741837, -0.3112143, 0, 0.49840117, -0.4871815, 0, 0.31656432, -0.5810312, 0, -0.0065938234, -0.5137526, 0, -0.34577906, -0.25038758, 0, -0.6010318)
