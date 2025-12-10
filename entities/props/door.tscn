@@ -24,9 +24,9 @@ metadata/_custom_type_script = "uid://0dld8iow0suh"
 [sub_resource type="BoxShape3D" id="BoxShape3D_nynkh"]
 size = Vector3(2, 4, 0.25)
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("child_entity")]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("entities")]
 script = ExtResource("1_3y01w")
-child_entity = NodePath("Door")
+entities = [NodePath("Door")]
 
 [node name="Door" type="StaticBody3D" parent="."]
 collision_layer = 2
