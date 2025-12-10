@@ -4,20 +4,49 @@ class_name ZO_DoorObserver
 func watch() -> Resource:
 	return ZC_Door
 
-func on_component_changed(entity: Entity, door: Resource, property: String, new_value: Variant, _old_value: Variant):
+
+func on_component_changed(entity: Entity, component: Resource, property: String, new_value: Variant, _old_value: Variant):
+	var door := component as ZC_Door
+
 	if property == 'is_open':
 		var entity3d := entity.get_node(".") as Node3D
-		var tween := entity3d.create_tween()
 
 		if new_value:
-			print("Opening door")
-			#if entity3d.position != door.open_position:
-			#	tween.tween_property(entity3d, "position", door.open_position, 2.0)
-			if entity3d.rotation != door.open_rotation:
-				tween.tween_property(entity3d, "rotation", door.open_rotation, 2.0)
+			_open_door(entity3d, door)
+
+			if door.auto_close_time > 0:
+				var close_timer := get_tree().create_timer(door.auto_close_time)
+				close_timer.timeout.connect(_auto_close.bind(entity3d, door))
 		else:
-			print("Closing door")
-			#if entity3d.position != door.close_position:
-			#	tween.tween_property(entity3d, "position", door.close_position, 2.0)
-			if entity3d.rotation != door.close_rotation:
-				tween.tween_property(entity3d, "rotation", door.close_rotation, 2.0)
+			_close_door(entity3d, door)
+
+
+func _tween_to_marker(entity3d: Node3D, marker: Marker3D, duration: float) -> Tween:
+	var tween := entity3d.create_tween()
+	tween.set_parallel()
+
+	if not is_zero_approx(entity3d.position.distance_squared_to(marker.position)):
+		tween.tween_property(entity3d, "position", marker.position, duration)
+	if not is_zero_approx(entity3d.rotation.distance_squared_to(marker.rotation)):
+		tween.tween_property(entity3d, "rotation", marker.rotation, duration)
+
+	return tween
+
+
+func _open_door(entity3d: Node3D, door: ZC_Door) -> void:
+	# TODO: figure out which way to swing
+	# var open_marker_away := entity.get_node(door.open_marker_away) as Marker3D
+
+	print("Opening door")
+	var open_marker := entity3d.get_node(door.open_marker) as Marker3D
+	_tween_to_marker(entity3d, open_marker, door.open_time)
+
+
+func _close_door(entity3d: Node3D, door: ZC_Door) -> void:
+	print("Closing door")
+	var close_marker := entity3d.get_node(door.close_marker) as Marker3D
+	_tween_to_marker(entity3d, close_marker, door.close_time)
+
+
+func _auto_close(_entity3d: Node3D, door: ZC_Door) -> void:
+	door.is_open = false

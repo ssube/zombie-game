@@ -1,40 +1,54 @@
-[gd_scene load_steps=10 format=3 uid="uid://qwwlyenuba3g"]
+[gd_scene load_steps=11 format=3 uid="uid://qwwlyenuba3g"]
 
+[ext_resource type="Script" uid="uid://dvcw0ghs3aqdo" path="res://scripts/nodes/ZN_CopyComponents.gd" id="1_3y01w"]
 [ext_resource type="Script" uid="uid://m5nxypqqfkd" path="res://scripts/entities/props/ZE_Door.gd" id="1_qm17t"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wyt2q"]
 [ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/props/ZC_Door.gd" id="3_auxoi"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_wyt2q"]
 [ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_auxoi"]
+[ext_resource type="Material" uid="uid://q11wc28gwgth" path="res://textures/Color Maps/wood_5.tres" id="6_1aoj0"]
 
 [sub_resource type="Resource" id="Resource_q8gv4"]
 script = ExtResource("3_auxoi")
-close_rotation = Vector3(0, 1.57, 0)
+open_marker = NodePath("../Markers/OpenMarker3D")
+close_marker = NodePath("../Markers/CloseMarker3D")
 metadata/_custom_type_script = "uid://qjr7o31fiedq"
 
 [sub_resource type="Resource" id="Resource_auxoi"]
 script = ExtResource("4_wyt2q")
+name = "Door"
 shimmer_material = ExtResource("5_auxoi")
 shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
-name = "Door"
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nynkh"]
 size = Vector3(2, 4, 0.25)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8gv4"]
-albedo_color = Color(0.51, 0.51, 0.51, 1)
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("child_entity")]
+script = ExtResource("1_3y01w")
+child_entity = NodePath("Door")
 
-[node name="Door" type="StaticBody3D"]
+[node name="Door" type="StaticBody3D" parent="."]
 collision_layer = 2
 collision_mask = 31
 script = ExtResource("1_qm17t")
+extra_components = null
 component_resources = Array[ExtResource("2_wyt2q")]([SubResource("Resource_q8gv4"), SubResource("Resource_auxoi")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
 shape = SubResource("BoxShape3D_nynkh")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="Door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
 size = Vector3(2, 4, 0.25)
-material = SubResource("StandardMaterial3D_q8gv4")
+material = ExtResource("6_1aoj0")
+
+[node name="Markers" type="Node3D" parent="."]
+
+[node name="OpenMarker3D" type="Marker3D" parent="Markers"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+gizmo_extents = 1.0
+
+[node name="CloseMarker3D" type="Marker3D" parent="Markers"]
+gizmo_extents = 1.0
