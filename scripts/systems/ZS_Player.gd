@@ -64,7 +64,10 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			var weapon_body = entity.current_weapon.get_node(".") as RigidBody3D
 			weapon_body.global_transform = entity.hands_node.global_transform
 
-		# TODO: consider updating transform for inventory items as well
+		# Update transform for inventory items as well
+		if entity.inventory_node != null:
+			for child in entity.inventory_node.get_children():
+				child.global_transform = entity.hands_node.global_transform
 
 		# Process any usage relationships
 		var used_items := entity.get_relationships(RelationshipUtils.any_used) as Array[Relationship]
