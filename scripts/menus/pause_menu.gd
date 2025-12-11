@@ -1,5 +1,6 @@
 extends ZM_BaseMenu
 
+signal shader_toggled(value: bool)
 signal resume_pressed()
 signal inventory_pressed()
 signal objectives_pressed()
@@ -39,3 +40,7 @@ func _on_exit_pressed() -> void:
 
 func on_update() -> void:
 	pass
+
+
+func _on_post_shader_toggled(toggled_on: bool) -> void:
+	shader_toggled.emit(toggled_on)

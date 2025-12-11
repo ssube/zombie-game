@@ -199,3 +199,7 @@ func _on_game_saved(_name: String) -> void:
 
 func _on_game_loaded(_name: String) -> void:
 	pass # Replace with function body.
+
+
+func _on_shader_toggled(value: bool) -> void:
+	$PostLayer.visible = value

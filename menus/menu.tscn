@@ -46,7 +46,7 @@ script = ExtResource("1_2d4ws")
 
 [node name="PostLayer" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="PostLayer"]
+[node name="CRTShader" type="ColorRect" parent="PostLayer"]
 material = SubResource("ShaderMaterial_pua1y")
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,6 +103,7 @@ visible = false
 [connection signal="options_pressed" from="MenuLayer/PauseMenu" to="." method="_on_options_pressed"]
 [connection signal="resume_pressed" from="MenuLayer/PauseMenu" to="." method="_on_resume_pressed"]
 [connection signal="save_pressed" from="MenuLayer/PauseMenu" to="." method="_on_save_game_pressed"]
+[connection signal="shader_toggled" from="MenuLayer/PauseMenu" to="." method="_on_shader_toggled"]
 [connection signal="back_pressed" from="MenuLayer/InventoryMenu" to="." method="_on_back_pressed"]
 [connection signal="menu_changed" from="MenuLayer/InventoryMenu" to="." method="_on_menu_changed"]
 [connection signal="back_pressed" from="MenuLayer/ObjectivesMenu" to="." method="_on_back_pressed"]
