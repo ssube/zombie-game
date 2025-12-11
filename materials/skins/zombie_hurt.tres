@@ -4,7 +4,12 @@
 noise_type = 2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mleiw"]
+width = 256
+height = 256
 noise = SubResource("FastNoiseLite_ekbwb")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 0.25
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2yl8o"]
 noise = SubResource("FastNoiseLite_ekbwb")
