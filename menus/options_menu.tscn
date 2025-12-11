@@ -253,7 +253,6 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Physical Shell Casings"
-alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3"]
 layout_mode = 2
@@ -262,7 +261,6 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Physical Empty Magazines"
-alignment = 1
 
 [node name="Graphics" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
@@ -399,23 +397,18 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+[node name="NoAggroBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
 layout_mode = 2
+text = "No aggro"
 
 [node name="NoClipBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
 layout_mode = 2
 text = "No clip"
-alignment = 1
-
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
-layout_mode = 2
 
 [node name="GodModeBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
 layout_mode = 2
 text = "God mode"
-alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
