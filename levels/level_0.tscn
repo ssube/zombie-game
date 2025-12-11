@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=124 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://dyenf2chlolgq" path="res://effects/sounds/key_pickup.tscn" id="6_jawnq"]
@@ -34,6 +34,7 @@
 [ext_resource type="Material" uid="uid://bc3b71ottph3s" path="res://textures/Color Maps/concrete_5.tres" id="21_ggct0"]
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="23_8mki0"]
 [ext_resource type="Script" uid="uid://dd4hkf7y5v13t" path="res://scripts/components/status/ZC_Locked.gd" id="27_2fv0q"]
+[ext_resource type="PackedScene" uid="uid://dc22w3kstrlyu" path="res://entities/characters/zombie_worker.tscn" id="30_2fv0q"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="35_lf4l6"]
 [ext_resource type="Script" uid="uid://bn1fw86ypw3a6" path="res://scripts/nodes/actions/ZN_PortalAction.gd" id="35_q6gno"]
 [ext_resource type="Script" uid="uid://cpxac3i6p71x0" path="res://scripts/nodes/objectives/ZN_CountObjective.gd" id="38_2fv0q"]
@@ -611,6 +612,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -11)
 [node name="Door2" parent="Entities/Room4" instance=ExtResource("8_58gyl")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.25, 0, 1)
 
+[node name="Zombie" parent="Entities/Room4" instance=ExtResource("30_2fv0q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1283226, 1.1611633, 0.5116539)
+move_speed = 1.5
+
 [node name="Lights" type="Node" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
@@ -621,13 +626,13 @@ shadow_enabled = true
 omni_range = 24.0
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.780468, 3.1510324, -9.595341)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.780468, 3.1510324, -9.595341)
 light_energy = 2.5
 shadow_enabled = true
 omni_range = 14.736
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.780468, 3.1510324, -12.595341)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.219532, 3.1510324, -12.595341)
 light_color = Color(0.56, 1, 0.67, 1)
 light_energy = 2.5
 shadow_enabled = true
