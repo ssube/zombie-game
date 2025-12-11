@@ -1,6 +1,8 @@
 shader_type spatial;
 render_mode unshaded, depth_draw_never;
 
+global uniform float shimmer_time = 0.0;
+
 group_uniforms Highlight;
 uniform vec4 shine_color : source_color = vec4(1.0);
 uniform float shine_speed : hint_range(0, 25) = 1.0;
@@ -14,7 +16,8 @@ uniform float y_direction : hint_range(-1, 1) = 0.0;
 uniform float z_direction : hint_range(-1, 1) = 1.0;
 
 float sawtooth(float x) {
-	return 2.0 * ( (x + shine_speed * TIME) / (shine_width + cycle_interval) - floor( 0.5 + (x + shine_speed * TIME) / (shine_width + cycle_interval) ) );
+	float time_since = TIME - shimmer_time;
+	return 2.0 * ( (x + shine_speed * time_since) / (shine_width + cycle_interval) - floor( 0.5 + (x + shine_speed * time_since) / (shine_width + cycle_interval) ) );
 }
 
 void fragment() {

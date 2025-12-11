@@ -1,6 +1,8 @@
 class_name ZS_PlayerSystem
 extends System
 
+@export var shimmer_offset: float = 4.0
+
 var last_shimmer: Dictionary[Entity, Entity] = {} # dict for multiplayer
 
 func query():
@@ -12,17 +14,11 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		var velocity = entity.get_component(ZC_Velocity) as ZC_Velocity
 		var player = entity.get_component(ZC_Player) as ZC_Player
 		var input = entity.get_component(ZC_Input) as ZC_Input
-		var modifiers = entity.get_relationships(RelationshipUtils.any_modifier)
-
-		var speed_multiplier := 1.0
-		for modifier: Relationship in modifiers:
-			if modifier.target is ZC_Effect_Speed:
-				speed_multiplier *= modifier.target.multiplier
 
 		var body := entity.get_node(".") as CharacterBody3D
 		body.rotation.x += input.turn_direction.x
 		body.rotation.y += input.turn_direction.y
-		body.rotation.z = input.turn_direction.z
+		body.rotation.z = input.turn_direction.z # not additive
 
 		var forward = -body.global_transform.basis.z.normalized()
 		var right = body.global_transform.basis.x.normalized()
@@ -46,6 +42,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 		# Apply gravity
 		velocity.linear_velocity += velocity.gravity * delta
+
 		# TODO: fix infinite gravity
 		if velocity.linear_velocity.y < 0:
 			velocity.linear_velocity.y = max(velocity.gravity.y, velocity.linear_velocity.y)
@@ -55,8 +52,9 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			if body.is_on_floor():
 				velocity.linear_velocity.y = input.jump_speed
 
-		# TODO: move this input the MovementSystem
+		# TODO: move this into the MovementSystem
 		# Sync to CharacterBody3D (Node assumed attached to entity)
+		var speed_multiplier := EntityUtils.get_speed_multiplier(entity)
 		body.velocity = velocity.linear_velocity * speed_multiplier
 		body.move_and_slide()
 		_handle_collisions(body, delta)
@@ -65,6 +63,8 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		if entity.current_weapon != null:
 			var weapon_body = entity.current_weapon.get_node(".") as RigidBody3D
 			weapon_body.global_transform = entity.hands_node.global_transform
+
+		# TODO: consider updating transform for inventory items as well
 
 		# Pause menu
 		if input.menu_pause:
@@ -113,6 +113,9 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 						var shimmer = ZC_Shimmer.from_interactive(interactive)
 						collider.add_component(shimmer)
 						last_shimmer[entity] = collider
+
+						var shimmer_start := (Time.get_ticks_msec() / 1000.0) + shimmer_offset
+						RenderingServer.global_shader_parameter_set("shimmer_time", shimmer_start)
 
 					if collider is ZE_Character:
 						if input.use_interact:
@@ -315,7 +318,15 @@ func use_armor(entity: Entity, player_entity: Entity) -> void:
 		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
 		_add_sound(sound, player_entity)
 
-	# remove_entity(entity)
+	# TODO: should inventory items follow the player in 3D space?
+	var entity3d := entity.get_node(".") as RigidBody3D
+	entity3d.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
+	entity3d.freeze = true
+	entity3d.visible = false
+
+	for child in entity3d.get_children():
+		if child is CollisionShape3D:
+			child.disabled = true
 
 
 func use_character(entity: Entity, player_entity: Entity) -> void:
