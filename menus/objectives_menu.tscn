@@ -38,4 +38,5 @@ column_titles_visible = true
 layout_mode = 2
 text = "Back"
 
+[connection signal="item_activated" from="MarginContainer/VFlowContainer/ObjectiveTree" to="." method="_on_objective_tree_item_activated"]
 [connection signal="pressed" from="MarginContainer/VFlowContainer/Back" to="." method="_on_back_pressed"]

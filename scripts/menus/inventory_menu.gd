@@ -4,6 +4,9 @@ extends ZM_BaseMenu
 @export var inventory_list: ItemList
 
 
+signal item_activated(index: int, title: String)
+
+
 func on_update() -> void:
 	var players: Array[Entity] = ECS.world.query.with_all([ZC_Player]).execute()
 	var inventory: Array[Entity] = []
@@ -41,10 +44,8 @@ func on_update() -> void:
 func _on_inventory_list_item_activated(index: int) -> void:
 	var list := $MenuLayer/InventoryMenu/MarginContainer/VFlowContainer/InventoryList as ItemList
 	if list.is_item_selectable(index):
-		var item := list.get_item_text(index)
-		printerr("TODO: use inventory item: ", item)
-		# TODO: get player that is holding item and call ZS_Player.use_item
-		# var player := RelationshipUtils.get_holder(
+		var title := list.get_item_text(index)
+		item_activated.emit(index, title)
 
 
 func _on_back_pressed() -> void:

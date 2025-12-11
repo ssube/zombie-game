@@ -30,7 +30,7 @@ func _add_objective_children(objective: ZN_BaseObjective, item: TreeItem) -> voi
 
 
 func _on_objective_tree_item_activated() -> void:
-	var tree := $MenuLayer/ObjectivesMenu/MarginContainer/VFlowContainer/ObjectiveTree as Tree
+	var tree := $MarginContainer/VFlowContainer/ObjectiveTree as Tree
 	var item := tree.get_selected() as TreeItem
 	var objective_title := item.get_text(0)
 

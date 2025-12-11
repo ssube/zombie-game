@@ -186,7 +186,7 @@ func _on_options_applied() -> void:
 
 
 func _on_objective_changed(objective: ZN_BaseObjective) -> void:
-	$GameHud.set_objective_label(objective.title)
+	$MenuLayer/GameHud.set_objective_label(objective.title)
 
 
 func _on_menu_changed(menu: ZM_BaseMenu.Menus) -> void:
@@ -203,3 +203,7 @@ func _on_game_loaded(_name: String) -> void:
 
 func _on_shader_toggled(value: bool) -> void:
 	$PostLayer.visible = value
+
+
+func _on_inventory_item_activated(index: int, title: String) -> void:
+	printerr("TODO: activated inventory item %d: %s" % [index, title])
