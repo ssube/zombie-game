@@ -526,6 +526,7 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 	var old_weapon = entity.current_weapon
 	if old_weapon != null:
 		old_weapon.get_parent().remove_child(old_weapon)
+		old_weapon.visible = false
 		entity.inventory_node.add_child(old_weapon)
 		entity.remove_relationship(RelationshipUtils.make_equipped(old_weapon))
 
@@ -541,13 +542,18 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 		return
 
 	new_weapon.get_parent().remove_child(new_weapon)
+	new_weapon.visible = true
 	entity.hands_node.add_child(new_weapon)
 	entity.add_relationship(RelationshipUtils.make_equipped(new_weapon))
 
 	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
 	%Menu.set_weapon_label(c_interactive.name)
-	# TODO: set ammo label to a real value
-	%Menu.set_ammo_label("Shells: 0/0")
+	if EntityUtils.is_ranged_weapon(new_weapon):
+		# TODO: set ammo label to a real value
+		%Menu.set_ammo_label("Shells: 0/0")
+	else:
+		%Menu.clear_ammo_label()
+
 	%Menu.push_action("Switched to weapon: %s" % c_interactive.name)
 
 	if c_interactive.use_sound:
