@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://vcyq2fbg0dts"]
+[gd_scene load_steps=16 format=3 uid="uid://vcyq2fbg0dts"]
 
 [ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/menus/menu.gd" id="1_2d4ws"]
 [ext_resource type="Shader" uid="uid://ckydjmdamo2fo" path="res://shaders/post_crt.gdshader" id="2_jayei"]
@@ -33,6 +33,8 @@ shader_parameter/enable_color_quantization = true
 shader_parameter/color_quant_steps = 32.0
 shader_parameter/warble_amount = 0.00400000019
 shader_parameter/warble_speed = 0.50000002375
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t5x1p"]
 
 [node name="Menu" type="Control"]
 process_mode = 3
@@ -88,6 +90,55 @@ visible = false
 [node name="DialogueMenu" parent="MenuLayer" instance=ExtResource("13_t5x1p")]
 visible = false
 
+[node name="ExitDialog" type="AspectRatioContainer" parent="MenuLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MenuLayer/ExitDialog"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuLayer/ExitDialog/CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer"]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VFlowContainer" type="VFlowContainer" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Are you sure you want to quit?"
+horizontal_alignment = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="QuitButton" type="Button" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer"]
+modulate = Color(1, 0.47000003, 0.47000003, 1)
+layout_mode = 2
+text = "Quit"
+
+[node name="VSeparator" type="VSeparator" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_t5x1p")
+
+[node name="BackButton" type="Button" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer"]
+layout_mode = 2
+text = "Back"
+
 [connection signal="back_pressed" from="MenuLayer/GameHud" to="." method="_on_back_pressed"]
 [connection signal="menu_changed" from="MenuLayer/GameHud" to="." method="_on_menu_changed"]
 [connection signal="exit_pressed" from="MenuLayer/StartMenu" to="." method="_on_exit_pressed"]
@@ -124,3 +175,5 @@ visible = false
 [connection signal="apply_pressed" from="MenuLayer/OptionsMenu" to="." method="_on_options_applied"]
 [connection signal="back_pressed" from="MenuLayer/OptionsMenu" to="." method="_on_back_pressed"]
 [connection signal="menu_changed" from="MenuLayer/OptionsMenu" to="." method="_on_menu_changed"]
+[connection signal="pressed" from="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer/QuitButton" to="." method="_on_dialog_quit_pressed"]
+[connection signal="pressed" from="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer/BackButton" to="." method="_on_back_pressed"]

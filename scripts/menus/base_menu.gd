@@ -12,6 +12,7 @@ enum Menus {
 	LOAD_MENU,
 	SAVE_MENU,
 	OPTIONS_MENU,
+	EXIT_DIALOG,
 }
 
 signal apply_pressed()

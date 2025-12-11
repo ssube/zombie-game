@@ -100,6 +100,7 @@ func show_menu(menu: Menus) -> void:
 		$MenuLayer/PauseMenu.visible = (menu == Menus.PAUSE_MENU)
 		$MenuLayer/SaveMenu.visible = (menu == Menus.SAVE_MENU)
 		$MenuLayer/StartMenu.visible = (menu == Menus.START_MENU)
+		$MenuLayer/ExitDialog.visible = (menu == Menus.EXIT_DIALOG)
 
 		update_mouse_mode()
 
@@ -135,9 +136,7 @@ func _on_load_game_pressed() -> void:
 
 
 func _on_exit_pressed() -> void:
-	# TODO: prompt to save
-	print("Exit from menu")
-	get_tree().quit()
+	show_menu(Menus.EXIT_DIALOG)
 
 
 func _on_resume_pressed() -> void:
@@ -167,10 +166,6 @@ func _on_level_loaded(_old_level: String, _new_level: String) -> void:
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
 	$PostLayer.visible = toggled_on
-
-
-func _on_new_save_pressed() -> void:
-	SaveManager.save_game("test")
 
 
 func _on_objectives_pressed() -> void:
@@ -205,5 +200,6 @@ func _on_shader_toggled(value: bool) -> void:
 	$PostLayer.visible = value
 
 
-func _on_inventory_item_activated(index: int, title: String) -> void:
-	printerr("TODO: activated inventory item %d: %s" % [index, title])
+func _on_dialog_quit_pressed() -> void:
+	print("Exit from menu")
+	get_tree().quit()
