@@ -100,6 +100,7 @@ func clear_world(keep_players: bool = true) -> void:
 
 func load_level(level_name: String, spawn_point: String) -> void:
 	# TODO: use ResourceLoader.load_threaded_get
+	# var level_scene := ResourceLoader.load_threaded_get(level_path.resource_path) as PackedScene
 
 	var level_scene = level_scenes.get(level_name) as PackedScene
 	if level_scene == null:
@@ -109,7 +110,6 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	level_loading.emit(last_level, level_name)
 	clear_world()
 
-	# var level_scene := ResourceLoader.load_threaded_get(level_path.resource_path) as PackedScene
 	var next_level := level_scene.instantiate()
 
 	%Level.add_child(next_level)
@@ -121,8 +121,12 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	last_level = level_name
 
 	var spawn_node := next_level.get_node(spawn_point) as Node3D
-	if spawn_node == null:
+	if spawn_point == "" or spawn_node == null:
 		printerr("Invalid spawn point: ", spawn_point)
+
+	spawn_node = next_level.get_node("Markers/Start") as Node3D
+	if spawn_node == null:
+		printerr("No fallback spawn point: Markers/Start")
 		return
 
 	var players: Array[Entity] = QueryBuilder.new(ECS.world).with_all([ZC_Player]).execute()
