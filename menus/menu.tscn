@@ -105,7 +105,6 @@ visible = false
 [connection signal="save_pressed" from="MenuLayer/PauseMenu" to="." method="_on_save_game_pressed"]
 [connection signal="shader_toggled" from="MenuLayer/PauseMenu" to="." method="_on_shader_toggled"]
 [connection signal="back_pressed" from="MenuLayer/InventoryMenu" to="." method="_on_back_pressed"]
-[connection signal="item_activated" from="MenuLayer/InventoryMenu" to="." method="_on_inventory_item_activated"]
 [connection signal="menu_changed" from="MenuLayer/InventoryMenu" to="." method="_on_menu_changed"]
 [connection signal="back_pressed" from="MenuLayer/ObjectivesMenu" to="." method="_on_back_pressed"]
 [connection signal="menu_changed" from="MenuLayer/ObjectivesMenu" to="." method="_on_menu_changed"]

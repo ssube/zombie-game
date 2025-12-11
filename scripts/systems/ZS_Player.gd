@@ -66,6 +66,12 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 		# TODO: consider updating transform for inventory items as well
 
+		# Process any usage relationships
+		var used_items := entity.get_relationships(RelationshipUtils.any_used) as Array[Relationship]
+		for rel in used_items:
+			use_interactive(rel.target, entity, player, false)
+			entity.remove_relationship(rel)
+
 		# Pause menu
 		if input.menu_pause:
 			%Menu.toggle_pause()
@@ -117,50 +123,11 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 						var shimmer_start := (Time.get_ticks_msec() / 1000.0) + shimmer_offset
 						RenderingServer.global_shader_parameter_set("shimmer_time", shimmer_start)
 
-					if collider is ZE_Character:
-						if input.use_interact:
-							use_character(collider, entity)
+					if input.use_pickup:
+						pickup_item(collider, entity)
 
-					if collider.has_component(ZC_Objective):
-						%Menu.set_crosshair_color(Color.GOLD)
-						if input.use_interact:
-							use_objective(collider, player)
-
-					if collider.has_component(ZC_Effect_Armor):
-						%Menu.set_crosshair_color(Color.GREEN)
-						if input.use_interact:
-							use_armor(collider, entity)
-						elif input.use_pickup:
-							pickup_item(collider, entity)
-
-					if collider.has_component(ZC_Food):
-						%Menu.set_crosshair_color(Color.GREEN)
-						if input.use_interact:
-							use_food(collider, entity)
-						elif input.use_pickup:
-							pickup_item(collider, entity)
-
-					if collider.has_component(ZC_Key):
-						%Menu.set_crosshair_color(Color.YELLOW)
-						if input.use_interact:
-							use_key(collider, entity, player)
-
-					if collider.has_component(ZC_Door):
-						%Menu.set_crosshair_color(Color.DODGER_BLUE)
-						if input.use_interact:
-							use_door(collider, entity)
-
-					if collider.has_component(ZC_Portal):
-						%Menu.set_crosshair_color(Color.GOLD)
-						if input.use_interact:
-							use_portal(collider, entity)
-
-					if EntityUtils.is_weapon(collider):
-						%Menu.set_crosshair_color(Color.ORANGE)
-						if input.use_interact:
-							use_weapon(collider, entity)
-						elif input.use_pickup:
-							pickup_item(collider, entity)
+					if input.use_interact:
+						use_interactive(collider, entity, player)
 
 		else:
 			%Menu.clear_target_label()
@@ -170,6 +137,50 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		# Update ECS transform from actual node position
 		transform.position = body.global_position
 		transform.rotation = body.rotation
+
+
+func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_crosshair: bool = true) -> void:
+	if collider is ZE_Character:
+		if set_crosshair:
+			%Menu.set_crosshair_color(Color.DODGER_BLUE)
+
+		use_character(collider, entity)
+
+	if collider.has_component(ZC_Objective):
+		if set_crosshair:
+			%Menu.set_crosshair_color(Color.GOLD)
+		use_objective(collider, player)
+
+	if collider.has_component(ZC_Effect_Armor):
+		if set_crosshair:
+			%Menu.set_crosshair_color(Color.GREEN)
+		use_armor(collider, entity)
+
+	if collider.has_component(ZC_Food):
+		if set_crosshair:
+			%Menu.set_crosshair_color(Color.GREEN)
+		use_food(collider, entity)
+
+	if collider.has_component(ZC_Key):
+		if set_crosshair:
+			%Menu.set_crosshair_color(Color.YELLOW)
+		use_key(collider, entity, player)
+
+	if collider.has_component(ZC_Door):
+		if set_crosshair:
+			%Menu.set_crosshair_color(Color.DODGER_BLUE)
+		use_door(collider, entity)
+
+	if collider.has_component(ZC_Portal):
+		if set_crosshair:
+			%Menu.set_crosshair_color(Color.GOLD)
+		use_portal(collider, entity)
+
+	if EntityUtils.is_weapon(collider):
+		if set_crosshair:
+			%Menu.set_crosshair_color(Color.ORANGE)
+		use_weapon(collider, entity)
+
 
 
 func _handle_collisions(body: CharacterBody3D, delta: float) -> void:

@@ -39,4 +39,5 @@ item_0/text = "Inventory Items"
 layout_mode = 2
 text = "Back"
 
+[connection signal="item_activated" from="MarginContainer/VFlowContainer/InventoryList" to="." method="_on_inventory_list_item_activated"]
 [connection signal="pressed" from="MarginContainer/VFlowContainer/Back" to="." method="_on_back_pressed"]
