@@ -91,7 +91,6 @@ visible = false
 visible = false
 
 [node name="ExitDialog" type="AspectRatioContainer" parent="MenuLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -118,8 +117,15 @@ size_flags_horizontal = 4
 
 [node name="Label" type="Label" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 1
 text = "Are you sure you want to quit?"
+horizontal_alignment = 1
+
+[node name="LastSaveLabel" type="Label" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Your last save was %s minutes ago."
 horizontal_alignment = 1
 
 [node name="HFlowContainer" type="HFlowContainer" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]

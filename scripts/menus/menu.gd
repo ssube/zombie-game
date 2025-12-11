@@ -2,6 +2,9 @@ extends ZM_BaseMenu
 
 var visible_menu: Menus = Menus.NONE
 var previous_menu: Menus = Menus.START_MENU
+var last_save: int = 0
+
+@onready var last_save_template: String = %LastSaveLabel.text
 
 func _ready() -> void:
 	update_mouse_mode()
@@ -36,14 +39,11 @@ func update_mouse_mode() -> void:
 func set_health(value: int, immediate: bool = false) -> void:
 	$MenuLayer/GameHud.set_health(value, immediate)
 
-
 func set_objective_label(title: String) -> void:
 	$MenuLayer/GameHud.set_objective_label(title)
 
-
 func push_action(action: String) -> void:
 	$MenuLayer/GameHud.push_action(action)
-
 
 func clear_ammo_label() -> void:
 	$MenuLayer/GameHud.clear_ammo_label()
@@ -123,6 +123,15 @@ func show_menu(menu: Menus) -> void:
 				$MenuLayer/SaveMenu.on_show()
 			Menus.START_MENU:
 				$MenuLayer/StartMenu.on_show()
+			Menus.EXIT_DIALOG:
+				var current_time := Time.get_ticks_msec()
+				var elapsed_minutes := "forever"
+				if last_save > 0:
+					var elapsed_seconds := (current_time - last_save) / 60.0 / 60.0
+					elapsed_minutes = Time.get_offset_string_from_offset_minutes(floor(elapsed_seconds))
+					elapsed_minutes = elapsed_minutes.trim_prefix("+")
+
+				%LastSaveLabel.text = last_save_template % elapsed_minutes
 
 
 func _on_new_game_pressed() -> void:
@@ -189,7 +198,7 @@ func _on_menu_changed(menu: ZM_BaseMenu.Menus) -> void:
 
 
 func _on_game_saved(_name: String) -> void:
-	pass # Replace with function body.
+	last_save = Time.get_ticks_msec()
 
 
 func _on_game_loaded(_name: String) -> void:
