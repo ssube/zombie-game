@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=4 uid="uid://bse6riebwmfln"]
+[gd_scene load_steps=85 format=4 uid="uid://bse6riebwmfln"]
 
 [ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/props/objective.tscn" id="4_l53as"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="5_3sk1a"]
@@ -12,6 +12,7 @@
 [ext_resource type="Material" uid="uid://b7hn4t4hgmaod" path="res://textures/Color Maps/concrete_3.tres" id="11_vjtdm"]
 [ext_resource type="Material" uid="uid://bmxolsa17xlkl" path="res://textures/Color Maps/brick_wall_tx_3.tres" id="12_bgw3c"]
 [ext_resource type="Material" uid="uid://bc3b71ottph3s" path="res://textures/Color Maps/concrete_5.tres" id="13_lrvbd"]
+[ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="13_nmsli"]
 
 [sub_resource type="Resource" id="Resource_6y5fu"]
 script = ExtResource("6_08mmt")
@@ -686,3 +687,11 @@ shape = SubResource("ConvexPolygonShape3D_1lhc5")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_iss0w")
+
+[node name="Objectives" type="Node" parent="."]
+
+[node name="ZN_FlagObjective" type="Node" parent="Objectives"]
+script = ExtResource("13_nmsli")
+key = "escape"
+title = "Find a way to escape"
+metadata/_custom_type_script = "uid://b560n5psxwkuk"

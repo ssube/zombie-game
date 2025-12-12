@@ -7,5 +7,6 @@
 
 [resource]
 script = ExtResource("3_ogk7f")
+inverse_scale_factor = 64.0
 entity_fgd = ExtResource("2_463jw")
 use_groups_hierarchy = true

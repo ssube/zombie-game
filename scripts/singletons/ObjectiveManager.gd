@@ -156,7 +156,6 @@ func _end_game(_state: bool = true) -> void:
 	var timer := get_tree().create_timer(1.0)
 	await timer.timeout
 
-	menu_node.set_pause(true)
 	menu_node.show_menu(menu_node.Menus.GAME_OVER_MENU)
 
 

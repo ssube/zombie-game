@@ -21,15 +21,23 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			var damage := damage_rel.target as ZC_Damage
 			total_damage += floor(damage.amount)
 
-		if total_damage > 0 and EntityUtils.is_objective(entity):
-			var objective: ZC_Objective = entity.get_component(ZC_Objective)
-			if objective.is_active and objective.complete_on_damage:
-				objective.is_complete = true
-
+		# TODO: combine damage loops
 		for damage_rel in damages:
 			var damage: ZC_Damage = damage_rel.target as ZC_Damage
 			health.current_health = max(0, health.current_health - floor(damage.amount))
 			entity.remove_relationship(damage_rel)
+
+		if total_damage > 0:
+			if EntityUtils.is_player(entity):
+				var effect_strength := 1.0 - (health.current_health / float(health.max_health))
+				var effect_duration := effect_strength * 5.0
+				effect_strength /= 2.0
+				%Menu.show_effect(%Menu.Effects.DAMAGE, effect_duration, effect_strength)
+
+			if EntityUtils.is_objective(entity):
+				var objective: ZC_Objective = entity.get_component(ZC_Objective)
+				if objective.is_active and objective.complete_on_damage:
+					objective.is_complete = true
 
 		var skin := entity.get_component(ZC_Skin) as ZC_Skin
 		if health.current_health <= 0:

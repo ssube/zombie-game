@@ -1,5 +1,7 @@
-[gd_scene load_steps=124 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=130 format=4 uid="uid://yvupurpwmap4"]
 
+[ext_resource type="Script" uid="uid://c0x5fgy8sbya0" path="res://scripts/nodes/ZN_EffectArea3D.gd" id="1_66alr"]
+[ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://dyenf2chlolgq" path="res://effects/sounds/key_pickup.tscn" id="6_jawnq"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
@@ -39,6 +41,27 @@
 [ext_resource type="Script" uid="uid://bn1fw86ypw3a6" path="res://scripts/nodes/actions/ZN_PortalAction.gd" id="35_q6gno"]
 [ext_resource type="Script" uid="uid://cpxac3i6p71x0" path="res://scripts/nodes/objectives/ZN_CountObjective.gd" id="38_2fv0q"]
 [ext_resource type="PackedScene" uid="uid://c8tswr23gn5mg" path="res://entities/items/armor.tscn" id="38_g1jay"]
+
+[sub_resource type="Resource" id="Resource_r7enh"]
+script = ExtResource("2_ijfse")
+effect = 4
+duration = 10.0
+strength = 0.5
+metadata/_custom_type_script = "uid://ewo3m4f384i0"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ukt1r"]
+radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wgrf"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.2509804)
+
+[sub_resource type="Resource" id="Resource_ijfse"]
+script = ExtResource("2_ijfse")
+effect = 5
+duration = 10.0
+strength = 0.5
+metadata/_custom_type_script = "uid://ewo3m4f384i0"
 
 [sub_resource type="Resource" id="Resource_nq5s6"]
 script = ExtResource("9_gxks1")
@@ -524,6 +547,34 @@ region_merge_size = 5.0
 filter_ledge_spans = true
 
 [node name="Level0" type="Node3D"]
+
+[node name="Areas" type="Node" parent="."]
+
+[node name="Area3D" type="Area3D" parent="Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.48387, 1.5680256, -9.010336)
+collision_mask = 24
+script = ExtResource("1_66alr")
+effect = SubResource("Resource_r7enh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/Area3D"]
+shape = SubResource("SphereShape3D_ukt1r")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Areas/Area3D"]
+radius = 2.0
+material = SubResource("StandardMaterial3D_1wgrf")
+
+[node name="Area3D2" type="Area3D" parent="Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4530973, 1.5680275, -12.916126)
+collision_mask = 24
+script = ExtResource("1_66alr")
+effect = SubResource("Resource_ijfse")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/Area3D2"]
+shape = SubResource("SphereShape3D_ukt1r")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Areas/Area3D2"]
+radius = 2.0
+material = SubResource("StandardMaterial3D_1wgrf")
 
 [node name="Entities" type="Node" parent="."]
 unique_name_in_owner = true

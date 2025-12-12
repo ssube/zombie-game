@@ -123,8 +123,8 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	var spawn_node := next_level.get_node(spawn_point) as Node3D
 	if spawn_point == "" or spawn_node == null:
 		printerr("Invalid spawn point: ", spawn_point)
-
-	spawn_node = next_level.get_node("Markers/Start") as Node3D
+		spawn_node = next_level.get_node("Markers/Start") as Node3D
+		
 	if spawn_node == null:
 		printerr("No fallback spawn point: Markers/Start")
 		return

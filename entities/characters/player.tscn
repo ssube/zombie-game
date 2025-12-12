@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://busds31ha5tx1"]
+[gd_scene load_steps=23 format=3 uid="uid://busds31ha5tx1"]
 
 [ext_resource type="Script" uid="uid://dyudolkkkb4ut" path="res://scripts/entities/characters/ZE_Player.gd" id="1_ks8m5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_l1ths"]
@@ -8,7 +8,9 @@
 [ext_resource type="Script" uid="uid://cxm3pspus34o7" path="res://scripts/components/characters/ZC_Input.gd" id="6_a1f57"]
 [ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/weapons/ZC_Weapon_Ranged.gd" id="7_25mxy"]
 [ext_resource type="PackedScene" uid="uid://blxc4fcjrrpa2" path="res://entities/weapons/bullet.tscn" id="7_dv4ir"]
+[ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="7_f8inm"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="9_idcse"]
+[ext_resource type="PackedScene" uid="uid://cmyplaoxhtlit" path="res://effects/sounds/player_hurt.tscn" id="10_bjbbu"]
 [ext_resource type="Script" uid="uid://c01mmquxj5ukg" path="res://scripts/nodes/ZN_Mouse.gd" id="10_p37y2"]
 [ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="10_vkqcq"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="12_b4uku"]
@@ -40,6 +42,7 @@ metadata/_custom_type_script = "uid://dwsqxsqwtloma"
 
 [sub_resource type="Resource" id="Resource_p37y2"]
 script = ExtResource("9_idcse")
+hurt_sound = ExtResource("10_bjbbu")
 metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
 [sub_resource type="Resource" id="Resource_b4uku"]

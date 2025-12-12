@@ -14,16 +14,18 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 
 	var c_health := component as ZC_Health
 	if new_value == 0 and c_health.death_sound:
-		var sound_node = entity.get_node(c_health.death_sound) as ZN_AudioSubtitle3D
-		if sound_node != null:
-			var c_noise := ZC_Noise.from_node(sound_node)
-			entity.add_component(c_noise)
+		var sound_node = c_health.death_sound.instantiate() as ZN_AudioSubtitle3D
+		entity.add_child(sound_node)
+		#if sound_node != null:
+		#	var c_noise := ZC_Noise.from_node(sound_node)
+		#	entity.add_component(c_noise)
 
 	if new_value > 0 and c_health.hurt_sound:
-		var sound_node = entity.get_node(c_health.hurt_sound) as ZN_AudioSubtitle3D
-		if sound_node != null:
-			var c_noise := ZC_Noise.from_node(sound_node)
-			entity.add_component(c_noise)
+		var sound_node = c_health.hurt_sound.instantiate() as ZN_AudioSubtitle3D
+		entity.add_child(sound_node)
+		#if sound_node != null:
+		#	var c_noise := ZC_Noise.from_node(sound_node)
+		#	entity.add_component(c_noise)
 
 	if EntityUtils.is_player(entity):
 		print("Health changed: ", property, " from ", old_value, " to ", new_value)

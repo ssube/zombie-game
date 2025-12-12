@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmyplaoxhtlit"]
+
+[ext_resource type="AudioStream" uid="uid://rgqfeexguqii" path="res://sounds/1000 Retro Sound Effects/Death & Damage/Simple Damage Sounds/sfx_damage_hit6.wav" id="1_jddik"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="2_s5vsk"]
+
+[node name="PlayerHurt" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_jddik")
+script = ExtResource("2_s5vsk")
+play_on_ready = true
+subtitle_text = "Player hurt"
+metadata/_custom_type_script = "uid://mcuf24u8q14t"

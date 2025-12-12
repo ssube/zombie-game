@@ -9,16 +9,22 @@ static func create_path() -> bool:
 	return true
 
 
-static func _sort_by_value(a, b):
-	return a[1] < b[1]
+## Sort by time, or if the times are equal, by name
+## Inputs should be a 2-value array with [name, time]
+static func _sort_by_time_name(a, b):
+	if a[1] == b[1]:
+		return a[0] < b[0]
+
+	# latest first
+	return a[1] > b[1]
 
 
-static func _sort_values(data: Dictionary) -> Array[Array]:
+static func _sort_values(data: Dictionary) -> Array:
 	var sorted_pairs = []
 	for key in data.keys():
 		sorted_pairs.append([key, data[key]])
 
-	sorted_pairs.sort_custom(_sort_by_value)
+	sorted_pairs.sort_custom(_sort_by_time_name)
 	return sorted_pairs
 
 
@@ -35,14 +41,20 @@ static func list_saves() -> Array[String]:
 		else:
 			print("Found save: ", file_name)
 			var clean_name = file_name.replace("_entities.tres", "").replace("_objectives.tres", "").replace(".tres", "")
-			var modified_at = FileAccess.get_modified_time(file_name)
+			var modified_at = FileAccess.get_modified_time("user://saves/" + file_name)
 			save_names[clean_name] = modified_at
 
 		file_name = save_dir.get_next()
 
-	# TODO: sort by modified time
-	save_names.sort()
-	return save_names.keys()
+	# sort by modified time
+	var sorted_saves := _sort_values(save_names)
+	var sorted_names: Array[String] = []
+
+	for pair in sorted_saves:
+		sorted_names.append(pair[0])
+
+	# save_names.sort()
+	return sorted_names
 
 
 static func save_game(name: String) -> bool:

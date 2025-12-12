@@ -41,11 +41,15 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		velocity.linear_velocity.z = horizontal_velocity.z
 
 		# Apply gravity
-		velocity.linear_velocity += velocity.gravity * delta
+		var no_clip := CheatManager.get_cheat_state(CheatManager.Cheats.NO_CLIP)
+		if no_clip:
+			velocity.linear_velocity.y = 0
+		else:
+			velocity.linear_velocity += velocity.gravity * delta
 
-		# TODO: fix infinite gravity
-		if velocity.linear_velocity.y < 0:
-			velocity.linear_velocity.y = max(velocity.gravity.y, velocity.linear_velocity.y)
+			# TODO: fix infinite gravity
+			if velocity.linear_velocity.y < 0:
+				velocity.linear_velocity.y = max(velocity.gravity.y, velocity.linear_velocity.y)
 
 		# Apply jump
 		if input.move_jump:
@@ -68,6 +72,16 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		if entity.inventory_node != null:
 			for child in entity.inventory_node.get_children():
 				child.global_transform = entity.hands_node.global_transform
+
+		# Process any effect relationships
+		var effects := entity.get_relationships(RelationshipUtils.any_effect) as Array[Relationship]
+		for rel in effects:
+			var effect := rel.target as ZC_Screen_Effect
+			if effect == null:
+				continue
+
+			%Menu.show_effect(effect.effect, effect.duration, effect.strength)
+			entity.remove_relationship(rel)
 
 		# Process any usage relationships
 		var used_items := entity.get_relationships(RelationshipUtils.any_used) as Array[Relationship]
