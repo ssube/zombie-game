@@ -1,11 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://vcyq2fbg0dts"]
+[gd_scene load_steps=26 format=3 uid="uid://vcyq2fbg0dts"]
 
 [ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/menus/menu.gd" id="1_2d4ws"]
+[ext_resource type="Shader" uid="uid://brw8j2w8g6y35" path="res://shaders/scroll.gdshader" id="2_4vei7"]
 [ext_resource type="Shader" uid="uid://ckydjmdamo2fo" path="res://shaders/post_crt.gdshader" id="2_jayei"]
+[ext_resource type="Shader" uid="uid://dbhp1fqn4l3mb" path="res://shaders/vignette.gdshader" id="2_w7kj8"]
+[ext_resource type="Texture2D" uid="uid://dwf44rltpd2up" path="res://effects/screen/water_texture.tres" id="3_50hu0"]
 [ext_resource type="PackedScene" uid="uid://vs3qkjinyhbb" path="res://menus/game_hud.tscn" id="3_nonqb"]
+[ext_resource type="Texture2D" uid="uid://bsyv551fas3wv" path="res://effects/screen/fire_texture.tres" id="4_ph6eu"]
 [ext_resource type="PackedScene" uid="uid://7wq8jy2v0e4b" path="res://menus/start_menu.tscn" id="4_t5x1p"]
 [ext_resource type="PackedScene" uid="uid://dyv5b48xquqot" path="res://menus/options_menu.tscn" id="4_tck7o"]
 [ext_resource type="PackedScene" uid="uid://sah33a6m5cm8" path="res://menus/pause_menu.tscn" id="5_j27vk"]
+[ext_resource type="Texture2D" uid="uid://cfqo5agum2br2" path="res://effects/screen/acid_texture.tres" id="5_tvlqr"]
 [ext_resource type="PackedScene" uid="uid://b0lsnupsevvdt" path="res://menus/inventory_menu.tscn" id="6_w7kj8"]
 [ext_resource type="PackedScene" uid="uid://12llaao0w5gu" path="res://menus/objectives_menu.tscn" id="7_ss16q"]
 [ext_resource type="PackedScene" uid="uid://cuod00oetrc32" path="res://menus/load_menu.tscn" id="8_4vei7"]
@@ -13,6 +18,34 @@
 [ext_resource type="PackedScene" uid="uid://r5xbo2n5wsid" path="res://menus/game_over_menu.tscn" id="10_ph6eu"]
 [ext_resource type="PackedScene" uid="uid://445cu24k4j5g" path="res://menus/loading_menu.tscn" id="11_tvlqr"]
 [ext_resource type="PackedScene" uid="uid://bc12xlkdaphu3" path="res://menus/dialogue_menu.tscn" id="13_t5x1p"]
+[ext_resource type="PackedScene" uid="uid://d1mfodqblneky" path="res://menus/exit_dialog.tscn" id="14_j27vk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ph6eu"]
+shader = ExtResource("2_4vei7")
+shader_parameter/scroll_speed = Vector2(0.1, 0.1)
+shader_parameter/clamp_edges = false
+
+[sub_resource type="Gradient" id="Gradient_4vei7"]
+colors = PackedColorArray(0.55, 0.18149999, 0.18149999, 1, 1, 0.27999997, 0.27999997, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_50hu0"]
+frequency = 0.025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ph6eu"]
+width = 64
+height = 64
+noise = SubResource("FastNoiseLite_50hu0")
+color_ramp = SubResource("Gradient_4vei7")
+seamless = true
+seamless_blend_skirt = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ss16q"]
+shader = ExtResource("2_w7kj8")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.75
+shader_parameter/softness = 0.50010002374747
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
+shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pua1y"]
 shader = ExtResource("2_jayei")
@@ -34,8 +67,6 @@ shader_parameter/color_quant_steps = 32.0
 shader_parameter/warble_amount = 0.00400000019
 shader_parameter/warble_speed = 0.50000002375
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t5x1p"]
-
 [node name="Menu" type="Control"]
 process_mode = 3
 layout_mode = 3
@@ -45,6 +76,60 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2d4ws")
+
+[node name="EffectLayer" type="CanvasLayer" parent="."]
+
+[node name="WaterEffect" type="TextureRect" parent="EffectLayer"]
+visible = false
+modulate = Color(1, 1, 1, 0.5019608)
+material = SubResource("ShaderMaterial_ph6eu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_50hu0")
+
+[node name="FireEffect" type="TextureRect" parent="EffectLayer"]
+visible = false
+modulate = Color(1, 1, 1, 0.5019608)
+material = SubResource("ShaderMaterial_ph6eu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_ph6eu")
+
+[node name="AcidEffect" type="TextureRect" parent="EffectLayer"]
+visible = false
+modulate = Color(1, 1, 1, 0.5019608)
+material = SubResource("ShaderMaterial_ph6eu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_tvlqr")
+
+[node name="DamageEffect" type="TextureRect" parent="EffectLayer"]
+visible = false
+modulate = Color(1, 1, 1, 0.5019608)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_ph6eu")
+
+[node name="VignetteEffect" type="ColorRect" parent="EffectLayer"]
+visible = false
+material = SubResource("ShaderMaterial_ss16q")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PostLayer" type="CanvasLayer" parent="."]
 
@@ -90,60 +175,8 @@ visible = false
 [node name="DialogueMenu" parent="MenuLayer" instance=ExtResource("13_t5x1p")]
 visible = false
 
-[node name="ExitDialog" type="AspectRatioContainer" parent="MenuLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="MenuLayer/ExitDialog"]
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="MenuLayer/ExitDialog/CenterContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer"]
-custom_minimum_size = Vector2(300, 150)
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="VFlowContainer" type="VFlowContainer" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Label" type="Label" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Are you sure you want to quit?"
-horizontal_alignment = 1
-
-[node name="LastSaveLabel" type="Label" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-text = "Your last save was %s minutes ago."
-horizontal_alignment = 1
-
-[node name="HFlowContainer" type="HFlowContainer" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="QuitButton" type="Button" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer"]
-modulate = Color(1, 0.47000003, 0.47000003, 1)
-layout_mode = 2
-text = "Quit"
-
-[node name="VSeparator" type="VSeparator" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer"]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxEmpty_t5x1p")
-
-[node name="BackButton" type="Button" parent="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer"]
-layout_mode = 2
-text = "Back"
+[node name="ExitDialog" parent="MenuLayer" instance=ExtResource("14_j27vk")]
+visible = false
 
 [connection signal="back_pressed" from="MenuLayer/GameHud" to="." method="_on_back_pressed"]
 [connection signal="menu_changed" from="MenuLayer/GameHud" to="." method="_on_menu_changed"]
@@ -181,5 +214,4 @@ text = "Back"
 [connection signal="apply_pressed" from="MenuLayer/OptionsMenu" to="." method="_on_options_applied"]
 [connection signal="back_pressed" from="MenuLayer/OptionsMenu" to="." method="_on_back_pressed"]
 [connection signal="menu_changed" from="MenuLayer/OptionsMenu" to="." method="_on_menu_changed"]
-[connection signal="pressed" from="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer/QuitButton" to="." method="_on_dialog_quit_pressed"]
-[connection signal="pressed" from="MenuLayer/ExitDialog/CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer/BackButton" to="." method="_on_back_pressed"]
+[connection signal="back_pressed" from="MenuLayer/ExitDialog" to="." method="_on_back_pressed"]

@@ -129,9 +129,9 @@ func _on_window_mode_menu_item_selected(_index: int) -> void:
 	# TODO: add to options
 
 
-func _on_no_clip_box_toggled(_toggled_on: bool) -> void:
+func _on_no_clip_box_toggled(toggled_on: bool) -> void:
 	if cheats:
-		printerr("TODO: implement noclip cheat")
+		CheatManager.toggle_cheat(CheatManager.Cheats.NO_CLIP, toggled_on)
 
 
 func _on_god_mode_box_toggled(_toggled_on: bool) -> void:
@@ -141,3 +141,7 @@ func _on_god_mode_box_toggled(_toggled_on: bool) -> void:
 
 func _on_back_pressed() -> void:
 	back_pressed.emit()
+
+
+func _on_no_aggro_box_toggled(_toggled_on: bool) -> void:
+	pass # Replace with function body.

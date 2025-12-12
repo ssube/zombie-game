@@ -10,3 +10,7 @@ func _on_new_game_pressed() -> void:
 
 func _on_exit_pressed() -> void:
 	exit_pressed.emit()
+
+
+func on_update() -> void:
+	pass

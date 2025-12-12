@@ -21,3 +21,7 @@ func _on_saved_games_item_activated(index: int) -> void:
 
 func _on_back_pressed() -> void:
 	back_pressed.emit()
+
+
+func _on_load_pressed() -> void:
+	pass # Replace with function body.

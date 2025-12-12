@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1mfodqblneky"]
+
+[ext_resource type="Script" uid="uid://rtidq1edask0" path="res://scripts/menus/exit_dialog.gd" id="1_vxrlt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t5x1p"]
+
+[node name="ExitDialog" type="AspectRatioContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vxrlt")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VFlowContainer" type="VFlowContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Are you sure you want to quit?"
+horizontal_alignment = 1
+
+[node name="LastSaveLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Your last save was %s ago."
+horizontal_alignment = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="QuitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer"]
+modulate = Color(1, 0.47000003, 0.47000003, 1)
+layout_mode = 2
+text = "Quit"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_t5x1p")
+
+[node name="BackButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer/BackButton" to="." method="_on_back_button_pressed"]

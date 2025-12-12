@@ -15,6 +15,15 @@ enum Menus {
 	EXIT_DIALOG,
 }
 
+enum Effects {
+	NONE,
+	DAMAGE,
+	VIGNETTE,
+	WATER,
+	FIRE,
+	ACID,
+}
+
 signal apply_pressed()
 signal back_pressed()
 signal menu_changed(menu: Menus)

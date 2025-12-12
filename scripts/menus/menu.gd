@@ -2,9 +2,11 @@ extends ZM_BaseMenu
 
 var visible_menu: Menus = Menus.NONE
 var previous_menu: Menus = Menus.START_MENU
-var last_save: int = 0
 
-@onready var last_save_template: String = %LastSaveLabel.text
+var pause_menus: Dictionary[Menus, bool] = {
+	Menus.NONE: false,
+}
+var visible_effects: Dictionary[Effects, float] = {}
 
 func _ready() -> void:
 	update_mouse_mode()
@@ -19,12 +21,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 	if event.is_action_pressed("menu_inventory"):
-		set_pause(true)
 		_on_inventory_pressed()
 		get_viewport().set_input_as_handled()
 
 	if event.is_action_pressed("menu_objectives"):
-		set_pause(true)
 		_on_objectives_pressed()
 		get_viewport().set_input_as_handled()
 
@@ -71,21 +71,23 @@ func set_crosshair_color(color: Color) -> void:
 
 func set_pause(pause: bool) -> void:
 	get_tree().paused = pause
+
+
+func toggle_pause() -> void:
+	var pause := !get_tree().paused
 	if pause:
 		show_menu(Menus.PAUSE_MENU)
 	else:
 		show_menu(Menus.NONE)
 
 
-func toggle_pause() -> void:
-	var pause := !get_tree().paused
-	set_pause(pause)
-
-
 func show_menu(menu: Menus) -> void:
 	if menu != visible_menu:
 		var menu_name := Menus.keys()[menu] as String
 		print("Show menu: ", menu_name)
+
+		var menu_pause := pause_menus.get(menu, true) as bool
+		set_pause(menu_pause)
 
 		previous_menu = visible_menu
 		visible_menu = menu
@@ -124,20 +126,63 @@ func show_menu(menu: Menus) -> void:
 			Menus.START_MENU:
 				$MenuLayer/StartMenu.on_show()
 			Menus.EXIT_DIALOG:
-				var current_time := Time.get_ticks_msec()
-				var elapsed_minutes := "forever"
-				if last_save > 0:
-					var elapsed_seconds := (current_time - last_save) / 60.0 / 60.0
-					elapsed_minutes = Time.get_offset_string_from_offset_minutes(floor(elapsed_seconds))
-					elapsed_minutes = elapsed_minutes.trim_prefix("+")
+				$MenuLayer/ExitDialog.on_show()
 
-				%LastSaveLabel.text = last_save_template % elapsed_minutes
+
+## If the effect is visible, fade out
+func hide_effect(effect: Effects) -> void:
+	if effect not in visible_effects:
+		return
+
+	visible_effects.erase(effect)
+	match effect:
+		Effects.ACID:
+			$EffectLayer/AcidEffect.visible = false
+		Effects.DAMAGE:
+			$EffectLayer/DamageEffect.visible = false
+		Effects.FIRE:
+			$EffectLayer/FireEffect.visible = false
+		Effects.VIGNETTE:
+			$EffectLayer/VignetteEffect.visible = false
+		Effects.WATER:
+			$EffectLayer/WaterEffect.visible = false
+
+
+func show_effect(effect: Effects, duration: float, strength: float = 1.0, fade_in: float = 0.2) -> void:
+	strength = clampf(strength, 0.0, 1.0)
+
+	var effect_node: Control
+	match effect:
+		Effects.ACID:
+			effect_node = $EffectLayer/AcidEffect
+		Effects.DAMAGE:
+			effect_node = $EffectLayer/DamageEffect
+		Effects.FIRE:
+			effect_node = $EffectLayer/FireEffect
+		Effects.VIGNETTE:
+			effect_node = $EffectLayer/VignetteEffect
+			var vignette_material := $EffectLayer/VignetteEffect.material as ShaderMaterial
+			vignette_material.set_shader_parameter("softness", strength)
+		Effects.WATER:
+			effect_node = $EffectLayer/WaterEffect
+
+	if effect not in visible_effects:
+		effect_node.modulate.a = 0.0
+		effect_node.visible = true
+		
+	visible_effects[effect] = duration
+
+	var tween := create_tween()
+	tween.tween_property(effect_node, "modulate:a", strength, fade_in)
+
+	if duration < INF:
+		tween.tween_property(effect_node, "modulate:a", 0, duration)
+		tween.tween_callback(hide_effect.bind(effect))
 
 
 func _on_new_game_pressed() -> void:
 	print("New game")
 	show_menu(Menus.NONE)
-	set_pause(false)
 
 
 func _on_load_game_pressed() -> void:
@@ -150,7 +195,6 @@ func _on_exit_pressed() -> void:
 
 func _on_resume_pressed() -> void:
 	show_menu(Menus.NONE)
-	set_pause(false)
 
 
 func _on_save_game_pressed() -> void:
@@ -198,7 +242,8 @@ func _on_menu_changed(menu: ZM_BaseMenu.Menus) -> void:
 
 
 func _on_game_saved(_name: String) -> void:
-	last_save = Time.get_ticks_msec()
+	var last_save = Time.get_ticks_msec()
+	$MenuLayer/ExitDialog.set_last_save(last_save)
 
 
 func _on_game_loaded(_name: String) -> void:
@@ -207,8 +252,3 @@ func _on_game_loaded(_name: String) -> void:
 
 func _on_shader_toggled(value: bool) -> void:
 	$PostLayer.visible = value
-
-
-func _on_dialog_quit_pressed() -> void:
-	print("Exit from menu")
-	get_tree().quit()
