@@ -22,6 +22,7 @@ DecalManager="*res://scripts/singletons/DecalManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 ObjectiveManager="*res://scripts/singletons/ObjectiveManager.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+CheatManager="*res://scripts/singletons/CheatManager.gd"
 
 [debug_draw_3d]
 
@@ -214,6 +215,7 @@ locale/translations_pot_files=PackedStringArray("res://dialogue/hotel_guest.dial
 3d_physics/layer_3="items"
 3d_physics/layer_4="players"
 3d_physics/layer_5="mobs"
+3d_physics/layer_8="noclip"
 
 [rendering]
 
