@@ -305,7 +305,7 @@ func _get_level_markers(root: Node = null) -> Dictionary[String, Marker3D]:
 
 func _add_sound(sound: ZN_AudioSubtitle3D, player_entity: Entity) -> void:
 	player_entity.add_child(sound)
-	sound.play_subtitle()
+	# sound.play_subtitle()
 
 
 func pickup_item(entity: Entity, player_entity: Entity) -> void:
@@ -477,9 +477,9 @@ func use_weapon(entity: Entity, player_entity: Entity) -> void:
 	var interactive = weapon.get_component(ZC_Interactive) as ZC_Interactive
 	%Menu.push_action("Found new weapon: %s" % interactive.name)
 
-	if interactive.use_sound:
-		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-		_add_sound(sound, entity)
+	#if interactive.use_sound:
+	#	var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
+	#	_add_sound(sound, entity)
 
 
 func remove_entity(entity: Entity) -> void:
