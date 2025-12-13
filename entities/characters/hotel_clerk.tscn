@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bq6a52tvj60bq"]
+[gd_scene load_steps=21 format=4 uid="uid://bq6a52tvj60bq"]
 
 [ext_resource type="Script" uid="uid://d2ww1flmd4yo4" path="res://scripts/entities/characters/ZE_Survivor.gd" id="1_61xi3"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_ig744"]
@@ -7,6 +7,8 @@
 [ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_eirhj"]
 [ext_resource type="Resource" uid="uid://bjknld1sg8tq0" path="res://dialogue/hotel_clerk.dialogue" id="6_jkcq6"]
 [ext_resource type="Script" uid="uid://b0eipv08nprbd" path="res://scripts/components/characters/ZC_Dialogue.gd" id="7_04tpt"]
+[ext_resource type="Script" uid="uid://c7dv7vmk2ynqt" path="res://scripts/components/characters/ZC_Movement.gd" id="8_eirhj"]
+[ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="9_jkcq6"]
 
 [sub_resource type="Resource" id="Resource_0qnp1"]
 script = ExtResource("3_ci84u")
@@ -24,6 +26,14 @@ script = ExtResource("7_04tpt")
 dialogue_tree = ExtResource("6_jkcq6")
 character_name = "Hotel Clerk"
 metadata/_custom_type_script = "uid://b0eipv08nprbd"
+
+[sub_resource type="Resource" id="Resource_jkcq6"]
+script = ExtResource("8_eirhj")
+metadata/_custom_type_script = "uid://c7dv7vmk2ynqt"
+
+[sub_resource type="Resource" id="Resource_04tpt"]
+script = ExtResource("9_jkcq6")
+metadata/_custom_type_script = "uid://cixmecjncarw5"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2n0ki"]
 _surfaces = [{
@@ -67,7 +77,7 @@ _data = {
 collision_layer = 8
 collision_mask = 31
 script = ExtResource("1_61xi3")
-component_resources = Array[ExtResource("2_ig744")]([SubResource("Resource_0qnp1"), SubResource("Resource_w7go0"), SubResource("Resource_4sttm")])
+component_resources = Array[ExtResource("2_ig744")]([SubResource("Resource_0qnp1"), SubResource("Resource_w7go0"), SubResource("Resource_4sttm"), SubResource("Resource_jkcq6"), SubResource("Resource_04tpt")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

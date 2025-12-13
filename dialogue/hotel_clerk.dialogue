@@ -1,7 +1,7 @@
 ~ start
-set speaker.look_direction = player.global_position
+do helpers.look_at_entity(player)
 if player.current_weapon != null:
-	{{dialogue.character_name}}: Please put your weapon down before entering the hotel.
+	{{dialogue.character_name}}: Please put your weapon away before entering the hotel.
 	=> END
 
 {{dialogue.character_name}}: [[Hi|Hello|Howdy]], welcome to the hotel.
@@ -14,16 +14,16 @@ if player.current_weapon != null:
 - End the conversation => goodbye
 {{dialogue.character_name}}: Well that's everything for now.
 set dialogue.start_title = "leave"
-set speaker.look_direction = speaker.global_position + Vector3(10, 0, 0)
+do helpers.look_at_offset(Vector3(10, 0, 0))
 => END
 
 ~ goodbye
 {{dialogue.character_name}}: Goodbye
-set speaker.look_direction = speaker.global_position + Vector3(-10, 0, 0)
+do helpers.look_at_offset(Vector3(-10, 0, 0))
 => END
 
 ~ leave
 {{dialogue.character_name}}: Please leave.
 set dialogue.start_title = "start"
-set speaker.look_direction = markers["Start"].global_position
+do helpers.look_at_marker("Start")
 => END

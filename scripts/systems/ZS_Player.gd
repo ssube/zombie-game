@@ -365,10 +365,12 @@ func use_character(entity: Entity, player_entity: Entity) -> void:
 	var markers := _get_level_markers()
 
 	# start dialogue
+	var helpers := DialogueUtils.DialogueHelper.new(entity, markers)
 	var dialogue = entity.get_component(ZC_Dialogue)
 	DialogueManager.show_dialogue_balloon(dialogue.dialogue_tree, dialogue.start_title, [
 		{
 			"dialogue" = dialogue,
+			"helpers" = helpers,
 			"markers" = markers,
 			"player" = player_entity,
 			"speaker" = entity,
