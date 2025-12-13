@@ -23,5 +23,5 @@ class_name ZC_Weapon_Ranged
 @export var per_reload: int = 10
 
 @export_group("Projectile")
+# TODO: remove in favor of the RANGED_FIRE weapon effect's projectile scene
 @export var projectile_scene: PackedScene = null
-# @export var projectile_effect: PackedScene = null

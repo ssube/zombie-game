@@ -19,11 +19,11 @@ func apply_effects(effect_type: ZR_Weapon_Effect.EffectType) -> Array[Node3D]:
 
 	var use_projectile = false
 	match effect_type:
-		ZR_Weapon_Effect.EffectType.MUZZLE_FIRE:
+		ZR_Weapon_Effect.EffectType.RANGED_FIRE:
 			use_projectile = true
-		ZR_Weapon_Effect.EffectType.RECOIL:
+		ZR_Weapon_Effect.EffectType.RANGED_RECOIL:
 			use_projectile = physical_shells
-		ZR_Weapon_Effect.EffectType.RELOAD:
+		ZR_Weapon_Effect.EffectType.RANGED_RELOAD:
 			use_projectile = physical_mags
 
 	var effect_scenes: Array[Node3D] = []

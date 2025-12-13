@@ -313,7 +313,7 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	var forward = -marker.global_transform.basis.z.normalized()
 	new_projectile.apply_impulse(forward * ranged_weapon.muzzle_velocity, marker.global_position)
 
-	weapon.apply_effects(ZR_Weapon_Effect.EffectType.MUZZLE_FIRE)
+	weapon.apply_effects(ZR_Weapon_Effect.EffectType.RANGED_FIRE)
 
 	# tween along recoil path
 	if ranged_weapon.recoil_path:
