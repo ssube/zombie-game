@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=114 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://c0x5fgy8sbya0" path="res://scripts/nodes/ZN_EffectArea3D.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
@@ -15,29 +15,16 @@
 [ext_resource type="PackedScene" uid="uid://kod7e8o8xpep" path="res://entities/items/key.tscn" id="14_juy1h"]
 [ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/props/ZC_Portal.gd" id="14_qgvj7"]
 [ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/props/objective.tscn" id="15_7di2q"]
-[ext_resource type="Script" uid="uid://dvvgjajqy6hg3" path="res://scripts/components/characters/ZC_Enemy.gd" id="15_ijfse"]
 [ext_resource type="PackedScene" uid="uid://tna8f01ql67u" path="res://entities/weapons/bat.tscn" id="15_owf05"]
 [ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_key.tres" id="16_2sfss"]
-[ext_resource type="Script" uid="uid://dlu5li3mn8w5y" path="res://scripts/components/ZC_Transform.gd" id="16_r7enh"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="16_uuq13"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="17_58gyl"]
-[ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="17_ukt1r"]
 [ext_resource type="Script" uid="uid://bdl3b6gan30l0" path="res://scripts/components/status/ZC_Objective.gd" id="17_x1db4"]
-[ext_resource type="PackedScene" uid="uid://d17pdvgowfg7l" path="res://effects/sounds/zombie_hurt.tscn" id="18_1wgrf"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="18_ggct0"]
 [ext_resource type="Material" uid="uid://b7hn4t4hgmaod" path="res://textures/Color Maps/concrete_3.tres" id="19_8mki0"]
-[ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="19_o4imw"]
 [ext_resource type="Material" uid="uid://bmxolsa17xlkl" path="res://textures/Color Maps/brick_wall_tx_3.tres" id="20_58gyl"]
-[ext_resource type="Material" uid="uid://d1jglv2507aak" path="res://materials/skins/zombie_dead.tres" id="20_ik3kg"]
-[ext_resource type="Material" uid="uid://bajoa8ksbfb81" path="res://materials/skins/zombie_healthy.tres" id="21_20cl6"]
 [ext_resource type="Material" uid="uid://bc3b71ottph3s" path="res://textures/Color Maps/concrete_5.tres" id="21_ggct0"]
-[ext_resource type="Material" uid="uid://rmfci1rvpdo4" path="res://materials/skins/zombie_hurt.tres" id="22_dfwmi"]
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="23_8mki0"]
-[ext_resource type="Script" uid="uid://b8oatb3tdywrh" path="res://scripts/components/characters/ZC_Skin.gd" id="23_v4yv6"]
-[ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="24_hxseb"]
-[ext_resource type="Script" uid="uid://boehksdg08i5l" path="res://scripts/components/characters/ZC_Body_Regions.gd" id="25_gdkf1"]
-[ext_resource type="Script" uid="uid://dpu6n5g8bpa3g" path="res://scripts/components/characters/ZC_Footstep.gd" id="26_ukt1r"]
-[ext_resource type="PackedScene" uid="uid://bwou77c4uqtt" path="res://effects/sounds/footstep_wood.tscn" id="27_1wgrf"]
 [ext_resource type="Script" uid="uid://dd4hkf7y5v13t" path="res://scripts/components/status/ZC_Locked.gd" id="27_2fv0q"]
 [ext_resource type="PackedScene" uid="uid://dc22w3kstrlyu" path="res://entities/characters/zombie_worker.tscn" id="30_2fv0q"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="35_lf4l6"]
@@ -100,51 +87,6 @@ complete_on_interaction = false
 complete_on_damage = true
 complete_on_death = true
 metadata/_custom_type_script = "uid://bdl3b6gan30l0"
-
-[sub_resource type="Resource" id="Resource_l1o5o"]
-script = ExtResource("15_ijfse")
-metadata/_custom_type_script = "uid://dvvgjajqy6hg3"
-
-[sub_resource type="Resource" id="Resource_tfdn2"]
-script = ExtResource("16_r7enh")
-metadata/_custom_type_script = "uid://dlu5li3mn8w5y"
-
-[sub_resource type="Resource" id="Resource_7tmu0"]
-script = ExtResource("17_ukt1r")
-metadata/_custom_type_script = "uid://cixmecjncarw5"
-
-[sub_resource type="Resource" id="Resource_4bumh"]
-script = ExtResource("19_o4imw")
-hurt_sound = ExtResource("18_1wgrf")
-metadata/_custom_type_script = "uid://0ndifcnh0nsp"
-
-[sub_resource type="Resource" id="Resource_wwun5"]
-script = ExtResource("23_v4yv6")
-material_healthy = ExtResource("21_20cl6")
-material_injured = ExtResource("22_dfwmi")
-material_dead = ExtResource("20_ik3kg")
-skin_shapes = Array[NodePath]([NodePath("CSGCylinder3D"), NodePath("CSGSphere3D")])
-metadata/_custom_type_script = "uid://b8oatb3tdywrh"
-
-[sub_resource type="Resource" id="Resource_jpnnd"]
-script = ExtResource("24_hxseb")
-effect_path = NodePath("Effects/FireEffect")
-metadata/_custom_type_script = "uid://jokkv7skgimj"
-
-[sub_resource type="Resource" id="Resource_8aduj"]
-script = ExtResource("25_gdkf1")
-regions = Dictionary[NodePath, float]({
-NodePath("HeadShape"): 5.0
-})
-metadata/_custom_type_script = "uid://boehksdg08i5l"
-
-[sub_resource type="Resource" id="Resource_sn1gh"]
-script = ExtResource("26_ukt1r")
-raycast = NodePath("RayCast3D")
-sounds = Dictionary[String, PackedScene]({
-"unknown": ExtResource("27_1wgrf")
-})
-metadata/_custom_type_script = "uid://dpu6n5g8bpa3g"
 
 [sub_resource type="Resource" id="Resource_6y5fu"]
 script = ExtResource("10_8mki0")
@@ -630,7 +572,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 4)
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 3.6006222, 1.038658, 0.25554276)
 extra_components = Array[ExtResource("9_ggct0")]([SubResource("Resource_2fv0q")])
 id = "Level0_ZE_Zombie_1765571838_49320"
-component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj"), SubResource("Resource_sn1gh"), SubResource("Resource_2fv0q")])
 
 [node name="Ball" parent="Entities/Room2" instance=ExtResource("6_owf05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.531044, 0.6708808, 1.8977566)
@@ -670,9 +611,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
 
 [node name="HotelClerk" parent="Entities/Room3" instance=ExtResource("11_ggct0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.084522486, -2.2994375)
-look_acceleration = 0.0
-move_speed = 2.0
-move_acceleration = null
 
 [node name="Armor" parent="Entities/Room3" instance=ExtResource("38_g1jay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.34950802, 2.5)
@@ -685,7 +623,6 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.2
 
 [node name="Zombie" parent="Entities/Room4" instance=ExtResource("30_2fv0q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1283226, 1.1611633, 0.5116539)
-move_speed = 1.5
 id = "Level0_ZE_Zombie_1765571833_84556"
 
 [node name="Lights" type="Node" parent="."]

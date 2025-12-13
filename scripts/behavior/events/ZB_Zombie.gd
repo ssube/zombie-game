@@ -50,6 +50,15 @@ func on_ready(entity: Entity) -> void:
 	entity_weapon = actor_entity.get_component(ZC_Weapon_Melee)
 	entity_velocity = actor_entity.get_component(ZC_Velocity)
 
+## Gradually update the physics velocity of the actor node
+func lerp_actor_velocity(target_velocity: Vector3, delta: float) -> void:
+	var current_velocity: Vector3 = entity_velocity.linear_velocity
+	var new_velocity: Vector3 = current_velocity.lerp(target_velocity, minf(delta, 1.0))
+	if new_velocity.length_squared() < 1.0:
+		new_velocity = Vector3.ZERO
+
+	entity_velocity.linear_velocity = new_velocity
+
 func _process(delta: float):
 	if not is_actor_active():
 		state_machine.active = false
@@ -62,7 +71,7 @@ func _process(delta: float):
 		actor_node.axis_lock_angular_x = false
 		actor_node.axis_lock_angular_z = false
 		# lerp to zero velocity
-		actor_node.lerp_actor_velocity(Vector3.ZERO, delta)
+		lerp_actor_velocity(Vector3.ZERO, delta)
 		# delete zombie weapon
 		if actor_entity.current_weapon:
 			EntityUtils.remove(actor_entity.current_weapon)

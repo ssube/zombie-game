@@ -11,7 +11,8 @@ func tick(entity: Entity, delta: float, blackboard: ZB_Blackboard) -> TickResult
 	if entity.current_weapon == null:
 		return TickResult.FORCE_EXIT
 
-	entity.look_at_target(target_player.global_position)
+	var movement := entity.get_component(ZC_Movement) as ZC_Movement
+	movement.target_look_position = target_player.global_position
 
 	attack_timer -= delta
 	if attack_timer > 0.0:

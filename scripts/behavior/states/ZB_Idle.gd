@@ -16,12 +16,15 @@ func enter(entity: Entity):
 
 func tick(entity: Entity, delta: float, _blackboard: ZB_Blackboard) -> TickResult:
 	# print("Zombie is idling.")
-	entity.set_actor_velocity(Vector3.ZERO)
+	var entity3d := entity.get_node(".") as Node3D
+	var movement := entity.get_component(ZC_Movement) as ZC_Movement
+	movement.target_move_position = entity3d.global_position
 
 	idle_timer -= delta
 	if idle_timer <= 0.0:
 		return TickResult.CHECK
 
-	entity.look_at_target(look_direction)
+	movement.target_look_position = look_direction
+
 	# TODO: play a random idle animation
 	return TickResult.CONTINUE

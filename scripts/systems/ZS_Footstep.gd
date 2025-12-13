@@ -21,7 +21,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float) -> void
 		horizontal_velocity.y = 0
 
 		# TODO: hack to fix zombies, until they can use their velocity correctly
-		if is_zero_approx(horizontal_velocity.length_squared()) and not entity.has_component(ZC_Enemy):
+		if is_zero_approx(horizontal_velocity.length_squared()):
 			#print("entity %s is not moving" % entity.id)
 			continue
 

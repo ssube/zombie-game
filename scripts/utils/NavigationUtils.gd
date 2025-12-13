@@ -8,7 +8,8 @@ static func follow_navigation_path(entity: Node3D, navigation_path: PackedVector
 	if NavigationUtils.is_point_nearby(entity, next_point, point_proximity):
 		navigation_path.remove_at(0)
 	else:
-		entity.move_to_target(next_point)
+		var movement := entity.get_component(ZC_Movement) as ZC_Movement
+		movement.target_move_position = next_point
 
 ## Check if the node is close to a point
 static func is_point_nearby(entity: Node3D, point: Vector3, proximity: float) -> bool:

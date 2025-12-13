@@ -15,7 +15,10 @@ func tick(entity: Entity, delta: float, blackboard: ZB_Blackboard) -> TickResult
 
 	var target_position := target_player.global_position
 	blackboard.set_value(BehaviorUtils.target_position, target_position)
-	entity.look_at_target(target_position)
+
+	var movement := entity.get_component(ZC_Movement) as ZC_Movement
+	movement.target_look_position = target_player.global_position
+
 	# print("Zombie is chasing player at position: ", target_position)
 
 	var node_3d := entity.root_3d as Node3D

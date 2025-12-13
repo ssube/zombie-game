@@ -21,7 +21,8 @@ func tick(entity: Entity, delta: float, _blackboard: ZB_Blackboard) -> TickResul
 		return TickResult.CHECK
 
 	# follow nav path
-	entity.look_at_target(target_position)
+	var movement := entity.get_component(ZC_Movement) as ZC_Movement
+	movement.target_look_position = target_position
 
 	NavigationUtils.follow_navigation_path(node_3d, navigation_path, point_proximity)
 
@@ -30,6 +31,7 @@ func tick(entity: Entity, delta: float, _blackboard: ZB_Blackboard) -> TickResul
 		return TickResult.CONTINUE
 
 	print("Zombie wander timed out")
+	update_wander_target(entity)
 	return TickResult.CHECK
 
 func update_wander_target(entity) -> void:

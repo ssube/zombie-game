@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_enhv7"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_g3ik4"]
 [ext_resource type="Script" uid="uid://dvvgjajqy6hg3" path="res://scripts/components/characters/ZC_Enemy.gd" id="3_xbif0"]
-[ext_resource type="Script" uid="uid://dlu5li3mn8w5y" path="res://scripts/components/ZC_Transform.gd" id="4_ekadw"]
+[ext_resource type="Script" uid="uid://c7dv7vmk2ynqt" path="res://scripts/components/characters/ZC_Movement.gd" id="4_xbif0"]
 [ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="5_fkiag"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="6_y05cp"]
 [ext_resource type="Material" uid="uid://d1jglv2507aak" path="res://materials/skins/zombie_dead.tres" id="7_23j0l"]
@@ -34,9 +34,9 @@
 script = ExtResource("3_xbif0")
 metadata/_custom_type_script = "uid://dvvgjajqy6hg3"
 
-[sub_resource type="Resource" id="Resource_tfdn2"]
-script = ExtResource("4_ekadw")
-metadata/_custom_type_script = "uid://dlu5li3mn8w5y"
+[sub_resource type="Resource" id="Resource_ekadw"]
+script = ExtResource("4_xbif0")
+metadata/_custom_type_script = "uid://c7dv7vmk2ynqt"
 
 [sub_resource type="Resource" id="Resource_7tmu0"]
 script = ExtResource("5_fkiag")
@@ -102,8 +102,7 @@ script = ExtResource("1_enhv7")
 events = NodePath("Behavior/ZombieBehavior/Events")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
-move_speed = 2.5
-component_resources = Array[ExtResource("2_g3ik4")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj"), SubResource("Resource_xbif0")])
+component_resources = Array[ExtResource("2_g3ik4")]([SubResource("Resource_l1o5o"), SubResource("Resource_ekadw"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj"), SubResource("Resource_xbif0")])
 
 [node name="CSGBody" type="CSGCylinder3D" parent="."]
 material = ExtResource("8_ljrwo")
