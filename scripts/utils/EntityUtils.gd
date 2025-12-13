@@ -16,12 +16,69 @@ static func apply_damage(entity: Node, base_damage: int, base_multiplier: float 
 	return damage
 
 
+static func drop_weapon(character: ZE_Character) -> ZE_Weapon:
+	var old_weapon := character.current_weapon
+	if old_weapon == null:
+		return null
+
+	character.current_weapon = null
+
+	var weapon_body = old_weapon.get_node(".") as RigidBody3D
+	var weapon_position := weapon_body.global_position as Vector3
+	var weapon_parent := old_weapon.get_parent()
+	if weapon_parent:
+		weapon_parent.remove_child(old_weapon)
+
+	var entity_parent := character.get_parent()
+	entity_parent.add_child(old_weapon)
+
+	old_weapon.remove_relationship(RelationshipUtils.make_equipped(old_weapon))
+	old_weapon.remove_relationship(RelationshipUtils.make_holding(old_weapon))
+
+	weapon_body.freeze = false
+	weapon_body.global_position = weapon_position
+
+	return old_weapon
+
+
+static func equip_weapon(character: ZE_Character, weapon: ZE_Weapon) -> ZE_Weapon:
+	var old_weapon := character.current_weapon
+	if old_weapon != null:
+		old_weapon.get_parent().remove_child(old_weapon)
+		old_weapon.visible = false
+		character.inventory_node.add_child(old_weapon)
+		character.remove_relationship(RelationshipUtils.make_equipped(old_weapon))
+
+	character.current_weapon = weapon
+	if weapon != null:
+		var weapon_parent := weapon.get_parent()
+		if weapon_parent:
+			weapon_parent.remove_child(weapon)
+
+		weapon.visible = true
+		character.hands_node.add_child(weapon)
+		character.add_relationship(RelationshipUtils.make_equipped(weapon))
+
+	return old_weapon
+
+
 static func get_players() -> Array[Entity]:
 	return ECS.world.query.with_all([ZC_Player]).execute()
 
 
 static func get_enemies() -> Array[Entity]:
 	return ECS.world.query.with_all([ZC_Enemy]).execute()
+
+
+static func is_broken(entity: Node) -> bool:
+	if entity is not Entity:
+		return false
+
+	var durability := entity.get_component(ZC_Durability) as ZC_Durability
+	if durability != null:
+		return durability.current_durability <= 0
+
+	return false
 
 
 static func is_player(entity: Node) -> bool:
@@ -100,6 +157,25 @@ static func is_ranged_weapon(entity: Node) -> bool:
 		return false
 
 	return entity.has_component(ZC_Weapon_Ranged)
+
+
+static func has_ammo(weapon: ZE_Weapon, ammos: Array[ZC_Ammo], min_count: int = 1) -> bool:
+	if weapon is not Entity:
+		return false
+
+	var ranged_weapon := weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	var ammo_type := ranged_weapon.ammo_type
+	var total_count := 0
+	for ammo in ammos:
+		var ammo_count := ammo.get_ammo(ammo_type)
+		if ammo_count > min_count:
+			return true
+
+		total_count += ammo_count
+		if total_count > min_count:
+			return true
+
+	return false
 
 
 static func has_shimmer(entity: Node) -> bool:

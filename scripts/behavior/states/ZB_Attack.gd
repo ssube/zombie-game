@@ -9,6 +9,9 @@ func tick(entity: Entity, delta: float, blackboard: ZB_Blackboard) -> TickResult
 		return TickResult.FORCE_EXIT
 
 	if entity.current_weapon == null:
+		switch_weapon(entity)
+
+	if entity.current_weapon == null:
 		return TickResult.FORCE_EXIT
 
 	var movement := entity.get_component(ZC_Movement) as ZC_Movement
@@ -21,14 +24,32 @@ func tick(entity: Entity, delta: float, blackboard: ZB_Blackboard) -> TickResult
 	print("Zombie attacks player! ", target_player)
 
 	var weapon = entity.current_weapon as ZE_Weapon
-	var c_weapon = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
-	attack_timer = c_weapon.cooldown_time
+	if EntityUtils.is_broken(weapon):
+		weapon = switch_weapon(entity)
 
-	var swing_node = weapon.get_node(c_weapon.swing_path) as PathFollow3D
+	var melee_weapon = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
+	attack_timer = melee_weapon.cooldown_time
+
+	var swing_node = weapon.get_node(melee_weapon.swing_path) as PathFollow3D
 	swing_node.progress_ratio = 0.0
 
 	var tween = weapon.create_tween()
-	tween.tween_property(swing_node, "progress_ratio", 1.0, c_weapon.swing_time)
-	tween.tween_property(swing_node, "progress_ratio", 0.0, c_weapon.cooldown_time)
+	tween.tween_property(swing_node, "progress_ratio", 1.0, melee_weapon.swing_time)
+	tween.tween_property(swing_node, "progress_ratio", 0.0, melee_weapon.cooldown_time)
 
 	return TickResult.CHECK
+
+func switch_weapon(entity: Entity) -> ZE_Weapon:
+	if entity is not ZE_Character:
+		return null
+
+	var entity_ammo := entity.get_component(ZC_Ammo) as ZC_Ammo
+	var inventory := entity.inventory_node.get_children() as Array[Node]
+	for item in inventory:
+		if EntityUtils.is_weapon(item):
+			var loaded := EntityUtils.has_ammo(item, [entity_ammo])
+			var broken := EntityUtils.is_broken(item)
+			if loaded or not broken:
+				EntityUtils.equip_weapon(entity, item)
+
+	return null
