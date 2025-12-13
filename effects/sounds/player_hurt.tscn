@@ -8,4 +8,5 @@ stream = ExtResource("1_jddik")
 script = ExtResource("2_s5vsk")
 play_on_ready = true
 subtitle_text = "Player hurt"
+subtitle_radius = 3.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"

@@ -8,4 +8,5 @@ stream = ExtResource("1_euh7n")
 script = ExtResource("1_vwpmr")
 play_on_ready = true
 subtitle_text = "Picked up key"
+subtitle_radius = 2.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"

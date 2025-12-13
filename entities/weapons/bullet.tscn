@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://blxc4fcjrrpa2"]
+[gd_scene load_steps=9 format=3 uid="uid://blxc4fcjrrpa2"]
 
 [ext_resource type="Script" uid="uid://dp6acnrca27yq" path="res://scripts/entities/weapons/ZE_Bullet.gd" id="1_a2x2l"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_a0ooq"]
 [ext_resource type="Script" uid="uid://d2o34b8fqmhd3" path="res://scripts/components/weapons/ZC_Projectile.gd" id="3_jngwf"]
-[ext_resource type="Script" uid="uid://dlu5li3mn8w5y" path="res://scripts/components/ZC_Transform.gd" id="4_gxey3"]
 [ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="5_4cfqs"]
 
 [sub_resource type="Resource" id="Resource_u10uh"]
@@ -12,10 +11,6 @@ damage = 25.0
 collision_ray = NodePath("RayCast3D")
 piercing = 1
 metadata/_custom_type_script = "uid://d2o34b8fqmhd3"
-
-[sub_resource type="Resource" id="Resource_a6wvd"]
-script = ExtResource("4_gxey3")
-metadata/_custom_type_script = "uid://dlu5li3mn8w5y"
 
 [sub_resource type="Resource" id="Resource_74leh"]
 script = ExtResource("5_4cfqs")
@@ -31,7 +26,7 @@ radius = 0.1
 collision_layer = 2
 collision_mask = 31
 script = ExtResource("1_a2x2l")
-component_resources = Array[ExtResource("2_a0ooq")]([SubResource("Resource_u10uh"), SubResource("Resource_a6wvd"), SubResource("Resource_74leh")])
+component_resources = Array[ExtResource("2_a0ooq")]([SubResource("Resource_u10uh"), SubResource("Resource_74leh")])
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 radius = 0.1

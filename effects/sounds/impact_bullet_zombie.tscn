@@ -7,5 +7,5 @@
 stream = ExtResource("1_koid2")
 script = ExtResource("2_e2jdi")
 subtitle_text = "Zombie Groaning"
-subtitle_radius = 3.0
+subtitle_radius = 5.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"

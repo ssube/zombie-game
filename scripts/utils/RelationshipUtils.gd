@@ -2,6 +2,7 @@ class_name RelationshipUtils
 
 static var any_damage = Relationship.new(ZC_Damaged.new(), null)
 static var any_effect = Relationship.new(ZC_Effected.new(), null)
+static var any_heard = Relationship.new(ZC_Heard.new(), null)
 static var any_holding = Relationship.new(ZC_Holding.new(), null)
 static var any_modifier = Relationship.new(ZC_Modifier.new(), null)
 static var any_wearing = Relationship.new(ZC_Wearing.new(), null)
@@ -40,6 +41,10 @@ static func make_effect(effect: ZC_Screen_Effect) -> Relationship:
 static func make_equipped(item: Entity) -> Relationship:
 	var equipped_component := ZC_Equipped.new()
 	return Relationship.new(equipped_component, item)
+
+static func make_heard(sound: ZC_Noise) -> Relationship:
+	var heard_component := ZC_Heard.new()
+	return Relationship.new(heard_component, sound)
 
 static func make_holding(item: Entity) -> Relationship:
 	var holding_component := ZC_Holding.new()

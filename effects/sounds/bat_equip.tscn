@@ -8,4 +8,5 @@ stream = ExtResource("1_oebxg")
 script = ExtResource("2_y3qm4")
 play_on_ready = true
 subtitle_text = "Wooden Bat"
+subtitle_radius = 2.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"

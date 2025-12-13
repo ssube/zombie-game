@@ -85,6 +85,16 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			%Menu.show_effect(effect.effect, effect.duration, effect.strength)
 			entity.remove_relationship(rel)
 
+		# Process any heard relationships
+		var heard_noises := entity.get_relationships(RelationshipUtils.any_heard) as Array[Relationship]
+		for rel in heard_noises:
+			var noise := rel.target as ZC_Noise
+			if noise.subtitle_tag == "":
+				continue
+
+			%Menu.push_action(noise.subtitle_tag)
+			entity.remove_relationship(rel)
+
 		# Process any usage relationships
 		var used_items := entity.get_relationships(RelationshipUtils.any_used) as Array[Relationship]
 		for rel in used_items:
@@ -259,10 +269,7 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	var forward = -marker.global_transform.basis.z.normalized()
 	new_projectile.apply_impulse(forward * c_weapon.muzzle_velocity, marker.global_position)
 
-	var effect_scenes := weapon.apply_effects(ZR_Weapon_Effect.EffectType.MUZZLE_FIRE)
-	for scene in effect_scenes:
-		for sound in EntityUtils.find_sounds(scene):
-			%Menu.push_action(sound.subtitle_tag)
+	weapon.apply_effects(ZR_Weapon_Effect.EffectType.MUZZLE_FIRE)
 
 	# tween along recoil path
 	if c_weapon.recoil_path:
@@ -296,11 +303,9 @@ func _get_level_markers(root: Node = null) -> Dictionary[String, Marker3D]:
 	return markers
 
 
-## TODO: should this be part of the audio observer?
 func _add_sound(sound: ZN_AudioSubtitle3D, player_entity: Entity) -> void:
 	player_entity.add_child(sound)
 	sound.play_subtitle()
-	%Menu.push_action(sound.subtitle_tag)
 
 
 func pickup_item(entity: Entity, player_entity: Entity) -> void:

@@ -20,23 +20,17 @@ func process(entities: Array[Entity], _components: Array, _delta: float) -> void
 		var horizontal_velocity := velocity.linear_velocity
 		horizontal_velocity.y = 0
 
-		# TODO: hack to fix zombies, until they can use their velocity correctly
 		if is_zero_approx(horizontal_velocity.length_squared()):
-			#print("entity %s is not moving" % entity.id)
 			continue
 
 		var raycast := entity.get_node(footstep.raycast) as RayCast3D
 		if not raycast.is_colliding():
-			#print("entity %s is not on the floor" % entity.id)
 			continue
 
 		var surface_type := CollisionUtils.get_surface_type(raycast)
 		var step_sound := footstep.sounds.get(surface_type) as PackedScene
 		if step_sound == null:
-			#print("entity %s has no footstep for surface %s" % [entity.id, surface_type])
 			continue
-
-		#print("Playing footstep %s for entity %s" % [surface_type, entity.id])
 
 		var new_footstep := step_sound.instantiate() as Node3D
 		var collider := raycast.get_collider() as Node3D
