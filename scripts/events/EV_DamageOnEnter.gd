@@ -51,7 +51,7 @@ func _physics_process(_delta: float) -> void:
 			if collider == null:
 				continue
 
-			print("Colliding with: ", collider)
+			print("Area is colliding with: ", collider)
 			if collider == body:
 				sight_queue.append(body)
 

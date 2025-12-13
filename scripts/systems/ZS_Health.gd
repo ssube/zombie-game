@@ -60,8 +60,8 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 
 					# Place the explosion at the same position as the entity
 					var root = entity.get_parent()
-					explosion.global_transform = entity_node.global_transform
 					root.add_child(explosion)
+					explosion.global_transform = entity_node.global_transform
 
 					# Remove the exploded entity
 					print("Entity has exploded: ", entity)
