@@ -1,10 +1,11 @@
-[gd_scene load_steps=39 format=3 uid="uid://ds0q1crcrv862"]
+[gd_scene load_steps=43 format=3 uid="uid://ds0q1crcrv862"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_rffgv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_2yl8o"]
 [ext_resource type="Script" uid="uid://dvvgjajqy6hg3" path="res://scripts/components/characters/ZC_Enemy.gd" id="3_nswy3"]
 [ext_resource type="Script" uid="uid://dlu5li3mn8w5y" path="res://scripts/components/ZC_Transform.gd" id="4_4bumh"]
 [ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="5_tseq0"]
+[ext_resource type="PackedScene" uid="uid://d17pdvgowfg7l" path="res://effects/sounds/zombie_hurt.tscn" id="6_8aduj"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="6_nswy3"]
 [ext_resource type="Material" uid="uid://d1jglv2507aak" path="res://materials/skins/zombie_dead.tres" id="7_l1o5o"]
 [ext_resource type="Material" uid="uid://bajoa8ksbfb81" path="res://materials/skins/zombie_healthy.tres" id="8_tfdn2"]
@@ -14,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="11_7tmu0"]
 [ext_resource type="Script" uid="uid://boehksdg08i5l" path="res://scripts/components/characters/ZC_Body_Regions.gd" id="12_j7lgi"]
 [ext_resource type="Script" uid="uid://cmgcelj1qxg8o" path="res://addons/tattomoosa.vision_cone_3d/src/VisionCone3D.gd" id="12_kv3li"]
+[ext_resource type="Script" uid="uid://dpu6n5g8bpa3g" path="res://scripts/components/characters/ZC_Footstep.gd" id="14_rcyyt"]
+[ext_resource type="PackedScene" uid="uid://bwou77c4uqtt" path="res://effects/sounds/footstep_wood.tscn" id="15_kwfyu"]
 [ext_resource type="Script" uid="uid://di74g8tmachs3" path="res://scripts/behavior/fsm/ZB_StateMachine.gd" id="15_u1ccf"]
 [ext_resource type="Script" uid="uid://cwxhmhhcchnk5" path="res://scripts/behavior/events/ZB_Zombie.gd" id="16_3lyvt"]
 [ext_resource type="Script" uid="uid://420evxa6jy8r" path="res://scripts/behavior/fsm/ZB_Blackboard.gd" id="16_u1ccf"]
@@ -42,6 +45,7 @@ metadata/_custom_type_script = "uid://cixmecjncarw5"
 
 [sub_resource type="Resource" id="Resource_4bumh"]
 script = ExtResource("6_nswy3")
+hurt_sound = ExtResource("6_8aduj")
 metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
 [sub_resource type="Resource" id="Resource_wwun5"]
@@ -64,6 +68,14 @@ NodePath("HeadShape"): 5.0
 })
 metadata/_custom_type_script = "uid://boehksdg08i5l"
 
+[sub_resource type="Resource" id="Resource_sn1gh"]
+script = ExtResource("14_rcyyt")
+raycast = NodePath("RayCast3D")
+sounds = Dictionary[String, PackedScene]({
+"unknown": ExtResource("15_kwfyu")
+})
+metadata/_custom_type_script = "uid://dpu6n5g8bpa3g"
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwqt7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uqboj"]
@@ -84,13 +96,14 @@ events = NodePath("Behavior/ZombieBehavior/Events")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
 move_speed = 2.5
-component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj")])
+component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj"), SubResource("Resource_sn1gh")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 material = ExtResource("8_tfdn2")
 
 [node name="BodyShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_iwqt7")
+metadata/surface_type = &"zombie"
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
@@ -100,6 +113,7 @@ material = ExtResource("8_tfdn2")
 [node name="HeadShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
 shape = SubResource("SphereShape3D_uqboj")
+metadata/surface_type = &"zombie"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 simplify_path = true
@@ -239,3 +253,5 @@ visible = false
 [node name="ZombieMelee" parent="Inventory" instance=ExtResource("27_j7lgi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5514579)
 visible = false
+
+[node name="RayCast3D" type="RayCast3D" parent="."]

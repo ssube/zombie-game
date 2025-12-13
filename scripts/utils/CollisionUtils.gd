@@ -17,18 +17,13 @@ static func get_collision_shape(raycast: RayCast3D) -> CollisionShape3D:
 
 	return null
 
-static func get_shape_components(entity: Node, raycast: RayCast3D) -> Array[Component]:
-	if not entity is Entity:
-		return []
+static func get_surface_type(raycast: RayCast3D) -> StringName:
+	var shape := get_collision_shape(raycast)
+	if shape.has_meta("surface_type"):
+		return shape.get_meta("surface_type")
 
-	var collision_shape := CollisionUtils.get_collision_shape(raycast)
-	var e_entity := entity as Entity
-	var critical_relationships := e_entity.get_relationships(Relationship.new(null, null)) # TODO: ZC_Critical -> any
-	for relationship in critical_relationships:
-		var shape = relationship.target.shape
+	var collider := raycast.get_collider()
+	if collider.has_meta("surface_type"):
+		return collider.get_meta("surface_type")
 
-		if shape == collision_shape:
-			var shape_components = relationship.target.components as Array[Component]
-			return shape_components.duplicate_deep()
-
-	return []
+	return "unknown"

@@ -1,7 +1,12 @@
 class_name ZS_ProjectileSystem
 extends System
 
-var impact_sound = preload("res://effects/impacts/impact_bullet_metal.tscn")
+var impact_sounds: Dictionary[StringName, PackedScene] = {
+	"metal": preload("res://effects/sounds/impact_bullet_metal.tscn"),
+	"zombie": preload("res://effects/sounds/impact_bullet_zombie.tscn"),
+}
+
+@onready var default_sound: PackedScene = impact_sounds[impact_sounds.keys()[0]]
 
 func query():
 	return q.with_all([ZC_Projectile])
@@ -46,28 +51,22 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 				print("Bullet has expired: ", entity)
 				EntityUtils.remove(entity)
 
+
 func apply_decal(ray: RayCast3D, collider: Node3D) -> void:
 	# Obtain collision info
 	var collision_point = ray.get_collision_point()
 	var collision_normal = ray.get_collision_normal()
 
-	# Determine surface type. This example uses node groups.
-	var surface_type = ""
-	if collider.is_in_group("wood"):
-			surface_type = "wood"
-	elif collider.is_in_group("metal"):
-			surface_type = "metal"
-	elif collider.is_in_group("stone"):
-			surface_type = "stone"
-	else:
-			surface_type = "default"
-
 	# Spawn the decal via the manager singleton.
+	var surface_type := CollisionUtils.get_surface_type(ray)
 	DecalManager.spawn_decal(surface_type, collider, collision_point, collision_normal)
+
 
 func apply_sound(ray: RayCast3D, collider: Node3D) -> void:
 	# Obtain collision info
 	var collision_point = ray.get_collision_point()
+	var surface_type := CollisionUtils.get_surface_type(ray)
+	var impact_sound := impact_sounds.get(surface_type, default_sound) as PackedScene
 
 	var sound_node = impact_sound.instantiate() as ZN_AudioSubtitle3D
 	collider.add_child(sound_node)

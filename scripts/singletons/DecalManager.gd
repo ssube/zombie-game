@@ -3,10 +3,10 @@ extends Node
 
 # Mapping of surface types to decal scenes (PackedScene of a Sprite3D)
 @export var decal_scenes := {
-	"default": preload("res://effects/decals/bullet_hole_metal.tscn"),
-	"wood": preload("res://effects/decals/bullet_hole_wood.tscn"),
 	"metal": preload("res://effects/decals/bullet_hole_metal.tscn"),
 	"stone": preload("res://effects/decals/bullet_hole_stone.tscn"),
+	"wood": preload("res://effects/decals/bullet_hole_wood.tscn"),
+	"zombie": preload("res://effects/decals/bullet_hole_zombie.tscn"),
 }
 
 ## Seconds before fading out
@@ -16,7 +16,7 @@ extends Node
 
 @onready var default_decal: PackedScene = decal_scenes[decal_scenes.keys()[0]]
 
-func spawn_decal(surface_type: String, collider: Node3D, position: Vector3, normal: Vector3) -> void:
+func spawn_decal(surface_type: StringName, collider: Node3D, position: Vector3, normal: Vector3) -> void:
 	# Determine which decal scene to use based on surface_type (e.g. group name)
 	var scene: PackedScene = decal_scenes.get(surface_type, default_decal)
 	if scene == null:

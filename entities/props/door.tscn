@@ -32,12 +32,12 @@ entities = [NodePath("Door")]
 collision_layer = 2
 collision_mask = 31
 script = ExtResource("1_qm17t")
-extra_components = null
 component_resources = Array[ExtResource("2_wyt2q")]([SubResource("Resource_q8gv4"), SubResource("Resource_auxoi")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
 shape = SubResource("BoxShape3D_nynkh")
+metadata/surface_type = &"wood"
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)

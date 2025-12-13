@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dc22w3kstrlyu"]
+[gd_scene load_steps=45 format=3 uid="uid://dc22w3kstrlyu"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_enhv7"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_g3ik4"]
@@ -13,7 +13,9 @@
 [ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="11_b2lq4"]
 [ext_resource type="Script" uid="uid://boehksdg08i5l" path="res://scripts/components/characters/ZC_Body_Regions.gd" id="12_6olyw"]
 [ext_resource type="Script" uid="uid://cmgcelj1qxg8o" path="res://addons/tattomoosa.vision_cone_3d/src/VisionCone3D.gd" id="13_4g7vu"]
+[ext_resource type="Script" uid="uid://dpu6n5g8bpa3g" path="res://scripts/components/characters/ZC_Footstep.gd" id="13_g3ik4"]
 [ext_resource type="Script" uid="uid://di74g8tmachs3" path="res://scripts/behavior/fsm/ZB_StateMachine.gd" id="14_ojwvh"]
+[ext_resource type="PackedScene" uid="uid://bwou77c4uqtt" path="res://effects/sounds/footstep_wood.tscn" id="14_xbif0"]
 [ext_resource type="Script" uid="uid://420evxa6jy8r" path="res://scripts/behavior/fsm/ZB_Blackboard.gd" id="15_7fjew"]
 [ext_resource type="Script" uid="uid://cwxhmhhcchnk5" path="res://scripts/behavior/events/ZB_Zombie.gd" id="16_v2128"]
 [ext_resource type="Script" uid="uid://df075dj3mhif5" path="res://scripts/behavior/states/ZB_Attack.gd" id="17_vww2o"]
@@ -64,6 +66,14 @@ NodePath("HeadShape"): 5.0
 })
 metadata/_custom_type_script = "uid://boehksdg08i5l"
 
+[sub_resource type="Resource" id="Resource_xbif0"]
+script = ExtResource("13_g3ik4")
+raycast = NodePath("RayCast3D")
+sounds = Dictionary[String, PackedScene]({
+"unknown": ExtResource("14_xbif0")
+})
+metadata/_custom_type_script = "uid://dpu6n5g8bpa3g"
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwqt7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g3ik4"]
@@ -71,6 +81,9 @@ albedo_color = Color(1, 1, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enhv7"]
 albedo_color = Color(1, 0.4392157, 0.2, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_enhv7"]
+points = PackedVector3Array(0, 0, -0.6, -0.3, 0, -0.51965547, 0, 0.3, -0.51965547, 0.3, 0, -0.51965547, -0.51965547, 0, -0.3, -0.25982773, 0.3, -0.45000002, 0, 0.5195967, -0.3, 0.14999998, 0.5195967, -0.25982773, 0.25971025, 0.3, -0.45000002, -0.15, 0.5195967, -0.25982773, 0.45000005, 0.3, -0.25982773, 0.5195379, 0, -0.3, -0.6, 0, 0, -0.51965547, 0.3, 0, -0.45000002, 0.3, -0.25982773, 0, 0.6, 0, 0.25971025, 0.5195967, -0.15, -0.25982773, 0.5195967, -0.15, 0.3, 0.5195967, 0, 0.5195379, 0.3, 0, 0.6, 0, 0, -0.51965547, 0, 0.3, -0.45000002, 0.3, 0.25971025, -0.25982773, 0.5195967, 0.14999998, -0.3, 0.5195967, 0, -0.15, 0.5195967, 0.25971025, 0, 0.5195967, 0.3, 0.14999998, 0.5195967, 0.25971025, 0.25971025, 0.5195967, 0.14999998, 0.45000005, 0.3, 0.25971025, 0.5195379, 0, 0.3, -0.3, 0, 0.5195379, -0.25982773, 0.3, 0.45000005, 0, 0.3, 0.5195379, 0.25971025, 0.3, 0.45000005, 0.3, 0, 0.5195379, 0, 0, 0.6)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uqboj"]
 radius = 0.25
@@ -90,13 +103,14 @@ events = NodePath("Behavior/ZombieBehavior/Events")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
 move_speed = 2.5
-component_resources = Array[ExtResource("2_g3ik4")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj")])
+component_resources = Array[ExtResource("2_g3ik4")]([SubResource("Resource_l1o5o"), SubResource("Resource_tfdn2"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj"), SubResource("Resource_xbif0")])
 
 [node name="CSGBody" type="CSGCylinder3D" parent="."]
 material = ExtResource("8_ljrwo")
 
 [node name="BodyShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_iwqt7")
+metadata/surface_type = &"zombie"
 
 [node name="CSGHead" type="CSGSphere3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
@@ -126,9 +140,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 operation = 2
 size = Vector3(1.5, 1, 1.5)
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("ConvexPolygonShape3D_enhv7")
+
 [node name="HeadShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
 shape = SubResource("SphereShape3D_uqboj")
+metadata/surface_type = &"zombie"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 simplify_path = true
@@ -269,4 +288,5 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5514579)
 visible = false
 
-[node name="HatNode" type="Node3D" parent="."]
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
