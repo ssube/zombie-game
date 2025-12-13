@@ -99,8 +99,8 @@ func _apply_static_movement_tween(movement: ZC_Movement, velocity: ZC_Velocity) 
 		return
 
 	# Duration based on speed - faster movement = shorter tween
-	var movement_duration := 1.0 / maxf(target_velocity.length(), 0.2)
-	movement_duration = clampf(movement_duration, 0.1, 5.0)
+	var movement_duration := 1.0 * maxf(target_velocity.length(), 0.5)
+	movement_duration = clampf(movement_duration, 0.5, 5.0)
 
 	move_tween = create_tween()
 	move_tween.tween_property(root_3d, "global_position", target_velocity, movement_duration).as_relative()
