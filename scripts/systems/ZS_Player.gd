@@ -227,20 +227,26 @@ func _update_ammo_label(player: Entity) -> void:
 		%Menu.set_ammo_label("")
 		return
 
-	var ranged_weapon := player_weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
-	if ranged_weapon == null:
-		return
+	var melee_weapon := player_weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
+	if melee_weapon != null:
+		var weapon_durability := player_weapon.get_component(ZC_Durability) as ZC_Durability
+		%Menu.set_ammo_label("Durability: %d/%d" % [
+			weapon_durability.current_durability,
+			weapon_durability.max_durability,
+		])
 
-	var weapon_ammo := player_weapon.get_component(ZC_Ammo) as ZC_Ammo
-	var player_count := player_ammo.get_ammo(ranged_weapon.ammo_type)
-	var weapon_count := weapon_ammo.get_ammo(ranged_weapon.ammo_type)
-	var weapon_max := weapon_ammo.get_max_ammo(ranged_weapon.ammo_type)
-	%Menu.set_ammo_label("%s: %d/%d + %d" % [
-		ranged_weapon.ammo_type,
-		weapon_count,
-		weapon_max,
-		player_count,
-	])
+	var ranged_weapon := player_weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	if ranged_weapon != null:
+		var weapon_ammo := player_weapon.get_component(ZC_Ammo) as ZC_Ammo
+		var player_count := player_ammo.get_ammo(ranged_weapon.ammo_type)
+		var weapon_count := weapon_ammo.get_ammo(ranged_weapon.ammo_type)
+		var weapon_max := weapon_ammo.get_max_ammo(ranged_weapon.ammo_type)
+		%Menu.set_ammo_label("%s: %d/%d + %d" % [
+			ranged_weapon.ammo_type,
+			weapon_count,
+			weapon_max,
+			player_count,
+		])
 
 
 func _handle_collisions(body: CharacterBody3D, delta: float) -> void:
@@ -630,12 +636,7 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 
 	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
 	%Menu.set_weapon_label(c_interactive.name)
-
-	if EntityUtils.is_ranged_weapon(new_weapon):
-		_update_ammo_label(entity)
-	else:
-		%Menu.clear_ammo_label()
-
+	_update_ammo_label(entity)
 	%Menu.push_action("Switched to weapon: %s" % c_interactive.name)
 
 	if c_interactive.use_sound:
@@ -669,7 +670,7 @@ func reload_weapon(player: Entity) -> void:
 	var weapon_ammo := current_weapon.get_component(ZC_Ammo) as ZC_Ammo
 	if weapon_ammo == null:
 		return
-	
+
 	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
 	weapon_ammo.transfer(player_ammo)
 	_update_ammo_label(player)
