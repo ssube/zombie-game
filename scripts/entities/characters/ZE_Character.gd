@@ -80,8 +80,11 @@ func _apply_rigid_look_torque(movement: ZC_Movement, _velocity: ZC_Velocity) -> 
 
 
 func _apply_static_physics(_delta: float, movement: ZC_Movement, velocity: ZC_Velocity) -> void:
-	_apply_static_movement_tween(movement, velocity)
-	_apply_static_look_tween(movement, velocity)
+	if movement.has_move_target:
+		_apply_static_movement_tween(movement, velocity)
+
+	if movement.has_look_target:
+		_apply_static_look_tween(movement, velocity)
 
 
 func _apply_static_movement_tween(movement: ZC_Movement, velocity: ZC_Velocity) -> void:
