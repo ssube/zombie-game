@@ -110,9 +110,6 @@ func _apply_static_look_tween(movement: ZC_Movement, _velocity: ZC_Velocity) -> 
 	if look_tween and look_tween.is_running():
 		return
 
-	if not movement.has_look_input:
-		return
-
 	var current_transform := root_3d.global_transform
 	var target_position := movement.target_look_position
 
