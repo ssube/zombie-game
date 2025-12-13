@@ -104,3 +104,4 @@ visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_bv25f")
+metadata/surface_type = &"metal"

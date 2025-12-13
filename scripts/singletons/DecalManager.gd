@@ -3,6 +3,10 @@ extends Node
 
 # Mapping of surface types to decal scenes (PackedScene of a Sprite3D)
 @export var decal_scenes := {
+	"asphalt": preload("res://effects/decals/bullet_hole_concrete.tscn"),
+	"blue": preload("res://effects/decals/bullet_hole_blue.tscn"),
+	"concrete": preload("res://effects/decals/bullet_hole_concrete.tscn"),
+	"grass": preload("res://effects/decals/bullet_hole_grass.tscn"),
 	"metal": preload("res://effects/decals/bullet_hole_metal.tscn"),
 	"stone": preload("res://effects/decals/bullet_hole_stone.tscn"),
 	"wood": preload("res://effects/decals/bullet_hole_wood.tscn"),

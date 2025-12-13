@@ -20,6 +20,7 @@ size = Vector2(0.2, 0.2)
 
 [node name="BulletHoleMetal" type="Sprite3D"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+cast_shadow = 0
 modulate = Color(0.2894318, 0.69159335, 4.620552e-05, 1)
 texture = ExtResource("1_s4sbg")
 

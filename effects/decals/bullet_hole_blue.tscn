@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://drlbilphm4tlq"]
+
+[ext_resource type="Texture2D" uid="uid://cmpugrrinf3bw" path="res://textures/bullet_hole_32px.png" id="1_wg7v7"]
+[ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/events/EV_EmitOnReady.gd" id="2_wg7v7"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wg7v7"]
+direction = Vector3(0, 0, -1)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, -2, 0)
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hag0k"]
+albedo_color = Color(0.105882354, 0.2509804, 0.6509804, 1)
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_xt5gw"]
+material = SubResource("StandardMaterial3D_hag0k")
+size = Vector2(0.2, 0.2)
+
+[node name="BulletHoleBlue" type="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+cast_shadow = 0
+modulate = Color(0, 0.345, 0.69, 1)
+texture = ExtResource("1_wg7v7")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+cast_shadow = 0
+emitting = false
+explosiveness = 0.75
+process_material = SubResource("ParticleProcessMaterial_wg7v7")
+draw_pass_1 = SubResource("QuadMesh_xt5gw")
+script = ExtResource("2_wg7v7")

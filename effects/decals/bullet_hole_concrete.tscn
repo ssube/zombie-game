@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbokjwmrm081n"]
+
+[ext_resource type="Texture2D" uid="uid://cmpugrrinf3bw" path="res://textures/bullet_hole_32px.png" id="1_da8sl"]
+[ext_resource type="AudioStream" uid="uid://0w6ilyin7ah4" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/IMPACTS and CONTACTS/Short Contact Sounds/sfx_short_contact_sound_230.wav" id="2_ji2yf"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="3_fshpr"]
+[ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/events/EV_EmitOnReady.gd" id="4_u5vei"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_da8sl"]
+particle_flag_align_y = true
+direction = Vector3(0, 0, -1)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, -2, 0)
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ji2yf"]
+shading_mode = 0
+albedo_color = Color(0.49, 0.48020002, 0.46060002, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_fshpr"]
+material = SubResource("StandardMaterial3D_ji2yf")
+size = Vector2(0.1, 0.2)
+
+[node name="BulletHoleConcrete" type="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+cast_shadow = 0
+texture = ExtResource("1_da8sl")
+
+[node name="ImpactBulletConcrete" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_ji2yf")
+script = ExtResource("3_fshpr")
+play_on_ready = true
+subtitle_text = "Bullet Impact"
+subtitle_radius = 3.0
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+cast_shadow = 0
+emitting = false
+one_shot = true
+explosiveness = 0.75
+process_material = SubResource("ParticleProcessMaterial_da8sl")
+draw_pass_1 = SubResource("QuadMesh_fshpr")
+script = ExtResource("4_u5vei")

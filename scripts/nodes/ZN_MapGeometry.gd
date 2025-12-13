@@ -9,6 +9,7 @@ enum TexturePriority {
 
 ## Keyword -> priority
 static var texture_keywords: Dictionary[String, int] = {
+	"asphalt": 0,
 	"brick": 0,
 	"carpet": 1,
 	"concrete": 0,
