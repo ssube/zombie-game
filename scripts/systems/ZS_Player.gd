@@ -124,6 +124,10 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		if input.use_holster:
 			switch_weapon(entity, null)
 
+		# Reloading weapon
+		if input.use_reload:
+			reload_weapon(entity)
+
 		# Toggle flashlight
 		if input.use_light:
 			toggle_flashlight(entity, body)
@@ -176,6 +180,12 @@ func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_cr
 			%Menu.set_crosshair_color(Color.GOLD)
 		use_objective(collider, player)
 
+	# Check for weapons to avoid unloading and removing weapons
+	if collider.has_component(ZC_Ammo) and not EntityUtils.is_weapon(collider):
+		if set_crosshair:
+			%Menu.set_crosshair_color(Color.GREEN)
+		use_ammo(collider, entity)
+
 	if collider.has_component(ZC_Effect_Armor):
 		if set_crosshair:
 			%Menu.set_crosshair_color(Color.GREEN)
@@ -206,6 +216,31 @@ func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_cr
 			%Menu.set_crosshair_color(Color.ORANGE)
 		use_weapon(collider, entity)
 
+
+func _update_ammo_label(player: Entity) -> void:
+	if player is not ZE_Character:
+		return
+
+	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
+	var player_weapon := player.current_weapon as ZE_Weapon
+	if player_weapon == null:
+		%Menu.set_ammo_label("")
+		return
+
+	var ranged_weapon := player_weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	if ranged_weapon == null:
+		return
+
+	var weapon_ammo := player_weapon.get_component(ZC_Ammo) as ZC_Ammo
+	var player_count := player_ammo.get_ammo(ranged_weapon.ammo_type)
+	var weapon_count := weapon_ammo.get_ammo(ranged_weapon.ammo_type)
+	var weapon_max := weapon_ammo.get_max_ammo(ranged_weapon.ammo_type)
+	%Menu.set_ammo_label("%s: %d/%d + %d" % [
+		ranged_weapon.ammo_type,
+		weapon_count,
+		weapon_max,
+		player_count,
+	])
 
 
 func _handle_collisions(body: CharacterBody3D, delta: float) -> void:
@@ -249,13 +284,22 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	if weapon == null:
 		return
 
-	var c_weapon = weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
-	var marker = weapon.get_node(c_weapon.muzzle_marker) as Marker3D
-	if marker == null:
-		printerr("Muzzle marker not found: ", c_weapon.muzzle_marker)
+	var weapon_ammo := weapon.get_component(ZC_Ammo) as ZC_Ammo
+	var ranged_weapon = weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	var current_ammo := weapon_ammo.get_ammo(ranged_weapon.ammo_type)
+	if current_ammo <= 0:
+		# TODO: play empty/broken effects
 		return
 
-	var new_projectile = c_weapon.projectile_scene.instantiate() as RigidBody3D
+	weapon_ammo.remove_ammo(ranged_weapon.ammo_type, ranged_weapon.per_shot)
+	_update_ammo_label(entity)
+
+	var marker = weapon.get_node(ranged_weapon.muzzle_marker) as Marker3D
+	if marker == null:
+		printerr("Muzzle marker not found: ", ranged_weapon.muzzle_marker)
+		return
+
+	var new_projectile = ranged_weapon.projectile_scene.instantiate() as RigidBody3D
 	body.get_parent().add_child(new_projectile)
 
 	if new_projectile is Entity:
@@ -267,16 +311,16 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	new_projectile.global_rotation = marker.global_rotation
 
 	var forward = -marker.global_transform.basis.z.normalized()
-	new_projectile.apply_impulse(forward * c_weapon.muzzle_velocity, marker.global_position)
+	new_projectile.apply_impulse(forward * ranged_weapon.muzzle_velocity, marker.global_position)
 
 	weapon.apply_effects(ZR_Weapon_Effect.EffectType.MUZZLE_FIRE)
 
 	# tween along recoil path
-	if c_weapon.recoil_path:
-		var recoil_path := c_weapon.recoil_path as PathFollow3D
+	if ranged_weapon.recoil_path:
+		var recoil_path := ranged_weapon.recoil_path as PathFollow3D
 		var recoil_tween := weapon.create_tween()
-		recoil_tween.tween_property(recoil_path, "progress_ratio", c_weapon.recoil_per_shot, c_weapon.recoil_time)
-		recoil_tween.tween_property(recoil_path, "progress_ratio", 0.0, c_weapon.recoil_time)
+		recoil_tween.tween_property(recoil_path, "progress_ratio", ranged_weapon.recoil_per_shot, ranged_weapon.recoil_time)
+		recoil_tween.tween_property(recoil_path, "progress_ratio", 0.0, ranged_weapon.recoil_time)
 
 
 func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
@@ -323,6 +367,22 @@ func pickup_item(entity: Entity, player_entity: Entity) -> void:
 	if interactive.pickup_sound:
 		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
 		_add_sound(sound, player_entity)
+
+
+func use_ammo(entity: Entity, player_entity: Entity) -> void:
+	var entity_ammo := entity.get_component(ZC_Ammo) as ZC_Ammo
+	var player_ammo := player_entity.get_component(ZC_Ammo) as ZC_Ammo
+	player_ammo.transfer(entity_ammo)
+	_update_ammo_label(player_entity)
+
+	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
+	%Menu.push_action("Picked up ammo: %s" % interactive.name)
+
+	if interactive.pickup_sound:
+		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
+		_add_sound(sound, player_entity)
+
+	remove_entity(entity)
 
 
 func use_armor(entity: Entity, player_entity: Entity) -> void:
@@ -560,16 +620,19 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 
 		return
 
-	new_weapon.get_parent().remove_child(new_weapon)
+	var new_parent := new_weapon.get_parent()
+	if new_parent:
+		new_parent.remove_child(new_weapon)
+
 	new_weapon.visible = true
 	entity.hands_node.add_child(new_weapon)
 	entity.add_relationship(RelationshipUtils.make_equipped(new_weapon))
 
 	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
 	%Menu.set_weapon_label(c_interactive.name)
+
 	if EntityUtils.is_ranged_weapon(new_weapon):
-		# TODO: set ammo label to a real value
-		%Menu.set_ammo_label("Shells: 0/0")
+		_update_ammo_label(entity)
 	else:
 		%Menu.clear_ammo_label()
 
@@ -596,3 +659,14 @@ func release_weapon(entity: Entity) -> void:
 	var weapon_body = weapon.get_node(".") as RigidBody3D
 	weapon_body.freeze = false
 	weapon_body.global_position = weapon_position
+
+
+func reload_weapon(player: Entity) -> void:
+	if player is not ZE_Character:
+		return
+
+	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
+	var current_weapon := player.current_weapon as ZE_Weapon
+	var weapon_ammo := current_weapon.get_component(ZC_Ammo) as ZC_Ammo
+	weapon_ammo.transfer(player_ammo)
+	_update_ammo_label(player)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dirupaj1q5imr"]
+[gd_scene load_steps=28 format=4 uid="uid://dirupaj1q5imr"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_2kns5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_17hxq"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="6_l5ox4"]
 [ext_resource type="Texture2D" uid="uid://cm5mhpoe8joro" path="res://textures/fire1_ 07.png" id="7_xq6m6"]
 [ext_resource type="Texture2D" uid="uid://dm8xysr4gal26" path="res://assets/PSX-Shotgun/Shotgun_Textures/Shotgun_Texture_2.png" id="8_e2xev"]
+[ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="11_sgaoq"]
 
 [sub_resource type="Resource" id="Resource_17hxq"]
 script = ExtResource("5_17hxq")
@@ -34,9 +35,20 @@ script = ExtResource("4_xq6m6")
 muzzle_velocity = 50.0
 muzzle_marker = NodePath("ProjectileMarker")
 recoil_marker = NodePath("ProjectileMarker")
+ammo_type = "12gauge"
 projectile_scene = ExtResource("3_7rb10")
 effects = Array[ExtResource("6_l5ox4")]([SubResource("Resource_l5ox4")])
 metadata/_custom_type_script = "uid://dwsqxsqwtloma"
+
+[sub_resource type="Resource" id="Resource_bsv6m"]
+script = ExtResource("11_sgaoq")
+ammo_count = Dictionary[String, int]({
+"12gauge": 6
+})
+max_ammo_count = Dictionary[String, int]({
+"12gauge": 10
+})
+metadata/_custom_type_script = "uid://bsnlq5t650od"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dhvf"]
 resource_name = "Material.002"
@@ -143,7 +155,7 @@ size = Vector3(0.13093567, 0.27976608, 1.0812988)
 collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_2kns5")
-component_resources = Array[ExtResource("2_17hxq")]([SubResource("Resource_17hxq"), SubResource("Resource_7rb10")])
+component_resources = Array[ExtResource("2_17hxq")]([SubResource("Resource_17hxq"), SubResource("Resource_7rb10"), SubResource("Resource_bsv6m")])
 
 [node name="Shotgun" type="Node3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.18490055, -0.5303326)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=116 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://c0x5fgy8sbya0" path="res://scripts/nodes/ZN_EffectArea3D.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
@@ -24,6 +24,7 @@
 [ext_resource type="Material" uid="uid://b7hn4t4hgmaod" path="res://textures/Color Maps/concrete_3.tres" id="19_8mki0"]
 [ext_resource type="Material" uid="uid://bmxolsa17xlkl" path="res://textures/Color Maps/brick_wall_tx_3.tres" id="20_58gyl"]
 [ext_resource type="Material" uid="uid://bc3b71ottph3s" path="res://textures/Color Maps/concrete_5.tres" id="21_ggct0"]
+[ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="23_1hnym"]
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="23_8mki0"]
 [ext_resource type="Script" uid="uid://c6dan22mbgmgs" path="res://scripts/nodes/ZN_MapGeometry.gd" id="25_jwc5o"]
 [ext_resource type="Script" uid="uid://dd4hkf7y5v13t" path="res://scripts/components/status/ZC_Locked.gd" id="27_2fv0q"]
@@ -625,6 +626,12 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.2
 [node name="Zombie" parent="Entities/Room4" instance=ExtResource("30_2fv0q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1283226, 1.1611633, 0.5116539)
 id = "Level0_ZE_Zombie_1765571833_84556"
+
+[node name="Ammo" parent="Entities/Room4" instance=ExtResource("23_1hnym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57901, 0.2904392, -2.7523222)
+
+[node name="Ammo2" parent="Entities/Room4" instance=ExtResource("23_1hnym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57901, 0.43693882, 2.756857)
 
 [node name="Lights" type="Node" parent="."]
 

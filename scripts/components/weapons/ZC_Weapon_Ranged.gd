@@ -18,9 +18,9 @@ class_name ZC_Weapon_Ranged
 @export var reload_path: NodePath
 
 @export_group("Ammo")
-@export var current_ammo : int = 10
+@export var ammo_type: String
+@export var per_shot: int = 1
 @export var per_reload: int = 10
-@export var max_ammo: int = 100
 
 @export_group("Projectile")
 @export var projectile_scene: PackedScene = null
