@@ -116,6 +116,8 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	_register_level_entities()
 	_register_level_objectives()
 
+	ECS.world._invalidate_cache("level_loaded")
+
 	%Menu.push_action("Loaded level: %s" % level_name)
 	level_loaded.emit(last_level, level_name)
 	last_level = level_name
@@ -124,17 +126,13 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	if spawn_point == "" or spawn_node == null:
 		printerr("Invalid spawn point: ", spawn_point)
 		spawn_node = next_level.get_node("Markers/Start") as Node3D
-		
+
 	if spawn_node == null:
 		printerr("No fallback spawn point: Markers/Start")
 		return
 
 	var players: Array[Entity] = QueryBuilder.new(ECS.world).with_all([ZC_Player]).execute()
 	for player in players:
-		var transform := player.get_component(ZC_Transform) as ZC_Transform
-		transform.position = spawn_node.global_position
-		transform.rotation = spawn_node.global_rotation
-
 		var input := player.get_component(ZC_Input) as ZC_Input
 		input.turn_direction = spawn_node.global_rotation
 

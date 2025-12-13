@@ -6,11 +6,10 @@ extends System
 var last_shimmer: Dictionary[Entity, Entity] = {} # dict for multiplayer
 
 func query():
-	return q.with_all([ZC_Transform, ZC_Velocity, ZC_Player, ZC_Input])
+	return q.with_all([ZC_Velocity, ZC_Player, ZC_Input])
 
 func process(entities: Array[Entity], _components: Array, delta: float):
 	for entity in entities:
-		var transform = entity.get_component(ZC_Transform) as ZC_Transform
 		var velocity = entity.get_component(ZC_Velocity) as ZC_Velocity
 		var player = entity.get_component(ZC_Player) as ZC_Player
 		var input = entity.get_component(ZC_Input) as ZC_Input
@@ -69,9 +68,12 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			weapon_body.global_transform = entity.hands_node.global_transform
 
 		# Update transform for inventory items as well
+		var hands_back: Vector3 = -entity.hands_node.global_transform.basis.z.normalized()
 		if entity.inventory_node != null:
 			for child in entity.inventory_node.get_children():
 				child.global_transform = entity.hands_node.global_transform
+				# TODO: convert player inventory to a Node3D and do this once
+				child.global_position -= hands_back * 5
 
 		# Process any effect relationships
 		var effects := entity.get_relationships(RelationshipUtils.any_effect) as Array[Relationship]
@@ -150,10 +152,6 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			%Menu.clear_target_label()
 			%Menu.reset_crosshair_color()
 			remove_shimmer_key(entity)
-
-		# Update ECS transform from actual node position
-		transform.position = body.global_position
-		transform.rotation = body.rotation
 
 
 func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_crosshair: bool = true) -> void:
