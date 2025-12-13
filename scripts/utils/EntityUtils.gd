@@ -16,6 +16,14 @@ static func apply_damage(entity: Node, base_damage: int, base_multiplier: float 
 	return damage
 
 
+static func get_players() -> Array[Entity]:
+	return ECS.world.query.with_all([ZC_Player]).execute()
+
+
+static func get_enemies() -> Array[Entity]:
+	return ECS.world.query.with_all([ZC_Enemy]).execute()
+
+
 static func is_player(entity: Node) -> bool:
 	if entity is not Entity:
 		return false

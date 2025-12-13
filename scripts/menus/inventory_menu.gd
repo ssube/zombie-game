@@ -15,7 +15,7 @@ func on_update() -> void:
 	_item_index.clear()
 	_item_players.clear()
 
-	var players: Array[Entity] = ECS.world.query.with_all([ZC_Player]).execute()
+	var players: Array[Entity] = EntityUtils.get_players()
 	var inventory: Array[Entity] = []
 	var keys: Array[String] = []
 

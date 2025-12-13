@@ -41,7 +41,7 @@ func play_subtitle(from_position: float = 0.0) -> void:
 		self.stop()
 
 	# TODO: add sound to enemies too
-	var players := ECS.world.query.with_all([ZC_Player]).execute()
+	var players := EntityUtils.get_players()
 	for player in players:
 		var player3d := player.get_node(".") as Node3D
 		if player3d.global_position.distance_squared_to(self.global_position) < radius_squared:

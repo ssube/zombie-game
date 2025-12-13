@@ -8,9 +8,6 @@ enum Cheats {
 
 var _state: Dictionary[Cheats, bool] = {}
 
-func _get_players() -> Array[Entity]:
-	return ECS.world.query.with_all([ZC_Player]).execute()
-
 func _toggle_no_aggro(_players: Array[Entity], _value: bool) -> void:
 	pass
 
@@ -40,7 +37,7 @@ func _toggle_god_mode(_players: Array[Entity], _value: bool) -> void:
 func toggle_cheat(cheat: Cheats, value: bool) -> void:
 	_state[Cheats.NO_CLIP] = value
 
-	var players := _get_players()
+	var players := EntityUtils.get_players()
 	match cheat:
 		Cheats.NO_AGGRO:
 			_toggle_no_aggro(players, value)
