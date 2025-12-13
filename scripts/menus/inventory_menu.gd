@@ -18,6 +18,7 @@ func on_update() -> void:
 	var players: Array[Entity] = EntityUtils.get_players()
 	var inventory: Array[Entity] = []
 	var keys: Array[String] = []
+	var ammo: Dictionary[String, int] = {}
 
 	for player in players:
 		var c_player := player.get_component(ZC_Player) as ZC_Player
@@ -36,6 +37,11 @@ func on_update() -> void:
 					inventory.append(item)
 					_item_players[item] = player
 
+		var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
+		if player_ammo:
+			for ammo_type in player_ammo.ammo_count.keys():
+				ammo[ammo_type] = player_ammo.get_ammo(ammo_type) + ammo.get(ammo_type, 0)
+
 	inventory_list.clear()
 	if inventory.size() == 0:
 		inventory_list.add_item("No Items", null, false)
@@ -50,6 +56,13 @@ func on_update() -> void:
 	else:
 		for key in keys:
 			inventory_list.add_item("Key: " + key, null, false)
+
+	if ammo.size() == 0:
+		inventory_list.add_item("No Ammo", null, false)
+	else:
+		for ammo_type in ammo:
+			var ammo_text = "Ammo: %d of %s" % [ammo[ammo_type], ammo_type]
+			inventory_list.add_item(ammo_text, null, false)
 
 
 func _on_inventory_list_item_activated(index: int) -> void:
