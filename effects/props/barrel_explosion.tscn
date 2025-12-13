@@ -42,6 +42,7 @@ apply_fire = true
 shape = SubResource("SphereShape3D_ma1qw")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Area3D"]
+visible = false
 radius = 10.0
 radial_segments = 24
 rings = 12
