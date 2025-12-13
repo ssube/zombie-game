@@ -665,8 +665,11 @@ func reload_weapon(player: Entity) -> void:
 	if player is not ZE_Character:
 		return
 
-	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
 	var current_weapon := player.current_weapon as ZE_Weapon
 	var weapon_ammo := current_weapon.get_component(ZC_Ammo) as ZC_Ammo
+	if weapon_ammo == null:
+		return
+	
+	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
 	weapon_ammo.transfer(player_ammo)
 	_update_ammo_label(player)
