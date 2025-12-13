@@ -30,6 +30,9 @@ func _generate_instance_id() -> void:
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+
 	self.component_resources.append_array(self.extra_components)
 
 
