@@ -1,7 +1,7 @@
 extends System
 class_name ZS_FootstepSystem
 
-var _last_footsteps: Dictionary[String, float] = {}
+var _next_footsteps: Dictionary[String, float] = {}
 
 func query() -> QueryBuilder:
 	return q.with_all([ZC_Footstep, ZC_Velocity])
@@ -13,9 +13,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float) -> void
 		var footstep := entity.get_component(ZC_Footstep) as ZC_Footstep
 		var velocity := entity.get_component(ZC_Velocity) as ZC_Velocity
 
-		var last_footstep := _last_footsteps.get(entity.id, 0.0) as float
-		var next_variation = randf_range(-footstep.variation, +footstep.variation)
-		var next_footstep = last_footstep + next_variation + footstep.interval
+		var next_footstep := _next_footsteps.get(entity.id, 0.0) as float
 		if now < next_footstep:
 			continue
 
@@ -47,4 +45,6 @@ func process(entities: Array[Entity], _components: Array, _delta: float) -> void
 		collider.add_child(new_footstep)
 		new_footstep.global_position = collision_point
 
-		_last_footsteps[entity.id] = now
+		var next_variation = randf_range(-footstep.variation, +footstep.variation)
+		next_footstep = now + next_variation + footstep.interval
+		_next_footsteps[entity.id] = next_footstep
