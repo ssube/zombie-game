@@ -608,14 +608,8 @@ func equip_previous_weapon(entity: ZE_Player) -> void:
 
 
 func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
-	var old_weapon = entity.current_weapon
-	if old_weapon != null:
-		old_weapon.get_parent().remove_child(old_weapon)
-		old_weapon.visible = false
-		entity.inventory_node.add_child(old_weapon)
-		entity.remove_relationship(RelationshipUtils.make_equipped(old_weapon))
+	var old_weapon = EntityUtils.equip_weapon(entity, new_weapon)
 
-	entity.current_weapon = new_weapon
 	if new_weapon == null:
 		%Menu.clear_weapon_label()
 		%Menu.clear_ammo_label()
@@ -626,14 +620,6 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 
 		return
 
-	var new_parent := new_weapon.get_parent()
-	if new_parent:
-		new_parent.remove_child(new_weapon)
-
-	new_weapon.visible = true
-	entity.hands_node.add_child(new_weapon)
-	entity.add_relationship(RelationshipUtils.make_equipped(new_weapon))
-
 	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
 	%Menu.set_weapon_label(c_interactive.name)
 	_update_ammo_label(entity)
@@ -642,24 +628,6 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 	if c_interactive.use_sound:
 		var sound := c_interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
 		_add_sound(sound, entity)
-
-
-func release_weapon(entity: Entity) -> void:
-	var weapon = entity.current_weapon
-	if weapon == null:
-		return
-
-	entity.current_weapon = null
-
-	var weapon_position = weapon.global_position
-	weapon.get_parent().remove_child(weapon)
-	entity.get_parent().add_child(weapon)
-	entity.remove_relationship(RelationshipUtils.make_equipped(weapon))
-	entity.remove_relationship(RelationshipUtils.make_holding(weapon))
-
-	var weapon_body = weapon.get_node(".") as RigidBody3D
-	weapon_body.freeze = false
-	weapon_body.global_position = weapon_position
 
 
 func reload_weapon(player: Entity) -> void:
@@ -673,4 +641,5 @@ func reload_weapon(player: Entity) -> void:
 
 	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
 	weapon_ammo.transfer(player_ammo)
+	current_weapon.apply_effects(ZR_Weapon_Effect.EffectType.RANGED_RELOAD)
 	_update_ammo_label(player)
