@@ -13,6 +13,8 @@ class_name GameOptions
 @export_range(0.0, 100.0) var main_volume: float = 50.0
 @export_range(0.0, 100.0) var music_volume: float = 50.0
 @export_range(0.0, 100.0) var effects_volume: float = 50.0
+@export var subtitles: bool = true
+
 
 static func load_path(path: String = "user://options.tres") -> GameOptions:
 	if not ResourceLoader.exists(path):

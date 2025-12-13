@@ -383,6 +383,13 @@ size_flags_vertical = 4
 tick_count = 5
 ticks_on_borders = true
 
+[node name="SubtitleLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SubtitleCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "Subtitles"
+
 [node name="Cheats" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
@@ -427,6 +434,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_labby")
 layout_mode = 2
 text = "Apply"
 
+[connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/SubtitleCheckBox" to="." method="_on_subtitle_check_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoAggroBox" to="." method="_on_no_aggro_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoClipBox" to="." method="_on_no_clip_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/GodModeBox" to="." method="_on_god_mode_box_toggled"]

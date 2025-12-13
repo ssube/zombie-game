@@ -145,3 +145,8 @@ func _on_back_pressed() -> void:
 
 func _on_no_aggro_box_toggled(_toggled_on: bool) -> void:
 	pass # Replace with function body.
+
+
+func _on_subtitle_check_box_toggled(toggled_on: bool) -> void:
+	dirty = true
+	options.subtitles = toggled_on
