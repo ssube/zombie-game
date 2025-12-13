@@ -11,12 +11,17 @@ func process(entities: Array[Entity], _components: Array, _delta: float) -> void
 
 	for entity in entities:
 		var footstep := entity.get_component(ZC_Footstep) as ZC_Footstep
-		var velocity := entity.get_component(ZC_Velocity) as ZC_Velocity
 
 		var next_footstep := _next_footsteps.get(entity.id, 0.0) as float
 		if now < next_footstep:
 			continue
 
+		var health := entity.get_component(ZC_Health) as ZC_Health
+		if health:
+			if health.current_health <= 0:
+				continue
+
+		var velocity := entity.get_component(ZC_Velocity) as ZC_Velocity
 		var horizontal_velocity := velocity.linear_velocity
 		horizontal_velocity.y = 0
 
