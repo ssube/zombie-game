@@ -1,7 +1,8 @@
-[gd_scene load_steps=388 format=4 uid="uid://2631yqe4y8ki"]
+[gd_scene load_steps=389 format=4 uid="uid://2631yqe4y8ki"]
 
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="2_1pddc"]
-[ext_resource type="Script" uid="uid://c0x5fgy8sbya0" path="res://scripts/nodes/ZN_EffectArea3D.gd" id="7_i7led"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="5_3ioyf"]
+[ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="6_3k1mp"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door.tscn" id="8_4uioy"]
 [ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="8_ebfu5"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="8_wks3y"]
@@ -1477,13 +1478,19 @@ shape = SubResource("BoxShape3D_ebfu5")
 [node name="RiverAreaEffect" type="Area3D" parent="Areas"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.461, -1, 0)
 collision_mask = 24
-script = ExtResource("7_i7led")
-effect = SubResource("Resource_3ioyf")
-metadata/_custom_type_script = "uid://bhgbf8ykucy2n"
+script = ExtResource("5_3ioyf")
+trigger_on_exit = true
+trigger_on_timer = false
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/RiverAreaEffect"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 7)
 shape = SubResource("BoxShape3D_ebfu5")
+
+[node name="ZN_ScreenEffectAction" type="Node" parent="Areas/RiverAreaEffect"]
+script = ExtResource("6_3k1mp")
+effect = SubResource("Resource_3ioyf")
+metadata/_custom_type_script = "uid://dmonxsvpyoytj"
 
 [node name="FireArea" parent="Areas" instance=ExtResource("10_wks3y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.393482, 0.4999981, 11.367695)
