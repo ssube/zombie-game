@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dktd2ekufselm"]
+[gd_scene load_steps=11 format=3 uid="uid://dktd2ekufselm"]
 
-[ext_resource type="Script" uid="uid://2b0anfdfvkft" path="res://scripts/events/EV_RemoveAfterTimer.gd" id="1_nlgyr"]
 [ext_resource type="AudioStream" uid="uid://cbh3us2kncrl0" path="res://sounds/Sound Effects/Firearms/Fire/shotgun_fire_ufx_1.ogg" id="2_nx8m0"]
+[ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/ZN_TriggerTimer.gd" id="3_bd4u4"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="3_jplj4"]
+[ext_resource type="Script" uid="uid://b1hfgveu3fvsd" path="res://scripts/nodes/actions/ZN_NodeAction.gd" id="4_dxxuk"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nlgyr"]
 direction = Vector3(0, 0, -1)
@@ -36,7 +37,6 @@ radial_segments = 6
 rings = 4
 
 [node name="ShotgunBlast" type="Node3D"]
-script = ExtResource("1_nlgyr")
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
 explosiveness = 0.5
@@ -55,3 +55,12 @@ play_on_ready = true
 subtitle_text = "Shotgun Blast"
 subtitle_radius = 10.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
+[node name="ZN_TriggerTimer" type="Timer" parent="."]
+script = ExtResource("3_bd4u4")
+metadata/_custom_type_script = "uid://b3w64ibj5uxv4"
+
+[node name="ZN_NodeAction" type="Node" parent="ZN_TriggerTimer" node_paths=PackedStringArray("node")]
+script = ExtResource("4_dxxuk")
+node = NodePath("../..")
+remove = true

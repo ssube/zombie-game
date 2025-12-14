@@ -6,6 +6,7 @@ enum AreaEvent {
 	BODY_ENTER,
 	BODY_EXIT,
 	BODY_INTERVAL,
+	TIMER_TIMEOUT,
 }
 
 @export var active: bool = true

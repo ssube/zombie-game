@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cmpugrrinf3bw" path="res://textures/bullet_hole_32px.png" id="1_xwty4"]
 [ext_resource type="AudioStream" uid="uid://0w6ilyin7ah4" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/IMPACTS and CONTACTS/Short Contact Sounds/sfx_short_contact_sound_230.wav" id="2_g6us3"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="3_7mqec"]
-[ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/events/EV_EmitOnReady.gd" id="4_7mqec"]
+[ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/nodes/ZN_GPUParticles3D.gd" id="4_7mqec"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g6us3"]
 particle_flag_align_y = true

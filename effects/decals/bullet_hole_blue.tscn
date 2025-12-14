@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://drlbilphm4tlq"]
 
 [ext_resource type="Texture2D" uid="uid://cmpugrrinf3bw" path="res://textures/bullet_hole_32px.png" id="1_wg7v7"]
-[ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/events/EV_EmitOnReady.gd" id="2_wg7v7"]
+[ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/nodes/ZN_GPUParticles3D.gd" id="2_wg7v7"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wg7v7"]
 direction = Vector3(0, 0, -1)

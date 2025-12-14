@@ -1,3 +1,4 @@
+@tool
 extends ZN_BaseAction
 class_name ZN_PhysicsAction
 
@@ -10,6 +11,15 @@ enum PhysicsOrigin {
 @export var impulse_multiplier: float = 1.0
 @export var impulse_offset: Vector3 = Vector3.ZERO
 @export var impulse_origin: PhysicsOrigin = PhysicsOrigin.AREA
+
+
+func _get_configuration_warnings():
+	var warnings = []
+
+	if self.entity_only:
+		warnings.append("Physics action is entity-only!")
+
+	return warnings
 
 
 func _get_position(body: Node3D, area: ZN_TriggerArea3D) -> Vector3:
