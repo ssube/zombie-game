@@ -10,9 +10,8 @@
 
 [node name="ZN_TriggerArea3D" type="Area3D" parent="."]
 script = ExtResource("1_0vmuv")
-interval_timer = 5.0
 trigger_on_enter = false
-trigger_on_exit = false
+trigger_on_interval = true
 trigger_on_timer = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
@@ -24,7 +23,6 @@ script = ExtResource("2_fis0n")
 spawn_scenes = Array[PackedScene]([ExtResource("3_8n7nj")])
 spawn_mode = 0
 spawn_marker = NodePath("../../Marker3D")
-spawn_at = 1
 random_radius = 0.25
 
 [node name="Marker3D" type="Marker3D" parent="."]

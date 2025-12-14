@@ -6,7 +6,7 @@ class_name ZN_DelayAction
 var timer: SceneTreeTimer
 
 
-func run(actor: Entity) -> void:
+func run(actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
 	timer = self.get_tree().create_timer(delay)
 	timer.timeout.connect(run_children.bind(actor))
 

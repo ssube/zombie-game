@@ -16,7 +16,7 @@ enum HealthMode {
 @export var health_amount: int = 10
 
 
-func run(actor: Entity) -> void:
+func run(actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
 	var actor_health := actor.get_component(ZC_Health) as ZC_Health
 	if actor_health == null:
 		return

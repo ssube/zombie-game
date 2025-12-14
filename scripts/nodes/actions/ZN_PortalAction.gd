@@ -9,7 +9,7 @@ class_name ZN_PortalAction
 ## Use the portal
 @export var activate: ZN_BaseAction.Tristate = ZN_BaseAction.Tristate.NO_CHANGE
 
-func run(_actor: Entity) -> void:
+func run(_actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
 	var portal := target.get_component(ZC_Portal) as ZC_Portal
 	if portal == null:
 		printerr("Target entity is not a portal: ", target)

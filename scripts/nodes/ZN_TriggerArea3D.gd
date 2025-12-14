@@ -1,20 +1,36 @@
 extends Area3D
 class_name ZN_TriggerArea3D
 
+enum AreaEvent {
+	AREA_INTERVAL,
+	BODY_ENTER,
+	BODY_EXIT,
+	BODY_INTERVAL,
+}
+
 @export var active: bool = true
-@export var collider_timer: float = 1.0
-@export var interval_timer: float = 1.0
+@export var area_interval: float = 1.0
+@export var body_interval: float = 1.0
 
 @export_group("Triggers")
+## Trigger when all bodies have left and the area is empty
+@export var trigger_on_empty: bool = false
+
+## Trigger when a body enters
 @export var trigger_on_enter: bool = true
-@export var trigger_on_exit: bool = true
-@export var trigger_on_interval: bool = true
+
+## Trigger when a body leaves
+@export var trigger_on_exit: bool = false
+
+## Retrigger for the area itself on an interval defined by the area_interval
+@export var trigger_on_interval: bool = false
+
+## Retrigger for each colliding body on an interval defined by the body_interval
 @export var trigger_on_timer: bool = true
-# TODO: trigger when empty
 
 
-var collider_timers: Dictionary[Node, float] = {}
-var interval_delta: float = 0.0
+var area_timer: float = 0.0
+var body_timers: Dictionary[Node, float] = {}
 
 
 func _ready() -> void:
@@ -27,14 +43,14 @@ func _process(delta: float) -> void:
 		return
 
 	if trigger_on_interval:
-		interval_delta += delta
-		if interval_delta > interval_timer:
-			interval_delta = 0.0
-			apply_actions(null)
+		area_timer += delta
+		if area_timer > area_interval:
+			area_timer = 0.0
+			apply_actions(null, self, AreaEvent.AREA_INTERVAL)
 
-	for collider in collider_timers:
-		collider_timers[collider] += delta
-		if collider_timers[collider] > collider_timer:
+	for collider in body_timers:
+		body_timers[collider] += delta
+		if body_timers[collider] > body_interval:
 			_on_body_timer(collider)
 
 
@@ -45,10 +61,10 @@ func _on_body_entered(body: Node) -> void:
 	if not body is Entity:
 		return
 
-	collider_timers[body] = 0
+	body_timers[body] = 0
 
 	if trigger_on_enter:
-		apply_actions(body)
+		apply_actions(body, self, AreaEvent.BODY_ENTER)
 
 
 func _on_body_exited(body: Node) -> void:
@@ -58,10 +74,10 @@ func _on_body_exited(body: Node) -> void:
 	if not body is Entity:
 		return
 
-	collider_timers.erase(body)
+	body_timers.erase(body)
 
 	if trigger_on_exit:
-		apply_actions(body)
+		apply_actions(body, self, AreaEvent.BODY_EXIT)
 
 
 func _on_body_timer(body: Node) -> void:
@@ -72,11 +88,11 @@ func _on_body_timer(body: Node) -> void:
 		return
 
 	if trigger_on_timer:
-		apply_actions(body)
+		apply_actions(body, self, AreaEvent.BODY_INTERVAL)
 
 
-func apply_actions(body: Entity) -> void:
+func apply_actions(body: Entity, area: ZN_TriggerArea3D, event: AreaEvent) -> void:
 	var children := self.get_children()
 	for child in children:
 		if child is ZN_BaseAction:
-			child.run(body)
+			child._run(body, area, event)
