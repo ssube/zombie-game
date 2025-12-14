@@ -6,7 +6,10 @@ class_name ZE_Weapon
 var physical_shells: bool = true
 var physical_mags: bool = true
 
-func apply_effects(effect_type: ZR_Weapon_Effect.EffectType) -> Array[Node3D]:
+var _effects_cache: Dictionary[ZR_Weapon_Effect.EffectType, Array] = {}
+
+
+func _get_effects() -> Array[ZR_Weapon_Effect]:
 	var effects: Array[ZR_Weapon_Effect] = []
 
 	if self.has_component(ZC_Weapon_Ranged):
@@ -17,6 +20,26 @@ func apply_effects(effect_type: ZR_Weapon_Effect.EffectType) -> Array[Node3D]:
 		var melee := self.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
 		effects.append_array(melee.effects)
 
+	return effects
+
+
+func on_ready() -> void:
+	var cached := 0
+	var effects := _get_effects()
+	for effect_name in ZR_Weapon_Effect.EffectType:
+		var effect_type := ZR_Weapon_Effect.EffectType[effect_name] as ZR_Weapon_Effect.EffectType
+		var cache_for_type := _effects_cache.get(effect_type, []) as Array
+		for effect in effects:
+			if effect.effect_type == effect_type:
+				cache_for_type.append(effect)
+				cached += 1
+		
+		if cache_for_type.size() > 0:
+			_effects_cache[effect_type] = cache_for_type
+
+	print("Cached %d effects for entity %s" % [cached, self.id])
+
+func apply_effects(effect_type: ZR_Weapon_Effect.EffectType) -> Array[Node3D]:
 	var use_projectile = false
 	match effect_type:
 		ZR_Weapon_Effect.EffectType.RANGED_FIRE:
@@ -26,8 +49,9 @@ func apply_effects(effect_type: ZR_Weapon_Effect.EffectType) -> Array[Node3D]:
 		ZR_Weapon_Effect.EffectType.RANGED_RELOAD:
 			use_projectile = physical_mags
 
+	var effects := _effects_cache.get(effect_type, []) as Array
 	var effect_scenes: Array[Node3D] = []
-	for effect in effects:
+	for effect: ZR_Weapon_Effect in effects:
 		if effect.effect_type == effect_type:
 			var effect_marker := self.get_node(effect.marker)
 
