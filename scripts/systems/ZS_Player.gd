@@ -283,6 +283,7 @@ func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
 	tween.tween_property(swing_node, "progress_ratio", 1.0, c_weapon.swing_time)
 	tween.tween_property(swing_node, "progress_ratio", 0.0, c_weapon.cooldown_time)
 	tween.tween_callback(_set_damage_areas.bind(weapon, c_weapon, false))
+	tween.tween_callback(_update_ammo_label.bind(entity))
 
 
 func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
