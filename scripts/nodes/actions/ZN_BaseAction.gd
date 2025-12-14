@@ -1,11 +1,10 @@
-@abstract
 @icon("res://textures/icons/obj_action.svg")
 extends Node
 class_name ZN_BaseAction
 
 enum Tristate { NO_CHANGE = -1, SET_FALSE = 0, SET_TRUE = 1 }
 
-@abstract func run(actor: Entity, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void
+@export var entity_only: bool = true
 
 var _conditions: Array[ZN_BaseCondition] = []
 
@@ -15,13 +14,28 @@ func _ready() -> void:
 			_conditions.append(child)
 
 
-func _run(actor: Entity, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(_actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+	pass
+
+
+func run_physics(_body: PhysicsBody3D, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+	pass
+
+
+func _run(actor: Node, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
 	if test(actor, area, event):
-		run(actor, area, event)
+		if actor is Entity:
+			run_entity(actor, area, event)
+		elif actor is PhysicsBody3D:
+			run_physics(actor, area, event)
 
 
 ## Check condition children before running
-func test(actor: Entity, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> bool:
+func test(actor: Node, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> bool:
+	if entity_only:
+		if actor is not Entity:
+			return false
+
 	for condition in _conditions:
 		if not condition.test(actor, area, event):
 			return false

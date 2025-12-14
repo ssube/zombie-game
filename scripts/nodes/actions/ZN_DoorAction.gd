@@ -6,7 +6,7 @@ class_name ZN_DoorAction
 @export var unlock: Tristate = Tristate.NO_CHANGE
 @export var open: Tristate = Tristate.NO_CHANGE
 
-func run(_actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(_actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
 	var door := target.get_component(ZC_Door) as ZC_Door
 	if door == null:
 		printerr("Target is not a door: ", target)

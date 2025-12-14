@@ -19,7 +19,7 @@ enum SpawnLocation {
 @export var random_radius: float = 0.0
 
 
-func run(actor: Entity, area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(actor: Entity, area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
 	match spawn_mode:
 		SpawnMode.ALL:
 			_spawn_all(actor, area)

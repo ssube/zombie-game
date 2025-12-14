@@ -23,7 +23,7 @@ func _remove_effect(body: Node) -> void:
 		# body.remove_relationship(RelationshipUtils.make_effect(body_effect))
 
 
-func run(actor: Entity, _area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(actor: Entity, _area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
 	match event:
 		ZN_TriggerArea3D.AreaEvent.BODY_ENTER:
 			_apply_effect(actor)

@@ -55,11 +55,13 @@ script = ExtResource("5_uou4s")
 script = ExtResource("6_v5jnh")
 impulse = true
 impulse_multiplier = 0.2
+entity_only = false
 
 [node name="ZN_HealthAction" type="Node" parent="Area3D"]
 script = ExtResource("7_1j86e")
 health_mode = 0
 health_amount = 25
+entity_only = null
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_fds2i")

@@ -5,7 +5,7 @@ class_name ZN_AreaAction
 @export var active: ZN_BaseAction.Tristate = ZN_BaseAction.Tristate.NO_CHANGE
 
 
-func run(_actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(_actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
 	match active:
 		ZN_BaseAction.Tristate.NO_CHANGE:
 			pass

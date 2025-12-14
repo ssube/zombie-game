@@ -35,9 +35,6 @@ var _body_timers: Dictionary[Node, float] = {}
 
 
 func _ready() -> void:
-	if "Bat" in str(get_path()).to_lower():
-		breakpoint
-
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
@@ -66,12 +63,6 @@ func _on_body_entered(body: Node) -> void:
 	if not active:
 		return
 
-	if not body is Entity:
-		return
-
-	if "Bat" in str(get_path()).to_lower():
-		breakpoint
-
 	_body_timers[body] = 0
 
 	if trigger_on_enter:
@@ -80,9 +71,6 @@ func _on_body_entered(body: Node) -> void:
 
 func _on_body_exited(body: Node) -> void:
 	if not active:
-		return
-
-	if not body is Entity:
 		return
 
 	_body_timers.erase(body)
@@ -95,13 +83,10 @@ func _on_body_timer(body: Node) -> void:
 	if not active:
 		return
 
-	if not body is Entity:
-		return
-
 	if trigger_on_timer:
 		apply_actions(body, self, AreaEvent.BODY_INTERVAL)
 
 
-func apply_actions(body: Entity, area: ZN_TriggerArea3D, event: AreaEvent) -> void:
+func apply_actions(body: Node, area: ZN_TriggerArea3D, event: AreaEvent) -> void:
 	for action in _actions:
 		action._run(body, area, event)

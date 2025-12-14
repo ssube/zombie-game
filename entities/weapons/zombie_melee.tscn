@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4406rbr42a1e"]
+[gd_scene load_steps=13 format=3 uid="uid://b4406rbr42a1e"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_n0ht5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_3pflf"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="5_4d0u4"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="5_82ul1"]
 [ext_resource type="Script" uid="uid://dlb4vkkjdb658" path="res://scripts/nodes/actions/ZN_HealthAction.gd" id="6_4d0u4"]
+[ext_resource type="Script" uid="uid://crylbd231pgne" path="res://scripts/nodes/conditions/ZN_FactionCondition.gd" id="7_3voqo"]
 
 [sub_resource type="Resource" id="Resource_lu3nb"]
 script = ExtResource("3_82ul1")
@@ -41,8 +42,6 @@ curve = SubResource("Curve3D_4d0u4")
 collision_layer = 16
 collision_mask = 27
 script = ExtResource("5_4d0u4")
-trigger_on_exit = false
-trigger_on_interval = false
 trigger_on_timer = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
@@ -53,7 +52,13 @@ shape = SubResource("SphereShape3D_3voqo")
 script = ExtResource("6_4d0u4")
 health_mode = 0
 
+[node name="ZN_FactionCondition" type="Node" parent="Path3D/PathFollow3D/Area3D/ZN_HealthAction"]
+script = ExtResource("7_3voqo")
+apply_to_factions = Array[String](["players"])
+metadata/_custom_type_script = "uid://crylbd231pgne"
+
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Path3D/PathFollow3D"]
+visible = false
 radius = 0.25
 radial_segments = 8
 rings = 4

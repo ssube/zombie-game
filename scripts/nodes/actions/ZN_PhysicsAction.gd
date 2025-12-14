@@ -22,7 +22,13 @@ func _get_position(body: Node3D, area: ZN_TriggerArea3D) -> Vector3:
 	return Vector3.ZERO
 
 
-func run(body: Node, area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(actor: Entity, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
+	var body := actor.get_node(".")
+	if body is PhysicsBody3D:
+		run_physics(body, area, event)
+
+
+func run_physics(body: PhysicsBody3D, area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
 	if not impulse:
 		return
 

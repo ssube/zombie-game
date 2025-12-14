@@ -37,7 +37,7 @@ func _get_target(actor: Entity) -> Entity:
 	return null
 
 
-func run(actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
 	var target_entity := _get_target(actor)
 	if target_entity == null:
 		return

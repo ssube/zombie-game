@@ -10,7 +10,7 @@ enum ActionMode {
 @export var components: Array[Component] = []
 @export var mode: ActionMode = ActionMode.ADD
 
-func run(actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
 	match mode:
 		ActionMode.ADD:
 			actor.add_components(components)
