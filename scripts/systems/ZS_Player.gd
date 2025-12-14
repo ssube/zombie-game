@@ -389,7 +389,8 @@ func use_ammo(entity: Entity, player_entity: Entity) -> void:
 		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
 		_add_sound(sound, player_entity)
 
-	remove_entity(entity)
+	if EntityUtils.is_ammo_empty(entity_ammo):
+		remove_entity(entity)
 
 
 func use_armor(entity: Entity, player_entity: Entity) -> void:

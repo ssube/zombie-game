@@ -81,6 +81,14 @@ static func is_broken(entity: Node) -> bool:
 	return false
 
 
+static func is_ammo_empty(ammo: ZC_Ammo) -> bool:
+	for ammo_type in ammo.ammo_count:
+		if ammo.ammo_count.get(ammo_type, 0) > 0:
+			return false
+
+	return true
+
+
 static func is_player(entity: Node) -> bool:
 	if entity is not Entity:
 		return false
