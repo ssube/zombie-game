@@ -61,7 +61,7 @@ ammo_count = Dictionary[String, int]({
 "12gauge": 2
 })
 max_ammo_count = Dictionary[String, int]({
-"12gauge": 100
+"12gauge": 30
 })
 metadata/_custom_type_script = "uid://bsnlq5t650od"
 
