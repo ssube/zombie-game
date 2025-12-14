@@ -1,6 +1,9 @@
 class_name CollisionUtils
 
 
+static var unknown_surface = &"unknown"
+
+
 static func get_collision_shape(raycast: RayCast3D) -> CollisionShape3D:
 	if not raycast.is_colliding():
 		return null
@@ -26,18 +29,32 @@ static func get_shape_body(shape: CollisionShape3D) -> CollisionObject3D:
 
 
 static func _get_surface_meta(node: Node) -> StringName:
-	return node.get_meta("surface_type", "unknown")
+	return node.get_meta("surface_type", "")
+
+
+static func get_body_surface(body: CollisionObject3D) -> StringName:
+	var surface_type := _get_surface_meta(body)
+	if surface_type:
+		return surface_type
+
+	for child in body.get_children():
+		if child is CollisionShape3D:
+			surface_type = _get_surface_meta(child)
+			if surface_type:
+				return surface_type
+
+	return unknown_surface
 
 
 static func get_surface_type(raycast: RayCast3D) -> StringName:
 	var shape := get_collision_shape(raycast)
 	var surface_type := _get_surface_meta(shape)
-	if surface_type != null:
+	if surface_type:
 		return surface_type
 
 	var body := raycast.get_collider()
 	surface_type = _get_surface_meta(body)
-	if surface_type != null:
+	if surface_type:
 		return surface_type
 
-	return &"unknown"
+	return unknown_surface

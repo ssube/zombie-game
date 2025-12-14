@@ -1,6 +1,7 @@
 extends Area3D
 
 @export var active: bool = true
+@export var part_of_entity: Entity = null
 @export var require_line_of_sight: bool = true
 
 @export_group("Regular Damage")
@@ -82,6 +83,14 @@ func apply_effects(body: Node) -> void:
 
 		if apply_fire:
 			fire_damage(body)
+
+	if part_of_entity:
+		var durability := part_of_entity.get_component(ZC_Durability) as ZC_Durability
+		var surface_type := CollisionUtils.get_body_surface(body)
+		if surface_type and durability:
+			var surface_damage := durability.surface_damage.get(surface_type, 0) as int
+			durability.current_durability = maxi(0, durability.current_durability - surface_damage)
+			# TODO: update ammo label
 
 
 func regular_damage(body: Entity) -> void:
