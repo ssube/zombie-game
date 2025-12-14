@@ -1,8 +1,7 @@
-[gd_scene load_steps=45 format=3 uid="uid://ds0q1crcrv862"]
+[gd_scene load_steps=43 format=3 uid="uid://ds0q1crcrv862"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_rffgv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_2yl8o"]
-[ext_resource type="Script" uid="uid://dvvgjajqy6hg3" path="res://scripts/components/characters/ZC_Enemy.gd" id="3_nswy3"]
 [ext_resource type="Script" uid="uid://c7dv7vmk2ynqt" path="res://scripts/components/characters/ZC_Movement.gd" id="4_rcyyt"]
 [ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="5_tseq0"]
 [ext_resource type="PackedScene" uid="uid://d17pdvgowfg7l" path="res://effects/sounds/zombie_hurt.tscn" id="6_8aduj"]
@@ -31,10 +30,6 @@
 [ext_resource type="Script" uid="uid://ccjqwf2jo717o" path="res://scripts/behavior/conditions/utils/ZB_Random.gd" id="24_3lyvt"]
 [ext_resource type="Script" uid="uid://dicdllgowu6ov" path="res://scripts/behavior/conditions/utils/ZB_Throttle.gd" id="24_j7lgi"]
 [ext_resource type="PackedScene" uid="uid://b4406rbr42a1e" path="res://entities/weapons/zombie_melee.tscn" id="27_j7lgi"]
-
-[sub_resource type="Resource" id="Resource_l1o5o"]
-script = ExtResource("3_nswy3")
-metadata/_custom_type_script = "uid://dvvgjajqy6hg3"
 
 [sub_resource type="Resource" id="Resource_kwfyu"]
 script = ExtResource("4_rcyyt")
@@ -79,7 +74,7 @@ metadata/_custom_type_script = "uid://dpu6n5g8bpa3g"
 
 [sub_resource type="Resource" id="Resource_euqm3"]
 script = ExtResource("16_kwfyu")
-faction_name = "zombies"
+faction_name = "enemy_zombies"
 metadata/_custom_type_script = "uid://b7x5tu22015cx"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwqt7"]
@@ -101,7 +96,7 @@ script = ExtResource("1_rffgv")
 events = NodePath("Behavior/ZombieBehavior/Events")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
-component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_l1o5o"), SubResource("Resource_kwfyu"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj"), SubResource("Resource_sn1gh"), SubResource("Resource_euqm3")])
+component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_kwfyu"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj"), SubResource("Resource_sn1gh"), SubResource("Resource_euqm3")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 material = ExtResource("8_tfdn2")

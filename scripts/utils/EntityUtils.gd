@@ -67,7 +67,15 @@ static func get_players() -> Array[Entity]:
 
 
 static func get_enemies() -> Array[Entity]:
-	return ECS.world.query.with_all([ZC_Enemy]).execute()
+	var characters := ECS.world.query.with_all([ZC_Faction]).execute() as Array[Entity]
+	var enemies: Array[Entity] = []
+
+	for character in characters:
+		var faction := character.get_component(ZC_Faction) as ZC_Faction
+		if faction.faction_name.begins_with("enemy_"):
+			enemies.append(character)
+
+	return enemies
 
 
 static func is_broken(entity: Node) -> bool:
@@ -93,7 +101,8 @@ static func is_enemy(entity: Node) -> bool:
 	if entity is not Entity:
 		return false
 
-	return entity.has_component(ZC_Enemy)
+	var faction := entity.get_component(ZC_Faction) as ZC_Faction
+	return faction.faction_name.begins_with("enemy_")
 
 
 static func is_player(entity: Node) -> bool:
@@ -101,13 +110,6 @@ static func is_player(entity: Node) -> bool:
 		return false
 
 	return entity.has_component(ZC_Player)
-
-
-static func is_zombie(entity: Node) -> bool:
-	if entity is not Entity:
-		return false
-
-	return entity.has_component(ZC_Enemy)
 
 
 static func is_explosive(entity: Node) -> bool:
