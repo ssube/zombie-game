@@ -1,7 +1,8 @@
-[gd_scene load_steps=118 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=119 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://c0x5fgy8sbya0" path="res://scripts/nodes/ZN_EffectArea3D.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
+[ext_resource type="PackedScene" uid="uid://cdik1mgum870e" path="res://entities/debug/ammo_station.tscn" id="3_w633q"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://dyenf2chlolgq" path="res://effects/sounds/key_pickup.tscn" id="6_jawnq"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
@@ -562,6 +563,9 @@ shape = SubResource("SphereShape3D_ukt1r")
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Areas/WaterArea"]
 radius = 2.0
 material = SubResource("StandardMaterial3D_1hnym")
+
+[node name="AmmoStation" parent="Areas" instance=ExtResource("3_w633q")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 12.9767065, 0.574916, -11.924664)
 
 [node name="Entities" type="Node" parent="."]
 unique_name_in_owner = true
