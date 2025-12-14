@@ -24,6 +24,10 @@ ObjectiveManager="*res://scripts/singletons/ObjectiveManager.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 CheatManager="*res://scripts/singletons/CheatManager.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+
 [debug_draw_3d]
 
 settings/addon_root_folder="res://addons/debug_draw_3d"
