@@ -19,7 +19,7 @@ enum SpawnLocation {
 @export var random_radius: float = 0.0
 
 
-func run_entity(actor: Entity, area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_node(actor: Node, area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
 	match spawn_mode:
 		SpawnMode.ALL:
 			_spawn_all(actor, area)
@@ -27,7 +27,7 @@ func run_entity(actor: Entity, area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.
 			_spawn_random(actor, area)
 
 
-func _get_parent(actor: Entity, area: ZN_TriggerArea3D) -> Node:
+func _get_parent(actor: Node, area: ZN_TriggerArea3D) -> Node:
 	match spawn_at:
 		SpawnLocation.ACTOR:
 			return actor
@@ -47,7 +47,7 @@ func _random_offset(scene: Node) -> void:
 	scene.global_position += offset
 
 
-func _spawn_all(actor: Entity, area: ZN_TriggerArea3D) -> void:
+func _spawn_all(actor: Node, area: ZN_TriggerArea3D) -> void:
 	var parent := _get_parent(actor, area)
 	for scene in spawn_scenes:
 		var instance := scene.instantiate()
@@ -55,7 +55,7 @@ func _spawn_all(actor: Entity, area: ZN_TriggerArea3D) -> void:
 		_random_offset(instance)
 
 
-func _spawn_random(actor: Entity, area: ZN_TriggerArea3D) -> void:
+func _spawn_random(actor: Node, area: ZN_TriggerArea3D) -> void:
 	var parent := _get_parent(actor, area)
 	var index := randi() % spawn_scenes.size()
 	var scene := spawn_scenes[index]

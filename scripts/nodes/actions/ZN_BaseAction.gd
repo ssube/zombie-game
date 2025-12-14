@@ -14,12 +14,16 @@ func _ready() -> void:
 			_conditions.append(child)
 
 
-func run_entity(_actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_node(_node: Node, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
 	pass
 
 
-func run_physics(_body: PhysicsBody3D, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
-	pass
+func run_entity(actor: Entity, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
+	run_node(actor, area, event)
+
+
+func run_physics(body: PhysicsBody3D, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
+	run_node(body, area, event)
 
 
 func _run(actor: Node, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
@@ -28,6 +32,8 @@ func _run(actor: Node, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent
 			run_entity(actor, area, event)
 		elif actor is PhysicsBody3D:
 			run_physics(actor, area, event)
+		else:
+			run_node(actor, area, event)
 
 
 ## Check condition children before running

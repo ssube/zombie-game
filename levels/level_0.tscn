@@ -1,10 +1,11 @@
-[gd_scene load_steps=120 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=121 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="1_q6gno"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="2_lf4l6"]
 [ext_resource type="PackedScene" uid="uid://cdik1mgum870e" path="res://entities/debug/ammo_station.tscn" id="3_w633q"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
+[ext_resource type="PackedScene" uid="uid://lbpyhtg453yg" path="res://entities/debug/zombie_spawn.tscn" id="5_lf4l6"]
 [ext_resource type="PackedScene" uid="uid://dyenf2chlolgq" path="res://effects/sounds/key_pickup.tscn" id="6_jawnq"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
 [ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="7_uuq13"]
@@ -589,6 +590,9 @@ metadata/_custom_type_script = "uid://dmonxsvpyoytj"
 [node name="AmmoStation" parent="Areas" instance=ExtResource("3_w633q")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 12.9767065, 0.574916, -11.924664)
 
+[node name="ZombieSpawn" parent="Areas" instance=ExtResource("5_lf4l6")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 10.5, 2.75, -7.5)
+
 [node name="Entities" type="Node" parent="."]
 unique_name_in_owner = true
 
@@ -1031,9 +1035,8 @@ title = "Shoot the Zombie"
 optional = true
 metadata/_custom_type_script = "uid://cpxac3i6p71x0"
 
-[node name="RemoveClerk" type="Node" parent="Objectives/KeyObjective/DoorObjective/ZombieObjective" node_paths=PackedStringArray("target")]
+[node name="RemoveClerk" type="Node" parent="Objectives/KeyObjective/DoorObjective/ZombieObjective"]
 script = ExtResource("35_lf4l6")
-target = NodePath("../../../../../Entities/Room3/HotelClerk")
 remove = true
 metadata/_custom_type_script = "uid://dlpeis5tgmelp"
 
