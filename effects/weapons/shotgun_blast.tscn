@@ -57,6 +57,8 @@ subtitle_radius = 10.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="ZN_TriggerTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
 script = ExtResource("3_bd4u4")
 metadata/_custom_type_script = "uid://b3w64ibj5uxv4"
 
@@ -64,3 +66,4 @@ metadata/_custom_type_script = "uid://b3w64ibj5uxv4"
 script = ExtResource("4_dxxuk")
 node = NodePath("../..")
 remove = true
+entity_only = false
