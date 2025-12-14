@@ -563,9 +563,11 @@ component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_nq5s6
 
 [node name="WeaponBat" parent="Entities/Room1" instance=ExtResource("15_owf05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.584343, 1.1126956, -2)
+id = "Level0_ZE_Weapon_1765677280_38874"
 
 [node name="WeaponShotgun" parent="Entities/Room1" instance=ExtResource("16_uuq13")]
 transform = Transform3D(-4.371139e-08, 0, -1, -1, -4.371139e-08, 4.371139e-08, -4.371139e-08, 1, 1.9106855e-15, 0.009268761, 0.38109618, 3.2732358)
+id = "Level0_ZE_Weapon_1765677275_6355"
 
 [node name="Room2" type="Node3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 4)
