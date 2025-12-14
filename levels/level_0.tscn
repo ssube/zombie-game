@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=118 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://c0x5fgy8sbya0" path="res://scripts/nodes/ZN_EffectArea3D.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
@@ -49,7 +49,7 @@ transparency = 1
 albedo_color = Color(1, 0.57, 0.57, 0.2509804)
 disable_receive_shadows = true
 
-[sub_resource type="Resource" id="Resource_ijfse"]
+[sub_resource type="Resource" id="Resource_1hnym"]
 script = ExtResource("2_ijfse")
 effect = 5
 duration = inf
@@ -59,6 +59,18 @@ metadata/_custom_type_script = "uid://ewo3m4f384i0"
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o4imw"]
 transparency = 1
 albedo_color = Color(0.3969, 0.81, 0.500175, 0.2509804)
+disable_receive_shadows = true
+
+[sub_resource type="Resource" id="Resource_ijfse"]
+script = ExtResource("2_ijfse")
+effect = 3
+duration = inf
+strength = 0.5
+metadata/_custom_type_script = "uid://ewo3m4f384i0"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1hnym"]
+transparency = 1
+albedo_color = Color(0.3969, 0.45197996, 0.81, 0.2509804)
 disable_receive_shadows = true
 
 [sub_resource type="Resource" id="Resource_nq5s6"]
@@ -512,31 +524,44 @@ filter_ledge_spans = true
 
 [node name="Areas" type="Node" parent="."]
 
-[node name="Area3D" type="Area3D" parent="Areas"]
+[node name="FireArea" type="Area3D" parent="Areas"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.5, -9.25)
 collision_mask = 24
 script = ExtResource("1_66alr")
 effect = SubResource("Resource_r7enh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/FireArea"]
 shape = SubResource("SphereShape3D_ukt1r")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Areas/Area3D"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Areas/FireArea"]
 radius = 2.0
 material = SubResource("StandardMaterial3D_1wgrf")
 
-[node name="Area3D2" type="Area3D" parent="Areas"]
+[node name="AcidArea" type="Area3D" parent="Areas"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.5, -12.75)
+collision_mask = 24
+script = ExtResource("1_66alr")
+effect = SubResource("Resource_1hnym")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/AcidArea"]
+shape = SubResource("SphereShape3D_ukt1r")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Areas/AcidArea"]
+radius = 2.0
+material = SubResource("StandardMaterial3D_o4imw")
+
+[node name="WaterArea" type="Area3D" parent="Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.5, -12.75)
 collision_mask = 24
 script = ExtResource("1_66alr")
 effect = SubResource("Resource_ijfse")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/Area3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/WaterArea"]
 shape = SubResource("SphereShape3D_ukt1r")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Areas/Area3D2"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Areas/WaterArea"]
 radius = 2.0
-material = SubResource("StandardMaterial3D_o4imw")
+material = SubResource("StandardMaterial3D_1hnym")
 
 [node name="Entities" type="Node" parent="."]
 unique_name_in_owner = true
