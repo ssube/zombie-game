@@ -1,9 +1,10 @@
-[gd_scene load_steps=403 format=4 uid="uid://bv4ooq3kct6wv"]
+[gd_scene load_steps=404 format=4 uid="uid://bv4ooq3kct6wv"]
 
 [ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/props/objective.tscn" id="1_5waeb"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_7w2j4"]
-[ext_resource type="Script" uid="uid://c0x5fgy8sbya0" path="res://scripts/nodes/ZN_EffectArea3D.gd" id="2_lpxg8"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="2_l234y"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="3_l234y"]
+[ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="3_lgb38"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_s4smc"]
 [ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_key.tres" id="4_hxnah"]
 [ext_resource type="Script" uid="uid://bdl3b6gan30l0" path="res://scripts/components/status/ZC_Objective.gd" id="5_72jfg"]
@@ -1543,13 +1544,19 @@ shape = SubResource("BoxShape3D_2038p")
 
 [node name="PoolEffect" type="Area3D" parent="Areas"]
 collision_mask = 24
-script = ExtResource("2_lpxg8")
-effect = SubResource("Resource_lgb38")
-metadata/_custom_type_script = "uid://bhgbf8ykucy2n"
+script = ExtResource("2_l234y")
+trigger_on_exit = true
+trigger_on_timer = false
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/PoolEffect"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.75, -1.5, 51.5)
 shape = SubResource("BoxShape3D_2038p")
+
+[node name="ZN_ScreenEffectAction" type="Node" parent="Areas/PoolEffect"]
+script = ExtResource("3_lgb38")
+effect = SubResource("Resource_lgb38")
+metadata/_custom_type_script = "uid://dmonxsvpyoytj"
 
 [node name="Entities" type="Node" parent="."]
 
