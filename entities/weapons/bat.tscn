@@ -35,7 +35,8 @@ surface_damage = Dictionary[String, int]({
 "brick": 20,
 "metal": 15,
 "stone": 25,
-"wood": 5
+"wood": 5,
+"zombie": 5
 })
 metadata/_custom_type_script = "uid://dnmn2xmqdrr00"
 
