@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://tna8f01ql67u"]
+[gd_scene load_steps=22 format=4 uid="uid://tna8f01ql67u"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aigh8"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_dy0dc"]
@@ -7,9 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://dy4nxp8gacdao" path="res://effects/sounds/bat_equip.tscn" id="5_55xri"]
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="5_fnw7o"]
 [ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="5_xpimh"]
-[ext_resource type="Script" uid="uid://b8uyvu6k51kor" path="res://scripts/events/EV_DamageOnEnter.gd" id="6_fnw7o"]
 [ext_resource type="Texture2D" uid="uid://dpc8jknfhigal" path="res://assets/ZombieApocalypsePack/Bat/bat_texture.png" id="6_jaqrl"]
 [ext_resource type="Script" uid="uid://dnmn2xmqdrr00" path="res://scripts/components/weapons/ZC_Durability.gd" id="8_3gqkk"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="10_hgjmx"]
+[ext_resource type="Script" uid="uid://u512rl8uacud" path="res://scripts/nodes/actions/ZN_DurabilityAction.gd" id="10_hvjee"]
+[ext_resource type="Script" uid="uid://dlb4vkkjdb658" path="res://scripts/nodes/actions/ZN_HealthAction.gd" id="11_hgjmx"]
+[ext_resource type="Script" uid="uid://crylbd231pgne" path="res://scripts/nodes/conditions/ZN_FactionCondition.gd" id="12_nl1ig"]
 
 [sub_resource type="Resource" id="Resource_dy0dc"]
 script = ExtResource("4_ee0de")
@@ -109,17 +112,37 @@ transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1
 mesh = SubResource("ArrayMesh_j1wg2")
 skeleton = NodePath("")
 
-[node name="Area3D" type="Area3D" parent="Node3D" node_paths=PackedStringArray("part_of_entity")]
+[node name="Area3D" type="Area3D" parent="Node3D"]
 transform = Transform3D(1, -5.9604645e-08, -2.9802322e-08, -2.9802322e-08, 0.99999994, -4.4703484e-08, 0, 0, 1, 0, 0, 0)
 collision_layer = 4
 collision_mask = 19
-script = ExtResource("6_fnw7o")
-part_of_entity = NodePath("../..")
-damage_players = false
+script = ExtResource("10_hgjmx")
+trigger_on_timer = false
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Area3D"]
 transform = Transform3D(0.9999856, 2.9802322e-07, -2.9802322e-08, -6.2584877e-07, 0.9999917, -1.0430813e-07, 1.0430813e-07, -7.003546e-07, 0.9999913, 0, 0.03, 0)
 shape = SubResource("CapsuleShape3D_r1fv1")
+
+[node name="ZN_DurabilityAction" type="Node" parent="Node3D/Area3D" node_paths=PackedStringArray("entity")]
+script = ExtResource("10_hvjee")
+default_amount = 0
+surface_amounts = Dictionary[String, int]({
+"metal": 10,
+"stone": 25,
+"wood": 5
+})
+entity = NodePath("../../..")
+
+[node name="ZN_HealthAction" type="Node" parent="Node3D/Area3D"]
+script = ExtResource("11_hgjmx")
+health_mode = 0
+metadata/_custom_type_script = "uid://dlb4vkkjdb658"
+
+[node name="ZN_FactionCondition" type="Node" parent="Node3D/Area3D/ZN_HealthAction"]
+script = ExtResource("12_nl1ig")
+apply_to_factions = Array[int]([1])
+metadata/_custom_type_script = "uid://crylbd231pgne"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7643113, 0.5640393, 0.31251454, 0, 0.48464668, -0.87470967, -0.6448176, 0.6685637, 0.37042788, 0.7398019, -0.59114224, -0.7246001)

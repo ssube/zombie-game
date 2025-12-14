@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://2b0anfdfvkft" path="res://scripts/events/EV_RemoveAfterTimer.gd" id="1_ikohy"]
 [ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/events/EV_EmitOnReady.gd" id="1_ma1qw"]
 [ext_resource type="QuadMesh" uid="uid://cltad2jeupalx" path="res://effects/fire_particle.tres" id="2_n1k4f"]
-[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="4_uou4s"]
+[ext_resource type="Script" uid="uid://ccd48503b4mr6" path="res://scripts/nodes/ZN_RaycastArea3D.gd" id="4_uou4s"]
 [ext_resource type="AudioStream" uid="uid://cedq4twkuc4vs" path="res://sounds/Sound Effects/Explosions/explosion_close_short_ufx_3.ogg" id="5_fds2i"]
 [ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="5_uou4s"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="6_nyi6q"]
@@ -37,9 +37,7 @@ script = ExtResource("1_ma1qw")
 collision_layer = 2
 collision_mask = 30
 script = ExtResource("4_uou4s")
-trigger_on_exit = false
-trigger_on_interval = false
-metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+trigger_on_timer = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_ma1qw")

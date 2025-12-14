@@ -9,18 +9,18 @@ enum Factions {
 	SURVIVOR = 4,
 }
 
-@export_flags("Enemy:1", "Player:2", "Survivor:4") var apply_to_factions: Factions = Factions.NONE
+@export_flags("Enemy:1", "Player:2", "Survivor:4") var apply_to_factions: Array[int] = []
 
 func test(actor: Entity, _area, _event) -> bool:
-	if apply_to_factions & Factions.ENEMY:
+	if Factions.ENEMY in apply_to_factions:
 		if EntityUtils.is_enemy(actor):
 			return true
 
-	if apply_to_factions & Factions.PLAYER:
+	if Factions.PLAYER in apply_to_factions:
 		if EntityUtils.is_player(actor):
 			return true
 
-	# TODO: implement
-	# if apply_to_factions & Factions.SURVIVOR:
+	if Factions.SURVIVOR in apply_to_factions:
+		assert(false, "TODO: implement survivor faction!")
 
 	return false

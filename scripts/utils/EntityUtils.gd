@@ -89,6 +89,13 @@ static func is_ammo_empty(ammo: ZC_Ammo) -> bool:
 	return true
 
 
+static func is_enemy(entity: Node) -> bool:
+	if entity is not Entity:
+		return false
+
+	return entity.has_component(ZC_Enemy)
+
+
 static func is_player(entity: Node) -> bool:
 	if entity is not Entity:
 		return false

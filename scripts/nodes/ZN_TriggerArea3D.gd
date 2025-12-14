@@ -29,13 +29,21 @@ enum AreaEvent {
 @export var trigger_on_timer: bool = true
 
 
-var area_timer: float = 0.0
-var body_timers: Dictionary[Node, float] = {}
+var _actions: Array[ZN_BaseAction] = []
+var _area_timer: float = 0.0
+var _body_timers: Dictionary[Node, float] = {}
 
 
 func _ready() -> void:
+	if "Bat" in str(get_path()).to_lower():
+		breakpoint
+
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+
+	for child in self.get_children():
+		if child is ZN_BaseAction:
+			_actions.append(child)
 
 
 func _process(delta: float) -> void:
@@ -43,14 +51,14 @@ func _process(delta: float) -> void:
 		return
 
 	if trigger_on_interval:
-		area_timer += delta
-		if area_timer > area_interval:
-			area_timer = 0.0
+		_area_timer += delta
+		if _area_timer > area_interval:
+			_area_timer = 0.0
 			apply_actions(null, self, AreaEvent.AREA_INTERVAL)
 
-	for collider in body_timers:
-		body_timers[collider] += delta
-		if body_timers[collider] > body_interval:
+	for collider in _body_timers:
+		_body_timers[collider] += delta
+		if _body_timers[collider] > body_interval:
 			_on_body_timer(collider)
 
 
@@ -61,7 +69,10 @@ func _on_body_entered(body: Node) -> void:
 	if not body is Entity:
 		return
 
-	body_timers[body] = 0
+	if "Bat" in str(get_path()).to_lower():
+		breakpoint
+
+	_body_timers[body] = 0
 
 	if trigger_on_enter:
 		apply_actions(body, self, AreaEvent.BODY_ENTER)
@@ -74,7 +85,7 @@ func _on_body_exited(body: Node) -> void:
 	if not body is Entity:
 		return
 
-	body_timers.erase(body)
+	_body_timers.erase(body)
 
 	if trigger_on_exit:
 		apply_actions(body, self, AreaEvent.BODY_EXIT)
@@ -92,7 +103,5 @@ func _on_body_timer(body: Node) -> void:
 
 
 func apply_actions(body: Entity, area: ZN_TriggerArea3D, event: AreaEvent) -> void:
-	var children := self.get_children()
-	for child in children:
-		if child is ZN_BaseAction:
-			child._run(body, area, event)
+	for action in _actions:
+		action._run(body, area, event)

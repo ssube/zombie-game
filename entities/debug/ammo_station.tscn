@@ -10,6 +10,7 @@
 
 [node name="ZN_TriggerArea3D" type="Area3D" parent="."]
 script = ExtResource("1_0vmuv")
+area_interval = 15.0
 trigger_on_enter = false
 trigger_on_interval = true
 trigger_on_timer = false
@@ -22,10 +23,11 @@ shape = SubResource("BoxShape3D_36awv")
 script = ExtResource("2_fis0n")
 spawn_scenes = Array[PackedScene]([ExtResource("3_8n7nj")])
 spawn_mode = 0
-spawn_marker = NodePath("../../Marker3D")
+spawn_marker = NodePath("../../SpawnMarker3D")
+spawn_at = 2
 random_radius = 0.25
 
-[node name="Marker3D" type="Marker3D" parent="."]
+[node name="SpawnMarker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
