@@ -24,10 +24,8 @@ func run(actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEv
 	match health_mode:
 		HealthMode.DAMAGE:
 			actor.add_relationship(RelationshipUtils.make_damage(health_amount))
-			# actor_health.current_health -= health_amount
 		HealthMode.HEAL:
 			actor.add_relationship(RelationshipUtils.make_damage(-health_amount))
-			# actor_health.current_health += health_amount
 		HealthMode.MAX:
 			actor_health.current_health = maxi(actor_health.current_health, health_amount)
 		HealthMode.SET:

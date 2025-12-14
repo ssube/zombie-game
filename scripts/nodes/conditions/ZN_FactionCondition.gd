@@ -1,26 +1,13 @@
 extends ZN_BaseCondition
 class_name ZN_FactionCondition
 
-# TODO: turn into a component later
-enum Factions {
-	NONE = 0,
-	ENEMY = 1,
-	PLAYER = 2,
-	SURVIVOR = 4,
-}
+static var world_faction := &"world"
 
-@export_flags("Enemy:1", "Player:2", "Survivor:4") var apply_to_factions: Array[int] = []
+@export var apply_to_factions: Array[String] = []
 
 func test(actor: Entity, _area, _event) -> bool:
-	if Factions.ENEMY in apply_to_factions:
-		if EntityUtils.is_enemy(actor):
-			return true
-
-	if Factions.PLAYER in apply_to_factions:
-		if EntityUtils.is_player(actor):
-			return true
-
-	if Factions.SURVIVOR in apply_to_factions:
-		assert(false, "TODO: implement survivor faction!")
-
-	return false
+	var actor_faction := actor.get_component(ZC_Faction) as ZC_Faction
+	if actor_faction == null:
+		return world_faction in apply_to_factions
+		
+	return actor_faction.faction_name in apply_to_factions

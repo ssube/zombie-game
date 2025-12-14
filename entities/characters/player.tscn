@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://busds31ha5tx1"]
+[gd_scene load_steps=28 format=3 uid="uid://busds31ha5tx1"]
 
 [ext_resource type="Script" uid="uid://dyudolkkkb4ut" path="res://scripts/entities/characters/ZE_Player.gd" id="1_ks8m5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_l1ths"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://dpu6n5g8bpa3g" path="res://scripts/components/characters/ZC_Footstep.gd" id="13_jq748"]
 [ext_resource type="PackedScene" uid="uid://bwou77c4uqtt" path="res://effects/sounds/footstep_wood.tscn" id="14_gmhi3"]
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="14_jq748"]
+[ext_resource type="Script" uid="uid://b7x5tu22015cx" path="res://scripts/components/characters/ZC_Faction.gd" id="15_gmhi3"]
 
 [sub_resource type="Resource" id="Resource_l1ths"]
 script = ExtResource("5_a1f57")
@@ -65,6 +66,11 @@ max_ammo_count = Dictionary[String, int]({
 })
 metadata/_custom_type_script = "uid://bsnlq5t650od"
 
+[sub_resource type="Resource" id="Resource_g5okp"]
+script = ExtResource("15_gmhi3")
+faction_name = "players"
+metadata/_custom_type_script = "uid://b7x5tu22015cx"
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_idcse"]
 height = 2.25
 
@@ -74,7 +80,7 @@ collision_mask = 27
 script = ExtResource("1_ks8m5")
 hands_node = NodePath("Head/Hands")
 inventory_node = NodePath("Inventory")
-component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_l1ths"), SubResource("Resource_25mxy"), SubResource("Resource_dv4ir"), SubResource("Resource_idcse"), SubResource("Resource_p37y2"), SubResource("Resource_b4uku"), SubResource("Resource_8ug6l"), SubResource("Resource_gmhi3")])
+component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_l1ths"), SubResource("Resource_25mxy"), SubResource("Resource_dv4ir"), SubResource("Resource_idcse"), SubResource("Resource_p37y2"), SubResource("Resource_b4uku"), SubResource("Resource_8ug6l"), SubResource("Resource_gmhi3"), SubResource("Resource_g5okp")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_idcse")
