@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/props/objective.tscn" id="1_5waeb"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_7w2j4"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="2_l234y"]
+[ext_resource type="Script" uid="uid://hu6tpnmjxa07" path="res://scripts/nodes/actions/ZN_SpeedModifierAction.gd" id="2_lgb38"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="3_l234y"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="3_lgb38"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_s4smc"]
@@ -13,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door.tscn" id="7_s4smc"]
 [ext_resource type="PackedScene" uid="uid://bq6a52tvj60bq" path="res://entities/characters/hotel_clerk.tscn" id="8_72jfg"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="8_lpxg8"]
-[ext_resource type="Script" uid="uid://bhgbf8ykucy2n" path="res://scripts/nodes/ZN_SpeedModifierArea3D.gd" id="9_a0yg2"]
 [ext_resource type="Material" uid="uid://q11wc28gwgth" path="res://textures/Color Maps/wood_5.tres" id="10_s4smc"]
 [ext_resource type="Material" uid="uid://b6lsikrvoffh2" path="res://textures/Color Maps/carpet_pt_1_2.tres" id="12_hxnah"]
 [ext_resource type="Material" uid="uid://difbcy7mrrmab" path="res://textures/Color Maps/tiles_floor_pt_3.tres" id="13_72jfg"]
@@ -1535,12 +1535,18 @@ filter_ledge_spans = true
 
 [node name="PoolModifier" type="Area3D" parent="Areas"]
 collision_mask = 24
-script = ExtResource("9_a0yg2")
-metadata/_custom_type_script = "uid://bhgbf8ykucy2n"
+script = ExtResource("2_l234y")
+trigger_on_exit = true
+trigger_on_timer = false
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/PoolModifier"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.75, -1, 51.5)
 shape = SubResource("BoxShape3D_2038p")
+
+[node name="ZN_SpeedModifierAction" type="Node" parent="Areas/PoolModifier"]
+script = ExtResource("2_lgb38")
+speed_multiplier = 0.5
 
 [node name="PoolEffect" type="Area3D" parent="Areas"]
 collision_mask = 24

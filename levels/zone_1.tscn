@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="2_1pddc"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="5_3ioyf"]
+[ext_resource type="Script" uid="uid://hu6tpnmjxa07" path="res://scripts/nodes/actions/ZN_SpeedModifierAction.gd" id="5_3k1mp"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="6_3k1mp"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door.tscn" id="8_4uioy"]
 [ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="8_ebfu5"]
@@ -19,12 +20,11 @@
 [ext_resource type="Material" uid="uid://b6lsikrvoffh2" path="res://textures/Color Maps/carpet_pt_1_2.tres" id="15_i7led"]
 [ext_resource type="Material" uid="uid://q11wc28gwgth" path="res://textures/Color Maps/wood_5.tres" id="16_1u2y2"]
 [ext_resource type="Material" uid="uid://dyp1fuggnjhni" path="res://textures/Color Maps/grass_11.tres" id="16_cem8g"]
-[ext_resource type="Script" uid="uid://bhgbf8ykucy2n" path="res://scripts/nodes/ZN_SpeedModifierArea3D.gd" id="17_32bcm"]
 [ext_resource type="Script" uid="uid://c6dan22mbgmgs" path="res://scripts/nodes/ZN_MapGeometry.gd" id="18_wks3y"]
 [ext_resource type="PackedScene" uid="uid://cf8xh1my8wn0y" path="res://materials/environment_day.tscn" id="22_3ioyf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ebfu5"]
-size = Vector3(12, 1, 58)
+size = Vector3(30, 1, 196)
 
 [sub_resource type="Resource" id="Resource_3ioyf"]
 script = ExtResource("8_wks3y")
@@ -1465,29 +1465,35 @@ transform = Transform3D(-0.9989903, 0, 0.0449271, 0, 1, 0, -0.0449271, 0, -0.998
 
 [node name="Areas" type="Node" parent="."]
 
-[node name="RiverAreaSlow" type="Area3D" parent="Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.46095, 0, 0)
-collision_mask = 24
-script = ExtResource("17_32bcm")
-metadata/_custom_type_script = "uid://bhgbf8ykucy2n"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/RiverAreaSlow"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 7)
-shape = SubResource("BoxShape3D_ebfu5")
-
-[node name="RiverAreaEffect" type="Area3D" parent="Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.461, -1, 0)
+[node name="RiverSlowArea" type="Area3D" parent="Areas"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -23.460976, -1, -84.99998)
 collision_mask = 24
 script = ExtResource("5_3ioyf")
 trigger_on_exit = true
 trigger_on_timer = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/RiverAreaEffect"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 7)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/RiverSlowArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, -39)
 shape = SubResource("BoxShape3D_ebfu5")
 
-[node name="ZN_ScreenEffectAction" type="Node" parent="Areas/RiverAreaEffect"]
+[node name="ZN_SpeedModifierAction" type="Node" parent="Areas/RiverSlowArea"]
+script = ExtResource("5_3k1mp")
+speed_multiplier = 0.5
+
+[node name="RiverEffectArea" type="Area3D" parent="Areas"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -23.460976, -2, -85.00002)
+collision_mask = 24
+script = ExtResource("5_3ioyf")
+trigger_on_exit = true
+trigger_on_timer = false
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/RiverEffectArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -2, 7)
+shape = SubResource("BoxShape3D_ebfu5")
+
+[node name="ZN_ScreenEffectAction" type="Node" parent="Areas/RiverEffectArea"]
 script = ExtResource("6_3k1mp")
 effect = SubResource("Resource_3ioyf")
 metadata/_custom_type_script = "uid://dmonxsvpyoytj"
