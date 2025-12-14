@@ -1,13 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnaekqfrdu382"]
+[gd_scene load_steps=6 format=3 uid="uid://bnaekqfrdu382"]
 
 [ext_resource type="QuadMesh" uid="uid://cltad2jeupalx" path="res://effects/fire_particle.tres" id="1_rbltl"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="1_rrymp"]
-[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_vbrxv"]
-[ext_resource type="Script" uid="uid://ck5xciqm7c6lo" path="res://scripts/components/effects/ZC_Effect_Burning.gd" id="3_hnali"]
-
-[sub_resource type="Resource" id="Resource_t2g83"]
-script = ExtResource("3_hnali")
-metadata/_custom_type_script = "uid://ck5xciqm7c6lo"
+[ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="3_80lxs"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aewav"]
 emission_shape = 3
@@ -20,7 +15,6 @@ size = Vector3(5, 2, 5)
 [node name="FireArea" type="Area3D"]
 collision_mask = 30
 script = ExtResource("1_rrymp")
-components = Array[ExtResource("2_vbrxv")]([SubResource("Resource_t2g83")])
 trigger_on_exit = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
@@ -37,3 +31,6 @@ light_size = 1.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_aewav")
+
+[node name="ZN_FireAction" type="Node" parent="."]
+script = ExtResource("3_80lxs")

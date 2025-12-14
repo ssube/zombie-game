@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqfrsv8nlncwj"]
+[gd_scene load_steps=12 format=3 uid="uid://dqfrsv8nlncwj"]
 
 [ext_resource type="Script" uid="uid://2b0anfdfvkft" path="res://scripts/events/EV_RemoveAfterTimer.gd" id="1_ikohy"]
 [ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/events/EV_EmitOnReady.gd" id="1_ma1qw"]
 [ext_resource type="QuadMesh" uid="uid://cltad2jeupalx" path="res://effects/fire_particle.tres" id="2_n1k4f"]
-[ext_resource type="Script" uid="uid://b8uyvu6k51kor" path="res://scripts/events/EV_DamageOnEnter.gd" id="4_n1k4f"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="4_uou4s"]
 [ext_resource type="AudioStream" uid="uid://cedq4twkuc4vs" path="res://sounds/Sound Effects/Explosions/explosion_close_short_ufx_3.ogg" id="5_fds2i"]
+[ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="5_uou4s"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="6_nyi6q"]
+[ext_resource type="Script" uid="uid://dofl71mlsf7s6" path="res://scripts/nodes/actions/ZN_PhysicsAction.gd" id="6_v5jnh"]
+[ext_resource type="Script" uid="uid://dlb4vkkjdb658" path="res://scripts/nodes/actions/ZN_HealthAction.gd" id="7_1j86e"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o8st4"]
 spread = 180.0
@@ -33,10 +36,10 @@ script = ExtResource("1_ma1qw")
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2
 collision_mask = 30
-script = ExtResource("4_n1k4f")
-require_line_of_sight = false
-damage_amount = 25
-apply_fire = true
+script = ExtResource("4_uou4s")
+trigger_on_exit = false
+trigger_on_interval = false
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_ma1qw")
@@ -46,6 +49,19 @@ visible = false
 radius = 10.0
 radial_segments = 24
 rings = 12
+
+[node name="ZN_FireAction" type="Node" parent="Area3D"]
+script = ExtResource("5_uou4s")
+
+[node name="ZN_PhysicsAction" type="Node" parent="Area3D"]
+script = ExtResource("6_v5jnh")
+impulse = true
+impulse_multiplier = 0.2
+
+[node name="ZN_HealthAction" type="Node" parent="Area3D"]
+script = ExtResource("7_1j86e")
+health_mode = 0
+health_amount = 25
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_fds2i")
