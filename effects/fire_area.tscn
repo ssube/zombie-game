@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnaekqfrdu382"]
+[gd_scene load_steps=8 format=3 uid="uid://bnaekqfrdu382"]
 
 [ext_resource type="QuadMesh" uid="uid://cltad2jeupalx" path="res://effects/fire_particle.tres" id="1_rbltl"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="1_rrymp"]
 [ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="3_80lxs"]
+[ext_resource type="Script" uid="uid://hu6tpnmjxa07" path="res://scripts/nodes/actions/ZN_SpeedModifierAction.gd" id="4_vbrxv"]
+[ext_resource type="Script" uid="uid://crylbd231pgne" path="res://scripts/nodes/conditions/ZN_FactionCondition.gd" id="5_hnali"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aewav"]
 emission_shape = 3
-emission_box_extents = Vector3(2, 0.2, 2)
+emission_box_extents = Vector3(2.5, 0.2, 2.5)
 gravity = Vector3(0, 1, 0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aewav"]
@@ -15,16 +17,16 @@ size = Vector3(5, 2, 5)
 [node name="FireArea" type="Area3D"]
 collision_mask = 30
 script = ExtResource("1_rrymp")
-trigger_on_exit = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-amount = 12
+amount = 16
 visibility_aabb = AABB(-2.5, -1, -2.5, 5, 5, 5)
 process_material = SubResource("ParticleProcessMaterial_aewav")
 draw_pass_1 = ExtResource("1_rbltl")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 light_color = Color(1, 0.32156864, 0.32156864, 1)
 light_size = 1.0
 
@@ -34,3 +36,13 @@ shape = SubResource("BoxShape3D_aewav")
 
 [node name="ZN_FireAction" type="Node" parent="."]
 script = ExtResource("3_80lxs")
+
+[node name="ZN_SpeedModifierAction" type="Node" parent="."]
+script = ExtResource("4_vbrxv")
+speed_multiplier = 1.2
+metadata/_custom_type_script = "uid://hu6tpnmjxa07"
+
+[node name="ZN_FactionCondition" type="Node" parent="ZN_SpeedModifierAction"]
+script = ExtResource("5_hnali")
+apply_to_factions = Array[String](["players"])
+metadata/_custom_type_script = "uid://crylbd231pgne"
