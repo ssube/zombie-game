@@ -116,13 +116,13 @@ key = "touch_portal"
 is_active = true
 metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 
-[sub_resource type="Resource" id="Resource_g1jay"]
+[sub_resource type="Resource" id="Resource_w633q"]
 script = ExtResource("17_x1db4")
 key = "open_door"
 is_active = true
 metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 
-[sub_resource type="Resource" id="Resource_jawnq"]
+[sub_resource type="Resource" id="Resource_q6gno"]
 script = ExtResource("27_2fv0q")
 key_name = "door"
 metadata/_custom_type_script = "uid://dd4hkf7y5v13t"
@@ -652,7 +652,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.007, 0.6708808, -2.2530918)
 
 [node name="Door" parent="Entities/Room2" instance=ExtResource("8_58gyl")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.25, 0, -3)
-components = Array[ExtResource("9_ggct0")]([SubResource("Resource_g1jay"), SubResource("Resource_jawnq")])
+extra_components = Array[ExtResource("9_ggct0")]([SubResource("Resource_w633q"), SubResource("Resource_q6gno")])
 
 [node name="Room3" type="Node3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
