@@ -274,6 +274,10 @@ func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
 	if weapon == null:
 		return
 
+	if EntityUtils.is_broken(weapon):
+		# TODO: play broken effects
+		return
+
 	var c_weapon = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
 	var swing_node = weapon.get_node(c_weapon.swing_path) as PathFollow3D
 	swing_node.progress_ratio = 0.0
@@ -295,7 +299,7 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	var ranged_weapon = weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
 	var current_ammo := weapon_ammo.get_ammo(ranged_weapon.ammo_type)
 	if current_ammo <= 0:
-		# TODO: play empty/broken effects
+		# TODO: play empty effects
 		return
 
 	weapon_ammo.remove_ammo(ranged_weapon.ammo_type, ranged_weapon.per_shot)
