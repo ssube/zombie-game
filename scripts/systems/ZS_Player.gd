@@ -274,20 +274,22 @@ func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
 	if weapon == null:
 		return
 
-	if EntityUtils.is_broken(weapon):
-		# TODO: play broken effects
-		return
+	var broken := EntityUtils.is_broken(weapon)
+	if broken:
+		weapon.apply_effects(ZR_Weapon_Effect.EffectType.MELEE_BREAK)
 
 	var c_weapon = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
 	var swing_node = weapon.get_node(c_weapon.swing_path) as PathFollow3D
 	swing_node.progress_ratio = 0.0
 
 	var tween = weapon.create_tween()
-	tween.tween_callback(_set_damage_areas.bind(weapon, c_weapon, true))
+	if not broken:
+		tween.tween_callback(_set_damage_areas.bind(weapon, c_weapon, true))
 	tween.tween_property(swing_node, "progress_ratio", 1.0, c_weapon.swing_time)
 	tween.tween_property(swing_node, "progress_ratio", 0.0, c_weapon.cooldown_time)
-	tween.tween_callback(_set_damage_areas.bind(weapon, c_weapon, false))
-	tween.tween_callback(_update_ammo_label.bind(entity))
+	if not broken:
+		tween.tween_callback(_set_damage_areas.bind(weapon, c_weapon, false))
+		tween.tween_callback(_update_ammo_label.bind(entity))
 
 
 func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
@@ -299,7 +301,7 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	var ranged_weapon = weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
 	var current_ammo := weapon_ammo.get_ammo(ranged_weapon.ammo_type)
 	if current_ammo <= 0:
-		# TODO: play empty effects
+		weapon.apply_effects(ZR_Weapon_Effect.EffectType.RANGED_EMPTY)
 		return
 
 	weapon_ammo.remove_ammo(ranged_weapon.ammo_type, ranged_weapon.per_shot)
