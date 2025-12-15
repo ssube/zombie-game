@@ -50,15 +50,21 @@ func _random_offset(scene: Node) -> void:
 func _spawn_all(actor: Node, area: ZN_TriggerArea3D) -> void:
 	var parent := _get_parent(actor, area)
 	for scene in spawn_scenes:
-		var instance := scene.instantiate()
-		parent.add_child(instance)
-		_random_offset(instance)
+		_spawn_scene(scene, parent)
 
 
 func _spawn_random(actor: Node, area: ZN_TriggerArea3D) -> void:
 	var parent := _get_parent(actor, area)
 	var index := randi() % spawn_scenes.size()
 	var scene := spawn_scenes[index]
+	_spawn_scene(scene, parent)
+
+
+func _spawn_scene(scene: PackedScene, parent: Node) -> void:
 	var instance := scene.instantiate()
 	parent.add_child(instance)
 	_random_offset(instance)
+
+	# TODO: register nested entities with ECS world
+	if instance is Entity:
+		ECS.world.add_entity(instance)
