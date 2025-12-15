@@ -38,7 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://c8tswr23gn5mg" path="res://entities/items/armor.tscn" id="38_g1jay"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ukt1r"]
-radius = 2.0
+radius = 1.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wgrf"]
 transparency = 1
@@ -573,7 +573,8 @@ metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 shape = SubResource("SphereShape3D_ukt1r")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Areas/WaterArea"]
-radius = 2.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.584219)
+radius = 1.5
 material = SubResource("StandardMaterial3D_1hnym")
 
 [node name="ZN_ScreenEffectAction" type="Node" parent="Areas/WaterArea"]
@@ -662,7 +663,7 @@ extra_components = Array[ExtResource("9_ggct0")]([SubResource("Resource_w633q"),
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
 
 [node name="HotelClerk" parent="Entities/Room3" instance=ExtResource("11_ggct0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.084522486, -2.2994375)
+transform = Transform3D(0.86602545, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, 0.86602545, 0, 0.085, -2.25)
 
 [node name="Armor" parent="Entities/Room3" instance=ExtResource("38_g1jay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.34950802, 2.5)
