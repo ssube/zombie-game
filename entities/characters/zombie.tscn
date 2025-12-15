@@ -47,7 +47,7 @@ metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 [sub_resource type="Resource" id="Resource_wwun5"]
 script = ExtResource("9_7tmu0")
 material_healthy = ExtResource("8_tfdn2")
-material_injured = ExtResource("9_wwun5")
+material_hurt = ExtResource("9_wwun5")
 material_dead = ExtResource("7_l1o5o")
 skin_shapes = Array[NodePath]([NodePath("CSGCylinder3D"), NodePath("CSGSphere3D")])
 metadata/_custom_type_script = "uid://b8oatb3tdywrh"

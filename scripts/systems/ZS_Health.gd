@@ -39,13 +39,9 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 				if objective.is_active and objective.complete_on_damage:
 					objective.is_complete = true
 
-		var skin := entity.get_component(ZC_Skin) as ZC_Skin
 		if health.current_health <= 0:
 			health.current_health = 0
 			print("Entity has perished: ", entity)
-
-			if skin != null and skin.material_dead != null:
-				update_skin_material(entity, skin, skin.material_dead)
 
 			if EntityUtils.is_objective(entity):
 				var objective: ZC_Objective = entity.get_component(ZC_Objective)
@@ -67,11 +63,3 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 					print("Entity has exploded: ", entity)
 					EntityUtils.keep_sounds(entity)
 					EntityUtils.remove(entity)
-		elif health.current_health < health.max_health:
-			if skin != null and skin.material_injured != null:
-				update_skin_material(entity, skin, skin.material_injured)
-
-func update_skin_material(entity: Node, skin: ZC_Skin, material: BaseMaterial3D):
-	for shape_path in skin.skin_shapes:
-		var shape = entity.get_node(shape_path) as GeometryInstance3D
-		shape.material_overlay = material
