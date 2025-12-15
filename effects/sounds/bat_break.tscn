@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgo4rx8hcv6un"]
+
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="1_e7lok"]
+[ext_resource type="AudioStream" uid="uid://pj4vvdms6jty" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Misc/break_1.ogg" id="1_yixvk"]
+
+[node name="BatBreak" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_yixvk")
+script = ExtResource("1_e7lok")
+play_on_ready = true
+subtitle_text = "Bat Broken"
+subtitle_radius = 3.0
+metadata/_custom_type_script = "uid://mcuf24u8q14t"

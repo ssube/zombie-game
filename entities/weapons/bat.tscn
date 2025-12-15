@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://tna8f01ql67u"]
+[gd_scene load_steps=24 format=4 uid="uid://tna8f01ql67u"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aigh8"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_dy0dc"]
@@ -8,6 +8,7 @@
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="5_fnw7o"]
 [ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="5_xpimh"]
 [ext_resource type="Texture2D" uid="uid://dpc8jknfhigal" path="res://assets/ZombieApocalypsePack/Bat/bat_texture.png" id="6_jaqrl"]
+[ext_resource type="PackedScene" uid="uid://cgo4rx8hcv6un" path="res://effects/sounds/bat_break.tscn" id="7_nl1ig"]
 [ext_resource type="Script" uid="uid://dnmn2xmqdrr00" path="res://scripts/components/weapons/ZC_Durability.gd" id="8_3gqkk"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="10_hgjmx"]
 [ext_resource type="Script" uid="uid://u512rl8uacud" path="res://scripts/nodes/actions/ZN_DurabilityAction.gd" id="10_hvjee"]
@@ -22,6 +23,13 @@ shimmer_nodes = Array[NodePath]([NodePath("Node3D/bat/Cube")])
 use_sound = ExtResource("5_55xri")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
+[sub_resource type="Resource" id="Resource_dwhqy"]
+script = ExtResource("5_xpimh")
+effect_type = 5
+marker = NodePath("Node3D/SoundMarker3D")
+effect_scene = ExtResource("7_nl1ig")
+metadata/_custom_type_script = "uid://d3sex4y0oww04"
+
 [sub_resource type="Resource" id="Resource_ee0de"]
 script = ExtResource("3_ee0de")
 swing_path = NodePath("SwingPath/PathFollow3D")
@@ -29,6 +37,7 @@ swing_time = 0.5
 cooldown_time = 0.3
 damage_areas = Array[NodePath]([NodePath("Node3D/Area3D")])
 damage = 10
+effects = Array[ExtResource("5_xpimh")]([SubResource("Resource_dwhqy")])
 metadata/_custom_type_script = "uid://c86wth8kvlbt7"
 
 [sub_resource type="Resource" id="Resource_42kvg"]
@@ -103,6 +112,9 @@ component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_dy0dc
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(0.7643113, 0.5640393, 0.31251454, 0, 0.48464668, -0.87470967, -0.6448176, 0.6685637, 0.37042788, 0.7398019, -0.59114224, -0.7246001)
+
+[node name="SoundMarker3D" type="Marker3D" parent="Node3D"]
+transform = Transform3D(0.76434076, 1.1340122e-08, -0.6448424, 0.56403923, 0.48464644, 0.66856354, 0.31251475, -0.87471026, 0.37042817, -0.010933876, 0.55519664, 0.00024962425)
 
 [node name="bat" type="Node3D" parent="Node3D"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.1, 0)
