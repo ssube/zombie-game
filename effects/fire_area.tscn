@@ -44,5 +44,5 @@ metadata/_custom_type_script = "uid://hu6tpnmjxa07"
 
 [node name="ZN_FactionCondition" type="Node" parent="ZN_SpeedModifierAction"]
 script = ExtResource("5_hnali")
-apply_to_factions = Array[String](["players"])
+apply_to_factions = Array[String](["friendly_players"])
 metadata/_custom_type_script = "uid://crylbd231pgne"

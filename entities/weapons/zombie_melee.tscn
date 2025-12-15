@@ -54,7 +54,7 @@ health_mode = 0
 
 [node name="ZN_FactionCondition" type="Node" parent="Path3D/PathFollow3D/Area3D/ZN_HealthAction"]
 script = ExtResource("7_3voqo")
-apply_to_factions = Array[String](["players"])
+apply_to_factions = Array[String](["friendly_players"])
 metadata/_custom_type_script = "uid://crylbd231pgne"
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Path3D/PathFollow3D"]
