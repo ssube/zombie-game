@@ -10,24 +10,26 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			printerr("Processing null entity")
 			continue
 
-		var health := entity.get_component(ZC_Health) as ZC_Health
-
 		var damages := entity.get_relationships(RelationshipUtils.any_damage) as Array[Relationship]
 		if damages.size() == 0:
 			continue
 
 		var total_damage := 0
 		for damage_rel in damages:
-			var damage := damage_rel.target as ZC_Damage
-			total_damage += floor(damage.amount)
-
-		# TODO: combine damage loops
-		for damage_rel in damages:
-			var damage: ZC_Damage = damage_rel.target as ZC_Damage
-			health.current_health = max(0, health.current_health - floor(damage.amount))
+			var c_damage := damage_rel.target as ZC_Damage
+			total_damage += floor(c_damage.amount)
 			entity.remove_relationship(damage_rel)
 
-		if total_damage > 0:
+		var damage: int = total_damage
+		# Do not apply damage resistance to healing (negative damage)
+		if damage > 0:
+			var multiplier: float = EntityUtils.get_damage_multiplier(entity)
+			damage = floor(total_damage * multiplier)
+
+		var health := entity.get_component(ZC_Health) as ZC_Health
+		health.current_health = clampi(health.current_health - damage, 0, health.max_health)
+
+		if damage > 0:
 			if EntityUtils.is_player(entity):
 				var effect_strength := 1.0 - (health.current_health / float(health.max_health))
 				var effect_duration := effect_strength * 5.0
@@ -40,7 +42,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 					objective.is_complete = true
 
 		if health.current_health <= 0:
-			health.current_health = 0
+			assert(health.current_health == 0, "Health is negative!")
 			print("Entity has perished: ", entity)
 
 			if EntityUtils.is_objective(entity):

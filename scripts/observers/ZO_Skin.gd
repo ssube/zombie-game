@@ -23,7 +23,7 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 				skin_material = skin.material_hurt
 
 		assert(skin_material != null, "Skin material is missing!")
-		update_skin_material(entity, skin, skin_material)
+		update_skin_material.call_deferred(entity, skin, skin_material)
 
 
 func update_skin_material(entity: Node, skin: ZC_Skin, material: BaseMaterial3D):

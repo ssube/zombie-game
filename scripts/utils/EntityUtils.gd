@@ -1,17 +1,14 @@
 class_name EntityUtils
 
 
-static func apply_damage(entity: Node, base_damage: int, base_multiplier: float = 1.0) -> int:
+static func apply_damage(entity: Node, base_damage: int, multiplier: float = 1.0) -> int:
 	if entity is not Entity:
 		return 0
 
 	if not EntityUtils.has_health(entity):
 		return 0
 
-	var multiplier: float = EntityUtils.get_damage_multiplier(entity)
-	multiplier *= base_multiplier
-
-	var damage: int = floor(base_damage * multiplier)
+	var damage := floori(base_damage * multiplier)
 	entity.add_relationship(RelationshipUtils.make_damage(damage))
 	return damage
 
