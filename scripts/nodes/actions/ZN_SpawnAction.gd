@@ -68,3 +68,11 @@ func _spawn_scene(scene: PackedScene, parent: Node) -> void:
 	# TODO: register nested entities with ECS world
 	if instance is Entity:
 		ECS.world.add_entity(instance)
+		if instance is ZE_Character:
+			if instance.current_weapon:
+				ECS.world.add_entity(instance.current_weapon)
+
+			if instance.inventory_node:
+				for item in instance.inventory_node.get_children():
+					if item is Entity:
+						ECS.world.add_entity(item)
