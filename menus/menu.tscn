@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://vcyq2fbg0dts"]
+[gd_scene load_steps=28 format=3 uid="uid://vcyq2fbg0dts"]
 
 [ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/menus/menu.gd" id="1_2d4ws"]
 [ext_resource type="Shader" uid="uid://brw8j2w8g6y35" path="res://shaders/scroll.gdshader" id="2_4vei7"]
@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://dyv5b48xquqot" path="res://menus/options_menu.tscn" id="4_tck7o"]
 [ext_resource type="PackedScene" uid="uid://sah33a6m5cm8" path="res://menus/pause_menu.tscn" id="5_j27vk"]
 [ext_resource type="Texture2D" uid="uid://cfqo5agum2br2" path="res://effects/screen/acid_texture.tres" id="5_tvlqr"]
+[ext_resource type="Texture2D" uid="uid://cfi2mua5vs0f7" path="res://effects/screen/armor_texture.tres" id="6_1iwcg"]
 [ext_resource type="PackedScene" uid="uid://b0lsnupsevvdt" path="res://menus/inventory_menu.tscn" id="6_w7kj8"]
+[ext_resource type="Texture2D" uid="uid://cxgntqm0bn8iu" path="res://effects/screen/heal_texture.tres" id="7_2usqi"]
 [ext_resource type="PackedScene" uid="uid://12llaao0w5gu" path="res://menus/objectives_menu.tscn" id="7_ss16q"]
 [ext_resource type="PackedScene" uid="uid://cuod00oetrc32" path="res://menus/load_menu.tscn" id="8_4vei7"]
 [ext_resource type="PackedScene" uid="uid://dixp3emrvmp7g" path="res://menus/save_menu.tscn" id="9_50hu0"]
@@ -111,6 +113,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_tvlqr")
+
+[node name="ArmorEffect" type="TextureRect" parent="EffectLayer"]
+visible = false
+modulate = Color(1, 1, 1, 0.5019608)
+material = SubResource("ShaderMaterial_ph6eu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_1iwcg")
+
+[node name="HealEffect" type="TextureRect" parent="EffectLayer"]
+visible = false
+modulate = Color(1, 1, 1, 0.5019608)
+material = SubResource("ShaderMaterial_ph6eu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_2usqi")
 
 [node name="DamageEffect" type="TextureRect" parent="EffectLayer"]
 visible = false

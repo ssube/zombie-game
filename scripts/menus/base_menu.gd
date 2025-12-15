@@ -22,6 +22,8 @@ enum Effects {
 	WATER,
 	FIRE,
 	ACID,
+	ARMOR,
+	HEAL,
 }
 
 signal apply_pressed()

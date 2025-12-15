@@ -138,10 +138,14 @@ func hide_effect(effect: Effects) -> void:
 	match effect:
 		Effects.ACID:
 			$EffectLayer/AcidEffect.visible = false
+		Effects.ARMOR:
+			$EffectLayer/ArmorEffect.visible = false
 		Effects.DAMAGE:
 			$EffectLayer/DamageEffect.visible = false
 		Effects.FIRE:
 			$EffectLayer/FireEffect.visible = false
+		Effects.HEAL:
+			$EffectLayer/HealEffect.visible = false
 		Effects.VIGNETTE:
 			$EffectLayer/VignetteEffect.visible = false
 		Effects.WATER:
@@ -155,10 +159,14 @@ func show_effect(effect: Effects, duration: float, strength: float = 1.0, fade_i
 	match effect:
 		Effects.ACID:
 			effect_node = $EffectLayer/AcidEffect
+		Effects.ARMOR:
+			effect_node = $EffectLayer/ArmorEffect
 		Effects.DAMAGE:
 			effect_node = $EffectLayer/DamageEffect
 		Effects.FIRE:
 			effect_node = $EffectLayer/FireEffect
+		Effects.HEAL:
+			effect_node = $EffectLayer/HealEffect
 		Effects.VIGNETTE:
 			effect_node = $EffectLayer/VignetteEffect
 			var vignette_material := $EffectLayer/VignetteEffect.material as ShaderMaterial
@@ -169,7 +177,7 @@ func show_effect(effect: Effects, duration: float, strength: float = 1.0, fade_i
 	if effect not in visible_effects:
 		effect_node.modulate.a = 0.0
 		effect_node.visible = true
-		
+
 	visible_effects[effect] = duration
 
 	var tween := create_tween()
