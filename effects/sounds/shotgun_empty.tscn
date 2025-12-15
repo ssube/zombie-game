@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsryju4igi6gd"]
+
+[ext_resource type="AudioStream" uid="uid://s3on5pr6qj2q" path="res://sounds/Sound Effects/Firearms/Reloading/assault_rifle_reloading_mag_in_ufx_2.ogg" id="1_gaiim"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="2_ync1d"]
+
+[node name="ShotgunEmpty" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_gaiim")
+script = ExtResource("2_ync1d")
+play_on_ready = true
+subtitle_text = "Shotgun Empty"
+subtitle_radius = 3.0
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
