@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct1mncqede373"]
+
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="1_jfjfn"]
+[ext_resource type="AudioStream" uid="uid://8qcb8nvs564r" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Doors & Drawers/drawer_2_open.ogg" id="1_p3w6s"]
+
+[node name="DoorOpen" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_p3w6s")
+script = ExtResource("1_jfjfn")
+play_on_ready = true
+subtitle_text = "Door Opening"
+subtitle_radius = 3.0
+metadata/_custom_type_script = "uid://mcuf24u8q14t"

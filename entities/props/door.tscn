@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://qwwlyenuba3g"]
+[gd_scene load_steps=13 format=3 uid="uid://qwwlyenuba3g"]
 
 [ext_resource type="Script" uid="uid://dvcw0ghs3aqdo" path="res://scripts/nodes/ZN_ExtraComponents.gd" id="1_3y01w"]
 [ext_resource type="Script" uid="uid://m5nxypqqfkd" path="res://scripts/entities/props/ZE_Door.gd" id="1_qm17t"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wyt2q"]
 [ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/props/ZC_Door.gd" id="3_auxoi"]
+[ext_resource type="PackedScene" uid="uid://bl5eexiq13e3h" path="res://effects/sounds/door_close.tscn" id="4_5ysdd"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_wyt2q"]
+[ext_resource type="PackedScene" uid="uid://ct1mncqede373" path="res://effects/sounds/door_open.tscn" id="5_4j475"]
 [ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_auxoi"]
 [ext_resource type="Material" uid="uid://q11wc28gwgth" path="res://textures/Color Maps/wood_5.tres" id="6_1aoj0"]
 
@@ -12,6 +14,8 @@
 script = ExtResource("3_auxoi")
 open_marker = NodePath("../Markers/OpenMarker3D")
 close_marker = NodePath("../Markers/CloseMarker3D")
+open_effect = ExtResource("5_4j475")
+close_effect = ExtResource("4_5ysdd")
 metadata/_custom_type_script = "uid://qjr7o31fiedq"
 
 [sub_resource type="Resource" id="Resource_auxoi"]

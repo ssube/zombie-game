@@ -41,11 +41,19 @@ func _open_door(entity3d: Node3D, door: ZC_Door) -> void:
 	var open_marker := entity3d.get_node(door.open_marker) as Marker3D
 	_tween_to_marker(entity3d, open_marker, door.open_time)
 
+	if door.open_effect:
+		var effect := door.open_effect.instantiate() as Node3D
+		entity3d.add_child(effect)
+
 
 func _close_door(entity3d: Node3D, door: ZC_Door) -> void:
 	print("Closing door")
 	var close_marker := entity3d.get_node(door.close_marker) as Marker3D
 	_tween_to_marker(entity3d, close_marker, door.close_time)
+
+	if door.close_effect:
+		var effect := door.close_effect.instantiate() as Node3D
+		entity3d.add_child(effect)
 
 
 func _auto_close(_entity3d: Node3D, door: ZC_Door) -> void:
