@@ -5,19 +5,26 @@
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="3_jplj4"]
 [ext_resource type="Script" uid="uid://b1hfgveu3fvsd" path="res://scripts/nodes/actions/ZN_NodeAction.gd" id="4_dxxuk"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nlgyr"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jplj4"]
+particle_flag_align_y = true
 direction = Vector3(0, 0, -1)
-spread = 25.0
-initial_velocity_max = 4.0
-gravity = Vector3(0, 0, -1)
+spread = 15.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, -0.5, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlgyr"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bd4u4"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.5019608)
+shading_mode = 2
+albedo_color = Color(1, 0.79733336, 0.24000001, 0.6431373)
+emission_enabled = true
+emission = Color(0.94, 0.40733334, 0.14099997, 1)
+disable_receive_shadows = true
 
-[sub_resource type="BoxMesh" id="BoxMesh_nlgyr"]
-material = SubResource("StandardMaterial3D_nlgyr")
-size = Vector3(0.2, 0.2, 0.2)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jplj4"]
+material = SubResource("StandardMaterial3D_bd4u4")
+radius = 0.05
+height = 0.25
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kmwy0"]
 direction = Vector3(0, 0, -1)
@@ -25,27 +32,27 @@ initial_velocity_min = 0.5
 initial_velocity_max = 1.0
 gravity = Vector3(0, 3, -1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ana8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjpqw"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.21176471)
+cull_mode = 1
+albedo_color = Color(1, 1, 1, 0.2509804)
 
-[sub_resource type="SphereMesh" id="SphereMesh_25lki"]
-material = SubResource("StandardMaterial3D_1ana8")
-radius = 0.1
-height = 0.2
-radial_segments = 6
-rings = 4
+[sub_resource type="SphereMesh" id="SphereMesh_m8jg2"]
+material = SubResource("StandardMaterial3D_wjpqw")
+radius = 0.2
+height = 0.4
 
 [node name="ShotgunBlast" type="Node3D"]
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
-explosiveness = 0.5
-process_material = SubResource("ParticleProcessMaterial_nlgyr")
-draw_pass_1 = SubResource("BoxMesh_nlgyr")
+cast_shadow = 0
+explosiveness = 0.75
+process_material = SubResource("ParticleProcessMaterial_jplj4")
+draw_pass_1 = SubResource("CapsuleMesh_jplj4")
 
 [node name="Smoke" type="GPUParticles3D" parent="."]
 process_material = SubResource("ParticleProcessMaterial_kmwy0")
-draw_pass_1 = SubResource("SphereMesh_25lki")
+draw_pass_1 = SubResource("SphereMesh_m8jg2")
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_nx8m0")
