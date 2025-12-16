@@ -4,6 +4,22 @@ class_name CollisionUtils
 static var unknown_surface = &"unknown"
 
 
+## Attempt to get the collider's entity, if the collider itself is not an entity.
+## Checks the `parent_entity` field, then the node's immediate parent.
+static func get_collider_entity(collider: Node) -> Entity:
+	if collider is PhysicsBody3D and collider is Entity:
+		return collider
+
+	if 'parent_entity' in collider:
+		return collider.parent_entity
+
+	var parent := collider.get_parent()
+	if parent is Entity:
+		return parent
+
+	return null
+
+
 static func get_collision_shape(raycast: RayCast3D) -> CollisionShape3D:
 	if not raycast.is_colliding():
 		return null

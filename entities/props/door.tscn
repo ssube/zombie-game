@@ -43,6 +43,8 @@ gizmo_extents = 1.0
 gizmo_extents = 1.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." node_paths=PackedStringArray("parent_entity")]
+collision_layer = 2
+collision_mask = 24
 script = ExtResource("8_5ysdd")
 parent_entity = NodePath("..")
 

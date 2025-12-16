@@ -136,31 +136,32 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		var ray = entity.get_node(player.view_ray) as RayCast3D
 		if ray.is_colliding():
 			var collider = ray.get_collider()
+			var collider_entity := CollisionUtils.get_collider_entity(collider)
 
-			if collider != last_shimmer.get(entity) and collider != entity.current_weapon:
+			if collider_entity != last_shimmer.get(entity) and collider_entity != entity.current_weapon:
 				%Menu.clear_target_label()
 				%Menu.reset_crosshair_color()
 				remove_shimmer_key(entity)
 
 			# Use interactive items
-			if collider is Entity and collider != entity.current_weapon:
-				if EntityUtils.is_interactive(collider):
-					var interactive = collider.get_component(ZC_Interactive) as ZC_Interactive
+			if collider_entity and collider_entity != entity.current_weapon:
+				if EntityUtils.is_interactive(collider_entity):
+					var interactive = collider_entity.get_component(ZC_Interactive) as ZC_Interactive
 					%Menu.set_target_label(interactive.name)
 
-					if not EntityUtils.has_shimmer(collider):
+					if not EntityUtils.has_shimmer(collider_entity):
 						var shimmer = ZC_Shimmer.from_interactive(interactive)
-						collider.add_component(shimmer)
-						last_shimmer[entity] = collider
+						collider_entity.add_component(shimmer)
+						last_shimmer[entity] = collider_entity
 
 						var shimmer_start := (Time.get_ticks_msec() / 1000.0) + shimmer_offset
 						RenderingServer.global_shader_parameter_set("shimmer_time", shimmer_start)
 
 					if input.use_pickup:
-						pickup_item(collider, entity)
+						pickup_item(collider_entity, entity)
 
 					if input.use_interact:
-						use_interactive(collider, entity, player)
+						use_interactive(collider_entity, entity, player)
 
 		else:
 			%Menu.clear_target_label()
