@@ -88,6 +88,12 @@ metadata/_custom_type_script = "uid://ccykut6yrev33"
 
 [node name="ZS_PlayerSystem" type="Node" parent="World/Systems"]
 script = ExtResource("8_j8ow8")
+shimmer_offset = null
+group = null
+process_empty = null
+active = null
+parallel_processing = null
+parallel_threshold = null
 metadata/_custom_type_script = "uid://cq8j5lp5vrtpp"
 
 [node name="ZS_ProjectileSystem" type="Node" parent="World/Systems"]

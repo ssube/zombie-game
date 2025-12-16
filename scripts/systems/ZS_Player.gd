@@ -173,6 +173,15 @@ func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_cr
 	if collider.has_component(ZC_Cooldown):
 		return
 
+	if EntityUtils.is_locked(collider):
+		var locked := collider.get_component(ZC_Locked) as ZC_Locked
+		if player.has_key(locked.key_name):
+			locked.is_locked = false
+			%Menu.push_action("Used %s key to unlock %s" % [locked.key_name, entity.id])
+		else:
+			%Menu.push_action("Need %s key to use %s" % [locked.key_name, entity.id])
+			return
+
 	if collider is ZE_Character:
 		if set_crosshair:
 			%Menu.set_crosshair_color(Color.DODGER_BLUE)
@@ -492,18 +501,8 @@ func use_character(entity: Entity, player_entity: Entity) -> void:
 	])
 
 
-func use_door(entity: Entity, player_entity: Entity) -> void:
+func use_door(entity: Entity, _player_entity: Entity) -> void:
 	var door := entity.get_component(ZC_Door) as ZC_Door
-	var locked := entity.get_component(ZC_Locked) as ZC_Locked
-	var player := player_entity.get_component(ZC_Player) as ZC_Player
-
-	if EntityUtils.is_locked(entity):
-		if player.has_key(locked.key_name):
-			locked.is_locked = false
-			%Menu.push_action("Used key: %s" % locked.key_name)
-		else:
-			%Menu.push_action("Need key: %s" % locked.key_name)
-			return
 
 	if door.open_on_use and not EntityUtils.is_locked(entity):
 		door.is_open = !door.is_open
