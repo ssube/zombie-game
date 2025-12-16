@@ -454,7 +454,7 @@ func use_button(entity: Entity, player_entity: Entity) -> void:
 	if not button.is_active:
 		return
 
-	if button.toggle:
+	if button.is_toggle:
 		button.is_pressed = not button.is_pressed
 		var pressed_message := _format_button_pressed(button.is_pressed)
 		%Menu.push_action("Toggled button %s" % pressed_message)

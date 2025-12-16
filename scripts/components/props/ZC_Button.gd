@@ -2,7 +2,7 @@ extends Component
 class_name ZC_Button
 
 @export var is_active: bool = true
-@export var toggle: bool = false
+@export var is_toggle: bool = false
 
 @export_group("Actions")
 @export var pressed_actions: NodePath
@@ -22,6 +22,3 @@ class_name ZC_Button
 		is_pressed = value
 		if old_value != value:
 			property_changed.emit(self, "is_pressed", old_value, value)
-
-# TODO: save and restore whether the button has been toggled
-# @export var is_toggled: bool = false
