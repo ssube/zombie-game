@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://lbpyhtg453yg"]
 
-[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="1_g5n4o"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_ActionArea3D.gd" id="1_g5n4o"]
 [ext_resource type="Script" uid="uid://c1xgtwmj2vomk" path="res://scripts/nodes/actions/ZN_SpawnAction.gd" id="2_6qs0j"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="3_t0qtj"]
 [ext_resource type="PackedScene" uid="uid://dc22w3kstrlyu" path="res://entities/characters/zombie_worker.tscn" id="4_7yueh"]

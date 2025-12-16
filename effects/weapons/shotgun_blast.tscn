@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bism3fuwsio0w" path="res://textures/Particle Effect Texture Essentials/Transparent Versions/fx_Smoke3.png" id="1_bd4u4"]
 [ext_resource type="AudioStream" uid="uid://cbh3us2kncrl0" path="res://sounds/Sound Effects/Firearms/Fire/shotgun_fire_ufx_1.ogg" id="2_nx8m0"]
-[ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/ZN_TriggerTimer.gd" id="3_bd4u4"]
+[ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/ZN_ActionTimer.gd" id="3_bd4u4"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="3_jplj4"]
 [ext_resource type="Script" uid="uid://b1hfgveu3fvsd" path="res://scripts/nodes/actions/ZN_NodeAction.gd" id="4_dxxuk"]
 

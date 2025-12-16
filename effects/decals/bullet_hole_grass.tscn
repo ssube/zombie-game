@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b0tqytixfffwv"]
 
 [ext_resource type="Texture2D" uid="uid://cmpugrrinf3bw" path="res://textures/bullet_hole_32px.png" id="1_jv4y2"]
-[ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/ZN_TriggerTimer.gd" id="3_4fq8f"]
+[ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/ZN_ActionTimer.gd" id="3_4fq8f"]
 [ext_resource type="Script" uid="uid://b1hfgveu3fvsd" path="res://scripts/nodes/actions/ZN_NodeAction.gd" id="4_iexc3"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jv4y2"]
