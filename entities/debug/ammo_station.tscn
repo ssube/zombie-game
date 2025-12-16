@@ -26,7 +26,6 @@ spawn_mode = 0
 spawn_marker = NodePath("../../SpawnMarker3D")
 spawn_at = 2
 random_radius = 0.25
-entity_only = false
 
 [node name="SpawnMarker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)

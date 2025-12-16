@@ -88,4 +88,3 @@ metadata/_custom_type_script = "uid://b3w64ibj5uxv4"
 script = ExtResource("4_dxxuk")
 node = NodePath("../..")
 remove = true
-entity_only = false

@@ -13,15 +13,6 @@ enum PhysicsOrigin {
 @export var impulse_origin: PhysicsOrigin = PhysicsOrigin.SOURCE
 
 
-func _get_configuration_warnings():
-	var warnings = []
-
-	if self.entity_only:
-		warnings.append("Physics action is entity-only!")
-
-	return warnings
-
-
 func _get_position(source: Node3D, body: Node3D) -> Vector3:
 	match impulse_origin:
 		PhysicsOrigin.BODY:

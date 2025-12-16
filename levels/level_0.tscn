@@ -644,7 +644,6 @@ script = ExtResource("20_jawnq")
 target = NodePath("../../../Room4/Door2")
 unlock = 1
 open = 1
-entity_only = false
 metadata/_custom_type_script = "uid://cpgnglttfputx"
 
 [node name="Room2" type="Node3D" parent="Entities"]

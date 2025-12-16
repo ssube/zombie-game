@@ -5,15 +5,6 @@ class_name ZN_NodeAction
 @export var remove: bool = false
 
 
-func _get_configuration_warnings():
-	var warnings = []
-
-	if self.entity_only:
-		warnings.append("Node action is entity-only!")
-
-	return warnings
-
-
 func _get_target(other: Node) -> Entity:
 	if node:
 		return node
