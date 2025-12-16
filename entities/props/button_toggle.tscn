@@ -1,15 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://xj6pi1xr3mu8"]
+[gd_scene load_steps=18 format=3 uid="uid://xj6pi1xr3mu8"]
 
 [ext_resource type="Script" uid="uid://svxqn3t4whnt" path="res://scripts/entities/props/ZE_Button.gd" id="1_p86pc"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_f2tyo"]
 [ext_resource type="Script" uid="uid://c8jci3yicdcmm" path="res://scripts/components/props/ZC_Button.gd" id="3_c1g8g"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_3n38l"]
 [ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_nqh2g"]
+[ext_resource type="AudioStream" uid="uid://duux0lfms1eea" path="res://sounds/1000 Retro Sound Effects/General Sounds/Buttons/sfx_button_small2.wav" id="6_3n38l"]
 [ext_resource type="Script" uid="uid://djt2jgsv2ihkt" path="res://scripts/nodes/actions/ZN_AnimationAction.gd" id="6_ie4yn"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="7_nqh2g"]
+[ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="9_ie4yn"]
 
 [sub_resource type="Resource" id="Resource_0h2if"]
 script = ExtResource("3_c1g8g")
-toggle = true
+is_toggle = true
 pressed_actions = NodePath("PressedActions")
 released_actions = NodePath("ReleasedActions")
 metadata/_custom_type_script = "uid://c8jci3yicdcmm"
@@ -91,6 +94,12 @@ material = SubResource("StandardMaterial3D_p86pc")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_0h2if")
 
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_3n38l")
+script = ExtResource("7_nqh2g")
+remove_on_finished = false
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_hdbxb")
@@ -105,6 +114,10 @@ event_animations = Dictionary[int, String]({
 5: "pressed"
 })
 
+[node name="ZN_AudioAction" type="Node" parent="PressedActions" node_paths=PackedStringArray("audio_player")]
+script = ExtResource("9_ie4yn")
+audio_player = NodePath("../../ZN_AudioSubtitle3D")
+
 [node name="ReleasedActions" type="Node" parent="."]
 
 [node name="ZN_AnimationAction" type="Node" parent="ReleasedActions" node_paths=PackedStringArray("animation_player")]
@@ -113,3 +126,7 @@ animation_player = NodePath("../../AnimationPlayer")
 event_animations = Dictionary[int, String]({
 6: "released"
 })
+
+[node name="ZN_AudioAction" type="Node" parent="ReleasedActions" node_paths=PackedStringArray("audio_player")]
+script = ExtResource("9_ie4yn")
+audio_player = NodePath("../../ZN_AudioSubtitle3D")
