@@ -1,25 +1,19 @@
 extends ZN_BaseAction
 class_name ZN_ComponentAction
 
-enum ActionMode {
-	ADD,
-	REMOVE,
-	UPDATE,
-}
-
 @export var components: Array[Component] = []
-@export var mode: ActionMode = ActionMode.ADD
+@export var mode: Enums.CRUD = Enums.CRUD.CREATE
 
-func run_entity(actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(_source: Node, _event: Enums.ActionEvent, actor: Entity) -> void:
 	match mode:
-		ActionMode.ADD:
+		Enums.CRUD.ADD:
 			actor.add_components(components)
-		ActionMode.REMOVE:
+		Enums.CRUD.REMOVE:
 			actor.remove_components(components)
-		ActionMode.UPDATE:
+		Enums.CRUD.UPDATE:
 			_update_components(actor, components)
 
 
-func _update_components(entity: Entity, components: Array[Component]) -> void:
+func _update_components(_entity: Entity, _components: Array[Component]) -> void:
 	# TODO: only update components that are already present, do not add new ones
 	pass

@@ -3,21 +3,21 @@ class_name ZN_DoorAction
 
 @export var target: Entity = null
 
-@export var unlock: Tristate = Tristate.NO_CHANGE
-@export var open: Tristate = Tristate.NO_CHANGE
+@export var unlock: Enums.Tristate = Enums.Tristate.UNSET
+@export var open: Enums.Tristate = Enums.Tristate.UNSET
 
-func run_entity(_actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(_source: Node, _event: Enums.ActionEvent, _actor: Entity) -> void:
 	var door := target.get_component(ZC_Door) as ZC_Door
 	if door == null:
 		printerr("Target is not a door: ", target)
 		return
 
 	match open:
-		Tristate.NO_CHANGE:
+		Enums.Tristate.UNSET:
 			pass
-		Tristate.SET_FALSE:
+		Enums.Tristate.FALSE:
 			door.is_open = false
-		Tristate.SET_TRUE:
+		Enums.Tristate.TRUE:
 			door.is_open = true
 
 	var locked := target.get_component(ZC_Locked) as ZC_Locked
@@ -25,9 +25,9 @@ func run_entity(_actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3
 		return
 
 	match unlock:
-		Tristate.NO_CHANGE:
+		Enums.Tristate.UNSET:
 			pass
-		Tristate.SET_FALSE:
+		Enums.Tristate.FALSE:
 			locked.is_locked = false
-		Tristate.SET_TRUE:
+		Enums.Tristate.TRUE:
 			locked.is_locked = true

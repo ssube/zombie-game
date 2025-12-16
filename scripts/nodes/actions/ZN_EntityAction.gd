@@ -12,7 +12,7 @@ func _get_target(actor: Entity) -> Entity:
 	return actor
 
 
-func run_entity(actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(_source: Node, _event: Enums.ActionEvent, actor: Entity) -> void:
 	var target := _get_target(actor)
 	if remove:
 		EntityUtils.remove(target)

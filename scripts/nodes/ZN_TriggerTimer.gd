@@ -21,10 +21,9 @@ func _ready() -> void:
 
 
 func on_timeout() -> void:
-	# TODO: send some real parameters
-	apply_actions(self, null, ZN_TriggerArea3D.AreaEvent.TIMER_TIMEOUT)
+	apply_actions(self, Enums.ActionEvent.TIMER_TIMEOUT, null)
 
 
-func apply_actions(body: Node, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
+func apply_actions(source: Node, event: Enums.ActionEvent, actor: Node) -> void:
 	for action in _actions:
-		action._run(body, area, event)
+		action._run(source, event, actor)

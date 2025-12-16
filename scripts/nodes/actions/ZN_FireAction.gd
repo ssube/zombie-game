@@ -10,7 +10,7 @@ enum FireMode {
 @export var fire_mode: FireMode = FireMode.IGNITE
 @export var fire_duration: float = 5.0
 
-func run_entity(actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(_source: Node, _event: Enums.ActionEvent, actor: Entity) -> void:
 	match fire_mode:
 		FireMode.EXTEND:
 			if actor.has_component(ZC_Effect_Burning):

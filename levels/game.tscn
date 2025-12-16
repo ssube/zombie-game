@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c32dl721ugeb0"]
+[gd_scene load_steps=24 format=3 uid="uid://c32dl721ugeb0"]
 
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/ZG_World.gd" id="1_7ti0h"]
 [ext_resource type="PackedScene" uid="uid://2631yqe4y8ki" path="res://levels/zone_1.tscn" id="3_bk7mf"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://4x335wa2bbnp" path="res://scripts/observers/ZO_Skin.gd" id="12_tkgql"]
 [ext_resource type="Script" uid="uid://dyutgptbapg76" path="res://scripts/observers/ZO_Button.gd" id="13_si8kf"]
 [ext_resource type="Script" uid="uid://c5v1jn1s0niq2" path="res://scripts/systems/ZS_Footstep.gd" id="19_tkgql"]
+[ext_resource type="Script" uid="uid://dxu3llv6t4pyu" path="res://scripts/systems/ZS_Cooldown.gd" id="21_mgpep"]
 [ext_resource type="PackedScene" uid="uid://vcyq2fbg0dts" path="res://menus/menu.tscn" id="26_ohs1m"]
 [ext_resource type="PackedScene" uid="uid://yvupurpwmap4" path="res://levels/level_0.tscn" id="28_u1aa1"]
 
@@ -95,6 +96,9 @@ metadata/_custom_type_script = "uid://cxrhjwcd6iqpy"
 
 [node name="ZS_FootstepSystem" type="Node" parent="World/Systems"]
 script = ExtResource("19_tkgql")
+
+[node name="ZS_CooldownSystem" type="Node" parent="World/Systems"]
+script = ExtResource("21_mgpep")
 
 [node name="Entities" type="Node" parent="World"]
 unique_name_in_owner = true

@@ -1,16 +1,6 @@
 extends Area3D
 class_name ZN_TriggerArea3D
 
-enum AreaEvent {
-	AREA_INTERVAL,
-	BODY_ENTER,
-	BODY_EXIT,
-	BODY_INTERVAL,
-	TIMER_TIMEOUT,
-	BUTTON_PRESSED,
-	BUTTON_RELEASED,
-}
-
 @export var active: bool = true
 @export var area_interval: float = 1.0
 @export var body_interval: float = 1.0
@@ -54,7 +44,7 @@ func _process(delta: float) -> void:
 		_area_timer += delta
 		if _area_timer > area_interval:
 			_area_timer = 0.0
-			apply_actions(null, self, AreaEvent.AREA_INTERVAL)
+			apply_actions(self, Enums.ActionEvent.AREA_INTERVAL, null)
 
 	for collider in _body_timers:
 		_body_timers[collider] += delta
@@ -69,7 +59,7 @@ func _on_body_entered(body: Node) -> void:
 	_body_timers[body] = 0
 
 	if trigger_on_enter:
-		apply_actions(body, self, AreaEvent.BODY_ENTER)
+		apply_actions(self, Enums.ActionEvent.BODY_ENTER, body)
 
 
 func _on_body_exited(body: Node) -> void:
@@ -79,7 +69,7 @@ func _on_body_exited(body: Node) -> void:
 	_body_timers.erase(body)
 
 	if trigger_on_exit:
-		apply_actions(body, self, AreaEvent.BODY_EXIT)
+		apply_actions(self, Enums.ActionEvent.BODY_EXIT, body)
 
 
 func _on_body_timer(body: Node) -> void:
@@ -87,9 +77,9 @@ func _on_body_timer(body: Node) -> void:
 		return
 
 	if trigger_on_timer:
-		apply_actions(body, self, AreaEvent.BODY_INTERVAL)
+		apply_actions(self, Enums.ActionEvent.BODY_INTERVAL, body)
 
 
-func apply_actions(body: Node, area: ZN_TriggerArea3D, event: AreaEvent) -> void:
+func apply_actions(source: Node, event: Enums.ActionEvent, actor: Node) -> void:
 	for action in _actions:
-		action._run(body, area, event)
+		action._run(source, event, actor)

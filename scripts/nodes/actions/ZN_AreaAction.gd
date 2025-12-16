@@ -2,15 +2,14 @@ extends ZN_BaseAction
 class_name ZN_AreaAction
 
 @export var area: ZN_TriggerArea3D = null
-@export var active: ZN_BaseAction.Tristate = ZN_BaseAction.Tristate.NO_CHANGE
+@export var active: Enums.Tristate = Enums.Tristate.UNSET
 
-
-func run_entity(_actor: Entity, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(_source: Node, _event: Enums.ActionEvent, _actor: Entity) -> void:
 	match active:
-		ZN_BaseAction.Tristate.NO_CHANGE:
+		Enums.Tristate.UNSET:
 			pass
-		ZN_BaseAction.Tristate.SET_FALSE:
+		Enums.Tristate.FALSE:
 			area.active = false
-		ZN_BaseAction.Tristate.SET_TRUE:
+		Enums.Tristate.TRUE:
 			area.active = true
 		# TODO: add toggle

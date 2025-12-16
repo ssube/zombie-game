@@ -111,7 +111,7 @@ libraries = {
 script = ExtResource("6_wlayu")
 animation_player = NodePath("../../AnimationPlayer")
 event_animations = Dictionary[int, String]({
-5: "pressed"
+20: "pressed"
 })
 
 [node name="ZN_AudioAction" type="Node" parent="PressedActions" node_paths=PackedStringArray("audio_player")]
@@ -124,5 +124,5 @@ audio_player = NodePath("../../ZN_AudioSubtitle3D")
 script = ExtResource("6_wlayu")
 animation_player = NodePath("../../AnimationPlayer")
 event_animations = Dictionary[int, String]({
-6: "released"
+21: "released"
 })

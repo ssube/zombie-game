@@ -15,11 +15,11 @@ class_name ZN_SpeedModifierAction
 )
 
 
-func run_entity(actor: Entity, _area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_entity(_source: Node, event: Enums.ActionEvent, actor: Entity) -> void:
 	match event:
-		ZN_TriggerArea3D.AreaEvent.BODY_ENTER:
+		Enums.ActionEvent.BODY_ENTER:
 			apply_multiplier(actor)
-		ZN_TriggerArea3D.AreaEvent.BODY_EXIT:
+		Enums.ActionEvent.BODY_EXIT:
 			remove_multiplier(actor)
 
 

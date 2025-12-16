@@ -2,10 +2,6 @@
 extends Node
 class_name ZN_BaseAction
 
-enum Tristate { NO_CHANGE = -1, SET_FALSE = 0, SET_TRUE = 1 }
-
-@export var entity_only: bool = true
-
 var _conditions: Array[ZN_BaseCondition] = []
 
 func _ready() -> void:
@@ -14,36 +10,32 @@ func _ready() -> void:
 			_conditions.append(child)
 
 
-func run_node(_node: Node, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_node(_source: Node, _event: Enums.ActionEvent, _actor: Node) -> void:
 	pass
 
 
-func run_entity(actor: Entity, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
-	run_node(actor, area, event)
+func run_entity(source: Node, event: Enums.ActionEvent, actor: Entity) -> void:
+	run_node(source, event, actor)
 
 
-func run_physics(body: PhysicsBody3D, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
-	run_node(body, area, event)
+func run_physics(source: Node, event: Enums.ActionEvent, actor: PhysicsBody3D) -> void:
+	run_node(source, event, actor)
 
 
-func _run(actor: Node, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> void:
-	if test(actor, area, event):
+func _run(source: Node, event: Enums.ActionEvent, actor: Node) -> void:
+	if test(source, event, actor):
 		if actor is Entity:
-			run_entity(actor, area, event)
+			run_entity(source, event, actor)
 		elif actor is PhysicsBody3D:
-			run_physics(actor, area, event)
+			run_physics(source, event, actor)
 		else:
-			run_node(actor, area, event)
+			run_node(source, event, actor)
 
 
 ## Check condition children before running
-func test(actor: Node, area: ZN_TriggerArea3D, event: ZN_TriggerArea3D.AreaEvent) -> bool:
-	if entity_only:
-		if actor is not Entity:
-			return false
-
+func test(source: Node, event: Enums.ActionEvent, actor: Node) -> bool:
 	for condition in _conditions:
-		if not condition.test(actor, area, event):
+		if not condition.test(source, event, actor):
 			return false
 
 	return true

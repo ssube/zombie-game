@@ -34,6 +34,6 @@ func _process(delta: float) -> void:
 	super._process(delta)
 
 	for body in sight_queue:
-		apply_actions(body, self, AreaEvent.BODY_ENTER)
+		apply_actions(self, Enums.ActionEvent.BODY_ENTER, body)
 
 	sight_queue.clear()

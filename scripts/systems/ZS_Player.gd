@@ -464,21 +464,21 @@ func use_button(entity: Entity, player_entity: Entity) -> void:
 
 	# TODO: should add a pressed-by relationship that is used by the button observer
 	var actions: Node
-	var event: ZN_TriggerArea3D.AreaEvent
+	var event: Enums.ActionEvent
 
 	if button.is_pressed:
 		actions = entity.get_node(button.pressed_actions)
-		event = ZN_TriggerArea3D.AreaEvent.BUTTON_PRESSED
+		event = Enums.ActionEvent.BUTTON_PRESS
 	else:
 		actions = entity.get_node(button.released_actions)
-		event = ZN_TriggerArea3D.AreaEvent.BUTTON_RELEASED
+		event = Enums.ActionEvent.BUTTON_RELEASE
 
 	if actions:
-		ActionUtils.run_node(actions, player_entity, null, event)
+		ActionUtils.run_node(actions, entity, event, player_entity)
 
 	var extra_actions := entity.get_component(ZC_Action) as ZC_Action
 	if extra_actions:
-		ActionUtils.run_component(extra_actions, player_entity, null, event)
+		ActionUtils.run_component(extra_actions, entity, event, player_entity)
 
 
 func use_character(entity: Entity, player_entity: Entity) -> void:

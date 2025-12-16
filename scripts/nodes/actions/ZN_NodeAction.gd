@@ -29,8 +29,8 @@ func _remove_node(target: Node) -> void:
 	target.queue_free()
 
 
-func run_node(other: Node, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
-	var target := _get_target(other)
+func run_node(_source: Node, _event: Enums.ActionEvent, actor: Node) -> void:
+	var target := _get_target(actor)
 
 	if remove:
 		_remove_node(target)

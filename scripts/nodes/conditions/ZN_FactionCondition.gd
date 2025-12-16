@@ -7,7 +7,7 @@ static var world_faction := &"world"
 @export var apply_to_factions: Array[String] = []
 
 
-func test(actor: Node, _area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> bool:
+func test(_source: Node, _event: Enums.ActionEvent, actor: Node) -> bool:
 	if actor is not Entity:
 		return false
 

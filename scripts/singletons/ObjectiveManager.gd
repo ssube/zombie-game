@@ -140,7 +140,7 @@ func _complete_objective(objective: ZN_BaseObjective, actor: Entity = null) -> v
 
 	for child in objective.get_children():
 		if child is ZN_BaseAction:
-			child._run(actor, null, 0) # TODO: add event for objective complete
+			child._run(objective, Enums.ActionEvent.OBJECTIVE_COMPLETE, actor)
 
 	match objective.game_state:
 		ZN_BaseObjective.GameState.NONE:

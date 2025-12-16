@@ -9,7 +9,17 @@ enum ActionEvent {
 	BUTTON_RELEASE = 21,
 	ENTITY_PICKUP = 30,
 	ENTITY_USE = 31,
+	OBJECTIVE_COMPLETE = 50,
 	TIMER_TIMEOUT = 40,
+}
+
+enum CRUD {
+	ADD = 0,
+	CREATE = 0,
+	# READ?
+	UPDATE = 2,
+	DELETE = 3,
+	REMOVE = 3,
 }
 
 enum Tristate {

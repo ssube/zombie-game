@@ -8,34 +8,33 @@ enum SpawnMode {
 
 enum SpawnLocation {
 	ACTOR,
-	AREA,
 	MARKER,
+	SOURCE,
 }
 
 @export var spawn_scenes: Array[PackedScene] = []
 @export var spawn_mode: SpawnMode = SpawnMode.RANDOM
 @export var spawn_marker: Marker3D = null
-@export var spawn_at: SpawnLocation = SpawnLocation.AREA
+@export var spawn_at: SpawnLocation = SpawnLocation.SOURCE
 @export var random_radius: float = 0.0
 
-
-func run_node(actor: Node, area: ZN_TriggerArea3D, _event: ZN_TriggerArea3D.AreaEvent) -> void:
+func run_node(source: Node, _event: Enums.ActionEvent, actor: Node) -> void:
 	match spawn_mode:
 		SpawnMode.ALL:
-			_spawn_all(actor, area)
+			_spawn_all(actor, source)
 		SpawnMode.RANDOM:
-			_spawn_random(actor, area)
+			_spawn_random(actor, source)
 
 
 func _get_parent(actor: Node, area: ZN_TriggerArea3D) -> Node:
 	match spawn_at:
 		SpawnLocation.ACTOR:
 			return actor
-		SpawnLocation.AREA:
-			return area.get_parent()
 		SpawnLocation.MARKER:
 			assert(spawn_marker != null, "Spawn marker must be provided for spawn actions with the marker spawn location!")
 			return spawn_marker
+		SpawnLocation.SOURCE:
+			return area.get_parent()
 
 	return null
 
