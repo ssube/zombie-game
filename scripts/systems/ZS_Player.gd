@@ -169,6 +169,9 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 
 func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_crosshair: bool = true) -> void:
+	if collider.has_component(ZC_Cooldown):
+		return
+
 	if collider is ZE_Character:
 		if set_crosshair:
 			%Menu.set_crosshair_color(Color.DODGER_BLUE)
