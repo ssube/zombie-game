@@ -9,7 +9,7 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 	var door := component as ZC_Door
 
 	if property == 'is_open':
-		var entity3d := entity.get_node(".") as Node3D
+		var entity3d := entity.get_node(door.door_body) as Node3D
 
 		if new_value:
 			_open_door(entity3d, door)

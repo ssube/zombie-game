@@ -1,6 +1,8 @@
 extends Component
 class_name ZC_Door
 
+@export var door_body: NodePath
+
 @export_group("Triggers")
 @export var open_on_proximity: bool = false
 @export var open_on_touch: bool = false
@@ -26,7 +28,6 @@ class_name ZC_Door
 @export_group("Misc")
 ## Rotate both ways, away from the player
 @export var rotate_away: bool = false
-
 @export var open_area: NodePath
 
 @export_group("Effects")
