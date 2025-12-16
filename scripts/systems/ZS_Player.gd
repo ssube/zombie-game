@@ -529,7 +529,7 @@ func use_food(entity: Entity, player_entity: Entity) -> void:
 		return
 
 	var food = entity.get_component(ZC_Food) as ZC_Food
-	health.current_health = min(health.max_health, health.current_health + food.health)
+	health.current_health += food.health
 
 	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
 	%Menu.push_action("Used food: %s" % interactive.name)

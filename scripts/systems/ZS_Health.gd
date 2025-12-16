@@ -27,7 +27,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			damage = floor(total_damage * multiplier)
 
 		var health := entity.get_component(ZC_Health) as ZC_Health
-		health.current_health = clampi(health.current_health - damage, 0, health.max_health)
+		health.current_health -= damage
 
 		if damage > 0:
 			if EntityUtils.is_player(entity):
