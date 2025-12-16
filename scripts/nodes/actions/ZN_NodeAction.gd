@@ -1,7 +1,7 @@
 extends ZN_BaseAction
 class_name ZN_NodeAction
 
-@export var node: Node= null
+@export var node: Node = null
 @export var remove: bool = false
 
 
