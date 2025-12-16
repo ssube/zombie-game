@@ -474,10 +474,11 @@ func use_button(entity: Entity, player_entity: Entity) -> void:
 		event = ZN_TriggerArea3D.AreaEvent.BUTTON_RELEASED
 
 	if actions:
-		# TODO: handle parent node being an action as well
-		for child in actions.get_children():
-			if child is ZN_BaseAction:
-				child._run(player_entity, null, event)
+		ActionUtils.run_node(actions, player_entity, null, event)
+
+	var extra_actions := entity.get_component(ZC_Action) as ZC_Action
+	if extra_actions:
+		ActionUtils.run_component(extra_actions, player_entity, null, event)
 
 
 func use_character(entity: Entity, player_entity: Entity) -> void:
