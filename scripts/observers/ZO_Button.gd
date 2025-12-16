@@ -19,13 +19,7 @@ func on_component_changed(
 			return
 
 		var event := Enums.ActionEvent.BUTTON_PRESS
-		var actions_node := entity.get_node(button.pressed_actions)
-		if actions_node:
-			ActionUtils.run_node(actions_node, entity, event, null)
-
-		var extra_actions := entity.get_component(ZC_Action) as ZC_Action
-		if extra_actions:
-			ActionUtils.run_component(extra_actions, entity, event, null)
+		ActionUtils.run_entity(entity, event, null)
 
 		if button.is_toggle:
 			return
@@ -43,11 +37,4 @@ func _release_button(entity: Entity, button: ZC_Button) -> void:
 	button.is_pressed = false
 
 	var event := Enums.ActionEvent.BUTTON_RELEASE
-
-	var actions_node := entity.get_node(button.released_actions)
-	if actions_node:
-		ActionUtils.run_node(actions_node, entity, event, null)
-
-	var extra_actions := entity.get_component(ZC_Action) as ZC_Action
-	if extra_actions:
-		ActionUtils.run_component(extra_actions, entity, event, null)
+	ActionUtils.run_entity(entity, event, null)

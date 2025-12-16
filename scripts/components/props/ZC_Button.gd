@@ -4,10 +4,6 @@ class_name ZC_Button
 @export var is_active: bool = true
 @export var is_toggle: bool = false
 
-@export_group("Actions")
-@export var pressed_actions: NodePath
-@export var released_actions: NodePath
-
 @export_group("Timers")
 ## How long after being pressed until the button can be pressed again
 @export var cooldown_delay: float = 1.0
