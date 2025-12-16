@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://dktd2ekufselm"]
+[gd_scene load_steps=14 format=3 uid="uid://dktd2ekufselm"]
 
+[ext_resource type="Texture2D" uid="uid://bism3fuwsio0w" path="res://textures/Particle Effect Texture Essentials/Transparent Versions/fx_Smoke3.png" id="1_bd4u4"]
 [ext_resource type="AudioStream" uid="uid://cbh3us2kncrl0" path="res://sounds/Sound Effects/Firearms/Fire/shotgun_fire_ufx_1.ogg" id="2_nx8m0"]
 [ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/ZN_TriggerTimer.gd" id="3_bd4u4"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="3_jplj4"]
@@ -12,6 +13,7 @@ spread = 15.0
 initial_velocity_min = 4.0
 initial_velocity_max = 6.0
 gravity = Vector3(0, -0.5, 0)
+collision_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bd4u4"]
 transparency = 1
@@ -26,21 +28,34 @@ material = SubResource("StandardMaterial3D_bd4u4")
 radius = 0.05
 height = 0.25
 
+[sub_resource type="Curve" id="Curve_dxxuk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5014409, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wjpqw"]
+curve = SubResource("Curve_dxxuk")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kmwy0"]
 direction = Vector3(0, 0, -1)
 initial_velocity_min = 0.5
 initial_velocity_max = 1.0
 gravity = Vector3(0, 3, -1)
+scale_min = 0.75
+scale_max = 1.25
+alpha_curve = SubResource("CurveTexture_wjpqw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjpqw"]
 transparency = 1
-cull_mode = 1
-albedo_color = Color(1, 1, 1, 0.2509804)
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.7764706)
+albedo_texture = ExtResource("1_bd4u4")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
-[sub_resource type="SphereMesh" id="SphereMesh_m8jg2"]
+[sub_resource type="QuadMesh" id="QuadMesh_m8jg2"]
 material = SubResource("StandardMaterial3D_wjpqw")
-radius = 0.2
-height = 0.4
 
 [node name="ShotgunBlast" type="Node3D"]
 
@@ -52,7 +67,7 @@ draw_pass_1 = SubResource("CapsuleMesh_jplj4")
 
 [node name="Smoke" type="GPUParticles3D" parent="."]
 process_material = SubResource("ParticleProcessMaterial_kmwy0")
-draw_pass_1 = SubResource("SphereMesh_m8jg2")
+draw_pass_1 = SubResource("QuadMesh_m8jg2")
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_nx8m0")
