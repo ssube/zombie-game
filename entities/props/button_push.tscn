@@ -1,0 +1,115 @@
+[gd_scene load_steps=15 format=3 uid="uid://drdesj6rooo11"]
+
+[ext_resource type="Script" uid="uid://svxqn3t4whnt" path="res://scripts/entities/props/ZE_Button.gd" id="1_l113m"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_txy2n"]
+[ext_resource type="Script" uid="uid://c8jci3yicdcmm" path="res://scripts/components/props/ZC_Button.gd" id="3_klvmx"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_c6nwv"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_b5ffr"]
+[ext_resource type="Script" uid="uid://djt2jgsv2ihkt" path="res://scripts/nodes/actions/ZN_AnimationAction.gd" id="6_wlayu"]
+
+[sub_resource type="Resource" id="Resource_0h2if"]
+script = ExtResource("3_klvmx")
+pressed_actions = NodePath("PressedActions")
+released_actions = NodePath("ReleasedActions")
+reset_delay = 1.0
+metadata/_custom_type_script = "uid://c8jci3yicdcmm"
+
+[sub_resource type="Resource" id="Resource_qcbqw"]
+script = ExtResource("4_c6nwv")
+name = "Green Button"
+shimmer_material = ExtResource("5_b5ffr")
+shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
+metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcbqw"]
+albedo_color = Color(0.18, 1, 0.19366664, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0h2if"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="Animation" id="Animation_2yqqr"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_2syx8"]
+resource_name = "pressed"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.1, 1, 0, 0, 0, 0.5, 1, 0, -0.5, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.1, 1, 0, 0, 0, 0.5, 1, 0, -0.5, 0)
+
+[sub_resource type="Animation" id="Animation_hdbxb"]
+resource_name = "released"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.1, 1, 0, -0.5, 0, 0.5, 1, 0, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.1, 1, 0, -0.5, 0, 0.5, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hdbxb"]
+_data = {
+&"RESET": SubResource("Animation_2yqqr"),
+&"pressed": SubResource("Animation_2syx8"),
+&"released": SubResource("Animation_hdbxb")
+}
+
+[node name="PushButton" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 31
+script = ExtResource("1_l113m")
+component_resources = Array[ExtResource("2_txy2n")]([SubResource("Resource_0h2if"), SubResource("Resource_qcbqw")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.3, 0.3, 0.3)
+material = SubResource("StandardMaterial3D_qcbqw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_0h2if")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hdbxb")
+}
+
+[node name="PressedActions" type="Node" parent="."]
+
+[node name="ZN_AnimationAction" type="Node" parent="PressedActions" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("6_wlayu")
+animation_player = NodePath("../../AnimationPlayer")
+event_animations = Dictionary[int, String]({
+5: "pressed"
+})
+
+[node name="ReleasedActions" type="Node" parent="."]
+
+[node name="ZN_AnimationAction" type="Node" parent="ReleasedActions" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("6_wlayu")
+animation_player = NodePath("../../AnimationPlayer")
+event_animations = Dictionary[int, String]({
+6: "released"
+})

@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=122 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_TriggerArea3D.gd" id="1_q6gno"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
@@ -22,7 +22,9 @@
 [ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_key.tres" id="16_2sfss"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="16_uuq13"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="17_58gyl"]
+[ext_resource type="PackedScene" uid="uid://drdesj6rooo11" path="res://entities/props/button_push.tscn" id="17_m8bfh"]
 [ext_resource type="Script" uid="uid://bdl3b6gan30l0" path="res://scripts/components/status/ZC_Objective.gd" id="17_x1db4"]
+[ext_resource type="PackedScene" uid="uid://xj6pi1xr3mu8" path="res://entities/props/button_toggle.tscn" id="18_g1jay"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="18_ggct0"]
 [ext_resource type="Material" uid="uid://b7hn4t4hgmaod" path="res://textures/Color Maps/concrete_3.tres" id="19_8mki0"]
 [ext_resource type="Material" uid="uid://bmxolsa17xlkl" path="res://textures/Color Maps/brick_wall_tx_3.tres" id="20_58gyl"]
@@ -618,6 +620,15 @@ id = "Level0_ZE_Weapon_1765677280_38874"
 [node name="WeaponShotgun" parent="Entities/Room1" instance=ExtResource("16_uuq13")]
 transform = Transform3D(-4.371139e-08, 0, -1, -1, -4.371139e-08, 4.371139e-08, -4.371139e-08, 1, 1.9106855e-15, 0.009268761, 0.38109618, 3.2732358)
 id = "Level0_ZE_Weapon_1765677275_6355"
+
+[node name="PushButton" parent="Entities/Room1" instance=ExtResource("17_m8bfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.85, 2, 2.25)
+extra_components = Array[ExtResource("9_ggct0")]([])
+id = "Level0_ZE_Button_1765814833_52382"
+
+[node name="ToggleButton" parent="Entities/Room1" instance=ExtResource("18_g1jay")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.85, 2, 2.75)
+id = "Level0_ZE_Button_1765814836_92969"
 
 [node name="Room2" type="Node3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 4)

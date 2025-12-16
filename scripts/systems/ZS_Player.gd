@@ -191,6 +191,11 @@ func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_cr
 			%Menu.set_crosshair_color(Color.GREEN)
 		use_armor(collider, entity)
 
+	if collider.has_component(ZC_Button):
+		if set_crosshair:
+			%Menu.set_crosshair_color(Color.GOLD)
+		use_button(collider, entity)
+
 	if collider.has_component(ZC_Food):
 		if set_crosshair:
 			%Menu.set_crosshair_color(Color.GREEN)
@@ -432,6 +437,44 @@ func use_armor(entity: Entity, player_entity: Entity) -> void:
 	for child in entity3d.get_children():
 		if child is CollisionShape3D:
 			child.disabled = true
+
+
+func _format_button_pressed(pressed: bool) -> String:
+	if pressed:
+		return "on"
+	else:
+		return "off"
+
+
+func use_button(entity: Entity, player_entity: Entity) -> void:
+	var button := entity.get_component(ZC_Button) as ZC_Button
+	if not button.is_active:
+		return
+
+	if button.toggle:
+		button.is_pressed = not button.is_pressed
+		var pressed_message := _format_button_pressed(button.is_pressed)
+		%Menu.push_action("Toggled button %s" % pressed_message)
+	else:
+		button.is_pressed = true
+		%Menu.push_action("Pressed button")
+
+	# TODO: should add a pressed-by relationship that is used by the button observer
+	var actions: Node
+	var event: ZN_TriggerArea3D.AreaEvent
+
+	if button.is_pressed:
+		actions = entity.get_node(button.pressed_actions)
+		event = ZN_TriggerArea3D.AreaEvent.BUTTON_PRESSED
+	else:
+		actions = entity.get_node(button.released_actions)
+		event = ZN_TriggerArea3D.AreaEvent.BUTTON_RELEASED
+
+	if actions:
+		# TODO: handle parent node being an action as well
+		for child in actions.get_children():
+			if child is ZN_BaseAction:
+				child._run(player_entity, null, event)
 
 
 func use_character(entity: Entity, player_entity: Entity) -> void:
