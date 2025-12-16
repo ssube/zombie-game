@@ -27,7 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://xj6pi1xr3mu8" path="res://entities/props/button_toggle.tscn" id="18_g1jay"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="18_ggct0"]
 [ext_resource type="Material" uid="uid://b7hn4t4hgmaod" path="res://textures/Color Maps/concrete_3.tres" id="19_8mki0"]
-[ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="19_jawnq"]
+[ext_resource type="Script" uid="uid://x2so3fh4lo1n" path="res://scripts/components/ZC_ExtraAction.gd" id="19_jawnq"]
 [ext_resource type="Material" uid="uid://bmxolsa17xlkl" path="res://textures/Color Maps/brick_wall_tx_3.tres" id="20_58gyl"]
 [ext_resource type="Script" uid="uid://cpgnglttfputx" path="res://scripts/nodes/actions/ZN_DoorAction.gd" id="20_jawnq"]
 [ext_resource type="Material" uid="uid://bc3b71ottph3s" path="res://textures/Color Maps/concrete_5.tres" id="21_ggct0"]
@@ -102,9 +102,10 @@ metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 [sub_resource type="Resource" id="Resource_ukt1r"]
 script = ExtResource("19_jawnq")
 actions = Dictionary[int, NodePath]({
-5: NodePath("ZN_DoorAction")
+20: NodePath("ZN_OpenDoorAction"),
+21: NodePath("ZN_CloseDoorAction")
 })
-metadata/_custom_type_script = "uid://barikupijl7r7"
+metadata/_custom_type_script = "uid://x2so3fh4lo1n"
 
 [sub_resource type="Resource" id="Resource_2fv0q"]
 script = ExtResource("17_x1db4")
@@ -639,11 +640,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.85, 2, 2.75)
 extra_components = Array[ExtResource("9_ggct0")]([SubResource("Resource_ukt1r")])
 id = "Level0_ZE_Button_1765814836_92969"
 
-[node name="ZN_DoorAction" type="Node" parent="Entities/Room1/ToggleButton" node_paths=PackedStringArray("target")]
+[node name="ZN_OpenDoorAction" type="Node" parent="Entities/Room1/ToggleButton" node_paths=PackedStringArray("target")]
 script = ExtResource("20_jawnq")
 target = NodePath("../../../Room4/Door2")
 unlock = 1
 open = 1
+metadata/_custom_type_script = "uid://cpgnglttfputx"
+
+[node name="ZN_CloseDoorAction" type="Node" parent="Entities/Room1/ToggleButton" node_paths=PackedStringArray("target")]
+script = ExtResource("20_jawnq")
+target = NodePath("../../../Room4/Door2")
+unlock = 1
+open = 0
 metadata/_custom_type_script = "uid://cpgnglttfputx"
 
 [node name="Room2" type="Node3D" parent="Entities"]

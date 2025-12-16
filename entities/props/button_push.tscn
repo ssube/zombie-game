@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://drdesj6rooo11"]
+[gd_scene load_steps=20 format=3 uid="uid://drdesj6rooo11"]
 
 [ext_resource type="Script" uid="uid://svxqn3t4whnt" path="res://scripts/entities/props/ZE_Button.gd" id="1_l113m"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_txy2n"]
 [ext_resource type="Script" uid="uid://c8jci3yicdcmm" path="res://scripts/components/props/ZC_Button.gd" id="3_klvmx"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_c6nwv"]
 [ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_b5ffr"]
+[ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="6_b5ffr"]
 [ext_resource type="Script" uid="uid://djt2jgsv2ihkt" path="res://scripts/nodes/actions/ZN_AnimationAction.gd" id="6_wlayu"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="7_c6nwv"]
 [ext_resource type="AudioStream" uid="uid://brrg1fnj5tpo3" path="res://sounds/1000 Retro Sound Effects/General Sounds/Buttons/sfx_sounds_button3.wav" id="8_b5ffr"]
@@ -12,8 +13,6 @@
 
 [sub_resource type="Resource" id="Resource_0h2if"]
 script = ExtResource("3_klvmx")
-pressed_actions = NodePath("PressedActions")
-released_actions = NodePath("ReleasedActions")
 reset_delay = 1.0
 metadata/_custom_type_script = "uid://c8jci3yicdcmm"
 
@@ -23,6 +22,14 @@ name = "Green Button"
 shimmer_material = ExtResource("5_b5ffr")
 shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_wlayu"]
+script = ExtResource("6_b5ffr")
+actions = Dictionary[int, NodePath]({
+20: NodePath("PressedActions"),
+21: NodePath("ReleasedActions")
+})
+metadata/_custom_type_script = "uid://barikupijl7r7"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcbqw"]
 albedo_color = Color(0.18, 1, 0.19366664, 1)
@@ -85,7 +92,7 @@ _data = {
 collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_l113m")
-component_resources = Array[ExtResource("2_txy2n")]([SubResource("Resource_0h2if"), SubResource("Resource_qcbqw")])
+component_resources = Array[ExtResource("2_txy2n")]([SubResource("Resource_0h2if"), SubResource("Resource_qcbqw"), SubResource("Resource_wlayu")])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 size = Vector3(0.3, 0.3, 0.3)
