@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=119 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_ActionArea3D.gd" id="1_q6gno"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
@@ -6,20 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://cdik1mgum870e" path="res://entities/debug/ammo_station.tscn" id="3_w633q"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://lbpyhtg453yg" path="res://entities/debug/zombie_spawn.tscn" id="5_lf4l6"]
-[ext_resource type="PackedScene" uid="uid://dyenf2chlolgq" path="res://effects/sounds/key_pickup.tscn" id="6_jawnq"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
 [ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="7_uuq13"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door.tscn" id="8_58gyl"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="9_ggct0"]
-[ext_resource type="Script" uid="uid://q5lsf8fn6s2" path="res://scripts/components/props/ZC_Key.gd" id="9_gxks1"]
-[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="10_8mki0"]
 [ext_resource type="PackedScene" uid="uid://bq6a52tvj60bq" path="res://entities/characters/hotel_clerk.tscn" id="11_ggct0"]
 [ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/items/medkit.tscn" id="13_vfwqd"]
 [ext_resource type="PackedScene" uid="uid://kod7e8o8xpep" path="res://entities/items/key.tscn" id="14_juy1h"]
 [ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/props/ZC_Portal.gd" id="14_qgvj7"]
 [ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/props/objective.tscn" id="15_7di2q"]
 [ext_resource type="PackedScene" uid="uid://tna8f01ql67u" path="res://entities/weapons/bat.tscn" id="15_owf05"]
-[ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_key.tres" id="16_2sfss"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="16_uuq13"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="17_58gyl"]
 [ext_resource type="PackedScene" uid="uid://drdesj6rooo11" path="res://entities/props/button_push.tscn" id="17_m8bfh"]
@@ -79,19 +75,6 @@ effect = 3
 duration = inf
 strength = 0.5
 metadata/_custom_type_script = "uid://ewo3m4f384i0"
-
-[sub_resource type="Resource" id="Resource_nq5s6"]
-script = ExtResource("9_gxks1")
-name = "door"
-metadata/_custom_type_script = "uid://q5lsf8fn6s2"
-
-[sub_resource type="Resource" id="Resource_g03v2"]
-script = ExtResource("10_8mki0")
-name = "Key"
-shimmer_material = ExtResource("16_2sfss")
-shimmer_nodes = Array[NodePath]([NodePath("TrafficCone/TrafficCone")])
-pickup_sound = ExtResource("6_jawnq")
-metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_66alr"]
 script = ExtResource("17_x1db4")
@@ -620,8 +603,8 @@ id = "Level0_ZE_Food_1764359954_81099"
 
 [node name="Key" parent="Entities/Room1" instance=ExtResource("14_juy1h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8346415, 0.4356786, 2.86876)
+extra_components = Array[ExtResource("9_ggct0")]([SubResource("Resource_66alr")])
 id = "Level0_ZE_Key_1764359955_57861"
-component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_nq5s6"), SubResource("Resource_g03v2"), SubResource("Resource_66alr")])
 
 [node name="WeaponBat" parent="Entities/Room1" instance=ExtResource("15_owf05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.584343, 1.1126956, -2)
@@ -1064,8 +1047,9 @@ title = "Shoot the Zombie"
 optional = true
 metadata/_custom_type_script = "uid://cpxac3i6p71x0"
 
-[node name="RemoveClerk" type="Node" parent="Objectives/KeyObjective/DoorObjective/ZombieObjective"]
+[node name="RemoveClerk" type="Node" parent="Objectives/KeyObjective/DoorObjective/ZombieObjective" node_paths=PackedStringArray("entity")]
 script = ExtResource("35_lf4l6")
+entity = NodePath("../../../../../Entities/Room3/HotelClerk")
 remove = true
 metadata/_custom_type_script = "uid://dlpeis5tgmelp"
 
