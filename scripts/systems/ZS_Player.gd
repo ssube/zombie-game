@@ -173,13 +173,14 @@ func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_cr
 	if collider.has_component(ZC_Cooldown):
 		return
 
+	var interactive = collider.get_component(ZC_Interactive) as ZC_Interactive
 	if EntityUtils.is_locked(collider):
 		var locked := collider.get_component(ZC_Locked) as ZC_Locked
 		if player.has_key(locked.key_name):
 			locked.is_locked = false
-			%Menu.push_action("Used %s key to unlock %s" % [locked.key_name, entity.id])
+			%Menu.push_action("Used %s key to unlock %s" % [locked.key_name, interactive.name])
 		else:
-			%Menu.push_action("Need %s key to use %s" % [locked.key_name, entity.id])
+			%Menu.push_action("Need %s key to use %s" % [locked.key_name, interactive.name])
 			return
 
 	if collider is ZE_Character:
@@ -384,6 +385,18 @@ func _add_sound(sound: ZN_AudioSubtitle3D, player_entity: Entity) -> void:
 
 
 func pickup_item(entity: Entity, player_entity: Entity) -> void:
+	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
+	if EntityUtils.is_locked(entity):
+		var locked := entity.get_component(ZC_Locked) as ZC_Locked
+		var c_player := player_entity.get_component(ZC_Player) as ZC_Player
+
+		if c_player.has_key(locked.key_name):
+			locked.is_locked = false
+			%Menu.push_action("Used %s key to unlock %s" % [locked.key_name, interactive.name])
+		else:
+			%Menu.push_action("Need %s key to pick up %s" % [locked.key_name, interactive.name])
+			return
+
 	remove_shimmer_target(entity)
 
 	entity.get_parent().remove_child(entity)
@@ -392,7 +405,6 @@ func pickup_item(entity: Entity, player_entity: Entity) -> void:
 	var player := player_entity as ZE_Player
 	player.inventory_node.add_child(entity)
 
-	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
 	%Menu.push_action("Picked up item: %s" % interactive.name)
 
 	if interactive.pickup_sound:
