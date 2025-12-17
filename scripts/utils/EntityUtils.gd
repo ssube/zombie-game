@@ -53,7 +53,8 @@ static func equip_weapon(character: ZE_Character, weapon: ZE_Weapon) -> ZE_Weapo
 			weapon_parent.remove_child(weapon)
 
 		weapon.visible = true
-		character.hands_node.add_child(weapon)
+		character.weapon_node.add_child(weapon)
+		weapon.global_transform = character.weapon_node.global_transform
 		character.add_relationship(RelationshipUtils.make_equipped(weapon))
 
 	return old_weapon

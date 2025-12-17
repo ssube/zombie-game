@@ -65,15 +65,15 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		# Move weapon to follow hands
 		if entity.current_weapon != null:
 			var weapon_body = entity.current_weapon.get_node(".") as RigidBody3D
-			weapon_body.global_transform = entity.hands_node.global_transform
+			weapon_body.global_transform = entity.weapon_node.global_transform
 
 		# Update transform for inventory items as well
-		var hands_back: Vector3 = -entity.hands_node.global_transform.basis.z.normalized()
-		if entity.inventory_node != null:
-			for child in entity.inventory_node.get_children():
-				child.global_transform = entity.hands_node.global_transform
+		# var hands_back: Vector3 = -entity.hands_node.global_transform.basis.z.normalized()
+		# if entity.inventory_node != null:
+			# for child in entity.inventory_node.get_children():
+				# child.global_transform = entity.hands_node.global_transform
 				# TODO: convert player inventory to a Node3D and do this once
-				child.global_position -= hands_back * 5
+				# child.global_position -= hands_back * 5
 
 		# Process any effect relationships
 		var effects := entity.get_relationships(RelationshipUtils.any_effect) as Array[Relationship]

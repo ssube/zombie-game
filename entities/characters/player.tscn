@@ -74,12 +74,13 @@ metadata/_custom_type_script = "uid://b7x5tu22015cx"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_idcse"]
 height = 2.25
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("hands_node", "inventory_node")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("hands_node", "inventory_node", "weapon_node")]
 collision_layer = 8
 collision_mask = 27
 script = ExtResource("1_ks8m5")
 hands_node = NodePath("Head/Hands")
 inventory_node = NodePath("Inventory")
+weapon_node = NodePath("Head/Hands/WeaponMarker")
 component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_l1ths"), SubResource("Resource_25mxy"), SubResource("Resource_dv4ir"), SubResource("Resource_idcse"), SubResource("Resource_p37y2"), SubResource("Resource_b4uku"), SubResource("Resource_8ug6l"), SubResource("Resource_gmhi3"), SubResource("Resource_g5okp")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -106,18 +107,18 @@ current = true
 target_position = Vector3(0, 0, -2.5)
 collision_mask = 30
 
-[node name="RayCastProbe" type="CSGCylinder3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, -0.325, -1.2)
+[node name="Hands" type="Node3D" parent="Head"]
+
+[node name="WeaponMarker" type="Node3D" parent="Head/Hands"]
+transform = Transform3D(0.99845827, 0.0044806385, 0.0553267, 0, 0.99673676, -0.08072083, -0.055507835, 0.08059638, 0.99520004, 0.21910977, -0.25579888, -0.20406437)
+
+[node name="RayCastProbe" type="CSGCylinder3D" parent="Head/Hands/WeaponMarker"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -0.99999994)
 visible = false
 radius = 0.05
 height = 2.5
 sides = 6
 cone = true
-
-[node name="Hands" type="Node3D" parent="Head"]
-
-[node name="ProjectileMarker" type="Marker3D" parent="Head/Hands"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="Flashlight" type="SpotLight3D" parent="Head/Hands"]
 transform = Transform3D(1, 0, 0, 0, 0.9975641, -0.06975647, 0, 0.06975647, 0.9975641, 0, 0, 0)
@@ -130,7 +131,8 @@ spot_angle = 30.0
 [node name="FireEffect" parent="Effects" instance=ExtResource("12_b4uku")]
 visible = false
 
-[node name="Inventory" type="Node" parent="."]
+[node name="Inventory" type="Node3D" parent="."]
+visible = false
 
 [node name="FootRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

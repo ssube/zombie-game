@@ -6,6 +6,7 @@ class_name ZE_Character
 @export var current_armor: ZE_Armor = null
 @export var current_weapon: ZE_Weapon = null
 @export var inventory_node: Node = null
+@export var weapon_node: Node3D = null
 
 @onready var rigid_3d := get_node(".") as RigidBody3D
 @onready var static_3d := get_node(".") as StaticBody3D
