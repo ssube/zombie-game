@@ -26,7 +26,7 @@ func run_node(source: Node, _event: Enums.ActionEvent, actor: Node) -> void:
 			_spawn_random(actor, source)
 
 
-func _get_parent(actor: Node, area: ZN_TriggerArea3D) -> Node:
+func _get_parent(actor: Node, source: Node) -> Node:
 	match spawn_at:
 		SpawnLocation.ACTOR:
 			return actor
@@ -34,7 +34,7 @@ func _get_parent(actor: Node, area: ZN_TriggerArea3D) -> Node:
 			assert(spawn_marker != null, "Spawn marker must be provided for spawn actions with the marker spawn location!")
 			return spawn_marker
 		SpawnLocation.SOURCE:
-			return area.get_parent()
+			return source.get_parent()
 
 	return null
 
@@ -46,14 +46,14 @@ func _random_offset(scene: Node) -> void:
 	scene.global_position += offset
 
 
-func _spawn_all(actor: Node, area: ZN_TriggerArea3D) -> void:
-	var parent := _get_parent(actor, area)
+func _spawn_all(actor: Node, source: Node) -> void:
+	var parent := _get_parent(actor, source)
 	for scene in spawn_scenes:
 		_spawn_scene(scene, parent)
 
 
-func _spawn_random(actor: Node, area: ZN_TriggerArea3D) -> void:
-	var parent := _get_parent(actor, area)
+func _spawn_random(actor: Node, source: Node) -> void:
+	var parent := _get_parent(actor, source)
 	var index := randi() % spawn_scenes.size()
 	var scene := spawn_scenes[index]
 	_spawn_scene(scene, parent)
