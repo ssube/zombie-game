@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://lbpyhtg453yg" path="res://entities/debug/zombie_spawn.tscn" id="5_lf4l6"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
 [ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="7_uuq13"]
-[ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door.tscn" id="8_58gyl"]
+[ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door_wood_cw.tscn" id="8_58gyl"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="9_ggct0"]
 [ext_resource type="PackedScene" uid="uid://bq6a52tvj60bq" path="res://entities/characters/hotel_clerk.tscn" id="11_ggct0"]
 [ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/items/medkit.tscn" id="13_vfwqd"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://tna8f01ql67u" path="res://entities/weapons/bat.tscn" id="15_owf05"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="16_uuq13"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="17_58gyl"]
+[ext_resource type="PackedScene" uid="uid://do56uq0uysdn6" path="res://entities/props/door_wood_breakable.tscn" id="17_g1jay"]
 [ext_resource type="PackedScene" uid="uid://drdesj6rooo11" path="res://entities/props/button_push.tscn" id="17_m8bfh"]
 [ext_resource type="Script" uid="uid://bdl3b6gan30l0" path="res://scripts/components/status/ZC_Objective.gd" id="17_x1db4"]
 [ext_resource type="PackedScene" uid="uid://xj6pi1xr3mu8" path="res://entities/props/button_toggle.tscn" id="18_g1jay"]
@@ -31,6 +32,7 @@
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="23_8mki0"]
 [ext_resource type="Script" uid="uid://c6dan22mbgmgs" path="res://scripts/nodes/ZN_MapGeometry.gd" id="25_jwc5o"]
 [ext_resource type="Script" uid="uid://dd4hkf7y5v13t" path="res://scripts/components/status/ZC_Locked.gd" id="27_2fv0q"]
+[ext_resource type="PackedScene" uid="uid://dr14d3op0qqa7" path="res://entities/props/door_wood_ccw.tscn" id="27_m8bfh"]
 [ext_resource type="PackedScene" uid="uid://dc22w3kstrlyu" path="res://entities/characters/zombie_worker.tscn" id="30_2fv0q"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="35_lf4l6"]
 [ext_resource type="Script" uid="uid://bn1fw86ypw3a6" path="res://scripts/nodes/actions/ZN_PortalAction.gd" id="35_q6gno"]
@@ -625,17 +627,20 @@ id = "Level0_ZE_Button_1765814836_92969"
 
 [node name="ZN_OpenDoorAction" type="Node" parent="Entities/Room1/ToggleButton" node_paths=PackedStringArray("target")]
 script = ExtResource("20_jawnq")
-target = NodePath("../../../Room4/Door2")
+target = NodePath("../../../Room4/Door")
 unlock = 1
 open = 1
 metadata/_custom_type_script = "uid://cpgnglttfputx"
 
 [node name="ZN_CloseDoorAction" type="Node" parent="Entities/Room1/ToggleButton" node_paths=PackedStringArray("target")]
 script = ExtResource("20_jawnq")
-target = NodePath("../../../Room4/Door2")
+target = NodePath("../../../Room4/Door")
 unlock = 1
 open = 0
 metadata/_custom_type_script = "uid://cpgnglttfputx"
+
+[node name="Door" parent="Entities/Room1" instance=ExtResource("17_g1jay")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.25)
 
 [node name="Room2" type="Node3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 4)
@@ -689,9 +694,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.34950802, 2.5)
 [node name="Room4" type="Node3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -11)
 
-[node name="Door2" parent="Entities/Room4" instance=ExtResource("8_58gyl")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.25, 0, 1)
-
 [node name="Zombie" parent="Entities/Room4" instance=ExtResource("30_2fv0q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1283226, 1.1611633, 0.5116539)
 id = "Level0_ZE_Zombie_1765571833_84556"
@@ -701,6 +703,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57901, 0.2904392, -2.75232
 
 [node name="Ammo2" parent="Entities/Room4" instance=ExtResource("23_1hnym")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57901, 0.43693882, 2.756857)
+
+[node name="Door" parent="Entities/Room4" instance=ExtResource("27_m8bfh")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.25, 0, -1)
 
 [node name="Lights" type="Node" parent="."]
 

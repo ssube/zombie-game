@@ -1,0 +1,89 @@
+[gd_scene load_steps=18 format=3 uid="uid://bygvbok8hajkv"]
+
+[ext_resource type="Script" uid="uid://m5nxypqqfkd" path="res://scripts/entities/props/ZE_Door.gd" id="1_iauw2"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_tcpgw"]
+[ext_resource type="PackedScene" uid="uid://bl5eexiq13e3h" path="res://effects/sounds/door_close.tscn" id="3_o6vs3"]
+[ext_resource type="PackedScene" uid="uid://ct1mncqede373" path="res://effects/sounds/door_open.tscn" id="4_0vjok"]
+[ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/props/ZC_Door.gd" id="5_gvmmc"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="6_ix2pv"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="7_ksctv"]
+[ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="8_o6vs3"]
+[ext_resource type="Script" uid="uid://dxh5mkb32cr8f" path="res://scripts/nodes/ZN_EntityBody.gd" id="8_xmjbh"]
+[ext_resource type="Material" uid="uid://q11wc28gwgth" path="res://textures/Color Maps/wood_5.tres" id="9_i3ife"]
+[ext_resource type="Script" uid="uid://cpgnglttfputx" path="res://scripts/nodes/actions/ZN_DoorAction.gd" id="11_0vjok"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="12_0vjok"]
+
+[sub_resource type="Resource" id="Resource_q8gv4"]
+script = ExtResource("5_gvmmc")
+door_body = NodePath("StaticBody3D")
+open_marker = NodePath("Markers/OpenMarker3D")
+close_marker = NodePath("Markers/CloseMarker3D")
+auto_close_time = 5.0
+open_effect = ExtResource("4_0vjok")
+close_effect = ExtResource("3_o6vs3")
+metadata/_custom_type_script = "uid://qjr7o31fiedq"
+
+[sub_resource type="Resource" id="Resource_auxoi"]
+script = ExtResource("6_ix2pv")
+name = "Door"
+shimmer_material = ExtResource("7_ksctv")
+shimmer_nodes = Array[NodePath]([NodePath("StaticBody3D/CSGBox3D")])
+metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_gvmmc"]
+script = ExtResource("8_o6vs3")
+actions = Dictionary[int, NodePath]({
+10: NodePath("ZN_TriggerArea3D/ZN_DoorAction")
+})
+metadata/_custom_type_script = "uid://barikupijl7r7"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nynkh"]
+size = Vector3(2, 4, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gvmmc"]
+size = Vector3(2, 4, 2)
+
+[node name="Door" type="Node3D"]
+script = ExtResource("1_iauw2")
+component_resources = Array[ExtResource("2_tcpgw")]([SubResource("Resource_q8gv4"), SubResource("Resource_auxoi"), SubResource("Resource_gvmmc")])
+
+[node name="Markers" type="Node3D" parent="."]
+
+[node name="OpenMarker3D" type="Marker3D" parent="Markers"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+gizmo_extents = 1.0
+
+[node name="CloseMarker3D" type="Marker3D" parent="Markers"]
+gizmo_extents = 1.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." node_paths=PackedStringArray("parent_entity")]
+collision_layer = 2
+collision_mask = 24
+script = ExtResource("8_xmjbh")
+parent_entity = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
+shape = SubResource("BoxShape3D_nynkh")
+metadata/surface_type = &"wood"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
+size = Vector3(2, 4, 0.25)
+material = ExtResource("9_i3ife")
+
+[node name="ZN_TriggerArea3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 30
+script = ExtResource("12_0vjok")
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZN_TriggerArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
+shape = SubResource("BoxShape3D_gvmmc")
+
+[node name="ZN_DoorAction" type="Node" parent="ZN_TriggerArea3D" node_paths=PackedStringArray("target")]
+script = ExtResource("11_0vjok")
+target = NodePath("../..")
+open = 1
+metadata/_custom_type_script = "uid://cpgnglttfputx"
