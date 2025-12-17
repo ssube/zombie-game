@@ -1,10 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdik1mgum870e"]
+[gd_scene load_steps=8 format=3 uid="uid://cdik1mgum870e"]
 
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_0vmuv"]
 [ext_resource type="Script" uid="uid://c1xgtwmj2vomk" path="res://scripts/nodes/actions/ZN_SpawnAction.gd" id="2_fis0n"]
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="3_8n7nj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_36awv"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fis0n"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8n7nj"]
+width = 64
+height = 64
+noise = SubResource("FastNoiseLite_fis0n")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wa850"]
+albedo_color = Color(0.12389998, 0.59, 0.14720495, 1)
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_8n7nj")
 
 [node name="AmmoStation" type="Node3D"]
 
@@ -24,7 +38,6 @@ script = ExtResource("2_fis0n")
 spawn_scenes = Array[PackedScene]([ExtResource("3_8n7nj")])
 spawn_mode = 0
 spawn_marker = NodePath("../../SpawnMarker3D")
-spawn_at = 2
 random_radius = 0.25
 
 [node name="SpawnMarker3D" type="Marker3D" parent="."]
@@ -33,3 +46,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.09124756)
 size = Vector3(1, 1, 0.8)
+material = SubResource("StandardMaterial3D_wa850")
