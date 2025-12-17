@@ -1,9 +1,10 @@
-[gd_scene load_steps=404 format=4 uid="uid://bv4ooq3kct6wv"]
+[gd_scene load_steps=405 format=4 uid="uid://bv4ooq3kct6wv"]
 
 [ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/props/objective.tscn" id="1_5waeb"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_7w2j4"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_l234y"]
 [ext_resource type="Script" uid="uid://hu6tpnmjxa07" path="res://scripts/nodes/actions/ZN_SpeedModifierAction.gd" id="2_lgb38"]
+[ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="3_i88hr"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="3_l234y"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="3_lgb38"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_s4smc"]
@@ -1547,6 +1548,11 @@ shape = SubResource("BoxShape3D_2038p")
 [node name="ZN_SpeedModifierAction" type="Node" parent="Areas/PoolModifier"]
 script = ExtResource("2_lgb38")
 speed_multiplier = 0.5
+
+[node name="ZN_FireAction" type="Node" parent="Areas/PoolModifier"]
+script = ExtResource("3_i88hr")
+fire_mode = 1
+metadata/_custom_type_script = "uid://do7trwtn8xc7t"
 
 [node name="PoolEffect" type="Area3D" parent="Areas"]
 collision_mask = 24

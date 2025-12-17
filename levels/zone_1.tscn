@@ -1,9 +1,10 @@
-[gd_scene load_steps=389 format=4 uid="uid://2631yqe4y8ki"]
+[gd_scene load_steps=390 format=4 uid="uid://2631yqe4y8ki"]
 
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="2_1pddc"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="5_3ioyf"]
 [ext_resource type="Script" uid="uid://hu6tpnmjxa07" path="res://scripts/nodes/actions/ZN_SpeedModifierAction.gd" id="5_3k1mp"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="6_3k1mp"]
+[ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="6_3wwps"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door_wood_cw.tscn" id="8_4uioy"]
 [ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="8_ebfu5"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="8_wks3y"]
@@ -1480,6 +1481,11 @@ shape = SubResource("BoxShape3D_ebfu5")
 [node name="ZN_SpeedModifierAction" type="Node" parent="Areas/RiverSlowArea"]
 script = ExtResource("5_3k1mp")
 speed_multiplier = 0.5
+
+[node name="ZN_FireAction" type="Node" parent="Areas/RiverSlowArea"]
+script = ExtResource("6_3wwps")
+fire_mode = 1
+metadata/_custom_type_script = "uid://do7trwtn8xc7t"
 
 [node name="RiverEffectArea" type="Area3D" parent="Areas"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -23.460976, -2, -85.00002)
