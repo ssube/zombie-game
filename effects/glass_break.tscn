@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://h4ria6xn24kr"]
+
+[ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/nodes/ZN_GPUParticles3D.gd" id="1_ljhuj"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ncx43"]
+direction = Vector3(0, 0, -1)
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, -3, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljhuj"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.5686275)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_j2qt6"]
+material = SubResource("StandardMaterial3D_ljhuj")
+size = Vector2(0.2, 0.2)
+
+[node name="GlassBreak" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 12
+explosiveness = 0.75
+process_material = SubResource("ParticleProcessMaterial_ncx43")
+draw_pass_1 = SubResource("QuadMesh_j2qt6")
+script = ExtResource("1_ljhuj")

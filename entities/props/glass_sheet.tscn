@@ -1,0 +1,81 @@
+[gd_scene load_steps=18 format=3 uid="uid://c4timw2odgktn"]
+
+[ext_resource type="Script" uid="uid://ba5j4jfy3hpc" path="res://scripts/entities/props/ZE_Wall.gd" id="1_u0tbx"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_34t28"]
+[ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="3_faors"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_l4c1e"]
+[ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="5_7sij5"]
+[ext_resource type="Script" uid="uid://dxh5mkb32cr8f" path="res://scripts/nodes/ZN_EntityBody.gd" id="5_nn44j"]
+[ext_resource type="Script" uid="uid://c1xgtwmj2vomk" path="res://scripts/nodes/actions/ZN_SpawnAction.gd" id="6_faors"]
+[ext_resource type="Material" uid="uid://di5bd43dv3jro" path="res://materials/glass_clean.tres" id="6_nn44j"]
+[ext_resource type="PackedScene" uid="uid://h4ria6xn24kr" path="res://effects/glass_break.tscn" id="7_1uxs3"]
+[ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="7_l4c1e"]
+[ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="8_7sij5"]
+[ext_resource type="Script" uid="uid://n6ylsi7eoelr" path="res://scripts/nodes/actions/ZN_TimerAction.gd" id="11_jks22"]
+[ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/triggers/ZN_TriggerTimer.gd" id="12_md1jy"]
+
+[sub_resource type="Resource" id="Resource_nn44j"]
+script = ExtResource("3_faors")
+max_health = 10
+current_health = 10
+metadata/_custom_type_script = "uid://0ndifcnh0nsp"
+
+[sub_resource type="Resource" id="Resource_7sij5"]
+script = ExtResource("4_l4c1e")
+metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_dv5ss"]
+script = ExtResource("5_7sij5")
+actions = Dictionary[int, NodePath]({
+33: NodePath("ZN_BranchAction")
+})
+metadata/_custom_type_script = "uid://barikupijl7r7"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_md1jy"]
+size = Vector3(1, 1, 0.2)
+
+[node name="GlassSheet" type="Node3D"]
+script = ExtResource("1_u0tbx")
+component_resources = Array[ExtResource("2_34t28")]([SubResource("Resource_nn44j"), SubResource("Resource_7sij5"), SubResource("Resource_dv5ss")])
+
+[node name="GlassSheet" type="StaticBody3D" parent="." node_paths=PackedStringArray("parent_entity")]
+script = ExtResource("5_nn44j")
+parent_entity = NodePath("..")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="GlassSheet"]
+size = Vector3(1, 1, 0.05)
+material = ExtResource("6_nn44j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GlassSheet"]
+shape = SubResource("BoxShape3D_md1jy")
+
+[node name="ZN_BranchAction" type="Node" parent="."]
+script = ExtResource("8_7sij5")
+metadata/_custom_type_script = "uid://dbj456ofx8mw1"
+
+[node name="ZN_SpawnAction" type="Node" parent="ZN_BranchAction" node_paths=PackedStringArray("spawn_marker")]
+script = ExtResource("6_faors")
+spawn_scenes = Array[PackedScene]([ExtResource("7_1uxs3"), ExtResource("7_1uxs3"), ExtResource("7_1uxs3")])
+spawn_mode = 0
+spawn_marker = NodePath("../../Marker3D")
+spawn_at = 1
+random_radius = 0.5
+metadata/_custom_type_script = "uid://c1xgtwmj2vomk"
+
+[node name="ZN_TimerAction" type="Node" parent="ZN_BranchAction" node_paths=PackedStringArray("timer")]
+script = ExtResource("11_jks22")
+timer = NodePath("../../ZN_TriggerTimer")
+
+[node name="ZN_TriggerTimer" type="Timer" parent="."]
+wait_time = 0.5
+script = ExtResource("12_md1jy")
+start_on_ready = false
+metadata/_custom_type_script = "uid://b3w64ibj5uxv4"
+
+[node name="ZN_EntityAction" type="Node" parent="ZN_TriggerTimer" node_paths=PackedStringArray("entity")]
+script = ExtResource("7_l4c1e")
+entity = NodePath("../..")
+remove = true
+metadata/_custom_type_script = "uid://dlpeis5tgmelp"
+
+[node name="Marker3D" type="Marker3D" parent="."]

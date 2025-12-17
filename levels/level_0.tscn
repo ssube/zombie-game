@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=122 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_q6gno"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
@@ -38,6 +38,7 @@
 [ext_resource type="Script" uid="uid://bn1fw86ypw3a6" path="res://scripts/nodes/actions/ZN_PortalAction.gd" id="35_q6gno"]
 [ext_resource type="Script" uid="uid://cpxac3i6p71x0" path="res://scripts/nodes/objectives/ZN_CountObjective.gd" id="38_2fv0q"]
 [ext_resource type="PackedScene" uid="uid://c8tswr23gn5mg" path="res://entities/items/armor.tscn" id="38_g1jay"]
+[ext_resource type="PackedScene" uid="uid://c4timw2odgktn" path="res://entities/props/glass_sheet.tscn" id="39_2fv0q"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ukt1r"]
 radius = 1.5
@@ -580,7 +581,7 @@ effect = SubResource("Resource_ijfse")
 metadata/_custom_type_script = "uid://dmonxsvpyoytj"
 
 [node name="AmmoStation" parent="Areas" instance=ExtResource("3_w633q")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 12.9767065, 0.574916, -11.924664)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 1, -14.5)
 
 [node name="ZombieSpawn" parent="Areas" instance=ExtResource("5_lf4l6")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 10.5, 2.25, -7.5)
@@ -641,6 +642,14 @@ metadata/_custom_type_script = "uid://cpgnglttfputx"
 
 [node name="Door" parent="Entities/Room1" instance=ExtResource("17_g1jay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.25)
+
+[node name="GlassSheet" parent="Entities/Room1" instance=ExtResource("39_2fv0q")]
+transform = Transform3D(1.4142135, 0, -1.4142135, 0, 2, 0, 1.4142135, 0, 1.4142135, 2.216167, 1, -1.8180183)
+id = "Level0_ZE_Wall_1765939120_82616"
+
+[node name="GlassSheet2" parent="Entities/Room1" instance=ExtResource("39_2fv0q")]
+transform = Transform3D(1.4142135, 0, -1.4142135, 0, 2, 0, 1.4142135, 0, 1.4142135, 2.216167, 3, -1.8180183)
+id = "Level0_ZE_Wall_1765939118_76924"
 
 [node name="Room2" type="Node3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 4)
