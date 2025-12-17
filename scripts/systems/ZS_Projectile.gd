@@ -17,16 +17,17 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		var ray = entity.get_node(projectile.collision_ray) as RayCast3D
 
 		if ray != null and ray.is_colliding():
-			var target_object = ray.get_collider()
+			var collider = ray.get_collider()
+			var target_object = CollisionUtils.get_collider_entity(collider)
 			var target_shape = CollisionUtils.get_collision_shape(ray)
 
 			print("Bullet is colliding with: ", target_object, ", ", target_shape)
-			apply_decal(ray, target_object)
-			apply_sound(ray, target_object)
+			apply_decal(ray, collider)
+			apply_sound(ray, collider)
 
-			if target_object is RigidBody3D:
+			if collider is RigidBody3D:
 				var impact_vector: Vector3 = ray.get_collision_normal() * -projectile.mass
-				target_object.apply_impulse(impact_vector)
+				collider.apply_impulse(impact_vector)
 
 			if target_object is Entity:
 				var body_regions = target_object.get_component(ZC_Body_Regions) as ZC_Body_Regions
