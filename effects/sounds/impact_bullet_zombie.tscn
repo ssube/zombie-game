@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3l6kq0wreu1j"]
 
 [ext_resource type="AudioStream" uid="uid://bttoaidu2p4db" path="res://sounds/Sound Effects/Melee/Hit/blunt_hit_bloody_light_ufx_2.ogg" id="1_koid2"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="2_e2jdi"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_e2jdi"]
 
 [node name="ImpactBulletZombie" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_koid2")

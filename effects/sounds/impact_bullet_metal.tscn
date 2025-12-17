@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c5fps4vw7b0mo"]
 
 [ext_resource type="AudioStream" uid="uid://0w6ilyin7ah4" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/IMPACTS and CONTACTS/Short Contact Sounds/sfx_short_contact_sound_230.wav" id="1_sa7mc"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="2_hc255"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_hc255"]
 
 [node name="ImpactBulletMetal" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_sa7mc")

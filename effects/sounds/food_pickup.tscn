@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://be8hsn7xg2ebr"]
 
 [ext_resource type="AudioStream" uid="uid://d11bh5ukbi70b" path="res://sounds/1000 Retro Sound Effects/General Sounds/Interactions/sfx_pick_up1.wav" id="1_7gta3"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="2_5fala"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_5fala"]
 
 [node name="FoodPickup" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_7gta3")

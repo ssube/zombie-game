@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://duux0lfms1eea" path="res://sounds/1000 Retro Sound Effects/General Sounds/Buttons/sfx_button_small2.wav" id="6_3n38l"]
 [ext_resource type="Script" uid="uid://djt2jgsv2ihkt" path="res://scripts/nodes/actions/ZN_AnimationAction.gd" id="6_ie4yn"]
 [ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="6_nqh2g"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="7_nqh2g"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="7_nqh2g"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="9_ie4yn"]
 
 [sub_resource type="Resource" id="Resource_0h2if"]

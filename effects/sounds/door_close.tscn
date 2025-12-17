@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bl5eexiq13e3h"]
 
 [ext_resource type="AudioStream" uid="uid://dx43jaqci2m6n" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Doors & Drawers/drawer_2_close.ogg" id="1_s18jx"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="2_nx5y2"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_nx5y2"]
 
 [node name="DoorClose" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_s18jx")

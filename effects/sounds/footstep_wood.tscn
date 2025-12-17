@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwou77c4uqtt"]
 
 [ext_resource type="AudioStream" uid="uid://dhcvjyu4pgyyx" path="res://sounds/1000 Retro Sound Effects/Movement/Footsteps/sfx_walk9.wav" id="1_aaynp"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="2_ucaq1"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_ucaq1"]
 
 [node name="FootstepWood" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_aaynp")

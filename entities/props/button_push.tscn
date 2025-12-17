@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://djt2jgsv2ihkt" path="res://scripts/nodes/actions/ZN_AnimationAction.gd" id="6_wlayu"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="7_c6nwv"]
 [ext_resource type="AudioStream" uid="uid://brrg1fnj5tpo3" path="res://sounds/1000 Retro Sound Effects/General Sounds/Buttons/sfx_sounds_button3.wav" id="8_b5ffr"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="9_wlayu"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="9_wlayu"]
 
 [sub_resource type="Resource" id="Resource_0h2if"]
 script = ExtResource("3_klvmx")

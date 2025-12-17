@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjwcu1vgbspmb"]
 
 [ext_resource type="AudioStream" uid="uid://c4gct48ef8kao" path="res://sounds/Sound Effects/Firearms/Racking/shotgun_racking_ufx_2.ogg" id="1_da2ck"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_Subtitle3D.gd" id="2_pboaa"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_pboaa"]
 
 [node name="ShotgunEquip" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_da2ck")
