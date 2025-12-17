@@ -13,7 +13,8 @@ class_name ZC_Door
 	set(value):
 		var previous_open := is_open
 		is_open = value
-		property_changed.emit(self, "is_open", previous_open, is_open)
+		if previous_open != is_open:
+			property_changed.emit(self, "is_open", previous_open, is_open)
 
 @export_group("Markers")
 @export var open_marker: NodePath
