@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://btcylfw6737qc"]
+
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_s60rm"]
+[ext_resource type="Script" uid="uid://djt2jgsv2ihkt" path="res://scripts/nodes/actions/ZN_AnimationAction.gd" id="2_rhbva"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rhbva"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="Animation" id="Animation_5ds3a"]
+resource_name = "pressed"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.5, 1, 0, -0.25, 0)
+
+[sub_resource type="Animation" id="Animation_5m7mg"]
+resource_name = "released"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, -0.25, 0, 0.53333336, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_r4638"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_miebl"]
+_data = {
+&"RESET": SubResource("Animation_r4638"),
+&"pressed": SubResource("Animation_5ds3a"),
+&"released": SubResource("Animation_5m7mg")
+}
+
+[node name="PressurePlate" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D"]
+size = Vector3(1, 0.5, 1)
+
+[node name="ZN_TriggerArea3D" type="Area3D" parent="Node3D"]
+collision_layer = 2
+collision_mask = 24
+script = ExtResource("1_s60rm")
+trigger_on_exit = true
+trigger_on_timer = false
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/ZN_TriggerArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_rhbva")
+
+[node name="ZN_AnimationAction" type="Node" parent="Node3D/ZN_TriggerArea3D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("2_rhbva")
+animation_player = NodePath("../../../AnimationPlayer")
+event_animations = Dictionary[int, String]({
+10: "pressed",
+11: "released"
+})
+metadata/_custom_type_script = "uid://djt2jgsv2ihkt"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_miebl")
+}
