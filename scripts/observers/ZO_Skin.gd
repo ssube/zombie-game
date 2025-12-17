@@ -31,9 +31,9 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 				skin_group = "skin_hurt"
 				skin_material = skin.material_hurt
 
-		assert(skin_material != null, "Skin material is missing!")
-
-		update_skin_material.call_deferred(entity, skin, skin_material)
+		# assert(skin_material != null, "Skin material is missing!")
+		if skin_material:
+			update_skin_material.call_deferred(entity, skin, skin_material)
 		show_skin_group.call_deferred(entity, skin_group, hide_groups)
 
 
