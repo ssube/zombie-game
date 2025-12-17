@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3tpjihi54q6d"]
+
+[ext_resource type="Script" uid="uid://dek5gcrqglmkl" path="res://scripts/nodes/ZN_Gimbal.gd" id="1_x8yyl"]
+
+[node name="GimbalTest" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(0.82181746, 0.43611312, -0.3666354, -0.53764665, 0.80656976, -0.24572602, 0.18855256, 0.39906237, 0.8973283, 0, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D"]
+
+[node name="ZN_Gimbal" type="Node3D" parent="Node3D"]
+transform = Transform3D(0.8217233, -0.53762233, 0.18855597, 0.43606314, 0.8065331, 0.3990692, -0.36659315, -0.24571489, 0.8973435, 3.993511e-06, -0.49999392, -4.61936e-06)
+script = ExtResource("1_x8yyl")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D/ZN_Gimbal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
