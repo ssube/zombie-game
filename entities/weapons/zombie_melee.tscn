@@ -58,7 +58,6 @@ apply_to_factions = Array[String](["friendly_players"])
 metadata/_custom_type_script = "uid://crylbd231pgne"
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Path3D/PathFollow3D"]
-visible = false
 radius = 0.25
 radial_segments = 8
 rings = 4

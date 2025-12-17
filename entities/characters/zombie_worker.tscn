@@ -95,7 +95,7 @@ radius = 20.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_kv3li"]
 radius = 2.0
 
-[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("events", "current_weapon", "inventory_node")]
+[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("events", "current_weapon", "inventory_node", "weapon_node")]
 collision_layer = 16
 collision_mask = 31
 mass = 20.0
@@ -103,6 +103,7 @@ script = ExtResource("1_enhv7")
 events = NodePath("Behavior/ZombieBehavior/Events")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
+weapon_node = NodePath("WeaponMarker")
 component_resources = Array[ExtResource("2_g3ik4")]([SubResource("Resource_ekadw"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj"), SubResource("Resource_xbif0"), SubResource("Resource_fkiag")])
 
 [node name="CSGBody" type="CSGCylinder3D" parent="."]
@@ -286,7 +287,9 @@ visible = false
 
 [node name="ZombieMelee" parent="Inventory" instance=ExtResource("27_rmkq5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5514579)
-visible = false
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="WeaponMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4162073, -0.583356)

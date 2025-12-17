@@ -17,6 +17,10 @@ var move_tween: Tween
 
 var max_look: float = deg_to_rad(180)
 
+func _process(_delta: float) -> void:
+	if current_weapon and weapon_node:
+		current_weapon.global_transform = weapon_node.global_transform
+
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
