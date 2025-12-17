@@ -12,14 +12,6 @@ func run_entity(_source: Node, _event: Enums.ActionEvent, _actor: Entity) -> voi
 		printerr("Target is not a door: ", target)
 		return
 
-	match open:
-		Enums.Tristate.UNSET:
-			pass
-		Enums.Tristate.FALSE:
-			door.is_open = false
-		Enums.Tristate.TRUE:
-			door.is_open = true
-
 	var locked := target.get_component(ZC_Locked) as ZC_Locked
 	if locked == null:
 		return
@@ -31,3 +23,15 @@ func run_entity(_source: Node, _event: Enums.ActionEvent, _actor: Entity) -> voi
 			locked.is_locked = false
 		Enums.Tristate.TRUE:
 			locked.is_locked = true
+
+	if locked.is_locked:
+		return
+		
+	# TODO: should open actions run if the door is locked?
+	match open:
+		Enums.Tristate.UNSET:
+			pass
+		Enums.Tristate.FALSE:
+			door.is_open = false
+		Enums.Tristate.TRUE:
+			door.is_open = true

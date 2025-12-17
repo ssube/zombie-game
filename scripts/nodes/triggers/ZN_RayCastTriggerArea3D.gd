@@ -1,6 +1,7 @@
 extends ZN_TriggerArea3D
-class_name ZN_RaycastArea3D
+class_name ZN_RayCastTriggerArea3D
 
+# TODO: add test markers
 
 var body_queue: Array[Node] = []
 var sight_queue: Array[Node] = []

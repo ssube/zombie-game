@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dpc8jknfhigal" path="res://assets/ZombieApocalypsePack/Bat/bat_texture.png" id="6_jaqrl"]
 [ext_resource type="PackedScene" uid="uid://cgo4rx8hcv6un" path="res://effects/sounds/bat_break.tscn" id="7_nl1ig"]
 [ext_resource type="Script" uid="uid://dnmn2xmqdrr00" path="res://scripts/components/weapons/ZC_Durability.gd" id="8_3gqkk"]
-[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_ActionArea3D.gd" id="10_hgjmx"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="10_hgjmx"]
 [ext_resource type="Script" uid="uid://u512rl8uacud" path="res://scripts/nodes/actions/ZN_DurabilityAction.gd" id="10_hvjee"]
 [ext_resource type="Script" uid="uid://dlb4vkkjdb658" path="res://scripts/nodes/actions/ZN_HealthAction.gd" id="11_hgjmx"]
 [ext_resource type="Script" uid="uid://crylbd231pgne" path="res://scripts/nodes/conditions/ZN_FactionCondition.gd" id="12_nl1ig"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bnaekqfrdu382"]
 
 [ext_resource type="QuadMesh" uid="uid://cltad2jeupalx" path="res://effects/fire_particle.tres" id="1_rbltl"]
-[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/ZN_ActionArea3D.gd" id="1_rrymp"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_rrymp"]
 [ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="3_80lxs"]
 [ext_resource type="Script" uid="uid://hu6tpnmjxa07" path="res://scripts/nodes/actions/ZN_SpeedModifierAction.gd" id="4_vbrxv"]
 [ext_resource type="Script" uid="uid://crylbd231pgne" path="res://scripts/nodes/conditions/ZN_FactionCondition.gd" id="5_hnali"]
