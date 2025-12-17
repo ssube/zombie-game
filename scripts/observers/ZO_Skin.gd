@@ -46,10 +46,26 @@ func update_skin_material(entity: Node, skin: ZC_Skin, material: BaseMaterial3D)
 func show_skin_group(entity: Node, show_group: String, hide_groups: Array[String] = []) -> void:
 	var all_children := entity.find_children("*")
 	for child in all_children:
-		if "visible" in child:
-			if child.is_in_group(show_group):
-					child.visible = true
+		if child.is_in_group(show_group):
+			_toggle_node(child, true)
 
-			for hide_group in hide_groups:
-				if child.is_in_group(hide_group):
-					child.visible = false
+		for hide_group in hide_groups:
+			if child.is_in_group(hide_group):
+				_toggle_node(child, false)
+
+
+func _toggle_node(node: Node, value: bool) -> void:
+	if "active" in node:
+		node.active = value
+
+	if "visible" in node:
+		node.visible = value
+
+	if "disabled" in node:
+		node.disabled = not node
+
+	if "process_mode" in node:
+		if value:
+			node.process_mode = Node.PROCESS_MODE_INHERIT
+		else:
+			node.process_mode = Node.PROCESS_MODE_DISABLED
