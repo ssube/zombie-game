@@ -11,9 +11,11 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 		return
 
 	var c_health := component as ZC_Health
-	if new_value == 0 and c_health.death_sound:
-		var sound_node = c_health.death_sound.instantiate() as ZN_AudioSubtitle3D
-		entity.add_child(sound_node)
+	if new_value == 0:
+		ActionUtils.run_entity(entity, Enums.ActionEvent.ENTITY_DEATH, null)
+		if c_health.death_sound:
+			var sound_node = c_health.death_sound.instantiate() as ZN_AudioSubtitle3D
+			entity.add_child(sound_node)
 
 	call_deferred("update_skin", entity, c_health, new_value)
 
