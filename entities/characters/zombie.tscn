@@ -252,7 +252,7 @@ visible = false
 [node name="Inventory" type="Node3D" parent="."]
 
 [node name="ZombieMelee" parent="Inventory" instance=ExtResource("27_j7lgi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5514579)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44078487, -0.60281074)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 
