@@ -1,0 +1,52 @@
+[gd_scene load_steps=13 format=3 uid="uid://c64yefgf5ki5c"]
+
+[ext_resource type="Script" uid="uid://bcl4s07i5wm66" path="res://scripts/entities/characters/ZE_Character.gd" id="1_0ymef"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_x4c01"]
+[ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="3_m1ox8"]
+[ext_resource type="Script" uid="uid://c7dv7vmk2ynqt" path="res://scripts/components/characters/ZC_Movement.gd" id="4_8d7q7"]
+[ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="5_4hlmh"]
+
+[sub_resource type="Resource" id="Resource_k55fj"]
+script = ExtResource("3_m1ox8")
+max_health = 25
+current_health = 25
+metadata/_custom_type_script = "uid://0ndifcnh0nsp"
+
+[sub_resource type="Resource" id="Resource_x1bwj"]
+script = ExtResource("4_8d7q7")
+metadata/_custom_type_script = "uid://c7dv7vmk2ynqt"
+
+[sub_resource type="Resource" id="Resource_alwcs"]
+script = ExtResource("5_4hlmh")
+metadata/_custom_type_script = "uid://cixmecjncarw5"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vdtwx"]
+radius = 0.3
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iot0x"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nmu5s"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_iot0x")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_73fbt"]
+transparency = 1
+albedo_color = Color(0.19999999, 0.41333312, 1, 0.54901963)
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_nmu5s")
+
+[node name="SlimeBlue" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 27
+script = ExtResource("1_0ymef")
+component_resources = Array[ExtResource("2_x4c01")]([SubResource("Resource_k55fj"), SubResource("Resource_x1bwj"), SubResource("Resource_alwcs")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_vdtwx")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+radius = 0.3
+material = SubResource("StandardMaterial3D_73fbt")

@@ -1,0 +1,91 @@
+[gd_scene load_steps=19 format=3 uid="uid://bh1ay01i184yn"]
+
+[ext_resource type="Script" uid="uid://bcl4s07i5wm66" path="res://scripts/entities/characters/ZE_Character.gd" id="1_trphr"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_jnxhp"]
+[ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="2_xvftl"]
+[ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="3_1q86x"]
+[ext_resource type="Script" uid="uid://c1xgtwmj2vomk" path="res://scripts/nodes/actions/ZN_SpawnAction.gd" id="3_6w2fd"]
+[ext_resource type="Script" uid="uid://c7dv7vmk2ynqt" path="res://scripts/components/characters/ZC_Movement.gd" id="4_b3cc5"]
+[ext_resource type="Script" uid="uid://dek5gcrqglmkl" path="res://scripts/nodes/ZN_Gimbal.gd" id="4_xvftl"]
+[ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="5_p0mug"]
+[ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="6_1q86x"]
+[ext_resource type="PackedScene" uid="uid://c64yefgf5ki5c" path="res://entities/characters/slime_blue.tscn" id="9_b3cc5"]
+
+[sub_resource type="Resource" id="Resource_k55fj"]
+script = ExtResource("3_1q86x")
+max_health = 50
+current_health = 50
+metadata/_custom_type_script = "uid://0ndifcnh0nsp"
+
+[sub_resource type="Resource" id="Resource_x1bwj"]
+script = ExtResource("4_b3cc5")
+metadata/_custom_type_script = "uid://c7dv7vmk2ynqt"
+
+[sub_resource type="Resource" id="Resource_alwcs"]
+script = ExtResource("5_p0mug")
+metadata/_custom_type_script = "uid://cixmecjncarw5"
+
+[sub_resource type="Resource" id="Resource_b3cc5"]
+script = ExtResource("6_1q86x")
+actions = Dictionary[int, NodePath]({
+33: NodePath("ZN_BranchAction")
+})
+metadata/_custom_type_script = "uid://barikupijl7r7"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vdtwx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l2mc0"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pkns6"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_l2mc0")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ysw2j"]
+transparency = 1
+albedo_color = Color(1, 0.19999999, 0.19999999, 0.54901963)
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_pkns6")
+
+[node name="SlimeRed" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 27
+script = ExtResource("1_trphr")
+component_resources = Array[ExtResource("2_jnxhp")]([SubResource("Resource_k55fj"), SubResource("Resource_x1bwj"), SubResource("Resource_alwcs"), SubResource("Resource_b3cc5")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_vdtwx")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+material = SubResource("StandardMaterial3D_ysw2j")
+
+[node name="ZN_BranchAction" type="Node" parent="."]
+script = ExtResource("2_xvftl")
+metadata/_custom_type_script = "uid://dbj456ofx8mw1"
+
+[node name="ZN_SpawnAction" type="Node" parent="ZN_BranchAction" node_paths=PackedStringArray("spawn_marker")]
+script = ExtResource("3_6w2fd")
+spawn_position = 1
+spawn_scenes = Array[PackedScene]([ExtResource("9_b3cc5")])
+spawn_marker = NodePath("../../Node3D/Marker3D")
+metadata/_custom_type_script = "uid://c1xgtwmj2vomk"
+
+[node name="ZN_SpawnAction2" type="Node" parent="ZN_BranchAction" node_paths=PackedStringArray("spawn_marker")]
+script = ExtResource("3_6w2fd")
+spawn_position = 1
+spawn_scenes = Array[PackedScene]([ExtResource("9_b3cc5")])
+spawn_marker = NodePath("../../Node3D/Marker3D2")
+metadata/_custom_type_script = "uid://c1xgtwmj2vomk"
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("4_xvftl")
+multiplier = 0.5
+metadata/_custom_type_script = "uid://dek5gcrqglmkl"
+
+[node name="Marker3D" type="Marker3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+
+[node name="Marker3D2" type="Marker3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
