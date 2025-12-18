@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://h4ria6xn24kr"]
+[gd_scene load_steps=7 format=3 uid="uid://h4ria6xn24kr"]
 
 [ext_resource type="Script" uid="uid://y0s0q2drbh8g" path="res://scripts/nodes/ZN_GPUParticles3D.gd" id="1_ljhuj"]
+[ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/triggers/ZN_TriggerTimer.gd" id="2_j2qt6"]
+[ext_resource type="Script" uid="uid://b1hfgveu3fvsd" path="res://scripts/nodes/actions/ZN_NodeAction.gd" id="3_ju8ry"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ncx43"]
 direction = Vector3(0, 0, -1)
@@ -28,3 +30,14 @@ explosiveness = 0.75
 process_material = SubResource("ParticleProcessMaterial_ncx43")
 draw_pass_1 = SubResource("QuadMesh_j2qt6")
 script = ExtResource("1_ljhuj")
+
+[node name="ZN_TriggerTimer" type="Timer" parent="."]
+wait_time = 0.5
+script = ExtResource("2_j2qt6")
+metadata/_custom_type_script = "uid://b3w64ibj5uxv4"
+
+[node name="ZN_NodeAction" type="Node" parent="ZN_TriggerTimer" node_paths=PackedStringArray("node")]
+script = ExtResource("3_ju8ry")
+node = NodePath("../..")
+remove = true
+metadata/_custom_type_script = "uid://b1hfgveu3fvsd"

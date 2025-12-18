@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4timw2odgktn"]
+[gd_scene load_steps=16 format=3 uid="uid://c4timw2odgktn"]
 
 [ext_resource type="Script" uid="uid://ba5j4jfy3hpc" path="res://scripts/entities/props/ZE_Wall.gd" id="1_u0tbx"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_34t28"]
@@ -11,8 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://h4ria6xn24kr" path="res://effects/glass_break.tscn" id="7_1uxs3"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="7_l4c1e"]
 [ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="8_7sij5"]
-[ext_resource type="Script" uid="uid://n6ylsi7eoelr" path="res://scripts/nodes/actions/ZN_TimerAction.gd" id="11_jks22"]
-[ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/triggers/ZN_TriggerTimer.gd" id="12_md1jy"]
 
 [sub_resource type="Resource" id="Resource_nn44j"]
 script = ExtResource("3_faors")
@@ -55,24 +53,14 @@ metadata/_custom_type_script = "uid://dbj456ofx8mw1"
 
 [node name="ZN_SpawnAction" type="Node" parent="ZN_BranchAction" node_paths=PackedStringArray("spawn_marker")]
 script = ExtResource("6_faors")
-spawn_scenes = Array[PackedScene]([ExtResource("7_1uxs3"), ExtResource("7_1uxs3"), ExtResource("7_1uxs3")])
 spawn_mode = 0
+spawn_position = 1
+spawn_scenes = Array[PackedScene]([ExtResource("7_1uxs3"), ExtResource("7_1uxs3"), ExtResource("7_1uxs3")])
 spawn_marker = NodePath("../../Marker3D")
-spawn_at = 1
-random_radius = 0.5
+random_spread = Vector3(0, 0.5, 0.5)
 metadata/_custom_type_script = "uid://c1xgtwmj2vomk"
 
-[node name="ZN_TimerAction" type="Node" parent="ZN_BranchAction" node_paths=PackedStringArray("timer")]
-script = ExtResource("11_jks22")
-timer = NodePath("../../ZN_TriggerTimer")
-
-[node name="ZN_TriggerTimer" type="Timer" parent="."]
-wait_time = 0.5
-script = ExtResource("12_md1jy")
-start_on_ready = false
-metadata/_custom_type_script = "uid://b3w64ibj5uxv4"
-
-[node name="ZN_EntityAction" type="Node" parent="ZN_TriggerTimer" node_paths=PackedStringArray("entity")]
+[node name="ZN_EntityAction" type="Node" parent="ZN_BranchAction" node_paths=PackedStringArray("entity")]
 script = ExtResource("7_l4c1e")
 entity = NodePath("../..")
 remove = true
