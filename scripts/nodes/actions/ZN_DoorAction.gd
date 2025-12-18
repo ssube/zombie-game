@@ -3,7 +3,7 @@ class_name ZN_DoorAction
 
 @export var target: Entity = null
 
-@export var unlock: Enums.Tristate = Enums.Tristate.UNSET
+# @export var unlock: Enums.Tristate = Enums.Tristate.UNSET
 @export var open: Enums.Tristate = Enums.Tristate.UNSET
 
 func run_entity(_source: Node, _event: Enums.ActionEvent, _actor: Entity) -> void:
@@ -12,22 +12,11 @@ func run_entity(_source: Node, _event: Enums.ActionEvent, _actor: Entity) -> voi
 		printerr("Target is not a door: ", target)
 		return
 
-	var locked := target.get_component(ZC_Locked) as ZC_Locked
-	if locked == null:
-		return
-
-	match unlock:
-		Enums.Tristate.UNSET:
-			pass
-		Enums.Tristate.FALSE:
-			locked.is_locked = false
-		Enums.Tristate.TRUE:
-			locked.is_locked = true
-
-	if locked.is_locked:
-		return
-		
 	# TODO: should open actions run if the door is locked?
+	var locked := target.get_component(ZC_Locked) as ZC_Locked
+	if locked and locked.is_locked:
+		return
+
 	match open:
 		Enums.Tristate.UNSET:
 			pass
