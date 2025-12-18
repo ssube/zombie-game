@@ -1,5 +1,5 @@
 extends ZN_BaseAction
-class_name ZN_RemoteAction
+class_name ZN_CallAction
 
 @export var target_actions: Array[ZN_BaseAction] = []
 
