@@ -42,7 +42,9 @@ func _ready():
 		add_entity(child)
 
 	if OS.is_debug_build():
-		load_level(debug_level, debug_marker)
+		# look up debug level from CLI args
+		var args := _get_debug_level()
+		load_level(args[0], args[1])
 	else:
 		load_level(start_level, start_marker)
 
@@ -50,6 +52,30 @@ func _process(delta):
 	# Process all systems
 	if ECS.world:
 		ECS.process(delta)
+
+func _get_debug_level() -> Array[String]:
+	var level := debug_level
+	var marker := debug_marker
+
+	var args := OS.get_cmdline_user_args()
+	for arg in args:
+		if arg.begins_with("--level="):
+			var arg_level := arg.substr(8)
+			if arg_level:
+				if arg_level in level_scenes:
+					level = arg_level
+				else:
+					printerr("Requested level %s is not in the levels table!" % level)
+
+		# no way to validate the marker is valid until the level has been loaded
+		if arg.begins_with("--marker="):
+			var arg_marker := arg.substr(9)
+			if arg_marker:
+				marker = arg_marker
+
+	print("Loading level %s at marker %s" % [level, marker])
+
+	return [level, marker]
 
 ## Add the level entities to the ECS world
 func _register_level_entities() -> void:
