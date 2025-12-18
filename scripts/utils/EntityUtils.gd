@@ -235,7 +235,7 @@ static func get_speed_multiplier(entity: Node) -> float:
 	return multiplier
 
 
-static func remove(entity: Node) -> void:
+static func remove_immediate(entity: Node) -> void:
 	if entity is Entity:
 		ECS.world.remove_entity(entity)
 
@@ -244,6 +244,10 @@ static func remove(entity: Node) -> void:
 		parent.remove_child(entity)
 
 	entity.queue_free()
+
+
+static func remove(entity: Node) -> void:
+	remove_immediate.call_deferred(entity)
 
 
 static func find_sounds(entity: Node3D) -> Array[ZN_AudioSubtitle3D]:
