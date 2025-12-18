@@ -4,6 +4,7 @@ class_name ZN_TriggerArea3D
 @export var active: bool = true
 @export var area_interval: float = 1.0
 @export var body_interval: float = 1.0
+@export var check_body_for_entity: bool = true
 
 @export_group("Triggers")
 ## Trigger when all bodies have left and the area is empty
@@ -52,6 +53,14 @@ func _process(delta: float) -> void:
 			_on_body_timer(collider)
 
 
+func _get_body_entity(body: Node) -> Node:
+	var entity := CollisionUtils.get_collider_entity(body)
+	if entity:
+		return entity
+
+	return body
+
+
 func _on_body_entered(body: Node) -> void:
 	if not active:
 		return
@@ -80,6 +89,11 @@ func _on_body_timer(body: Node) -> void:
 		apply_actions(self, Enums.ActionEvent.BODY_INTERVAL, body)
 
 
-func apply_actions(source: Node, event: Enums.ActionEvent, actor: Node) -> void:
+func apply_actions(source: Node, event: Enums.ActionEvent, body: Node) -> void:
+	var actor := body
+	if check_body_for_entity:
+		actor = _get_body_entity(body)
+
+	assert(actor != null, "Actor should not be null for trigger area!")
 	for action in _actions:
 		action._run(source, event, actor)
