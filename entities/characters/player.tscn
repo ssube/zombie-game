@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="10_vkqcq"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="12_b4uku"]
 [ext_resource type="Script" uid="uid://dpu6n5g8bpa3g" path="res://scripts/components/characters/ZC_Footstep.gd" id="13_jq748"]
-[ext_resource type="PackedScene" uid="uid://bwou77c4uqtt" path="res://effects/sounds/footstep_wood.tscn" id="14_gmhi3"]
+[ext_resource type="PackedScene" uid="uid://bwou77c4uqtt" path="res://effects/sounds/footstep_wood_player.tscn" id="14_gmhi3"]
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="14_jq748"]
 [ext_resource type="Script" uid="uid://b7x5tu22015cx" path="res://scripts/components/characters/ZC_Faction.gd" id="15_gmhi3"]
 
