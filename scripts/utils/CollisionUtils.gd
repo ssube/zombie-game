@@ -7,6 +7,9 @@ static var unknown_surface = &"unknown"
 ## Attempt to get the collider's entity, if the collider itself is not an entity.
 ## Checks the `parent_entity` field, then the node's immediate parent.
 static func get_collider_entity(collider: Node) -> Entity:
+	if collider == null:
+		return null
+		
 	if collider is PhysicsBody3D and collider is Entity:
 		return collider
 
@@ -48,7 +51,7 @@ static func _get_surface_meta(node: Node) -> StringName:
 	return node.get_meta("surface_type", "")
 
 
-static func get_body_surface(body: CollisionObject3D) -> StringName:
+static func get_body_surface(body: Node) -> StringName:
 	var surface_type := _get_surface_meta(body)
 	if surface_type:
 		return surface_type
