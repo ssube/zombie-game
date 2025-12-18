@@ -5,12 +5,19 @@ enum SkinType {
 	HEALTHY,
 	HURT,
 	DEAD,
+	ENABLED,
+	DISABLED,
 }
 
 @export_group("Materials")
+@export_subgroup("Health")
 @export var material_healthy: BaseMaterial3D = null
 @export var material_hurt: BaseMaterial3D = null
 @export var material_dead: BaseMaterial3D = null
+
+@export_subgroup("State")
+@export var material_disabled: BaseMaterial3D = null
+@export var material_enabled: BaseMaterial3D = null
 
 @export_group("Nodes")
 @export var skin_shapes: Array[NodePath] = []

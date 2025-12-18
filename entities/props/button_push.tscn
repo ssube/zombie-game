@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://drdesj6rooo11"]
+[gd_scene load_steps=24 format=3 uid="uid://drdesj6rooo11"]
 
 [ext_resource type="Script" uid="uid://svxqn3t4whnt" path="res://scripts/entities/props/ZE_Button.gd" id="1_l113m"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_txy2n"]
@@ -7,9 +7,13 @@
 [ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_b5ffr"]
 [ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="6_b5ffr"]
 [ext_resource type="Script" uid="uid://djt2jgsv2ihkt" path="res://scripts/nodes/actions/ZN_AnimationAction.gd" id="6_wlayu"]
+[ext_resource type="Script" uid="uid://b8oatb3tdywrh" path="res://scripts/components/characters/ZC_Skin.gd" id="7_b41lu"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="7_c6nwv"]
+[ext_resource type="Material" uid="uid://divxfmiycw33x" path="res://materials/button_green_disabled.tres" id="7_iasvb"]
+[ext_resource type="Material" uid="uid://c4ihe7nrnnjeg" path="res://materials/button_green_enabled.tres" id="7_ysgk6"]
 [ext_resource type="AudioStream" uid="uid://brrg1fnj5tpo3" path="res://sounds/1000 Retro Sound Effects/General Sounds/Buttons/sfx_sounds_button3.wav" id="8_b5ffr"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="9_wlayu"]
+[ext_resource type="Script" uid="uid://w4f2ylmprmmj" path="res://scripts/nodes/actions/ZN_SkinAction.gd" id="11_wlayu"]
 
 [sub_resource type="Resource" id="Resource_0h2if"]
 script = ExtResource("3_klvmx")
@@ -31,8 +35,13 @@ actions = Dictionary[int, NodePath]({
 })
 metadata/_custom_type_script = "uid://barikupijl7r7"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcbqw"]
-albedo_color = Color(0.18, 1, 0.19366664, 1)
+[sub_resource type="Resource" id="Resource_ysgk6"]
+script = ExtResource("7_b41lu")
+material_disabled = ExtResource("7_iasvb")
+material_enabled = ExtResource("7_ysgk6")
+skin_shapes = Array[NodePath]([NodePath("CSGBox3D")])
+current_skin = 3
+metadata/_custom_type_script = "uid://b8oatb3tdywrh"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0h2if"]
 size = Vector3(0.3, 0.3, 0.3)
@@ -92,11 +101,11 @@ _data = {
 collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_l113m")
-component_resources = Array[ExtResource("2_txy2n")]([SubResource("Resource_0h2if"), SubResource("Resource_qcbqw"), SubResource("Resource_wlayu")])
+component_resources = Array[ExtResource("2_txy2n")]([SubResource("Resource_0h2if"), SubResource("Resource_qcbqw"), SubResource("Resource_wlayu"), SubResource("Resource_ysgk6")])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 size = Vector3(0.3, 0.3, 0.3)
-material = SubResource("StandardMaterial3D_qcbqw")
+material = ExtResource("7_ysgk6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_0h2if")
@@ -125,6 +134,11 @@ event_animations = Dictionary[int, String]({
 script = ExtResource("7_c6nwv")
 audio_player = NodePath("../../ZN_AudioSubtitle3D")
 
+[node name="ZN_SkinAction" type="Node" parent="PressedActions" node_paths=PackedStringArray("target_entity")]
+script = ExtResource("11_wlayu")
+target_entity = NodePath("../..")
+new_skin = 4
+
 [node name="ReleasedActions" type="Node" parent="."]
 
 [node name="ZN_AnimationAction" type="Node" parent="ReleasedActions" node_paths=PackedStringArray("animation_player")]
@@ -133,3 +147,8 @@ animation_player = NodePath("../../AnimationPlayer")
 event_animations = Dictionary[int, String]({
 21: "released"
 })
+
+[node name="ZN_SkinAction" type="Node" parent="ReleasedActions" node_paths=PackedStringArray("target_entity")]
+script = ExtResource("11_wlayu")
+target_entity = NodePath("../..")
+new_skin = 3

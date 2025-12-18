@@ -30,6 +30,14 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 				hide_groups = ["skin_dead", "skin_healthy"]
 				skin_group = "skin_hurt"
 				skin_material = skin.material_hurt
+			ZC_Skin.SkinType.DISABLED:
+				hide_groups = ["skin_enabled"]
+				skin_group = "skin_disabled"
+				skin_material = skin.material_disabled
+			ZC_Skin.SkinType.ENABLED:
+				hide_groups = ["skin_disabled"]
+				skin_group = "skin_enabled"
+				skin_material = skin.material_enabled
 
 		# assert(skin_material != null, "Skin material is missing!")
 		if skin_material:
@@ -40,7 +48,8 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 func update_skin_material(entity: Node, skin: ZC_Skin, material: BaseMaterial3D):
 	for shape_path in skin.skin_shapes:
 		var shape = entity.get_node(shape_path) as GeometryInstance3D
-		shape.material_overlay = material
+		# shape.material_overlay = material
+		shape.material_override = material
 
 
 func show_skin_group(entity: Node, show_group: String, hide_groups: Array[String] = []) -> void:

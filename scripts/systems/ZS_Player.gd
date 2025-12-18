@@ -475,7 +475,8 @@ func use_button(entity: Entity, player_entity: Entity) -> void:
 	var button := entity.get_component(ZC_Button) as ZC_Button
 	if not button.is_active:
 		return
-
+		
+	# TODO: should add a pressed-by relationship that is used by the button observer
 	if button.is_toggle:
 		button.is_pressed = not button.is_pressed
 		var pressed_message := _format_button_pressed(button.is_pressed)
@@ -483,16 +484,6 @@ func use_button(entity: Entity, player_entity: Entity) -> void:
 	else:
 		button.is_pressed = true
 		%Menu.push_action("Pressed button")
-
-	# TODO: should add a pressed-by relationship that is used by the button observer
-	var event: Enums.ActionEvent
-
-	if button.is_pressed:
-		event = Enums.ActionEvent.BUTTON_PRESS
-	else:
-		event = Enums.ActionEvent.BUTTON_RELEASE
-
-	ActionUtils.run_entity(entity, event, player_entity)
 
 
 func use_character(entity: Entity, player_entity: Entity) -> void:

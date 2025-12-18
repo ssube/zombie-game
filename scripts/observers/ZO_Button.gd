@@ -15,11 +15,12 @@ func on_component_changed(
 		if button.cooldown_delay > 0:
 			entity.add_component(ZC_Cooldown.new(button.cooldown_delay))
 
+		# TODO: actor should be source of a pressed relationship
 		if not is_pressed:
+			ActionUtils.run_entity(entity, Enums.ActionEvent.BUTTON_RELEASE, entity)
 			return
 
-		var event := Enums.ActionEvent.BUTTON_PRESS
-		ActionUtils.run_entity(entity, event, null)
+		ActionUtils.run_entity(entity, Enums.ActionEvent.BUTTON_PRESS, entity)
 
 		if button.is_toggle:
 			return
@@ -27,14 +28,10 @@ func on_component_changed(
 		# not a toggle button
 		if button.reset_delay > 0:
 			var reset_timer := get_tree().create_timer(button.reset_delay)
-			reset_timer.timeout.connect(_release_button.bind(entity, button))
+			reset_timer.timeout.connect(_release_button.bind(button))
 		else:
-			_release_button(entity, button)
+			_release_button(button)
 
 
-
-func _release_button(entity: Entity, button: ZC_Button) -> void:
+func _release_button(button: ZC_Button) -> void:
 	button.is_pressed = false
-
-	var event := Enums.ActionEvent.BUTTON_RELEASE
-	ActionUtils.run_entity(entity, event, null)
