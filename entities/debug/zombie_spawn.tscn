@@ -14,8 +14,8 @@
 script = ExtResource("1_g5n4o")
 area_interval = 15.0
 trigger_on_enter = false
-trigger_on_interval = true
-trigger_on_timer = false
+trigger_on_area_interval = true
+trigger_on_body_interval = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ZN_TriggerArea3D"]
@@ -25,8 +25,6 @@ shape = SubResource("BoxShape3D_36awv")
 script = ExtResource("2_6qs0j")
 spawn_scenes = Array[PackedScene]([ExtResource("3_t0qtj"), ExtResource("4_7yueh")])
 spawn_marker = NodePath("../../SpawnMarker3D")
-spawn_at = 2
-random_radius = 0.25
 
 [node name="SpawnMarker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
