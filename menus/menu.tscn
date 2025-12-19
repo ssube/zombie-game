@@ -44,8 +44,8 @@ seamless_blend_skirt = 0.5
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ss16q"]
 shader = ExtResource("2_w7kj8")
 shader_parameter/center = Vector2(0.5, 0.5)
-shader_parameter/radius = 0.75
-shader_parameter/softness = 0.50010002374747
+shader_parameter/radius = 0.666000031635
+shader_parameter/softness = 9.999999747e-05
 shader_parameter/vignette_color = Color(0, 0, 0, 1)
 shader_parameter/intensity = 1.0
 
@@ -147,7 +147,6 @@ grow_vertical = 2
 texture = SubResource("NoiseTexture2D_ph6eu")
 
 [node name="VignetteEffect" type="ColorRect" parent="EffectLayer"]
-visible = false
 material = SubResource("ShaderMaterial_ss16q")
 anchors_preset = 15
 anchor_right = 1.0
