@@ -1,16 +1,25 @@
 extends ZM_BaseMenu
 
-var visible_menu: Menus = Menus.NONE
+@export var visible_menu: Menus = Menus.NONE
 var previous_menu: Menus = Menus.START_MENU
 
 var pause_menus: Dictionary[Menus, bool] = {
 	Menus.NONE: false,
 }
-var visible_effects: Dictionary[Effects, float] = {}
+
 
 func _ready() -> void:
 	update_mouse_mode()
 	ObjectiveManager.set_menu(self)
+
+	$EffectLayer/AcidEffect.modulate.a = 0.0
+	$EffectLayer/ArmorEffect.modulate.a = 0.0
+	$EffectLayer/DamageEffect.modulate.a = 0.0
+	$EffectLayer/FireEffect.modulate.a = 0.0
+	$EffectLayer/HealEffect.modulate.a = 0.0
+	$EffectLayer/VignetteEffect.material.set_shader_parameter("softness", 0.0)
+	$EffectLayer/WaterEffect.modulate.a = 0.0
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -106,6 +115,7 @@ func show_menu(menu: Menus) -> void:
 
 		update_mouse_mode()
 
+		# TODO: move these into a dict and loop
 		match menu:
 			Menus.GAME_OVER_MENU:
 				$MenuLayer/GameOverMenu.on_show()
@@ -129,32 +139,10 @@ func show_menu(menu: Menus) -> void:
 				$MenuLayer/ExitDialog.on_show()
 
 
-## If the effect is visible, fade out
-func hide_effect(effect: Effects) -> void:
-	if effect not in visible_effects:
-		return
-
-	visible_effects.erase(effect)
-	match effect:
-		Effects.ACID:
-			$EffectLayer/AcidEffect.visible = false
-		Effects.ARMOR:
-			$EffectLayer/ArmorEffect.visible = false
-		Effects.DAMAGE:
-			$EffectLayer/DamageEffect.visible = false
-		Effects.FIRE:
-			$EffectLayer/FireEffect.visible = false
-		Effects.HEAL:
-			$EffectLayer/HealEffect.visible = false
-		Effects.VIGNETTE:
-			$EffectLayer/VignetteEffect.visible = false
-		Effects.WATER:
-			$EffectLayer/WaterEffect.visible = false
-
-
-func show_effect(effect: Effects, duration: float, strength: float = 1.0, fade_in: float = 0.2) -> void:
+func set_effect_strength(effect: Effects, strength: float = 1.0, fade_in: float = 0.1) -> void:
 	strength = clampf(strength, 0.0, 1.0)
 
+	# TODO: move these into a dict and loop
 	var effect_node: Control
 	match effect:
 		Effects.ACID:
@@ -174,18 +162,19 @@ func show_effect(effect: Effects, duration: float, strength: float = 1.0, fade_i
 		Effects.WATER:
 			effect_node = $EffectLayer/WaterEffect
 
-	if effect not in visible_effects:
-		effect_node.modulate.a = 0.0
+	if strength == effect_node.modulate.a:
+		return
+
+	effect_node.modulate.a = lerp(effect_node.modulate.a, strength, fade_in)
+
+	if effect_node.modulate.a > 0:
 		effect_node.visible = true
+	else:
+		effect_node.visible = false
 
-	visible_effects[effect] = duration
 
-	var tween := create_tween()
-	tween.tween_property(effect_node, "modulate:a", strength, fade_in)
-
-	if duration < INF:
-		tween.tween_property(effect_node, "modulate:a", 0, duration)
-		tween.tween_callback(hide_effect.bind(effect))
+func _hide_effect_node(node: Node) -> void:
+	node.visible = false
 
 
 func _on_new_game_pressed() -> void:
@@ -198,7 +187,10 @@ func _on_load_game_pressed() -> void:
 
 
 func _on_exit_pressed() -> void:
-	show_menu(Menus.EXIT_DIALOG)
+	if visible_menu == Menus.GAME_OVER_MENU:
+		get_tree().quit()
+	else:
+		show_menu(Menus.EXIT_DIALOG)
 
 
 func _on_resume_pressed() -> void:

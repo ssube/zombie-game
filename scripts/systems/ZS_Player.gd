@@ -68,14 +68,12 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			weapon_body.global_transform = entity.weapon_node.global_transform
 
 		# Process any effect relationships
-		var effects := entity.get_relationships(RelationshipUtils.any_effect) as Array[Relationship]
-		for rel in effects:
-			var effect := rel.target as ZC_Screen_Effect
+		var effect_strength := EntityUtils.get_screen_effects(entity)
+		for effect in effect_strength:
 			if effect == null:
 				continue
 
-			%Menu.show_effect(effect.effect, effect.duration, effect.strength)
-			entity.remove_relationship(rel)
+			%Menu.set_effect_strength(effect, effect_strength[effect], delta * 8)
 
 		# Process any heard relationships
 		var heard_noises := entity.get_relationships(RelationshipUtils.any_heard) as Array[Relationship]

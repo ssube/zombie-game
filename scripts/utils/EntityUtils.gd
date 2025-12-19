@@ -235,6 +235,26 @@ static func get_speed_multiplier(entity: Node) -> float:
 	return multiplier
 
 
+static func get_screen_effects(entity: Node) -> Dictionary[ZM_BaseMenu.Effects, float]:
+	var max_effects: Dictionary[ZM_BaseMenu.Effects, float] = {}
+
+	# TODO: remove or cache this loop
+	for effect_type in ZM_BaseMenu.Effects.values():
+		if effect_type == ZM_BaseMenu.Effects.NONE:
+			continue
+
+		max_effects[effect_type] = 0.0
+
+	var effects := entity.get_relationships(RelationshipUtils.any_effect) as Array[Relationship]
+	for rel in effects:
+		var effect := rel.target as ZC_Screen_Effect
+		var prev_strength := max_effects.get(effect.effect, 0.0) as float
+		if effect.strength > prev_strength:
+			max_effects[effect.effect] = effect.strength
+
+	return max_effects
+
+
 static func remove_immediate(entity: Node) -> void:
 	if entity is Entity:
 		ECS.world.remove_entity(entity)
