@@ -1,4 +1,4 @@
 extends Component
-class_name C_Behavior
+class_name ZC_Behavior
 
-@export var behavior_tree: Resource = null # Should be a Beehave BT resource
+@export var state_machine: NodePath
