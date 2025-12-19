@@ -67,14 +67,6 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			var weapon_body = entity.current_weapon.get_node(".") as RigidBody3D
 			weapon_body.global_transform = entity.weapon_node.global_transform
 
-		# Update transform for inventory items as well
-		# var hands_back: Vector3 = -entity.hands_node.global_transform.basis.z.normalized()
-		# if entity.inventory_node != null:
-			# for child in entity.inventory_node.get_children():
-				# child.global_transform = entity.hands_node.global_transform
-				# TODO: convert player inventory to a Node3D and do this once
-				# child.global_position -= hands_back * 5
-
 		# Process any effect relationships
 		var effects := entity.get_relationships(RelationshipUtils.any_effect) as Array[Relationship]
 		for rel in effects:
@@ -183,11 +175,11 @@ func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_cr
 			%Menu.push_action("Need %s key to use %s" % [locked.key_name, interactive.name])
 			return
 
-	if collider is ZE_Character:
+	if collider.has_component(ZC_Dialogue):
 		if set_crosshair:
 			%Menu.set_crosshair_color(Color.DODGER_BLUE)
 
-		use_character(collider, entity)
+		use_dialogue(collider, entity)
 
 	if collider.has_component(ZC_Objective):
 		if set_crosshair:
@@ -471,11 +463,11 @@ func _format_button_pressed(pressed: bool) -> String:
 		return "off"
 
 
-func use_button(entity: Entity, player_entity: Entity) -> void:
+func use_button(entity: Entity, _player_entity: Entity) -> void:
 	var button := entity.get_component(ZC_Button) as ZC_Button
 	if not button.is_active:
 		return
-		
+
 	# TODO: should add a pressed-by relationship that is used by the button observer
 	if button.is_toggle:
 		button.is_pressed = not button.is_pressed
@@ -486,7 +478,7 @@ func use_button(entity: Entity, player_entity: Entity) -> void:
 		%Menu.push_action("Pressed button")
 
 
-func use_character(entity: Entity, player_entity: Entity) -> void:
+func use_dialogue(entity: Entity, player_entity: Entity) -> void:
 	# get level markers
 	var markers := _get_level_markers()
 
@@ -631,7 +623,7 @@ func _list_player_weapons(entity: ZE_Player) -> Array[ZE_Weapon]:
 	var inventory = entity.get_inventory()
 	var weapons: Array[ZE_Weapon] = []
 	for item in inventory:
-		if item is ZE_Weapon:
+		if EntityUtils.is_weapon(item):
 			weapons.append(item)
 
 	return weapons

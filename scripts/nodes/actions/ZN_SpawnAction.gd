@@ -67,6 +67,7 @@ func _get_position(actor: Node, source: Node) -> Vector3:
 func _random_offset(scene: Node) -> void:
 	assert(scene is Node3D, "scene must be a 3D node to be offset!")
 
+	# TODO: spread both positive and negative direction
 	var offset := Vector3(randf() * random_spread.x, randf() * random_spread.y, randf() * random_spread.z)
 	scene.global_position += offset
 
