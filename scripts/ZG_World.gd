@@ -169,14 +169,8 @@ func load_level(level_name: String, spawn_point: String) -> void:
 
 func add_entity(node: Node) -> void:
 	if node is Entity:
-		print_debug("Registering entity: ", node)
+		print("Registering entity: ", node)
 		ECS.world.add_entity(node)
-		if "inventory_node" in node:
-			if node.inventory_node != null:
-				add_entity(node.inventory_node)
-	elif node is Node3D:
-		for child in node.get_children():
-			add_entity(child)
 	elif node is Node:
 		for child in node.get_children():
 			add_entity(child)

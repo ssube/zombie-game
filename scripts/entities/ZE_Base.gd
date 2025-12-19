@@ -36,6 +36,17 @@ func _ready() -> void:
 	self.component_resources.append_array(self.extra_components)
 
 
+func _register_children(node: Node) -> void:
+	for child in node.get_children():
+		# register entities and let them register their own children, recurse into other nodes
+		if child is Entity:
+			ECS.world.add_entity(child)
+		else:
+			_register_children(child)
+
+
 func on_ready() -> void:
 	if self.id == "":
 		printerr("Entity instance ID is empty, will not persist in saved state: ", self)
+
+	_register_children(self)

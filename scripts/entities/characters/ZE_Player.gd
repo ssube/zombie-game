@@ -5,6 +5,7 @@ class_name ZE_Player
 @export var hands_node: Node3D = null
 
 func on_ready():
+	super.on_ready()
 	sync_health()
 
 
