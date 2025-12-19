@@ -123,10 +123,11 @@ simplify_path = true
 
 [node name="VisionCone3D" type="Area3D" parent="Behavior"]
 collision_layer = 16
-collision_mask = 27
+collision_mask = 26
 script = ExtResource("12_kv3li")
+vision_test_mode = 0
 collision_layer_ = 16
-collision_mask_ = 27
+collision_mask_ = 26
 metadata/_custom_type_script = "uid://cmgcelj1qxg8o"
 
 [node name="DetectionArea3D" type="Area3D" parent="Behavior"]

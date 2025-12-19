@@ -23,6 +23,8 @@ var entity_health: ZC_Health
 var entity_weapon: ZC_Weapon_Melee
 var entity_velocity: ZC_Velocity
 
+var detected_bodies: int = 0
+
 func _ready():
 	if vision_area != null:
 		vision_area.monitoring = true
@@ -37,6 +39,7 @@ func _ready():
 	if detection_area != null:
 		detection_area.monitoring = true
 		detection_area.body_entered.connect(_on_detection_area_body_entered)
+		detection_area.body_exited.connect(_on_detection_area_body_exited)
 
 	# lock zombie node rotation
 	actor_node.axis_lock_angular_x = true
@@ -109,9 +112,19 @@ func _on_attack_area_body_exited(body: Node) -> void:
 
 func _on_detection_area_body_entered(body: Node) -> void:
 	print("Zombie detected body: ", body.name)
+	detected_bodies += 1
+	vision_area.monitoring = true
+
 	var target_player = blackboard.get_value(BehaviorUtils.target_player)
 	if EntityUtils.is_player(body) and target_player == null:
 		blackboard.set_value(BehaviorUtils.target_position, body.global_position)
+
+func _on_detection_area_body_exited(_body: Node) -> void:
+	detected_bodies -= 1
+	assert(detected_bodies >= 0, "Body detection went negative!")
+
+	if detected_bodies == 0:
+		vision_area.monitoring = false
 
 func is_actor_active() -> bool:
 	if actor_entity and not entity_health:

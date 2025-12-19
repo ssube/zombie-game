@@ -159,6 +159,7 @@ simplify_path = true
 collision_layer = 16
 collision_mask = 27
 script = ExtResource("13_4g7vu")
+vision_test_mode = 0
 collision_layer_ = 16
 collision_mask_ = 27
 metadata/_custom_type_script = "uid://cmgcelj1qxg8o"
