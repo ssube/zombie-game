@@ -31,10 +31,12 @@ func _physics_process(_delta: float) -> void:
 	body_queue.clear()
 
 
-func _process(delta: float) -> void:
-	super._process(delta)
+func _process(_delta: float) -> void:
+	if not active:
+		return
 
 	for body in sight_queue:
-		apply_actions(self, Enums.ActionEvent.BODY_ENTER, body)
+		# apply_actions(self, Enums.ActionEvent.BODY_ENTER, body)
+		super._on_body_entered(body)
 
 	sight_queue.clear()

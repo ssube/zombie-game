@@ -525,7 +525,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.5, -9.25)
 collision_mask = 24
 script = ExtResource("1_q6gno")
 trigger_on_exit = true
-trigger_on_timer = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/FireArea"]
@@ -545,7 +544,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.5, -12.75)
 collision_mask = 24
 script = ExtResource("1_q6gno")
 trigger_on_exit = true
-trigger_on_timer = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/AcidArea"]
@@ -565,7 +563,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.5, -12.75)
 collision_mask = 24
 script = ExtResource("1_q6gno")
 trigger_on_exit = true
-trigger_on_timer = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/WaterArea"]

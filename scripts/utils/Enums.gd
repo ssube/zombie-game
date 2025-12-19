@@ -2,6 +2,7 @@ class_name Enums
 
 enum ActionEvent {
 	AREA_INTERVAL = 0,
+	AREA_EMPTY = 1,
 	BODY_ENTER = 10,
 	BODY_EXIT = 11,
 	BODY_INTERVAL = 12,

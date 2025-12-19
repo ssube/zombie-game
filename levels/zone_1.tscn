@@ -1471,7 +1471,6 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -23.
 collision_mask = 24
 script = ExtResource("5_3ioyf")
 trigger_on_exit = true
-trigger_on_timer = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/RiverSlowArea"]
@@ -1492,7 +1491,6 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -23.
 collision_mask = 24
 script = ExtResource("5_3ioyf")
 trigger_on_exit = true
-trigger_on_timer = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/RiverEffectArea"]
