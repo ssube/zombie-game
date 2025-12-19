@@ -39,3 +39,4 @@ func update_wander_target(entity) -> void:
 	print("Zombie picked new wander target position: ", random_pos)
 	target_position = random_pos
 	navigation_path = NavigationUtils.update_navigation_path(entity, target_position)
+	wander_timer = wander_interval
