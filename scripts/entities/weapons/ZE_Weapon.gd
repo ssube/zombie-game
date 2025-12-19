@@ -24,6 +24,8 @@ func _get_effects() -> Array[ZR_Weapon_Effect]:
 
 
 func on_ready() -> void:
+	super.on_ready()
+
 	var cached := 0
 	var effects := _get_effects()
 	for effect_name in ZR_Weapon_Effect.EffectType:
@@ -33,7 +35,7 @@ func on_ready() -> void:
 			if effect.effect_type == effect_type:
 				cache_for_type.append(effect)
 				cached += 1
-		
+
 		if cache_for_type.size() > 0:
 			_effects_cache[effect_type] = cache_for_type
 
