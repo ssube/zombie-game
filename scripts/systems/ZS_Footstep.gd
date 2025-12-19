@@ -1,19 +1,20 @@
 extends System
 class_name ZS_FootstepSystem
 
-var _next_footsteps: Dictionary[String, float] = {}
+var _footstep_timers: Dictionary[String, float] = {}
 
 func query() -> QueryBuilder:
 	return q.with_all([ZC_Footstep, ZC_Velocity])
 
-func process(entities: Array[Entity], _components: Array, _delta: float) -> void:
-	var now := Time.get_ticks_msec() / 1000.0
-
+func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 	for entity in entities:
 		var footstep := entity.get_component(ZC_Footstep) as ZC_Footstep
 
-		var next_footstep := _next_footsteps.get(entity.id, 0.0) as float
-		if now < next_footstep:
+		var footstep_timer := _footstep_timers.get(entity.id, 0.0) as float
+		footstep_timer -= delta
+
+		if footstep_timer > 0:
+			_footstep_timers[entity.id] = footstep_timer
 			continue
 
 		var health := entity.get_component(ZC_Health) as ZC_Health
@@ -45,5 +46,5 @@ func process(entities: Array[Entity], _components: Array, _delta: float) -> void
 		new_footstep.global_position = collision_point
 
 		var next_variation = randf_range(-footstep.variation, +footstep.variation)
-		next_footstep = now + next_variation + footstep.interval
-		_next_footsteps[entity.id] = next_footstep
+		footstep_timer = next_variation + footstep.interval
+		_footstep_timers[entity.id] = footstep_timer

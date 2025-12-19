@@ -9,7 +9,7 @@ static var unknown_surface = &"unknown"
 static func get_collider_entity(collider: Node) -> Entity:
 	if collider == null:
 		return null
-		
+
 	if collider is PhysicsBody3D and collider is Entity:
 		return collider
 
