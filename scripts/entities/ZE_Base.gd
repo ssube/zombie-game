@@ -48,6 +48,9 @@ func _register_children(node: Node) -> void:
 
 
 func on_ready() -> void:
+	if self.has_component(ZC_Persistent):
+		assert(self.id != "", "Entity instance ID is empty, will not persist in saved state")
+
 	action_event.connect(_on_action_event)
 	_register_children(self)
 
