@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://ds0q1crcrv862"]
+[gd_scene load_steps=49 format=3 uid="uid://ds0q1crcrv862"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_rffgv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_2yl8o"]
@@ -23,8 +23,8 @@
 [ext_resource type="Script" uid="uid://gy1d5pnk4rwg" path="res://scripts/components/characters/ZC_Attention.gd" id="17_euqm3"]
 [ext_resource type="Script" uid="uid://df075dj3mhif5" path="res://scripts/behavior/states/ZB_Attack.gd" id="17_qjub6"]
 [ext_resource type="Script" uid="uid://b0rh6txy38f6h" path="res://scripts/components/characters/ZC_Perception.gd" id="17_ull4n"]
-[ext_resource type="Script" uid="uid://s8mvu7ttxmus" path="res://scripts/components/characters/ZC_Stimulus.gd" id="18_0f2mi"]
 [ext_resource type="Script" uid="uid://c6pla5ya01llv" path="res://scripts/behavior/fsm/ZB_Transition.gd" id="18_bf4rb"]
+[ext_resource type="Script" uid="uid://b7fgmwfrg0t73" path="res://scripts/components/characters/ZC_Experience.gd" id="18_euqm3"]
 [ext_resource type="Script" uid="uid://spbk6hwrc5ow" path="res://scripts/behavior/states/ZB_Wander.gd" id="18_hann2"]
 [ext_resource type="Script" uid="uid://cyplr8cytq8s7" path="res://scripts/behavior/states/ZB_Chase.gd" id="18_wtse8"]
 [ext_resource type="Script" uid="uid://4mkf4oytommo" path="res://scripts/behavior/states/ZB_Idle.gd" id="19_3lyvt"]
@@ -89,6 +89,11 @@ metadata/_custom_type_script = "uid://gy1d5pnk4rwg"
 script = ExtResource("17_ull4n")
 metadata/_custom_type_script = "uid://b0rh6txy38f6h"
 
+[sub_resource type="Resource" id="Resource_ull4n"]
+script = ExtResource("18_euqm3")
+base_xp = 750
+metadata/_custom_type_script = "uid://b7fgmwfrg0t73"
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwqt7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uqboj"]
@@ -109,7 +114,7 @@ events = NodePath("Behavior/ZombieBehavior/Events")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("WeaponMarker")
-component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_kwfyu"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj"), SubResource("Resource_sn1gh"), SubResource("Resource_euqm3"), SubResource("Resource_4i4kv"), SubResource("Resource_mn8kb")])
+component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_kwfyu"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj"), SubResource("Resource_sn1gh"), SubResource("Resource_euqm3"), SubResource("Resource_4i4kv"), SubResource("Resource_mn8kb"), SubResource("Resource_ull4n")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 material = ExtResource("8_tfdn2")

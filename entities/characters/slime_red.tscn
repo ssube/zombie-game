@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bh1ay01i184yn"]
+[gd_scene load_steps=25 format=3 uid="uid://bh1ay01i184yn"]
 
 [ext_resource type="Script" uid="uid://bcl4s07i5wm66" path="res://scripts/entities/characters/ZE_Character.gd" id="1_trphr"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_jnxhp"]
@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://gy1d5pnk4rwg" path="res://scripts/components/characters/ZC_Attention.gd" id="7_x1bwj"]
 [ext_resource type="Script" uid="uid://b0rh6txy38f6h" path="res://scripts/components/characters/ZC_Perception.gd" id="8_alwcs"]
 [ext_resource type="PackedScene" uid="uid://c64yefgf5ki5c" path="res://entities/characters/slime_blue.tscn" id="9_b3cc5"]
-[ext_resource type="Script" uid="uid://s8mvu7ttxmus" path="res://scripts/components/characters/ZC_Stimulus.gd" id="9_l2mc0"]
+[ext_resource type="Script" uid="uid://b7fgmwfrg0t73" path="res://scripts/components/characters/ZC_Experience.gd" id="9_x1bwj"]
 
 [sub_resource type="Resource" id="Resource_k55fj"]
 script = ExtResource("3_1q86x")
@@ -44,6 +44,11 @@ metadata/_custom_type_script = "uid://gy1d5pnk4rwg"
 script = ExtResource("8_alwcs")
 metadata/_custom_type_script = "uid://b0rh6txy38f6h"
 
+[sub_resource type="Resource" id="Resource_l2mc0"]
+script = ExtResource("9_x1bwj")
+base_xp = 500
+metadata/_custom_type_script = "uid://b7fgmwfrg0t73"
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_vdtwx"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_l2mc0"]
@@ -65,7 +70,7 @@ normal_texture = SubResource("NoiseTexture2D_pkns6")
 collision_layer = 16
 collision_mask = 27
 script = ExtResource("1_trphr")
-component_resources = Array[ExtResource("2_jnxhp")]([SubResource("Resource_k55fj"), SubResource("Resource_x1bwj"), SubResource("Resource_alwcs"), SubResource("Resource_b3cc5"), SubResource("Resource_pkns6"), SubResource("Resource_ysw2j")])
+component_resources = Array[ExtResource("2_jnxhp")]([SubResource("Resource_k55fj"), SubResource("Resource_x1bwj"), SubResource("Resource_alwcs"), SubResource("Resource_b3cc5"), SubResource("Resource_pkns6"), SubResource("Resource_ysw2j"), SubResource("Resource_l2mc0")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_vdtwx")
