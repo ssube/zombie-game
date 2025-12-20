@@ -147,6 +147,8 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	clear_world()
 
 	var next_level := level_scene.instantiate()
+	if 'remove_screenshot_tools' in next_level:
+		next_level.remove_screenshot_tools()
 
 	%Level.add_child(next_level)
 	_register_level_entities()
