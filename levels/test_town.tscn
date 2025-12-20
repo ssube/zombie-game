@@ -830,6 +830,7 @@ environment = SubResource("Environment_bxjvt")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, -0.25881904, 0.9659258, 0, -0.9659258, -0.25881904, 0, 0, 0)
 light_color = Color(0.39, 0.6034999, 1, 1)
+shadow_enabled = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3, -5)
