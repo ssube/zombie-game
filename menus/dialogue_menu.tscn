@@ -1,56 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bc12xlkdaphu3"]
+[gd_scene load_steps=8 format=3 uid="uid://bc12xlkdaphu3"]
 
 [ext_resource type="Script" uid="uid://hyr2u8jujttn" path="res://scripts/menus/dialogue_menu.gd" id="1_36de5"]
+[ext_resource type="Theme" uid="uid://bdnxpcwbllbem" path="res://menus/theme_dialogue.tres" id="2_5r6f2"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tu48"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.14, 0.14, 0.14, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5r6f2"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(0.46453, 0.82, 0.4018, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kx1nf"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.24926001, 0.44, 0.2156, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="Theme" id="Theme_r10vy"]
-default_font_size = 20
-Button/styles/disabled = SubResource("StyleBoxFlat_2tu48")
-Button/styles/focus = SubResource("StyleBoxFlat_5r6f2")
-Button/styles/hover = SubResource("StyleBoxFlat_5r6f2")
-Button/styles/normal = SubResource("StyleBoxFlat_kx1nf")
-MarginContainer/constants/margin_bottom = 15
-MarginContainer/constants/margin_left = 30
-MarginContainer/constants/margin_right = 30
-MarginContainer/constants/margin_top = 15
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_kx1nf")
 
 [sub_resource type="Animation" id="Animation_nlsx6"]
 length = 0.001
@@ -100,7 +53,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_r10vy")
+theme = ExtResource("2_5r6f2")
 
 [node name="MarginContainer" type="MarginContainer" parent="Balloon"]
 layout_mode = 1
@@ -129,7 +82,7 @@ size_flags_horizontal = 3
 
 [node name="CharacterLabel" type="RichTextLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.501961)
+modulate = Color(1, 1, 1, 0.6745098)
 layout_mode = 2
 mouse_filter = 1
 bbcode_enabled = true
