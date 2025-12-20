@@ -10,7 +10,7 @@ static func get_collider_entity(collider: Node) -> Entity:
 	if collider == null:
 		return null
 
-	if collider is PhysicsBody3D and collider is Entity:
+	if collider is Entity:
 		return collider
 
 	if 'parent_entity' in collider:

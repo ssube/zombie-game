@@ -5,6 +5,7 @@ static var any_effect = Relationship.new(ZC_Effected.new(), null)
 static var any_heard = Relationship.new(ZC_Heard.new(), null)
 static var any_holding = Relationship.new(ZC_Holding.new(), null)
 static var any_modifier = Relationship.new(ZC_Modifier.new(), null)
+static var any_detected = Relationship.new(ZC_Detected.new(), null)
 static var any_wearing = Relationship.new(ZC_Wearing.new(), null)
 static var any_used = Relationship.new(ZC_Used.new(), null)
 
@@ -33,6 +34,10 @@ static func make_damage(damage_amount: int) -> Relationship:
 	var damage_component := ZC_Damage.new(damage_amount)
 	var damaged_component := ZC_Damaged.new()
 	return Relationship.new(damaged_component, damage_component)
+
+static func make_detected(stimulus: ZC_Stimulus) -> Relationship:
+	var detected_component := ZC_Detected.new()
+	return Relationship.new(detected_component, stimulus)
 
 static func make_effect(effect: ZC_Screen_Effect) -> Relationship:
 	var effected_component := ZC_Effected.new()
