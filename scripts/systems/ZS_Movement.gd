@@ -1,6 +1,12 @@
 class_name ZS_MovementSystem
 extends System
 
+func deps() -> Dictionary[int, Array]:
+	return {
+		Runs.After: [ZS_InputSystem],
+		Runs.Before: [ZS_FootstepSystem],
+	}
+
 func query():
 	return q.with_all([ZC_Movement, ZC_Velocity]).with_none([ZC_Player, ZC_Input])
 
