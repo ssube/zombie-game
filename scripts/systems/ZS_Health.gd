@@ -33,8 +33,13 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			if EntityUtils.is_player(entity):
 				var effect_strength := 1.0 - (health.current_health / float(health.max_health))
 				effect_strength /= 2.0
-				# var effect_duration := effect_strength * 5.0
-				%Menu.set_effect_strength(%Menu.Effects.DAMAGE, effect_strength)
+
+				var effect := ZC_Screen_Effect.new()
+				effect.effect = ZM_BaseMenu.Effects.DAMAGE
+				effect.duration = effect_strength * 5.0
+				effect.strength = effect_strength
+				var effect_rel := RelationshipUtils.make_effect(effect)
+				entity.add_relationship(effect_rel)
 
 			if EntityUtils.is_objective(entity):
 				var objective: ZC_Objective = entity.get_component(ZC_Objective)
