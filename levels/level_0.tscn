@@ -1,6 +1,6 @@
 [gd_scene load_steps=125 format=4 uid="uid://yvupurpwmap4"]
 
-[ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_LevelRoot.gd" id="1_66alr"]
+[ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_q6gno"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="2_lf4l6"]
@@ -523,7 +523,7 @@ geometry_source_group_name = &"level"
 region_merge_size = 5.0
 filter_ledge_spans = true
 
-[node name="Level0" type="Node" node_paths=PackedStringArray("screenshot_camera")]
+[node name="Level0" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
 script = ExtResource("1_66alr")
 screenshot_camera = NodePath("Cameras/Screenshot")
 metadata/_custom_type_script = "uid://btaxq2wx10f5v"
