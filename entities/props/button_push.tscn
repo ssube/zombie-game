@@ -113,6 +113,7 @@ shape = SubResource("BoxShape3D_0h2if")
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("8_b5ffr")
 script = ExtResource("9_wlayu")
+subtitle_text = "Button Pressed"
 remove_on_finished = false
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
