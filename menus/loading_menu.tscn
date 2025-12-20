@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://445cu24k4j5g"]
+[gd_scene load_steps=3 format=3 uid="uid://445cu24k4j5g"]
 
 [ext_resource type="Script" uid="uid://c7mwmktio4xx7" path="res://scripts/menus/loading_menu.gd" id="1_gn3ar"]
 
-[node name="LoadingMenu" type="AspectRatioContainer" node_paths=PackedStringArray("hint_label")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gn3ar"]
+
+[node name="LoadingMenu" type="AspectRatioContainer" node_paths=PackedStringArray("hint_label", "level_label")]
 process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gn3ar")
 hint_label = NodePath("MarginContainer/VFlowContainer/HintLabel")
+level_label = NodePath("MarginContainer/VFlowContainer/LoadingLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -19,6 +22,7 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_bottom = 64
 
 [node name="VFlowContainer" type="VFlowContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/v_separation = 16
@@ -26,11 +30,14 @@ alignment = 1
 
 [node name="LoadingLabel" type="Label" parent="MarginContainer/VFlowContainer"]
 layout_mode = 2
-text = "Loading..."
+text = "Loading %s..."
+horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VFlowContainer"]
 layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_gn3ar")
 
 [node name="HintLabel" type="Label" parent="MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "Hints"
+horizontal_alignment = 1

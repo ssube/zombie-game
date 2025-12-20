@@ -78,6 +78,12 @@ func set_target_label(text: String) -> void:
 func set_crosshair_color(color: Color) -> void:
 	$MenuLayer/GameHud.set_crosshair_color(color)
 
+func set_hints(hints: Array[String]) -> void:
+	$MenuLayer/LoadingMenu.hints = hints
+
+func set_level(level_name: String) -> void:
+	$MenuLayer/LoadingMenu.level_name = level_name
+
 func set_pause(pause: bool) -> void:
 	get_tree().paused = pause
 
