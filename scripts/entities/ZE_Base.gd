@@ -7,6 +7,8 @@ var generate_instance_id = _generate_instance_id
 
 @export var extra_components: Array[Component] = []
 
+signal action_event(event: Enums.ActionEvent, actor: Node)
+
 func _generate_instance_id() -> void:
 	var root := self.owner
 	if root == null:
@@ -46,7 +48,12 @@ func _register_children(node: Node) -> void:
 
 
 func on_ready() -> void:
-	if self.id == "":
-		printerr("Entity instance ID is empty, will not persist in saved state: ", self)
-
+	action_event.connect(_on_action_event)
 	_register_children(self)
+
+
+func _on_action_event(event: Enums.ActionEvent, actor: Node) -> void:
+	if actor is not Entity:
+		return
+
+	ActionUtils.run_entity(self, event, actor)
