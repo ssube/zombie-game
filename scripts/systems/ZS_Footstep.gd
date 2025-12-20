@@ -1,6 +1,8 @@
 extends System
 class_name ZS_FootstepSystem
 
+@export var sprint_multiplier: float = 2.0
+
 var _footstep_timers: Dictionary[String, float] = {}
 
 func query() -> QueryBuilder:
@@ -47,4 +49,11 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 
 		var next_variation = randf_range(-footstep.variation, +footstep.variation)
 		footstep_timer = next_variation + footstep.interval
+
+		# TODO: reset the timer when the entity starts sprinting
+		var input := entity.get_component(ZC_Input) as ZC_Input
+		if input:
+			if input.move_sprint:
+				footstep_timer = footstep_timer / (input.sprint_multiplier * self.sprint_multiplier)
+
 		_footstep_timers[entity.id] = footstep_timer
