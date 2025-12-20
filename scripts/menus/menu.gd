@@ -48,6 +48,9 @@ func update_mouse_mode() -> void:
 func set_health(value: int, immediate: bool = false) -> void:
 	$MenuLayer/GameHud.set_health(value, immediate)
 
+func set_stamina(value: int, immediate: bool = false) -> void:
+	$MenuLayer/GameHud.set_stamina(value, immediate)
+
 func set_objective_label(title: String) -> void:
 	$MenuLayer/GameHud.set_objective_label(title)
 

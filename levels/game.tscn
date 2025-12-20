@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c32dl721ugeb0"]
+[gd_scene load_steps=26 format=3 uid="uid://c32dl721ugeb0"]
 
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/nodes/ZN_World.gd" id="1_7ti0h"]
 [ext_resource type="Resource" uid="uid://dhop75hkvee3x" path="res://levels/main_campaign.tres" id="2_mgpep"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://4x335wa2bbnp" path="res://scripts/observers/ZO_Skin.gd" id="12_tkgql"]
 [ext_resource type="Script" uid="uid://bxs4yliwwtxr" path="res://scripts/systems/ZS_Effect.gd" id="13_pb6kn"]
 [ext_resource type="Script" uid="uid://dyutgptbapg76" path="res://scripts/observers/ZO_Button.gd" id="13_si8kf"]
+[ext_resource type="Script" uid="uid://rlyjuahjpvyv" path="res://scripts/systems/ZS_Stamina.gd" id="17_kw56w"]
 [ext_resource type="Script" uid="uid://c5v1jn1s0niq2" path="res://scripts/systems/ZS_Footstep.gd" id="19_tkgql"]
 [ext_resource type="Script" uid="uid://dxu3llv6t4pyu" path="res://scripts/systems/ZS_Cooldown.gd" id="21_mgpep"]
 [ext_resource type="Script" uid="uid://71r7uq3wy006" path="res://scripts/systems/ZS_Attention.gd" id="22_pb6kn"]
@@ -92,6 +93,9 @@ metadata/_custom_type_script = "uid://dtr4nknl4vi2g"
 script = ExtResource("7_4q61s")
 process_empty = true
 metadata/_custom_type_script = "uid://ccykut6yrev33"
+
+[node name="ZS_StaminaSystem" type="Node" parent="World/Systems"]
+script = ExtResource("17_kw56w")
 
 [node name="ZS_PlayerSystem" type="Node" parent="World/Systems"]
 script = ExtResource("8_j8ow8")

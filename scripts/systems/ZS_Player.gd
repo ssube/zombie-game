@@ -41,7 +41,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 		# Apply gravity
 		var no_clip := CheatManager.get_cheat_state(CheatManager.Cheats.NO_CLIP)
-		if no_clip:
+		if no_clip or body.is_on_floor():
 			velocity.linear_velocity.y = 0
 		else:
 			velocity.linear_velocity += velocity.gravity * delta

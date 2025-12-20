@@ -17,6 +17,18 @@ class_name ZC_Input
 @export var use_pickup: bool = false
 @export var use_reload: bool = false
 
+@export var use_any: bool:
+	get():
+		return (
+			use_attack or
+			use_interact or
+			use_light or
+			use_heal or
+			use_holster or
+			use_pickup or
+			use_reload
+		)
+
 @export_group("Menus")
 @export var menu_pause: bool = false
 @export var menu_inventory: bool = false

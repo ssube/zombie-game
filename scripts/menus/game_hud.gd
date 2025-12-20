@@ -1,7 +1,8 @@
 extends ZM_BaseMenu
 
-@export var health_bar: ProgressBar = null
 @export var crosshair: TextureRect = null
+@export var health_bar: ProgressBar = null
+@export var stamina_bar: ProgressBar = null
 
 @export_group("Labels")
 @export var objective_label: Label = null
@@ -19,6 +20,7 @@ extends ZM_BaseMenu
 var action_queue: Array[String] = []
 var action_timer: float = 0.0
 var health_tween: Tween = null
+var stamina_tween: Tween = null
 
 func _ready() -> void:
 	clear_objective_label()
@@ -81,6 +83,7 @@ func clear_ammo_label() -> void:
 func set_ammo_label(text: String) -> void:
 	ammo_label.text = text
 
+
 func set_health(value: int, instant: bool = false) -> void:
 	if health_tween != null:
 		health_tween.kill()
@@ -92,6 +95,17 @@ func set_health(value: int, instant: bool = false) -> void:
 		health_tween = health_bar.create_tween()
 		health_tween.tween_property(health_bar, "value", value, 0.5)
 		health_tween.tween_callback(health_callback.bind(value))
+
+
+func set_stamina(value: int, instant: bool = false) -> void:
+	if stamina_tween != null:
+		stamina_tween.kill()
+
+	if instant:
+		stamina_bar.value = value
+	else:
+		stamina_tween = stamina_bar.create_tween()
+		stamina_tween.tween_property(stamina_bar, "value", value, 0.5)
 
 
 func health_callback(value: int) -> void:

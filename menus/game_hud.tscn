@@ -29,7 +29,7 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 6
 
-[node name="GameHud" type="AspectRatioContainer" node_paths=PackedStringArray("health_bar", "crosshair", "objective_label", "target_label", "weapon_label", "ammo_label", "action_label")]
+[node name="GameHud" type="AspectRatioContainer" node_paths=PackedStringArray("crosshair", "health_bar", "stamina_bar", "objective_label", "target_label", "weapon_label", "ammo_label", "action_label")]
 process_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,8 +37,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gjtvi")
-health_bar = NodePath("BottomContainer/HBoxContainer2/HealthBar")
 crosshair = NodePath("CenterContainer/Crosshair")
+health_bar = NodePath("BottomContainer/HBoxContainer2/HealthBar")
+stamina_bar = NodePath("BottomContainer/HBoxContainer2/StaminaBar")
 objective_label = NodePath("TopContainer/ObjectiveLabel")
 target_label = NodePath("BottomContainer/TargetLabel")
 weapon_label = NodePath("BottomContainer/HBoxContainer/WeaponLabel")

@@ -7,15 +7,24 @@ class_name ZE_Player
 func on_ready():
 	super.on_ready()
 	sync_health()
+	sync_stamina()
 
 
 ## Sync health from component to menu
 func sync_health():
-	var c_health = get_component(ZC_Health) as ZC_Health
+	var c_health := get_component(ZC_Health) as ZC_Health
 	if not c_health:
 		return
 
 	%Menu.set_health(c_health.current_health, true)
+
+
+func sync_stamina():
+	var c_stamina := get_component(ZC_Stamina) as ZC_Stamina
+	if not c_stamina:
+		return
+
+	%Menu.set_stamina(c_stamina.current_stamina, true)
 
 
 func get_inventory() -> Array[Entity]:
