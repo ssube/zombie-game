@@ -3,7 +3,7 @@ extends Node
 signal level_loading
 signal level_loaded
 
-@export var level_scenes: Dictionary[String, Resource] = {}
+@export var campaign: ZR_Campaign
 
 @export_group("Start")
 @export var start_level: String = ''
@@ -16,6 +16,8 @@ signal level_loaded
 @onready var last_level: String = start_level
 
 func _ready():
+	campaign.cache()
+
 	ECS.world = %World
 
 	# Create the systems
@@ -62,7 +64,7 @@ func _get_debug_level() -> Array[String]:
 		if arg.begins_with("--level="):
 			var arg_level := arg.substr(8)
 			if arg_level:
-				if arg_level in level_scenes:
+				if campaign.has_level(arg_level):
 					level = arg_level
 				else:
 					printerr("Requested level %s is not in the levels table!" % level)
@@ -128,11 +130,19 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	# TODO: use ResourceLoader.load_threaded_get
 	# var level_scene := ResourceLoader.load_threaded_get(level_path.resource_path) as PackedScene
 
-	var level_scene = level_scenes.get(level_name) as PackedScene
-	if level_scene == null:
+	var level_data := campaign.get_level(level_name)
+	if level_data == null:
 		printerr("Invalid level name: ", level_name)
 		return
 
+	var level_hints := level_data.loading_hints.duplicate()
+	if level_data.hint_mode == level_data.HintMode.APPEND:
+		level_hints.append_array(campaign.hints)
+
+	%Menu.set_hints(level_hints)
+	%Menu.set_level(level_data.title)
+
+	var level_scene = level_data.scene
 	level_loading.emit(last_level, level_name)
 	clear_world()
 
@@ -141,6 +151,9 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	%Level.add_child(next_level)
 	_register_level_entities()
 	_register_level_objectives()
+
+	if level_data.min_load_time > 0:
+		await get_tree().create_timer(level_data.min_load_time).timeout
 
 	ECS.world._invalidate_cache("level_loaded")
 
