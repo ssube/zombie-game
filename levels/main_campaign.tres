@@ -13,7 +13,6 @@ key = "debug"
 title = "Debug"
 scene = ExtResource("2_2gt56")
 loading_hints = Array[String](["Zombies are not made of cheese."])
-min_load_time = 60.0
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
 [sub_resource type="Resource" id="Resource_apgre"]
@@ -28,6 +27,7 @@ script = ExtResource("1_y5d03")
 key = "zone_1"
 title = "Zone 1"
 scene = ExtResource("4_6fqys")
+min_load_time = 3.0
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
 [sub_resource type="Resource" id="Resource_lm6ky"]
@@ -35,6 +35,7 @@ script = ExtResource("1_y5d03")
 key = "zone_1_hotel"
 title = "Hotel Interior"
 scene = ExtResource("5_yk5cd")
+min_load_time = 3.0
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
 [resource]
