@@ -5,6 +5,7 @@ var previous_menu: Menus = Menus.START_MENU
 
 var pause_menus: Dictionary[Menus, bool] = {
 	Menus.NONE: false,
+	Menus.DIALOGUE_BALLOON: false,
 }
 
 
