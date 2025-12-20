@@ -826,9 +826,11 @@ points = PackedVector3Array(39.5, -0.25, 24, 39.5, -0.5, 24, 37.5, -0.25, 24, 37
 
 [node name="Ammo" parent="Entities" instance=ExtResource("1_5axou")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.08934, 0.040440142, -7.426856)
+id = "TestTown_ZE_Armor_1766272352_34834"
 
 [node name="WeaponShotgun" parent="Entities" instance=ExtResource("2_og1ph")]
 transform = Transform3D(-3.804258e-08, 0.87031275, 0.4924995, -1, -4.371139e-08, 0, 2.1527837e-08, -0.4924995, 0.87031275, -7.32526, 0.13767618, -6.8085938)
+id = "TestTown_ZE_Weapon_1766272350_80923"
 
 [node name="Lights" type="Node3D" parent="."]
 
