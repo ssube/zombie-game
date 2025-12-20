@@ -32,9 +32,9 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		if damage > 0:
 			if EntityUtils.is_player(entity):
 				var effect_strength := 1.0 - (health.current_health / float(health.max_health))
-				var effect_duration := effect_strength * 5.0
 				effect_strength /= 2.0
-				%Menu.show_effect(%Menu.Effects.DAMAGE, effect_duration, effect_strength)
+				# var effect_duration := effect_strength * 5.0
+				%Menu.set_effect_strength(%Menu.Effects.DAMAGE, effect_strength)
 
 			if EntityUtils.is_objective(entity):
 				var objective: ZC_Objective = entity.get_component(ZC_Objective)
