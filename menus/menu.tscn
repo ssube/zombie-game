@@ -238,4 +238,5 @@ visible = false
 [connection signal="apply_pressed" from="MenuLayer/OptionsMenu" to="." method="_on_options_applied"]
 [connection signal="back_pressed" from="MenuLayer/OptionsMenu" to="." method="_on_back_pressed"]
 [connection signal="menu_changed" from="MenuLayer/OptionsMenu" to="." method="_on_menu_changed"]
+[connection signal="dialogue_finished" from="MenuLayer/DialogueMenu" to="." method="_on_back_pressed"]
 [connection signal="back_pressed" from="MenuLayer/ExitDialog" to="." method="_on_back_pressed"]

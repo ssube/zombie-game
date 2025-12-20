@@ -1,6 +1,7 @@
 extends CanvasLayer
 ## A basic dialogue balloon for use with Dialogue Manager.
 
+signal dialogue_finished
 
 ## The dialogue resource
 @export var dialogue_resource: DialogueResource
@@ -46,6 +47,7 @@ var dialogue_line: DialogueLine:
 				queue_free()
 			else:
 				hide()
+				dialogue_finished.emit()
 	get:
 		return dialogue_line
 
@@ -88,7 +90,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not self.visible:
 		return
-		
+
 	if is_instance_valid(dialogue_line):
 		progress.visible = not dialogue_label.is_typing and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
 
@@ -96,7 +98,7 @@ func _process(_delta: float) -> void:
 func _unhandled_input(_event: InputEvent) -> void:
 	if not self.visible:
 		return
-		
+
 	# Only the balloon is allowed to handle input while it's showing
 	get_viewport().set_input_as_handled()
 

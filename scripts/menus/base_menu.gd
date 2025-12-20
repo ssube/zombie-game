@@ -13,6 +13,7 @@ enum Menus {
 	SAVE_MENU,
 	OPTIONS_MENU,
 	EXIT_DIALOG,
+	DIALOGUE_BALLOON,
 }
 
 enum Effects {

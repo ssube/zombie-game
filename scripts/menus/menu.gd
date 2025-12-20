@@ -81,6 +81,10 @@ func set_target_label(text: String) -> void:
 func set_crosshair_color(color: Color) -> void:
 	$MenuLayer/GameHud.set_crosshair_color(color)
 
+func start_dialogue(dialogue: DialogueResource, start_title: String, extras: Array = []) -> void:
+	show_menu(ZM_BaseMenu.Menus.DIALOGUE_BALLOON)
+	$MenuLayer/DialogueMenu.start(dialogue, start_title, extras)
+
 func set_hints(hints: Array[String]) -> void:
 	$MenuLayer/LoadingMenu.hints = hints
 
@@ -121,6 +125,7 @@ func show_menu(menu: Menus) -> void:
 		$MenuLayer/SaveMenu.visible = (menu == Menus.SAVE_MENU)
 		$MenuLayer/StartMenu.visible = (menu == Menus.START_MENU)
 		$MenuLayer/ExitDialog.visible = (menu == Menus.EXIT_DIALOG)
+		$MenuLayer/DialogueMenu.visible = (menu == Menus.DIALOGUE_BALLOON)
 
 		update_mouse_mode()
 

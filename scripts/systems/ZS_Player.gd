@@ -485,7 +485,7 @@ func use_dialogue(entity: Entity, player_entity: Entity) -> void:
 	# start dialogue
 	var helpers := DialogueUtils.DialogueHelper.new(entity, markers)
 	var dialogue = entity.get_component(ZC_Dialogue)
-	DialogueManager.show_dialogue_balloon(dialogue.dialogue_tree, dialogue.start_title, [
+	%Menu.start_dialogue(dialogue.dialogue_tree, dialogue.start_title, [
 		{
 			"dialogue" = dialogue,
 			"helpers" = helpers,
