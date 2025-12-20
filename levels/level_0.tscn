@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=124 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_q6gno"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
@@ -49,11 +49,17 @@ transparency = 1
 albedo_color = Color(1, 0.57, 0.57, 0.2509804)
 disable_receive_shadows = true
 
+[sub_resource type="Curve" id="Curve_jawnq"]
+_data = [Vector2(0, 0.50360227), 0.0, 0.0, 0, 0, Vector2(0.2526316, 1), 0.0, 0.0, 0, 0, Vector2(0.5017544, 0), 0.0, 0.0, 0, 0, Vector2(0.75438595, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.50360227), 0.0, 0.0, 0, 0]
+point_count = 5
+
 [sub_resource type="Resource" id="Resource_r7enh"]
 script = ExtResource("2_ijfse")
 effect = 4
-duration = inf
+duration = 15.0
 strength = 0.5
+curve_duration = 15.0
+strength_curve = SubResource("Curve_jawnq")
 metadata/_custom_type_script = "uid://ewo3m4f384i0"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o4imw"]
@@ -524,6 +530,7 @@ filter_ledge_spans = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.5, -9.25)
 collision_mask = 24
 script = ExtResource("1_q6gno")
+body_interval = 15.0
 trigger_on_exit = true
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 

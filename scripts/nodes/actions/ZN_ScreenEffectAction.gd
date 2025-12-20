@@ -36,3 +36,5 @@ func run_entity(_source: Node, event: Enums.ActionEvent, actor: Entity) -> void:
 			_apply_effect(actor)
 		Enums.ActionEvent.BODY_EXIT:
 			_remove_effect(actor)
+		Enums.ActionEvent.BODY_INTERVAL:
+			_apply_effect(actor)
