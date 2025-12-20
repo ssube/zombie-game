@@ -248,9 +248,10 @@ static func get_screen_effects(entity: Node) -> Dictionary[ZM_BaseMenu.Effects, 
 	var effects := entity.get_relationships(RelationshipUtils.any_effect) as Array[Relationship]
 	for rel in effects:
 		var effect := rel.target as ZC_Screen_Effect
+		var effect_strength := effect.current_strength()
 		var prev_strength := max_effects.get(effect.effect, 0.0) as float
-		if effect.strength > prev_strength:
-			max_effects[effect.effect] = effect.strength
+		if effect_strength > prev_strength:
+			max_effects[effect.effect] = effect_strength
 
 	return max_effects
 
