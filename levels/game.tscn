@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://c32dl721ugeb0"]
 
-[ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/ZG_World.gd" id="1_7ti0h"]
+[ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/nodes/ZN_World.gd" id="1_7ti0h"]
 [ext_resource type="Resource" uid="uid://dhop75hkvee3x" path="res://levels/main_campaign.tres" id="2_mgpep"]
 [ext_resource type="PackedScene" uid="uid://busds31ha5tx1" path="res://entities/characters/player.tscn" id="5_b84gv"]
 [ext_resource type="Script" uid="uid://0smt4eys5v7u" path="res://scripts/observers/ZO_Fire.gd" id="6_hg28n"]
