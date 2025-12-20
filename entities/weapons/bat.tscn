@@ -129,7 +129,7 @@ transform = Transform3D(1, -5.9604645e-08, -2.9802322e-08, -2.9802322e-08, 0.999
 collision_layer = 4
 collision_mask = 19
 script = ExtResource("10_hgjmx")
-trigger_on_timer = false
+trigger_on_body_interval = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Area3D"]

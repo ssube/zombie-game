@@ -285,11 +285,17 @@ func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
 	if weapon == null:
 		return
 
+	var c_weapon = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
+	var stamina := entity.get_component(ZC_Stamina) as ZC_Stamina
+	if stamina.current_stamina < c_weapon.swing_stamina:
+		return
+
+	stamina.current_stamina -= c_weapon.swing_stamina
+
 	var broken := EntityUtils.is_broken(weapon)
 	if broken:
 		weapon.apply_effects(ZR_Weapon_Effect.EffectType.MELEE_BREAK)
 
-	var c_weapon = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
 	var swing_node = weapon.get_node(c_weapon.swing_path) as PathFollow3D
 	swing_node.progress_ratio = 0.0
 
