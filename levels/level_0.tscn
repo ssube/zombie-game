@@ -106,7 +106,7 @@ metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 
 [sub_resource type="Resource" id="Resource_fv0x7"]
 script = ExtResource("14_qgvj7")
-next_level = "1"
+next_level = "zone_1"
 spawn_point = "Markers/Start"
 metadata/_custom_type_script = "uid://cn8mtbap6uudk"
 
@@ -638,6 +638,7 @@ metadata/_custom_type_script = "uid://cpgnglttfputx"
 
 [node name="Door" parent="Entities/Room1" instance=ExtResource("17_g1jay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.25)
+id = "Level0_ZE_Door_1766177028_32924"
 
 [node name="GlassSheet" parent="Entities/Room1" instance=ExtResource("39_2fv0q")]
 transform = Transform3D(1.4142135, 0, -1.4142135, 0, 2, 0, 1.4142135, 0, 1.4142135, 2.216167, 1, -1.8180183)
@@ -686,18 +687,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.007, 0.6708808, -2.2530918)
 [node name="Door" parent="Entities/Room2" instance=ExtResource("8_58gyl")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.25, 0, -3)
 extra_components = Array[ExtResource("9_ggct0")]([SubResource("Resource_w633q"), SubResource("Resource_q6gno")])
+id = "Level0_ZE_Door_1766177673_79331"
 
 [node name="SlimeRed" parent="Entities/Room2" instance=ExtResource("25_jawnq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5974007, 0.8673105, -4.3346243)
+id = "Level0_ZE_Character_1766177671_79586"
 
 [node name="Room3" type="Node3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
 
 [node name="HotelClerk" parent="Entities/Room3" instance=ExtResource("11_ggct0")]
 transform = Transform3D(0.86602545, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, 0.86602545, 0, 0.085, -2.25)
+id = "Level0_ZE_Survivor_1766177659_71858"
 
 [node name="Armor" parent="Entities/Room3" instance=ExtResource("38_g1jay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.34950802, 2.5)
+id = "Level0_ZE_Armor_1766177666_54941"
 
 [node name="Room4" type="Node3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -11)
@@ -708,12 +713,15 @@ id = "Level0_ZE_Zombie_1765571833_84556"
 
 [node name="Ammo" parent="Entities/Room4" instance=ExtResource("23_1hnym")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57901, 0.2904392, -2.7523222)
+id = "Level0_ZE_Armor_1766177707_59151"
 
 [node name="Ammo2" parent="Entities/Room4" instance=ExtResource("23_1hnym")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57901, 0.43693882, 2.756857)
+id = "Level0_ZE_Armor_1766177737_86801"
 
 [node name="Door" parent="Entities/Room4" instance=ExtResource("27_m8bfh")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.25, 0, -1)
+id = "Level0_ZE_Door_1766177710_5219"
 
 [node name="Lights" type="Node" parent="."]
 
