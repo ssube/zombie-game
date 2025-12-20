@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpytax0ogxkog"]
+
+[ext_resource type="AudioStream" uid="uid://cseclvit36kh1" path="res://sounds/Sound Effects/Break/glass_break_ufx_1.ogg" id="1_ix7gw"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_hyiyc"]
+
+[node name="GlassBreak" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_ix7gw")
+script = ExtResource("2_hyiyc")
+play_on_ready = true
+subtitle_text = "Breaking Glass"
+subtitle_radius = 5.0
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
