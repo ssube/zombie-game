@@ -48,12 +48,14 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 		new_footstep.global_position = collision_point
 
 		var next_variation = randf_range(-footstep.variation, +footstep.variation)
-		footstep_timer = next_variation + footstep.interval
 
 		# TODO: reset the timer when the entity starts sprinting
 		var input := entity.get_component(ZC_Input) as ZC_Input
-		if input:
-			if input.move_sprint:
-				footstep_timer = footstep_timer / (input.sprint_multiplier * self.sprint_multiplier)
+		if input and input.move_sprint:
+			footstep_timer = next_variation + footstep.sprint_interval
+		elif input and input.move_crouch:
+			footstep_timer = next_variation + footstep.crouch_interval
+		else:
+			footstep_timer = next_variation + footstep.walk_interval
 
 		_footstep_timers[entity.id] = footstep_timer
