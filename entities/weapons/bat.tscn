@@ -153,7 +153,7 @@ metadata/_custom_type_script = "uid://dlb4vkkjdb658"
 
 [node name="ZN_FactionCondition" type="Node" parent="Node3D/Area3D/ZN_HealthAction"]
 script = ExtResource("12_nl1ig")
-apply_to_factions = Array[String](["enemy_zombies", "world"])
+apply_to_factions = Array[String](["hostile_zombies", "neutral_world"])
 metadata/_custom_type_script = "uid://crylbd231pgne"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

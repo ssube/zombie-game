@@ -1,10 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://c64yefgf5ki5c"]
+[gd_scene load_steps=18 format=3 uid="uid://c64yefgf5ki5c"]
 
 [ext_resource type="Script" uid="uid://bcl4s07i5wm66" path="res://scripts/entities/characters/ZE_Character.gd" id="1_0ymef"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_x4c01"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="3_m1ox8"]
 [ext_resource type="Script" uid="uid://c7dv7vmk2ynqt" path="res://scripts/components/characters/ZC_Movement.gd" id="4_8d7q7"]
 [ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="5_4hlmh"]
+[ext_resource type="Script" uid="uid://gy1d5pnk4rwg" path="res://scripts/components/characters/ZC_Attention.gd" id="6_g1t4t"]
+[ext_resource type="Script" uid="uid://b0rh6txy38f6h" path="res://scripts/components/characters/ZC_Perception.gd" id="7_m5vbp"]
+[ext_resource type="Script" uid="uid://s8mvu7ttxmus" path="res://scripts/components/characters/ZC_Stimulus.gd" id="8_0ymef"]
 
 [sub_resource type="Resource" id="Resource_k55fj"]
 script = ExtResource("3_m1ox8")
@@ -19,6 +22,15 @@ metadata/_custom_type_script = "uid://c7dv7vmk2ynqt"
 [sub_resource type="Resource" id="Resource_alwcs"]
 script = ExtResource("5_4hlmh")
 metadata/_custom_type_script = "uid://cixmecjncarw5"
+
+[sub_resource type="Resource" id="Resource_x4c01"]
+script = ExtResource("6_g1t4t")
+faction_scores = null
+metadata/_custom_type_script = "uid://gy1d5pnk4rwg"
+
+[sub_resource type="Resource" id="Resource_m1ox8"]
+script = ExtResource("7_m5vbp")
+metadata/_custom_type_script = "uid://b0rh6txy38f6h"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vdtwx"]
 radius = 0.3
@@ -42,7 +54,7 @@ normal_texture = SubResource("NoiseTexture2D_nmu5s")
 collision_layer = 16
 collision_mask = 27
 script = ExtResource("1_0ymef")
-component_resources = Array[ExtResource("2_x4c01")]([SubResource("Resource_k55fj"), SubResource("Resource_x1bwj"), SubResource("Resource_alwcs")])
+component_resources = Array[ExtResource("2_x4c01")]([SubResource("Resource_k55fj"), SubResource("Resource_x1bwj"), SubResource("Resource_alwcs"), SubResource("Resource_x4c01"), SubResource("Resource_m1ox8")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_vdtwx")

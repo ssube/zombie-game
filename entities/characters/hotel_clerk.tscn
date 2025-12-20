@@ -38,7 +38,7 @@ metadata/_custom_type_script = "uid://cixmecjncarw5"
 
 [sub_resource type="Resource" id="Resource_y41co"]
 script = ExtResource("10_04tpt")
-faction_name = "survivors"
+faction_name = "friendly_survivors"
 metadata/_custom_type_script = "uid://b7x5tu22015cx"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2n0ki"]

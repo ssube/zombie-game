@@ -20,6 +20,7 @@ class_name ZB_ZombieEvents
 # Components
 var actor_entity: Entity
 var entity_health: ZC_Health
+var entity_perception: ZC_Perception
 var entity_weapon: ZC_Weapon_Melee
 var entity_velocity: ZC_Velocity
 
@@ -50,6 +51,7 @@ func _ready():
 func on_ready(entity: Entity) -> void:
 	actor_entity = entity
 	entity_health = actor_entity.get_component(ZC_Health)
+	entity_perception = actor_entity.get_component(ZC_Perception)
 	entity_weapon = actor_entity.get_component(ZC_Weapon_Melee)
 	entity_velocity = actor_entity.get_component(ZC_Velocity)
 
@@ -82,20 +84,38 @@ func _process(delta: float):
 
 		return
 
+func _calculate_visual_intensity(seen_entity: Entity) -> float:
+	var distance := actor_entity.global_position.distance_to(seen_entity.global_position) as float
+	var max_distance := 30.0  # Tune this
+	return clampf(1.0 - (distance / max_distance), 0.1, 1.0)
+
+func _get_faction(other: Entity) -> StringName:
+	var faction_component = other.get_component(ZC_Faction)
+	if faction_component:
+		return faction_component.faction_name
+	return &"unknown"
+
 func _on_vision_area_body_sighted(body: Node) -> void:
 	print("Zombie saw body: ", body.name)
-	if EntityUtils.is_player(body):
-		blackboard.set_value(BehaviorUtils.target_player, body)
-		blackboard.set_value(BehaviorUtils.target_position, body.global_position)
-		state_machine.set_state(state_chase.name)
+	var seen_entity := CollisionUtils.get_collider_entity(body)
+	if seen_entity == null:
+		return
+
+	if seen_entity.id not in entity_perception.visible_entities:
+		entity_perception.visible_entities[seen_entity.id] = true
+
+	# Create stimulus
+	var intensity := _calculate_visual_intensity(seen_entity)
+	var stimulus := ZC_Stimulus.saw_entity(seen_entity, intensity)
+	actor_entity.add_relationship(RelationshipUtils.make_detected(stimulus))
 
 func _on_vision_area_body_hidden(body: Node) -> void:
 	print("Zombie lost sight of body: ", body.name)
-	var target_player = blackboard.get_value(BehaviorUtils.target_player)
-	if body == target_player:
-		# clear target and continue wandering to the last known position
-		blackboard.remove_value(BehaviorUtils.target_player)
-		state_machine.set_state(state_wander.name)
+	var seen_entity := CollisionUtils.get_collider_entity(body)
+	if seen_entity == null:
+		return
+
+	entity_perception.visible_entities.erase(seen_entity.id)
 
 func _on_attack_area_body_entered(body: Node) -> void:
 	print("Zombie can attack body: ", body.name)
@@ -125,6 +145,7 @@ func _on_detection_area_body_exited(_body: Node) -> void:
 
 	if detected_bodies == 0:
 		vision_area.monitoring = false
+		state_machine.set_state(state_wander.name)
 
 func is_actor_active() -> bool:
 	if actor_entity and not entity_health:

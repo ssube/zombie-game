@@ -5,6 +5,13 @@ class_name ZN_AudioSubtitle3D
 @export var play_on_ready: bool = false
 @export var play_on_loop: bool = false
 
+@export_group("Attention")
+@export var sound_radius: float = 10.0
+@export var sound_volume: float = 1.0
+@export var sound_faction: StringName = &"object"
+## If true, this sound will alert zombies (not just show subtitles)
+@export var alerts_enemies: bool = true
+
 @export_group("Subtitles")
 @export var subtitle_text: String = ""
 @export var subtitle_radius: float = 1.0
@@ -15,6 +22,7 @@ class_name ZN_AudioSubtitle3D
 
 @onready var subtitle_tag = "[%s]" % subtitle_text
 @onready var radius_squared := subtitle_radius ** 2
+
 var remove_timer: SceneTreeTimer
 
 func _ready() -> void:
@@ -40,12 +48,29 @@ func play_subtitle(from_position: float = 0.0) -> void:
 	if playing:
 		self.stop()
 
-	# TODO: add sound to enemies too
-	var players := EntityUtils.get_players()
-	for player in players:
-		var player3d := player.get_node(".") as Node3D
-		if player3d.global_position.distance_squared_to(self.global_position) < radius_squared:
-			var noise := ZC_Noise.from_node(self)
-			player.add_relationship(RelationshipUtils.make_heard(noise))
+	if alerts_enemies:
+		# Find the source entity if this sound is attached to one
+		# TODO: this is the wrong call to use here
+		var source_entity: Entity = CollisionUtils.get_collider_entity(self)
+
+		# Full broadcast: subtitles + zombie attention
+		SoundUtils.broadcast(
+				self.global_position,
+				sound_radius,
+				sound_volume,
+				subtitle_tag,
+				sound_faction,
+				source_entity
+		)
+	else:
+		# Subtitle-only broadcast (for UI sounds, ambient, etc.)
+		SoundUtils.broadcast(
+				self.global_position,
+				sound_radius,
+				sound_volume,
+				subtitle_tag,
+				&"",  # Empty faction = no attention
+				null
+		)
 
 	super.play(from_position)
