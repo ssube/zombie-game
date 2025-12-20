@@ -1,7 +1,9 @@
-[gd_scene load_steps=240 format=4 uid="uid://djo5cynmo7f4y"]
+[gd_scene load_steps=242 format=4 uid="uid://djo5cynmo7f4y"]
 
+[ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_5axou"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_o8f3c"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="2_ltd73"]
+[ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="2_og1ph"]
 [ext_resource type="Texture2D" uid="uid://dwtub4bxfxr25" path="res://textures/Color Maps/brick_wall_tx_1.png" id="3_bxjvt"]
 [ext_resource type="Texture2D" uid="uid://d3gxye56hxhy1" path="res://textures/Normal Maps/brick_wall_tx_1_normal.png" id="4_ltd73"]
 [ext_resource type="Texture2D" uid="uid://biafh0sg3jrx2" path="res://textures/Color Maps/concrete_tx_2.png" id="4_wl7ja"]
@@ -821,6 +823,12 @@ points = PackedVector3Array(39.5, -0.25, 24, 39.5, -0.5, 24, 37.5, -0.25, 24, 37
 [node name="TestTown" type="Node3D"]
 
 [node name="Entities" type="Node3D" parent="."]
+
+[node name="Ammo" parent="Entities" instance=ExtResource("1_5axou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.08934, 0.040440142, -7.426856)
+
+[node name="WeaponShotgun" parent="Entities" instance=ExtResource("2_og1ph")]
+transform = Transform3D(-3.804258e-08, 0.87031275, 0.4924995, -1, -4.371139e-08, 0, 2.1527837e-08, -0.4924995, 0.87031275, -7.32526, 0.13767618, -6.8085938)
 
 [node name="Lights" type="Node3D" parent="."]
 
