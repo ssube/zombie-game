@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://bk0rpsoqchthy"
+path="res://.godot/imported/test_town.map-f713b73d041666b75dbef8733ef94a10.tres"
+
+[deps]
+
+source_file="res://levels/test_town.map"
+dest_files=["res://.godot/imported/test_town.map-f713b73d041666b75dbef8733ef94a10.tres"]
+
+[params]
+
