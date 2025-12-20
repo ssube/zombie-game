@@ -13,6 +13,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		var velocity = entity.get_component(ZC_Velocity) as ZC_Velocity
 		var player = entity.get_component(ZC_Player) as ZC_Player
 		var input = entity.get_component(ZC_Input) as ZC_Input
+		var stamina := entity.get_component(ZC_Stamina) as ZC_Stamina
 
 		var body := entity.get_node(".") as CharacterBody3D
 		body.rotation.x += input.turn_direction.x
@@ -28,7 +29,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		).normalized()
 		var speed = input.walk_speed
 
-		if input.move_sprint:
+		if input.move_sprint and stamina.can_sprint():
 			speed *= input.sprint_multiplier
 		elif input.move_crouch:
 			speed *= input.crouch_multiplier
@@ -51,8 +52,9 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 				velocity.linear_velocity.y = max(velocity.gravity.y, velocity.linear_velocity.y)
 
 		# Apply jump
-		if input.move_jump:
+		if input.move_jump and stamina.can_jump():
 			if body.is_on_floor():
+				stamina.current_stamina -= stamina.jump_cost
 				velocity.linear_velocity.y = input.jump_speed
 
 		# TODO: move this into the MovementSystem

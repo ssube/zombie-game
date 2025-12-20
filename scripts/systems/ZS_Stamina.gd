@@ -11,19 +11,22 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 		if stamina.current_stamina >= stamina.max_stamina:
 			continue
 
-		var input := entity.get_component(ZC_Input) as ZC_Input
-		if input != null:
-			if input.move_jump or input.move_sprint or input.use_any:
-				continue
-
 		# Only recharge if they are still
 		var velocity := entity.get_component(ZC_Velocity) as ZC_Velocity
 		var recharge: float = 0.0
 		if is_zero_approx(velocity.linear_velocity.length_squared()):
-			recharge += stamina.still_recharge_rate * delta
+			recharge += stamina.still_recharge_rate
 		else:
-			recharge += stamina.moving_recharge_rate * delta
+			recharge += stamina.moving_recharge_rate
 
-		stamina.current_stamina += recharge
+		# Apply cost
+		var input := entity.get_component(ZC_Input) as ZC_Input
+		var cost: float = velocity.linear_velocity.length() * stamina.velocity_multiplier
+		if input and input.move_sprint:
+			cost *= stamina.sprint_multiplier
+
+		var change := (recharge - cost) * delta
+		stamina.current_stamina += change
+
 		if EntityUtils.is_player(entity):
 			%Menu.set_stamina(stamina.current_stamina)

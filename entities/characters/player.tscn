@@ -79,9 +79,11 @@ metadata/_custom_type_script = "uid://b7fgmwfrg0t73"
 
 [sub_resource type="Resource" id="Resource_e31fi"]
 script = ExtResource("17_g5okp")
-current_stamina = 10.0
-moving_recharge_rate = 0.25
-still_recharge_rate = 2.5
+current_stamina = 50.0
+velocity_multiplier = 0.2
+sprint_multiplier = 5.0
+moving_recharge_rate = 0.5
+still_recharge_rate = 5.0
 metadata/_custom_type_script = "uid://8srnd548by47"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_idcse"]
