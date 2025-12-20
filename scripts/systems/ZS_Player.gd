@@ -679,7 +679,14 @@ func reload_weapon(player: Entity) -> void:
 	if weapon_ammo == null:
 		return
 
+	var ranged_weapon := current_weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	if ranged_weapon == null:
+		return
+
 	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
+	if player_ammo.get_ammo(ranged_weapon.ammo_type) == 0:
+		return
+
 	weapon_ammo.transfer(player_ammo)
 	current_weapon.apply_effects(ZR_Weapon_Effect.EffectType.RANGED_RELOAD)
 	_update_ammo_label(player)
