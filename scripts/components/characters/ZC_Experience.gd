@@ -51,7 +51,7 @@ func calculate_level() -> int:
 
 
 func get_transfer_xp() -> int:
-	var transfer_xp := int(total_xp * transfer_ratio)
+	var transfer_xp := base_xp + int(earned_xp * transfer_ratio)
 	if transfer_max >= 0:
 		transfer_xp = mini(transfer_max, transfer_xp)
 	return transfer_xp
