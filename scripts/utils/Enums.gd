@@ -19,11 +19,13 @@ enum ActionEvent {
 }
 
 enum CRUD {
+	## Synonym for create
 	ADD = 0,
 	CREATE = 0,
 	# READ?
 	UPDATE = 2,
 	DELETE = 3,
+	## Synonym for delete
 	REMOVE = 3,
 }
 

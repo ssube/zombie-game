@@ -175,6 +175,8 @@ func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_cr
 			%Menu.push_action("Need %s key to use %s" % [locked.key_name, interactive.name])
 			return
 
+	collider.emit_action(Enums.ActionEvent.ENTITY_USE, entity)
+
 	if collider.has_component(ZC_Dialogue):
 		if set_crosshair:
 			%Menu.set_crosshair_color(Color.DODGER_BLUE)
@@ -667,6 +669,8 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 			%Menu.push_action("Holstered weapon: %s" % old_interactive.name)
 
 		return
+
+	new_weapon.emit_action(Enums.ActionEvent.ENTITY_EQUIP, entity)
 
 	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
 	%Menu.set_weapon_label(c_interactive.name)

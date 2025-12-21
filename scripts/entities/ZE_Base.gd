@@ -51,6 +51,7 @@ func on_ready() -> void:
 	if self.has_component(ZC_Persistent):
 		assert(self.id != "", "Entity instance ID is empty, will not persist in saved state")
 
+	# Not connected until ECS on_ready to make sure components are in place
 	action_event.connect(_on_action_event)
 	_register_children(self)
 
@@ -60,3 +61,8 @@ func _on_action_event(event: Enums.ActionEvent, actor: Node) -> void:
 		return
 
 	ActionUtils.run_entity(self, event, actor)
+
+
+## Typesafe wrapper for action_event.emit(...)
+func emit_action(event: Enums.ActionEvent, actor: Node) -> void:
+	action_event.emit(event, actor)

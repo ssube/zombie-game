@@ -17,10 +17,10 @@ func on_component_changed(
 
 		# TODO: actor should be source of a pressed relationship
 		if not is_pressed:
-			ActionUtils.run_entity(entity, Enums.ActionEvent.BUTTON_RELEASE, entity)
+			entity.emit_action(Enums.ActionEvent.BUTTON_RELEASE, entity)
 			return
 
-		ActionUtils.run_entity(entity, Enums.ActionEvent.BUTTON_PRESS, entity)
+		entity.emit_action(Enums.ActionEvent.BUTTON_PRESS, entity)
 
 		if button.is_toggle:
 			return
