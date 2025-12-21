@@ -27,7 +27,7 @@ func _apply_effect(body: Node) -> void:
 
 func _remove_effect(body: Node) -> void:
 	if body.has_component(ZC_Player):
-		body.remove_relationship(remove_query)
+		body.remove_relationship(remove_query, 1)
 
 
 func run_entity(_source: Node, event: Enums.ActionEvent, actor: Entity) -> void:
