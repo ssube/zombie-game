@@ -57,9 +57,6 @@ func on_ready() -> void:
 
 
 func _on_action_event(event: Enums.ActionEvent, actor: Node) -> void:
-	if actor is not Entity:
-		return
-
 	ActionUtils.run_entity(self, event, actor)
 
 

@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://d2lqgdvcjtotl"]
+
+[ext_resource type="Material" uid="uid://b1y3n6j10vsip" path="res://textures/Color Maps/water_2.tres" id="1_ln82x"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_n1ox7"]
+[ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="3_br04h"]
+[ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="4_auidd"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xm8ht"]
+collision_mode = 1
+collision_friction = 0.1
+collision_bounce = 0.25
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_15erg"]
+material = ExtResource("1_ln82x")
+radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_420cn"]
+size = Vector3(1, 4, 1)
+
+[sub_resource type="Curve" id="Curve_jwf3j"]
+_data = [Vector2(0, 0.20389044), 0.0, 0.0, 0, 0, Vector2(0.19649123, 0.20389044), 0.0, 0.0, 0, 0, Vector2(0.2526316, 0.34802443), 0.0, 0.0, 0, 0, Vector2(0.39649123, 0.20389044), 0.0, 0.0, 0, 0, Vector2(0.5017544, 0.29755038), -1.7314436, -1.7314436, 0, 0, Vector2(0.69824564, 0.20389044), 0.0, 0.0, 0, 0, Vector2(0.7473684, 0.39741647), 0.0, 0.0, 0, 0, Vector2(0.9017544, 0.20389044), 0.0, 0.0, 0, 0]
+point_count = 8
+
+[sub_resource type="Resource" id="Resource_4d0wg"]
+script = ExtResource("4_auidd")
+effect = 3
+duration = 10.0
+strength = 0.2
+curve_duration = 10.0
+strength_curve = SubResource("Curve_jwf3j")
+metadata/_custom_type_script = "uid://ewo3m4f384i0"
+
+[node name="WaterDrip" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+amount_ratio = 0.25
+lifetime = 1.5
+fixed_fps = 0
+collision_base_size = 0.2
+visibility_aabb = AABB(-2, -8, -2, 4, 12, 4)
+process_material = SubResource("ParticleProcessMaterial_xm8ht")
+draw_pass_1 = SubResource("CapsuleMesh_15erg")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0)
+size = Vector3(1, 1, 1)
+
+[node name="ZN_TriggerArea3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("2_n1ox7")
+body_interval = 10.0
+trigger_on_exit = true
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZN_TriggerArea3D"]
+shape = SubResource("BoxShape3D_420cn")
+
+[node name="ZN_ScreenEffectAction" type="Node" parent="ZN_TriggerArea3D"]
+script = ExtResource("3_br04h")
+effect = SubResource("Resource_4d0wg")
+metadata/_custom_type_script = "uid://dmonxsvpyoytj"

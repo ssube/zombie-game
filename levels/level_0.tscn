@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=124 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_q6gno"]
@@ -41,6 +41,7 @@
 [ext_resource type="Script" uid="uid://cpxac3i6p71x0" path="res://scripts/nodes/objectives/ZN_CountObjective.gd" id="38_2fv0q"]
 [ext_resource type="PackedScene" uid="uid://c8tswr23gn5mg" path="res://entities/items/armor.tscn" id="38_g1jay"]
 [ext_resource type="PackedScene" uid="uid://c4timw2odgktn" path="res://entities/props/glass_sheet.tscn" id="39_2fv0q"]
+[ext_resource type="PackedScene" uid="uid://d2lqgdvcjtotl" path="res://effects/water_drip.tscn" id="42_ijfse"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ukt1r"]
 radius = 1.5
@@ -71,18 +72,6 @@ disable_receive_shadows = true
 [sub_resource type="Resource" id="Resource_1hnym"]
 script = ExtResource("2_ijfse")
 effect = 5
-duration = inf
-strength = 0.5
-metadata/_custom_type_script = "uid://ewo3m4f384i0"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1hnym"]
-transparency = 1
-albedo_color = Color(0.3969, 0.45197996, 0.81, 0.2509804)
-disable_receive_shadows = true
-
-[sub_resource type="Resource" id="Resource_ijfse"]
-script = ExtResource("2_ijfse")
-effect = 3
 duration = inf
 strength = 0.5
 metadata/_custom_type_script = "uid://ewo3m4f384i0"
@@ -569,26 +558,6 @@ script = ExtResource("2_lf4l6")
 effect = SubResource("Resource_1hnym")
 metadata/_custom_type_script = "uid://dmonxsvpyoytj"
 
-[node name="WaterArea" type="Area3D" parent="Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.5, -12.75)
-collision_mask = 24
-script = ExtResource("1_q6gno")
-trigger_on_exit = true
-metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/WaterArea"]
-shape = SubResource("SphereShape3D_ukt1r")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Areas/WaterArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.584219)
-radius = 1.5
-material = SubResource("StandardMaterial3D_1hnym")
-
-[node name="ZN_ScreenEffectAction" type="Node" parent="Areas/WaterArea"]
-script = ExtResource("2_lf4l6")
-effect = SubResource("Resource_ijfse")
-metadata/_custom_type_script = "uid://dmonxsvpyoytj"
-
 [node name="AmmoStation" parent="Areas" instance=ExtResource("3_w633q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 1, -14.5)
 
@@ -720,6 +689,9 @@ id = "Level0_ZE_Survivor_1766177659_71858"
 [node name="Armor" parent="Entities/Room3" instance=ExtResource("38_g1jay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.34950802, 2.5)
 id = "Level0_ZE_Armor_1766177666_54941"
+
+[node name="WaterDrip" parent="Entities/Room3" instance=ExtResource("42_ijfse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.543085, 1.8451071, -3.1637545)
 
 [node name="Room4" type="Node3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -11)
