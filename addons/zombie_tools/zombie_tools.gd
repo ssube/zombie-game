@@ -197,7 +197,7 @@ func check_lock_keys() -> void:
 			missing += 1
 
 	if missing == 0:
-		print("Level has all keys.")
+		print("Level has all %s keys." % key_names.size())
 	else:
 		printerr("Level is missing %d keys!" % missing)
 
@@ -237,6 +237,6 @@ func check_objective_keys() -> void:
 			printerr("Objective %s does not exist in the level!" % objective.key)
 
 	if missing == 0:
-		print("Level has all objectives.")
+		print("Level has all %d objectives." % objective_names.size())
 	else:
 		printerr("Level is missing %d objectives!" % missing)
