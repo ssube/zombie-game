@@ -15,6 +15,18 @@
 [ext_resource type="Script" uid="uid://dlb4vkkjdb658" path="res://scripts/nodes/actions/ZN_HealthAction.gd" id="11_hgjmx"]
 [ext_resource type="Script" uid="uid://crylbd231pgne" path="res://scripts/nodes/conditions/ZN_FactionCondition.gd" id="12_nl1ig"]
 
+[sub_resource type="Resource" id="Resource_42kvg"]
+script = ExtResource("8_3gqkk")
+current_durability = 50
+surface_damage = Dictionary[String, int]({
+"brick": 20,
+"metal": 15,
+"stone": 25,
+"wood": 5,
+"zombie": 5
+})
+metadata/_custom_type_script = "uid://dnmn2xmqdrr00"
+
 [sub_resource type="Resource" id="Resource_dy0dc"]
 script = ExtResource("4_ee0de")
 name = "Baseball Bat"
@@ -39,18 +51,6 @@ damage_areas = Array[NodePath]([NodePath("Node3D/Area3D")])
 damage = 10
 effects = Array[ExtResource("5_xpimh")]([SubResource("Resource_dwhqy")])
 metadata/_custom_type_script = "uid://c86wth8kvlbt7"
-
-[sub_resource type="Resource" id="Resource_42kvg"]
-script = ExtResource("8_3gqkk")
-current_durability = 50
-surface_damage = Dictionary[String, int]({
-"brick": 20,
-"metal": 15,
-"stone": 25,
-"wood": 5,
-"zombie": 5
-})
-metadata/_custom_type_script = "uid://dnmn2xmqdrr00"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00uot"]
 resource_name = "Material"
@@ -108,7 +108,7 @@ collision_layer = 4
 collision_mask = 23
 max_contacts_reported = 4
 script = ExtResource("1_aigh8")
-component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_dy0dc"), SubResource("Resource_ee0de"), SubResource("Resource_42kvg")])
+component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_42kvg"), SubResource("Resource_dy0dc"), SubResource("Resource_ee0de")])
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(0.7643113, 0.5640393, 0.31251454, 0, 0.48464668, -0.87470967, -0.6448176, 0.6685637, 0.37042788, 0.7398019, -0.59114224, -0.7246001)

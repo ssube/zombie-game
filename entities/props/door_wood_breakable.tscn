@@ -21,6 +21,12 @@ open_effect = ExtResource("4_btt3s")
 close_effect = ExtResource("3_8c2mg")
 metadata/_custom_type_script = "uid://qjr7o31fiedq"
 
+[sub_resource type="Resource" id="Resource_btt3s"]
+script = ExtResource("9_8c2mg")
+max_health = 50
+current_health = 50
+metadata/_custom_type_script = "uid://0ndifcnh0nsp"
+
 [sub_resource type="Resource" id="Resource_auxoi"]
 script = ExtResource("6_xwmlh")
 name = "Door"
@@ -31,12 +37,6 @@ metadata/_custom_type_script = "uid://0dld8iow0suh"
 [sub_resource type="Resource" id="Resource_8c2mg"]
 script = ExtResource("8_7gway")
 metadata/_custom_type_script = "uid://b8oatb3tdywrh"
-
-[sub_resource type="Resource" id="Resource_btt3s"]
-script = ExtResource("9_8c2mg")
-max_health = 50
-current_health = 50
-metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7gway"]
 size = Vector3(2, 4, 0.25)
@@ -49,7 +49,7 @@ size = Vector3(0.5, 2.5, 0.25)
 
 [node name="Door" type="Node3D"]
 script = ExtResource("1_svhb3")
-component_resources = Array[ExtResource("2_7gway")]([SubResource("Resource_q8gv4"), SubResource("Resource_auxoi"), SubResource("Resource_8c2mg"), SubResource("Resource_btt3s")])
+component_resources = Array[ExtResource("2_7gway")]([SubResource("Resource_q8gv4"), SubResource("Resource_btt3s"), SubResource("Resource_auxoi"), SubResource("Resource_8c2mg")])
 
 [node name="Markers" type="Node3D" parent="."]
 

@@ -13,6 +13,13 @@
 [ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="8_7sij5"]
 [ext_resource type="PackedScene" uid="uid://dpytax0ogxkog" path="res://effects/sounds/glass_break.tscn" id="11_dv5ss"]
 
+[sub_resource type="Resource" id="Resource_dv5ss"]
+script = ExtResource("5_7sij5")
+actions = Dictionary[int, NodePath]({
+33: NodePath("ZN_BranchAction")
+})
+metadata/_custom_type_script = "uid://barikupijl7r7"
+
 [sub_resource type="Resource" id="Resource_nn44j"]
 script = ExtResource("3_faors")
 max_health = 10
@@ -23,19 +30,12 @@ metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 script = ExtResource("4_l4c1e")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
-[sub_resource type="Resource" id="Resource_dv5ss"]
-script = ExtResource("5_7sij5")
-actions = Dictionary[int, NodePath]({
-33: NodePath("ZN_BranchAction")
-})
-metadata/_custom_type_script = "uid://barikupijl7r7"
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_md1jy"]
 size = Vector3(1, 1, 0.2)
 
 [node name="GlassSheet" type="Node3D"]
 script = ExtResource("1_u0tbx")
-component_resources = Array[ExtResource("2_34t28")]([SubResource("Resource_nn44j"), SubResource("Resource_7sij5"), SubResource("Resource_dv5ss")])
+component_resources = Array[ExtResource("2_34t28")]([SubResource("Resource_dv5ss"), SubResource("Resource_nn44j"), SubResource("Resource_7sij5")])
 
 [node name="GlassSheet" type="StaticBody3D" parent="." node_paths=PackedStringArray("parent_entity")]
 script = ExtResource("5_nn44j")

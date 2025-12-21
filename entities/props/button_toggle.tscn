@@ -11,6 +11,14 @@
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="7_nqh2g"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="9_ie4yn"]
 
+[sub_resource type="Resource" id="Resource_ie4yn"]
+script = ExtResource("6_nqh2g")
+actions = Dictionary[int, NodePath]({
+20: NodePath("PressedActions"),
+21: NodePath("ReleasedActions")
+})
+metadata/_custom_type_script = "uid://barikupijl7r7"
+
 [sub_resource type="Resource" id="Resource_0h2if"]
 script = ExtResource("3_c1g8g")
 is_toggle = true
@@ -22,14 +30,6 @@ name = "Red Button"
 shimmer_material = ExtResource("5_nqh2g")
 shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
-
-[sub_resource type="Resource" id="Resource_ie4yn"]
-script = ExtResource("6_nqh2g")
-actions = Dictionary[int, NodePath]({
-20: NodePath("PressedActions"),
-21: NodePath("ReleasedActions")
-})
-metadata/_custom_type_script = "uid://barikupijl7r7"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p86pc"]
 albedo_color = Color(1, 0.18, 0.19366646, 1)
@@ -92,7 +92,7 @@ _data = {
 collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_p86pc")
-component_resources = Array[ExtResource("2_f2tyo")]([SubResource("Resource_0h2if"), SubResource("Resource_qcbqw"), SubResource("Resource_ie4yn")])
+component_resources = Array[ExtResource("2_f2tyo")]([SubResource("Resource_ie4yn"), SubResource("Resource_0h2if"), SubResource("Resource_qcbqw")])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 size = Vector3(0.3, 0.3, 0.3)

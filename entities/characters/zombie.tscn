@@ -34,31 +34,10 @@
 [ext_resource type="Script" uid="uid://dicdllgowu6ov" path="res://scripts/behavior/conditions/utils/ZB_Throttle.gd" id="24_j7lgi"]
 [ext_resource type="PackedScene" uid="uid://b4406rbr42a1e" path="res://entities/weapons/zombie_melee.tscn" id="27_j7lgi"]
 
-[sub_resource type="Resource" id="Resource_kwfyu"]
-script = ExtResource("4_rcyyt")
-metadata/_custom_type_script = "uid://c7dv7vmk2ynqt"
-
-[sub_resource type="Resource" id="Resource_7tmu0"]
-script = ExtResource("5_tseq0")
-metadata/_custom_type_script = "uid://cixmecjncarw5"
-
-[sub_resource type="Resource" id="Resource_4bumh"]
-script = ExtResource("6_nswy3")
-hurt_sound = ExtResource("6_8aduj")
-metadata/_custom_type_script = "uid://0ndifcnh0nsp"
-
-[sub_resource type="Resource" id="Resource_wwun5"]
-script = ExtResource("9_7tmu0")
-material_healthy = ExtResource("8_tfdn2")
-material_hurt = ExtResource("9_wwun5")
-material_dead = ExtResource("7_l1o5o")
-skin_shapes = Array[NodePath]([NodePath("CSGCylinder3D"), NodePath("CSGSphere3D")])
-metadata/_custom_type_script = "uid://b8oatb3tdywrh"
-
-[sub_resource type="Resource" id="Resource_jpnnd"]
-script = ExtResource("10_tfdn2")
-effect_path = NodePath("Effects/FireEffect")
-metadata/_custom_type_script = "uid://jokkv7skgimj"
+[sub_resource type="Resource" id="Resource_4i4kv"]
+script = ExtResource("17_euqm3")
+faction_scores = null
+metadata/_custom_type_script = "uid://gy1d5pnk4rwg"
 
 [sub_resource type="Resource" id="Resource_8aduj"]
 script = ExtResource("12_j7lgi")
@@ -66,6 +45,21 @@ regions = Dictionary[NodePath, float]({
 NodePath("HeadShape"): 5.0
 })
 metadata/_custom_type_script = "uid://boehksdg08i5l"
+
+[sub_resource type="Resource" id="Resource_ull4n"]
+script = ExtResource("18_euqm3")
+base_xp = 750
+metadata/_custom_type_script = "uid://b7fgmwfrg0t73"
+
+[sub_resource type="Resource" id="Resource_euqm3"]
+script = ExtResource("16_kwfyu")
+faction_name = "hostile_zombies"
+metadata/_custom_type_script = "uid://b7x5tu22015cx"
+
+[sub_resource type="Resource" id="Resource_jpnnd"]
+script = ExtResource("10_tfdn2")
+effect_path = NodePath("Effects/FireEffect")
+metadata/_custom_type_script = "uid://jokkv7skgimj"
 
 [sub_resource type="Resource" id="Resource_sn1gh"]
 script = ExtResource("14_rcyyt")
@@ -75,24 +69,30 @@ sounds = Dictionary[String, PackedScene]({
 })
 metadata/_custom_type_script = "uid://dpu6n5g8bpa3g"
 
-[sub_resource type="Resource" id="Resource_euqm3"]
-script = ExtResource("16_kwfyu")
-faction_name = "hostile_zombies"
-metadata/_custom_type_script = "uid://b7x5tu22015cx"
+[sub_resource type="Resource" id="Resource_4bumh"]
+script = ExtResource("6_nswy3")
+hurt_sound = ExtResource("6_8aduj")
+metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
-[sub_resource type="Resource" id="Resource_4i4kv"]
-script = ExtResource("17_euqm3")
-faction_scores = null
-metadata/_custom_type_script = "uid://gy1d5pnk4rwg"
+[sub_resource type="Resource" id="Resource_kwfyu"]
+script = ExtResource("4_rcyyt")
+metadata/_custom_type_script = "uid://c7dv7vmk2ynqt"
 
 [sub_resource type="Resource" id="Resource_mn8kb"]
 script = ExtResource("17_ull4n")
 metadata/_custom_type_script = "uid://b0rh6txy38f6h"
 
-[sub_resource type="Resource" id="Resource_ull4n"]
-script = ExtResource("18_euqm3")
-base_xp = 750
-metadata/_custom_type_script = "uid://b7fgmwfrg0t73"
+[sub_resource type="Resource" id="Resource_wwun5"]
+script = ExtResource("9_7tmu0")
+material_healthy = ExtResource("8_tfdn2")
+material_hurt = ExtResource("9_wwun5")
+material_dead = ExtResource("7_l1o5o")
+skin_shapes = Array[NodePath]([NodePath("CSGCylinder3D"), NodePath("CSGSphere3D")])
+metadata/_custom_type_script = "uid://b8oatb3tdywrh"
+
+[sub_resource type="Resource" id="Resource_7tmu0"]
+script = ExtResource("5_tseq0")
+metadata/_custom_type_script = "uid://cixmecjncarw5"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwqt7"]
 
@@ -114,7 +114,7 @@ events = NodePath("Behavior/ZombieBehavior/Events")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("WeaponMarker")
-component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_kwfyu"), SubResource("Resource_7tmu0"), SubResource("Resource_4bumh"), SubResource("Resource_wwun5"), SubResource("Resource_jpnnd"), SubResource("Resource_8aduj"), SubResource("Resource_sn1gh"), SubResource("Resource_euqm3"), SubResource("Resource_4i4kv"), SubResource("Resource_mn8kb"), SubResource("Resource_ull4n")])
+component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_4i4kv"), SubResource("Resource_8aduj"), SubResource("Resource_ull4n"), SubResource("Resource_euqm3"), SubResource("Resource_jpnnd"), SubResource("Resource_sn1gh"), SubResource("Resource_4bumh"), SubResource("Resource_kwfyu"), SubResource("Resource_mn8kb"), SubResource("Resource_wwun5"), SubResource("Resource_7tmu0")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 material = ExtResource("8_tfdn2")
