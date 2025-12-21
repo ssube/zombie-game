@@ -131,9 +131,9 @@ event_animations = Dictionary[int, String]({
 20: "pressed"
 })
 
-[node name="ZN_AudioAction" type="Node" parent="PressedActions" node_paths=PackedStringArray("audio_player")]
+[node name="ZN_AudioAction" type="Node" parent="PressedActions" node_paths=PackedStringArray("audio_players")]
 script = ExtResource("7_c6nwv")
-audio_player = NodePath("../../ZN_AudioSubtitle3D")
+audio_players = [NodePath("../../ZN_AudioSubtitle3D")]
 
 [node name="ZN_SkinAction" type="Node" parent="PressedActions" node_paths=PackedStringArray("target_entity")]
 script = ExtResource("11_wlayu")
