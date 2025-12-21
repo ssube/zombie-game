@@ -10,3 +10,4 @@ func run_entity(_source: Node, _event: Enums.ActionEvent, actor: Entity) -> void
 
 	var transfer := experience.get_transfer_xp()
 	actor_experience.earned_xp += transfer
+	experience.clear()
