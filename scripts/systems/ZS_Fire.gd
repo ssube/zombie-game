@@ -18,7 +18,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		burning.time_remaining -= accumulated_delta
 
 		# Fire bypasses armor for now
-		entity.add_relationship(RelationshipUtils.make_damage(burning.damage_per_second))
+		entity.add_relationship(RelationshipUtils.make_damage(null, burning.damage_per_second))
 
 		if burning.time_remaining < 0:
 			entity.remove_component(ZC_Effect_Burning)

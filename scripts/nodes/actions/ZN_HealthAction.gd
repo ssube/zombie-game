@@ -23,9 +23,9 @@ func run_entity(_source: Node, _event: Enums.ActionEvent, actor: Entity) -> void
 
 	match health_mode:
 		HealthMode.DAMAGE:
-			actor.add_relationship(RelationshipUtils.make_damage(health_amount))
+			actor.add_relationship(RelationshipUtils.make_damage(null, health_amount))
 		HealthMode.HEAL:
-			actor.add_relationship(RelationshipUtils.make_damage(-health_amount))
+			actor.add_relationship(RelationshipUtils.make_damage(null, -health_amount))
 		HealthMode.MAX:
 			actor_health.current_health = maxi(actor_health.current_health, health_amount)
 		HealthMode.SET:

@@ -336,6 +336,7 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 
 	if new_projectile is Entity:
 		ECS.world.add_entity(new_projectile)
+		new_projectile.add_relationship(RelationshipUtils.make_fired(entity))
 	else:
 		printerr("Projectile is not an entity: ", new_projectile)
 

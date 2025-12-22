@@ -1,13 +1,18 @@
 class_name RelationshipUtils
 
-static var any_damage = Relationship.new(ZC_Damaged.new(), null)
+static var any_damage = Relationship.new(ZC_Damaged.new(""), null)
 static var any_effect = Relationship.new(ZC_Effected.new(), null)
+static var any_fired = Relationship.new(ZC_Fired.new(), null)
 static var any_heard = Relationship.new(ZC_Heard.new(), null)
 static var any_holding = Relationship.new(ZC_Holding.new(), null)
 static var any_modifier = Relationship.new(ZC_Modifier.new(), null)
 static var any_detected = Relationship.new(ZC_Detected.new(), null)
 static var any_wearing = Relationship.new(ZC_Wearing.new(), null)
 static var any_used = Relationship.new(ZC_Used.new(), null)
+
+static func get_damage(target: Entity) -> Array[Relationship]:
+	var relationships := target.get_relationships(any_damage) as Array[Relationship]
+	return relationships
 
 static func get_holder(item: Entity) -> Entity:
 	var relationships := ECS.world.query.with_reverse_relationship([
@@ -30,10 +35,15 @@ static func get_user(item: Entity) -> Entity:
 	assert(relationships.size() <= 1, "Item has more than one entity using it, relationships are leaking!")
 	return relationships.get(0)
 
-static func make_damage(damage_amount: int) -> Relationship:
-	var damage_component := ZC_Damage.new(damage_amount)
-	var damaged_component := ZC_Damaged.new()
-	return Relationship.new(damaged_component, damage_component)
+static func make_damage(actor: Entity, damage_amount: int) -> Relationship:
+	var actor_id := ""
+	if actor:
+		actor_id = actor.id
+
+	var damage_component := ZC_Damage.new(damage_amount, actor_id)
+	var damage_link := ZC_Damaged.new(actor_id)
+	damage_link.damaged_by = actor_id
+	return Relationship.new(damage_link, damage_component)
 
 static func make_detected(stimulus: ZC_Stimulus) -> Relationship:
 	var detected_component := ZC_Detected.new()
@@ -46,6 +56,10 @@ static func make_effect(effect: ZC_Screen_Effect) -> Relationship:
 static func make_equipped(item: Entity) -> Relationship:
 	var equipped_component := ZC_Equipped.new()
 	return Relationship.new(equipped_component, item)
+
+static func make_fired(actor: Entity) -> Relationship:
+	var fired_component := ZC_Fired.new()
+	return Relationship.new(fired_component, actor)
 
 static func make_heard(sound: ZC_Noise) -> Relationship:
 	var heard_component := ZC_Heard.new()

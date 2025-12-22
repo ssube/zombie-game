@@ -39,8 +39,15 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 						if target_shape == region_shape:
 							region_multiplier *= body_regions.regions[region]
 
-				EntityUtils.apply_damage(target_object, projectile.damage, region_multiplier)
+				var fired_by: Entity = null
+				var fired_rel := entity.get_relationship(RelationshipUtils.any_fired)
+				if fired_rel:
+					fired_by = fired_rel.target as Entity
 
+				assert(fired_by != null, "Projectile is missing its fired by relationship!")
+				EntityUtils.apply_damage(fired_by, target_object, projectile.damage, region_multiplier)
+
+				# only applies to projectiles, not melee
 				if EntityUtils.is_flammable(target_object):
 					var flammable: ZC_Flammable = target_object.get_component(ZC_Flammable)
 					if flammable.ignite_on_hit:
