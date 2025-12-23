@@ -6,6 +6,7 @@ enum LevelMode {
 	EXPONENTIAL,
 }
 
+@export var show_experience_messages: bool = false
 @export var level_increment: float = 1000.0
 @export var level_mode: LevelMode = LevelMode.LINEAR
 
@@ -33,6 +34,10 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 
 		if EntityUtils.is_player(entity):
 			print("Experience changed for player: ", property, " from ", old_value, " to ", new_value, " (Level: ", new_level, ")")
+			if show_experience_messages:
+				%Menu.push_action("Gained %d Experience" % (new_value - old_value))
+
+			%Menu.set_score(new_value)
 
 
 func _calculate_level(c_experience: ZC_Experience) -> int:

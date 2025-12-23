@@ -6,8 +6,17 @@ class_name ZE_Player
 
 func on_ready():
 	super.on_ready()
+	sync_experience()
 	sync_health()
 	sync_stamina()
+
+
+func sync_experience():
+	var c_experience := get_component(ZC_Experience) as ZC_Experience
+	if not c_experience:
+		return
+
+	%Menu.set_score(c_experience.total_xp)
 
 
 ## Sync health from component to menu

@@ -3,7 +3,11 @@ class_name ZC_Experience
 
 @export_group("XP")
 @export var base_xp: int = 0
-@export var earned_xp: int = 0
+@export var earned_xp: int = 0:
+	set(value):
+		var old_xp := earned_xp
+		earned_xp = value
+		property_changed.emit(self, "earned_xp", old_xp, earned_xp)
 
 var total_xp: int:
 	get():
