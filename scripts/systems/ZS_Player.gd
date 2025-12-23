@@ -89,13 +89,13 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			if OptionsManager.options.audio.subtitles:
 				%Menu.push_action(noise.subtitle_tag)
 
-			entity.remove_relationship(rel)
+		entity.remove_relationships(heard_noises)
 
 		# Process any usage relationships
 		var used_items := entity.get_relationships(RelationshipUtils.any_used) as Array[Relationship]
 		for rel in used_items:
 			use_interactive(rel.target, entity, player, false)
-			entity.remove_relationship(rel)
+		entity.remove_relationships(used_items)
 
 		# Pause menu
 		if input.menu_pause:
