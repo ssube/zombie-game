@@ -5,8 +5,10 @@ extends System
 
 var last_shimmer: Dictionary[Entity, Entity] = {} # dict for multiplayer
 
+
 func query():
 	return q.with_all([ZC_Velocity, ZC_Player, ZC_Input])
+
 
 func process(entities: Array[Entity], _components: Array, delta: float):
 	for entity in entities:

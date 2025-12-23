@@ -48,11 +48,11 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 				EntityUtils.apply_damage(fired_by, target_object, projectile.damage, region_multiplier)
 
 				# only applies to projectiles, not melee
-				if EntityUtils.is_flammable(target_object):
-					var flammable: ZC_Flammable = target_object.get_component(ZC_Flammable)
-					if flammable.ignite_on_hit:
-						var fire = ZC_Effect_Burning.new()
-						target_object.add_component(fire)
+				#if EntityUtils.is_flammable(target_object):
+				#	var flammable: ZC_Flammable = target_object.get_component(ZC_Flammable)
+				#	if flammable.ignite_on_hit:
+				#		var fire = ZC_Effect_Burning.new()
+				#		target_object.add_component(fire)
 
 			projectile.piercing -= 1
 			if projectile.piercing <= 0:

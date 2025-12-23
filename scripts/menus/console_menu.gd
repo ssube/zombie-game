@@ -2,7 +2,9 @@ extends ZM_BaseMenu
 
 signal command_submitted(command: String)
 
+
 var _history: Array[String] = []
+
 
 func _run_command(text: String) -> void:
 	var words := text.split(" ")

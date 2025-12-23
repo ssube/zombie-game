@@ -36,19 +36,22 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 
 		var health := entity.get_component(ZC_Health) as ZC_Health
 		var previous_health := health.current_health
-		health.current_health -= damage
+		var adjusted_health := previous_health - damage
 
 		if damage > 0:
+			var damage_source := _calculate_damage_source(damages)
+			var hit_by := ECS.world.get_entity_by_id(damage_source)
+			var hit := Relationship.new(ZC_Hit.new(), hit_by)
+			RelationshipUtils.add_unique_relationship(entity, hit)
+
 			# TODO: find a better way to only add this once per entity
 			# the observer already has both of these values, for example
-			if health.current_health == 0 and previous_health > 0:
-				var damage_source := _calculate_damage_source(damages)
-				var killed_by := ECS.world.get_entity_by_id(damage_source)
+			if adjusted_health <= 0 and previous_health > 0:
 				var killed := Relationship.new(ZC_Killed.new(damage_source), entity)
-				killed_by.add_relationship(killed)
+				hit_by.add_relationship(killed)
 
 			if EntityUtils.is_player(entity):
-				var effect_strength := 1.0 - (health.current_health / float(health.max_health))
+				var effect_strength := 1.0 - (adjusted_health / float(health.max_health))
 				effect_strength /= 2.0
 
 				var effect := ZC_Screen_Effect.new()
@@ -57,6 +60,9 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 				effect.strength = effect_strength
 				var effect_rel := RelationshipUtils.make_effect(effect)
 				entity.add_relationship(effect_rel)
+
+		health.current_health -= damage
+
 
 func _calculate_damage_source(damages: Array[Relationship]) -> String:
 	match mode:
@@ -67,6 +73,7 @@ func _calculate_damage_source(damages: Array[Relationship]) -> String:
 
 	assert(false, "Invalid damage mode!")
 	return ""
+
 
 func _calculate_last_damage_source(damages: Array[Relationship]) -> String:
 	var last_source :=  ""
@@ -79,6 +86,7 @@ func _calculate_last_damage_source(damages: Array[Relationship]) -> String:
 			max_timestamp = relation.damaged_at
 
 	return last_source
+
 
 func _calculate_most_damage_source(damages: Array[Relationship]) -> String:
 	var damage_by_source: Dictionary[String, int] = {}

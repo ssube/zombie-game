@@ -2,7 +2,7 @@ class_name ZS_FireSystem
 extends System
 
 var accumulated_delta: float = 0.0
-@export var delta_interval: float = 1.0
+@export var update_interval: float = 1.0
 
 func query():
 	return q.with_all([ZC_Effect_Burning])
@@ -10,7 +10,7 @@ func query():
 func process(entities: Array[Entity], _components: Array, delta: float):
 	# Run once per second
 	accumulated_delta += delta
-	if accumulated_delta < delta_interval:
+	if accumulated_delta < update_interval:
 		return
 
 	for entity in entities:

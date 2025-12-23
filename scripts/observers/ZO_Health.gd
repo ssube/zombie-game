@@ -40,7 +40,8 @@ func _update_hud(health: int) -> void:
 
 
 func _on_damage(entity: ZE_Base, c_health: ZC_Health) -> void:
-	entity.emit_action(Enums.ActionEvent.ENTITY_DAMAGE, null)
+	var hitter := entity.get_relationship(RelationshipUtils.any_hit)
+	entity.emit_action(Enums.ActionEvent.ENTITY_DAMAGE, hitter.target)
 
 	if c_health.hurt_sound:
 		var sound_node = c_health.hurt_sound.instantiate() as ZN_AudioSubtitle3D
@@ -52,9 +53,9 @@ func _on_damage(entity: ZE_Base, c_health: ZC_Health) -> void:
 			objective.is_complete = true
 
 
-
 func _on_death(entity: ZE_Base, c_health: ZC_Health) -> void:
-	entity.emit_action(Enums.ActionEvent.ENTITY_DEATH, null)
+	var killer := RelationshipUtils.get_killer(entity)
+	entity.emit_action(Enums.ActionEvent.ENTITY_DEATH, killer)
 
 	if c_health.death_sound:
 		var sound_node = c_health.death_sound.instantiate() as ZN_AudioSubtitle3D
@@ -64,19 +65,3 @@ func _on_death(entity: ZE_Base, c_health: ZC_Health) -> void:
 		var objective: ZC_Objective = entity.get_component(ZC_Objective)
 		if objective.is_active and objective.complete_on_death:
 			objective.is_complete = true
-
-	if EntityUtils.is_explosive(entity):
-		var explosive: ZC_Explosive = entity.get_component(ZC_Explosive)
-		if explosive.explode_on_death:
-			var explosion = explosive.explosion_scene.instantiate() as Node3D
-			var entity_node: Node3D = entity.get_node(".") as Node3D
-
-			# Place the explosion at the same position as the entity
-			var root = entity.get_parent()
-			root.add_child(explosion)
-			explosion.global_transform = entity_node.global_transform
-
-			# Remove the exploded entity
-			print("Entity has exploded: ", entity)
-			EntityUtils.keep_sounds(entity)
-			EntityUtils.remove(entity)

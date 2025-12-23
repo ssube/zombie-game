@@ -4,6 +4,7 @@ static var any_damage = Relationship.new(ZC_Damaged.new(""), null)
 static var any_effect = Relationship.new(ZC_Effected.new(), null)
 static var any_fired = Relationship.new(ZC_Fired.new(), null)
 static var any_heard = Relationship.new(ZC_Heard.new(), null)
+static var any_hit = Relationship.new(ZC_Hit.new(), null)
 static var any_holding = Relationship.new(ZC_Holding.new(), null)
 static var any_modifier = Relationship.new(ZC_Modifier.new(), null)
 static var any_detected = Relationship.new(ZC_Detected.new(), null)
@@ -25,6 +26,13 @@ static func get_holder(item: Entity) -> Entity:
 		RelationshipUtils.make_holding(item)
 	]).execute() as Array[Entity]
 	assert(relationships.size() <= 1, "Item has more than one entity holding it, relationships are leaking!")
+	return relationships.get(0)
+
+static func get_killer(item: Entity) -> Entity:
+	var relationships := ECS.world.query.with_relationship([
+		Relationship.new(ZC_Killed.new(""), item),
+	]).execute() as Array
+	assert(relationships.size() <= 1, "Item has been killed by more than one entity, relationships are leaking!")
 	return relationships.get(0)
 
 static func get_user(item: Entity) -> Entity:
