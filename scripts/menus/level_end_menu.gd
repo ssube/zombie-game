@@ -2,7 +2,7 @@ extends ZM_BaseMenu
 
 @export var level_label: Label
 @export var score_label: Label
-@export var next_level_button: Button
+@export var next_level_label: Label
 @export var level_image_rect: TextureRect
 
 @export var last_level: String
@@ -12,7 +12,7 @@ extends ZM_BaseMenu
 
 @onready var level_template: String = level_label.text
 @onready var score_template: String = score_label.text
-@onready var next_level_template: String = next_level_button.text
+@onready var next_level_template: String = next_level_label.text
 
 
 signal next_level_pressed()
@@ -30,7 +30,7 @@ func _on_exit_pressed() -> void:
 func on_update() -> void:
 	level_label.text = level_template % last_level
 	score_label.text = score_template % score
-	next_level_button.text = next_level_template % next_level
+	next_level_label.text = next_level_template % next_level
 
 	if level_image:
 		level_image_rect.texture = level_image

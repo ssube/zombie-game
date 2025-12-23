@@ -105,6 +105,9 @@ func set_score(score: int) -> void:
 	$MenuLayer/LevelEndMenu.score = score
 	$MenuLayer/GameOverMenu.score = score
 
+func set_killer(killer: String) -> void:
+	$MenuLayer/GameOverMenu.killed_by = killer
+
 func show_console() -> void:
 	show_menu(Menus.CONSOLE_MENU)
 

@@ -80,6 +80,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2d4ws")
+visible_menu = 1
 
 [node name="EffectLayer" type="CanvasLayer" parent="."]
 

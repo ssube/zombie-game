@@ -5,7 +5,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lr8k6"]
 
-[node name="LevelEndMenu" type="AspectRatioContainer" node_paths=PackedStringArray("level_label", "score_label", "next_level_button", "level_image_rect")]
+[node name="LevelEndMenu" type="AspectRatioContainer" node_paths=PackedStringArray("level_label", "score_label", "next_level_label", "level_image_rect")]
 process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +15,7 @@ grow_vertical = 2
 script = ExtResource("1_lr8k6")
 level_label = NodePath("MarginContainer/VFlowContainer/LevelLabel")
 score_label = NodePath("MarginContainer/VFlowContainer/ScoreLabel")
-next_level_button = NodePath("MarginContainer/VFlowContainer/NextLevel")
+next_level_label = NodePath("MarginContainer/VFlowContainer/NextLabel")
 level_image_rect = NodePath("MarginContainer/TextureRect")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -52,9 +52,13 @@ layout_mode = 2
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_lr8k6")
 
-[node name="NextLevel" type="Button" parent="MarginContainer/VFlowContainer"]
+[node name="NextLabel" type="Label" parent="MarginContainer/VFlowContainer"]
 layout_mode = 2
-text = "Next Level
-%s"
+text = "Next Level: %s"
+horizontal_alignment = 1
 
-[connection signal="pressed" from="MarginContainer/VFlowContainer/NextLevel" to="." method="_on_next_level_pressed"]
+[node name="ContinueButton" type="Button" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Continue"
+
+[connection signal="pressed" from="MarginContainer/VFlowContainer/ContinueButton" to="." method="_on_next_level_pressed"]

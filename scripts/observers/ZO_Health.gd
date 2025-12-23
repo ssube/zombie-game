@@ -65,3 +65,6 @@ func _on_death(entity: ZE_Base, c_health: ZC_Health) -> void:
 		var objective: ZC_Objective = entity.get_component(ZC_Objective)
 		if objective.is_active and objective.complete_on_death:
 			objective.is_complete = true
+
+	if EntityUtils.is_player(entity):
+		%Menu.set_killer(killer.name)

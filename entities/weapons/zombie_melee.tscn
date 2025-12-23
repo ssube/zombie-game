@@ -38,10 +38,11 @@ curve = SubResource("Curve3D_4d0u4")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
 
-[node name="Area3D" type="Area3D" parent="Path3D/PathFollow3D"]
+[node name="Area3D" type="Area3D" parent="Path3D/PathFollow3D" node_paths=PackedStringArray("parent_entity")]
 collision_layer = 16
 collision_mask = 11
 script = ExtResource("5_4d0u4")
+parent_entity = NodePath("../../..")
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Area3D"]
