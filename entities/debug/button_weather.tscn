@@ -1,0 +1,156 @@
+[gd_scene load_steps=25 format=3 uid="uid://cwpv6dhxasw3v"]
+
+[ext_resource type="Script" uid="uid://svxqn3t4whnt" path="res://scripts/entities/props/ZE_Button.gd" id="1_tjtal"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_v1ybl"]
+[ext_resource type="Script" uid="uid://c8jci3yicdcmm" path="res://scripts/components/props/ZC_Button.gd" id="3_qt6bo"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_ua5xn"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_7gmon"]
+[ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="6_16u43"]
+[ext_resource type="Material" uid="uid://divxfmiycw33x" path="res://materials/button_green_disabled.tres" id="7_21ppk"]
+[ext_resource type="Material" uid="uid://c4ihe7nrnnjeg" path="res://materials/button_green_enabled.tres" id="8_vfdcv"]
+[ext_resource type="Script" uid="uid://b8oatb3tdywrh" path="res://scripts/components/characters/ZC_Skin.gd" id="9_2nhmx"]
+[ext_resource type="AudioStream" uid="uid://brrg1fnj5tpo3" path="res://sounds/1000 Retro Sound Effects/General Sounds/Buttons/sfx_sounds_button3.wav" id="10_nvqgh"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="11_vaesf"]
+[ext_resource type="Script" uid="uid://djt2jgsv2ihkt" path="res://scripts/nodes/actions/ZN_AnimationAction.gd" id="12_bihfo"]
+[ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="13_fw6mk"]
+[ext_resource type="Script" uid="uid://bus2bo0rlmxbd" path="res://scripts/nodes/actions/ZN_WeatherAction.gd" id="14_wn6qm"]
+
+[sub_resource type="Resource" id="Resource_0h2if"]
+script = ExtResource("3_qt6bo")
+reset_delay = 1.0
+metadata/_custom_type_script = "uid://c8jci3yicdcmm"
+
+[sub_resource type="Resource" id="Resource_qcbqw"]
+script = ExtResource("4_ua5xn")
+name = "Magic Weather Button"
+shimmer_material = ExtResource("5_7gmon")
+shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
+metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_wlayu"]
+script = ExtResource("6_16u43")
+actions = Dictionary[int, NodePath]({
+20: NodePath("PressedActions"),
+21: NodePath("ReleasedActions")
+})
+metadata/_custom_type_script = "uid://barikupijl7r7"
+
+[sub_resource type="Resource" id="Resource_ysgk6"]
+script = ExtResource("9_2nhmx")
+material_disabled = ExtResource("7_21ppk")
+material_enabled = ExtResource("8_vfdcv")
+skin_shapes = Array[NodePath]([NodePath("CSGBox3D")])
+current_skin = 3
+metadata/_custom_type_script = "uid://b8oatb3tdywrh"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gdqc6"]
+albedo_color = Color(0.45, 0.8349999, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0h2if"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="Animation" id="Animation_2yqqr"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_2syx8"]
+resource_name = "pressed"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.1, 1, 0, 0, 0, 0.5, 1, 0, -0.5, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.1, 1, 0, 0, 0, 0.5, 1, 0, -0.5, 0)
+
+[sub_resource type="Animation" id="Animation_hdbxb"]
+resource_name = "released"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.1, 1, 0, -0.5, 0, 0.5, 1, 0, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.1, 1, 0, -0.5, 0, 0.5, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hdbxb"]
+_data = {
+&"RESET": SubResource("Animation_2yqqr"),
+&"pressed": SubResource("Animation_2syx8"),
+&"released": SubResource("Animation_hdbxb")
+}
+
+[node name="PushButton" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 31
+script = ExtResource("1_tjtal")
+component_resources = Array[ExtResource("2_v1ybl")]([SubResource("Resource_0h2if"), SubResource("Resource_qcbqw"), SubResource("Resource_wlayu"), SubResource("Resource_ysgk6")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.3, 0.3, 0.3)
+material = SubResource("StandardMaterial3D_gdqc6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_0h2if")
+
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_nvqgh")
+script = ExtResource("11_vaesf")
+subtitle_text = "Button Pressed"
+remove_on_finished = false
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hdbxb")
+}
+
+[node name="PressedActions" type="Node" parent="."]
+
+[node name="ZN_AnimationAction" type="Node" parent="PressedActions" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("12_bihfo")
+animation_player = NodePath("../../AnimationPlayer")
+event_animations = Dictionary[int, String]({
+20: "pressed"
+})
+
+[node name="ZN_AudioAction" type="Node" parent="PressedActions" node_paths=PackedStringArray("audio_players")]
+script = ExtResource("13_fw6mk")
+audio_players = [NodePath("../../ZN_AudioSubtitle3D")]
+
+[node name="ZN_WeatherAction" type="Node" parent="PressedActions"]
+script = ExtResource("14_wn6qm")
+set_time = true
+time_of_day = 0
+set_weather = true
+weather_type = 2
+metadata/_custom_type_script = "uid://bus2bo0rlmxbd"
+
+[node name="ReleasedActions" type="Node" parent="."]
+
+[node name="ZN_AnimationAction" type="Node" parent="ReleasedActions" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("12_bihfo")
+animation_player = NodePath("../../AnimationPlayer")
+event_animations = Dictionary[int, String]({
+21: "released"
+})

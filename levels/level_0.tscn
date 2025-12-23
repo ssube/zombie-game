@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=125 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_q6gno"]
@@ -42,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://c8tswr23gn5mg" path="res://entities/items/armor.tscn" id="38_g1jay"]
 [ext_resource type="PackedScene" uid="uid://c4timw2odgktn" path="res://entities/props/glass_sheet.tscn" id="39_2fv0q"]
 [ext_resource type="PackedScene" uid="uid://d2lqgdvcjtotl" path="res://effects/water_drip.tscn" id="42_ijfse"]
+[ext_resource type="PackedScene" uid="uid://cwpv6dhxasw3v" path="res://entities/debug/button_weather.tscn" id="43_r7enh"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ukt1r"]
 radius = 1.5
@@ -122,20 +123,6 @@ metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 script = ExtResource("27_2fv0q")
 key_name = "door"
 metadata/_custom_type_script = "uid://dd4hkf7y5v13t"
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yi3jx"]
-sky_top_color = Color(0.35032377, 0.43960616, 0.67056155, 1)
-sky_horizon_color = Color(0.6, 0.6784314, 0.6313726, 1)
-ground_horizon_color = Color(0.6, 0.6784314, 0.6313726, 1)
-ground_curve = 0.05
-
-[sub_resource type="Sky" id="Sky_b6wpd"]
-sky_material = SubResource("ProceduralSkyMaterial_yi3jx")
-
-[sub_resource type="Environment" id="Environment_foxie"]
-background_mode = 2
-sky = SubResource("Sky_b6wpd")
-ambient_light_source = 3
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jwc5o"]
 _surfaces = [{
@@ -512,6 +499,20 @@ geometry_source_group_name = &"level"
 region_merge_size = 5.0
 filter_ledge_spans = true
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yi3jx"]
+sky_top_color = Color(0.35032377, 0.43960616, 0.67056155, 1)
+sky_horizon_color = Color(0.6, 0.6784314, 0.6313726, 1)
+ground_horizon_color = Color(0.6, 0.6784314, 0.6313726, 1)
+ground_curve = 0.05
+
+[sub_resource type="Sky" id="Sky_b6wpd"]
+sky_material = SubResource("ProceduralSkyMaterial_yi3jx")
+
+[sub_resource type="Environment" id="Environment_foxie"]
+background_mode = 2
+sky = SubResource("Sky_b6wpd")
+ambient_light_source = 3
+
 [node name="Level0" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
 script = ExtResource("1_66alr")
 screenshot_camera = NodePath("Cameras/Screenshot")
@@ -634,6 +635,9 @@ id = "Level0_ZE_Wall_1765939120_82616"
 transform = Transform3D(1.4142135, 0, -1.4142135, 0, 2, 0, 1.4142135, 0, 1.4142135, 2.445844, 3, -1.8714375)
 id = "Level0_ZE_Wall_1765939118_76924"
 
+[node name="PushButton2" parent="Entities/Room1" instance=ExtResource("43_r7enh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.78291, 2.047391, -3.849999)
+
 [node name="Room2" type="Node3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 4)
 
@@ -733,9 +737,6 @@ light_color = Color(0.56, 1, 0.67, 1)
 light_energy = 2.5
 shadow_enabled = true
 omni_range = 14.736
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Lights"]
-environment = SubResource("Environment_foxie")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
 transform = Transform3D(-0.50000006, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.50000006, 7, 3, -3)
@@ -1070,3 +1071,8 @@ key = "touch_portal"
 title = "Touch the glowing red portal"
 game_state = 1
 metadata/_custom_type_script = "uid://b560n5psxwkuk"
+
+[node name="Skies" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Skies"]
+environment = SubResource("Environment_foxie")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c32dl721ugeb0"]
+[gd_scene load_steps=28 format=3 uid="uid://c32dl721ugeb0"]
 
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/nodes/ZN_World.gd" id="1_7ti0h"]
 [ext_resource type="Resource" uid="uid://dhop75hkvee3x" path="res://campaigns/zombie_game.tres" id="2_mgpep"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://secirogvxx3a" path="res://scripts/observers/ZO_Objective.gd" id="12_fbo34"]
 [ext_resource type="Script" uid="uid://4x335wa2bbnp" path="res://scripts/observers/ZO_Skin.gd" id="12_tkgql"]
 [ext_resource type="Script" uid="uid://d4vgv5bhgdrp" path="res://scripts/observers/ZO_Experience.gd" id="12_xr5dp"]
+[ext_resource type="Script" uid="uid://cmt101c6etawn" path="res://scripts/observers/ZO_Weather.gd" id="13_kck2e"]
 [ext_resource type="Script" uid="uid://bxs4yliwwtxr" path="res://scripts/systems/ZS_Effect.gd" id="13_pb6kn"]
 [ext_resource type="Script" uid="uid://dyutgptbapg76" path="res://scripts/observers/ZO_Button.gd" id="13_si8kf"]
 [ext_resource type="Script" uid="uid://rlyjuahjpvyv" path="res://scripts/systems/ZS_Stamina.gd" id="17_kw56w"]
@@ -69,6 +70,9 @@ script = ExtResource("13_si8kf")
 
 [node name="ZO_ExperienceObserver" type="Node" parent="World/Observers"]
 script = ExtResource("12_xr5dp")
+
+[node name="ZO_WeatherObserver" type="Node" parent="World/Observers"]
+script = ExtResource("13_kck2e")
 
 [node name="Systems" type="Node" parent="World"]
 unique_name_in_owner = true

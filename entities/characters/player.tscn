@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://busds31ha5tx1"]
+[gd_scene load_steps=30 format=3 uid="uid://busds31ha5tx1"]
 
 [ext_resource type="Script" uid="uid://dyudolkkkb4ut" path="res://scripts/entities/characters/ZE_Player.gd" id="1_ks8m5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_l1ths"]
+[ext_resource type="Script" uid="uid://ueea117e6ncx" path="res://scripts/components/ZC_Weather.gd" id="3_gmhi3"]
 [ext_resource type="Script" uid="uid://cllu7i7unqk6u" path="res://scripts/components/characters/ZC_Player.gd" id="4_25mxy"]
 [ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="5_a1f57"]
 [ext_resource type="Script" uid="uid://cxm3pspus34o7" path="res://scripts/components/characters/ZC_Input.gd" id="6_a1f57"]
@@ -17,24 +18,28 @@
 [ext_resource type="Script" uid="uid://b7fgmwfrg0t73" path="res://scripts/components/characters/ZC_Experience.gd" id="16_8ug6l"]
 [ext_resource type="Script" uid="uid://8srnd548by47" path="res://scripts/components/characters/ZC_Stamina.gd" id="17_g5okp"]
 
-[sub_resource type="Resource" id="Resource_l1ths"]
-script = ExtResource("5_a1f57")
-linear_velocity = Vector3(1, 0, 0)
-metadata/_custom_type_script = "uid://cixmecjncarw5"
+[sub_resource type="Resource" id="Resource_blta8"]
+script = ExtResource("3_gmhi3")
+metadata/_custom_type_script = "uid://ueea117e6ncx"
 
-[sub_resource type="Resource" id="Resource_25mxy"]
-script = ExtResource("4_25mxy")
-view_ray = NodePath("Head/TouchRay")
-metadata/_custom_type_script = "uid://cllu7i7unqk6u"
+[sub_resource type="Resource" id="Resource_gmhi3"]
+script = ExtResource("14_jq748")
+ammo_count = Dictionary[String, int]({
+"12gauge": 2
+})
+max_ammo_count = Dictionary[String, int]({
+"12gauge": 30
+})
+metadata/_custom_type_script = "uid://bsnlq5t650od"
 
-[sub_resource type="Resource" id="Resource_dv4ir"]
-script = ExtResource("6_a1f57")
-metadata/_custom_type_script = "uid://cxm3pspus34o7"
+[sub_resource type="Resource" id="Resource_eiif7"]
+script = ExtResource("16_8ug6l")
+metadata/_custom_type_script = "uid://b7fgmwfrg0t73"
 
-[sub_resource type="Resource" id="Resource_p37y2"]
-script = ExtResource("9_idcse")
-hurt_sound = ExtResource("10_bjbbu")
-metadata/_custom_type_script = "uid://0ndifcnh0nsp"
+[sub_resource type="Resource" id="Resource_g5okp"]
+script = ExtResource("15_gmhi3")
+faction_name = "friendly_players"
+metadata/_custom_type_script = "uid://b7x5tu22015cx"
 
 [sub_resource type="Resource" id="Resource_b4uku"]
 script = ExtResource("10_vkqcq")
@@ -49,24 +54,19 @@ sounds = Dictionary[String, PackedScene]({
 })
 metadata/_custom_type_script = "uid://dpu6n5g8bpa3g"
 
-[sub_resource type="Resource" id="Resource_gmhi3"]
-script = ExtResource("14_jq748")
-ammo_count = Dictionary[String, int]({
-"12gauge": 2
-})
-max_ammo_count = Dictionary[String, int]({
-"12gauge": 30
-})
-metadata/_custom_type_script = "uid://bsnlq5t650od"
+[sub_resource type="Resource" id="Resource_p37y2"]
+script = ExtResource("9_idcse")
+hurt_sound = ExtResource("10_bjbbu")
+metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
-[sub_resource type="Resource" id="Resource_g5okp"]
-script = ExtResource("15_gmhi3")
-faction_name = "friendly_players"
-metadata/_custom_type_script = "uid://b7x5tu22015cx"
+[sub_resource type="Resource" id="Resource_dv4ir"]
+script = ExtResource("6_a1f57")
+metadata/_custom_type_script = "uid://cxm3pspus34o7"
 
-[sub_resource type="Resource" id="Resource_eiif7"]
-script = ExtResource("16_8ug6l")
-metadata/_custom_type_script = "uid://b7fgmwfrg0t73"
+[sub_resource type="Resource" id="Resource_25mxy"]
+script = ExtResource("4_25mxy")
+view_ray = NodePath("Head/TouchRay")
+metadata/_custom_type_script = "uid://cllu7i7unqk6u"
 
 [sub_resource type="Resource" id="Resource_e31fi"]
 script = ExtResource("17_g5okp")
@@ -76,6 +76,11 @@ sprint_multiplier = 5.0
 moving_recharge_rate = 0.5
 still_recharge_rate = 5.0
 metadata/_custom_type_script = "uid://8srnd548by47"
+
+[sub_resource type="Resource" id="Resource_l1ths"]
+script = ExtResource("5_a1f57")
+linear_velocity = Vector3(1, 0, 0)
+metadata/_custom_type_script = "uid://cixmecjncarw5"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_idcse"]
 height = 2.25
@@ -87,7 +92,7 @@ script = ExtResource("1_ks8m5")
 hands_node = NodePath("Head/Hands")
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("Head/Hands/WeaponMarker")
-component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_l1ths"), SubResource("Resource_25mxy"), SubResource("Resource_dv4ir"), SubResource("Resource_p37y2"), SubResource("Resource_b4uku"), SubResource("Resource_8ug6l"), SubResource("Resource_gmhi3"), SubResource("Resource_g5okp"), SubResource("Resource_eiif7"), SubResource("Resource_e31fi")])
+component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_blta8"), SubResource("Resource_gmhi3"), SubResource("Resource_eiif7"), SubResource("Resource_g5okp"), SubResource("Resource_b4uku"), SubResource("Resource_8ug6l"), SubResource("Resource_p37y2"), SubResource("Resource_dv4ir"), SubResource("Resource_25mxy"), SubResource("Resource_e31fi"), SubResource("Resource_l1ths")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_idcse")
