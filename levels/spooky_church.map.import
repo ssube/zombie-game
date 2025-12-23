@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://xsyey7s3gc2h"
+path="res://.godot/imported/spooky_church.map-045b59e48a7fadc641ee5e59cb52e508.tres"
+
+[deps]
+
+source_file="res://levels/spooky_church.map"
+dest_files=["res://.godot/imported/spooky_church.map-045b59e48a7fadc641ee5e59cb52e508.tres"]
+
+[params]
+

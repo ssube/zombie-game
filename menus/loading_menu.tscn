@@ -1,10 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://445cu24k4j5g"]
+[gd_scene load_steps=6 format=3 uid="uid://445cu24k4j5g"]
 
 [ext_resource type="Script" uid="uid://c7mwmktio4xx7" path="res://scripts/menus/loading_menu.gd" id="1_gn3ar"]
 
+[sub_resource type="Gradient" id="Gradient_gn3ar"]
+colors = PackedColorArray(0, 0, 0, 1, 0.48, 0.48, 0.48, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4e30e"]
+domain_warp_enabled = true
+domain_warp_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tbf8g"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_4e30e")
+color_ramp = SubResource("Gradient_gn3ar")
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gn3ar"]
 
-[node name="LoadingMenu" type="AspectRatioContainer" node_paths=PackedStringArray("hint_label", "level_label")]
+[node name="LoadingMenu" type="AspectRatioContainer" node_paths=PackedStringArray("hint_label", "level_image_rect", "level_label")]
 process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
