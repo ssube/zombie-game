@@ -10,6 +10,12 @@ static var any_detected = Relationship.new(ZC_Detected.new(), null)
 static var any_wearing = Relationship.new(ZC_Wearing.new(), null)
 static var any_used = Relationship.new(ZC_Used.new(), null)
 
+static func add_unique_relationship(target: Entity, relationship: Relationship) -> void:
+	var similar_relationship := Relationship.new(relationship.relation, null)
+	var existing_relationships := target.get_relationships(similar_relationship)
+	target.remove_relationships(existing_relationships)
+	target.add_relationship(relationship)
+
 static func get_damage(target: Entity) -> Array[Relationship]:
 	var relationships := target.get_relationships(any_damage) as Array[Relationship]
 	return relationships

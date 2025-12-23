@@ -177,6 +177,9 @@ func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_cr
 
 	collider.emit_action(Enums.ActionEvent.ENTITY_USE, entity)
 
+	# add used-by relationship, replacing any existing ones
+	RelationshipUtils.add_unique_relationship(collider, Relationship.new(ZC_Used.new(), entity))
+
 	if collider.has_component(ZC_Dialogue):
 		if set_crosshair:
 			%Menu.set_crosshair_color(Color.DODGER_BLUE)
