@@ -35,12 +35,10 @@ static func get_killer(item: Entity) -> Entity:
 	assert(relationships.size() <= 1, "Item has been killed by more than one entity, relationships are leaking!")
 	return relationships.get(0)
 
-static func get_user(item: Entity) -> Entity:
-	var relationships := ECS.world.query.with_reverse_relationship([
-		RelationshipUtils.make_used(item)
-	]).execute() as Array[Entity]
+static func get_user(target: Entity) -> Entity:
+	var relationships := target.get_relationships(any_used) as Array[Relationship]
 	assert(relationships.size() <= 1, "Item has more than one entity using it, relationships are leaking!")
-	return relationships.get(0)
+	return relationships.get(0).target
 
 static func get_wearer(item: Entity) -> Entity:
 	var relationships := ECS.world.query.with_reverse_relationship([

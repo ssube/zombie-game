@@ -16,11 +16,12 @@ func on_component_changed(
 			entity.add_component(ZC_Cooldown.new(button.cooldown_delay))
 
 		# TODO: actor should be source of a pressed relationship
+		var user := RelationshipUtils.get_user(entity)
 		if not is_pressed:
-			entity.emit_action(Enums.ActionEvent.BUTTON_RELEASE, entity)
+			entity.emit_action(Enums.ActionEvent.BUTTON_RELEASE, user)
 			return
 
-		entity.emit_action(Enums.ActionEvent.BUTTON_PRESS, entity)
+		entity.emit_action(Enums.ActionEvent.BUTTON_PRESS, user)
 
 		if button.is_toggle:
 			return

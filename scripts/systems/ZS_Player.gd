@@ -180,10 +180,10 @@ func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_cr
 			%Menu.push_action("Need %s key to use %s" % [locked.key_name, interactive.name])
 			return
 
-	collider.emit_action(Enums.ActionEvent.ENTITY_USE, entity)
-
 	# add used-by relationship, replacing any existing ones
 	RelationshipUtils.add_unique_relationship(collider, Relationship.new(ZC_Used.new(), entity))
+
+	collider.emit_action(Enums.ActionEvent.ENTITY_USE, entity)
 
 	if collider.has_component(ZC_Dialogue):
 		if set_crosshair:
