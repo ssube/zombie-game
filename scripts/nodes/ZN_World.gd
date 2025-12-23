@@ -140,7 +140,7 @@ func load_level(level_name: String, spawn_point: String) -> void:
 		level_hints.append_array(campaign.hints)
 
 	%Menu.set_hints(level_hints)
-	%Menu.set_level(level_data.title, level_data.loading_image)
+	%Menu.set_level(level_data.title, level_data.loading_image, level_data.end_image)
 	%Menu.set_next_level(level_data.next_level)
 
 	var level_scene = level_data.scene

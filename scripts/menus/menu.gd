@@ -93,9 +93,10 @@ func start_dialogue(dialogue: DialogueResource, start_title: String, extras: Arr
 func set_hints(hints: Array[String]) -> void:
 	$MenuLayer/LoadingMenu.hints = hints
 
-func set_level(level_name: String, level_image: Texture2D) -> void:
+func set_level(level_name: String, loading_image: Texture2D, end_image: Texture2D) -> void:
 	$MenuLayer/LoadingMenu.level_name = level_name
-	$MenuLayer/LoadingMenu.level_image = level_image
+	$MenuLayer/LoadingMenu.level_image = loading_image
+	$MenuLayer/LevelEndMenu.level_image = end_image
 
 func set_next_level(level_name: String) -> void:
 	$MenuLayer/LevelEndMenu.next_level = level_name

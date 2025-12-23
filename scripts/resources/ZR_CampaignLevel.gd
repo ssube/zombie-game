@@ -9,6 +9,9 @@ enum HintMode {
 @export var key: String
 @export var title: String
 @export var scene: PackedScene
+
+@export_group("Ending")
+@export var end_image: Texture2D = null
 @export var next_level: String # TODO: calculate this from the level list if not set
 
 @export_group("Loading")

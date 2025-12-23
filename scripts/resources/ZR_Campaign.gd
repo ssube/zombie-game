@@ -2,6 +2,8 @@ extends Resource
 class_name ZR_Campaign
 
 @export var title: String = "Zombie Game"
+@export var title_screen: Texture2D
+
 @export var levels: Array[ZR_CampaignLevel] = []
 @export var hints: Array[String] = [
 	"Zombies are bad for your health.",

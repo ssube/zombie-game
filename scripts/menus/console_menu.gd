@@ -1,5 +1,9 @@
 extends ZM_BaseMenu
 
+@export var command_input: LineEdit
+@export var command_history: RichTextLabel
+
+
 signal command_submitted(command: String)
 
 
@@ -22,6 +26,10 @@ func _run_command(text: String) -> void:
 			print("Loading level %s from the console..." % level)
 			var game := get_tree().root.get_node("/root/Game")
 			game.load_level(level, spawn)
+		"menu":
+			var menu_index := int(words[1])
+			var menu := get_tree().root.get_node("/root/Game/Menu")
+			menu.show_menu(menu_index)
 
 
 func _on_console_input_text_submitted(text: String) -> void:
@@ -29,14 +37,15 @@ func _on_console_input_text_submitted(text: String) -> void:
 	_run_command(text)
 
 	_history.append(text)
+	command_input.text = ""
 	on_update()
 
 
 func on_show() -> void:
 	super.on_show()
-	$MarginContainer/VBoxContainer/ConsoleInput.grab_focus()
+	command_input.grab_focus()
 
 
 func on_update() -> void:
 	var history := "\n".join(_history)
-	$MarginContainer/VBoxContainer/ConsoleHistory.text = history
+	command_history.text = history

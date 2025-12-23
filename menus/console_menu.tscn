@@ -4,13 +4,15 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p3dnq"]
 
-[node name="ConsoleMenu" type="AspectRatioContainer"]
+[node name="ConsoleMenu" type="AspectRatioContainer" node_paths=PackedStringArray("command_input", "command_history")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ia81e")
+command_input = NodePath("MarginContainer/VBoxContainer/ConsoleInput")
+command_history = NodePath("MarginContainer/VBoxContainer/ConsoleHistory")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2

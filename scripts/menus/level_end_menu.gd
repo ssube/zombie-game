@@ -3,10 +3,12 @@ extends ZM_BaseMenu
 @export var level_label: Label
 @export var score_label: Label
 @export var next_level_button: Button
+@export var level_image_rect: TextureRect
 
 @export var last_level: String
 @export var next_level: String
 @export var score: int
+@export var level_image: Texture2D
 
 @onready var level_template: String = level_label.text
 @onready var score_template: String = score_label.text
@@ -29,3 +31,9 @@ func on_update() -> void:
 	level_label.text = level_template % last_level
 	score_label.text = score_template % score
 	next_level_button.text = next_level_template % next_level
+
+	if level_image:
+		level_image_rect.texture = level_image
+		level_image_rect.visible = true
+	else:
+		level_image_rect.visible = false

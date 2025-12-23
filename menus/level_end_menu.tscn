@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dialawbgdnoap"]
+[gd_scene load_steps=4 format=3 uid="uid://dialawbgdnoap"]
 
 [ext_resource type="Script" uid="uid://d1jb5qko6v5f3" path="res://scripts/menus/level_end_menu.gd" id="1_lr8k6"]
+[ext_resource type="Texture2D" uid="uid://xvvykos6jpvb" path="res://textures/level_placeholder.tres" id="2_2d6ew"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lr8k6"]
 
-[node name="LevelEndMenu" type="AspectRatioContainer" node_paths=PackedStringArray("level_label", "score_label", "next_level_button")]
+[node name="LevelEndMenu" type="AspectRatioContainer" node_paths=PackedStringArray("level_label", "score_label", "next_level_button", "level_image_rect")]
 process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,12 +16,19 @@ script = ExtResource("1_lr8k6")
 level_label = NodePath("MarginContainer/VFlowContainer/LevelLabel")
 score_label = NodePath("MarginContainer/VFlowContainer/ScoreLabel")
 next_level_button = NodePath("MarginContainer/VFlowContainer/NextLevel")
+level_image_rect = NodePath("MarginContainer/TextureRect")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/margin_top = 64
 theme_override_constants/margin_bottom = 64
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_2d6ew")
+expand_mode = 2
+stretch_mode = 6
 
 [node name="VFlowContainer" type="VFlowContainer" parent="MarginContainer"]
 layout_mode = 2
