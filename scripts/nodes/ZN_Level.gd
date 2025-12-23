@@ -9,6 +9,8 @@ class_name ZN_Level
 @export var markers_node: NodePath = "Markers"
 @export var map_node: NodePath = "Map"
 @export var objectives_node: NodePath = "Objectives"
+# TODO: extra observers
+# TODO: extra systems
 
 @export_group("Screenshots")
 @export var screenshot_camera: Camera3D
@@ -46,7 +48,7 @@ func _take_level_screenshot() -> void:
 	print("camera copy position: ", camera_copy.global_position)
 
 	# Force render update
-	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS # UPDATE_ONCE
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	RenderingServer.force_draw()
 
 	# Wait for rendering to complete (in editor, we use call_deferred)

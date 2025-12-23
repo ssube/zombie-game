@@ -44,6 +44,8 @@ func _ready():
 		add_entity(child)
 
 	var user_args := CommandLineArgs.parse_user_args()
+	# user_args["mod"] = ["foo.pck"]
+	
 	CommandLineArgs.load_mods_from_args(user_args)
 	campaign = CommandLineArgs.get_campaign(user_args, campaign)
 	print("Loaded campaign: %s" % campaign.title)

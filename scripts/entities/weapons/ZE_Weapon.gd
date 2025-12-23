@@ -39,7 +39,7 @@ func on_ready() -> void:
 		if cache_for_type.size() > 0:
 			_effects_cache[effect_type] = cache_for_type
 
-	print("Cached %d effects for entity %s" % [cached, self.id])
+	print("Cached %d effects for weapon %s" % [cached, self.id])
 
 func apply_effects(effect_type: ZR_Weapon_Effect.EffectType) -> Array[Node3D]:
 	var use_projectile = false

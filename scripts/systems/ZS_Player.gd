@@ -164,6 +164,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 
 func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_crosshair: bool = true) -> void:
+	# TODO: queue entities for removal but don't fully remove them until after all of the components have been processed
 	if collider.has_component(ZC_Cooldown):
 		return
 
