@@ -179,3 +179,50 @@ static func get_campaign(parsed_args: Dictionary, default_campaign: ZR_Campaign)
 
 	print("Loaded campaign: %s" % campaign_path)
 	return loaded as ZR_Campaign
+
+## Checks for --help flag and prints usage if present.
+## Returns true if help was shown (caller should quit), false otherwise.
+static func check_help(parsed_args: Dictionary) -> bool:
+	if not parsed_args.has("help"):
+		return false
+
+	print_help()
+	return true
+
+
+## Prints help text describing available command line arguments.
+static func print_help() -> void:
+	var help_text := """
+Zombie Game - Command Line Arguments
+=====================================
+
+Usage: game [-- OPTIONS]
+
+Note: Arguments after -- are passed to the game, not the engine.
+
+OPTIONS:
+  --help                    Show this help message and quit
+
+  --campaign=PATH           Load a campaign resource
+                            Can be a short name (e.g., main) or full path
+                            Short names look in res://campaigns/
+
+  --level=NAME              Start at a specific level (must exist in campaign)
+
+  --marker=PATH             Spawn at a specific marker node path
+                            (e.g., Markers/FrontDoor)
+
+  --merge-campaigns         Merge the base campaign and the campaign loaded
+                            with the --campaign option
+
+  --mod=PATH                Load a PCK mod file (can be repeated)
+                            (e.g., --mod=weapons.pck --mod=maps.pck)
+
+EXAMPLES:
+  game -- --help
+  game -- --level=1_hotel --marker=Markers/Pool
+  game -- --campaign=debug --level=test_town
+  game -- --mod=mymods/extra_weapons.pck --mod=mymods/new_maps.pck
+  game -- --campaign=main --level=1_hotel --marker=Markers/Start --mod=dlc.pck
+"""
+	print(help_text)

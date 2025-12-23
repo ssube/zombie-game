@@ -44,6 +44,9 @@ func _ready():
 		add_entity(child)
 
 	var user_args := CommandLineArgs.parse_user_args()
+	if CommandLineArgs.check_help(user_args):
+		get_tree().quit()
+
 	print("Running with user arguments: ", JSON.stringify(user_args))
 
 	CommandLineArgs.load_mods_from_args(user_args)
