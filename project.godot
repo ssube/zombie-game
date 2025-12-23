@@ -21,8 +21,8 @@ ECS="*res://addons/gecs/ecs/ecs.gd"
 DecalManager="*res://scripts/singletons/DecalManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 ObjectiveManager="*res://scripts/singletons/ObjectiveManager.gd"
+OptionsManager="*res://scripts/singletons/OptionsManager.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
-CheatManager="*res://scripts/singletons/CheatManager.gd"
 
 [debug]
 
