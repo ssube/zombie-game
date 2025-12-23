@@ -435,8 +435,17 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_labby")
 layout_mode = 2
 text = "Apply"
 
+[connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3/PhysicalShellsBox" to="." method="_on_physical_shells_box_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3/PhysicalMagsBox" to="." method="_on_physical_mags_box_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2/CRTShader" to="." method="_on_crt_shader_toggled"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2/ResolutionMenu" to="." method="_on_resolution_menu_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2/WindowModeMenu" to="." method="_on_window_mode_menu_item_selected"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/MainVolumeSlider" to="." method="_on_main_volume_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/EffectsVolumeSlider" to="." method="_on_effects_volume_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/SubtitleCheckBox" to="." method="_on_subtitle_check_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoAggroBox" to="." method="_on_no_aggro_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoClipBox" to="." method="_on_no_clip_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/GodModeBox" to="." method="_on_god_mode_box_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]

@@ -3,8 +3,10 @@ extends Node
 @export var options: ZR_Options = ZR_Options.new()
 
 func apply_pending(previous_options: ZR_Options) -> bool:
+	apply_volume()
+
 	if options.graphics.screen_resolution != previous_options.graphics.screen_resolution:
-		OptionsManager.apply_resolution()
+		apply_resolution()
 
 	return true
 
@@ -19,6 +21,17 @@ func apply_resolution() -> void:
 	get_window().set_size(options.screen_resolution)
 	get_viewport().set_size(options.screen_resolution)
 	get_window().move_to_center()
+
+
+func apply_volume() -> void:
+	var master_bus_index := AudioServer.get_bus_index("Master")
+	AudioServer.set_bus_volume_linear(master_bus_index, options.audio.main_volume / 100.0)
+
+	var music_bus_index := AudioServer.get_bus_index("Music")
+	AudioServer.set_bus_volume_linear(music_bus_index, options.audio.music_volume / 100.0)
+
+	var effects_bus_index := AudioServer.get_bus_index("Effects")
+	AudioServer.set_bus_volume_linear(effects_bus_index, options.audio.effects_volume / 100.0)
 
 
 func toggle_cheat_no_aggro(_value: bool) -> void:

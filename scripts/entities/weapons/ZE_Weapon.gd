@@ -2,9 +2,6 @@
 extends ZE_Base
 class_name ZE_Weapon
 
-# TODO: move to game settings
-var physical_shells: bool = true
-var physical_mags: bool = true
 
 var _effects_cache: Dictionary[ZR_Weapon_Effect.EffectType, Array] = {}
 
@@ -47,9 +44,9 @@ func apply_effects(effect_type: ZR_Weapon_Effect.EffectType) -> Array[Node3D]:
 		ZR_Weapon_Effect.EffectType.RANGED_FIRE:
 			use_projectile = true
 		ZR_Weapon_Effect.EffectType.RANGED_RECOIL:
-			use_projectile = physical_shells
+			use_projectile = OptionsManager.options.gameplay.physical_casings
 		ZR_Weapon_Effect.EffectType.RANGED_RELOAD:
-			use_projectile = physical_mags
+			use_projectile = OptionsManager.options.gameplay.physical_mags
 
 	var effects := _effects_cache.get(effect_type, []) as Array
 	var effect_scenes: Array[Node3D] = []
