@@ -86,7 +86,9 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			if noise.subtitle_tag == "":
 				continue
 
-			%Menu.push_action(noise.subtitle_tag)
+			if OptionsManager.options.audio.subtitles:
+				%Menu.push_action(noise.subtitle_tag)
+
 			entity.remove_relationship(rel)
 
 		# Process any usage relationships

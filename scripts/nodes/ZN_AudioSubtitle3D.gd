@@ -63,14 +63,15 @@ func play_subtitle(from_position: float = 0.0) -> void:
 				source_entity
 		)
 	else:
-		# Subtitle-only broadcast (for UI sounds, ambient, etc.)
-		SoundUtils.broadcast(
-				self.global_position,
-				sound_radius,
-				sound_volume,
-				subtitle_tag,
-				&"",  # Empty faction = no attention
-				null
-		)
+		if OptionsManager.options.audio.subtitles:
+			# Subtitle-only broadcast (for UI sounds, ambient, etc.)
+			SoundUtils.broadcast(
+					self.global_position,
+					sound_radius,
+					sound_volume,
+					subtitle_tag,
+					&"",  # Empty faction = no attention
+					null
+			)
 
 	super.play(from_position)
