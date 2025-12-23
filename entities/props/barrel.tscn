@@ -107,6 +107,7 @@ skeleton = NodePath("")
 
 [node name="FireEffect" parent="Effects" instance=ExtResource("6_dwmog")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.16060305, 0)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_bv25f")
