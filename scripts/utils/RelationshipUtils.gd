@@ -17,22 +17,29 @@ static func get_damage(target: Entity) -> Array[Relationship]:
 static func get_holder(item: Entity) -> Entity:
 	var relationships := ECS.world.query.with_reverse_relationship([
 		RelationshipUtils.make_holding(item)
-	]).execute() as Array[Relationship]
+	]).execute() as Array[Entity]
 	assert(relationships.size() <= 1, "Item has more than one entity holding it, relationships are leaking!")
-	return relationships.get(0)
-
-static func get_wearer(item: Entity) -> Entity:
-	var relationships := ECS.world.query.with_reverse_relationship([
-		RelationshipUtils.make_wearing(item)
-	]).execute() as Array[Relationship]
-	assert(relationships.size() <= 1, "Item has more than one entity wearing it, relationships are leaking!")
 	return relationships.get(0)
 
 static func get_user(item: Entity) -> Entity:
 	var relationships := ECS.world.query.with_reverse_relationship([
 		RelationshipUtils.make_used(item)
-	]).execute() as Array[Relationship]
+	]).execute() as Array[Entity]
 	assert(relationships.size() <= 1, "Item has more than one entity using it, relationships are leaking!")
+	return relationships.get(0)
+
+static func get_wearer(item: Entity) -> Entity:
+	var relationships := ECS.world.query.with_reverse_relationship([
+		RelationshipUtils.make_wearing(item)
+	]).execute() as Array[Entity]
+	assert(relationships.size() <= 1, "Item has more than one entity wearing it, relationships are leaking!")
+	return relationships.get(0)
+
+static func get_wielder(item: Entity) -> Entity:
+	var relationships := ECS.world.query.with_relationship([
+		RelationshipUtils.make_equipped(item),
+	]).execute() as Array
+	assert(relationships.size() <= 1, "Item has more than one entity wielding it, relationships are leaking!")
 	return relationships.get(0)
 
 static func make_damage(actor: Entity, damage_amount: int) -> Relationship:

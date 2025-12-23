@@ -124,11 +124,14 @@ transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1
 mesh = SubResource("ArrayMesh_j1wg2")
 skeleton = NodePath("")
 
-[node name="Area3D" type="Area3D" parent="Node3D"]
+[node name="Area3D" type="Area3D" parent="Node3D" node_paths=PackedStringArray("parent_entity")]
 transform = Transform3D(1, -5.9604645e-08, -2.9802322e-08, -2.9802322e-08, 0.99999994, -4.4703484e-08, 0, 0, 1, 0, 0, 0)
 collision_layer = 4
 collision_mask = 19
+monitoring = false
 script = ExtResource("10_hgjmx")
+active = false
+parent_entity = NodePath("../..")
 trigger_on_body_interval = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 

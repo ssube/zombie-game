@@ -280,6 +280,8 @@ func _set_damage_areas(entity: Entity, weapon: ZC_Weapon_Melee, enable: bool) ->
 		var area = entity.get_node(area_path) as Area3D
 		if "active" in area:
 			area.active = enable
+		if "monitoring" in area:
+			area.monitoring = enable
 
 
 func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:

@@ -4,6 +4,7 @@ class_name ZN_TriggerArea3D
 @export var active: bool = true
 @export var use_body_entity: bool = true
 @export var track_colliders: bool = false
+@export var parent_entity: Entity
 
 @export_group("Intervals")
 @export var area_interval: float = 1.0
@@ -131,6 +132,8 @@ func apply_actions(source: Node, event: Enums.ActionEvent, body: Node) -> void:
 	if use_body_entity:
 		actor = _get_body_entity(body)
 
+	var source_entity := _get_body_entity(source)
+
 	# assert(actor != null, "Actor should not be null for trigger area!")
 	for action in _actions:
-		action._run(source, event, actor)
+		action._run(source_entity, event, actor)
