@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://kod7e8o8xpep"]
+[gd_scene load_steps=20 format=4 uid="uid://kod7e8o8xpep"]
 
 [ext_resource type="Script" uid="uid://vgk3yi0ub4yr" path="res://scripts/entities/items/ZE_Key.gd" id="1_lwijo"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_xagmd"]
@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://dyenf2chlolgq" path="res://effects/sounds/key_pickup.tscn" id="4_rlvp5"]
 [ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_key.tres" id="5_nq5s6"]
 [ext_resource type="Texture2D" uid="uid://d4l062v4wmbhg" path="res://assets/Traffic Cone/StandardCone.png" id="6_m1b77"]
+[ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="7_mviw2"]
+[ext_resource type="Script" uid="uid://b7fgmwfrg0t73" path="res://scripts/components/characters/ZC_Experience.gd" id="8_vcsu8"]
+[ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="10_n0s8o"]
+[ext_resource type="Script" uid="uid://djqo74flocpe0" path="res://scripts/nodes/actions/ZN_ExperienceAction.gd" id="11_yl4b0"]
 
 [sub_resource type="Resource" id="Resource_nq5s6"]
 script = ExtResource("3_478x2")
@@ -20,6 +24,18 @@ shimmer_material = ExtResource("5_nq5s6")
 shimmer_nodes = Array[NodePath]([NodePath("TrafficCone/TrafficCone")])
 pickup_sound = ExtResource("4_rlvp5")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_7nikf"]
+script = ExtResource("7_mviw2")
+actions = Dictionary[int, NodePath]({
+31: NodePath("UseBranch")
+})
+metadata/_custom_type_script = "uid://barikupijl7r7"
+
+[sub_resource type="Resource" id="Resource_qn836"]
+script = ExtResource("8_vcsu8")
+base_xp = 10
+metadata/_custom_type_script = "uid://b7fgmwfrg0t73"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skab2"]
 resource_name = "Default"
@@ -70,7 +86,7 @@ points = PackedVector3Array(-0.06152448, -0.0050914427, 0.35563493, 0.2765873, 0
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_lwijo")
-component_resources = Array[ExtResource("2_xagmd")]([SubResource("Resource_nq5s6"), SubResource("Resource_g03v2")])
+component_resources = Array[ExtResource("2_xagmd")]([SubResource("Resource_nq5s6"), SubResource("Resource_g03v2"), SubResource("Resource_7nikf"), SubResource("Resource_qn836")])
 
 [node name="TrafficCone" type="Node3D" parent="."]
 
@@ -82,3 +98,11 @@ skeleton = NodePath("")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_m1b77")
+
+[node name="UseBranch" type="Node" parent="."]
+script = ExtResource("10_n0s8o")
+metadata/_custom_type_script = "uid://dbj456ofx8mw1"
+
+[node name="TransferExperience" type="Node" parent="UseBranch"]
+script = ExtResource("11_yl4b0")
+metadata/_custom_type_script = "uid://djqo74flocpe0"
