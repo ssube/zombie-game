@@ -26,6 +26,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		return
 
+	if event.is_action_pressed("menu_console"):
+		show_console()
+		get_viewport().set_input_as_handled()
+
 	if event.is_action_pressed("menu_pause"):
 		toggle_pause()
 		get_viewport().set_input_as_handled()
@@ -93,6 +97,10 @@ func set_level(level_name: String, level_image: Texture2D) -> void:
 	$MenuLayer/LoadingMenu.level_name = level_name
 	$MenuLayer/LoadingMenu.level_image = level_image
 
+func show_console() -> void:
+	show_menu(Menus.CONSOLE_MENU)
+
+
 func set_pause(pause: bool) -> void:
 	get_tree().paused = pause
 
@@ -128,6 +136,7 @@ func show_menu(menu: Menus) -> void:
 		$MenuLayer/StartMenu.visible = (menu == Menus.START_MENU)
 		$MenuLayer/ExitDialog.visible = (menu == Menus.EXIT_DIALOG)
 		$MenuLayer/DialogueMenu.visible = (menu == Menus.DIALOGUE_BALLOON)
+		$MenuLayer/ConsoleMenu.visible = (menu == Menus.CONSOLE_MENU)
 
 		update_mouse_mode()
 
@@ -268,3 +277,18 @@ func _on_game_loaded(_name: String) -> void:
 
 func _on_shader_toggled(value: bool) -> void:
 	$PostLayer.visible = value
+
+
+func _on_console_command_submitted(command: String) -> void:
+	var words := command.split(" ")
+	if words.size() == 0:
+		return
+
+	var keyword = words[0]
+	match keyword:
+		"load":
+			var level := words[1]
+			var spawn := words.get(2)
+			print("Loading level %s from the console..." % level)
+			var game := get_tree().root.get_node("/root/Game")
+			game.load_level(level, spawn)

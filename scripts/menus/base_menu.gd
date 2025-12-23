@@ -14,6 +14,7 @@ enum Menus {
 	OPTIONS_MENU,
 	EXIT_DIALOG,
 	DIALOGUE_BALLOON,
+	CONSOLE_MENU,
 }
 
 enum Effects {
