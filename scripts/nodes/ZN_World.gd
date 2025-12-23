@@ -140,15 +140,15 @@ func load_level(level_name: String, spawn_point: String) -> void:
 		level_hints.append_array(campaign.hints)
 
 	%Menu.set_hints(level_hints)
-	%Menu.set_level(level_data.title)
+	%Menu.set_level(level_data.title, level_data.loading_image)
 
 	var level_scene = level_data.scene
 	level_loading.emit(last_level, level_name)
 	clear_world()
 
 	var next_level := level_scene.instantiate()
-	if 'remove_screenshot_tools' in next_level:
-		next_level.remove_screenshot_tools()
+	if 'on_load' in next_level:
+		next_level.on_load()
 
 	%Level.add_child(next_level)
 	_register_level_entities()

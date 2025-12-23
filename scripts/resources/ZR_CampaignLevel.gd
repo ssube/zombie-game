@@ -12,6 +12,6 @@ enum HintMode {
 
 @export_group("Loading")
 @export var loading_hints: Array[String] = []
-@export var loading_screen: Image = null
+@export var loading_image: Texture2D = null
 @export var hint_mode: HintMode = HintMode.APPEND
 @export var min_load_time: float = 0.0

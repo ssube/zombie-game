@@ -89,8 +89,9 @@ func start_dialogue(dialogue: DialogueResource, start_title: String, extras: Arr
 func set_hints(hints: Array[String]) -> void:
 	$MenuLayer/LoadingMenu.hints = hints
 
-func set_level(level_name: String) -> void:
+func set_level(level_name: String, level_image: Texture2D) -> void:
 	$MenuLayer/LoadingMenu.level_name = level_name
+	$MenuLayer/LoadingMenu.level_image = level_image
 
 func set_pause(pause: bool) -> void:
 	get_tree().paused = pause

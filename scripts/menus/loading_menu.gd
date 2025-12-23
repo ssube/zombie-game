@@ -6,8 +6,12 @@ extends ZM_BaseMenu
 @export var hint_label: Label
 
 @export var level_name: String
+@export var level_image: Texture2D
+
+@export var level_image_rect: TextureRect
 @export var level_label: Label
 
+@onready var default_texture = level_image_rect.texture
 @onready var level_template = level_label.text
 
 var hint_timer: float = 0.0
@@ -17,6 +21,7 @@ signal hint_shown(hint: String)
 
 func on_update() -> void:
 	_show_next_hint()
+	_update_level_image()
 	_update_level_label()
 
 
@@ -43,6 +48,13 @@ func _show_next_hint() -> void:
 	hint_label.text = hints[hint_index]
 	hint_shown.emit(hints[hint_index])
 	hint_timer = 0.0
+
+
+func _update_level_image() -> void:
+	if level_image:
+		level_image_rect.texture = level_image
+	else:
+		level_image_rect.texture = default_texture
 
 
 func _update_level_label() -> void:

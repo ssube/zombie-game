@@ -567,7 +567,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 10.5
 [node name="Cameras" type="Node" parent="."]
 
 [node name="Screenshot" type="Camera3D" parent="Cameras"]
-transform = Transform3D(0.93644583, 0, -0.3508122, 0, 1, 0, 0.3508122, 0, 0.93644583, -1.884649, 2.1795053, 1.3133106)
+transform = Transform3D(0.5685475, 0, -0.82265043, 0, 1, 0, 0.82265043, 0, 0.5685475, -2.9385753, 2.1795053, 2.0894098)
 current = true
 
 [node name="Entities" type="Node" parent="."]
@@ -627,11 +627,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.25)
 id = "Level0_ZE_Door_1766177028_32924"
 
 [node name="GlassSheet" parent="Entities/Room1" instance=ExtResource("39_2fv0q")]
-transform = Transform3D(1.4142135, 0, -1.4142135, 0, 2, 0, 1.4142135, 0, 1.4142135, 2.216167, 1, -1.8180183)
+transform = Transform3D(1.4142135, 0, -1.4142135, 0, 2, 0, 1.4142135, 0, 1.4142135, 2.445844, 1, -1.8714375)
 id = "Level0_ZE_Wall_1765939120_82616"
 
 [node name="GlassSheet2" parent="Entities/Room1" instance=ExtResource("39_2fv0q")]
-transform = Transform3D(1.4142135, 0, -1.4142135, 0, 2, 0, 1.4142135, 0, 1.4142135, 2.216167, 3, -1.8180183)
+transform = Transform3D(1.4142135, 0, -1.4142135, 0, 2, 0, 1.4142135, 0, 1.4142135, 2.445844, 3, -1.8714375)
 id = "Level0_ZE_Wall_1765939118_76924"
 
 [node name="Room2" type="Node3D" parent="Entities"]

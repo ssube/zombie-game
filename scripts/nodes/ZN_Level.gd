@@ -41,16 +41,18 @@ func _take_level_screenshot() -> void:
 	camera_copy.current = true
 
 	viewport.add_child(camera_copy)
-	camera_copy.global_transform = screenshot_camera.global_transform
 	add_child(viewport)
+	camera_copy.global_transform = screenshot_camera.global_transform
+	print("camera copy position: ", camera_copy.global_position)
 
 	# Force render update
-	viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS # UPDATE_ONCE
 	RenderingServer.force_draw()
 
 	# Wait for rendering to complete (in editor, we use call_deferred)
 	await get_tree().process_frame
 	await get_tree().process_frame
+	await RenderingServer.frame_post_draw
 
 	# Capture the image
 	var image := viewport.get_texture().get_image()
@@ -72,9 +74,9 @@ func _take_level_screenshot() -> void:
 	print("Screenshot saved to: ", output_path)
 
 	# Refresh the filesystem so the image appears in the editor
-	if Engine.is_editor_hint():
-		EditorInterface.get_resource_filesystem().scan()
+	#if Engine.is_editor_hint():
+	#	EditorInterface.get_resource_filesystem().scan()
 
-func remove_screenshot_tools() -> void:
+func on_load() -> void:
 	if screenshot_camera:
 		screenshot_camera.queue_free()
