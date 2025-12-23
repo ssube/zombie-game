@@ -43,10 +43,15 @@ func _ready():
 	for child in entity_root.get_children():
 		add_entity(child)
 
+	var user_args := CommandLineArgs.parse_user_args()
+	CommandLineArgs.load_mods_from_args(user_args)
+	campaign = CommandLineArgs.get_campaign(user_args, campaign)
+	print("Loaded campaign: %s" % campaign.title)
+
 	if OS.is_debug_build():
 		# look up debug level from CLI args
-		var args := _get_debug_level()
-		load_level(args[0], args[1])
+		var level_args := CommandLineArgs.get_debug_level(user_args, campaign, debug_level, debug_marker)
+		load_level(level_args[0], level_args[1])
 	else:
 		load_level(start_level, start_marker)
 
@@ -54,30 +59,6 @@ func _process(delta):
 	# Process all systems
 	if ECS.world:
 		ECS.process(delta)
-
-func _get_debug_level() -> Array[String]:
-	var level := debug_level
-	var marker := debug_marker
-
-	var args := OS.get_cmdline_user_args()
-	for arg in args:
-		if arg.begins_with("--level="):
-			var arg_level := arg.substr(8)
-			if arg_level:
-				if campaign.has_level(arg_level):
-					level = arg_level
-				else:
-					printerr("Requested level %s is not in the levels table!" % level)
-
-		# no way to validate the marker is valid until the level has been loaded
-		if arg.begins_with("--marker="):
-			var arg_marker := arg.substr(9)
-			if arg_marker:
-				marker = arg_marker
-
-	print("Loading level %s at marker %s" % [level, marker])
-
-	return [level, marker]
 
 ## Add the level entities to the ECS world
 func _register_level_entities() -> void:
@@ -134,6 +115,8 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	if level_data == null:
 		printerr("Invalid level name: ", level_name)
 		return
+
+	print("Loading level: %s" % level_data.title)
 
 	var level_hints := level_data.loading_hints.duplicate()
 	if level_data.hint_mode == level_data.HintMode.APPEND:
