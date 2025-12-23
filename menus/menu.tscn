@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://vcyq2fbg0dts"]
+[gd_scene load_steps=30 format=3 uid="uid://vcyq2fbg0dts"]
 
 [ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/menus/menu.gd" id="1_2d4ws"]
 [ext_resource type="Shader" uid="uid://brw8j2w8g6y35" path="res://shaders/scroll.gdshader" id="2_4vei7"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://bc12xlkdaphu3" path="res://menus/dialogue_menu.tscn" id="13_t5x1p"]
 [ext_resource type="PackedScene" uid="uid://d1mfodqblneky" path="res://menus/exit_dialog.tscn" id="14_j27vk"]
 [ext_resource type="PackedScene" uid="uid://dtdv8vsvlfilr" path="res://menus/console_menu.tscn" id="22_2usqi"]
+[ext_resource type="PackedScene" uid="uid://dialawbgdnoap" path="res://menus/level_end_menu.tscn" id="23_l3jua"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ph6eu"]
 shader = ExtResource("2_4vei7")
@@ -208,6 +209,9 @@ visible = false
 [node name="ConsoleMenu" parent="MenuLayer" instance=ExtResource("22_2usqi")]
 visible = false
 
+[node name="LevelEndMenu" parent="MenuLayer" instance=ExtResource("23_l3jua")]
+visible = false
+
 [connection signal="back_pressed" from="MenuLayer/GameHud" to="." method="_on_back_pressed"]
 [connection signal="menu_changed" from="MenuLayer/GameHud" to="." method="_on_menu_changed"]
 [connection signal="exit_pressed" from="MenuLayer/StartMenu" to="." method="_on_exit_pressed"]
@@ -247,3 +251,4 @@ visible = false
 [connection signal="dialogue_finished" from="MenuLayer/DialogueMenu" to="." method="_on_back_pressed"]
 [connection signal="back_pressed" from="MenuLayer/ExitDialog" to="." method="_on_back_pressed"]
 [connection signal="back_pressed" from="MenuLayer/ConsoleMenu" to="." method="_on_back_pressed"]
+[connection signal="next_level_pressed" from="MenuLayer/LevelEndMenu" to="." method="_on_next_level_pressed"]

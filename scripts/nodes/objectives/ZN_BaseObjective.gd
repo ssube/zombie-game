@@ -3,7 +3,7 @@
 extends Node
 class_name ZN_BaseObjective
 
-enum GameState { NONE, WIN, LOSE }
+enum GameState { NONE, WIN, LOSE, NEXT_LEVEL }
 
 @export var active: bool = false
 @export var key: String = ""

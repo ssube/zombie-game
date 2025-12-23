@@ -97,6 +97,13 @@ func set_level(level_name: String, level_image: Texture2D) -> void:
 	$MenuLayer/LoadingMenu.level_name = level_name
 	$MenuLayer/LoadingMenu.level_image = level_image
 
+func set_next_level(level_name: String) -> void:
+	$MenuLayer/LevelEndMenu.next_level = level_name
+
+func set_score(score: int) -> void:
+	$MenuLayer/LevelEndMenu.score = score
+	$MenuLayer/GameOverMenu.score = score
+
 func show_console() -> void:
 	show_menu(Menus.CONSOLE_MENU)
 
@@ -137,6 +144,7 @@ func show_menu(menu: Menus) -> void:
 		$MenuLayer/ExitDialog.visible = (menu == Menus.EXIT_DIALOG)
 		$MenuLayer/DialogueMenu.visible = (menu == Menus.DIALOGUE_BALLOON)
 		$MenuLayer/ConsoleMenu.visible = (menu == Menus.CONSOLE_MENU)
+		$MenuLayer/LevelEndMenu.visible = (menu == Menus.LEVEL_END_MENU)
 
 		update_mouse_mode()
 
@@ -164,6 +172,8 @@ func show_menu(menu: Menus) -> void:
 				$MenuLayer/ExitDialog.on_show()
 			Menus.CONSOLE_MENU:
 				$MenuLayer/ConsoleMenu.on_show()
+			Menus.LEVEL_END_MENU:
+				$MenuLayer/LevelEndMenu.on_show()
 
 
 func set_effect_strength(effect: Effects, strength: float = 1.0, fade_in: float = 0.1) -> void:
@@ -279,3 +289,8 @@ func _on_game_loaded(_name: String) -> void:
 
 func _on_shader_toggled(value: bool) -> void:
 	$PostLayer.visible = value
+
+
+func _on_next_level_pressed() -> void:
+	var game := get_tree().root.get_node("/root/Game")
+	game.load_next_level("")

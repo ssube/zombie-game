@@ -146,18 +146,25 @@ func _complete_objective(objective: ZN_BaseObjective, actor: Entity = null) -> v
 		ZN_BaseObjective.GameState.NONE:
 			return
 		ZN_BaseObjective.GameState.WIN:
-			_end_game(true)
+			_end_game(objective.game_state)
 		ZN_BaseObjective.GameState.LOSE:
-			_end_game(false)
+			_end_game(objective.game_state)
+		ZN_BaseObjective.GameState.NEXT_LEVEL:
+			_end_game(objective.game_state)
 
 
-func _end_game(_state: bool = true) -> void:
+func _end_game(game_state: ZN_BaseObjective.GameState) -> void:
 	# delay slightly before showing game over menu
 	var timer := get_tree().create_timer(1.0)
 	await timer.timeout
 
-	menu_node.show_menu(menu_node.Menus.GAME_OVER_MENU)
-
+	match game_state:
+		ZN_BaseObjective.GameState.WIN:
+			menu_node.show_menu(menu_node.Menus.GAME_OVER_MENU)
+		ZN_BaseObjective.GameState.LOSE:
+			menu_node.show_menu(menu_node.Menus.GAME_OVER_MENU)
+		ZN_BaseObjective.GameState.NEXT_LEVEL:
+			menu_node.show_menu(menu_node.Menus.LEVEL_END_MENU)
 
 func reset_all() -> void:
 	for objective in objectives.values():

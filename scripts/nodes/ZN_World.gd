@@ -15,6 +15,9 @@ signal level_loaded
 
 @onready var last_level: String = start_level
 
+var current_level_name: String
+var next_level_name: String
+
 func _ready():
 	campaign.cache()
 
@@ -116,6 +119,11 @@ func clear_world(keep_players: bool = true) -> void:
 		child.queue_free()
 
 
+func load_next_level(spawn_point: String) -> void:
+	assert(next_level_name != "", "Next level is missing!")
+	load_level(next_level_name, spawn_point)
+
+
 func load_level(level_name: String, spawn_point: String) -> void:
 	# TODO: use ResourceLoader.load_threaded_get
 	# var level_scene := ResourceLoader.load_threaded_get(level_path.resource_path) as PackedScene
@@ -133,6 +141,7 @@ func load_level(level_name: String, spawn_point: String) -> void:
 
 	%Menu.set_hints(level_hints)
 	%Menu.set_level(level_data.title, level_data.loading_image)
+	%Menu.set_next_level(level_data.next_level)
 
 	var level_scene = level_data.scene
 	level_loading.emit(last_level, level_name)
@@ -145,6 +154,9 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	%Level.add_child(next_level)
 	_register_level_entities()
 	_register_level_objectives()
+
+	current_level_name = level_name
+	next_level_name = level_data.next_level
 
 	if level_data.min_load_time > 0:
 		await get_tree().create_timer(level_data.min_load_time).timeout

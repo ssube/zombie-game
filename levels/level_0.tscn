@@ -1055,6 +1055,7 @@ target_count = 1
 key = "shoot_zombie"
 title = "Shoot the Zombie"
 optional = true
+game_state = 3
 metadata/_custom_type_script = "uid://cpxac3i6p71x0"
 
 [node name="RemoveClerk" type="Node" parent="Objectives/KeyObjective/DoorObjective/ZombieObjective" node_paths=PackedStringArray("entity")]

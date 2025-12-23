@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://r5xbo2n5wsid"]
+[gd_scene load_steps=3 format=3 uid="uid://r5xbo2n5wsid"]
 
 [ext_resource type="Script" uid="uid://dsu0r4lmmurt6" path="res://scripts/menus/game_over_menu.gd" id="1_kqwex"]
 
-[node name="GameOverMenu" type="AspectRatioContainer"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqwex"]
+
+[node name="GameOverMenu" type="AspectRatioContainer" node_paths=PackedStringArray("score_label", "killed_label")]
 process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,6 +12,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kqwex")
+score_label = NodePath("MarginContainer/VFlowContainer/ScoreLabel")
+killed_label = NodePath("MarginContainer/VFlowContainer/KilledLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -26,6 +30,21 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "Game Over"
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "%d Points"
+horizontal_alignment = 1
+
+[node name="KilledLabel" type="Label" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Killed by %s"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_kqwex")
 
 [node name="NewGame" type="Button" parent="MarginContainer/VFlowContainer"]
 layout_mode = 2
