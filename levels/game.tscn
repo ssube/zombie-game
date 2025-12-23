@@ -95,7 +95,6 @@ metadata/_custom_type_script = "uid://dtr4nknl4vi2g"
 
 [node name="ZS_MovementSystem" type="Node" parent="World/Systems"]
 script = ExtResource("7_4q61s")
-process_empty = true
 metadata/_custom_type_script = "uid://ccykut6yrev33"
 
 [node name="ZS_StaminaSystem" type="Node" parent="World/Systems"]

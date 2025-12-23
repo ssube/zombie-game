@@ -288,7 +288,10 @@ func _on_console_command_submitted(command: String) -> void:
 	match keyword:
 		"load":
 			var level := words[1]
-			var spawn := words.get(2)
+			var spawn := "Markers/Start"
+			if words.size() > 2:
+				spawn = words[2]
+
 			print("Loading level %s from the console..." % level)
 			var game := get_tree().root.get_node("/root/Game")
 			game.load_level(level, spawn)
