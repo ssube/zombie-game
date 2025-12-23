@@ -161,7 +161,7 @@ static func get_campaign(parsed_args: Dictionary, default_campaign: ZR_Campaign)
 	# Try loading as a resource path first (res://)
 	if not campaign_path.begins_with("res://"):
 		# Assume it's relative to a campaigns folder
-		campaign_path = "res://resources/campaigns/%s" % campaign_path
+		campaign_path = "res://campaigns/%s" % campaign_path
 
 	if not ResourceLoader.exists(campaign_path):
 		printerr("Campaign resource not found: %s" % campaign_path)

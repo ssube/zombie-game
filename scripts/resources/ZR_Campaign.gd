@@ -20,3 +20,18 @@ func has_level(key: String) -> bool:
 
 func get_level(key: String) -> ZR_CampaignLevel:
 	return _level_keys.get(key, null) as ZR_CampaignLevel
+
+func merge_campaign(other: ZR_Campaign) -> ZR_Campaign:
+	var level_keys := []
+	for level in self.levels:
+		level_keys.append(level.key)
+
+	for level in other.levels:
+		if level_keys.has(level.key):
+			print("Campaign %s is replacing level %s!" % [other.title, level.key])
+
+	self.hints.append_array(other.hints)
+	self.levels.append_array(other.levels)
+	self.title = "%s (merged with %s)" % [self.title, other.title]
+
+	return self

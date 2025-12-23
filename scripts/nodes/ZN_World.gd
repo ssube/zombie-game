@@ -44,10 +44,14 @@ func _ready():
 		add_entity(child)
 
 	var user_args := CommandLineArgs.parse_user_args()
-	# user_args["mod"] = ["foo.pck"]
-	
+	print("Running with user arguments: ", JSON.stringify(user_args))
+
 	CommandLineArgs.load_mods_from_args(user_args)
-	campaign = CommandLineArgs.get_campaign(user_args, campaign)
+
+	if user_args.get("merge_campaigns", false):
+		campaign.merge_campaign(CommandLineArgs.get_campaign(user_args, campaign))
+	else:
+		campaign = CommandLineArgs.get_campaign(user_args, campaign)
 	print("Loaded campaign: %s" % campaign.title)
 
 	if OS.is_debug_build():
