@@ -247,4 +247,3 @@ visible = false
 [connection signal="dialogue_finished" from="MenuLayer/DialogueMenu" to="." method="_on_back_pressed"]
 [connection signal="back_pressed" from="MenuLayer/ExitDialog" to="." method="_on_back_pressed"]
 [connection signal="back_pressed" from="MenuLayer/ConsoleMenu" to="." method="_on_back_pressed"]
-[connection signal="command_submitted" from="MenuLayer/ConsoleMenu" to="." method="_on_console_command_submitted"]

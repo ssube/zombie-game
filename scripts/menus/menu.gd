@@ -162,6 +162,8 @@ func show_menu(menu: Menus) -> void:
 				$MenuLayer/StartMenu.on_show()
 			Menus.EXIT_DIALOG:
 				$MenuLayer/ExitDialog.on_show()
+			Menus.CONSOLE_MENU:
+				$MenuLayer/ConsoleMenu.on_show()
 
 
 func set_effect_strength(effect: Effects, strength: float = 1.0, fade_in: float = 0.1) -> void:
@@ -277,21 +279,3 @@ func _on_game_loaded(_name: String) -> void:
 
 func _on_shader_toggled(value: bool) -> void:
 	$PostLayer.visible = value
-
-
-func _on_console_command_submitted(command: String) -> void:
-	var words := command.split(" ")
-	if words.size() == 0:
-		return
-
-	var keyword = words[0]
-	match keyword:
-		"load":
-			var level := words[1]
-			var spawn := "Markers/Start"
-			if words.size() > 2:
-				spawn = words[2]
-
-			print("Loading level %s from the console..." % level)
-			var game := get_tree().root.get_node("/root/Game")
-			game.load_level(level, spawn)
