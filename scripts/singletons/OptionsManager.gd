@@ -8,6 +8,9 @@ func apply_pending(previous_options: ZR_Options) -> bool:
 	if options.graphics.screen_resolution != previous_options.graphics.screen_resolution:
 		apply_resolution()
 
+	if options.graphics.shader_resolution != previous_options.graphics.shader_resolution:
+		apply_shader_resolution()
+
 	return true
 
 func apply_resolution() -> void:
@@ -18,9 +21,14 @@ func apply_resolution() -> void:
 		return
 
 	# Change the window size to the selected resolution
-	get_window().set_size(options.screen_resolution)
-	get_viewport().set_size(options.screen_resolution)
+	get_window().set_size(options.graphics.screen_resolution)
+	get_viewport().set_size(options.graphics.screen_resolution)
 	get_window().move_to_center()
+
+
+func apply_shader_resolution() -> void:
+	var resolution := options.graphics.shader_resolution
+	RenderingServer.global_shader_parameter_set("crt_resolution", resolution)
 
 
 func apply_volume() -> void:

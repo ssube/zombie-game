@@ -73,6 +73,18 @@ func on_update() -> void:
 
 		i += 1
 
+	var shader_resolution_string = "%dx%d" % [
+		_current_options.graphics.shader_resolution.x,
+		_current_options.graphics.shader_resolution.y,
+	]
+	i = 0
+	while i < %ShaderResolutionMenu.item_count:
+		if %ShaderResolutionMenu.get_item_text(i) == shader_resolution_string:
+			%ResolutionMenu.select(i)
+			break
+
+		i += 1
+
 	%MainVolumeSlider.value = _current_options.audio.main_volume
 	%MusicVolumeSlider.value = _current_options.audio.music_volume
 	%EffectsVolumeSlider.value = _current_options.audio.effects_volume
@@ -101,6 +113,15 @@ func _on_resolution_menu_item_selected(index: int) -> void:
 	var resolution_parts = resolution.split("x")
 	_current_options.graphics.screen_resolution.x = int(resolution_parts[0])
 	_current_options.graphics.screen_resolution.y = int(resolution_parts[1])
+
+
+func _on_shader_resolution_menu_item_selected(index: int) -> void:
+	_dirty = true
+
+	var resolution = %ShaderResolutionMenu.get_item_text(index)
+	var resolution_parts = resolution.split("x")
+	_current_options.graphics.shader_resolution.x = int(resolution_parts[0])
+	_current_options.graphics.shader_resolution.y = int(resolution_parts[1])
 
 
 func _on_main_volume_slider_value_changed(value: float) -> void:
