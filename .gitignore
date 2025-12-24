@@ -6,6 +6,7 @@ addons/*
 !addons/zombie_tools
 
 assets/
+ExampleScene/
 examples_*/
 exports/
 /sounds/
