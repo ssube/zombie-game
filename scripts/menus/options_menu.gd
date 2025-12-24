@@ -142,3 +142,8 @@ func _on_back_pressed() -> void:
 func _on_subtitle_check_box_toggled(toggled_on: bool) -> void:
 	_dirty = true
 	_current_options.audio.subtitles = toggled_on
+
+
+func _on_mouse_sensitivity_slider_value_changed(value: float) -> void:
+	_dirty = true
+	_current_options.controls.mouse_sensitivity = round(value)

@@ -2,6 +2,7 @@ extends Resource
 class_name ZR_Options
 
 @export var audio: ZR_AudioOptions = ZR_AudioOptions.new()
+@export var controls: ZR_ControlOptions = ZR_ControlOptions.new()
 @export var cheats: ZR_CheatOptions = ZR_CheatOptions.new()
 @export var gameplay: ZR_GameplayOptions = ZR_GameplayOptions.new()
 @export var graphics: ZR_GraphicsOptions = ZR_GraphicsOptions.new()

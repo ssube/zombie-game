@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyv5b48xquqot"]
+[gd_scene load_steps=5 format=3 uid="uid://dyv5b48xquqot"]
 
 [ext_resource type="Script" uid="uid://dr0t3qprbbuke" path="res://scripts/menus/options_menu.gd" id="1_p3s2b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6r3ve"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wyyb7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_labby"]
 
@@ -40,6 +44,28 @@ size_flags_vertical = 3
 [node name="GridContainer3" type="GridContainer" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer"]
 layout_mode = 2
 columns = 2
+
+[node name="MouseSensitivityLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Mouse Sensitivity"
+
+[node name="MouseSensitivitySlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tick_count = 5
+ticks_on_borders = true
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_6r3ve")
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_wyyb7")
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3"]
 layout_mode = 2
@@ -435,6 +461,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_labby")
 layout_mode = 2
 text = "Apply"
 
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3/MouseSensitivitySlider" to="." method="_on_mouse_sensitivity_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3/PhysicalShellsBox" to="." method="_on_physical_shells_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3/PhysicalMagsBox" to="." method="_on_physical_mags_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2/CRTShader" to="." method="_on_crt_shader_toggled"]

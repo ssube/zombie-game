@@ -13,9 +13,6 @@ class_name ZN_MouseInput
 ## Mouse settings
 @export_subgroup("Mouse settings")
 
-## Overall mouse sensitivity
-@export_range(1, 100, 1) var mouse_sensitivity: int = 50
-
 ## Mouse sensitivity multiplier
 @export_range(0.001, 0.010, 0.001) var degrees_per_unit: float = 0.002
 
@@ -43,7 +40,7 @@ func aim_look(event: InputEventMouseMotion) -> void:
 	var viewport_transform: Transform2D = get_tree().root.get_final_transform()
 	var motion: Vector2 = event.xformed_by(viewport_transform).relative
 
-	motion *= mouse_sensitivity
+	motion *= OptionsManager.options.controls.mouse_sensitivity
 	motion *= degrees_per_unit
 
 	add_yaw(motion.x)
