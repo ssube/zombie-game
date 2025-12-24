@@ -834,7 +834,7 @@ id = "TestTown_ZE_Armor_1766272352_34834"
 transform = Transform3D(-3.804258e-08, 0.87031275, 0.4924995, -1, -4.371139e-08, 0, 2.1527837e-08, -0.4924995, 0.87031275, -7.32526, 0.13767618, -6.8085938)
 id = "TestTown_ZE_Weapon_1766272350_80923"
 
-[node name="Car01" parent="Entities" instance=ExtResource("18_og1ph")]
+[node name="Car5Red" parent="Entities" instance=ExtResource("18_og1ph")]
 transform = Transform3D(0.044002946, 0, -0.9990314, 0, 1, 0, 0.9990314, 0, 0.044002946, -1.177124, -0.222734, -33.98332)
 
 [node name="Car5Police" parent="Entities" instance=ExtResource("4_5t576")]
