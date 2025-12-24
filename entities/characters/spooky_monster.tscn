@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://ctpldo10k58u7"]
+
+[ext_resource type="Material" uid="uid://b5lkck7ikthnl" path="res://textures/Color Maps/stone_alien_1.tres" id="1_u62kk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oxm2w"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u62kk"]
+width = 64
+height = 64
+noise = SubResource("FastNoiseLite_oxm2w")
+in_3d_space = true
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x1wp6"]
+albedo_color = Color(0.7900002, 0.3, 1, 1)
+metallic = 0.5
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_u62kk")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oxm2w"]
+radius = 0.8
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x1wp6"]
+particle_flag_rotate_y = true
+emission_shape = 2
+emission_sphere_radius = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -2.2351742e-06
+tangential_accel_max = 0.99999774
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_bvsi7"]
+material = ExtResource("1_u62kk")
+radial_segments = 8
+rings = 4
+
+[node name="SpookyMonster" type="RigidBody3D"]
+gravity_scale = 0.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+radius = 0.75
+material = SubResource("StandardMaterial3D_x1wp6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_oxm2w")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_x1wp6")
+draw_pass_1 = SubResource("SphereMesh_bvsi7")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="GPUParticles3D"]
+strength = 5.0
+radius = 1.5
+
+[node name="GPUParticlesCollisionSphere3D" type="GPUParticlesCollisionSphere3D" parent="GPUParticles3D"]
