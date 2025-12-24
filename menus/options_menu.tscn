@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyv5b48xquqot"]
+[gd_scene load_steps=7 format=3 uid="uid://dyv5b48xquqot"]
 
 [ext_resource type="Script" uid="uid://dr0t3qprbbuke" path="res://scripts/menus/options_menu.gd" id="1_p3s2b"]
+[ext_resource type="AudioStream" uid="uid://ubdmirg50ful" path="res://sounds/Sound Effects/Firearms/Racking/shotgun_racking_ufx_1.ogg" id="2_cet7k"]
+[ext_resource type="AudioStream" uid="uid://cseclvit36kh1" path="res://sounds/Sound Effects/Break/glass_break_ufx_1.ogg" id="3_1vpws"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6r3ve"]
 
@@ -442,7 +444,20 @@ layout_mode = 2
 [node name="SubtitleCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Subtitles"
+text = "Enable Subtitles"
+
+[node name="MainPreviewPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/TabContainer/Audio"]
+unique_name_in_owner = true
+stream = ExtResource("2_cet7k")
+
+[node name="MusicPreviewPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/TabContainer/Audio"]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="EffectsPreviewPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/TabContainer/Audio"]
+unique_name_in_owner = true
+stream = ExtResource("3_1vpws")
+bus = &"Effects"
 
 [node name="Cheats" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false

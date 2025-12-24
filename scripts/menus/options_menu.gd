@@ -7,6 +7,7 @@ extends ZM_BaseMenu
 var _applied_options: ZR_Options
 var _current_options: ZR_Options
 var _dirty: bool = false
+var _play_audio: bool = false
 
 
 func _apply_options() -> void:
@@ -46,10 +47,11 @@ func on_show() -> void:
 	_applied_options = OptionsManager.options.duplicate_deep()
 	_current_options = OptionsManager.options
 	super.on_show()
+	_play_audio = true
 
 
 func on_hide() -> void:
-	pass
+	_play_audio = false
 
 
 func on_update() -> void:
@@ -130,16 +132,28 @@ func _on_shader_resolution_menu_item_selected(index: int) -> void:
 func _on_main_volume_slider_value_changed(value: float) -> void:
 	_dirty = true
 	_current_options.audio.main_volume = value
+	# TODO: debounce
+	if _play_audio:
+		OptionsManager.apply_volume()
+		%MainPreviewPlayer.play()
 
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
 	_dirty = true
 	_current_options.audio.music_volume = value
+	# TODO: debounce
+	if _play_audio:
+		OptionsManager.apply_volume()
+		%MusicPreviewPlayer.play()
 
 
 func _on_effects_volume_slider_value_changed(value: float) -> void:
 	_dirty = true
 	_current_options.audio.effects_volume = value
+	# TODO: debounce
+	if _play_audio:
+		OptionsManager.apply_volume()
+		%EffectsPreviewPlayer.play()
 
 
 func _on_window_mode_menu_item_selected(_index: int) -> void:
