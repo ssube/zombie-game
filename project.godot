@@ -58,6 +58,20 @@ default_map_settings="uid://dkql5djyx2s23"
 settings/debug_mode=true
 settings/log_level=3
 
+[global_group]
+
+time_day=""
+time_dawn=""
+time_dusk=""
+time_night=""
+time_custom=""
+weather_clear=""
+weather_cloudy=""
+weather_rain=""
+weather_thunder=""
+weather_snow=""
+weather_custom=""
+
 [input]
 
 move_forward={

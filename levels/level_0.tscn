@@ -1,9 +1,11 @@
-[gd_scene load_steps=125 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=126 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_q6gno"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
+[ext_resource type="PackedScene" uid="uid://bu2ntm7c8cyn8" path="res://skies/sky_day.tscn" id="2_ik3kg"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="2_lf4l6"]
+[ext_resource type="PackedScene" uid="uid://d4se7f101eb7" path="res://skies/sky_night.tscn" id="3_20cl6"]
 [ext_resource type="PackedScene" uid="uid://cdik1mgum870e" path="res://entities/debug/ammo_station.tscn" id="3_w633q"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://lbpyhtg453yg" path="res://entities/debug/zombie_spawn.tscn" id="5_lf4l6"]
@@ -36,7 +38,9 @@
 [ext_resource type="Script" uid="uid://dd4hkf7y5v13t" path="res://scripts/components/status/ZC_Locked.gd" id="27_2fv0q"]
 [ext_resource type="PackedScene" uid="uid://dr14d3op0qqa7" path="res://entities/props/door_wood_ccw.tscn" id="27_m8bfh"]
 [ext_resource type="PackedScene" uid="uid://dc22w3kstrlyu" path="res://entities/characters/zombie_worker.tscn" id="30_2fv0q"]
+[ext_resource type="Script" uid="uid://0uftjan8jqx7" path="res://addons/QuakeLamp/LampComponent.gd" id="34_1wgrf"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="35_lf4l6"]
+[ext_resource type="Script" uid="uid://dx3tgietk0dly" path="res://addons/QuakeLamp/FlickerComponent.gd" id="35_o4imw"]
 [ext_resource type="Script" uid="uid://bn1fw86ypw3a6" path="res://scripts/nodes/actions/ZN_PortalAction.gd" id="35_q6gno"]
 [ext_resource type="Script" uid="uid://cpxac3i6p71x0" path="res://scripts/nodes/objectives/ZN_CountObjective.gd" id="38_2fv0q"]
 [ext_resource type="PackedScene" uid="uid://c8tswr23gn5mg" path="res://entities/items/armor.tscn" id="38_g1jay"]
@@ -499,22 +503,13 @@ geometry_source_group_name = &"level"
 region_merge_size = 5.0
 filter_ledge_spans = true
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yi3jx"]
-sky_top_color = Color(0.35032377, 0.43960616, 0.67056155, 1)
-sky_horizon_color = Color(0.6, 0.6784314, 0.6313726, 1)
-ground_horizon_color = Color(0.6, 0.6784314, 0.6313726, 1)
-ground_curve = 0.05
-
-[sub_resource type="Sky" id="Sky_b6wpd"]
-sky_material = SubResource("ProceduralSkyMaterial_yi3jx")
-
-[sub_resource type="Environment" id="Environment_foxie"]
-background_mode = 2
-sky = SubResource("Sky_b6wpd")
-ambient_light_source = 3
-
 [node name="Level0" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
 script = ExtResource("1_66alr")
+environments = Dictionary[int, PackedScene]({
+2: ExtResource("2_ik3kg"),
+4: ExtResource("3_20cl6")
+})
+environment_node = NodePath("Sky")
 screenshot_camera = NodePath("Cameras/Screenshot")
 metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
@@ -727,16 +722,41 @@ omni_range = 24.0
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.780468, 3.1510324, -9.595341)
-light_energy = 2.5
+light_energy = 1.36
+light_indirect_energy = 1.36
 shadow_enabled = true
 omni_range = 14.736
+
+[node name="cLampComponent" type="Node" parent="Lights/OmniLight3D2" node_paths=PackedStringArray("LightInstances", "FlickerComponent")]
+script = ExtResource("34_1wgrf")
+LightInstances = [NodePath("..")]
+FlickerComponent = NodePath("cFlickerComponent")
+metadata/_custom_type_script = "uid://0uftjan8jqx7"
+
+[node name="cFlickerComponent" type="Node" parent="Lights/OmniLight3D2/cLampComponent"]
+script = ExtResource("35_o4imw")
+AnimationTable = 1
+metadata/_custom_type_script = "uid://dx3tgietk0dly"
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7362304, 3.1510324, -13.650693)
 light_color = Color(0.56, 1, 0.67, 1)
-light_energy = 2.5
+light_energy = 1.12
+light_indirect_energy = 1.12
 shadow_enabled = true
 omni_range = 14.736
+
+[node name="cLampComponent2" type="Node" parent="Lights/OmniLight3D4" node_paths=PackedStringArray("LightInstances", "FlickerComponent")]
+script = ExtResource("34_1wgrf")
+LightInstances = [NodePath("..")]
+FlickerComponent = NodePath("cFlickerComponent")
+metadata/_custom_type_script = "uid://0uftjan8jqx7"
+
+[node name="cFlickerComponent" type="Node" parent="Lights/OmniLight3D4/cLampComponent2"]
+script = ExtResource("35_o4imw")
+AnimationTable = 5
+AnimationTimeOffset = 5.0
+metadata/_custom_type_script = "uid://dx3tgietk0dly"
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
 transform = Transform3D(-0.50000006, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.50000006, 7, 3, -3)
@@ -1072,7 +1092,6 @@ title = "Touch the glowing red portal"
 game_state = 1
 metadata/_custom_type_script = "uid://b560n5psxwkuk"
 
-[node name="Skies" type="Node" parent="."]
+[node name="Sky" type="Node" parent="."]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Skies"]
-environment = SubResource("Environment_foxie")
+[node name="SkyDay" parent="Sky" instance=ExtResource("2_ik3kg")]

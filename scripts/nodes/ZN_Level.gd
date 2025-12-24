@@ -9,6 +9,11 @@ class_name ZN_Level
 @export var markers_node: NodePath = "Markers"
 @export var map_node: NodePath = "Map"
 @export var objectives_node: NodePath = "Objectives"
+
+@export_subgroup("Environment")
+@export var environments: Dictionary[ZC_Weather.TimeOfDay, PackedScene] = {}
+@export var environment_node: NodePath = "Environment"
+
 # TODO: extra observers
 # TODO: extra systems
 

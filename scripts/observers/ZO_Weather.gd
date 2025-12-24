@@ -20,6 +20,7 @@ var other_groups: Dictionary[String, Array] = {
 @export var rain_system: System = null
 @export var thunder_system: ZS_ThunderSystem = null
 
+
 func watch() -> Resource:
 	return ZC_Weather
 
@@ -49,6 +50,7 @@ func _time_of_day_changed(_entity: Entity, component: ZC_Weather, new_value: Var
 		for node in group_nodes:
 			_toggle_node(node, false)
 
+	_set_level_sky(component)
 	_call_level_hook(component)
 
 
@@ -73,18 +75,31 @@ func _weather_type_changed(_entity: Entity, component: ZC_Weather, new_value: Va
 	if thunder_system and OptionsManager.options.gameplay.enable_thunder:
 		thunder_system.active = (new_value == ZC_Weather.WeatherType.THUNDER)
 
+	_set_level_sky(component)
 	_call_level_hook(component)
 
 
 func _toggle_node(node: Node, enabled: bool) -> void:
-	if node is WorldEnvironment:
-		if enabled:
-			node.process_mode = Node.PROCESS_MODE_INHERIT
-		else:
-			node.process_mode = Node.PROCESS_MODE_DISABLED
-
-	if node is VisualInstance3D:
+	if "visible" in node:
 		node.visible = enabled
+
+
+func _set_level_sky(component: ZC_Weather) -> void:
+	var level_node := TreeUtils.get_level(self).get_child(0)
+	assert(level_node is ZN_Level, "Level does not inherit from ZN_Level, sky features are not available!")
+	if level_node is not ZN_Level:
+		return
+
+	var level := level_node as ZN_Level
+	var level_environment := level.get_node(level.environment_node)
+	var environment_scene := level.environments[component.time_of_day]
+
+	for child in level_environment.get_children():
+		child.queue_free()
+		level_environment.remove_child(child)
+
+	var environment := environment_scene.instantiate() as Node
+	level_environment.add_child(environment)
 
 
 func _call_level_hook(weather: ZC_Weather) -> void:

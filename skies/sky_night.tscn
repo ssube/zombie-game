@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4se7f101eb7"]
+
+[ext_resource type="PackedScene" uid="uid://cf8xh1my8wn0y" path="res://materials/environment_day.tscn" id="1_2rcv5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2rcv5"]
+sky_top_color = Color(0.0713, 0.16123, 0.23, 1)
+sky_horizon_color = Color(0.2826591, 0.18868053, 0.256016, 1)
+ground_bottom_color = Color(0.19, 0.144685, 0.08930001, 1)
+ground_horizon_color = Color(0.28235295, 0.1882353, 0.25490198, 1)
+ground_curve = 0.054641753
+energy_multiplier = 1.5
+
+[sub_resource type="Sky" id="Sky_fwpx5"]
+sky_material = SubResource("ProceduralSkyMaterial_2rcv5")
+
+[sub_resource type="Environment" id="Environment_t2j0q"]
+background_mode = 2
+sky = SubResource("Sky_fwpx5")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+
+[node name="SkyNight" type="Node3D"]
+
+[node name="EnvironmentNight" parent="." instance=ExtResource("1_2rcv5")]
+environment = SubResource("Environment_t2j0q")
+
+[node name="Moon" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.5000001, 0.8660254, 0, -0.8660254, -0.5000001, 0, 3.4615583, -2.556841)
+light_color = Color(0.2378, 0.2834266, 0.58, 1)
+shadow_enabled = true
+
+[node name="Debug" type="Node3D" parent="."]
+visible = false
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Debug"]
