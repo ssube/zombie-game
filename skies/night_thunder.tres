@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ZR_Weather" load_steps=3 format=3 uid="uid://cckhlv7hfuhvu"]
+
+[ext_resource type="PackedScene" uid="uid://d4se7f101eb7" path="res://skies/sky_night.tscn" id="1_qbumy"]
+[ext_resource type="Script" uid="uid://bbgu5yekfkubs" path="res://scripts/resources/ZR_Weather.gd" id="2_ikto8"]
+
+[resource]
+script = ExtResource("2_ikto8")
+time_of_day = 4
+weather_type = 4
+environment_scene = ExtResource("1_qbumy")
+metadata/_custom_type_script = "uid://bbgu5yekfkubs"

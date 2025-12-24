@@ -2,6 +2,7 @@ extends Component
 class_name ZC_Weather
 
 enum TimeOfDay {
+	ANY,
 	CUSTOM,
 	DAWN,
 	DAY,
@@ -10,6 +11,7 @@ enum TimeOfDay {
 }
 
 enum WeatherType {
+	ANY,
 	CUSTOM,
 	CLEAR,
 	CLOUDY,

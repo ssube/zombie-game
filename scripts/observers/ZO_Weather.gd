@@ -91,15 +91,18 @@ func _set_level_sky(component: ZC_Weather) -> void:
 		return
 
 	var level := level_node as ZN_Level
-	var level_environment := level.get_node(level.environment_node)
-	var environment_scene := level.environments[component.time_of_day]
+	var environment := _find_best_environment(level, component)
+	if environment == null:
+		printerr("No matching environment for conditions %d and %d" % [component.time_of_day, component.weather_type])
+		return
 
+	var level_environment := level.get_node(level.environment_node)
 	for child in level_environment.get_children():
 		child.queue_free()
 		level_environment.remove_child(child)
 
-	var environment := environment_scene.instantiate() as Node
-	level_environment.add_child(environment)
+	var environment_scene := environment.environment_scene.instantiate() as Node
+	level_environment.add_child(environment_scene)
 
 
 func _call_level_hook(weather: ZC_Weather) -> void:
@@ -108,3 +111,49 @@ func _call_level_hook(weather: ZC_Weather) -> void:
 	var level_node := TreeUtils.get_level(self)
 	if "set_weather" in level_node:
 		level_node.set_weather(weather)
+
+
+func _find_best_environment(level: ZN_Level, component: Component) -> ZR_Weather:
+	var matching_environment: ZR_Weather = null
+
+	# look for a strict match first
+	for environment in level.environment_scenes:
+		if _match_environment(component, environment, true):
+			matching_environment = environment
+			break
+
+	if matching_environment:
+		return matching_environment
+
+	# followed by a wildcard match
+	for environment in level.environment_scenes:
+		if _match_environment(component, environment):
+			matching_environment = environment
+			break
+
+	if matching_environment:
+		return matching_environment
+
+	# finally, look for a fallback sky
+	for environment in level.environment_scenes:
+		if environment.time_of_day == ZC_Weather.TimeOfDay.ANY and environment.weather_type == ZC_Weather.WeatherType.ANY:
+			matching_environment = environment
+			break
+
+	return matching_environment
+
+
+func _match_environment(component: ZC_Weather, environment: ZR_Weather, strict: bool = false) -> bool:
+	if environment.time_of_day == component.time_of_day and environment.weather_type == component.weather_type:
+		return true
+
+	if strict:
+		return false
+
+	if environment.weather_type == component.weather_type and environment.time_of_day == ZC_Weather.TimeOfDay.ANY:
+		return true
+
+	if environment.time_of_day == component.time_of_day and environment.weather_type == ZC_Weather.WeatherType.ANY:
+		return true
+
+	return false

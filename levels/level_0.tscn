@@ -1,12 +1,14 @@
-[gd_scene load_steps=126 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=128 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_q6gno"]
+[ext_resource type="Script" uid="uid://bbgu5yekfkubs" path="res://scripts/resources/ZR_Weather.gd" id="2_20cl6"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="2_ijfse"]
 [ext_resource type="PackedScene" uid="uid://bu2ntm7c8cyn8" path="res://skies/sky_day.tscn" id="2_ik3kg"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="2_lf4l6"]
-[ext_resource type="PackedScene" uid="uid://d4se7f101eb7" path="res://skies/sky_night.tscn" id="3_20cl6"]
+[ext_resource type="Resource" uid="uid://dj1reyq1l6vd7" path="res://skies/day_thunder.tres" id="3_dfwmi"]
 [ext_resource type="PackedScene" uid="uid://cdik1mgum870e" path="res://entities/debug/ammo_station.tscn" id="3_w633q"]
+[ext_resource type="Resource" uid="uid://cckhlv7hfuhvu" path="res://skies/night_thunder.tres" id="4_v4yv6"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://lbpyhtg453yg" path="res://entities/debug/zombie_spawn.tscn" id="5_lf4l6"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
@@ -505,11 +507,8 @@ filter_ledge_spans = true
 
 [node name="Level0" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
 script = ExtResource("1_66alr")
-environments = Dictionary[int, PackedScene]({
-2: ExtResource("2_ik3kg"),
-4: ExtResource("3_20cl6")
-})
 environment_node = NodePath("Sky")
+environment_scenes = Array[ExtResource("2_20cl6")]([ExtResource("3_dfwmi"), ExtResource("4_v4yv6")])
 screenshot_camera = NodePath("Cameras/Screenshot")
 metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
@@ -722,8 +721,8 @@ omni_range = 24.0
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.780468, 3.1510324, -9.595341)
-light_energy = 1.36
-light_indirect_energy = 1.36
+light_energy = 0.56
+light_indirect_energy = 0.56
 shadow_enabled = true
 omni_range = 14.736
 
@@ -741,8 +740,8 @@ metadata/_custom_type_script = "uid://dx3tgietk0dly"
 [node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7362304, 3.1510324, -13.650693)
 light_color = Color(0.56, 1, 0.67, 1)
-light_energy = 1.12
-light_indirect_energy = 1.12
+light_energy = 0.96
+light_indirect_energy = 0.96
 shadow_enabled = true
 omni_range = 14.736
 

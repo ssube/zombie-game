@@ -7,7 +7,7 @@
 [node name="EnvironmentDay" parent="." instance=ExtResource("1_8ycre")]
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 3.4615583, 1.4431591)
+transform = Transform3D(1, 0, 0, 0, 0.50776386, 0.86149627, 0, -0.86149627, 0.50776386, 0, 3.4615583, 1.4431591)
 light_color = Color(0.94464, 0.96, 0.65279996, 1)
 light_energy = 0.75
 shadow_enabled = true
