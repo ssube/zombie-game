@@ -1,6 +1,7 @@
-[gd_scene load_steps=269 format=4 uid="uid://cpgmxyybvd4x8"]
+[gd_scene load_steps=270 format=4 uid="uid://cpgmxyybvd4x8"]
 
 [ext_resource type="Texture2D" uid="uid://c51guvpg20wcf" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast4.png" id="1_qbcix"]
+[ext_resource type="PackedScene" uid="uid://dsjfc00ufve4t" path="res://entities/props/pine_tree_1_1.tscn" id="2_2rajt"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="4_gxru8"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="5_c71tc"]
 [ext_resource type="Texture2D" uid="uid://cq5ug1fieds0c" path="res://textures/Color Maps/rock_pt_3.png" id="6_a6qr0"]
@@ -943,6 +944,21 @@ draw_pass_1 = SubResource("SphereMesh_qbcix")
 
 [node name="Entities" type="Node" parent="."]
 unique_name_in_owner = true
+
+[node name="PineTree_1_3" parent="Entities" instance=ExtResource("2_2rajt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.825779, -1.6977503, -7.9377937)
+
+[node name="PineTree_1_4" parent="Entities" instance=ExtResource("2_2rajt")]
+transform = Transform3D(0.93360543, 0, 0.35830277, 0, 1, 0, -0.35830277, 0, 0.93360543, -21.40152, -1.6977522, 1.6798491)
+
+[node name="PineTree_1_5" parent="Entities" instance=ExtResource("2_2rajt")]
+transform = Transform3D(0.8416804, 0, -0.5399759, 0, 1, 0, 0.5399759, 0, 0.8416804, -15.126678, -2.085912, 7.0608296)
+
+[node name="PineTree_1_1" parent="Entities" instance=ExtResource("2_2rajt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.376745, -2.589057, 8.838953)
+
+[node name="PineTree_1_2" parent="Entities" instance=ExtResource("2_2rajt")]
+transform = Transform3D(0.62510645, 0, -0.7805395, 0, 1, 0, 0.7805395, 0, 0.62510645, -26.173742, -2.589057, -13.542305)
 
 [node name="Lights" type="Node" parent="."]
 
