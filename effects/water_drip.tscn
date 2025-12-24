@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2lqgdvcjtotl"]
+[gd_scene load_steps=12 format=3 uid="uid://d2lqgdvcjtotl"]
 
 [ext_resource type="Material" uid="uid://b1y3n6j10vsip" path="res://textures/Color Maps/water_2.tres" id="1_ln82x"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_n1ox7"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="3_br04h"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="4_auidd"]
+[ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="5_br04h"]
+[ext_resource type="Material" uid="uid://c67ov6fslkehf" path="res://textures/Color Maps/water_1.tres" id="6_auidd"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xm8ht"]
 collision_mode = 1
@@ -64,3 +66,14 @@ shape = SubResource("BoxShape3D_420cn")
 script = ExtResource("3_br04h")
 effect = SubResource("Resource_4d0wg")
 metadata/_custom_type_script = "uid://dmonxsvpyoytj"
+
+[node name="ZN_FireAction" type="Node" parent="ZN_TriggerArea3D"]
+script = ExtResource("5_br04h")
+fire_mode = 1
+metadata/_custom_type_script = "uid://do7trwtn8xc7t"
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+height = 0.1
+sides = 16
+material = ExtResource("6_auidd")
