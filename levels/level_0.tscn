@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=129 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_q6gno"]
@@ -44,6 +44,7 @@
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="35_lf4l6"]
 [ext_resource type="Script" uid="uid://dx3tgietk0dly" path="res://addons/QuakeLamp/FlickerComponent.gd" id="35_o4imw"]
 [ext_resource type="Script" uid="uid://bn1fw86ypw3a6" path="res://scripts/nodes/actions/ZN_PortalAction.gd" id="35_q6gno"]
+[ext_resource type="PackedScene" uid="uid://bypbk1livtqai" path="res://entities/props/puddle_thunder.tscn" id="37_v4yv6"]
 [ext_resource type="Script" uid="uid://cpxac3i6p71x0" path="res://scripts/nodes/objectives/ZN_CountObjective.gd" id="38_2fv0q"]
 [ext_resource type="PackedScene" uid="uid://c8tswr23gn5mg" path="res://entities/items/armor.tscn" id="38_g1jay"]
 [ext_resource type="PackedScene" uid="uid://c4timw2odgktn" path="res://entities/props/glass_sheet.tscn" id="39_2fv0q"]
@@ -689,7 +690,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.34950802, 2.5)
 id = "Level0_ZE_Armor_1766177666_54941"
 
 [node name="WaterDrip" parent="Entities/Room3" instance=ExtResource("42_ijfse")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.543085, 1.8451071, -3.1637545)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.543085, 1.997549, -3.1637545)
 
 [node name="Room4" type="Node3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -11)
@@ -710,6 +711,9 @@ id = "Level0_ZE_Armor_1766177737_86801"
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.25, 0, -1)
 id = "Level0_ZE_Door_1766177710_5219"
 
+[node name="PuddleThunder" parent="Entities" instance=ExtResource("37_v4yv6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5514488, 0.050000478, -0.012054682)
+
 [node name="Lights" type="Node" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
@@ -721,8 +725,8 @@ omni_range = 24.0
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.780468, 3.1510324, -9.595341)
-light_energy = 0.96
-light_indirect_energy = 0.96
+light_energy = 0.56
+light_indirect_energy = 0.56
 shadow_enabled = true
 omni_range = 14.736
 
@@ -740,8 +744,8 @@ metadata/_custom_type_script = "uid://dx3tgietk0dly"
 [node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7362304, 3.1510324, -13.650693)
 light_color = Color(0.56, 1, 0.67, 1)
-light_energy = 1.12
-light_indirect_energy = 1.12
+light_energy = 0.96
+light_indirect_energy = 0.96
 shadow_enabled = true
 omni_range = 14.736
 
