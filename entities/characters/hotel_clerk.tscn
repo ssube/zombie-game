@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bq6a52tvj60bq"]
+[gd_scene load_steps=27 format=4 uid="uid://bq6a52tvj60bq"]
 
 [ext_resource type="Script" uid="uid://d2ww1flmd4yo4" path="res://scripts/entities/characters/ZE_Survivor.gd" id="1_61xi3"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_ig744"]
@@ -10,6 +10,10 @@
 [ext_resource type="Script" uid="uid://c7dv7vmk2ynqt" path="res://scripts/components/characters/ZC_Movement.gd" id="8_eirhj"]
 [ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="9_jkcq6"]
 [ext_resource type="Script" uid="uid://b7x5tu22015cx" path="res://scripts/components/characters/ZC_Faction.gd" id="10_04tpt"]
+[ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="11_w7go0"]
+[ext_resource type="Script" uid="uid://c0cxv8olxfknv" path="res://scripts/nodes/actions/ZN_RandomBranch.gd" id="12_nvvd0"]
+[ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="13_wfgdr"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="14_80wbs"]
 
 [sub_resource type="Resource" id="Resource_0qnp1"]
 script = ExtResource("3_ci84u")
@@ -106,3 +110,48 @@ libraries = {
 &"": SubResource("AnimationLibrary_eirhj")
 }
 autoplay = "idle"
+
+[node name="IdleCommentTimer" type="Timer" parent="." node_paths=PackedStringArray("parent_entity")]
+wait_time = 5.0
+script = ExtResource("11_w7go0")
+min_variation = -5.0
+max_variation = 5.0
+repeat = true
+parent_entity = NodePath("..")
+metadata/_custom_type_script = "uid://h4hsumlormm8"
+
+[node name="ZN_RandomBranch" type="Node" parent="IdleCommentTimer"]
+script = ExtResource("12_nvvd0")
+metadata/_custom_type_script = "uid://c0cxv8olxfknv"
+
+[node name="ZN_AudioAction" type="Node" parent="IdleCommentTimer/ZN_RandomBranch" node_paths=PackedStringArray("audio_players")]
+script = ExtResource("13_wfgdr")
+audio_players = [NodePath("../../../Sounds/ZN_AudioSubtitle3D")]
+metadata/_custom_type_script = "uid://dga8v5ocxqirt"
+
+[node name="ZN_AudioAction2" type="Node" parent="IdleCommentTimer/ZN_RandomBranch" node_paths=PackedStringArray("audio_players")]
+script = ExtResource("13_wfgdr")
+audio_players = [NodePath("../../../Sounds/ZN_AudioSubtitle3D2")]
+metadata/_custom_type_script = "uid://dga8v5ocxqirt"
+
+[node name="ZN_AudioAction3" type="Node" parent="IdleCommentTimer/ZN_RandomBranch" node_paths=PackedStringArray("audio_players")]
+script = ExtResource("13_wfgdr")
+audio_players = [NodePath("../../../Sounds/ZN_AudioSubtitle3D3")]
+metadata/_custom_type_script = "uid://dga8v5ocxqirt"
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="Sounds"]
+script = ExtResource("14_80wbs")
+subtitle_text = "Grumbling"
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
+[node name="ZN_AudioSubtitle3D2" type="AudioStreamPlayer3D" parent="Sounds"]
+script = ExtResource("14_80wbs")
+subtitle_text = "Coughing"
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
+[node name="ZN_AudioSubtitle3D3" type="AudioStreamPlayer3D" parent="Sounds"]
+script = ExtResource("14_80wbs")
+subtitle_text = "Incoherent Screaming"
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
