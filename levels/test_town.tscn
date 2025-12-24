@@ -1,10 +1,11 @@
-[gd_scene load_steps=242 format=4 uid="uid://djo5cynmo7f4y"]
+[gd_scene load_steps=244 format=4 uid="uid://djo5cynmo7f4y"]
 
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_5axou"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_o8f3c"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="2_ltd73"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="2_og1ph"]
 [ext_resource type="Texture2D" uid="uid://dwtub4bxfxr25" path="res://textures/Color Maps/brick_wall_tx_1.png" id="3_bxjvt"]
+[ext_resource type="PackedScene" uid="uid://bsbjr3bmewqll" path="res://entities/props/car_5_police.tscn" id="4_5t576"]
 [ext_resource type="Texture2D" uid="uid://d3gxye56hxhy1" path="res://textures/Normal Maps/brick_wall_tx_1_normal.png" id="4_ltd73"]
 [ext_resource type="Texture2D" uid="uid://biafh0sg3jrx2" path="res://textures/Color Maps/concrete_tx_2.png" id="4_wl7ja"]
 [ext_resource type="Material" uid="uid://3akbo2rr6u1v" path="res://textures/Color Maps/asphalt_old_pt_1.tres" id="5_8r6s4"]
@@ -17,6 +18,7 @@
 [ext_resource type="Material" uid="uid://bc3b71ottph3s" path="res://textures/Color Maps/concrete_5.tres" id="10_5t576"]
 [ext_resource type="Texture2D" uid="uid://oe4k61h6cmkx" path="res://textures/Normal Maps/grass_2_normal.png" id="12_s4x2d"]
 [ext_resource type="Texture2D" uid="uid://4gwlka5ysr5i" path="res://textures/Normal Maps/glass_block_windows_pt_1_1_normal.png" id="14_5axou"]
+[ext_resource type="PackedScene" uid="uid://djk8f60j3oei0" path="res://entities/props/car_5_red.tscn" id="18_og1ph"]
 
 [sub_resource type="Gradient" id="Gradient_o8f3c"]
 colors = PackedColorArray(0, 0, 0, 0, 0.48299998, 0.69, 0.68655, 0.58431375)
@@ -831,6 +833,12 @@ id = "TestTown_ZE_Armor_1766272352_34834"
 [node name="WeaponShotgun" parent="Entities" instance=ExtResource("2_og1ph")]
 transform = Transform3D(-3.804258e-08, 0.87031275, 0.4924995, -1, -4.371139e-08, 0, 2.1527837e-08, -0.4924995, 0.87031275, -7.32526, 0.13767618, -6.8085938)
 id = "TestTown_ZE_Weapon_1766272350_80923"
+
+[node name="Car01" parent="Entities" instance=ExtResource("18_og1ph")]
+transform = Transform3D(0.044002946, 0, -0.9990314, 0, 1, 0, 0.9990314, 0, 0.044002946, -1.177124, -0.222734, -33.98332)
+
+[node name="Car5Police" parent="Entities" instance=ExtResource("4_5t576")]
+transform = Transform3D(0.82216394, 0, -0.5692508, 0, 1, 0, 0.5692508, 0, 0.82216394, -8.557605, -0.22273639, -40.028778)
 
 [node name="Lights" type="Node3D" parent="."]
 
