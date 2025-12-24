@@ -5,52 +5,59 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gn3ar"]
 
-[node name="LoadingMenu" type="AspectRatioContainer" node_paths=PackedStringArray("hint_label", "level_image_rect", "level_label")]
-process_mode = 2
+[node name="LoadingMenu" type="MarginContainer" node_paths=PackedStringArray("hint_label", "level_image_rect", "level_label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gn3ar")
-hint_label = NodePath("MarginContainer/VFlowContainer/HintLabel")
-level_image = Object(TextureRect,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":1,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","texture":null,"expand_mode":0,"stretch_mode":0,"flip_h":false,"flip_v":false,"script":null)
-
-level_image_rect = NodePath("MarginContainer/TextureRect")
-level_label = NodePath("MarginContainer/VFlowContainer/LoadingLabel")
+hint_label = NodePath("Letterbox/LoadingMenu/MarginContainer/VFlowContainer/HintLabel")
+level_image_rect = NodePath("Letterbox/TextureRect")
+level_label = NodePath("Letterbox/LoadingMenu/MarginContainer/VFlowContainer/LoadingLabel")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Letterbox" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_top = 64
-theme_override_constants/margin_bottom = 64
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="Letterbox"]
 layout_mode = 2
 texture = ExtResource("2_4e30e")
 expand_mode = 2
 stretch_mode = 6
 
-[node name="VFlowContainer" type="VFlowContainer" parent="MarginContainer"]
-custom_minimum_size = Vector2(200, 300)
+[node name="LoadingMenu" type="AspectRatioContainer" parent="Letterbox"]
+process_mode = 2
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Letterbox/LoadingMenu"]
+layout_mode = 2
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VFlowContainer" type="VFlowContainer" parent="Letterbox/LoadingMenu/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/v_separation = 16
 alignment = 1
 
-[node name="LoadingLabel" type="Label" parent="MarginContainer/VFlowContainer"]
+[node name="LoadingLabel" type="Label" parent="Letterbox/LoadingMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "Loading %s..."
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VFlowContainer"]
+[node name="HSeparator" type="HSeparator" parent="Letterbox/LoadingMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_gn3ar")
 
-[node name="HintLabel" type="Label" parent="MarginContainer/VFlowContainer"]
+[node name="HintLabel" type="Label" parent="Letterbox/LoadingMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "Hints"
 horizontal_alignment = 1
