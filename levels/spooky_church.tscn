@@ -1,5 +1,6 @@
-[gd_scene load_steps=268 format=4 uid="uid://cpgmxyybvd4x8"]
+[gd_scene load_steps=269 format=4 uid="uid://cpgmxyybvd4x8"]
 
+[ext_resource type="Texture2D" uid="uid://c51guvpg20wcf" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast4.png" id="1_qbcix"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="4_gxru8"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="5_c71tc"]
 [ext_resource type="Texture2D" uid="uid://cq5ug1fieds0c" path="res://textures/Color Maps/rock_pt_3.png" id="6_a6qr0"]
@@ -28,6 +29,8 @@ point_count = 3
 curve = SubResource("Curve_2rajt")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a6qr0"]
+emission_shape = 1
+emission_sphere_radius = 1.5
 gravity = Vector3(0, -0.5, 0)
 scale_curve = SubResource("CurveTexture_a6qr0")
 color_ramp = SubResource("GradientTexture1D_qbcix")
@@ -35,16 +38,19 @@ color_ramp = SubResource("GradientTexture1D_qbcix")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dfgex"]
 transparency = 1
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.49, 1, 0.9745, 0.078431375)
+albedo_color = Color(0.49, 1, 0.9745, 0.8666667)
+albedo_texture = ExtResource("1_qbcix")
 emission_enabled = true
 emission = Color(0.18759999, 0.28, 0.20762001, 1)
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
 
-[sub_resource type="SphereMesh" id="SphereMesh_408hf"]
+[sub_resource type="SphereMesh" id="SphereMesh_qbcix"]
 material = SubResource("StandardMaterial3D_dfgex")
-radius = 2.5
-height = 5.0
+radius = 3.0
+height = 8.0
 radial_segments = 8
-rings = 8
+rings = 6
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0l6r6"]
 sky_top_color = Color(0.08, 0.14799999, 0.32, 1)
@@ -929,11 +935,11 @@ filter_ledge_spans = true
 [node name="Areas" type="Node" parent="."]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.83364, 12.500341, -2.221366)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.83364, 12.060482, -2.221366)
 amount = 12
 lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_a6qr0")
-draw_pass_1 = SubResource("SphereMesh_408hf")
+draw_pass_1 = SubResource("SphereMesh_qbcix")
 
 [node name="Entities" type="Node" parent="."]
 unique_name_in_owner = true
