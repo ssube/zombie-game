@@ -1,4 +1,5 @@
 extends Node
+class_name ZN_World
 
 signal level_loading
 signal level_loaded

@@ -2,6 +2,7 @@ extends Component
 class_name ZC_Weather
 
 enum TimeOfDay {
+	CUSTOM,
 	DAWN,
 	DAY,
 	DUSK,
@@ -9,9 +10,12 @@ enum TimeOfDay {
 }
 
 enum WeatherType {
+	CUSTOM,
 	CLEAR,
 	CLOUDY,
+	RAIN,
 	THUNDER,
+	SNOW,
 }
 
 @export var time_of_day: TimeOfDay = TimeOfDay.DUSK:

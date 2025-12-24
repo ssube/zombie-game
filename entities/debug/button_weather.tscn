@@ -141,9 +141,9 @@ audio_players = [NodePath("../../ZN_AudioSubtitle3D")]
 [node name="ZN_WeatherAction" type="Node" parent="PressedActions"]
 script = ExtResource("14_wn6qm")
 set_time = true
-time_of_day = 0
+time_of_day = 4
 set_weather = true
-weather_type = 2
+weather_type = 4
 metadata/_custom_type_script = "uid://bus2bo0rlmxbd"
 
 [node name="ReleasedActions" type="Node" parent="."]

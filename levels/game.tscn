@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c32dl721ugeb0"]
+[gd_scene load_steps=30 format=3 uid="uid://c32dl721ugeb0"]
 
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/nodes/ZN_World.gd" id="1_7ti0h"]
 [ext_resource type="Resource" uid="uid://dhop75hkvee3x" path="res://campaigns/zombie_game.tres" id="2_mgpep"]
@@ -26,7 +26,12 @@
 [ext_resource type="Script" uid="uid://dxu3llv6t4pyu" path="res://scripts/systems/ZS_Cooldown.gd" id="21_mgpep"]
 [ext_resource type="Script" uid="uid://71r7uq3wy006" path="res://scripts/systems/ZS_Attention.gd" id="22_pb6kn"]
 [ext_resource type="Script" uid="uid://di50pseoblyu4" path="res://scripts/systems/ZS_Horde.gd" id="23_kw56w"]
+[ext_resource type="Script" uid="uid://c56mnlw3od4ni" path="res://scripts/systems/ZS_Thunder.gd" id="26_6w6r6"]
 [ext_resource type="PackedScene" uid="uid://vcyq2fbg0dts" path="res://menus/menu.tscn" id="26_ohs1m"]
+
+[sub_resource type="Curve" id="Curve_6w6r6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.17064846, 0.88231206), 0.0, 0.0, 0, 0, Vector2(0.3139932, 0.121866345), 0.0, 0.0, 0, 0, Vector2(0.48464167, 0.67409474), 0.0, 0.0, 0, 0, Vector2(0.6040956, 0.031337023), 0.0, 0.0, 0, 0, Vector2(0.75085324, 0.13997209), 0.0, 0.0, 0, 0, Vector2(0.784983, 0.82799447), 0.0, 0.0, 0, 0, Vector2(0.9010239, 0.8551533), 0.0, 0.0, 0, 0, Vector2(1, 0.18523681), 0.0, 0.0, 0, 0]
+point_count = 9
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_7ti0h")
@@ -71,8 +76,9 @@ script = ExtResource("13_si8kf")
 [node name="ZO_ExperienceObserver" type="Node" parent="World/Observers"]
 script = ExtResource("12_xr5dp")
 
-[node name="ZO_WeatherObserver" type="Node" parent="World/Observers"]
+[node name="ZO_WeatherObserver" type="Node" parent="World/Observers" node_paths=PackedStringArray("thunder_system")]
 script = ExtResource("13_kck2e")
+thunder_system = NodePath("../../Systems/ZS_ThunderSystem")
 
 [node name="Systems" type="Node" parent="World"]
 unique_name_in_owner = true
@@ -122,6 +128,11 @@ metadata/_custom_type_script = "uid://71r7uq3wy006"
 
 [node name="ZS_HordeSystem" type="Node" parent="World/Systems"]
 script = ExtResource("23_kw56w")
+
+[node name="ZS_ThunderSystem" type="Node" parent="World/Systems"]
+script = ExtResource("26_6w6r6")
+thunder_curve = SubResource("Curve_6w6r6")
+active = false
 
 [node name="Entities" type="Node" parent="World"]
 unique_name_in_owner = true
