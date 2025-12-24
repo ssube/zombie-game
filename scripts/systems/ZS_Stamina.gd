@@ -5,6 +5,17 @@ class_name ZS_StaminaSystem
 @export var effect_interval: float = 0.5
 var _effect_delta: float = 0.0
 
+@onready var remove_query = Relationship.new(
+	ZC_Effected.new(),
+	{
+		ZC_Screen_Effect: {
+			"effect": {
+				"_eq": ZM_BaseMenu.Effects.VIGNETTE,
+			},
+		}
+	}
+)
+
 
 func query() -> QueryBuilder:
 	return q.with_all([ZC_Stamina])
@@ -55,4 +66,6 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 				effect.strength = lerpf(-0.1, 0.7, clampf(inv_stamina_ratio, 0.0, 0.8))
 				effect.strength = clampf(effect.strength, 0.0, 1.0)
 				effect.duration = 5.0
-				RelationshipUtils.add_unique_relationship(entity, RelationshipUtils.make_effect(effect))
+
+				entity.remove_relationship(remove_query, 1)
+				entity.add_relationship(RelationshipUtils.make_effect(effect))
