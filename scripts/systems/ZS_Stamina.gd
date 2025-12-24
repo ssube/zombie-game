@@ -1,8 +1,10 @@
 extends System
 class_name ZS_StaminaSystem
 
+
 func query() -> QueryBuilder:
 	return q.with_all([ZC_Stamina])
+
 
 
 func process(entities: Array[Entity], _components: Array, delta: float) -> void:
@@ -30,3 +32,12 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 
 		if EntityUtils.is_player(entity):
 			%Menu.set_stamina(stamina.current_stamina)
+
+			# TODO: update once per second or so
+			var inv_stamina_ratio := 1.0 - (stamina.current_stamina / stamina.max_stamina)
+			var effect := ZC_Screen_Effect.new()
+			effect.effect = ZM_BaseMenu.Effects.VIGNETTE
+			effect.strength = lerpf(-0.1, 0.7, clampf(inv_stamina_ratio, 0.0, 0.8))
+			effect.strength = clampf(effect.strength, 0.0, 1.0)
+			effect.duration = 5.0
+			RelationshipUtils.add_unique_relationship(entity, RelationshipUtils.make_effect(effect))

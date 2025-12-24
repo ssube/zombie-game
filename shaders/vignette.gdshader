@@ -17,10 +17,16 @@ uniform vec4 vignette_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 // Overall strength of the effect.
 uniform float intensity : hint_range(0.0, 2.0) = 1.0;
 
+varying vec4 vertex_color;
+
+void vertex() {
+	vertex_color = COLOR;
+}
+
 void fragment()
 {
     vec2 screen_size = 1.0 / SCREEN_PIXEL_SIZE;
-	
+
     // Sample the current screen.
     vec4 base_color = texture(SCREEN_TEXTURE, SCREEN_UV);
 
@@ -35,6 +41,8 @@ void fragment()
 
     float v = smoothstep(radius - softness, radius, dist);
     vec3 final_rgb = mix(base_color.rgb, vignette_color.rgb, v * intensity * vignette_color.a);
+	final_rgb *= vertex_color.rgb;
+	float final_a = base_color.a * vertex_color.a;
 
-    COLOR = vec4(final_rgb, base_color.a);
+    COLOR = vec4(final_rgb, final_a);
 }
