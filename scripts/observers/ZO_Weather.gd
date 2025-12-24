@@ -80,6 +80,9 @@ func _weather_type_changed(_entity: Entity, component: ZC_Weather, new_value: Va
 
 
 func _toggle_node(node: Node, enabled: bool) -> void:
+	if "active" in node:
+		node.active = enabled
+
 	if "visible" in node:
 		node.visible = enabled
 
