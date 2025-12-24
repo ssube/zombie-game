@@ -114,6 +114,9 @@ func _on_resolution_menu_item_selected(index: int) -> void:
 	_current_options.graphics.screen_resolution.x = int(resolution_parts[0])
 	_current_options.graphics.screen_resolution.y = int(resolution_parts[1])
 
+	_on_shader_resolution_menu_item_selected(index) # indexes must match
+	%ShaderResolutionMenu.select(index)
+
 
 func _on_shader_resolution_menu_item_selected(index: int) -> void:
 	_dirty = true
