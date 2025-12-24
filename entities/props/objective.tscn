@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://nk5gadv88ni7"]
+[gd_scene load_steps=14 format=3 uid="uid://nk5gadv88ni7"]
 
 [ext_resource type="Script" uid="uid://dkpj2gjyqwbtk" path="res://scripts/entities/props/ZE_Objective.gd" id="1_gq75p"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_ko3gf"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_x6vs8"]
 [ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_key.tres" id="4_3q266"]
 [ext_resource type="Script" uid="uid://bdl3b6gan30l0" path="res://scripts/components/status/ZC_Objective.gd" id="5_wyyki"]
+[ext_resource type="Shader" uid="uid://biktyyh3i4ns7" path="res://shaders/wobble_normal.gdshader" id="6_012gx"]
 
 [sub_resource type="Resource" id="Resource_6y5fu"]
 script = ExtResource("3_x6vs8")
@@ -28,15 +29,26 @@ noise = SubResource("FastNoiseLite_n8xfw")
 seamless = true
 as_normal_map = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_66axx"]
-transparency = 1
-albedo_color = Color(1, 0.2784314, 0.2784314, 0.61960787)
-emission_enabled = true
-emission = Color(0.31, 0.052700005, 0.052700005, 1)
-normal_enabled = true
-normal_scale = 1.5
-normal_texture = SubResource("NoiseTexture2D_012gx")
-billboard_mode = 2
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_66axx"]
+render_priority = 0
+shader = ExtResource("6_012gx")
+shader_parameter/albedo = Color(1, 0.2784314, 0.2784314, 0.61960787)
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/emission = Color(0.31, 0.052700005, 0.052700005, 1)
+shader_parameter/emission_energy = 1.0
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_012gx")
+shader_parameter/normal_scale = 1.5
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/scale = 2.0
+shader_parameter/height = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_n8xfw"]
 radius = 0.75
@@ -45,7 +57,6 @@ radius = 0.75
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_gq75p")
-extra_components = null
 component_resources = Array[ExtResource("2_ko3gf")]([SubResource("Resource_6y5fu"), SubResource("Resource_lfpnt")])
 
 [node name="CSGCylinder3D" type="CSGSphere3D" parent="."]
@@ -55,7 +66,7 @@ material = SubResource("StandardMaterial3D_cqlhk")
 radius = 0.75
 radial_segments = 16
 rings = 8
-material = SubResource("StandardMaterial3D_66axx")
+material = SubResource("ShaderMaterial_66axx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_n8xfw")
