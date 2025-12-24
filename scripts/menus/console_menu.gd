@@ -24,11 +24,11 @@ func _run_command(text: String) -> void:
 				spawn = words[2]
 
 			print("Loading level %s from the console..." % level)
-			var game := get_tree().root.get_node("/root/Game")
+			var game := TreeUtils.get_game(self)
 			game.load_level(level, spawn)
 		"menu":
 			var menu_index := int(words[1])
-			var menu := get_tree().root.get_node("/root/Game/Menu")
+			var menu := TreeUtils.get_menu(self)
 			menu.show_menu(menu_index)
 
 

@@ -296,5 +296,5 @@ func _on_shader_toggled(value: bool) -> void:
 
 
 func _on_next_level_pressed() -> void:
-	var game := get_tree().root.get_node("/root/Game")
+	var game := TreeUtils.get_game(self)
 	game.load_next_level("")
