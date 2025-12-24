@@ -4,56 +4,66 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqwex"]
 
-[node name="GameOverMenu" type="AspectRatioContainer" node_paths=PackedStringArray("killed_label", "score_label")]
-process_mode = 2
+[node name="GameOverMenu" type="MarginContainer" node_paths=PackedStringArray("killed_label", "score_label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kqwex")
-killed_label = NodePath("MarginContainer/VFlowContainer/KilledLabel")
-score_label = NodePath("MarginContainer/VFlowContainer/ScoreLabel")
+killed_label = NodePath("MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/KilledLabel")
+score_label = NodePath("MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/ScoreLabel")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0, 0, 0, 0.3764706)
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="GameOverMenu" type="AspectRatioContainer" parent="MarginContainer3"]
+process_mode = 2
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer3/GameOverMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/margin_top = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="VFlowContainer" type="VFlowContainer" parent="MarginContainer"]
+[node name="VFlowContainer" type="VFlowContainer" parent="MarginContainer3/GameOverMenu/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/v_separation = 16
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VFlowContainer"]
+[node name="Label" type="Label" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "Game Over"
 horizontal_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="MarginContainer/VFlowContainer"]
+[node name="ScoreLabel" type="Label" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "%d Points"
 horizontal_alignment = 1
 
-[node name="KilledLabel" type="Label" parent="MarginContainer/VFlowContainer"]
+[node name="KilledLabel" type="Label" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "Killed by %s"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VFlowContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_kqwex")
 
-[node name="NewGame" type="Button" parent="MarginContainer/VFlowContainer"]
+[node name="NewGame" type="Button" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "New Game"
 
-[node name="Exit" type="Button" parent="MarginContainer/VFlowContainer"]
+[node name="Exit" type="Button" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "Exit"
 
-[connection signal="pressed" from="MarginContainer/VFlowContainer/NewGame" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="MarginContainer/VFlowContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/Exit" to="." method="_on_exit_pressed"]
