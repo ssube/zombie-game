@@ -50,7 +50,7 @@ func _time_of_day_changed(_entity: Entity, component: ZC_Weather, new_value: Var
 		for node in group_nodes:
 			_toggle_node(node, false)
 
-	_set_level_sky(component)
+	_set_level_environment(component)
 	_call_level_hook(component)
 
 
@@ -75,7 +75,7 @@ func _weather_type_changed(_entity: Entity, component: ZC_Weather, new_value: Va
 	if thunder_system and OptionsManager.options.gameplay.enable_thunder:
 		thunder_system.active = (new_value == ZC_Weather.WeatherType.THUNDER)
 
-	_set_level_sky(component)
+	_set_level_environment(component)
 	_call_level_hook(component)
 
 
@@ -84,9 +84,9 @@ func _toggle_node(node: Node, enabled: bool) -> void:
 		node.visible = enabled
 
 
-func _set_level_sky(component: ZC_Weather) -> void:
+func _set_level_environment(component: ZC_Weather) -> void:
 	var level_node := TreeUtils.get_level(self).get_child(0)
-	assert(level_node is ZN_Level, "Level does not inherit from ZN_Level, sky features are not available!")
+	assert(level_node is ZN_Level, "Level does not inherit from ZN_Level, changing the environment is not supported!")
 	if level_node is not ZN_Level:
 		return
 
@@ -134,7 +134,7 @@ func _find_best_environment(level: ZN_Level, component: Component) -> ZR_Weather
 	if matching_environment:
 		return matching_environment
 
-	# finally, look for a fallback sky
+	# finally, look for a fallback environment
 	for environment in level.environment_scenes:
 		if environment.time_of_day == ZC_Weather.TimeOfDay.ANY and environment.weather_type == ZC_Weather.WeatherType.ANY:
 			matching_environment = environment

@@ -2,6 +2,9 @@
 extends Node3D
 class_name ZN_Level
 
+@export_group("Hooks")
+@export var level_actions: ZC_Action
+
 @export_group("Pointers")
 @export var areas_node: NodePath = "Areas"
 @export var entities_node: NodePath = "Entities"
@@ -87,3 +90,6 @@ func _take_level_screenshot() -> void:
 func on_load() -> void:
 	if screenshot_camera:
 		screenshot_camera.queue_free()
+
+	if level_actions:
+		ActionUtils.run_component(level_actions, self, Enums.ActionEvent.LEVEL_LOAD, null)

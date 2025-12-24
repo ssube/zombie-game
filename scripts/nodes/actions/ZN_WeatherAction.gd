@@ -1,6 +1,8 @@
 extends ZN_BaseAction
 class_name ZN_WeatherAction
 
+@export var apply_to_players: bool = true
+
 @export_group("Time")
 @export var set_time: bool = false
 @export var time_of_day: ZC_Weather.TimeOfDay = ZC_Weather.TimeOfDay.DUSK
@@ -9,7 +11,18 @@ class_name ZN_WeatherAction
 @export var set_weather: bool = false
 @export var weather_type: ZC_Weather.WeatherType = ZC_Weather.WeatherType.CLOUDY
 
-func run_entity(_source: Node, _event: Enums.ActionEvent, actor: Entity) -> void:
+
+func run_node(_source: Node, _event: Enums.ActionEvent, actor: Node) -> void:
+	if actor is Entity:
+		_update_weather(actor)
+
+	if apply_to_players:
+		var players := EntityUtils.get_players()
+		for player in players:
+			_update_weather(player)
+
+
+func _update_weather(actor: Entity) -> void:
 	var weather := actor.get_component(ZC_Weather) as ZC_Weather
 	if weather == null:
 		return

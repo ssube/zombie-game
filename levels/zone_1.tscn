@@ -1,8 +1,13 @@
-[gd_scene load_steps=390 format=4 uid="uid://2631yqe4y8ki"]
+[gd_scene load_steps=398 format=4 uid="uid://2631yqe4y8ki"]
 
+[ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_chfad"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="2_1pddc"]
+[ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="2_3n5d4"]
+[ext_resource type="Script" uid="uid://bbgu5yekfkubs" path="res://scripts/resources/ZR_Weather.gd" id="3_11fd3"]
+[ext_resource type="Resource" uid="uid://dj1reyq1l6vd7" path="res://skies/day_thunder.tres" id="4_vopnn"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="5_3ioyf"]
 [ext_resource type="Script" uid="uid://hu6tpnmjxa07" path="res://scripts/nodes/actions/ZN_SpeedModifierAction.gd" id="5_3k1mp"]
+[ext_resource type="Resource" uid="uid://cckhlv7hfuhvu" path="res://skies/night_thunder.tres" id="5_ta7lq"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="6_3k1mp"]
 [ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="6_3wwps"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door_wood_cw.tscn" id="8_4uioy"]
@@ -23,6 +28,15 @@
 [ext_resource type="Material" uid="uid://dyp1fuggnjhni" path="res://textures/Color Maps/grass_11.tres" id="16_cem8g"]
 [ext_resource type="Script" uid="uid://c6dan22mbgmgs" path="res://scripts/nodes/ZN_MapGeometry.gd" id="18_wks3y"]
 [ext_resource type="PackedScene" uid="uid://cf8xh1my8wn0y" path="res://materials/environment_day.tscn" id="22_3ioyf"]
+[ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="26_e0klg"]
+[ext_resource type="Script" uid="uid://bus2bo0rlmxbd" path="res://scripts/nodes/actions/ZN_WeatherAction.gd" id="27_11fd3"]
+
+[sub_resource type="Resource" id="Resource_vopnn"]
+script = ExtResource("2_3n5d4")
+actions = Dictionary[int, NodePath]({
+70: NodePath("LoadActions")
+})
+metadata/_custom_type_script = "uid://barikupijl7r7"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ebfu5"]
 size = Vector3(30, 1, 196)
@@ -1380,6 +1394,10 @@ geometry_source_group_name = &"level"
 filter_ledge_spans = true
 
 [node name="Zone1" type="Node3D"]
+script = ExtResource("1_chfad")
+level_actions = SubResource("Resource_vopnn")
+environment_scenes = Array[ExtResource("3_11fd3")]([ExtResource("4_vopnn"), ExtResource("5_ta7lq")])
+metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
 [node name="Entities" type="Node" parent="."]
 
@@ -2745,6 +2763,19 @@ height = 20.0
 vertices = PackedVector3Array(91, 0, -70, 69, 0, -92, -30, 0, -92, -30, 0, 116, 69, 0, 116, 91, 0, 94)
 affect_navigation_mesh = true
 
-[node name="EnvironmentDay" parent="." instance=ExtResource("22_3ioyf")]
+[node name="Environment" type="Node" parent="."]
+
+[node name="EnvironmentDay" parent="Environment" instance=ExtResource("22_3ioyf")]
 
 [node name="Objectives" type="Node" parent="."]
+
+[node name="LoadActions" type="Node" parent="."]
+script = ExtResource("26_e0klg")
+metadata/_custom_type_script = "uid://dbj456ofx8mw1"
+
+[node name="SetWeather" type="Node" parent="LoadActions"]
+script = ExtResource("27_11fd3")
+set_time = true
+set_weather = true
+weather_type = 4
+metadata/_custom_type_script = "uid://bus2bo0rlmxbd"

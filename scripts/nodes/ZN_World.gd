@@ -149,12 +149,12 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	clear_world()
 
 	var next_level := level_scene.instantiate()
-	if 'on_load' in next_level:
-		next_level.on_load()
-
 	%Level.add_child(next_level)
 	_register_level_entities()
 	_register_level_objectives()
+
+	if 'on_load' in next_level:
+		next_level.on_load()
 
 	current_level_name = level_name
 	next_level_name = level_data.next_level

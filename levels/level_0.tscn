@@ -721,8 +721,8 @@ omni_range = 24.0
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.780468, 3.1510324, -9.595341)
-light_energy = 0.56
-light_indirect_energy = 0.56
+light_energy = 0.96
+light_indirect_energy = 0.96
 shadow_enabled = true
 omni_range = 14.736
 
@@ -740,8 +740,8 @@ metadata/_custom_type_script = "uid://dx3tgietk0dly"
 [node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7362304, 3.1510324, -13.650693)
 light_color = Color(0.56, 1, 0.67, 1)
-light_energy = 0.96
-light_indirect_energy = 0.96
+light_energy = 1.12
+light_indirect_energy = 1.12
 shadow_enabled = true
 omni_range = 14.736
 
