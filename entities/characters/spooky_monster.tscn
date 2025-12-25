@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctpldo10k58u7"]
+[gd_scene load_steps=10 format=3 uid="uid://ctpldo10k58u7"]
 
 [ext_resource type="Material" uid="uid://b5lkck7ikthnl" path="res://textures/Color Maps/stone_alien_1.tres" id="1_u62kk"]
+[ext_resource type="AudioStream" uid="uid://c12646njigexm" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/Ambiences/ambience_d3_loop.ogg" id="2_bvsi7"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="3_l4mt0"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oxm2w"]
 
@@ -57,3 +59,12 @@ strength = 5.0
 radius = 1.5
 
 [node name="GPUParticlesCollisionSphere3D" type="GPUParticlesCollisionSphere3D" parent="GPUParticles3D"]
+
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_bvsi7")
+script = ExtResource("3_l4mt0")
+play_on_ready = true
+play_on_loop = true
+subtitle_text = "Harsh Noise from Orb"
+remove_on_finished = false
+metadata/_custom_type_script = "uid://mcuf24u8q14t"

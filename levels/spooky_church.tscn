@@ -1,4 +1,4 @@
-[gd_scene load_steps=266 format=4 uid="uid://cpgmxyybvd4x8"]
+[gd_scene load_steps=268 format=4 uid="uid://cpgmxyybvd4x8"]
 
 [ext_resource type="Texture2D" uid="uid://c51guvpg20wcf" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast4.png" id="1_qbcix"]
 [ext_resource type="PackedScene" uid="uid://dsjfc00ufve4t" path="res://entities/props/pine_tree_1_1.tscn" id="2_2rajt"]
@@ -15,6 +15,8 @@
 [ext_resource type="Material" uid="uid://buwrdjgibshvs" path="res://textures/Color Maps/grass_8.tres" id="13_x4l7f"]
 [ext_resource type="Material" uid="uid://bssxeyjyxu12v" path="res://textures/Color Maps/stone_hell_5.tres" id="14_43fyf"]
 [ext_resource type="PackedScene" uid="uid://ctpldo10k58u7" path="res://entities/characters/spooky_monster.tscn" id="15_a6qr0"]
+[ext_resource type="AudioStream" uid="uid://jf13578h0spg" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/Ambiences/ambience_d4_loop.ogg" id="16_dfgex"]
+[ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="17_408hf"]
 
 [sub_resource type="Gradient" id="Gradient_0l6r6"]
 offsets = PackedFloat32Array(0.31034482, 0.9359606)
@@ -1763,3 +1765,7 @@ active = true
 key = "find_key"
 title = "Find the oddly cone-shaped key"
 metadata/_custom_type_script = "uid://b560n5psxwkuk"
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_dfgex")
+script = ExtResource("17_408hf")
