@@ -16,7 +16,8 @@ var other_groups: Dictionary[String, Array] = {
 	"weather_snow": ["weather_custom", "weather_clear", "weather_cloudy", "weather_rain", "weather_thunder"],
 }
 
-# TODO: attach fog and rain particles to each player
+@export var environment_scenes: Array[ZR_Weather] = []
+
 @export var rain_system: System = null
 @export var thunder_system: ZS_ThunderSystem = null
 
@@ -94,7 +95,10 @@ func _set_level_environment(component: ZC_Weather) -> void:
 		return
 
 	var level := level_node as ZN_Level
-	var environment := _find_best_environment(level, component)
+	var environment := _find_best_environment(level.environment_scenes, component)
+	if environment == null:
+		environment = _find_best_environment(self.environment_scenes, component)
+
 	if environment == null:
 		printerr("No matching environment for conditions %d and %d" % [component.time_of_day, component.weather_type])
 		return
@@ -116,11 +120,11 @@ func _call_level_hook(weather: ZC_Weather) -> void:
 		level_node.set_weather(weather)
 
 
-func _find_best_environment(level: ZN_Level, component: Component) -> ZR_Weather:
+func _find_best_environment(environments: Array[ZR_Weather], component: Component) -> ZR_Weather:
 	var matching_environment: ZR_Weather = null
 
 	# look for a strict match first
-	for environment in level.environment_scenes:
+	for environment in environments:
 		if _match_environment(component, environment, true):
 			matching_environment = environment
 			break
@@ -129,7 +133,7 @@ func _find_best_environment(level: ZN_Level, component: Component) -> ZR_Weather
 		return matching_environment
 
 	# followed by a wildcard match
-	for environment in level.environment_scenes:
+	for environment in environments:
 		if _match_environment(component, environment):
 			matching_environment = environment
 			break
@@ -138,7 +142,7 @@ func _find_best_environment(level: ZN_Level, component: Component) -> ZR_Weather
 		return matching_environment
 
 	# finally, look for a fallback environment
-	for environment in level.environment_scenes:
+	for environment in environments:
 		if environment.time_of_day == ZC_Weather.TimeOfDay.ANY and environment.weather_type == ZC_Weather.WeatherType.ANY:
 			matching_environment = environment
 			break
