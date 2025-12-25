@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://tna8f01ql67u"]
+[gd_scene load_steps=27 format=4 uid="uid://tna8f01ql67u"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aigh8"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_dy0dc"]
@@ -14,6 +14,9 @@
 [ext_resource type="Script" uid="uid://u512rl8uacud" path="res://scripts/nodes/actions/ZN_DurabilityAction.gd" id="10_hvjee"]
 [ext_resource type="Script" uid="uid://dlb4vkkjdb658" path="res://scripts/nodes/actions/ZN_HealthAction.gd" id="11_hgjmx"]
 [ext_resource type="Script" uid="uid://crylbd231pgne" path="res://scripts/nodes/conditions/ZN_FactionCondition.gd" id="12_nl1ig"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="12_u21t8"]
+[ext_resource type="AudioStream" uid="uid://bqyix45av3beh" path="res://sounds/Sound Effects/Melee/Hit/blunt_hit_body_ufx_1.ogg" id="12_v7hob"]
+[ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="16_v7hob"]
 
 [sub_resource type="Resource" id="Resource_42kvg"]
 script = ExtResource("8_3gqkk")
@@ -139,6 +142,15 @@ metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 transform = Transform3D(0.9999856, 2.9802322e-07, -2.9802322e-08, -6.2584877e-07, 0.9999917, -1.0430813e-07, 1.0430813e-07, -7.003546e-07, 0.9999913, 0, 0.03, 0)
 shape = SubResource("CapsuleShape3D_r1fv1")
 
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="Node3D/Area3D"]
+transform = Transform3D(1.0000193, 8.940697e-08, 2.9802322e-08, 0, 1, 4.4703484e-08, 1.4901161e-08, -1.4901161e-08, 1.0000004, 0, 0, 0)
+stream = ExtResource("12_v7hob")
+script = ExtResource("12_u21t8")
+alerts_enemies = false
+subtitle_text = "Bat Thumping"
+remove_on_finished = false
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
 [node name="ZN_DurabilityAction" type="Node" parent="Node3D/Area3D" node_paths=PackedStringArray("entity")]
 script = ExtResource("10_hvjee")
 default_amount = 0
@@ -158,6 +170,11 @@ metadata/_custom_type_script = "uid://dlb4vkkjdb658"
 script = ExtResource("12_nl1ig")
 apply_to_factions = Array[String](["hostile_zombies", "neutral_world"])
 metadata/_custom_type_script = "uid://crylbd231pgne"
+
+[node name="ZN_AudioAction" type="Node" parent="Node3D/Area3D" node_paths=PackedStringArray("audio_players")]
+script = ExtResource("16_v7hob")
+audio_players = [NodePath("../ZN_AudioSubtitle3D")]
+metadata/_custom_type_script = "uid://dga8v5ocxqirt"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7643113, 0.5640393, 0.31251454, 0, 0.48464668, -0.87470967, -0.6448176, 0.6685637, 0.37042788, 0.7398019, -0.59114224, -0.7246001)
