@@ -27,6 +27,10 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			total_damage += floor(c_damage.amount)
 			entity.remove_relationship(damage_rel)
 
+		# Skip damage after removing relationships, if this is a player with god mode
+		if EntityUtils.is_player(entity) and OptionsManager.options.cheats.god_mode:
+			continue
+
 		var damage: int = total_damage
 
 		# Do not apply damage resistance to healing (negative damage)
