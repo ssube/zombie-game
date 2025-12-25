@@ -19,6 +19,9 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 			dominated = _process_stimulus(attention, stimulus) or dominated
 		entity.remove_relationships(stimuli)
 
+		if OptionsManager.options.cheats.no_aggro:
+			return
+
 		# Apply decay
 		if not dominated:
 			attention.time_since_stimulus += delta
