@@ -8,6 +8,9 @@ func tick(entity: Entity, delta: float, _blackboard: ZB_Blackboard) -> TickResul
 		if attention == null or not attention.has_target_entity:
 				return TickResult.FORCE_EXIT
 
+		if OptionsManager.options.cheats.no_aggro:
+			return TickResult.FORCE_EXIT
+
 		var target_entity := ECS.world.get_entity_by_id(attention.target_entity)
 		if target_entity == null:
 				# Target was removed from world (died, etc.)

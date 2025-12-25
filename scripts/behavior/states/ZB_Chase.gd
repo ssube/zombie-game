@@ -13,6 +13,9 @@ func tick(entity: Entity, delta: float, _blackboard: ZB_Blackboard) -> TickResul
 		if attention == null or not attention.has_target_position:
 				return TickResult.FORCE_EXIT
 
+		if OptionsManager.options.cheats.no_aggro:
+			return TickResult.FORCE_EXIT
+
 		# Chase can work with just a position (heard a sound) or with an entity
 		var target_position: Vector3 = attention.target_position
 
