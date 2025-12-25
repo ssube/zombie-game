@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_ikto8")
-time_of_day = 4
-weather_type = 4
+time_of_day = 5
+weather_type = 5
 environment_scene = ExtResource("1_qbumy")
 metadata/_custom_type_script = "uid://bbgu5yekfkubs"
