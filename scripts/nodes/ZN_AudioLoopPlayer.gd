@@ -8,8 +8,7 @@ var _loop_count: int = 0
 
 
 func _ready() -> void:
-	if max_loops > -1:
-		self.finished.connect(_loop)
+	self.finished.connect(_loop)
 
 	if loop_on_ready:
 		self.play()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=4 uid="uid://v18fidmgep15"]
+[gd_scene load_steps=106 format=4 uid="uid://v18fidmgep15"]
 
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_b7jq5"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="2_7khm6"]
@@ -15,6 +15,8 @@
 [ext_resource type="Material" uid="uid://vq88t5vuqjfq" path="res://textures/Color Maps/wood_pt_4.tres" id="13_7khm6"]
 [ext_resource type="Texture2D" uid="uid://fa5k0edn886e" path="res://textures/Color Maps/metal_panels_pt_2.png" id="14_tu73e"]
 [ext_resource type="PackedScene" uid="uid://d4se7f101eb7" path="res://skies/sky_night.tscn" id="15_2vafd"]
+[ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="16_fbayg"]
+[ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="17_tr8cq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ccg5v"]
 albedo_texture = ExtResource("8_2vafd")
@@ -388,7 +390,7 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 4, 3), PackedInt32Arr
 geometry_source_geometry_mode = 1
 geometry_source_group_name = &"level"
 
-[node name="TestTown" type="Node3D"]
+[node name="BusStop" type="Node3D"]
 
 [node name="Entities" type="Node3D" parent="."]
 
@@ -686,3 +688,9 @@ shape = SubResource("ConvexPolygonShape3D_ufgqe")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_2vafd")
+
+[node name="ZN_AudioLoopPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_fbayg")
+volume_db = -3.0
+pitch_scale = 0.6
+script = ExtResource("17_tr8cq")
