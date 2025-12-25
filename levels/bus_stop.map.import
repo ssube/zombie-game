@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://cdm7ulyd3eh3n"
+path="res://.godot/imported/bus_stop.map-581968833eaeffae09b6d6ab05aedc3c.tres"
+
+[deps]
+
+source_file="res://levels/bus_stop.map"
+dest_files=["res://.godot/imported/bus_stop.map-581968833eaeffae09b6d6ab05aedc3c.tres"]
+
+[params]
+
