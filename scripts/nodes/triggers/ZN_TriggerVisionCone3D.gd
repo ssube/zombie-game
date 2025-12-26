@@ -22,11 +22,31 @@ var _actions: Array[ZN_BaseAction] = []
 
 
 func _get_prober_for_shape(shape: CollisionShape3D, body: CollisionObject3D) -> VisionTestProber:
-	for prober: VisionTestProber in _body_probe_data[body]:
+	for prober: VisionTestProber in _body_probe_data.get(body, []):
 		if prober.collision_shape == shape:
 			return prober
 
 	return null
+
+
+func _on_body_shape_exited(
+	_body_rid: RID,
+	body: Node3D,
+	body_shape_index: int,
+	_local_shape_index: int,
+) -> void:
+	if !body:
+		return
+
+	if body not in _body_probe_data:
+		return
+
+	var shape := _get_collision_shape_node_in_body(body, body_shape_index)
+	var prober := _get_prober_for_shape(shape, body)
+	var body_probers : Array[VisionTestProber]= _body_probe_data[body]
+	body_probers.erase(prober)
+	if body_probers.is_empty():
+		_body_probe_data.erase(body)
 
 
 func _ready() -> void:
