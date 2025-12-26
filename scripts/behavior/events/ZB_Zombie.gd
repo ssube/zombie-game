@@ -3,7 +3,8 @@ extends Node
 class_name ZB_ZombieEvents
 
 @export_group("Actor")
-@export var actor_node: RigidBody3D
+@export var actor_body: RigidBody3D
+@export var actor_entity: ZE_Character
 
 @export_group("Areas")
 @export var vision_area: VisionCone3D
@@ -17,7 +18,7 @@ class_name ZB_ZombieEvents
 @export var state_wander: ZB_State_Wander
 
 # Components
-var actor_entity: Entity
+var entity_ready: bool = false
 var entity_health: ZC_Health
 var entity_perception: ZC_Perception
 var entity_weapon: ZC_Weapon_Melee
@@ -42,17 +43,27 @@ func _ready():
 		detection_area.body_exited.connect(_on_detection_area_body_exited)
 
 	# lock zombie node rotation
-	actor_node.axis_lock_angular_x = true
-	actor_node.axis_lock_angular_z = true
+	actor_body.axis_lock_angular_x = true
+	actor_body.axis_lock_angular_z = true
+
+	actor_entity.action_event.connect(_on_action_event)
 
 	print("Zombie ready")
 
-func on_ready(entity: Entity) -> void:
-	actor_entity = entity
+
+func on_ready() -> void:
 	entity_health = actor_entity.get_component(ZC_Health)
 	entity_perception = actor_entity.get_component(ZC_Perception)
 	entity_weapon = actor_entity.get_component(ZC_Weapon_Melee)
 	entity_velocity = actor_entity.get_component(ZC_Velocity)
+	entity_ready = true
+
+
+# TODO: why is this being done here?
+func _process(delta: float) -> void:
+	if entity_velocity:
+		lerp_actor_velocity(Vector3.ZERO, delta)
+
 
 ## Gradually update the physics velocity of the actor node
 func lerp_actor_velocity(target_velocity: Vector3, delta: float) -> void:
@@ -63,8 +74,9 @@ func lerp_actor_velocity(target_velocity: Vector3, delta: float) -> void:
 
 	entity_velocity.linear_velocity = new_velocity
 
-func _process(delta: float):
-	if not is_actor_active():
+
+func _on_action_event(_entity: Entity, event: Enums.ActionEvent, _actor: Node):
+	if event == Enums.ActionEvent.ENTITY_DEATH:
 		state_machine.active = false
 		# disable area monitoring for performance
 		vision_area.debug_draw = false
@@ -72,16 +84,12 @@ func _process(delta: float):
 		attack_area.monitoring = false
 		detection_area.monitoring = false
 		# unlock rotation and let ragdoll physics take over
-		actor_node.axis_lock_angular_x = false
-		actor_node.axis_lock_angular_z = false
-		# lerp to zero velocity
-		lerp_actor_velocity(Vector3.ZERO, delta)
+		actor_body.axis_lock_angular_x = false
+		actor_body.axis_lock_angular_z = false
 		# delete zombie weapon
 		if actor_entity.current_weapon:
 			EntityUtils.remove(actor_entity.current_weapon)
 			actor_entity.current_weapon = null
-
-		return
 
 func _calculate_visual_intensity(seen_entity: Entity) -> float:
 	var distance := actor_entity.global_position.distance_to(seen_entity.global_position) as float
@@ -95,6 +103,9 @@ func _get_faction(other: Entity) -> StringName:
 	return &"unknown"
 
 func _on_vision_area_body_sighted(body: Node) -> void:
+	if not entity_ready:
+		return
+
 	print("Zombie saw body: ", body.name)
 	var seen_entity := CollisionUtils.get_collider_entity(body)
 	if seen_entity == null:
@@ -109,6 +120,9 @@ func _on_vision_area_body_sighted(body: Node) -> void:
 	actor_entity.add_relationship(RelationshipUtils.make_detected(stimulus))
 
 func _on_vision_area_body_hidden(body: Node) -> void:
+	if not entity_ready:
+		return
+
 	print("Zombie lost sight of body: ", body.name)
 	var seen_entity := CollisionUtils.get_collider_entity(body)
 	if seen_entity == null:
@@ -117,6 +131,9 @@ func _on_vision_area_body_hidden(body: Node) -> void:
 	entity_perception.visible_entities.erase(seen_entity.id)
 
 func _on_attack_area_body_entered(body: Node) -> void:
+	if not entity_ready:
+		return
+
 	print("Zombie can attack body: ", body.name)
 	if EntityUtils.is_player(body):
 		var behavior := actor_entity.get_component(ZC_Behavior) as ZC_Behavior
@@ -124,6 +141,9 @@ func _on_attack_area_body_entered(body: Node) -> void:
 		state_machine.set_state(actor_entity, state_attack.name)
 
 func _on_attack_area_body_exited(body: Node) -> void:
+	if not entity_ready:
+		return
+
 	print("Zombie can no longer attack body: ", body.name)
 	var behavior := actor_entity.get_component(ZC_Behavior) as ZC_Behavior
 	var target_player = behavior.get_value(BehaviorUtils.target_player)
@@ -132,6 +152,9 @@ func _on_attack_area_body_exited(body: Node) -> void:
 		state_machine.set_state(actor_entity, state_chase.name)
 
 func _on_detection_area_body_entered(body: Node) -> void:
+	if not entity_ready:
+		return
+
 	print("Zombie detected body: ", body.name)
 	detected_bodies += 1
 	vision_area.monitoring = true
@@ -142,6 +165,9 @@ func _on_detection_area_body_entered(body: Node) -> void:
 		behavior.set_value(BehaviorUtils.target_position, body.global_position)
 
 func _on_detection_area_body_exited(_body: Node) -> void:
+	if not entity_ready:
+		return
+
 	detected_bodies -= 1
 	assert(detected_bodies >= 0, "Body detection went negative!")
 

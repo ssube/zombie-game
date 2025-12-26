@@ -127,12 +127,11 @@ radius = 20.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_kv3li"]
 radius = 2.0
 
-[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("events", "current_weapon", "inventory_node", "weapon_node")]
+[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("current_weapon", "inventory_node", "weapon_node")]
 collision_layer = 16
 collision_mask = 31
 mass = 20.0
 script = ExtResource("1_enhv7")
-events = NodePath("Behavior/ZombieBehavior/Events")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("WeaponMarker")
@@ -216,9 +215,10 @@ script = ExtResource("14_ojwvh")
 default_state = NodePath("States/ZB_State_Wander")
 metadata/_custom_type_script = "uid://di74g8tmachs3"
 
-[node name="Events" type="Node" parent="Behavior/ZombieBehavior" node_paths=PackedStringArray("actor_node", "vision_area", "attack_area", "detection_area", "state_machine", "state_attack", "state_chase", "state_wander")]
+[node name="Events" type="Node" parent="Behavior/ZombieBehavior" node_paths=PackedStringArray("actor_body", "actor_entity", "vision_area", "attack_area", "detection_area", "state_machine", "state_attack", "state_chase", "state_wander")]
 script = ExtResource("16_v2128")
-actor_node = NodePath("../../..")
+actor_body = NodePath("../../..")
+actor_entity = NodePath("../../..")
 vision_area = NodePath("../../VisionCone3D")
 attack_area = NodePath("../../AttackArea3D")
 detection_area = NodePath("../../DetectionArea3D")

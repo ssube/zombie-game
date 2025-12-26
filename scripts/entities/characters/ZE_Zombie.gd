@@ -7,4 +7,4 @@ class_name ZE_Zombie
 func on_ready():
 	super.on_ready()
 	if events:
-		events.on_ready(self)
+		events.on_ready()
