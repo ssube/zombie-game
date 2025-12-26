@@ -112,7 +112,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="IdleCommentTimer" type="Timer" parent="." node_paths=PackedStringArray("parent_entity")]
-wait_time = 5.0
+wait_time = 60.0
 script = ExtResource("11_w7go0")
 min_variation = -5.0
 max_variation = 5.0
