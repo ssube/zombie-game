@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://bf8cjjumln7y5"]
+
+[ext_resource type="Script" uid="uid://di74g8tmachs3" path="res://scripts/behavior/fsm/ZB_StateMachine.gd" id="8_kw5dq"]
+[ext_resource type="Script" uid="uid://df075dj3mhif5" path="res://scripts/behavior/states/ZB_Attack.gd" id="10_t3yky"]
+[ext_resource type="Script" uid="uid://cyplr8cytq8s7" path="res://scripts/behavior/states/ZB_Chase.gd" id="11_4bq8y"]
+[ext_resource type="Script" uid="uid://t8sjqdgd8fgf" path="res://scripts/behavior/states/utils/ZB_Throttle.gd" id="12_86ygq"]
+[ext_resource type="Script" uid="uid://4mkf4oytommo" path="res://scripts/behavior/states/ZB_Idle.gd" id="13_4qama"]
+[ext_resource type="Script" uid="uid://spbk6hwrc5ow" path="res://scripts/behavior/states/ZB_Wander.gd" id="14_2byos"]
+[ext_resource type="Script" uid="uid://c6pla5ya01llv" path="res://scripts/behavior/fsm/ZB_Transition.gd" id="15_bmse4"]
+[ext_resource type="Script" uid="uid://bp8kk4kmch5fg" path="res://scripts/behavior/conditions/ZB_IsPlayerInArea.gd" id="16_vp68r"]
+[ext_resource type="Script" uid="uid://dyb15yih6xr3a" path="res://scripts/behavior/conditions/ZB_IsPlayerVisible.gd" id="17_npmva"]
+[ext_resource type="Script" uid="uid://dicdllgowu6ov" path="res://scripts/behavior/conditions/utils/ZB_Throttle.gd" id="18_gh7l7"]
+[ext_resource type="Script" uid="uid://ccjqwf2jo717o" path="res://scripts/behavior/conditions/utils/ZB_Random.gd" id="19_kp5j3"]
+
+[node name="AggressiveZombieBehavior" type="Node" node_paths=PackedStringArray("default_state")]
+script = ExtResource("8_kw5dq")
+default_state = NodePath("States/ZB_Throttle_Wander/ZB_State_Wander")
+metadata/_custom_type_script = "uid://di74g8tmachs3"
+
+[node name="States" type="Node" parent="."]
+
+[node name="ZB_State_Attack" type="Node" parent="States"]
+script = ExtResource("10_t3yky")
+metadata/_custom_type_script = "uid://df075dj3mhif5"
+
+[node name="ZB_State_Chase" type="Node" parent="States"]
+script = ExtResource("11_4bq8y")
+metadata/_custom_type_script = "uid://cyplr8cytq8s7"
+
+[node name="ZB_Throttle_Idle" type="Node" parent="States"]
+script = ExtResource("12_86ygq")
+metadata/_custom_type_script = "uid://t8sjqdgd8fgf"
+
+[node name="ZB_State_Idle" type="Node" parent="States/ZB_Throttle_Idle"]
+script = ExtResource("13_4qama")
+metadata/_custom_type_script = "uid://4mkf4oytommo"
+
+[node name="ZB_Throttle_Wander" type="Node" parent="States"]
+script = ExtResource("12_86ygq")
+metadata/_custom_type_script = "uid://t8sjqdgd8fgf"
+
+[node name="ZB_State_Wander" type="Node" parent="States/ZB_Throttle_Wander"]
+script = ExtResource("14_2byos")
+metadata/_custom_type_script = "uid://spbk6hwrc5ow"
+
+[node name="Transitions" type="Node" parent="."]
+
+[node name="Any_Attack" type="Node" parent="Transitions" node_paths=PackedStringArray("target_state")]
+script = ExtResource("15_bmse4")
+any_source = true
+target_state = NodePath("../../States/ZB_State_Attack")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="ZB_IsPlayerInArea" type="Node" parent="Transitions/Any_Attack"]
+script = ExtResource("16_vp68r")
+metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
+
+[node name="Any_Chase" type="Node" parent="Transitions" node_paths=PackedStringArray("target_state")]
+script = ExtResource("15_bmse4")
+any_source = true
+target_state = NodePath("../../States/ZB_State_Chase")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="ZB_IsPlayerVisible" type="Node" parent="Transitions/Any_Chase"]
+script = ExtResource("17_npmva")
+metadata/_custom_type_script = "uid://dyb15yih6xr3a"
+
+[node name="Idle_Wander" type="Node" parent="Transitions" node_paths=PackedStringArray("source_state", "target_state")]
+script = ExtResource("15_bmse4")
+source_state = NodePath("../../States/ZB_Throttle_Idle/ZB_State_Idle")
+target_state = NodePath("../../States/ZB_Throttle_Wander/ZB_State_Wander")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="ZB_Condition_Throttle" type="Node" parent="Transitions/Idle_Wander"]
+script = ExtResource("18_gh7l7")
+interval = 1.0
+
+[node name="ZB_Condition_Random" type="Node" parent="Transitions/Idle_Wander"]
+script = ExtResource("19_kp5j3")
+metadata/_custom_type_script = "uid://ccjqwf2jo717o"
+
+[node name="Wander_Idle" type="Node" parent="Transitions" node_paths=PackedStringArray("source_state", "target_state")]
+script = ExtResource("15_bmse4")
+source_state = NodePath("../../States/ZB_Throttle_Wander/ZB_State_Wander")
+target_state = NodePath("../../States/ZB_Throttle_Idle/ZB_State_Idle")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="ZB_Condition_Throttle" type="Node" parent="Transitions/Wander_Idle"]
+script = ExtResource("18_gh7l7")
+interval = 1.0
+
+[node name="ZB_Condition_Random" type="Node" parent="Transitions/Wander_Idle"]
+script = ExtResource("19_kp5j3")
+metadata/_custom_type_script = "uid://ccjqwf2jo717o"
+
+[node name="Any_Idle" type="Node" parent="Transitions" node_paths=PackedStringArray("target_state")]
+script = ExtResource("15_bmse4")
+any_source = true
+target_state = NodePath("../../States/ZB_Throttle_Idle")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"

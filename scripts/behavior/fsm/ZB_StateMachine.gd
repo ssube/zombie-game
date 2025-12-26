@@ -13,6 +13,7 @@ var current_state: ZB_State
 @export var active: bool = true
 @export var debug: bool = false
 @export var default_state: ZB_State = null
+@export var entity: Entity = null
 
 
 func _ready():
@@ -51,7 +52,7 @@ func _build_transition_table():
 				transitions_by_source[src].append(t)
 
 
-func _check_transitions(entity: Entity, delta: float, behavior: ZC_Behavior, force_exit: bool = false) -> void:
+func _check_transitions(delta: float, behavior: ZC_Behavior, force_exit: bool = false) -> void:
 		if current_state == null:
 				return
 
@@ -66,7 +67,7 @@ func _check_transitions(entity: Entity, delta: float, behavior: ZC_Behavior, for
 		for t in list:
 				if t.test(entity, delta, behavior):
 						if t.target_state:
-								set_state(entity, t.target_state.name)
+								set_state(t.target_state.name)
 								return
 
 		if force_exit:
@@ -74,10 +75,10 @@ func _check_transitions(entity: Entity, delta: float, behavior: ZC_Behavior, for
 					if default_state.name == current_state.name:
 						printerr("State tried to force exit, but it is the default state")
 					else:
-						set_state(entity, default_state.name)
+						set_state(default_state.name)
 
 
-func set_state(entity: Entity, new_name: String):
+func set_state(new_name: String):
 		var behavior := entity.get_component(ZC_Behavior) as ZC_Behavior
 		var old_state = current_state
 
@@ -91,7 +92,7 @@ func set_state(entity: Entity, new_name: String):
 		state_changed.emit(old_state, current_state)
 
 
-func tick(entity: Entity, delta: float):
+func tick(delta: float):
 	if not active:
 		return
 
@@ -113,7 +114,7 @@ func tick(entity: Entity, delta: float):
 					return
 
 			ZB_State.TickResult.CHECK:
-					_check_transitions(entity, delta, behavior)
+					_check_transitions(delta, behavior)
 
 			ZB_State.TickResult.FORCE_EXIT:
-					_check_transitions(entity, delta, behavior, true)
+					_check_transitions(delta, behavior, true)

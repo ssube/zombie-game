@@ -28,6 +28,7 @@ func on_ready() -> void:
 		self.add_relationship(RelationshipUtils.make_equipped(current_weapon))
 
 
+# TODO: should be part of the scene tree rather than scripted
 func _process(_delta: float) -> void:
 	if current_weapon and weapon_node:
 		current_weapon.global_transform = weapon_node.global_transform

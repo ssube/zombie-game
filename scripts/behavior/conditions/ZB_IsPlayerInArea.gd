@@ -32,7 +32,7 @@ func test(actor: Node, _delta: float, behavior: ZC_Behavior) -> bool:
 	if target_player == null:
 		return false
 
-	behavior.set_value("target_player", target_player)
+	behavior.set_value("target_player", target_player.id)
 	return true
 
 

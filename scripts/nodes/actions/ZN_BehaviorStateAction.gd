@@ -1,15 +1,30 @@
 extends ZN_BaseAction
 class_name ZN_BehaviorStateAction
 
-@export var entity: Entity
 @export var state_machine: ZB_StateMachine
-@export var switch_state: ZB_State
-@export var run_transition: ZB_Transition
 
-func run_node(_source: Node, _event: Enums.ActionEvent, _actor: Node) -> void:
-	if run_transition:
-		if run_transition.test(entity, 0.0, state_machine.blackboard):
-			state_machine.set_state(entity, run_transition.target_state.name)
+@export_group("Flags")
+@export var set_active: Enums.Tristate = Enums.Tristate.UNSET
+@export var try_transition: bool = true
 
-	if switch_state:
-		state_machine.current_state = switch_state
+
+func _get_entity(source: Node) -> Entity:
+	if source is Entity:
+		return source
+
+	return state_machine.entity
+
+
+func run_node(source: Node, _event: Enums.ActionEvent, _actor: Node) -> void:
+	match set_active:
+		Enums.Tristate.FALSE:
+			state_machine.active = false
+		Enums.Tristate.TRUE:
+			state_machine.active = true
+		Enums.Tristate.UNSET:
+			pass
+
+	if try_transition:
+		var entity := _get_entity(source)
+		var behavior := entity.get_component(ZC_Behavior) as ZC_Behavior
+		state_machine._check_transitions(0.0, behavior)
