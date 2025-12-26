@@ -3,7 +3,7 @@ class_name ZB_IsPlayerVisible
 
 @export var vision_cone: Area3D = null
 
-func test(actor: Node, _delta: float, blackboard: ZB_Blackboard) -> bool:
+func test(actor: Node, _delta: float, behavior: ZC_Behavior) -> bool:
 	if ECS.world == null:
 		return false
 
@@ -20,9 +20,7 @@ func test(actor: Node, _delta: float, blackboard: ZB_Blackboard) -> bool:
 		var body_root = body.get_node(".")
 		if body_root is Entity:
 			if EntityUtils.is_player(body_root):
-				blackboard.set_value("visible_player", body)
-				# blackboard.set_value("target_player", body)
-				# blackboard.set_value("target_position", body.global_position)
+				behavior.set_value("visible_player", body)
 				return true
 
 	return false

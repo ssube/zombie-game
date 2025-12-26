@@ -8,8 +8,8 @@ func _ready():
 				if c is ZB_Condition:
 						children.append(c)
 
-func test(entity: Entity, delta: float, blackboard: ZB_Blackboard) -> bool:
+func test(entity: Entity, delta: float, behavior: ZC_Behavior) -> bool:
 		for c in children:
-				if not c.test(entity, delta, blackboard):
+				if not c.test(entity, delta, behavior):
 						return false
 		return true

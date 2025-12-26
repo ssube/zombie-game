@@ -8,7 +8,7 @@ class_name ZB_State_Chase
 
 var navigation_path: PackedVector3Array = []
 
-func tick(entity: Entity, delta: float, _blackboard: ZB_Blackboard) -> TickResult:
+func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		var attention := entity.get_component(ZC_Attention) as ZC_Attention
 		if attention == null or not attention.has_target_position:
 				return TickResult.FORCE_EXIT

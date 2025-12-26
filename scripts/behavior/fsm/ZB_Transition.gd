@@ -18,9 +18,9 @@ func _ready():
 				if c is ZB_Condition:
 						conditions.append(c)
 
-func test(entity: Entity, delta: float, blackboard: ZB_Blackboard) -> bool:
+func test(entity: Entity, delta: float, behavior: ZC_Behavior) -> bool:
 		for c in conditions:
-				if not c.test(entity, delta, blackboard):
+				if not c.test(entity, delta, behavior):
 						return false
 
 		return true

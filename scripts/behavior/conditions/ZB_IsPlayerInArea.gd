@@ -12,7 +12,7 @@ func _ready() -> void:
 		printerr("Behavior node missing detection area: ", self)
 
 
-func test(actor: Node, _delta: float, blackboard: ZB_Blackboard) -> bool:
+func test(actor: Node, _delta: float, behavior: ZC_Behavior) -> bool:
 	if ECS.world == null:
 		return false
 
@@ -32,7 +32,7 @@ func test(actor: Node, _delta: float, blackboard: ZB_Blackboard) -> bool:
 	if target_player == null:
 		return false
 
-	blackboard.set_value("target_player", target_player)
+	behavior.set_value("target_player", target_player)
 	return true
 
 

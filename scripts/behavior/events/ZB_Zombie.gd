@@ -11,7 +11,6 @@ class_name ZB_ZombieEvents
 @export var detection_area: Area3D
 
 @export_group("States")
-@export var blackboard: ZB_Blackboard
 @export var state_machine: ZB_StateMachine
 @export var state_attack: ZB_State_Attack
 @export var state_chase: ZB_State_Chase
@@ -120,24 +119,27 @@ func _on_vision_area_body_hidden(body: Node) -> void:
 func _on_attack_area_body_entered(body: Node) -> void:
 	print("Zombie can attack body: ", body.name)
 	if EntityUtils.is_player(body):
-		blackboard.set_value(BehaviorUtils.target_player, body)
-		state_machine.set_state(state_attack.name)
+		var behavior := actor_entity.get_component(ZC_Behavior) as ZC_Behavior
+		behavior.set_value(BehaviorUtils.target_player, body)
+		state_machine.set_state(actor_entity, state_attack.name)
 
 func _on_attack_area_body_exited(body: Node) -> void:
 	print("Zombie can no longer attack body: ", body.name)
-	var target_player = blackboard.get_value(BehaviorUtils.target_player)
+	var behavior := actor_entity.get_component(ZC_Behavior) as ZC_Behavior
+	var target_player = behavior.get_value(BehaviorUtils.target_player)
 	if body == target_player:
 		# continue chasing
-		state_machine.set_state(state_chase.name)
+		state_machine.set_state(actor_entity, state_chase.name)
 
 func _on_detection_area_body_entered(body: Node) -> void:
 	print("Zombie detected body: ", body.name)
 	detected_bodies += 1
 	vision_area.monitoring = true
 
-	var target_player = blackboard.get_value(BehaviorUtils.target_player)
+	var behavior := actor_entity.get_component(ZC_Behavior) as ZC_Behavior
+	var target_player = behavior.get_value(BehaviorUtils.target_player)
 	if EntityUtils.is_player(body) and target_player == null:
-		blackboard.set_value(BehaviorUtils.target_position, body.global_position)
+		behavior.set_value(BehaviorUtils.target_position, body.global_position)
 
 func _on_detection_area_body_exited(_body: Node) -> void:
 	detected_bodies -= 1
@@ -145,7 +147,7 @@ func _on_detection_area_body_exited(_body: Node) -> void:
 
 	if detected_bodies == 0:
 		vision_area.monitoring = false
-		state_machine.set_state(state_wander.name)
+		state_machine.set_state(actor_entity, state_wander.name)
 
 func is_actor_active() -> bool:
 	if actor_entity and not entity_health:

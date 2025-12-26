@@ -5,7 +5,7 @@ class_name ZB_Condition_Throttle
 
 var timer = 0.0
 
-func test(_entity: Entity, delta: float, _blackboard: ZB_Blackboard) -> bool:
+func test(_entity: Entity, delta: float, _behavior: ZC_Behavior) -> bool:
 	timer += delta
 	if timer > interval:
 		timer = 0.0

@@ -14,7 +14,7 @@ func enter(entity: Entity):
 	var node_3d := entity.root_3d as Node3D
 	look_direction = NavigationUtils.pick_random_position(node_3d, look_radius)
 
-func tick(entity: Entity, delta: float, _blackboard: ZB_Blackboard) -> TickResult:
+func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 	# print("Zombie is idling.")
 	var entity3d := entity.get_node(".") as Node3D
 	var movement := entity.get_component(ZC_Movement) as ZC_Movement

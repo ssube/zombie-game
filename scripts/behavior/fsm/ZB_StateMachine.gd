@@ -12,19 +12,13 @@ var current_state: ZB_State
 
 @export var active: bool = true
 @export var debug: bool = false
-@export var blackboard: ZB_Blackboard = null
 @export var default_state: ZB_State = null
-@export var entity: ZE_Base = null
+
 
 func _ready():
 		_cache_states()
 		_cache_transitions()
 		_build_transition_table()
-
-		if states.has(default_state.name):
-				set_state(default_state.name)
-		else:
-				push_error("Default zombie state not found: %s" % default_state.name)
 
 
 func _cache_states():
@@ -57,7 +51,7 @@ func _build_transition_table():
 				transitions_by_source[src].append(t)
 
 
-func _check_transitions(delta: float, force_exit: bool = false) -> void:
+func _check_transitions(entity: Entity, delta: float, behavior: ZC_Behavior, force_exit: bool = false) -> void:
 		if current_state == null:
 				return
 
@@ -70,9 +64,9 @@ func _check_transitions(delta: float, force_exit: bool = false) -> void:
 				list.append_array(global_transitions)
 
 		for t in list:
-				if t.test(entity, delta, blackboard):
+				if t.test(entity, delta, behavior):
 						if t.target_state:
-								set_state(t.target_state.name)
+								set_state(entity, t.target_state.name)
 								return
 
 		if force_exit:
@@ -80,10 +74,11 @@ func _check_transitions(delta: float, force_exit: bool = false) -> void:
 					if default_state.name == current_state.name:
 						printerr("State tried to force exit, but it is the default state")
 					else:
-						set_state(default_state.name)
+						set_state(entity, default_state.name)
 
 
-func set_state(new_name: String):
+func set_state(entity: Entity, new_name: String):
+		var behavior := entity.get_component(ZC_Behavior) as ZC_Behavior
 		var old_state = current_state
 
 		if current_state:
@@ -92,17 +87,22 @@ func set_state(new_name: String):
 		current_state = states[new_name]
 		current_state.enter(entity)
 
+		behavior.current_state = new_name
 		state_changed.emit(old_state, current_state)
 
 
-func _process(delta):
+func tick(entity: Entity, delta: float):
 	if not active:
 		return
+
+	if current_state == null:
+		current_state = default_state
 
 	if not current_state:
 			return
 
-	var result := current_state.tick(entity, delta, blackboard)
+	var behavior := entity.get_component(ZC_Behavior) as ZC_Behavior
+	var result := current_state.tick(entity, delta, behavior)
 
 	if debug:
 		var result_name: String = ZB_State.TickResult.keys()[result]
@@ -113,7 +113,7 @@ func _process(delta):
 					return
 
 			ZB_State.TickResult.CHECK:
-					_check_transitions(delta)
+					_check_transitions(entity, delta, behavior)
 
 			ZB_State.TickResult.FORCE_EXIT:
-					_check_transitions(delta, true)
+					_check_transitions(entity, delta, behavior, true)

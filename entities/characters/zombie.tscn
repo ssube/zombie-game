@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://ds0q1crcrv862"]
+[gd_scene load_steps=54 format=3 uid="uid://ds0q1crcrv862"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_rffgv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_2yl8o"]
@@ -20,7 +20,6 @@
 [ext_resource type="Script" uid="uid://di74g8tmachs3" path="res://scripts/behavior/fsm/ZB_StateMachine.gd" id="15_u1ccf"]
 [ext_resource type="Script" uid="uid://cwxhmhhcchnk5" path="res://scripts/behavior/events/ZB_Zombie.gd" id="16_3lyvt"]
 [ext_resource type="Script" uid="uid://b7x5tu22015cx" path="res://scripts/components/characters/ZC_Faction.gd" id="16_kwfyu"]
-[ext_resource type="Script" uid="uid://420evxa6jy8r" path="res://scripts/behavior/fsm/ZB_Blackboard.gd" id="16_u1ccf"]
 [ext_resource type="Script" uid="uid://gy1d5pnk4rwg" path="res://scripts/components/characters/ZC_Attention.gd" id="17_euqm3"]
 [ext_resource type="Script" uid="uid://df075dj3mhif5" path="res://scripts/behavior/states/ZB_Attack.gd" id="17_qjub6"]
 [ext_resource type="Script" uid="uid://b0rh6txy38f6h" path="res://scripts/components/characters/ZC_Perception.gd" id="17_ull4n"]
@@ -29,6 +28,7 @@
 [ext_resource type="Script" uid="uid://spbk6hwrc5ow" path="res://scripts/behavior/states/ZB_Wander.gd" id="18_hann2"]
 [ext_resource type="Script" uid="uid://cyplr8cytq8s7" path="res://scripts/behavior/states/ZB_Chase.gd" id="18_wtse8"]
 [ext_resource type="Script" uid="uid://4mkf4oytommo" path="res://scripts/behavior/states/ZB_Idle.gd" id="19_3lyvt"]
+[ext_resource type="Script" uid="uid://db2qobebs40ku" path="res://scripts/components/characters/ZC_Behavior.gd" id="20_4i4kv"]
 [ext_resource type="Script" uid="uid://bp8kk4kmch5fg" path="res://scripts/behavior/conditions/ZB_IsPlayerInArea.gd" id="22_qpdga"]
 [ext_resource type="Script" uid="uid://dyb15yih6xr3a" path="res://scripts/behavior/conditions/ZB_IsPlayerVisible.gd" id="23_j7lgi"]
 [ext_resource type="Script" uid="uid://ccjqwf2jo717o" path="res://scripts/behavior/conditions/utils/ZB_Random.gd" id="24_3lyvt"]
@@ -104,6 +104,11 @@ metadata/_custom_type_script = "uid://b8oatb3tdywrh"
 script = ExtResource("5_tseq0")
 metadata/_custom_type_script = "uid://cixmecjncarw5"
 
+[sub_resource type="Resource" id="Resource_u6a8x"]
+script = ExtResource("20_4i4kv")
+state_machine = NodePath("Behavior/ZombieBehavior")
+metadata/_custom_type_script = "uid://db2qobebs40ku"
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwqt7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uqboj"]
@@ -124,7 +129,7 @@ events = NodePath("Behavior/ZombieBehavior/Events")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("WeaponMarker")
-component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_0ios3"), SubResource("Resource_4i4kv"), SubResource("Resource_8aduj"), SubResource("Resource_ull4n"), SubResource("Resource_euqm3"), SubResource("Resource_jpnnd"), SubResource("Resource_sn1gh"), SubResource("Resource_4bumh"), SubResource("Resource_kwfyu"), SubResource("Resource_mn8kb"), SubResource("Resource_wwun5"), SubResource("Resource_7tmu0")])
+component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_0ios3"), SubResource("Resource_4i4kv"), SubResource("Resource_8aduj"), SubResource("Resource_ull4n"), SubResource("Resource_euqm3"), SubResource("Resource_jpnnd"), SubResource("Resource_sn1gh"), SubResource("Resource_4bumh"), SubResource("Resource_kwfyu"), SubResource("Resource_mn8kb"), SubResource("Resource_wwun5"), SubResource("Resource_7tmu0"), SubResource("Resource_u6a8x")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 material = ExtResource("8_tfdn2")
@@ -174,14 +179,10 @@ debug_color = Color(0.7, 0, 0, 0.41960785)
 
 [node name="ZombieBehavior" type="Node" parent="Behavior" node_paths=PackedStringArray("blackboard", "default_state", "entity")]
 script = ExtResource("15_u1ccf")
-blackboard = NodePath("Blackboard")
+blackboard = NodePath("")
 default_state = NodePath("States/ZB_State_Wander")
 entity = NodePath("../..")
 metadata/_custom_type_script = "uid://di74g8tmachs3"
-
-[node name="Blackboard" type="Node" parent="Behavior/ZombieBehavior"]
-script = ExtResource("16_u1ccf")
-metadata/_custom_type_script = "uid://420evxa6jy8r"
 
 [node name="Events" type="Node" parent="Behavior/ZombieBehavior" node_paths=PackedStringArray("actor_node", "vision_area", "attack_area", "detection_area", "blackboard", "state_machine", "state_attack", "state_chase", "state_wander")]
 script = ExtResource("16_3lyvt")
@@ -189,7 +190,7 @@ actor_node = NodePath("../../..")
 vision_area = NodePath("../../VisionCone3D")
 attack_area = NodePath("../../AttackArea3D")
 detection_area = NodePath("../../DetectionArea3D")
-blackboard = NodePath("../Blackboard")
+blackboard = NodePath("")
 state_machine = NodePath("..")
 state_attack = NodePath("../States/ZB_State_Attack")
 state_chase = NodePath("../States/ZB_State_Chase")

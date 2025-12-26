@@ -3,7 +3,7 @@ class_name ZB_State_Attack
 
 var attack_timer: float = 0.0
 
-func tick(entity: Entity, delta: float, _blackboard: ZB_Blackboard) -> TickResult:
+func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		var attention := entity.get_component(ZC_Attention) as ZC_Attention
 		if attention == null or not attention.has_target_entity:
 				return TickResult.FORCE_EXIT

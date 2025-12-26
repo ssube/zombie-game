@@ -11,5 +11,5 @@ func enter(_entity: Entity): pass
 func exit(_entity: Entity): pass
 
 ## Called every frame while the state is active
-func tick(_entity: Entity, _delta: float, _blackboard: ZB_Blackboard) -> int:
+func tick(_entity: Entity, _delta: float, _behavior: ZC_Behavior) -> int:
 	return TickResult.CHECK # CONTINUE

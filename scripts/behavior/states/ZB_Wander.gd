@@ -11,7 +11,7 @@ var navigation_timer: float = 0.0
 var target_position: Vector3 = Vector3.ZERO
 @onready var wander_timer: float = wander_interval
 
-func tick(entity: Entity, delta: float, _blackboard: ZB_Blackboard) -> TickResult:
+func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 	if target_position == Vector3.ZERO:
 		update_wander_target(entity)
 
