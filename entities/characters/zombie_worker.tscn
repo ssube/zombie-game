@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dc22w3kstrlyu"]
+[gd_scene load_steps=54 format=3 uid="uid://dc22w3kstrlyu"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_enhv7"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_g3ik4"]
@@ -21,7 +21,6 @@
 [ext_resource type="Script" uid="uid://db2qobebs40ku" path="res://scripts/components/characters/ZC_Behavior.gd" id="19_ufuyc"]
 [ext_resource type="PackedScene" uid="uid://bf8cjjumln7y5" path="res://behavior/zombie_aggressive.tscn" id="20_3i4p6"]
 [ext_resource type="Script" uid="uid://cv6nlv1qus3o3" path="res://scripts/nodes/triggers/ZN_TriggerVisionCone3D.gd" id="21_23j0l"]
-[ext_resource type="Script" uid="uid://bc32kei4pauw1" path="res://addons/tattomoosa.vision_cone_3d/src/ConeShape3D.gd" id="22_ljrwo"]
 [ext_resource type="Script" uid="uid://cwxhmhhcchnk5" path="res://scripts/behavior/misc/ZB_ZombieVision.gd" id="23_ljrwo"]
 [ext_resource type="Script" uid="uid://d1xf73mn6pulk" path="res://scripts/nodes/actions/ZN_BehaviorStateAction.gd" id="26_b2lq4"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="26_sl7ba"]
@@ -120,13 +119,6 @@ points = PackedVector3Array(0, 0, -0.6, -0.3, 0, -0.51965547, 0, 0.3, -0.5196554
 [sub_resource type="SphereShape3D" id="SphereShape3D_uqboj"]
 radius = 0.25
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v2128"]
-points = PackedVector3Array(5, -7.5, 0, 3.535534, -7.5, 3.535534, 3.061617e-16, -7.5, 5, -3.535534, -7.5, 3.535534, -5, -7.5, 6.123234e-16, -3.535534, -7.5, -3.535534, -9.18485e-16, -7.5, -5, 3.535534, -7.5, -3.535534, 0, 7.5, 0)
-script = ExtResource("22_ljrwo")
-height = 15.0
-radius = 5.0
-metadata/_custom_type_script = "uid://bc32kei4pauw1"
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_vww2o"]
 radius = 15.0
 
@@ -205,20 +197,16 @@ detection_area = NodePath("../../../../AttackArea3D")
 [node name="ZB_IsPlayerVisible" parent="Node3D/Behavior/Transitions/Any_Chase" index="0" node_paths=PackedStringArray("vision_cone")]
 vision_cone = NodePath("../../../../VisionCone3D")
 
-[node name="VisionCone3D" type="Area3D" parent="Node3D" node_paths=PackedStringArray("parent_entity", "vision_test_ignore_bodies")]
+[node name="VisionCone3D" type="Area3D" parent="Node3D" node_paths=PackedStringArray("vision_test_ignore_bodies")]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 16
 collision_mask = 27
 script = ExtResource("21_23j0l")
-parent_entity = NodePath("../..")
+use_body_entity = null
 vision_test_mode = 0
 vision_test_ignore_bodies = [NodePath("../..")]
 collision_layer_ = 16
 collision_mask_ = 27
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/VisionCone3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.5, 0)
-shape = SubResource("ConvexPolygonShape3D_v2128")
 
 [node name="ZB_ZombieVision" type="Node" parent="Node3D/VisionCone3D" node_paths=PackedStringArray("vision_area", "entity")]
 script = ExtResource("23_ljrwo")
