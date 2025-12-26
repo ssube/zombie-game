@@ -171,13 +171,14 @@ detection_area = NodePath("../../../../AttackArea3D")
 [node name="ZB_IsPlayerVisible" parent="Node3D/Behavior/Transitions/Any_Chase" index="0" node_paths=PackedStringArray("vision_cone")]
 vision_cone = NodePath("../../../../VisionCone3D")
 
-[node name="VisionCone3D" type="Area3D" parent="Node3D" node_paths=PackedStringArray("parent_entity")]
+[node name="VisionCone3D" type="Area3D" parent="Node3D" node_paths=PackedStringArray("parent_entity", "vision_test_ignore_bodies")]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 16
 collision_mask = 27
 script = ExtResource("22_ull4n")
 parent_entity = NodePath("../..")
 vision_test_mode = 0
+vision_test_ignore_bodies = [NodePath("../..")]
 collision_layer_ = 16
 collision_mask_ = 27
 
@@ -234,9 +235,11 @@ area = NodePath("../../../VisionCone3D")
 active = 0
 metadata/_custom_type_script = "uid://b7fl0650sjefs"
 
-[node name="ZN_BehaviorStateAction" type="Node" parent="Node3D/DetectionArea3D/EmptyBranch" node_paths=PackedStringArray("state_machine")]
+[node name="ZN_BehaviorStateAction" type="Node" parent="Node3D/DetectionArea3D/EmptyBranch" node_paths=PackedStringArray("state_machine", "set_state")]
 script = ExtResource("27_u6a8x")
 state_machine = NodePath("../../../Behavior")
+set_state = NodePath("../../../Behavior/States/ZB_Throttle_Wander")
+try_transition = false
 metadata/_custom_type_script = "uid://d1xf73mn6pulk"
 
 [node name="AttackArea3D" type="Area3D" parent="Node3D" node_paths=PackedStringArray("parent_entity")]
@@ -267,9 +270,11 @@ script = ExtResource("31_getlk")
 set_key = &"target_player"
 metadata/_custom_type_script = "uid://dejf0mustesyw"
 
-[node name="ZN_BehaviorStateAction" type="Node" parent="Node3D/AttackArea3D/EnterBranch" node_paths=PackedStringArray("state_machine")]
+[node name="ZN_BehaviorStateAction" type="Node" parent="Node3D/AttackArea3D/EnterBranch" node_paths=PackedStringArray("state_machine", "set_state")]
 script = ExtResource("27_u6a8x")
 state_machine = NodePath("../../../Behavior")
+set_state = NodePath("../../../Behavior/States/ZB_State_Attack")
+try_transition = false
 metadata/_custom_type_script = "uid://d1xf73mn6pulk"
 
 [node name="EmptyBranch" type="Node" parent="Node3D/AttackArea3D"]
@@ -281,9 +286,11 @@ script = ExtResource("29_lpvjo")
 allow_events = Array[int]([1])
 metadata/_custom_type_script = "uid://daa5v82rpm7ih"
 
-[node name="ZN_BehaviorStateAction" type="Node" parent="Node3D/AttackArea3D/EmptyBranch" node_paths=PackedStringArray("state_machine")]
+[node name="ZN_BehaviorStateAction" type="Node" parent="Node3D/AttackArea3D/EmptyBranch" node_paths=PackedStringArray("state_machine", "set_state")]
 script = ExtResource("27_u6a8x")
 state_machine = NodePath("../../../Behavior")
+set_state = NodePath("../../../Behavior/States/ZB_State_Chase")
+try_transition = false
 metadata/_custom_type_script = "uid://d1xf73mn6pulk"
 
 [node name="Effects" type="Node3D" parent="."]

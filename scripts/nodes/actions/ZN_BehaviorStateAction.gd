@@ -5,6 +5,7 @@ class_name ZN_BehaviorStateAction
 
 @export_group("Flags")
 @export var set_active: Enums.Tristate = Enums.Tristate.UNSET
+@export var set_state: ZB_State = null
 @export var try_transition: bool = true
 
 
@@ -24,7 +25,10 @@ func run_node(source: Node, _event: Enums.ActionEvent, _actor: Node) -> void:
 		Enums.Tristate.UNSET:
 			pass
 
-	if try_transition:
+	# set_state and try_transition are mutually exclusive options
+	if set_state:
+		state_machine.set_state(set_state.name)
+	elif try_transition:
 		var entity := _get_entity(source)
 		var behavior := entity.get_component(ZC_Behavior) as ZC_Behavior
 		state_machine._check_transitions(0.0, behavior)

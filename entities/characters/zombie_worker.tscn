@@ -205,13 +205,14 @@ detection_area = NodePath("../../../../AttackArea3D")
 [node name="ZB_IsPlayerVisible" parent="Node3D/Behavior/Transitions/Any_Chase" index="0" node_paths=PackedStringArray("vision_cone")]
 vision_cone = NodePath("../../../../VisionCone3D")
 
-[node name="VisionCone3D" type="Area3D" parent="Node3D" node_paths=PackedStringArray("parent_entity")]
+[node name="VisionCone3D" type="Area3D" parent="Node3D" node_paths=PackedStringArray("parent_entity", "vision_test_ignore_bodies")]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 16
 collision_mask = 27
 script = ExtResource("21_23j0l")
 parent_entity = NodePath("../..")
 vision_test_mode = 0
+vision_test_ignore_bodies = [NodePath("../..")]
 collision_layer_ = 16
 collision_mask_ = 27
 
@@ -350,23 +351,27 @@ metadata/_custom_type_script = "uid://dbj456ofx8mw1"
 script = ExtResource("35_b2lq4")
 metadata/_custom_type_script = "uid://djqo74flocpe0"
 
-[node name="ZN_AreaAction" type="Node" parent="DeathBranch"]
+[node name="ZN_AreaAction" type="Node" parent="DeathBranch" node_paths=PackedStringArray("area")]
 script = ExtResource("29_ojwvh")
+area = NodePath("../../Node3D/VisionCone3D")
 active = 0
 metadata/_custom_type_script = "uid://b7fl0650sjefs"
 
-[node name="ZN_AreaAction2" type="Node" parent="DeathBranch"]
+[node name="ZN_AreaAction2" type="Node" parent="DeathBranch" node_paths=PackedStringArray("area")]
 script = ExtResource("29_ojwvh")
+area = NodePath("../../Node3D/DetectionArea3D")
 active = 0
 metadata/_custom_type_script = "uid://b7fl0650sjefs"
 
-[node name="ZN_AreaAction3" type="Node" parent="DeathBranch"]
+[node name="ZN_AreaAction3" type="Node" parent="DeathBranch" node_paths=PackedStringArray("area")]
 script = ExtResource("29_ojwvh")
+area = NodePath("../../Node3D/AttackArea3D")
 active = 0
 metadata/_custom_type_script = "uid://b7fl0650sjefs"
 
-[node name="ZN_BehaviorStateAction" type="Node" parent="DeathBranch"]
+[node name="ZN_BehaviorStateAction" type="Node" parent="DeathBranch" node_paths=PackedStringArray("state_machine")]
 script = ExtResource("26_b2lq4")
+state_machine = NodePath("../../Node3D/Behavior")
 set_active = 0
 try_transition = false
 metadata/_custom_type_script = "uid://d1xf73mn6pulk"
