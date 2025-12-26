@@ -104,7 +104,6 @@ sides = 6
 script = ExtResource("10_p37y2")
 character = NodePath("..")
 head = NodePath("../Head")
-mouse_sensitivity = 75
 max_pitch = 80.0
 min_pitch = -80.0
 
