@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=4 uid="uid://v18fidmgep15"]
+[gd_scene load_steps=117 format=4 uid="uid://v18fidmgep15"]
 
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_b7jq5"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="2_7khm6"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="16_fbayg"]
 [ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="17_tr8cq"]
 [ext_resource type="Material" uid="uid://g5xoeqn2qoy6" path="res://textures/Color Maps/metal_panels_pt_2.tres" id="17_y6j6u"]
+[ext_resource type="PackedScene" uid="uid://b6k3o4n33nlld" path="res://entities/props/dumpster.tscn" id="21_tu73e"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_dm6vb"]
 _surfaces = [{
@@ -770,3 +771,6 @@ stream = ExtResource("16_fbayg")
 volume_db = -3.0
 pitch_scale = 0.6
 script = ExtResource("17_tr8cq")
+
+[node name="Node3D" parent="." instance=ExtResource("21_tu73e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.697096, 0.25062275, 34.145134)

@@ -1,0 +1,43 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkkaq33vt04ge"]
+
+[ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_tnbbk"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_yvdg1"]
+[ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="3_le8od"]
+[ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/weapons/ZC_Weapon_Ranged.gd" id="4_hf08k"]
+[ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="5_i8qfw"]
+
+[sub_resource type="Resource" id="Resource_4s6ep"]
+script = ExtResource("4_hf08k")
+ammo_type = "flare"
+metadata/_custom_type_script = "uid://dwsqxsqwtloma"
+
+[sub_resource type="Resource" id="Resource_24ymc"]
+script = ExtResource("5_i8qfw")
+ammo_count = Dictionary[String, int]({
+"flare": 1
+})
+max_ammo_count = Dictionary[String, int]({
+"flare": 1
+})
+metadata/_custom_type_script = "uid://bsnlq5t650od"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1chp"]
+albedo_color = Color(0.68, 0.0816, 0.0816, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1chp"]
+radius = 0.1
+height = 0.66
+
+[node name="Flare" type="RigidBody3D"]
+script = ExtResource("1_tnbbk")
+component_resources = Array[ExtResource("2_yvdg1")]([SubResource("Resource_4s6ep"), SubResource("Resource_24ymc")])
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+radius = 0.1
+height = 0.5
+material = SubResource("StandardMaterial3D_r1chp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_r1chp")

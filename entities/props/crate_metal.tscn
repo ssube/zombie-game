@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://co2strl7y2n7h"]
+
+[ext_resource type="Material" uid="uid://b230jrvugibiu" path="res://textures/Color Maps/metal_floor_tx_1.tres" id="1_yxx8b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l5l63"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="CrateWood" type="StaticBody3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(1.5, 1.5, 1.5)
+material = ExtResource("1_yxx8b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_l5l63")

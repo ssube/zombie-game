@@ -1,0 +1,35 @@
+[gd_scene load_steps=10 format=3 uid="uid://c4gewr3tx3am5"]
+
+[ext_resource type="Material" uid="uid://vq88t5vuqjfq" path="res://textures/Color Maps/wood_pt_4.tres" id="1_li86w"]
+[ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_ptp1i"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_584vn"]
+[ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="3_fu6af"]
+[ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="4_nh0o1"]
+[ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="6_ccmkv"]
+
+[sub_resource type="Resource" id="Resource_drja3"]
+script = ExtResource("3_fu6af")
+effect_path = NodePath("FireEffect")
+metadata/_custom_type_script = "uid://jokkv7skgimj"
+
+[sub_resource type="Resource" id="Resource_op0x7"]
+script = ExtResource("4_nh0o1")
+metadata/_custom_type_script = "uid://0ndifcnh0nsp"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l5l63"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="CrateWood" type="StaticBody3D"]
+script = ExtResource("1_ptp1i")
+component_resources = Array[ExtResource("2_584vn")]([SubResource("Resource_drja3"), SubResource("Resource_op0x7")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(1.5, 1.5, 1.5)
+material = ExtResource("1_li86w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_l5l63")
+
+[node name="FireEffect" parent="." instance=ExtResource("6_ccmkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2037421, 0)
+visible = false
