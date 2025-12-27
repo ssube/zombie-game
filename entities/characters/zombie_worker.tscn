@@ -130,7 +130,7 @@ collision_layer = 16
 collision_mask = 31
 mass = 20.0
 script = ExtResource("1_enhv7")
-physics = NodePath("ZB_ZombiePhysics")
+physics = NodePath("Node3D/ZB_ZombiePhysics")
 vision = NodePath("Node3D/VisionCone3D/ZB_ZombieVision")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
@@ -309,6 +309,12 @@ script = ExtResource("26_b2lq4")
 state_machine = NodePath("../../../Behavior")
 metadata/_custom_type_script = "uid://d1xf73mn6pulk"
 
+[node name="ZB_ZombiePhysics" type="Node" parent="Node3D" node_paths=PackedStringArray("entity_body", "entity")]
+script = ExtResource("32_ufuyc")
+entity_body = NodePath("../..")
+entity = NodePath("../..")
+metadata/_custom_type_script = "uid://62vhg4wr8feb"
+
 [node name="Effects" type="Node3D" parent="."]
 
 [node name="FireEffect" parent="Effects" instance=ExtResource("26_sl7ba")]
@@ -324,12 +330,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="WeaponMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4162073, -0.583356)
-
-[node name="ZB_ZombiePhysics" type="Node" parent="." node_paths=PackedStringArray("entity_body", "entity")]
-script = ExtResource("32_ufuyc")
-entity_body = NodePath("..")
-entity = NodePath("..")
-metadata/_custom_type_script = "uid://62vhg4wr8feb"
 
 [node name="DeathBranch" type="Node" parent="."]
 script = ExtResource("34_x8nhq")

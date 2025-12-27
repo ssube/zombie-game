@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bf8cjjumln7y5"]
+[gd_scene load_steps=11 format=3 uid="uid://bf8cjjumln7y5"]
 
 [ext_resource type="Script" uid="uid://di74g8tmachs3" path="res://scripts/behavior/fsm/ZB_StateMachine.gd" id="8_kw5dq"]
 [ext_resource type="Script" uid="uid://df075dj3mhif5" path="res://scripts/behavior/states/ZB_Attack.gd" id="10_t3yky"]
 [ext_resource type="Script" uid="uid://cyplr8cytq8s7" path="res://scripts/behavior/states/ZB_Chase.gd" id="11_4bq8y"]
-[ext_resource type="Script" uid="uid://t8sjqdgd8fgf" path="res://scripts/behavior/states/utils/ZB_Throttle.gd" id="12_86ygq"]
 [ext_resource type="Script" uid="uid://4mkf4oytommo" path="res://scripts/behavior/states/ZB_Idle.gd" id="13_4qama"]
 [ext_resource type="Script" uid="uid://spbk6hwrc5ow" path="res://scripts/behavior/states/ZB_Wander.gd" id="14_2byos"]
 [ext_resource type="Script" uid="uid://c6pla5ya01llv" path="res://scripts/behavior/fsm/ZB_Transition.gd" id="15_bmse4"]
@@ -14,7 +13,7 @@
 
 [node name="AggressiveZombieBehavior" type="Node" node_paths=PackedStringArray("default_state")]
 script = ExtResource("8_kw5dq")
-default_state = NodePath("States/ZB_Throttle_Wander/ZB_State_Wander")
+default_state = NodePath("States/ZB_State_Wander")
 metadata/_custom_type_script = "uid://di74g8tmachs3"
 
 [node name="States" type="Node" parent="."]
@@ -27,19 +26,11 @@ metadata/_custom_type_script = "uid://df075dj3mhif5"
 script = ExtResource("11_4bq8y")
 metadata/_custom_type_script = "uid://cyplr8cytq8s7"
 
-[node name="ZB_Throttle_Idle" type="Node" parent="States"]
-script = ExtResource("12_86ygq")
-metadata/_custom_type_script = "uid://t8sjqdgd8fgf"
-
-[node name="ZB_State_Idle" type="Node" parent="States/ZB_Throttle_Idle"]
+[node name="ZB_State_Idle" type="Node" parent="States"]
 script = ExtResource("13_4qama")
 metadata/_custom_type_script = "uid://4mkf4oytommo"
 
-[node name="ZB_Throttle_Wander" type="Node" parent="States"]
-script = ExtResource("12_86ygq")
-metadata/_custom_type_script = "uid://t8sjqdgd8fgf"
-
-[node name="ZB_State_Wander" type="Node" parent="States/ZB_Throttle_Wander"]
+[node name="ZB_State_Wander" type="Node" parent="States"]
 script = ExtResource("14_2byos")
 metadata/_custom_type_script = "uid://spbk6hwrc5ow"
 
@@ -67,8 +58,8 @@ metadata/_custom_type_script = "uid://dyb15yih6xr3a"
 
 [node name="Idle_Wander" type="Node" parent="Transitions" node_paths=PackedStringArray("source_state", "target_state")]
 script = ExtResource("15_bmse4")
-source_state = NodePath("../../States/ZB_Throttle_Idle/ZB_State_Idle")
-target_state = NodePath("../../States/ZB_Throttle_Wander/ZB_State_Wander")
+source_state = NodePath("../../States/ZB_State_Idle")
+target_state = NodePath("../../States/ZB_State_Wander")
 metadata/_custom_type_script = "uid://c6pla5ya01llv"
 
 [node name="ZB_Condition_Throttle" type="Node" parent="Transitions/Idle_Wander"]
@@ -81,8 +72,8 @@ metadata/_custom_type_script = "uid://ccjqwf2jo717o"
 
 [node name="Wander_Idle" type="Node" parent="Transitions" node_paths=PackedStringArray("source_state", "target_state")]
 script = ExtResource("15_bmse4")
-source_state = NodePath("../../States/ZB_Throttle_Wander/ZB_State_Wander")
-target_state = NodePath("../../States/ZB_Throttle_Idle/ZB_State_Idle")
+source_state = NodePath("../../States/ZB_State_Wander")
+target_state = NodePath("../../States/ZB_State_Idle")
 metadata/_custom_type_script = "uid://c6pla5ya01llv"
 
 [node name="ZB_Condition_Throttle" type="Node" parent="Transitions/Wander_Idle"]
@@ -96,5 +87,5 @@ metadata/_custom_type_script = "uid://ccjqwf2jo717o"
 [node name="Any_Idle" type="Node" parent="Transitions" node_paths=PackedStringArray("target_state")]
 script = ExtResource("15_bmse4")
 any_source = true
-target_state = NodePath("../../States/ZB_Throttle_Idle")
+target_state = NodePath("../../States/ZB_State_Idle")
 metadata/_custom_type_script = "uid://c6pla5ya01llv"
