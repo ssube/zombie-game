@@ -1,8 +1,10 @@
 extends Observer
 class_name ZO_WeatherObserver
 
+# TODO: attach fog and rain particles to each player
+
 # TODO: build a cache map of other groups (all except X)
-var other_groups: Dictionary[String, Array] = {
+const _hidden_groups: Dictionary[String, Array] = {
 	"time_custom": ["time_dawn", "time_day", "time_dusk", "time_night"],
 	"time_dawn": ["time_custom", "time_day", "time_dusk", "time_night"],
 	"time_day": ["time_custom", "time_dawn", "time_dusk", "time_night"],
@@ -45,9 +47,9 @@ func _time_of_day_changed(_entity: Entity, component: ZC_Weather, new_value: Var
 	for node in group_nodes:
 		_toggle_node(node, true)
 
-	var other_group_names := other_groups[time_group]
-	for other_name in other_group_names:
-		group_nodes = get_tree().get_nodes_in_group(other_name)
+	var hidden_group_names := _hidden_groups[time_group]
+	for hidden_name in hidden_group_names:
+		group_nodes = get_tree().get_nodes_in_group(hidden_name)
 		for node in group_nodes:
 			_toggle_node(node, false)
 
@@ -63,7 +65,7 @@ func _weather_type_changed(_entity: Entity, component: ZC_Weather, new_value: Va
 	for node in group_nodes:
 		_toggle_node(node, true)
 
-	var other_group_names := other_groups[weather_group]
+	var other_group_names := _hidden_groups[weather_group]
 	for other_name in other_group_names:
 		group_nodes = get_tree().get_nodes_in_group(other_name)
 		for node in group_nodes:

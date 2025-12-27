@@ -1,6 +1,16 @@
 extends Observer
 class_name ZO_SkinObserver
 
+
+const _hidden_groups: Dictionary[String, Array] = {
+	"skin_dead": ["skin_healthy", "skin_hurt"],
+	"skin_healthy": ["skin_dead", "skin_hurt"],
+	"skin_hurt": ["skin_dead", "skin_healthy"],
+	"skin_disabled": ["skin_enabled"],
+	"skin_enabled": ["skin_disabled"],
+}
+
+
 func watch() -> Resource:
 	return ZC_Skin
 
@@ -20,29 +30,25 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 		var skin_material: BaseMaterial3D
 		match new_value:
 			ZC_Skin.SkinType.DEAD:
-				hide_groups = ["skin_healthy", "skin_hurt"]
 				skin_group = "skin_dead"
 				skin_material = skin.material_dead
 			ZC_Skin.SkinType.HEALTHY:
-				hide_groups = ["skin_dead", "skin_hurt"]
 				skin_group = "skin_healthy"
 				skin_material = skin.material_healthy
 			ZC_Skin.SkinType.HURT:
-				hide_groups = ["skin_dead", "skin_healthy"]
 				skin_group = "skin_hurt"
 				skin_material = skin.material_hurt
 			ZC_Skin.SkinType.DISABLED:
-				hide_groups = ["skin_enabled"]
 				skin_group = "skin_disabled"
 				skin_material = skin.material_disabled
 			ZC_Skin.SkinType.ENABLED:
-				hide_groups = ["skin_disabled"]
 				skin_group = "skin_enabled"
 				skin_material = skin.material_enabled
 
-		# assert(skin_material != null, "Skin material is missing!")
+		hide_groups = _hidden_groups[skin_group]
 		if skin_material:
 			update_skin_material.call_deferred(entity, skin, skin_material)
+
 		show_skin_group.call_deferred(entity, skin_group, hide_groups)
 
 
