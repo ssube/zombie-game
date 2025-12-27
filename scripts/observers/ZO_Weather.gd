@@ -59,7 +59,7 @@ func _weather_type_changed(_entity: Entity, component: ZC_Weather, new_value: Va
 	var weather_name := ZC_Weather.WeatherType.keys()[new_value] as String
 	var weather_group := "weather_%s" % weather_name.to_lower()
 	var group_nodes := get_tree().get_nodes_in_group(weather_group)
-	print("Weather group %s has %d nodes" % [weather_name, group_nodes.size()])
+	print("Weather group %s has %d nodes" % [weather_group, group_nodes.size()])
 	for node in group_nodes:
 		_toggle_node(node, true)
 
@@ -100,7 +100,9 @@ func _set_level_environment(component: ZC_Weather) -> void:
 		environment = _find_best_environment(self.environment_scenes, component)
 
 	if environment == null:
-		printerr("No matching environment for conditions %d and %d" % [component.time_of_day, component.weather_type])
+		var time_name := ZC_Weather.TimeOfDay.keys()[component.time_of_day] as String
+		var weather_name := ZC_Weather.WeatherType.keys()[component.weather_type] as String
+		printerr("No matching environment for conditions %s and %s" % [time_name, weather_name])
 		return
 
 	var level_environment := level.get_node(level.environment_node)
