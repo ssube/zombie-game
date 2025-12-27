@@ -1,7 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://445cu24k4j5g"]
+[gd_scene load_steps=5 format=3 uid="uid://445cu24k4j5g"]
 
 [ext_resource type="Script" uid="uid://c7mwmktio4xx7" path="res://scripts/menus/loading_menu.gd" id="1_gn3ar"]
 [ext_resource type="Texture2D" uid="uid://xvvykos6jpvb" path="res://textures/level_placeholder.tres" id="2_4e30e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4e30e"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gn3ar"]
 
@@ -12,9 +23,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gn3ar")
-hint_label = NodePath("Letterbox/LoadingMenu/MarginContainer/VFlowContainer/HintLabel")
+hint_label = NodePath("Letterbox/LoadingMenu/CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HintLabel")
 level_image_rect = NodePath("Letterbox/TextureRect")
-level_label = NodePath("Letterbox/LoadingMenu/MarginContainer/VFlowContainer/LoadingLabel")
+level_label = NodePath("Letterbox/LoadingMenu/CenterContainer/PanelContainer/MarginContainer/VFlowContainer/LoadingLabel")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2
@@ -37,27 +48,40 @@ stretch_mode = 6
 process_mode = 2
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Letterbox/LoadingMenu"]
+[node name="CenterContainer" type="CenterContainer" parent="Letterbox/LoadingMenu"]
 layout_mode = 2
-theme_override_constants/margin_top = 64
-theme_override_constants/margin_bottom = 64
 
-[node name="VFlowContainer" type="VFlowContainer" parent="Letterbox/LoadingMenu/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Letterbox/LoadingMenu/CenterContainer"]
+clip_children = 1
+custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/v_separation = 16
+theme_override_styles/panel = SubResource("StyleBoxFlat_4e30e")
+
+[node name="ColorRect" type="ColorRect" parent="Letterbox/LoadingMenu/CenterContainer/PanelContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="MarginContainer" type="MarginContainer" parent="Letterbox/LoadingMenu/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VFlowContainer" type="VBoxContainer" parent="Letterbox/LoadingMenu/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
 alignment = 1
 
-[node name="LoadingLabel" type="Label" parent="Letterbox/LoadingMenu/MarginContainer/VFlowContainer"]
+[node name="LoadingLabel" type="Label" parent="Letterbox/LoadingMenu/CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "Loading %s..."
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="Letterbox/LoadingMenu/MarginContainer/VFlowContainer"]
+[node name="HSeparator" type="HSeparator" parent="Letterbox/LoadingMenu/CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_gn3ar")
 
-[node name="HintLabel" type="Label" parent="Letterbox/LoadingMenu/MarginContainer/VFlowContainer"]
+[node name="HintLabel" type="Label" parent="Letterbox/LoadingMenu/CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
 layout_mode = 2
 text = "Hints"
 horizontal_alignment = 1
