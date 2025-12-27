@@ -3,10 +3,6 @@ extends Node
 class_name ZB_VisionPerceptionHelper
 
 
-@export var max_distance := 30.0
-
-
-@export_group("Areas")
 @export var vision_area: VisionCone3D
 
 
@@ -36,7 +32,7 @@ func _ready() -> void:
 
 func _calculate_visual_intensity(seen_entity: Entity) -> float:
 	var distance := entity.global_position.distance_to(seen_entity.global_position) as float
-	return clampf(1.0 - (distance / max_distance), 0.1, 1.0)
+	return clampf(1.0 - (distance / vision_area.range), 0.1, 1.0)
 
 
 func _on_vision_area_body_sighted(body: Node) -> void:
