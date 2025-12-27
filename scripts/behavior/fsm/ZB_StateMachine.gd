@@ -15,6 +15,9 @@ var current_state: ZB_State
 @export var default_state: ZB_State = null
 @export var entity: Entity = null
 
+@export var states_root: NodePath = "States"
+@export var transitions_root: NodePath = "Transitions"
+
 
 func _ready():
 		_cache_states()
@@ -23,14 +26,14 @@ func _ready():
 
 
 func _cache_states():
-		var states_node = $States
+		var states_node = self.get_node(states_root)
 		for s in states_node.get_children():
 				if s is ZB_State:
 						states[s.name] = s
 
 
 func _cache_transitions():
-		var tx_node = $Transitions
+		var tx_node = self.get_node(transitions_root)
 		for t in tx_node.get_children():
 				if t is ZB_Transition:
 						transitions.append(t)
