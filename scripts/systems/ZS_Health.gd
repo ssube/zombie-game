@@ -45,14 +45,16 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		if damage > 0:
 			var damage_source := _calculate_damage_source(damages)
 			var hit_by := ECS.world.get_entity_by_id(damage_source)
-			var hit := Relationship.new(ZC_Hit.new(), hit_by)
-			RelationshipUtils.add_unique_relationship(entity, hit)
 
-			# TODO: find a better way to only add this once per entity
-			# the observer already has both of these values, for example
-			if adjusted_health <= 0 and previous_health > 0:
-				var killed := Relationship.new(ZC_Killed.new(damage_source), entity)
-				hit_by.add_relationship(killed)
+			if hit_by:
+				var hit := Relationship.new(ZC_Hit.new(), hit_by)
+				RelationshipUtils.add_unique_relationship(entity, hit)
+
+				# TODO: find a better way to only add this once per entity
+				# the observer already has both of these values, for example
+				if adjusted_health <= 0 and previous_health > 0:
+					var killed := Relationship.new(ZC_Killed.new(damage_source), entity)
+					hit_by.add_relationship(killed)
 
 			if EntityUtils.is_player(entity):
 				var effect_strength := 1.0 - (adjusted_health / float(health.max_health))

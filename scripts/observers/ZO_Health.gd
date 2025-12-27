@@ -41,7 +41,10 @@ func _update_hud(health: int) -> void:
 
 func _on_damage(entity: ZE_Base, c_health: ZC_Health) -> void:
 	var hitter := entity.get_relationship(RelationshipUtils.any_hit)
-	entity.emit_action(Enums.ActionEvent.ENTITY_DAMAGE, hitter.target)
+	if hitter:
+		entity.emit_action(Enums.ActionEvent.ENTITY_DAMAGE, hitter.target)
+	else:
+		entity.emit_action(Enums.ActionEvent.ENTITY_DAMAGE, null)
 
 	if c_health.hurt_sound:
 		var sound_node = c_health.hurt_sound.instantiate() as ZN_AudioSubtitle3D

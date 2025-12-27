@@ -56,10 +56,10 @@ func on_ready() -> void:
 	_register_children(self)
 
 
-func _on_action_event(event: Enums.ActionEvent, actor: Node) -> void:
+func _on_action_event(_entity: Entity, event: Enums.ActionEvent, actor: Node) -> void:
 	ActionUtils.run_entity(self, event, actor)
 
 
 ## Typesafe wrapper for action_event.emit(...)
 func emit_action(event: Enums.ActionEvent, actor: Node) -> void:
-	action_event.emit(event, actor)
+	action_event.emit(self, event, actor)
