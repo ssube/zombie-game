@@ -26,6 +26,10 @@ static func get_holder(item: Entity) -> Entity:
 		RelationshipUtils.make_holding(item)
 	]).execute() as Array[Entity]
 	assert(relationships.size() <= 1, "Item has more than one entity holding it, relationships are leaking!")
+
+	if relationships.size() == 0:
+		return null
+
 	return relationships.get(0)
 
 static func get_killer(item: Entity) -> Entity:
@@ -33,6 +37,10 @@ static func get_killer(item: Entity) -> Entity:
 		Relationship.new(ZC_Killed.new(""), item),
 	]).execute() as Array
 	assert(relationships.size() <= 1, "Item has been killed by more than one entity, relationships are leaking!")
+
+	if relationships.size() == 0:
+		return null
+
 	return relationships.get(0)
 
 static func get_user(target: Entity) -> Entity:
