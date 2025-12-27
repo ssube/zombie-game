@@ -4,6 +4,7 @@ class_name ZC_Behavior
 @export var state_machine: NodePath
 
 @export_group("State")
+@export var active: bool = true
 @export var blackboard: Dictionary[String, Variant] = {}
 @export var current_state: String
 

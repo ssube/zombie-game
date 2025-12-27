@@ -1,6 +1,9 @@
 @icon("res://textures/icons/fsm_trigger.svg")
 extends Node
-class_name ZB_ZombieVision
+class_name ZB_VisionPerceptionHelper
+
+
+@export var max_distance := 30.0
 
 
 @export_group("Areas")
@@ -11,21 +14,18 @@ class_name ZB_ZombieVision
 @export var entity: ZE_Character:
 	set(value):
 		entity = value
-		_update_components()
+		_cached_perception = null
+		_cache_perception()
 
 
 # Components
-var entity_ready: bool = false
-var entity_perception: ZC_Perception
+var _cached_perception: ZC_Perception
 
 
-func _update_components() -> void:
-	entity_perception = entity.get_component(ZC_Perception) as ZC_Perception
-	entity_ready = true
-
-
-func on_ready() -> void:
-	_update_components()
+func _cache_perception() -> ZC_Perception:
+	if _cached_perception == null:
+		_cached_perception = entity.get_component(ZC_Perception) as ZC_Perception
+	return _cached_perception
 
 
 func _ready() -> void:
@@ -36,12 +36,11 @@ func _ready() -> void:
 
 func _calculate_visual_intensity(seen_entity: Entity) -> float:
 	var distance := entity.global_position.distance_to(seen_entity.global_position) as float
-	var max_distance := 30.0  # Tune this
 	return clampf(1.0 - (distance / max_distance), 0.1, 1.0)
 
 
 func _on_vision_area_body_sighted(body: Node) -> void:
-	if not entity_ready:
+	if not _cache_perception():
 		return
 
 	print("Zombie saw body: ", body.name)
@@ -49,8 +48,8 @@ func _on_vision_area_body_sighted(body: Node) -> void:
 	if seen_entity == null:
 		return
 
-	if seen_entity.id not in entity_perception.visible_entities:
-		entity_perception.visible_entities[seen_entity.id] = true
+	if seen_entity.id not in _cached_perception.visible_entities:
+		_cached_perception.visible_entities[seen_entity.id] = true
 
 	# Create stimulus
 	var intensity := _calculate_visual_intensity(seen_entity)
@@ -59,7 +58,7 @@ func _on_vision_area_body_sighted(body: Node) -> void:
 
 
 func _on_vision_area_body_hidden(body: Node) -> void:
-	if not entity_ready:
+	if not _cache_perception():
 		return
 
 	print("Zombie lost sight of body: ", body.name)
@@ -67,4 +66,4 @@ func _on_vision_area_body_hidden(body: Node) -> void:
 	if seen_entity == null:
 		return
 
-	entity_perception.visible_entities.erase(seen_entity.id)
+	_cached_perception.visible_entities.erase(seen_entity.id)
