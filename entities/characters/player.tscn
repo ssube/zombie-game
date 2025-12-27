@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://busds31ha5tx1"]
+[gd_scene load_steps=31 format=3 uid="uid://busds31ha5tx1"]
 
 [ext_resource type="Script" uid="uid://dyudolkkkb4ut" path="res://scripts/entities/characters/ZE_Player.gd" id="1_ks8m5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_l1ths"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://b7x5tu22015cx" path="res://scripts/components/characters/ZC_Faction.gd" id="15_gmhi3"]
 [ext_resource type="Script" uid="uid://b7fgmwfrg0t73" path="res://scripts/components/characters/ZC_Experience.gd" id="16_8ug6l"]
 [ext_resource type="Script" uid="uid://8srnd548by47" path="res://scripts/components/characters/ZC_Stamina.gd" id="17_g5okp"]
+[ext_resource type="PackedScene" uid="uid://d4hn3600t205c" path="res://effects/rain_effect.tscn" id="18_8ug6l"]
 
 [sub_resource type="Resource" id="Resource_blta8"]
 script = ExtResource("3_gmhi3")
@@ -139,6 +140,9 @@ spot_angle = 30.0
 [node name="Effects" type="Node3D" parent="."]
 
 [node name="FireEffect" parent="Effects" instance=ExtResource("12_b4uku")]
+visible = false
+
+[node name="RainEffect" parent="Effects" groups=["weather_rain", "weather_thunder"] instance=ExtResource("18_8ug6l")]
 visible = false
 
 [node name="Inventory" type="Node3D" parent="."]
