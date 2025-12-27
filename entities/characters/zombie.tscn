@@ -93,7 +93,7 @@ script = ExtResource("9_7tmu0")
 material_healthy = ExtResource("8_tfdn2")
 material_hurt = ExtResource("9_wwun5")
 material_dead = ExtResource("7_l1o5o")
-skin_shapes = Array[NodePath]([NodePath("Node3DBody/CSGCylinder3D"), NodePath("Node3DBody/CSGSphere3D")])
+skin_shapes = Array[NodePath]([NodePath("Body/CSGCylinder3D"), NodePath("Body/CSGSphere3D")])
 metadata/_custom_type_script = "uid://b8oatb3tdywrh"
 
 [sub_resource type="Resource" id="Resource_7tmu0"]
@@ -115,12 +115,12 @@ inventory_node = NodePath("Inventory")
 weapon_node = NodePath("WeaponMarker")
 component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_0ios3"), SubResource("Resource_4i4kv"), SubResource("Resource_u6a8x"), SubResource("Resource_8aduj"), SubResource("Resource_ull4n"), SubResource("Resource_euqm3"), SubResource("Resource_jpnnd"), SubResource("Resource_sn1gh"), SubResource("Resource_4bumh"), SubResource("Resource_kwfyu"), SubResource("Resource_mn8kb"), SubResource("Resource_wwun5"), SubResource("Resource_7tmu0")])
 
-[node name="Node3DBody" type="Node3D" parent="."]
+[node name="Body" type="Node3D" parent="."]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3DBody"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Body"]
 material = ExtResource("8_tfdn2")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Node3DBody"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
 radius = 0.25
 material = ExtResource("8_tfdn2")
@@ -134,11 +134,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
 shape = SubResource("SphereShape3D_uqboj")
 metadata/surface_type = &"zombie"
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-simplify_path = true
-
 [node name="Behavior" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("21_3lyvt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7376846, -0.76357365)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
 entity = NodePath("..")
 
 [node name="Effects" type="Node3D" parent="."]

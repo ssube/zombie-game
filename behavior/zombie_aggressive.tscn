@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bf8cjjumln7y5"]
+[gd_scene load_steps=26 format=3 uid="uid://bf8cjjumln7y5"]
 
 [ext_resource type="Script" uid="uid://cmcwd52jtm1r0" path="res://scripts/nodes/ZN_EntityProxy.gd" id="1_w8eiu"]
 [ext_resource type="Script" uid="uid://cv6nlv1qus3o3" path="res://scripts/nodes/triggers/ZN_TriggerVisionCone3D.gd" id="2_jabh2"]
@@ -28,6 +28,9 @@ radius = 15.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ojlir"]
 radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jabh2"]
+albedo_color = Color(0.94600004, 0.19, 1, 1)
 
 [node name="AggressiveZombieBehavior" type="Node3D" node_paths=PackedStringArray("targets")]
 script = ExtResource("1_w8eiu")
@@ -135,12 +138,14 @@ metadata/_custom_type_script = "uid://c6pla5ya01llv"
 [node name="VisionCone3D" type="Area3D" parent="." node_paths=PackedStringArray("vision_test_ignore_bodies")]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 16
-collision_mask = 27
+collision_mask = 26
+monitoring = false
 script = ExtResource("2_jabh2")
+active = false
 vision_test_mode = 0
 vision_test_ignore_bodies = [null]
 collision_layer_ = 16
-collision_mask_ = 27
+collision_mask_ = 26
 
 [node name="ZB_VisionPerceptionHelper" type="Node" parent="VisionCone3D" node_paths=PackedStringArray("vision_area")]
 script = ExtResource("9_ldd0b")
@@ -245,3 +250,7 @@ state_machine = NodePath("../../../FSM")
 set_state = NodePath("../../../FSM/States/ZB_State_Chase")
 try_transition = false
 metadata/_custom_type_script = "uid://d1xf73mn6pulk"
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+visible = false
+material = SubResource("StandardMaterial3D_jabh2")

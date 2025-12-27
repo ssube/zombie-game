@@ -168,10 +168,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
 shape = SubResource("SphereShape3D_uqboj")
 metadata/surface_type = &"zombie"
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-simplify_path = true
-
 [node name="Behavior" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("20_3i4p6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
 entity = NodePath("..")
 
 [node name="Effects" type="Node3D" parent="."]
