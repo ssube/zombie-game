@@ -22,7 +22,7 @@ enum DurabilityTarget {
 @export var target: DurabilityTarget = DurabilityTarget.ENTITY
 
 
-func _get_target(actor: Entity) -> Entity:
+func _get_target(actor: Node) -> Entity:
 	match target:
 		DurabilityTarget.ACTOR:
 			return actor
@@ -37,7 +37,7 @@ func _get_target(actor: Entity) -> Entity:
 	return null
 
 
-func run_entity(_source: Node, _event: Enums.ActionEvent, actor: Entity) -> void:
+func run_node(_source: Node, _event: Enums.ActionEvent, actor: Node) -> void:
 	var target_entity := _get_target(actor)
 	if target_entity == null:
 		return
