@@ -29,7 +29,7 @@
 [ext_resource type="Script" uid="uid://daa5v82rpm7ih" path="res://scripts/nodes/conditions/ZN_EventCondition.gd" id="28_4g7vu"]
 [ext_resource type="Script" uid="uid://b7fl0650sjefs" path="res://scripts/nodes/actions/ZN_AreaAction.gd" id="29_ojwvh"]
 [ext_resource type="Script" uid="uid://dejf0mustesyw" path="res://scripts/nodes/actions/ZN_BehaviorBlackboardAction.gd" id="30_7fjew"]
-[ext_resource type="Script" uid="uid://62vhg4wr8feb" path="res://scripts/behavior/misc/ZB_ZombiePhysics.gd" id="32_ufuyc"]
+[ext_resource type="Script" uid="uid://62vhg4wr8feb" path="res://scripts/nodes/ZN_EntityPhysicsLock.gd" id="32_ufuyc"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="34_b2lq4"]
 [ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="34_x8nhq"]
 [ext_resource type="Script" uid="uid://djqo74flocpe0" path="res://scripts/nodes/actions/ZN_ExperienceAction.gd" id="35_b2lq4"]
@@ -202,7 +202,6 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0
 collision_layer = 16
 collision_mask = 27
 script = ExtResource("21_23j0l")
-use_body_entity = null
 vision_test_mode = 0
 vision_test_ignore_bodies = [NodePath("../..")]
 collision_layer_ = 16

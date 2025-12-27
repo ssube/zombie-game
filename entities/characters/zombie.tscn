@@ -31,7 +31,7 @@
 [ext_resource type="Script" uid="uid://b7fl0650sjefs" path="res://scripts/nodes/actions/ZN_AreaAction.gd" id="30_rmak2"]
 [ext_resource type="Script" uid="uid://dejf0mustesyw" path="res://scripts/nodes/actions/ZN_BehaviorBlackboardAction.gd" id="31_getlk"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="35_0f2mi"]
-[ext_resource type="Script" uid="uid://62vhg4wr8feb" path="res://scripts/behavior/misc/ZB_ZombiePhysics.gd" id="35_4i4kv"]
+[ext_resource type="Script" uid="uid://62vhg4wr8feb" path="res://scripts/nodes/ZN_EntityPhysicsLock.gd" id="35_4i4kv"]
 [ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="35_mn8kb"]
 [ext_resource type="Script" uid="uid://djqo74flocpe0" path="res://scripts/nodes/actions/ZN_ExperienceAction.gd" id="36_u6a8x"]
 
@@ -168,7 +168,6 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0
 collision_layer = 16
 collision_mask = 27
 script = ExtResource("22_ull4n")
-use_body_entity = null
 vision_test_mode = 0
 vision_test_ignore_bodies = [NodePath("../..")]
 collision_layer_ = 16
@@ -223,10 +222,9 @@ area = NodePath("../../../VisionCone3D")
 active = 0
 metadata/_custom_type_script = "uid://b7fl0650sjefs"
 
-[node name="ZN_BehaviorStateAction" type="Node" parent="Node3D/DetectionArea3D/EmptyBranch" node_paths=PackedStringArray("state_machine", "set_state")]
+[node name="ZN_BehaviorStateAction" type="Node" parent="Node3D/DetectionArea3D/EmptyBranch" node_paths=PackedStringArray("state_machine")]
 script = ExtResource("27_u6a8x")
 state_machine = NodePath("../../../Behavior")
-set_state = NodePath("../../../Behavior/States/ZB_Throttle_Wander")
 try_transition = false
 metadata/_custom_type_script = "uid://d1xf73mn6pulk"
 
