@@ -259,8 +259,7 @@ static func deserialize_level(saved_level: ZP_SavedLevel) -> void:
 		var entity := deserialize_entity(saved_entity)
 		entity.id = entity_id
 		entity_lookup[entity_id] = entity
-		# TODO: add or update in ECS world
-		ECS.world.add_entity(entity)
+		EntityUtils.upsert(entity)
 
 	# TODO: handle deleted entities
 	for deleted_id in saved_level.deleted_entities:
@@ -283,5 +282,4 @@ static func deserialize_players(saved_players: Dictionary[String, ZP_SavedEntity
 		var entity := deserialize_entity(saved_entity)
 		entity.id = player_id
 		entity_node.add_child(entity)
-		# TODO: add or update in ECS world
-		ECS.world.add_entity(entity)
+		EntityUtils.upsert(entity)

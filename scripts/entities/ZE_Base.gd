@@ -13,6 +13,7 @@ var save_prefab_path = _save_prefab_path
 
 signal action_event(event: Enums.ActionEvent, actor: Node)
 
+
 func _generate_instance_id() -> void:
 	var root := self.owner
 	if root == null:
@@ -33,6 +34,7 @@ func _generate_instance_id() -> void:
 	]
 	self.id = "_".join(parts)
 	print("Generated new entity ID: ", self.id)
+
 
 func _save_prefab_path() -> void:
 	# var current_scene_root = get_tree().current_scene

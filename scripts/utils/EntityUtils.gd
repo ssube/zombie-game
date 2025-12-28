@@ -271,6 +271,13 @@ static func remove(entity: Node) -> void:
 	remove_immediate.call_deferred(entity)
 
 
+static func upsert(entity: Entity) -> void:
+	var existing := ECS.world.get_entity_by_id(entity.id)
+	if existing == null:
+		ECS.world.add_entity(entity)
+	else:
+		assert(false, "TODO: implement entity update in upsert")
+
 static func find_sounds(entity: Node3D) -> Array[ZN_AudioSubtitle3D]:
 	if entity is ZN_AudioSubtitle3D:
 		return [entity]
