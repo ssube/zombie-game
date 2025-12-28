@@ -80,13 +80,17 @@ static func save_game(name: String) -> bool:
 	return true
 
 
-static func load_game(_name: String, root: Node) -> bool:
-	var game_data := ResourceLoader.load("user://saves/%s.tres" % _name, "ZP_SavedGame") as ZP_SavedGame
+static func load_game(name: String, root: Node) -> bool:
+	var game_data := ResourceLoader.load("user://saves/%s.tres" % name, "ZP_SavedGame") as ZP_SavedGame
 	if game_data == null:
-		printerr("Failed to load save game: ", _name)
+		printerr("Failed to load save game: ", name)
 		return false
 
 	cache_components()
+
+	var game := TreeUtils.get_game(root)
+	game.clear_world()
+	game.load_level(game_data.current_level, game_data.last_spawn)
 
 	for level_key in game_data.levels.keys():
 		var level_data := game_data.levels[level_key]
