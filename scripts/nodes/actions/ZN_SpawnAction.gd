@@ -103,6 +103,9 @@ func _spawn_scene(scene: PackedScene, parent: Node, position: Vector3) -> void:
 	var instance := scene.instantiate()
 	parent.add_child(instance)
 
+	if instance is ZE_Base:
+		instance._generate_instance_id()
+
 	instance.global_position = position
 
 	if not is_zero_approx(random_spread.length_squared()):
