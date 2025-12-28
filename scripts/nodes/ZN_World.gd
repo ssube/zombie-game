@@ -15,6 +15,7 @@ signal level_loaded
 @export var debug_marker: String = ''
 
 @onready var last_level: String = start_level
+@onready var last_spawn: String = start_marker
 
 var current_level_name: String
 var next_level_name: String
@@ -138,6 +139,7 @@ func load_level(level_name: String, spawn_point: String) -> void:
 
 	var level_hints := level_data.loading_hints.duplicate()
 	if level_data.hint_mode == level_data.HintMode.APPEND:
+		# TODO: make sure these don't accumulate over multiple level loads
 		level_hints.append_array(campaign.hints)
 
 	%Menu.set_hints(level_hints)
@@ -169,9 +171,11 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	last_level = level_name
 
 	var spawn_node := next_level.get_node(spawn_point) as Node3D
+	last_spawn = spawn_point
 	if spawn_point == "" or spawn_node == null:
 		printerr("Invalid spawn point: ", spawn_point)
 		spawn_node = next_level.get_node("Markers/Start") as Node3D
+		last_spawn = "Markers/Start"
 
 	if spawn_node == null:
 		printerr("No fallback spawn point: Markers/Start")

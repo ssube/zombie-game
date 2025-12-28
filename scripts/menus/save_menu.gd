@@ -24,6 +24,7 @@ signal game_saved(name: String)
 
 func _on_new_save_pressed() -> void:
 	show_name_dialog = true
+	%SaveName.grab_focus()
 
 
 func _on_saved_games_item_activated(index: int) -> void:
@@ -52,7 +53,7 @@ func _on_dialog_save_button_pressed() -> void:
 	if save_name == "":
 		return
 
-	SaveManager.save_game(save_name)
+	SaveManager.save_game(save_name, self)
 	game_saved.emit(save_name)
 
 	on_update()
@@ -65,7 +66,7 @@ func _on_dialog_back_button_pressed() -> void:
 
 
 func _on_dialog_replace_button_pressed() -> void:
-	SaveManager.save_game(selected_name)
+	SaveManager.save_game(selected_name, self)
 	game_saved.emit(selected_name)
 	
 	on_update()

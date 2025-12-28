@@ -69,8 +69,13 @@ static func save_game(name: String) -> bool:
 	var game_data := ZP_SavedGame.new()
 	game_data.version = SaveManager.save_version
 
+	var game_node := TreeUtils.get_game(root)
+	var level_name := game_node.current_level_name
+	game_data.current_level = level_name
+	game_data.last_spawn = game_node.last_spawn
+
 	var level_data := serialize_level()
-	game_data.levels["TODO: level key"] = level_data
+	game_data.levels[level_name] = level_data
 
 	var player_data := serialize_players()
 	game_data.players = player_data
@@ -80,22 +85,32 @@ static func save_game(name: String) -> bool:
 	return true
 
 
-static func load_game(name: String, root: Node) -> bool:
+static func load_game(name: String, root: Node, use_json: bool = true) -> bool:
+	if use_json:
+		return false
+		# return load_game_json(name, root)
+	else:
+		return load_game_resource(name, root)
+
+
+static func load_game_resource(name: String, root: Node) -> bool:
 	var game_data := ResourceLoader.load("user://saves/%s.tres" % name, "ZP_SavedGame") as ZP_SavedGame
 	if game_data == null:
 		printerr("Failed to load save game: ", name)
 		return false
 
-	cache_components()
+	_cache_components()
 
 	var game := TreeUtils.get_game(root)
 	game.clear_world()
 	game.load_level(game_data.current_level, game_data.last_spawn)
 
-	for level_key in game_data.levels.keys():
-		var level_data := game_data.levels[level_key]
-		deserialize_level(level_data)
+	var level_data := game_data.levels.get(game_data.current_level, null) as ZP_SavedLevel
+	if level_data == null:
+		printerr("No saved data for level: ", game_data.current_level)
+		return false
 
+	deserialize_level(level_data)
 	deserialize_players(game_data.players, root.get_node("World/Entities"))
 
 	return true
@@ -104,7 +119,7 @@ static func load_game(name: String, root: Node) -> bool:
 static var _component_cache: Dictionary[String, String] = {}
 
 
-static func cache_components() -> void:
+static func _cache_components() -> void:
 	_component_cache.clear()
 
 	var global_classes := ProjectSettings.get_global_class_list()
@@ -265,9 +280,11 @@ static func deserialize_level(saved_level: ZP_SavedLevel) -> void:
 		entity_lookup[entity_id] = entity
 		EntityUtils.upsert(entity)
 
-	# TODO: handle deleted entities
-	for deleted_id in saved_level.deleted_entities:
-		pass
+	# Handle deleted entities
+	for deleted_id in saved_level.deleted:
+		var entity := ECS.world.get_entity_by_id(deleted_id)
+		if entity != null:
+			ECS.world.remove_entity(entity)
 
 	# Second pass: set up relationships
 	for entity_id in saved_level.entities.keys():
