@@ -282,18 +282,12 @@ func print_objective_tree() -> String:
 	return "\n".join(subtrees)
 
 
-func save(path: String) -> bool:
+func save() -> ZP_SavedObjectives:
 	var saved := ZP_SavedObjectives.from_manager(self)
-	var error := ResourceSaver.save(saved, path)
-	if error != OK:
-		printerr("Error saving objectives: ", error)
-		return false
-
-	return true
+	return saved
 
 
-func load(path: String) -> int:
-	var loaded := ResourceLoader.load(path, "ZP_SavedObjectives") as ZP_SavedObjectives
+func load(loaded: ZP_SavedObjectives) -> int:
 	var counter := 0
 
 	for count_key in loaded.counts:

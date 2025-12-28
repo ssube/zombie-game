@@ -1,6 +1,12 @@
 class_name SaveManager
 
 
+static var save_version: int = 1
+
+
+# var _deleted: Array[String] = []
+
+
 static func create_path() -> bool:
 	var user_dir := DirAccess.open("user://")
 	if not user_dir.dir_exists("saves"):
@@ -53,29 +59,93 @@ static func list_saves() -> Array[String]:
 	for pair in sorted_saves:
 		sorted_names.append(pair[0])
 
-	# save_names.sort()
 	return sorted_names
 
 
 static func save_game(name: String) -> bool:
 	SaveManager.create_path()
 
-	# save ECS world
-	var query = ECS.world.query.with_all([C_Persistent])
-	var data = ECS.serialize(query)
+	# TODO: merge with any previous level data
+	var game_data := ZP_SavedGame.new()
+	game_data.version = SaveManager.save_version
 
-	if ECS.save(data, "user://saves/%s_entities.tres" % name):
-		print("Saved %d entities!" % data.entities.size())
+	var level_data := serialize_level()
+	game_data.levels["TODO: level key"] = level_data
 
-	# save objectives
-	if ObjectiveManager.save("user://saves/%s_objectives.tres" % name):
-		print("Saved %d objectives!" % ObjectiveManager.objectives.size())
+	var player_data := serialize_players()
+	game_data.players = player_data
+
+	ResourceSaver.save(game_data, "user://saves/%s.tres" % name)
 
 	return true
 
 
 static func load_game(_name: String) -> bool:
 	assert(false, "TODO: implement this")
-	# TODO: load ECS world
-	# TODO: load objectives
 	return true
+
+
+static func serialize_component(component: Component) -> ZP_SavedComponent:
+	var saved_component := ZP_SavedComponent.new()
+	var component_script := component.get_script() as Script
+	saved_component.type = component_script.get_global_name()
+	saved_component.data = component.serialize()
+	return saved_component
+
+
+static func serialize_entity(entity: Entity) -> ZP_SavedEntity:
+	var saved_entity := ZP_SavedEntity.new()
+
+	if entity.get_node(".") is Node3D:
+		saved_entity.transform = entity.global_transform
+
+	# serialize components
+	for component in entity.components.values():
+		saved_entity.components.append(serialize_component(component))
+
+	# serialize inventory
+	if "inventory_node" in entity:
+		for item in entity.inventory_node.get_children():
+			saved_entity.inventory.append(serialize_entity(item))
+
+	# serialize relationships
+	for rel in entity.relationships:
+		saved_entity.relationships.append(serialize_relationship(rel))
+
+	return saved_entity
+
+
+static func serialize_relationship(relationship: Relationship) -> ZP_SavedRelationship:
+	var saved_relationship := ZP_SavedRelationship.new()
+	saved_relationship.relation = serialize_component(relationship.relation)
+	if relationship.target is Entity:
+		saved_relationship.target_type = ZP_SavedRelationship.TargetType.ENTITY
+		saved_relationship.target_entity_id = relationship.target_entity.id
+	else:
+		saved_relationship.target_type = ZP_SavedRelationship.TargetType.COMPONENT
+		saved_relationship.target_entity_id = ""
+		saved_relationship.target_component = serialize_component(relationship.target)
+
+	return saved_relationship
+
+
+static func serialize_level() -> ZP_SavedLevel:
+	var saved_level := ZP_SavedLevel.new()
+
+	for entity in ECS.world.query.with_all([ZC_Persistent]).execute():
+		saved_level.entities[entity.id] = serialize_entity(entity)
+
+	saved_level.objectives = ObjectiveManager.save()
+
+	# TODO: include deleted entities
+
+	return saved_level
+
+
+static func serialize_players() -> Dictionary[String, ZP_SavedEntity]:
+	var saved_players: Dictionary[String, ZP_SavedEntity] = {}
+
+	for player in EntityUtils.get_players():
+		saved_players[player.id] = serialize_entity(player)
+
+	return saved_players
