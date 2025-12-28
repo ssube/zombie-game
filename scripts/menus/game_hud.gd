@@ -118,3 +118,6 @@ func update_action_queue() -> void:
 		action_label.text = "\n".join(action_queue)
 	else:
 		action_label.text = ""
+
+func on_update() -> void:
+	pass

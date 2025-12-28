@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 ## A basic dialogue balloon for use with Dialogue Manager.
 
 signal dialogue_finished

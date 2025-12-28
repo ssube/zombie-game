@@ -8,6 +8,23 @@ var pause_menus: Dictionary[Menus, bool] = {
 	Menus.DIALOGUE_BALLOON: false,
 }
 
+@onready var menu_nodes: Dictionary[Menus, Control] = {
+	Menus.NONE: $MenuLayer/GameHud,
+	Menus.GAME_OVER_MENU: $MenuLayer/GameOverMenu,
+	Menus.INVENTORY_MENU: $MenuLayer/InventoryMenu,
+	Menus.LOAD_MENU: $MenuLayer/LoadMenu,
+	Menus.LOADING_MENU: $MenuLayer/LoadingMenu,
+	Menus.OBJECTIVES_MENU: $MenuLayer/ObjectivesMenu,
+	Menus.OPTIONS_MENU: $MenuLayer/OptionsMenu,
+	Menus.PAUSE_MENU: $MenuLayer/PauseMenu,
+	Menus.SAVE_MENU: $MenuLayer/SaveMenu,
+	Menus.START_MENU: $MenuLayer/StartMenu,
+	Menus.EXIT_DIALOG: $MenuLayer/ExitDialog,
+	Menus.DIALOGUE_BALLOON: $MenuLayer/DialogueMenu,
+	Menus.CONSOLE_MENU: $MenuLayer/ConsoleMenu,
+	Menus.LEVEL_END_MENU: $MenuLayer/LevelEndMenu,
+}
+
 
 func _ready() -> void:
 	update_mouse_mode()
@@ -135,49 +152,20 @@ func show_menu(menu: Menus) -> void:
 		previous_menu = visible_menu
 		visible_menu = menu
 
-		$MenuLayer/GameHud.visible = (menu == Menus.NONE)
-		$MenuLayer/GameOverMenu.visible = (menu == Menus.GAME_OVER_MENU)
-		$MenuLayer/InventoryMenu.visible = (menu == Menus.INVENTORY_MENU)
-		$MenuLayer/LoadMenu.visible = (menu == Menus.LOAD_MENU)
-		$MenuLayer/LoadingMenu.visible = (menu == Menus.LOADING_MENU)
-		$MenuLayer/ObjectivesMenu.visible = (menu == Menus.OBJECTIVES_MENU)
-		$MenuLayer/OptionsMenu.visible = (menu == Menus.OPTIONS_MENU)
-		$MenuLayer/PauseMenu.visible = (menu == Menus.PAUSE_MENU)
-		$MenuLayer/SaveMenu.visible = (menu == Menus.SAVE_MENU)
-		$MenuLayer/StartMenu.visible = (menu == Menus.START_MENU)
-		$MenuLayer/ExitDialog.visible = (menu == Menus.EXIT_DIALOG)
-		$MenuLayer/DialogueMenu.visible = (menu == Menus.DIALOGUE_BALLOON)
-		$MenuLayer/ConsoleMenu.visible = (menu == Menus.CONSOLE_MENU)
-		$MenuLayer/LevelEndMenu.visible = (menu == Menus.LEVEL_END_MENU)
+		for m in menu_nodes.keys():
+			var menu_node := menu_nodes[m]
+			if m != visible_menu:
+				menu_node.hide()
+				if menu_node is ZM_BaseMenu:
+					menu_node.on_hide()
+				menu_node.process_mode = Control.PROCESS_MODE_DISABLED
+			else:
+				menu_node.process_mode = Control.PROCESS_MODE_INHERIT
+				menu_node.show()
+				if menu_node is ZM_BaseMenu:
+					menu_node.on_show()
 
 		update_mouse_mode()
-
-		# TODO: move these into a dict and loop
-		match menu:
-			Menus.GAME_OVER_MENU:
-				$MenuLayer/GameOverMenu.on_show()
-			Menus.INVENTORY_MENU:
-				$MenuLayer/InventoryMenu.on_show()
-			Menus.LOAD_MENU:
-				$MenuLayer/LoadMenu.on_show()
-			Menus.LOADING_MENU:
-				$MenuLayer/LoadingMenu.on_show()
-			Menus.OBJECTIVES_MENU:
-				$MenuLayer/ObjectivesMenu.on_show()
-			Menus.OPTIONS_MENU:
-				$MenuLayer/OptionsMenu.on_show()
-			Menus.PAUSE_MENU:
-				$MenuLayer/PauseMenu.on_show()
-			Menus.SAVE_MENU:
-				$MenuLayer/SaveMenu.on_show()
-			Menus.START_MENU:
-				$MenuLayer/StartMenu.on_show()
-			Menus.EXIT_DIALOG:
-				$MenuLayer/ExitDialog.on_show()
-			Menus.CONSOLE_MENU:
-				$MenuLayer/ConsoleMenu.on_show()
-			Menus.LEVEL_END_MENU:
-				$MenuLayer/LevelEndMenu.on_show()
 
 
 func set_effect_strength(effect: Effects, strength: float = 1.0, fade_in: float = 0.1) -> void:

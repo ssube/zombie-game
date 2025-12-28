@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bc12xlkdaphu3"]
+[gd_scene load_steps=9 format=3 uid="uid://bc12xlkdaphu3"]
 
 [ext_resource type="Script" uid="uid://hyr2u8jujttn" path="res://scripts/menus/dialogue_menu.gd" id="1_36de5"]
 [ext_resource type="Theme" uid="uid://bdnxpcwbllbem" path="res://menus/theme_dialogue.tres" id="2_5r6f2"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5r6f2"]
 
 [sub_resource type="Animation" id="Animation_nlsx6"]
 length = 0.001
@@ -41,18 +43,18 @@ _data = {
 &"progress": SubResource("Animation_qkmqt")
 }
 
-[node name="DialogueMenu" type="CanvasLayer"]
-layer = 100
-script = ExtResource("1_36de5")
-
-[node name="Balloon" type="Control" parent="."]
-unique_name_in_owner = true
-layout_mode = 3
+[node name="DialogueMenu" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5r6f2")
+script = ExtResource("1_36de5")
+
+[node name="Balloon" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
 theme = ExtResource("2_5r6f2")
 
 [node name="MarginContainer" type="MarginContainer" parent="Balloon"]
@@ -61,7 +63,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -219.0
+offset_top = -628.0
 grow_horizontal = 2
 grow_vertical = 0
 

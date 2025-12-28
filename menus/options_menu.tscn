@@ -1,8 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyv5b48xquqot"]
+[gd_scene load_steps=8 format=3 uid="uid://dyv5b48xquqot"]
 
 [ext_resource type="Script" uid="uid://dr0t3qprbbuke" path="res://scripts/menus/options_menu.gd" id="1_p3s2b"]
 [ext_resource type="AudioStream" uid="uid://ubdmirg50ful" path="res://sounds/Sound Effects/Firearms/Racking/shotgun_racking_ufx_1.ogg" id="2_cet7k"]
 [ext_resource type="AudioStream" uid="uid://cseclvit36kh1" path="res://sounds/Sound Effects/Break/glass_break_ufx_1.ogg" id="3_1vpws"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cet7k"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.7529412)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6r3ve"]
 
@@ -32,6 +44,7 @@ layout_mode = 2
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_cet7k")
 current_tab = 0
 
 [node name="Controls" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
