@@ -80,9 +80,35 @@ static func save_game(name: String) -> bool:
 	return true
 
 
-static func load_game(_name: String) -> bool:
-	assert(false, "TODO: implement this")
+static func load_game(_name: String, root: Node) -> bool:
+	var game_data := ResourceLoader.load("user://saves/%s.tres" % _name, "ZP_SavedGame") as ZP_SavedGame
+	if game_data == null:
+		printerr("Failed to load save game: ", _name)
+		return false
+
+	cache_components()
+
+	for level_key in game_data.levels.keys():
+		var level_data := game_data.levels[level_key]
+		deserialize_level(level_data)
+
+	deserialize_players(game_data.players, root.get_node("World/Entities"))
+
 	return true
+
+
+static var _component_cache: Dictionary[String, String] = {}
+
+
+static func cache_components() -> void:
+	_component_cache.clear()
+
+	var global_classes := ProjectSettings.get_global_class_list()
+	for class_info in global_classes:
+		var name: String = class_info.get("class")
+		var path: String = class_info.get("path")
+		if name.begins_with("ZC_"):
+			_component_cache[name] = path
 
 
 static func serialize_component(component: Component) -> ZP_SavedComponent:
@@ -95,6 +121,10 @@ static func serialize_component(component: Component) -> ZP_SavedComponent:
 
 static func serialize_entity(entity: Entity) -> ZP_SavedEntity:
 	var saved_entity := ZP_SavedEntity.new()
+	saved_entity.id = entity.id
+
+	if entity is ZE_Base:
+		saved_entity.prefab_path = entity.prefab_path
 
 	if entity.get_node(".") is Node3D:
 		saved_entity.transform = entity.global_transform
@@ -149,3 +179,109 @@ static func serialize_players() -> Dictionary[String, ZP_SavedEntity]:
 		saved_players[player.id] = serialize_entity(player)
 
 	return saved_players
+
+
+static func deserialize_component(saved_component: ZP_SavedComponent) -> Component:
+	var component: Component = null
+	if saved_component.type in _component_cache:
+		var script_path: String = _component_cache[saved_component.type]
+		var script: Script = load(script_path)
+		component = script.new()
+		for key in saved_component.data.keys():
+			component[key] = saved_component.data[key]
+	else:
+		printerr("Unknown component type during deserialization: ", saved_component.type)
+
+	return component
+
+
+static func _get_or_create_entity(saved_entity: ZP_SavedEntity) -> Entity:
+	var entity := ECS.world.get_entity_by_id(saved_entity.id)
+	if entity == null:
+		# TODO: load the prefab if prefab_path is set
+		assert(saved_entity.prefab_path != "", "Prefab path is empty, cannot load entity prefab")
+		var prefab := ResourceLoader.load(saved_entity.prefab_path) as PackedScene
+		if prefab == null:
+			printerr("Failed to load prefab at path: ", saved_entity.prefab_path)
+
+		entity = prefab.instantiate() as Entity
+		entity.id = saved_entity.id
+		ECS.world.add_entity(entity)
+
+	return entity
+
+
+static func deserialize_entity(saved_entity: ZP_SavedEntity) -> Entity:
+	var entity := _get_or_create_entity(saved_entity)
+
+	if saved_entity.transform != Transform3D.IDENTITY:
+		if entity.get_node(".") is Node3D:
+			entity.global_transform = saved_entity.transform
+
+	# deserialize components
+	for saved_component in saved_entity.components:
+		var component := deserialize_component(saved_component)
+		if component != null:
+			entity.add_component(component)
+
+	# deserialize inventory
+	if "inventory_node" in entity:
+		for saved_item in saved_entity.inventory:
+			var item_entity := deserialize_entity(saved_item)
+			entity.inventory_node.add_child(item_entity)
+
+	# deserialize relationships after all entities are created
+
+	return entity
+
+
+static func deserialize_relationship(saved_relationship: ZP_SavedRelationship, entity_lookup: Dictionary[String, Entity]) -> Relationship:
+	var relationship := Relationship.new()
+	relationship.relation = deserialize_component(saved_relationship.relation)
+	if saved_relationship.target_type == ZP_SavedRelationship.TargetType.ENTITY:
+		if saved_relationship.target_entity_id in entity_lookup:
+			relationship.target = entity_lookup[saved_relationship.target_entity_id]
+		else:
+			printerr("Unknown target entity ID during relationship deserialization: ", saved_relationship.target_entity_id)
+	else:
+		relationship.target = deserialize_component(saved_relationship.target_component)
+
+	return relationship
+
+
+static func deserialize_level(saved_level: ZP_SavedLevel) -> void:
+	# TODO: add all entities, even existing ones
+	var entity_lookup: Dictionary[String, Entity] = {}
+
+	# First pass: create all entities
+	for entity_id in saved_level.entities.keys():
+		var saved_entity := saved_level.entities[entity_id]
+		var entity := deserialize_entity(saved_entity)
+		entity.id = entity_id
+		entity_lookup[entity_id] = entity
+		# TODO: add or update in ECS world
+		ECS.world.add_entity(entity)
+
+	# TODO: handle deleted entities
+	for deleted_id in saved_level.deleted_entities:
+		pass
+
+	# Second pass: set up relationships
+	for entity_id in saved_level.entities.keys():
+		var saved_entity := saved_level.entities[entity_id]
+		var entity := ECS.world.get_entity_by_id(entity_id)
+		for saved_relationship in saved_entity.relationships:
+			var relationship := deserialize_relationship(saved_relationship, entity_lookup)
+			entity.add_relationship(relationship)
+
+	ObjectiveManager.load(saved_level.objectives)
+
+
+static func deserialize_players(saved_players: Dictionary[String, ZP_SavedEntity], entity_node: Node) -> void:
+	for player_id in saved_players.keys():
+		var saved_entity := saved_players[player_id]
+		var entity := deserialize_entity(saved_entity)
+		entity.id = player_id
+		entity_node.add_child(entity)
+		# TODO: add or update in ECS world
+		ECS.world.add_entity(entity)

@@ -87,6 +87,7 @@ _data = {
 collision_layer = 8
 collision_mask = 31
 script = ExtResource("1_61xi3")
+prefab_path = "res://entities/characters/hotel_clerk.tscn"
 component_resources = Array[ExtResource("2_ig744")]([SubResource("Resource_0qnp1"), SubResource("Resource_w7go0"), SubResource("Resource_4sttm"), SubResource("Resource_jkcq6"), SubResource("Resource_04tpt"), SubResource("Resource_y41co")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]

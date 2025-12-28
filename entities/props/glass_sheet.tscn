@@ -35,6 +35,7 @@ size = Vector3(1, 1, 0.2)
 
 [node name="GlassSheet" type="Node3D"]
 script = ExtResource("1_u0tbx")
+prefab_path = "res://entities/props/glass_sheet.tscn"
 component_resources = Array[ExtResource("2_34t28")]([SubResource("Resource_dv5ss"), SubResource("Resource_nn44j"), SubResource("Resource_7sij5")])
 
 [node name="GlassSheet" type="StaticBody3D" parent="." node_paths=PackedStringArray("parent_entity")]

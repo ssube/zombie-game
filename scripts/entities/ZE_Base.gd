@@ -5,7 +5,11 @@ class_name ZE_Base
 @export_tool_button("Generate Instance ID")
 var generate_instance_id = _generate_instance_id
 
+@export_tool_button("Save Prefab Path")
+var save_prefab_path = _save_prefab_path
+
 @export var extra_components: Array[Component] = []
+@export var prefab_path: String = ""
 
 signal action_event(event: Enums.ActionEvent, actor: Node)
 
@@ -30,6 +34,17 @@ func _generate_instance_id() -> void:
 	self.id = "_".join(parts)
 	print("Generated new entity ID: ", self.id)
 
+func _save_prefab_path() -> void:
+	# var current_scene_root = get_tree().current_scene
+	var current_scene_root = EditorInterface.get_edited_scene_root()
+	if current_scene_root == null:
+		push_error("No current scene, cannot save prefab path.")
+		return
+
+	var scene_path = current_scene_root.scene_file_path
+	self.prefab_path = scene_path
+	print("Saved prefab path: ", self.prefab_path)
+
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -49,7 +64,8 @@ func _register_children(node: Node) -> void:
 
 func on_ready() -> void:
 	if self.has_component(ZC_Persistent):
-		assert(self.id != "", "Entity instance ID is empty, will not persist in saved state")
+		assert(self.id != "", "Entity instance ID is empty, will not reload correctly")
+		assert(self.prefab_path != "", "Prefab path is empty, cannot reload entity from prefab")
 
 	# Not connected until ECS on_ready to make sure components are in place
 	action_event.connect(_on_action_event)

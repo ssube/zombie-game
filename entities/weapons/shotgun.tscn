@@ -170,6 +170,7 @@ size = Vector3(0.13093567, 0.27976608, 1.0812988)
 collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_2kns5")
+prefab_path = "res://entities/weapons/shotgun.tscn"
 component_resources = Array[ExtResource("2_17hxq")]([SubResource("Resource_bsv6m"), SubResource("Resource_17hxq"), SubResource("Resource_7rb10")])
 
 [node name="Shotgun" type="Node3D" parent="."]

@@ -262,7 +262,7 @@ func _on_inventory_pressed() -> void:
 
 
 func _on_options_applied() -> void:
-	pass # Replace with function body.
+	pass
 
 
 func _on_objective_changed(objective: ZN_BaseObjective) -> void:
@@ -279,7 +279,7 @@ func _on_game_saved(_name: String) -> void:
 
 
 func _on_game_loaded(_name: String) -> void:
-	pass # Replace with function body.
+	SaveManager.load_game(_name, TreeUtils.get_game(self))
 
 
 func _on_shader_toggled(value: bool) -> void:

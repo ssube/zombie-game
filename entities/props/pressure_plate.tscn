@@ -6,6 +6,16 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_rhbva"]
 size = Vector3(1, 0.5, 1)
 
+[sub_resource type="Animation" id="Animation_r4638"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
 [sub_resource type="Animation" id="Animation_5ds3a"]
 resource_name = "pressed"
 tracks/0/type = "position_3d"
@@ -26,16 +36,6 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, -0.25, 0, 0.53333336, 1, 0, 0, 0)
 
-[sub_resource type="Animation" id="Animation_r4638"]
-length = 0.001
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node3D")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_miebl"]
 _data = {
 &"RESET": SubResource("Animation_r4638"),
@@ -55,7 +55,6 @@ collision_layer = 2
 collision_mask = 24
 script = ExtResource("1_s60rm")
 trigger_on_exit = true
-trigger_on_timer = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/ZN_TriggerArea3D"]

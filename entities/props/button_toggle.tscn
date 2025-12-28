@@ -92,6 +92,7 @@ _data = {
 collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_p86pc")
+prefab_path = "res://entities/props/button_toggle.tscn"
 component_resources = Array[ExtResource("2_f2tyo")]([SubResource("Resource_ie4yn"), SubResource("Resource_0h2if"), SubResource("Resource_qcbqw")])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]

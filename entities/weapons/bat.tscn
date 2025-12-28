@@ -111,6 +111,7 @@ collision_layer = 4
 collision_mask = 23
 max_contacts_reported = 4
 script = ExtResource("1_aigh8")
+prefab_path = "res://entities/weapons/bat.tscn"
 component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_42kvg"), SubResource("Resource_dy0dc"), SubResource("Resource_ee0de")])
 
 [node name="Node3D" type="Node3D" parent="."]

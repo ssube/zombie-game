@@ -26,6 +26,7 @@ data = PackedVector3Array(-0.7071068, -0.05, -0.7071067, -0.9238795, -0.05, -0.3
 
 [node name="PuddleGas" type="StaticBody3D"]
 script = ExtResource("1_mv04f")
+prefab_path = "res://entities/props/puddle_gas.tscn"
 component_resources = Array[ExtResource("2_ka8cp")]([SubResource("Resource_0ici7"), SubResource("Resource_xvbrr")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]

@@ -31,6 +31,7 @@ radius = 0.25
 
 [node name="ZombieMelee" type="Node3D"]
 script = ExtResource("1_n0ht5")
+prefab_path = "res://entities/weapons/zombie_melee.tscn"
 component_resources = Array[ExtResource("2_3pflf")]([SubResource("Resource_lu3nb")])
 
 [node name="Path3D" type="Path3D" parent="."]

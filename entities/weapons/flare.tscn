@@ -30,6 +30,7 @@ height = 0.66
 
 [node name="Flare" type="RigidBody3D"]
 script = ExtResource("1_tnbbk")
+prefab_path = "res://entities/weapons/flare.tscn"
 component_resources = Array[ExtResource("2_yvdg1")]([SubResource("Resource_4s6ep"), SubResource("Resource_24ymc")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]

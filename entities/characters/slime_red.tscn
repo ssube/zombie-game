@@ -70,6 +70,7 @@ normal_texture = SubResource("NoiseTexture2D_pkns6")
 collision_layer = 16
 collision_mask = 27
 script = ExtResource("1_trphr")
+prefab_path = "res://entities/characters/slime_red.tscn"
 component_resources = Array[ExtResource("2_jnxhp")]([SubResource("Resource_k55fj"), SubResource("Resource_x1bwj"), SubResource("Resource_alwcs"), SubResource("Resource_b3cc5"), SubResource("Resource_pkns6"), SubResource("Resource_ysw2j"), SubResource("Resource_l2mc0")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

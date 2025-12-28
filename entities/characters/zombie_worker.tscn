@@ -120,6 +120,7 @@ script = ExtResource("1_enhv7")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("WeaponMarker")
+prefab_path = "res://entities/characters/zombie_worker.tscn"
 component_resources = Array[ExtResource("2_g3ik4")]([SubResource("Resource_ufuyc"), SubResource("Resource_8aduj"), SubResource("Resource_23j0l"), SubResource("Resource_fkiag"), SubResource("Resource_jpnnd"), SubResource("Resource_xbif0"), SubResource("Resource_4bumh"), SubResource("Resource_ekadw"), SubResource("Resource_x8nhq"), SubResource("Resource_wwun5"), SubResource("Resource_7tmu0"), SubResource("Resource_6olyw"), SubResource("Resource_b2lq4")])
 
 [node name="Body" type="Node3D" parent="."]

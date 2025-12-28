@@ -49,6 +49,7 @@ size = Vector3(0.5, 2.5, 0.25)
 
 [node name="Door" type="Node3D"]
 script = ExtResource("1_svhb3")
+prefab_path = "res://entities/props/door_wood_breakable.tscn"
 component_resources = Array[ExtResource("2_7gway")]([SubResource("Resource_q8gv4"), SubResource("Resource_btt3s"), SubResource("Resource_auxoi"), SubResource("Resource_8c2mg")])
 
 [node name="Markers" type="Node3D" parent="."]

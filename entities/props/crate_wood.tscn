@@ -21,6 +21,7 @@ size = Vector3(1.5, 1.5, 1.5)
 
 [node name="CrateWood" type="StaticBody3D"]
 script = ExtResource("1_ptp1i")
+prefab_path = "res://entities/props/crate_wood.tscn"
 component_resources = Array[ExtResource("2_584vn")]([SubResource("Resource_drja3"), SubResource("Resource_op0x7")])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]

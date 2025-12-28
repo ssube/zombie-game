@@ -86,6 +86,7 @@ points = PackedVector3Array(-0.06152448, -0.0050914427, 0.35563493, 0.2765873, 0
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_lwijo")
+prefab_path = "res://entities/items/key.tscn"
 component_resources = Array[ExtResource("2_xagmd")]([SubResource("Resource_nq5s6"), SubResource("Resource_g03v2"), SubResource("Resource_7nikf"), SubResource("Resource_qn836")])
 
 [node name="TrafficCone" type="Node3D" parent="."]

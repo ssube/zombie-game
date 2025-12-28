@@ -75,6 +75,7 @@ points = PackedVector3Array(-0.18584935, -0.2904392, -0.40281802, -0.19955255, -
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_w1tgt")
+prefab_path = "res://entities/items/armor.tscn"
 component_resources = Array[ExtResource("2_7qc5y")]([SubResource("Resource_yjsqk"), SubResource("Resource_rx52j")])
 
 [node name="Toolbox" type="MeshInstance3D" parent="."]

@@ -57,6 +57,7 @@ radius = 0.75
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_gq75p")
+prefab_path = "res://entities/props/objective.tscn"
 component_resources = Array[ExtResource("2_ko3gf")]([SubResource("Resource_6y5fu"), SubResource("Resource_lfpnt")])
 
 [node name="CSGCylinder3D" type="CSGSphere3D" parent="."]

@@ -93,6 +93,7 @@ collision_layer = 2
 collision_mask = 31
 mass = 5.0
 script = ExtResource("1_o8a62")
+prefab_path = "res://entities/props/barrel.tscn"
 component_resources = Array[ExtResource("2_wrl38")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl"), SubResource("Resource_0kgpt"), SubResource("Resource_20vof")])
 
 [node name="Barrel" type="Node3D" parent="."]

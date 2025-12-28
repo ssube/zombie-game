@@ -104,6 +104,7 @@ _data = {
 collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_tjtal")
+prefab_path = "res://entities/debug/button_weather.tscn"
 component_resources = Array[ExtResource("2_v1ybl")]([SubResource("Resource_0h2if"), SubResource("Resource_qcbqw"), SubResource("Resource_wlayu"), SubResource("Resource_ysgk6")])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
