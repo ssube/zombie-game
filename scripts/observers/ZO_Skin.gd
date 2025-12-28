@@ -25,7 +25,7 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 		print("Current skin changed from %s to %s" % [old_name, new_name])
 
 		# TODO: find a better way to hide old groups
-		var hide_groups: Array[String] = []
+		var hide_groups: Array = []
 		var skin_group: String
 		var skin_material: BaseMaterial3D
 		match new_value:
@@ -45,10 +45,10 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 				skin_group = "skin_enabled"
 				skin_material = skin.material_enabled
 
-		hide_groups = _hidden_groups[skin_group]
 		if skin_material:
 			update_skin_material.call_deferred(entity, skin, skin_material)
 
+		hide_groups = _hidden_groups[skin_group]
 		show_skin_group.call_deferred(entity, skin_group, hide_groups)
 
 
@@ -59,13 +59,13 @@ func update_skin_material(entity: Node, skin: ZC_Skin, material: BaseMaterial3D)
 		shape.material_override = material
 
 
-func show_skin_group(entity: Node, show_group: String, hide_groups: Array[String] = []) -> void:
+func show_skin_group(entity: Node, show_group: String, hide_groups: Array = []) -> void:
 	var all_children := entity.find_children("*")
 	for child in all_children:
 		if child.is_in_group(show_group):
 			_toggle_node(child, true)
 
-		for hide_group in hide_groups:
+		for hide_group: String in hide_groups:
 			if child.is_in_group(hide_group):
 				_toggle_node(child, false)
 
