@@ -43,6 +43,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		return
 
+	if visible_menu == Menus.LOADING_MENU:
+		return
+
 	if event.is_action_pressed("menu_console"):
 		show_console()
 		get_viewport().set_input_as_handled()
