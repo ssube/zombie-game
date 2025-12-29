@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ZR_Campaign" load_steps=18 format=3 uid="uid://dhop75hkvee3x"]
+[gd_resource type="Resource" script_class="ZR_Campaign" load_steps=22 format=3 uid="uid://dhop75hkvee3x"]
 
 [ext_resource type="Script" uid="uid://6e7chkl4nt6l" path="res://scripts/resources/ZR_CampaignLevel.gd" id="1_y5d03"]
 [ext_resource type="PackedScene" uid="uid://yvupurpwmap4" path="res://levels/level_0.tscn" id="2_2gt56"]
@@ -9,7 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://bv4ooq3kct6wv" path="res://levels/zone_1_hotel_floor_1.tscn" id="5_yk5cd"]
 [ext_resource type="PackedScene" uid="uid://djo5cynmo7f4y" path="res://levels/test_town.tscn" id="6_li4a4"]
 [ext_resource type="PackedScene" uid="uid://cpgmxyybvd4x8" path="res://levels/spooky_church.tscn" id="8_yk5cd"]
+[ext_resource type="Texture2D" uid="uid://d16fipqw30tyn" path="res://levels/bus_stop.png" id="9_3xt08"]
 [ext_resource type="PackedScene" uid="uid://v18fidmgep15" path="res://levels/bus_stop.tscn" id="9_jcgx8"]
+[ext_resource type="Texture2D" uid="uid://d377jpd1i4ors" path="res://levels/fishing_pier.png" id="11_vhxrf"]
+[ext_resource type="PackedScene" uid="uid://b687g8br5b2mv" path="res://levels/fishing_pier.tscn" id="12_munrn"]
 
 [sub_resource type="Resource" id="Resource_ucckl"]
 script = ExtResource("1_y5d03")
@@ -69,9 +72,21 @@ script = ExtResource("1_y5d03")
 key = "bus_stop"
 title = "Bus Stop"
 scene = ExtResource("9_jcgx8")
+loading_image = ExtResource("9_3xt08")
+min_load_time = 5.0
+metadata/_custom_type_script = "uid://6e7chkl4nt6l"
+
+[sub_resource type="Resource" id="Resource_7xqtk"]
+script = ExtResource("1_y5d03")
+key = "fishing_pier"
+title = "Fishing Pier"
+scene = ExtResource("12_munrn")
+loading_hints = Array[String](["Fish are food, if you're a zombie."])
+loading_image = ExtResource("11_vhxrf")
+min_load_time = 5.0
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
 [resource]
 script = ExtResource("2_nkvo0")
-levels = Array[ExtResource("1_y5d03")]([SubResource("Resource_ucckl"), SubResource("Resource_apgre"), SubResource("Resource_v2ej0"), SubResource("Resource_lm6ky"), SubResource("Resource_2gt56"), SubResource("Resource_2rk21"), SubResource("Resource_3xt08")])
+levels = Array[ExtResource("1_y5d03")]([SubResource("Resource_ucckl"), SubResource("Resource_apgre"), SubResource("Resource_v2ej0"), SubResource("Resource_lm6ky"), SubResource("Resource_2gt56"), SubResource("Resource_2rk21"), SubResource("Resource_3xt08"), SubResource("Resource_7xqtk")])
 metadata/_custom_type_script = "uid://b2epsdmony1gs"
