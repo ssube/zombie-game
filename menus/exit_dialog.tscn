@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1mfodqblneky"]
+[gd_scene load_steps=4 format=3 uid="uid://d1mfodqblneky"]
 
 [ext_resource type="Script" uid="uid://rtidq1edask0" path="res://scripts/menus/exit_dialog.gd" id="1_vxrlt"]
+[ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="2_xhui5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t5x1p"]
 
@@ -56,7 +57,7 @@ text = "Quit"
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_t5x1p")
 
-[node name="BackButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer"]
+[node name="BackButton" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer" instance=ExtResource("2_xhui5")]
 layout_mode = 2
 text = "Back"
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpq3jghlq6nh2"]
+[gd_scene load_steps=5 format=3 uid="uid://cpq3jghlq6nh2"]
 
 [ext_resource type="Script" uid="uid://dtcaskyoxco5q" path="res://scripts/menus/level_select_item.gd" id="1_g2ath"]
+[ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="2_jqf7m"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_l7yks"]
 
@@ -16,8 +17,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g2ath")
-title_label = NodePath("MarginContainer/Button/HFlowContainer/Label")
-level_image = NodePath("MarginContainer/Button/HFlowContainer/TextureRect")
+title_label = NodePath("MarginContainer/AudioButton/HFlowContainer/Label")
+level_image = NodePath("MarginContainer/AudioButton/HFlowContainer/TextureRect")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -27,11 +28,12 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Button" type="Button" parent="MarginContainer"]
+[node name="AudioButton" parent="MarginContainer" instance=ExtResource("2_jqf7m")]
 custom_minimum_size = Vector2(0, 136)
 layout_mode = 2
+text = ""
 
-[node name="HFlowContainer" type="HFlowContainer" parent="MarginContainer/Button"]
+[node name="HFlowContainer" type="HFlowContainer" parent="MarginContainer/AudioButton"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -42,17 +44,17 @@ offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Button/HFlowContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/AudioButton/HFlowContainer"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = SubResource("NoiseTexture2D_l7yks")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="MarginContainer/Button/HFlowContainer"]
+[node name="Label" type="Label" parent="MarginContainer/AudioButton/HFlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "sdafasdfsd"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/AudioButton" to="." method="_on_button_pressed"]
