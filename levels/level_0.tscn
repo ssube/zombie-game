@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="5_fv0x7"]
 [ext_resource type="PackedScene" uid="uid://lbpyhtg453yg" path="res://entities/debug/zombie_spawn.tscn" id="5_lf4l6"]
 [ext_resource type="PackedScene" uid="uid://d2xp0y8vxoff3" path="res://entities/props/ball.tscn" id="6_owf05"]
-[ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="7_uuq13"]
+[ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel_explosive.tscn" id="7_uuq13"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door_wood_cw.tscn" id="8_58gyl"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="9_ggct0"]
 [ext_resource type="PackedScene" uid="uid://bq6a52tvj60bq" path="res://entities/characters/hotel_clerk.tscn" id="11_ggct0"]

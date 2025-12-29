@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://tvmpfdtpvbem" path="res://entities/props/street_light.tscn" id="5_dtwg0"]
 [ext_resource type="PackedScene" uid="uid://dldnu5jwuvjpo" path="res://entities/props/traffic_cone_double_stripe.tscn" id="5_tr8cq"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="5_y6j6u"]
-[ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="6_b7jq5"]
+[ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel_explosive.tscn" id="6_b7jq5"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="6_dm6vb"]
 [ext_resource type="Material" uid="uid://dk6tau17b5f76" path="res://textures/Color Maps/concrete_tx_6.tres" id="7_02tq1"]
 [ext_resource type="PackedScene" uid="uid://dfbrotsd7nstf" path="res://entities/props/traffic_cone.tscn" id="7_7khm6"]

@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="6_3k1mp"]
 [ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="6_3wwps"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door_wood_cw.tscn" id="8_4uioy"]
-[ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="8_ebfu5"]
+[ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel_explosive.tscn" id="8_ebfu5"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="8_wks3y"]
 [ext_resource type="Material" uid="uid://c67ov6fslkehf" path="res://textures/Color Maps/water_1.tres" id="10_1pddc"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="10_1ytwx"]

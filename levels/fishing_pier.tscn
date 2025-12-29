@@ -1,8 +1,13 @@
-[gd_scene load_steps=225 format=4 uid="uid://b687g8br5b2mv"]
+[gd_scene load_steps=236 format=4 uid="uid://b687g8br5b2mv"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_vf316"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_24vc2"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_tpjaq"]
+[ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="3_0007p"]
+[ext_resource type="PackedScene" uid="uid://dsjfc00ufve4t" path="res://entities/props/pine_tree_1_1.tscn" id="3_qv3ha"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="3_xtxad"]
+[ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="4_4nd5y"]
+[ext_resource type="Script" uid="uid://hu6tpnmjxa07" path="res://scripts/nodes/actions/ZN_SpeedModifierAction.gd" id="4_sg4l5"]
 [ext_resource type="Material" uid="uid://dsoh4noka57kw" path="res://textures/Color Maps/wood_8.tres" id="4_tpjaq"]
 [ext_resource type="Material" uid="uid://vq88t5vuqjfq" path="res://textures/Color Maps/wood_pt_4.tres" id="5_edr2s"]
 [ext_resource type="Material" uid="uid://cc7i2gt3t4y1j" path="res://textures/Color Maps/concrete_pt_4.tres" id="6_xtxad"]
@@ -18,6 +23,20 @@
 [ext_resource type="Material" uid="uid://c67ov6fslkehf" path="res://textures/Color Maps/water_1.tres" id="16_r8vtg"]
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="17_mk2pv"]
 [ext_resource type="PackedScene" uid="uid://bu2ntm7c8cyn8" path="res://skies/sky_day.tscn" id="18_tpjaq"]
+[ext_resource type="PackedScene" uid="uid://8f7bugrofvmc" path="res://entities/props/barrel_fire.tscn" id="19_xtxad"]
+[ext_resource type="AudioStream" uid="uid://ckpw468b6ekwv" path="res://sounds/beach_freesound_372021.wav" id="21_k8bry"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="22_fk3c4"]
+[ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="23_24vc2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fnrws"]
+size = Vector3(25, 3, 100)
+
+[sub_resource type="Resource" id="Resource_7ipmy"]
+script = ExtResource("4_4nd5y")
+effect = 3
+duration = inf
+strength = 0.3
+metadata/_custom_type_script = "uid://ewo3m4f384i0"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_xtxad"]
 _surfaces = [{
@@ -807,15 +826,45 @@ metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
 [node name="Areas" type="Node" parent="."]
 
+[node name="ZN_TriggerArea3D" type="Area3D" parent="Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, -6.75, 13)
+collision_layer = 24
+collision_mask = 24
+script = ExtResource("2_24vc2")
+trigger_on_exit = true
+trigger_on_body_interval = false
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/ZN_TriggerArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_fnrws")
+
+[node name="ZN_ScreenEffectAction" type="Node" parent="Areas/ZN_TriggerArea3D"]
+script = ExtResource("3_0007p")
+effect = SubResource("Resource_7ipmy")
+metadata/_custom_type_script = "uid://dmonxsvpyoytj"
+
+[node name="ZN_SpeedModifierAction" type="Node" parent="Areas/ZN_TriggerArea3D"]
+script = ExtResource("4_sg4l5")
+speed_multiplier = 0.5
+metadata/_custom_type_script = "uid://hu6tpnmjxa07"
+
 [node name="Entities" type="Node" parent="."]
 unique_name_in_owner = true
+
+[node name="Barrel" parent="Entities" instance=ExtResource("19_xtxad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.008009, 0.39999998, 0.060431957)
+id = "FishingPier_ZE_Barrel_1767043086_39795"
+
+[node name="PineTree_1_1" parent="Entities" instance=ExtResource("3_qv3ha")]
+transform = Transform3D(0.95471925, 0, 0.29750818, 0, 1, 0, -0.29750818, 0, 0.95471925, 14.0750475, -0.65130615, 42.188152)
 
 [node name="Lights" type="Node" parent="."]
 
 [node name="Markers" type="Node" parent="."]
 
 [node name="Start" type="Marker3D" parent="Markers"]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -26, -0.964674, -2)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.400211, 0.7186712, 0.0037620068)
 
 [node name="Map" type="Node3D" parent="." groups=["level"]]
 script = ExtResource("2_tpjaq")
@@ -1471,6 +1520,7 @@ occluder = SubResource("ArrayOccluder3D_0ct3y")
 shape = SubResource("ConcavePolygonShape3D_i2vqg")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+visible = false
 navigation_mesh = SubResource("NavigationMesh_0ct3y")
 
 [node name="Objectives" type="Node" parent="."]
@@ -1488,3 +1538,42 @@ metadata/_custom_type_script = "uid://b560n5psxwkuk"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.9659258, 0.06698735, -0.25000006, 0, 0.9659259, 0.2588191, 0.2588191, -0.25000003, 0.9330127, -7.6862698, 7.0653906, 54.765)
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.983921, 0, 38.22873)
+stream = ExtResource("21_k8bry")
+volume_db = -6.0
+unit_size = 25.0
+script = ExtResource("22_fk3c4")
+play_on_ready = true
+play_on_loop = true
+subtitle_text = "Waves lapping"
+remove_on_finished = false
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
+[node name="ZN_AudioSubtitle3D2" type="AudioStreamPlayer3D" parent="Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.889084, 0, 4.7788467)
+stream = ExtResource("21_k8bry")
+volume_db = -6.0
+unit_size = 25.0
+script = ExtResource("22_fk3c4")
+play_on_ready = true
+play_on_loop = true
+subtitle_text = "Waves lapping"
+remove_on_finished = false
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
+[node name="ZN_AudioLoopPlayer" type="AudioStreamPlayer3D" parent="Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.315876, 2.4743261, 17.53519)
+stream = ExtResource("23_24vc2")
+volume_db = -3.0
+unit_size = 25.0
+pitch_scale = 0.6
+script = ExtResource("22_fk3c4")
+play_on_ready = true
+play_on_loop = true
+subtitle_text = "Machinery"
+remove_on_finished = false
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
