@@ -1,9 +1,11 @@
-[gd_scene load_steps=117 format=4 uid="uid://v18fidmgep15"]
+[gd_scene load_steps=121 format=4 uid="uid://v18fidmgep15"]
 
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_b7jq5"]
+[ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_dm6vb"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="2_7khm6"]
 [ext_resource type="PackedScene" uid="uid://djk8f60j3oei0" path="res://entities/props/car_5_red.tscn" id="3_tu73e"]
 [ext_resource type="PackedScene" uid="uid://bsbjr3bmewqll" path="res://entities/props/car_5_police.tscn" id="4_ccg5v"]
+[ext_resource type="PackedScene" uid="uid://tvmpfdtpvbem" path="res://entities/props/street_light.tscn" id="5_dtwg0"]
 [ext_resource type="PackedScene" uid="uid://dldnu5jwuvjpo" path="res://entities/props/traffic_cone_double_stripe.tscn" id="5_tr8cq"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="5_y6j6u"]
 [ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel.tscn" id="6_b7jq5"]
@@ -11,6 +13,8 @@
 [ext_resource type="Material" uid="uid://dk6tau17b5f76" path="res://textures/Color Maps/concrete_tx_6.tres" id="7_02tq1"]
 [ext_resource type="PackedScene" uid="uid://dfbrotsd7nstf" path="res://entities/props/traffic_cone.tscn" id="7_7khm6"]
 [ext_resource type="Material" uid="uid://d2oaplvcftcrx" path="res://textures/Color Maps/brick_wall_pt_2.tres" id="9_1l5jw"]
+[ext_resource type="PackedScene" uid="uid://dp5sj0i441jcp" path="res://entities/props/trash_1.tscn" id="9_y6j6u"]
+[ext_resource type="PackedScene" uid="uid://rco5rs1kt8u5" path="res://entities/props/trash_2.tscn" id="10_dm6vb"]
 [ext_resource type="Material" uid="uid://c1aamlmiyxnnc" path="res://textures/Color Maps/asphalt_old_pt_1_2.tres" id="11_7khm6"]
 [ext_resource type="Material" uid="uid://cavhv65btryye" path="res://textures/Color Maps/grass_2.tres" id="12_b7jq5"]
 [ext_resource type="Material" uid="uid://vq88t5vuqjfq" path="res://textures/Color Maps/wood_pt_4.tres" id="13_7khm6"]
@@ -407,7 +411,10 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 4, 3), PackedInt32Arr
 geometry_source_geometry_mode = 1
 geometry_source_group_name = &"level"
 
-[node name="BusStop" type="Node3D"]
+[node name="BusStop" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
+script = ExtResource("1_dm6vb")
+screenshot_camera = NodePath("Camera3D")
+metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
 [node name="Entities" type="Node3D" parent="."]
 
@@ -422,8 +429,38 @@ id = "TestTown_ZE_Weapon_1766272350_80923"
 [node name="Car5Red" parent="Entities" groups=["level"] instance=ExtResource("3_tu73e")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.575405, -0.222734, -6.8905115)
 
+[node name="SpotLight3D" type="SpotLight3D" parent="Entities/Car5Red"]
+transform = Transform3D(1, 3.4344467e-15, -8.742278e-08, -1.7763568e-15, -1, -5.9604645e-08, -8.742278e-08, 5.9604645e-08, -1, 0.95120955, 0.98103154, 3.527712)
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Entities/Car5Red"]
+transform = Transform3D(1, 3.4344467e-15, -8.742278e-08, -1.7763568e-15, -1, -5.9604645e-08, -8.742278e-08, 5.9604645e-08, -1, -0.93104935, 0.98103154, 3.5277116)
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Entities/Car5Red"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.64980507, 1.1214526, -3.7560372)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.5
+omni_range = 3.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Entities/Car5Red"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6582346, 1.1214526, -3.7560372)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.5
+omni_range = 3.0
+
 [node name="Car5Police" parent="Entities" groups=["level"] instance=ExtResource("4_ccg5v")]
-transform = Transform3D(0.96565425, 0, -0.2598304, 0, 1, 0, 0.2598304, 0, 0.96565425, -27.64278, -0.22273639, 16.326828)
+transform = Transform3D(0.96471816, 0.044020407, -0.25957853, -0.03263053, 0.9983132, 0.048027422, 0.26125482, -0.03786274, 0.96452713, -27.382696, -0.028509647, 15.755138)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Entities/Car5Police"]
+transform = Transform3D(-0.4614711, 0.01743785, 0.886984, -0.0014992729, 0.9997896, -0.02043558, -0.8871538, -0.01076027, -0.461348, -1.1115475, 1.8133864, 0.94540215)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 12.4607115
+spot_angle = 40.0
+spot_angle_attenuation = 0.7320427
 
 [node name="TrafficCone" parent="Entities" instance=ExtResource("5_tr8cq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.955515, 0.3578602, -1.7691089)
@@ -450,16 +487,72 @@ transform = Transform3D(0.9775889, 0, 0.21052295, 0, 1, 0, -0.21052295, 0, 0.977
 transform = Transform3D(0.86271673, 0, -0.5056875, 0, 1, 0, 0.5056875, 0, 0.86271673, -16.159756, 1.1499999, -0.1173166)
 
 [node name="TrafficCone7" parent="Entities" instance=ExtResource("7_7khm6")]
-transform = Transform3D(0.97372216, 0, 0.22773911, 0, 1, 0, -0.22773911, 0, 0.97372216, 26.134611, 0.7802011, -0.36898923)
+transform = Transform3D(0.97372216, 0, 0.22773911, 0, 1, 0, -0.22773911, 0, 0.97372216, 23.085796, 0.60289145, 0.77081585)
+
+[node name="Dumpster" parent="Entities" instance=ExtResource("21_tu73e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.697096, 0.25062275, 34.145134)
+
+[node name="Trash1" parent="Entities" instance=ExtResource("9_y6j6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.684347, -0.010999858, 2.6494122)
+
+[node name="Trash2" parent="Entities" instance=ExtResource("10_dm6vb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.879467, 4.7683716e-07, -8.451016)
+
+[node name="Trash3" parent="Entities" instance=ExtResource("9_y6j6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.657106, 9.536743e-07, -8.10803)
+
+[node name="Trash4" parent="Entities" instance=ExtResource("10_dm6vb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.569433, 0.25, 0.21094656)
+
+[node name="Trash5" parent="Entities" instance=ExtResource("9_y6j6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.03298, 0.25, -0.08067918)
+
+[node name="Trash6" parent="Entities" instance=ExtResource("10_dm6vb")]
+transform = Transform3D(0.5429693, 0, 0.83975255, 0, 1, 0, -0.83975255, 0, 0.5429693, 21.55569, 0.24999976, -0.23851418)
+
+[node name="Trash7" parent="Entities" instance=ExtResource("9_y6j6u")]
+transform = Transform3D(0.6857802, 0, -0.72780865, 0, 1, 0, 0.72780865, 0, 0.6857802, 21.980412, -4.7683716e-07, -1.5622506)
+
+[node name="Trash8" parent="Entities" instance=ExtResource("10_dm6vb")]
+transform = Transform3D(0.93781626, 0, 0.3471321, 0, 1, 0, -0.3471321, 0, 0.93781626, 21.350798, -2.3841858e-07, -1.4928637)
+
+[node name="StreetLight" parent="Entities" instance=ExtResource("5_dtwg0")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 23.472279, -1.0947828, -9.439066)
+
+[node name="StreetLight2" parent="Entities" instance=ExtResource("5_dtwg0")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15.527721, -1.0947828, -9.439066)
+
+[node name="StreetLight4" parent="Entities" instance=ExtResource("5_dtwg0")]
+transform = Transform3D(1, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, 1, -29.081528, -1.094779, 34.88362)
+
+[node name="StreetLight3" parent="Entities" instance=ExtResource("5_dtwg0")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -53.52772, -1.0947828, -9.439066)
+
+[node name="Trash9" parent="Entities" instance=ExtResource("10_dm6vb")]
+transform = Transform3D(0.85157144, 0, -0.5242386, 0, 1, 0, 0.5242386, 0, 0.85157144, -44.254353, 0, -3.1324222)
+
+[node name="Trash10" parent="Entities" instance=ExtResource("9_y6j6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.587616, 0, -6.505074)
+
+[node name="TrafficCone8" parent="Entities" instance=ExtResource("5_tr8cq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.54651, 0.3578602, -8.044638)
+
+[node name="TrafficCone9" parent="Entities" instance=ExtResource("5_tr8cq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.52046, 0.3578602, -7.583598)
+
+[node name="TrafficCone10" parent="Entities" instance=ExtResource("5_tr8cq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.379623, 0.6078602, 0.6341927)
+
+[node name="TrafficCone11" parent="Entities" instance=ExtResource("5_tr8cq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.12238, 0.60785973, 1.0873463)
+
+[node name="TrafficCone12" parent="Entities" instance=ExtResource("5_tr8cq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.546272, 0.6078602, 1.1212034)
+
+[node name="TrafficCone13" parent="Entities" instance=ExtResource("5_tr8cq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.609315, 0.60785973, 0.7654824)
 
 [node name="Lights" type="Node3D" parent="."]
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(-0.1269607, 0, 0.9919078, 0, 1, 0, -0.9919078, 0, -0.1269607, -28.961794, 1.5906501, 16.950949)
-light_energy = 5.0
-shadow_enabled = true
-spot_range = 12.4607115
-spot_angle_attenuation = 0.7320427
 
 [node name="Markers" type="Node3D" parent="."]
 
@@ -764,6 +857,7 @@ shape = SubResource("ConvexPolygonShape3D_qe71q")
 [node name="SkyNight" parent="Sky" instance=ExtResource("15_2vafd")]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+visible = false
 navigation_mesh = SubResource("NavigationMesh_2vafd")
 
 [node name="ZN_AudioLoopPlayer" type="AudioStreamPlayer" parent="."]
@@ -772,5 +866,6 @@ volume_db = -3.0
 pitch_scale = 0.6
 script = ExtResource("17_tr8cq")
 
-[node name="Node3D" parent="." instance=ExtResource("21_tu73e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.697096, 0.25062275, 34.145134)
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.74457955, 0.33376688, -0.5781012, -6.160103e-08, 0.8660254, 0.50000006, 0.6675338, 0.37228984, -0.64482474, -27.326052, 13.346006, -8.322976)
+current = true
