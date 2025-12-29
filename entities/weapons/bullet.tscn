@@ -25,6 +25,7 @@ radius = 0.1
 [node name="Bullet" type="RigidBody3D"]
 collision_layer = 2
 collision_mask = 31
+continuous_cd = true
 script = ExtResource("1_a2x2l")
 prefab_path = "res://entities/weapons/bullet.tscn"
 component_resources = Array[ExtResource("2_a0ooq")]([SubResource("Resource_u10uh"), SubResource("Resource_74leh")])
