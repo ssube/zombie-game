@@ -19,6 +19,8 @@ signal level_loaded
 
 var current_level_name: String
 var next_level_name: String
+var deleted_entities: Array[String] = []
+
 
 func _ready():
 	campaign.cache()

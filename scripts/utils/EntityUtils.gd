@@ -259,6 +259,8 @@ static func get_screen_effects(entity: Node) -> Dictionary[ZM_BaseMenu.Effects, 
 static func remove_immediate(entity: Node) -> void:
 	if entity is Entity:
 		ECS.world.remove_entity(entity)
+		if entity.has_component(ZC_Persistent):
+			SaveManager.deleted_ids.append(entity.id)
 
 	var parent = entity.get_parent()
 	if parent:

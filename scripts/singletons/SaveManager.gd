@@ -2,6 +2,9 @@ class_name SaveManager
 
 
 static var save_version: int = 1
+static var deleted_ids: Array[String] = []
+
+static var _component_cache: Dictionary[String, String] = {}
 
 
 # var _deleted: Array[String] = []
@@ -85,7 +88,7 @@ static func save_game(name: String) -> bool:
 	return true
 
 
-static func load_game(name: String, root: Node, use_json: bool = true) -> bool:
+static func load_game(name: String, root: Node, use_json: bool = false) -> bool:
 	if use_json:
 		return false
 		# return load_game_json(name, root)
@@ -114,9 +117,6 @@ static func load_game_resource(name: String, root: Node) -> bool:
 	deserialize_players(game_data.players, root.get_node("World/Entities"))
 
 	return true
-
-
-static var _component_cache: Dictionary[String, String] = {}
 
 
 static func _cache_components() -> void:
@@ -167,13 +167,16 @@ static func serialize_entity(entity: Entity) -> ZP_SavedEntity:
 static func serialize_relationship(relationship: Relationship) -> ZP_SavedRelationship:
 	var saved_relationship := ZP_SavedRelationship.new()
 	saved_relationship.relation = serialize_component(relationship.relation)
-	if relationship.target is Entity:
-		saved_relationship.target_type = ZP_SavedRelationship.TargetType.ENTITY
-		saved_relationship.target_entity_id = relationship.target_entity.id
-	else:
-		saved_relationship.target_type = ZP_SavedRelationship.TargetType.COMPONENT
-		saved_relationship.target_entity_id = ""
-		saved_relationship.target_component = serialize_component(relationship.target)
+	if is_instance_valid(relationship.target):
+		if relationship.target is Entity:
+			saved_relationship.target_type = ZP_SavedRelationship.TargetType.ENTITY
+			saved_relationship.target_entity_id = relationship.target.id
+		elif relationship.target is Component:
+			saved_relationship.target_type = ZP_SavedRelationship.TargetType.COMPONENT
+			saved_relationship.target_entity_id = ""
+			saved_relationship.target_component = serialize_component(relationship.target)
+		else:
+			printerr("Unknown relationship target type: %s" % type_string(typeof(relationship.target)))
 
 	return saved_relationship
 
@@ -184,9 +187,8 @@ static func serialize_level() -> ZP_SavedLevel:
 	for entity in ECS.world.query.with_all([ZC_Persistent]).execute():
 		saved_level.entities[entity.id] = serialize_entity(entity)
 
+	saved_level.deleted = SaveManager.deleted_ids.duplicate()
 	saved_level.objectives = ObjectiveManager.save()
-
-	# TODO: include deleted entities
 
 	return saved_level
 
@@ -272,8 +274,11 @@ static func deserialize_level(saved_level: ZP_SavedLevel) -> void:
 	# TODO: add all entities, even existing ones
 	var entity_lookup: Dictionary[String, Entity] = {}
 
-	# First pass: create all entities
+	# Create all entities
 	for entity_id in saved_level.entities.keys():
+		if entity_id in saved_level.deleted:
+			continue
+
 		var saved_entity := saved_level.entities[entity_id]
 		var entity := deserialize_entity(saved_entity)
 		entity.id = entity_id
@@ -281,12 +286,13 @@ static func deserialize_level(saved_level: ZP_SavedLevel) -> void:
 		EntityUtils.upsert(entity)
 
 	# Handle deleted entities
+	deleted_ids = saved_level.deleted
 	for deleted_id in saved_level.deleted:
 		var entity := ECS.world.get_entity_by_id(deleted_id)
 		if entity != null:
 			ECS.world.remove_entity(entity)
 
-	# Second pass: set up relationships
+	# Set up relationships
 	for entity_id in saved_level.entities.keys():
 		var saved_entity := saved_level.entities[entity_id]
 		var entity := ECS.world.get_entity_by_id(entity_id)
