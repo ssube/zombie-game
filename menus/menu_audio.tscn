@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://calgaewey8pnp"]
+
+[ext_resource type="AudioStream" uid="uid://cyqxx7tg2vju4" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/Ambiences/ambience_d24_loop.ogg" id="1_tesnm"]
+[ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="2_h0xai"]
+[ext_resource type="AudioStream" uid="uid://gk384xmlorv7" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/Ambiences/ambience_d25_loop.ogg" id="3_xth7c"]
+
+[node name="MenuAudio" type="Node"]
+
+[node name="High" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_tesnm")
+parameters/looping = true
+script = ExtResource("2_h0xai")
+metadata/_custom_type_script = "uid://by081awsnotnk"
+
+[node name="Bass" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xth7c")
+volume_db = -6.0
+parameters/looping = true
+script = ExtResource("2_h0xai")
+metadata/_custom_type_script = "uid://by081awsnotnk"

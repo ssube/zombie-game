@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cr5jfpxi4hksb"]
+[gd_scene load_steps=7 format=3 uid="uid://cr5jfpxi4hksb"]
 
 [ext_resource type="Script" uid="uid://u43hknwu1sv6" path="res://scripts/menus/level_select_menu.gd" id="1_4804j"]
 [ext_resource type="PackedScene" uid="uid://cpq3jghlq6nh2" path="res://menus/level_select_item.tscn" id="2_ty7iu"]
 [ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="3_pc0a2"]
+[ext_resource type="PackedScene" uid="uid://calgaewey8pnp" path="res://menus/menu_audio.tscn" id="4_o8g4n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bd1c"]
 content_margin_left = 0.0
@@ -93,5 +94,7 @@ layout_mode = 2
 [node name="BackButton" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/CenterContainer/HFlowContainer" instance=ExtResource("3_pc0a2")]
 layout_mode = 2
 text = "Back"
+
+[node name="MenuAudio" parent="." instance=ExtResource("4_o8g4n")]
 
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/CenterContainer/HFlowContainer/BackButton" to="." method="_on_back_button_pressed"]

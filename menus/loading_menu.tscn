@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://445cu24k4j5g"]
+[gd_scene load_steps=6 format=3 uid="uid://445cu24k4j5g"]
 
 [ext_resource type="Script" uid="uid://c7mwmktio4xx7" path="res://scripts/menus/loading_menu.gd" id="1_gn3ar"]
 [ext_resource type="Texture2D" uid="uid://xvvykos6jpvb" path="res://textures/level_placeholder.tres" id="2_4e30e"]
+[ext_resource type="PackedScene" uid="uid://calgaewey8pnp" path="res://menus/menu_audio.tscn" id="3_tbf8g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4e30e"]
 content_margin_left = 0.0
@@ -86,3 +87,5 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_gn3ar")
 layout_mode = 2
 text = "Hints"
 horizontal_alignment = 1
+
+[node name="MenuAudio" parent="." instance=ExtResource("3_tbf8g")]
