@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7li71yotxcsw"]
+
+[ext_resource type="Environment" uid="uid://bd2r2yo8od8m4" path="res://skies/spooky_church_env.tres" id="1_jals3"]
+
+[node name="SpookyChurch" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_jals3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.63205636, -0.020663666, -0.77464694, 0.7749225, 0.016854076, 0.6318316, 0, -0.99964446, 0.026665464, -25.659742, 11.69957, -0.9199772)
+light_color = Color(0.46, 0.2346, 0.2346, 1)
+light_energy = 0.5
+shadow_enabled = true

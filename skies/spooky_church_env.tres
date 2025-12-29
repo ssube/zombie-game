@@ -1,0 +1,14 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://bd2r2yo8od8m4"]
+
+[ext_resource type="Material" uid="uid://dmv27ox1dcha" path="res://skies/spooky_church_sky.tres" id="1_xk28k"]
+
+[sub_resource type="Sky" id="Sky_qbcix"]
+sky_material = ExtResource("1_xk28k")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_qbcix")
+ambient_light_source = 3
+fog_enabled = true
+fog_light_color = Color(0.019200003, 0.05783999, 0.12, 1)
+fog_sky_affect = 0.844

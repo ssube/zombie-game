@@ -1,7 +1,9 @@
-[gd_scene load_steps=268 format=4 uid="uid://cpgmxyybvd4x8"]
+[gd_scene load_steps=269 format=4 uid="uid://cpgmxyybvd4x8"]
 
+[ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_43fyf"]
 [ext_resource type="Texture2D" uid="uid://c51guvpg20wcf" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast4.png" id="1_qbcix"]
 [ext_resource type="PackedScene" uid="uid://dsjfc00ufve4t" path="res://entities/props/pine_tree_1_1.tscn" id="2_2rajt"]
+[ext_resource type="Script" uid="uid://bbgu5yekfkubs" path="res://scripts/resources/ZR_Weather.gd" id="2_2vnsd"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="4_gxru8"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="5_c71tc"]
 [ext_resource type="Material" uid="uid://dc65t78xmgn1c" path="res://textures/Color Maps/rock_pt_3.tres" id="6_a6qr0"]
@@ -17,6 +19,12 @@
 [ext_resource type="PackedScene" uid="uid://ctpldo10k58u7" path="res://entities/characters/spooky_monster.tscn" id="15_a6qr0"]
 [ext_resource type="AudioStream" uid="uid://jf13578h0spg" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/Ambiences/ambience_d4_loop.ogg" id="16_dfgex"]
 [ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="17_408hf"]
+[ext_resource type="PackedScene" uid="uid://c7li71yotxcsw" path="res://skies/spooky_church.tscn" id="20_43fyf"]
+
+[sub_resource type="Resource" id="Resource_g4oj3"]
+script = ExtResource("2_2vnsd")
+environment_scene = ExtResource("20_43fyf")
+metadata/_custom_type_script = "uid://bbgu5yekfkubs"
 
 [sub_resource type="Gradient" id="Gradient_0l6r6"]
 offsets = PackedFloat32Array(0.31034482, 0.9359606)
@@ -55,23 +63,6 @@ radius = 3.0
 height = 8.0
 radial_segments = 8
 rings = 6
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0l6r6"]
-sky_top_color = Color(0.08, 0.14799999, 0.32, 1)
-sky_horizon_color = Color(0.13999999, 0.5, 0.28400004, 1)
-ground_horizon_color = Color(0.14117648, 0.5019608, 0.28235295, 1)
-ground_curve = 0.05
-
-[sub_resource type="Sky" id="Sky_qbcix"]
-sky_material = SubResource("ProceduralSkyMaterial_0l6r6")
-
-[sub_resource type="Environment" id="Environment_2rajt"]
-background_mode = 2
-sky = SubResource("Sky_qbcix")
-ambient_light_source = 3
-fog_enabled = true
-fog_light_color = Color(0.019200003, 0.05783999, 0.12, 1)
-fog_sky_affect = 0.844
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2vnsd"]
 _surfaces = [{
@@ -908,6 +899,10 @@ region_merge_size = 5.0
 filter_ledge_spans = true
 
 [node name="SpookyChurch" type="Node3D"]
+script = ExtResource("1_43fyf")
+environment_node = NodePath("Sky")
+environment_scenes = Array[ExtResource("2_2vnsd")]([SubResource("Resource_g4oj3")])
+metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
 [node name="Areas" type="Node" parent="."]
 
@@ -943,9 +938,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.454174, 5.9319224, -2.186
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.185, 5.454, -2.25)
 
 [node name="Lights" type="Node" parent="."]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Lights"]
-environment = SubResource("Environment_2rajt")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.676823, 12.170843, -2.3348184)
@@ -1004,12 +996,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.21157, 1.000001, 6.573911
 distance_fade_enabled = true
 distance_fade_begin = 20.0
 omni_range = 10.0
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
-transform = Transform3D(0.63205636, -0.020663666, -0.77464694, 0.7749225, 0.016854076, 0.6318316, 0, -0.99964446, 0.026665464, -25.659742, 11.69957, -0.9199772)
-light_color = Color(0.46, 0.2346, 0.2346, 1)
-light_energy = 0.5
-shadow_enabled = true
 
 [node name="Markers" type="Node" parent="."]
 
@@ -1769,3 +1755,7 @@ metadata/_custom_type_script = "uid://b560n5psxwkuk"
 [node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_dfgex")
 script = ExtResource("17_408hf")
+
+[node name="Sky" type="Node" parent="."]
+
+[node name="SpookyChurch" parent="Sky" instance=ExtResource("20_43fyf")]
