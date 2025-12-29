@@ -24,6 +24,11 @@ const _hidden_groups: Dictionary[String, Array] = {
 @export var thunder_system: ZS_ThunderSystem = null
 
 
+func _ready() -> void:
+	var game := TreeUtils.get_game(self)
+	game.level_loaded.connect(_on_level_loaded)
+
+
 func watch() -> Resource:
 	return ZC_Weather
 
@@ -168,3 +173,19 @@ func _match_environment(component: ZC_Weather, environment: ZR_Weather, strict: 
 		return true
 
 	return false
+
+
+## Sync weather groups for the current weather type and time of day when a level is loaded
+func _on_level_loaded(_last_level: String, _new_level: String) -> void:
+	# In a multiplayer game, use the first player's weather component to set the environment
+	var players := EntityUtils.get_players()
+	if players.size() == 0:
+		return
+
+	var first_player := players[0]
+	var weather_component := first_player.get_component(ZC_Weather) as ZC_Weather
+	if weather_component == null:
+		return
+
+	_time_of_day_changed(first_player, weather_component, weather_component.time_of_day, null)
+	_weather_type_changed(first_player, weather_component, weather_component.weather_type, null)
