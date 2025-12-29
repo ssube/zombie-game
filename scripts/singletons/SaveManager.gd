@@ -216,7 +216,9 @@ static func serialize_relationship(relationship: Relationship) -> ZP_SavedRelati
 			saved_relationship.target_entity_id = ""
 			saved_relationship.target_component = serialize_component(relationship.target)
 		else:
-			printerr("Unknown relationship target type: %s" % type_string(typeof(relationship.target)))
+			var target_type := type_string(typeof(relationship.target))
+			assert(false, "Unknown relationship target type!")
+			printerr("Unknown relationship target type: %s" % target_type)
 
 	return saved_relationship
 
