@@ -190,14 +190,16 @@ func set_effect_strength(effect: Effects, strength: float = 1.0, fade_in: float 
 		Effects.VIGNETTE:
 			effect_node = $EffectLayer/VignetteEffect
 			var vignette_material := $EffectLayer/VignetteEffect.material as ShaderMaterial
-			vignette_material.set_shader_parameter("softness", strength)
+			var softness := clampf(strength, 0.1, 1.0)
+			vignette_material.set_shader_parameter("softness", softness)
 		Effects.WATER:
 			effect_node = $EffectLayer/WaterEffect
 
 	if strength == effect_node.modulate.a:
 		return
 
-	effect_node.modulate.a = lerp(effect_node.modulate.a, strength, fade_in)
+	# TODO: should probably be multiplied by delta so fade_in can be seconds
+	effect_node.modulate.a = lerp(strength, effect_node.modulate.a, fade_in)
 
 	if effect_node.modulate.a > 0:
 		effect_node.visible = true
