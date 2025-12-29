@@ -1,5 +1,6 @@
-[gd_scene load_steps=85 format=4 uid="uid://bse6riebwmfln"]
+[gd_scene load_steps=86 format=4 uid="uid://bse6riebwmfln"]
 
+[ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_betor"]
 [ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/props/objective.tscn" id="4_l53as"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="5_3sk1a"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="6_08mmt"]
@@ -419,14 +420,16 @@ geometry_source_group_name = &"level"
 region_merge_size = 5.0
 filter_ledge_spans = true
 
-[node name="Level1" type="Node3D"]
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
+script = ExtResource("1_betor")
+screenshot_camera = NodePath("Cameras/Screenshot")
+metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
 [node name="Entities" type="Node" parent="."]
 unique_name_in_owner = true
 
 [node name="Objective" parent="Entities" groups=["level"] instance=ExtResource("4_l53as")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9657078, 2.000002, 0.011570454)
-extra_components = Array[ExtResource("5_3sk1a")]([])
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3681421, 2.000002, -9.122614)
 id = "Level1_ZE_Objective_1764359962_34782"
 component_resources = Array[ExtResource("5_3sk1a")]([SubResource("Resource_6y5fu"), SubResource("Resource_nmsli"), SubResource("Resource_vjtdm")])
 
@@ -695,3 +698,9 @@ script = ExtResource("13_nmsli")
 key = "escape"
 title = "Find a way to escape"
 metadata/_custom_type_script = "uid://b560n5psxwkuk"
+
+[node name="Cameras" type="Node" parent="."]
+
+[node name="Screenshot" type="Camera3D" parent="Cameras"]
+transform = Transform3D(0.5685475, 0, -0.82265043, 0, 1, 0, 0.82265043, 0, 0.5685475, -2.9385753, 2.1795053, 2.0894098)
+current = true
