@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cr5jfpxi4hksb"]
+[gd_scene load_steps=5 format=3 uid="uid://cr5jfpxi4hksb"]
 
 [ext_resource type="Script" uid="uid://u43hknwu1sv6" path="res://scripts/menus/level_select_menu.gd" id="1_4804j"]
 [ext_resource type="PackedScene" uid="uid://cpq3jghlq6nh2" path="res://menus/level_select_item.tscn" id="2_ty7iu"]
@@ -15,8 +15,6 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4804j"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ty7iu"]
 
 [node name="LevelSelectMenu" type="AspectRatioContainer" node_paths=PackedStringArray("level_list")]
 anchors_preset = 15
@@ -95,14 +93,4 @@ layout_mode = 2
 layout_mode = 2
 text = "Back"
 
-[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/CenterContainer/HFlowContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/separator = SubResource("StyleBoxEmpty_ty7iu")
-
-[node name="LoadButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/CenterContainer/HFlowContainer"]
-layout_mode = 2
-text = "Load"
-
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/CenterContainer/HFlowContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/CenterContainer/HFlowContainer/LoadButton" to="." method="_on_load_button_pressed"]
