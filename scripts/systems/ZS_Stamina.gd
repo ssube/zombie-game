@@ -17,11 +17,26 @@ var _effect_delta: float = 0.0
 )
 
 
+func _ready() -> void:
+	var game := TreeUtils.get_game(self)
+	game.level_loaded.connect(_on_level_loaded)
+
+
 func query() -> QueryBuilder:
 	return q.with_all([ZC_Stamina])
 
 
-func _update_effects(delta: float) -> bool:
+func _on_level_loaded(_old_level: String, _new_level: String) -> void:
+	var players := EntityUtils.get_players()
+	for player in players:
+		var stamina := player.get_component(ZC_Stamina) as ZC_Stamina
+		if stamina == null:
+			continue
+
+		_update_effects(player, stamina)
+
+
+func _should_update_effects(delta: float) -> bool:
 	_effect_delta += delta
 	if _effect_delta >= effect_interval:
 		_effect_delta = 0.0
@@ -30,8 +45,20 @@ func _update_effects(delta: float) -> bool:
 	return false
 
 
+func _update_effects(entity: Entity, stamina: ZC_Stamina) -> void:
+	var inv_stamina_ratio := 1.0 - (stamina.current_stamina / stamina.max_stamina)
+	var effect := ZC_Screen_Effect.new()
+	effect.effect = ZM_BaseMenu.Effects.VIGNETTE
+	effect.strength = lerpf(-0.1, 0.7, clampf(inv_stamina_ratio, 0.0, 0.8))
+	effect.strength = clampf(effect.strength, 0.0, 1.0)
+	effect.duration = 5.0
+
+	entity.remove_relationship(remove_query, 1)
+	entity.add_relationship(RelationshipUtils.make_effect(effect))
+
+
 func process(entities: Array[Entity], _components: Array, delta: float) -> void:
-	var update_effects := _update_effects(delta)
+	var should_update_effects := _should_update_effects(delta)
 
 	for entity in entities:
 		var stamina := entity.get_component(ZC_Stamina) as ZC_Stamina
@@ -59,13 +86,5 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 			%Menu.set_stamina(stamina.current_stamina)
 
 			# update once per second or so
-			if update_effects:
-				var inv_stamina_ratio := 1.0 - (stamina.current_stamina / stamina.max_stamina)
-				var effect := ZC_Screen_Effect.new()
-				effect.effect = ZM_BaseMenu.Effects.VIGNETTE
-				effect.strength = lerpf(-0.1, 0.7, clampf(inv_stamina_ratio, 0.0, 0.8))
-				effect.strength = clampf(effect.strength, 0.0, 1.0)
-				effect.duration = 5.0
-
-				entity.remove_relationship(remove_query, 1)
-				entity.add_relationship(RelationshipUtils.make_effect(effect))
+			if should_update_effects:
+				_update_effects(entity, stamina)
