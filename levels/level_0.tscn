@@ -44,11 +44,11 @@
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="35_lf4l6"]
 [ext_resource type="Script" uid="uid://dx3tgietk0dly" path="res://addons/QuakeLamp/FlickerComponent.gd" id="35_o4imw"]
 [ext_resource type="Script" uid="uid://bn1fw86ypw3a6" path="res://scripts/nodes/actions/ZN_PortalAction.gd" id="35_q6gno"]
-[ext_resource type="PackedScene" uid="uid://bypbk1livtqai" path="res://entities/props/puddle_thunder.tscn" id="37_v4yv6"]
+[ext_resource type="PackedScene" uid="uid://bypbk1livtqai" path="res://entities/props/puddle_water.tscn" id="37_v4yv6"]
 [ext_resource type="Script" uid="uid://cpxac3i6p71x0" path="res://scripts/nodes/objectives/ZN_CountObjective.gd" id="38_2fv0q"]
 [ext_resource type="PackedScene" uid="uid://c8tswr23gn5mg" path="res://entities/items/armor.tscn" id="38_g1jay"]
 [ext_resource type="PackedScene" uid="uid://c4timw2odgktn" path="res://entities/props/glass_sheet.tscn" id="39_2fv0q"]
-[ext_resource type="PackedScene" uid="uid://d2lqgdvcjtotl" path="res://effects/water_drip.tscn" id="42_ijfse"]
+[ext_resource type="PackedScene" uid="uid://d2lqgdvcjtotl" path="res://entities/props/water_drip.tscn" id="42_ijfse"]
 [ext_resource type="PackedScene" uid="uid://cwpv6dhxasw3v" path="res://entities/debug/button_weather.tscn" id="43_r7enh"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ukt1r"]

@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="3_br04h"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="4_auidd"]
 [ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="5_br04h"]
-[ext_resource type="Material" uid="uid://c67ov6fslkehf" path="res://textures/Color Maps/water_1.tres" id="6_auidd"]
+[ext_resource type="PackedScene" uid="uid://bypbk1livtqai" path="res://entities/props/puddle_water.tscn" id="6_ne41f"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="7_6v5qc"]
 [ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="7_jwf3j"]
 [ext_resource type="AudioStream" uid="uid://1738ctor0i17" path="res://sounds/water_drip_freesound_353686.mp3" id="7_regav"]
@@ -81,11 +81,8 @@ script = ExtResource("5_br04h")
 fire_mode = 1
 metadata/_custom_type_script = "uid://do7trwtn8xc7t"
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
-height = 0.1
-sides = 16
-material = ExtResource("6_auidd")
+[node name="PuddleWater" parent="." instance=ExtResource("6_ne41f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -2, 0)
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_regav")
