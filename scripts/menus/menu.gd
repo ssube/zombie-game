@@ -23,6 +23,7 @@ var pause_menus: Dictionary[Menus, bool] = {
 	Menus.DIALOGUE_BALLOON: $MenuLayer/DialogueMenu,
 	Menus.CONSOLE_MENU: $MenuLayer/ConsoleMenu,
 	Menus.LEVEL_END_MENU: $MenuLayer/LevelEndMenu,
+	Menus.LEVEL_SELECT_MENU: $MenuLayer/LevelSelectMenu,
 }
 
 
@@ -212,8 +213,7 @@ func _hide_effect_node(node: Node) -> void:
 
 
 func _on_new_game_pressed() -> void:
-	print("New game")
-	show_menu(Menus.NONE)
+	show_menu(Menus.LEVEL_SELECT_MENU)
 
 
 func _on_load_game_pressed() -> void:

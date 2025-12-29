@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpq3jghlq6nh2"]
+
+[ext_resource type="Script" uid="uid://dtcaskyoxco5q" path="res://scripts/menus/level_select_item.gd" id="1_g2ath"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l7yks"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l7yks"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_l7yks")
+
+[node name="LevelSelectItem" type="PanelContainer" node_paths=PackedStringArray("title_label", "level_image")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g2ath")
+title_label = NodePath("MarginContainer/Button/HFlowContainer/Label")
+level_image = NodePath("MarginContainer/Button/HFlowContainer/TextureRect")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Button" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 136)
+layout_mode = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="MarginContainer/Button"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Button/HFlowContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_l7yks")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="MarginContainer/Button/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "sdafasdfsd"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_button_pressed"]

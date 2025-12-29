@@ -1,0 +1,108 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr5jfpxi4hksb"]
+
+[ext_resource type="Script" uid="uid://u43hknwu1sv6" path="res://scripts/menus/level_select_menu.gd" id="1_4804j"]
+[ext_resource type="PackedScene" uid="uid://cpq3jghlq6nh2" path="res://menus/level_select_item.tscn" id="2_ty7iu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bd1c"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4804j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ty7iu"]
+
+[node name="LevelSelectMenu" type="AspectRatioContainer" node_paths=PackedStringArray("level_list")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4804j")
+level_item = ExtResource("2_ty7iu")
+level_list = NodePath("CenterContainer/PanelContainer/MarginContainer/VFlowContainer/ScrollContainer/LevelList")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+clip_children = 1
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8bd1c")
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VFlowContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Levels"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+theme_override_styles/separator = SubResource("StyleBoxEmpty_4804j")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelList" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LevelSelectItem" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/ScrollContainer/LevelList" instance=ExtResource("2_ty7iu")]
+layout_mode = 2
+
+[node name="LevelSelectItem2" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/ScrollContainer/LevelList" instance=ExtResource("2_ty7iu")]
+layout_mode = 2
+
+[node name="LevelSelectItem3" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/ScrollContainer/LevelList" instance=ExtResource("2_ty7iu")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+theme_override_styles/separator = SubResource("StyleBoxEmpty_4804j")
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
+layout_mode = 2
+
+[node name="HFlowContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/CenterContainer/HFlowContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/CenterContainer/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ty7iu")
+
+[node name="LoadButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/CenterContainer/HFlowContainer"]
+layout_mode = 2
+text = "Load"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/CenterContainer/HFlowContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/CenterContainer/HFlowContainer/LoadButton" to="." method="_on_load_button_pressed"]

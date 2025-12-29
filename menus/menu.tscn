@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://vcyq2fbg0dts"]
+[gd_scene load_steps=31 format=3 uid="uid://vcyq2fbg0dts"]
 
 [ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/menus/menu.gd" id="1_2d4ws"]
 [ext_resource type="Shader" uid="uid://brw8j2w8g6y35" path="res://shaders/scroll.gdshader" id="2_4vei7"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://d1mfodqblneky" path="res://menus/exit_dialog.tscn" id="14_j27vk"]
 [ext_resource type="PackedScene" uid="uid://dtdv8vsvlfilr" path="res://menus/console_menu.tscn" id="22_2usqi"]
 [ext_resource type="PackedScene" uid="uid://dialawbgdnoap" path="res://menus/level_end_menu.tscn" id="23_l3jua"]
+[ext_resource type="PackedScene" uid="uid://cr5jfpxi4hksb" path="res://menus/level_select_menu.tscn" id="24_4qscn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ph6eu"]
 shader = ExtResource("2_4vei7")
@@ -211,6 +212,9 @@ visible = false
 [node name="LevelEndMenu" parent="MenuLayer" instance=ExtResource("23_l3jua")]
 visible = false
 
+[node name="LevelSelectMenu" parent="MenuLayer" instance=ExtResource("24_4qscn")]
+visible = false
+
 [connection signal="back_pressed" from="MenuLayer/GameHud" to="." method="_on_back_pressed"]
 [connection signal="menu_changed" from="MenuLayer/GameHud" to="." method="_on_menu_changed"]
 [connection signal="exit_pressed" from="MenuLayer/StartMenu" to="." method="_on_exit_pressed"]
@@ -249,5 +253,10 @@ visible = false
 [connection signal="menu_changed" from="MenuLayer/OptionsMenu" to="." method="_on_menu_changed"]
 [connection signal="dialogue_finished" from="MenuLayer/DialogueMenu" to="." method="_on_back_pressed"]
 [connection signal="back_pressed" from="MenuLayer/ExitDialog" to="." method="_on_back_pressed"]
+[connection signal="menu_changed" from="MenuLayer/ExitDialog" to="." method="_on_menu_changed"]
 [connection signal="back_pressed" from="MenuLayer/ConsoleMenu" to="." method="_on_back_pressed"]
+[connection signal="menu_changed" from="MenuLayer/ConsoleMenu" to="." method="_on_menu_changed"]
+[connection signal="menu_changed" from="MenuLayer/LevelEndMenu" to="." method="_on_menu_changed"]
 [connection signal="next_level_pressed" from="MenuLayer/LevelEndMenu" to="." method="_on_next_level_pressed"]
+[connection signal="back_pressed" from="MenuLayer/LevelSelectMenu" to="." method="_on_back_pressed"]
+[connection signal="menu_changed" from="MenuLayer/LevelSelectMenu" to="." method="_on_menu_changed"]

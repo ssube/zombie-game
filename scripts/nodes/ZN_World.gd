@@ -11,6 +11,7 @@ signal level_loaded
 @export var start_marker: String = ''
 
 @export_group("Debug")
+@export var debug_skips_start_menu: bool = false
 @export var debug_level: String = ''
 @export var debug_marker: String = ''
 
@@ -64,12 +65,13 @@ func _ready():
 		campaign = CommandLineArgs.get_campaign(user_args, campaign)
 	print("Loaded campaign: %s" % campaign.title)
 
-	if OS.is_debug_build():
+	if OS.is_debug_build() and debug_skips_start_menu:
 		# look up debug level from CLI args
 		var level_args := CommandLineArgs.get_debug_level(user_args, campaign, debug_level, debug_marker)
 		load_level(level_args[0], level_args[1])
 	else:
-		load_level(start_level, start_marker)
+		# load_level(start_level, start_marker)
+		%Menu.show_menu(ZM_BaseMenu.Menus.START_MENU)
 
 func _process(delta):
 	# Process all systems

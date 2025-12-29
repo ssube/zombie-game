@@ -147,6 +147,7 @@ id = "Player_0"
 
 [node name="Menu" parent="." instance=ExtResource("26_ohs1m")]
 unique_name_in_owner = true
+visible_menu = 0
 
 [node name="Level" type="Node3D" parent="."]
 unique_name_in_owner = true
