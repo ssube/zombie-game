@@ -7,7 +7,15 @@ static var deleted_ids: Array[String] = []
 static var _component_cache: Dictionary[String, String] = {}
 
 
-# var _deleted: Array[String] = []
+static func _register_scripts() -> void:
+	ObjectSerializer.register_script("NodePath", ZP_SavedNodePath)
+	ObjectSerializer.register_script("ZP_Component", ZP_SavedComponent)
+	ObjectSerializer.register_script("ZP_Entity", ZP_SavedEntity)
+	ObjectSerializer.register_script("ZP_Game", ZP_SavedGame)
+	ObjectSerializer.register_script("ZP_Level", ZP_SavedLevel)
+	ObjectSerializer.register_script("ZP_Objectives", ZP_SavedObjectives)
+	ObjectSerializer.register_script("ZP_Relationship", ZP_SavedRelationship)
+	print("Registered serialization scripts.")
 
 
 static func create_path() -> bool:
@@ -65,7 +73,39 @@ static func list_saves() -> Array[String]:
 	return sorted_names
 
 
-static func save_game(name: String) -> bool:
+static func save_game(name: String, root: Node, use_json: bool = false) -> bool:
+	if use_json:
+		return save_game_json(name, root)
+	else:
+		return save_game_resource(name, root)
+
+
+static func save_game_json(_name: String, root: Node) -> bool:
+	SaveManager.create_path()
+	_register_scripts()
+
+	var game_data := ZP_SavedGame.new()
+	game_data.version = SaveManager.save_version
+
+	var game_node := TreeUtils.get_game(root)
+	var level_name := game_node.current_level_name
+	game_data.current_level = level_name
+	game_data.last_spawn = game_node.last_spawn
+
+	var level_data := serialize_level()
+	game_data.levels[level_name] = level_data
+
+	var player_data := serialize_players()
+	game_data.players = player_data
+
+	var serialized: Variant = DictionarySerializer.serialize_var(game_data)
+	var json := JSON.stringify(serialized, "\t")
+	print(json)
+
+	return true
+
+
+static func save_game_resource(name: String, root: Node) -> bool:
 	SaveManager.create_path()
 
 	# TODO: merge with any previous level data
