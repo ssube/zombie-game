@@ -167,19 +167,23 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 					var interactive = collider_entity.get_component(ZC_Interactive) as ZC_Interactive
 					%Menu.set_target_label(interactive.name)
 
-					if not EntityUtils.has_shimmer(collider_entity):
-						var shimmer = ZC_Shimmer.from_interactive(interactive)
-						collider_entity.add_component(shimmer)
-						last_shimmer[entity] = collider_entity
+					# Check the interactive distance
+					if interactive.shimmer_on_target and interactive.shimmer_range > 0.0:
+						var distance := body.global_position.distance_to(ray.get_collision_point())
+						if distance <= interactive.shimmer_range:
+							if not EntityUtils.has_shimmer(collider_entity):
+								var shimmer = ZC_Shimmer.from_interactive(interactive)
+								collider_entity.add_component(shimmer)
+								last_shimmer[entity] = collider_entity
 
-						var shimmer_start := (Time.get_ticks_msec() / 1000.0) + shimmer_offset
-						RenderingServer.global_shader_parameter_set("shimmer_time", shimmer_start)
+								var shimmer_start := (Time.get_ticks_msec() / 1000.0) + shimmer_offset
+								RenderingServer.global_shader_parameter_set("shimmer_time", shimmer_start)
 
-					if input.use_pickup:
-						pickup_item(collider_entity, entity)
+							if input.use_pickup:
+								pickup_item(collider_entity, entity)
 
-					if input.use_interact:
-						use_interactive(collider_entity, entity, player)
+							if input.use_interact:
+								use_interactive(collider_entity, entity, player)
 
 		else:
 			%Menu.clear_target_label()
