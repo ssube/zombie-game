@@ -10,15 +10,7 @@
 height = 0.2
 radius = 1.0
 
-[node name="PuddleWater" type="Node3D" groups=["weather_thunder"]]
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-radius = 1.0
-height = 0.1
-sides = 16
-material = ExtResource("1_0wruy")
-
-[node name="ZN_TriggerArea3D" type="Area3D" parent="."]
+[node name="PuddleWater" type="Area3D"]
 collision_layer = 2
 collision_mask = 28
 script = ExtResource("2_je1kp")
@@ -26,14 +18,20 @@ trigger_on_exit = true
 trigger_on_body_interval = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ZN_TriggerArea3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 shape = SubResource("CylinderShape3D_ut0u3")
 
-[node name="ZN_AudioAction" type="Node" parent="ZN_TriggerArea3D" node_paths=PackedStringArray("audio_players")]
+[node name="ZN_AudioAction" type="Node" parent="." node_paths=PackedStringArray("audio_players")]
 script = ExtResource("3_g4ime")
-audio_players = [NodePath("../../ZN_AudioSubtitle3D")]
+audio_players = [NodePath("../ZN_AudioSubtitle3D")]
 metadata/_custom_type_script = "uid://dga8v5ocxqirt"
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+radius = 1.0
+height = 0.1
+sides = 16
+material = ExtResource("1_0wruy")
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_je1kp")
