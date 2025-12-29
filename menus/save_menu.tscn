@@ -27,7 +27,21 @@ size_flags_horizontal = 4
 theme_override_constants/v_separation = 16
 alignment = 1
 
-[node name="Label" type="Label" parent="SaveListContainer/VFlowContainer"]
+[node name="TitleContainer" type="PanelContainer" parent="SaveListContainer/VFlowContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="SaveListContainer/VFlowContainer/TitleContainer"]
+layout_mode = 2
+color = Color(0.2112, 0.33, 0.24090001, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="SaveListContainer/VFlowContainer/TitleContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="TitleLabel" type="Label" parent="SaveListContainer/VFlowContainer/TitleContainer/MarginContainer"]
 layout_mode = 2
 text = "Saved Games"
 horizontal_alignment = 1

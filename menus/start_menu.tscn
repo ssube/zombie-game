@@ -32,7 +32,21 @@ size_flags_horizontal = 4
 theme_override_constants/v_separation = 16
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VFlowContainer"]
+[node name="TitleContainer" type="PanelContainer" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VFlowContainer/TitleContainer"]
+layout_mode = 2
+color = Color(0.2112, 0.33, 0.24090001, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VFlowContainer/TitleContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VFlowContainer/TitleContainer/MarginContainer"]
 layout_mode = 2
 text = "Zombie Game"
 

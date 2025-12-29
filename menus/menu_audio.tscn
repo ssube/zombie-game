@@ -8,6 +8,7 @@
 
 [node name="High" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_tesnm")
+volume_db = -3.0
 parameters/looping = true
 script = ExtResource("2_h0xai")
 metadata/_custom_type_script = "uid://by081awsnotnk"
