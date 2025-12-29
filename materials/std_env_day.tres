@@ -1,10 +1,13 @@
-[gd_resource type="Environment" load_steps=2 format=3 uid="uid://kf7a6fgi45r1"]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://kf7a6fgi45r1"]
 
-[ext_resource type="Sky" uid="uid://bdkm20ikc1o01" path="res://materials/std_sky_day.tres" id="1_ku4kq"]
+[ext_resource type="Material" uid="uid://cjskkk0aspkv4" path="res://skies/sky_day.tres" id="1_ku4kq"]
+
+[sub_resource type="Sky" id="Sky_xgs21"]
+sky_material = ExtResource("1_ku4kq")
 
 [resource]
 background_mode = 2
-sky = ExtResource("1_ku4kq")
+sky = SubResource("Sky_xgs21")
 ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 2

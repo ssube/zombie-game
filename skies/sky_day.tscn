@@ -1,15 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://bu2ntm7c8cyn8"]
 
-[ext_resource type="PackedScene" uid="uid://cf8xh1my8wn0y" path="res://materials/environment_day.tscn" id="1_8ycre"]
+[ext_resource type="Environment" uid="uid://kf7a6fgi45r1" path="res://materials/std_env_day.tres" id="1_8ycre"]
 
 [node name="SkyDay" type="Node3D"]
 
-[node name="EnvironmentDay" parent="." instance=ExtResource("1_8ycre")]
+[node name="EnvironmentDay" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_8ycre")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.50776386, 0.86149627, 0, -0.86149627, 0.50776386, 0, 3.4615583, 1.4431591)
 light_color = Color(0.94464, 0.96, 0.65279996, 1)
-light_energy = 0.75
 shadow_enabled = true
 
 [node name="Debug" type="Node3D" parent="."]
