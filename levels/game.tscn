@@ -143,7 +143,7 @@ unique_name_in_owner = true
 
 [node name="Player" parent="World/Entities" instance=ExtResource("5_b84gv")]
 transform = Transform3D(0.7582368, 0, -0.6519793, 0, 1, 0, 0.6519793, 0, 0.7582368, 0, 1.3329782, 0)
-id = "Game_ZE_Player_1766176977_94060"
+id = "Player_0"
 
 [node name="Menu" parent="." instance=ExtResource("26_ohs1m")]
 unique_name_in_owner = true
