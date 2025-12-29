@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ZR_Campaign" load_steps=11 format=3 uid="uid://bhqkgskgwwtfh"]
+[gd_resource type="Resource" script_class="ZR_Campaign" load_steps=14 format=3 uid="uid://bhqkgskgwwtfh"]
 
 [ext_resource type="Script" uid="uid://6e7chkl4nt6l" path="res://scripts/resources/ZR_CampaignLevel.gd" id="1_q0tev"]
 [ext_resource type="PackedScene" uid="uid://yvupurpwmap4" path="res://levels/level_0.tscn" id="2_dpcfo"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bse6riebwmfln" path="res://levels/level_1.tscn" id="3_wixcn"]
 [ext_resource type="PackedScene" uid="uid://cpgmxyybvd4x8" path="res://levels/spooky_church.tscn" id="4_0wtmc"]
 [ext_resource type="PackedScene" uid="uid://djo5cynmo7f4y" path="res://levels/test_town.tscn" id="5_guhbr"]
+[ext_resource type="Texture2D" uid="uid://d16fipqw30tyn" path="res://levels/bus_stop.png" id="6_0wtmc"]
+[ext_resource type="PackedScene" uid="uid://v18fidmgep15" path="res://levels/bus_stop.tscn" id="7_guhbr"]
 
 [sub_resource type="Resource" id="Resource_0p6i7"]
 script = ExtResource("1_q0tev")
@@ -35,8 +37,17 @@ title = "Test Town"
 scene = ExtResource("5_guhbr")
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
+[sub_resource type="Resource" id="Resource_2ol2k"]
+script = ExtResource("1_q0tev")
+key = "bus_stop"
+title = "Bus Stop"
+scene = ExtResource("7_guhbr")
+loading_image = ExtResource("6_0wtmc")
+min_load_time = 5.0
+metadata/_custom_type_script = "uid://6e7chkl4nt6l"
+
 [resource]
 script = ExtResource("2_udnhh")
 title = "Debug Levels"
-levels = Array[ExtResource("1_q0tev")]([SubResource("Resource_0p6i7"), SubResource("Resource_uv3d5"), SubResource("Resource_2i3pn"), SubResource("Resource_plda0")])
+levels = Array[ExtResource("1_q0tev")]([SubResource("Resource_0p6i7"), SubResource("Resource_uv3d5"), SubResource("Resource_2i3pn"), SubResource("Resource_plda0"), SubResource("Resource_2ol2k")])
 metadata/_custom_type_script = "uid://b2epsdmony1gs"
