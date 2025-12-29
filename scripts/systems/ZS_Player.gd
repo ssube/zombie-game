@@ -6,6 +6,26 @@ extends System
 var last_shimmer: Dictionary[Entity, Entity] = {} # dict for multiplayer
 
 
+func get_raycast_end_point(raycast: RayCast3D) -> Vector3:
+	return raycast.global_transform * raycast.target_position
+
+
+func do_adaptive_aim(raycast: RayCast3D, entity: Entity) -> void:
+	var collision_point: Vector3 = Vector3.ZERO
+	if raycast.is_colliding():
+		# adjust the weapon marker to face the point of the collision
+		collision_point = raycast.get_collision_point()
+	else:
+		collision_point = get_raycast_end_point(raycast)
+
+	var weapon_marker = entity.weapon_node as Node3D
+	if OptionsManager.options.gameplay.adaptive_aim == 1.0:
+		weapon_marker.look_at(collision_point, Vector3.UP)
+	elif OptionsManager.options.gameplay.adaptive_aim > 0.0:
+		var collision_transform = weapon_marker.transform.looking_at(collision_point, Vector3.UP)
+		weapon_marker.transform = lerp(weapon_marker.transform, collision_transform, OptionsManager.options.gameplay.adaptive_aim)
+
+
 func query():
 	return q.with_all([ZC_Velocity, ZC_Player, ZC_Input])
 
@@ -134,6 +154,8 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			var collider = ray.get_collider()
 			var collider_entity := CollisionUtils.get_collider_entity(collider)
 
+			do_adaptive_aim(ray, entity)
+
 			if collider_entity != last_shimmer.get(entity) and collider_entity != entity.current_weapon:
 				%Menu.clear_target_label()
 				%Menu.reset_crosshair_color()
@@ -163,6 +185,8 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			%Menu.clear_target_label()
 			%Menu.reset_crosshair_color()
 			remove_shimmer_key(entity)
+			do_adaptive_aim(ray, entity) # aim straight ahead
+
 
 
 func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_crosshair: bool = true) -> void:

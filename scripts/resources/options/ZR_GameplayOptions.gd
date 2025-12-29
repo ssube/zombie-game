@@ -1,6 +1,9 @@
 extends Resource
 class_name ZR_GameplayOptions
 
+@export_group("Aim Assist")
+@export var adaptive_aim: float = 1.0
+
 @export_group("Physics")
 @export var physical_casings: bool = true
 @export var physical_mags: bool = true

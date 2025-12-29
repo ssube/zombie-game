@@ -116,7 +116,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
 current = true
 
 [node name="TouchRay" type="RayCast3D" parent="Head"]
-target_position = Vector3(0, 0, -2.5)
+target_position = Vector3(0, 0, -10)
 collision_mask = 30
 
 [node name="Hands" type="Node3D" parent="Head"]
