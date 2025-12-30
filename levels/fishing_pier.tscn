@@ -1,4 +1,4 @@
-[gd_scene load_steps=244 format=4 uid="uid://b687g8br5b2mv"]
+[gd_scene load_steps=245 format=4 uid="uid://b687g8br5b2mv"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_vf316"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_24vc2"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="22_fk3c4"]
 [ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="23_24vc2"]
 [ext_resource type="PackedScene" uid="uid://rtq8nqsaa7st" path="res://entities/weapons/crowbar.tscn" id="29_7ipmy"]
+[ext_resource type="PackedScene" uid="uid://c4gewr3tx3am5" path="res://entities/props/crate_wood.tscn" id="30_7iyb8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fnrws"]
 size = Vector3(25, 3, 100)
@@ -846,7 +847,7 @@ filter_ledge_spans = true
 
 [node name="FishingPier" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
 script = ExtResource("1_vf316")
-screenshot_camera = NodePath("Camera3D")
+screenshot_camera = NodePath("Screenshot")
 metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
 [node name="Areas" type="Node" parent="."]
@@ -893,7 +894,10 @@ transform = Transform3D(-0.9999953, 0, -0.0020393382, 0, 1, 0, 0.0020393382, 0, 
 path = NodePath("..")
 
 [node name="WeaponCrowbar" parent="Entities" instance=ExtResource("29_7ipmy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28426808, 0.64204645, -1.6403737)
+transform = Transform3D(-3.680708e-08, 0.8420478, 0.53940296, -1, -4.371139e-08, 0, 2.357805e-08, -0.5394029, 0.8420479, -2.1579452, 1.1283704, -1.585184)
+
+[node name="CrateWood" parent="Entities" instance=ExtResource("30_7iyb8")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -1.9435724, 0.525, -2.112608)
 
 [node name="Lights" type="Node" parent="."]
 
@@ -1586,7 +1590,7 @@ metadata/_custom_type_script = "uid://b560n5psxwkuk"
 
 [node name="SkyDay" parent="Environment" instance=ExtResource("18_tpjaq")]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Screenshot" type="Camera3D" parent="."]
 transform = Transform3D(0.9659258, 0.06698735, -0.25000006, 0, 0.9659259, 0.2588191, 0.2588191, -0.25000003, 0.9330127, -7.6862698, 7.0653906, 54.765)
 
 [node name="Sounds" type="Node3D" parent="."]
