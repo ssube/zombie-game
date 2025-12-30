@@ -1,3 +1,24 @@
+// Shimmer highlight shader
+//
+// from https://godotshaders.com/shader/3d-item-highlighter-easier-to-adjust-supports-all-directions/
+// by https://godotshaders.com/author/wsnordenmark/
+// licensed under MIT
+
+/*
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the “Software”), to deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
+persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 shader_type spatial;
 render_mode unshaded, depth_draw_never;
 
@@ -22,11 +43,11 @@ float sawtooth(float x) {
 
 void fragment() {
 	vec3 w_vertex = ( INV_VIEW_MATRIX * vec4(VERTEX, 1.0) ).xyz;
-	
+
 	float projection = dot( w_vertex, normalize(vec3(x_direction, y_direction, z_direction)) );
-	
+
 	float frequency = ceil( sawtooth(projection) - sawtooth(projection + shine_width) );
-	
+
 	ALBEDO = shine_color.xyz;
-	ALPHA = clamp( ( 1.0 - dot(NORMAL, VIEW) * angle_fade) * frequency * shine_color.a, 0.0, 1.0 );	
+	ALPHA = clamp( ( 1.0 - dot(NORMAL, VIEW) * angle_fade) * frequency * shine_color.a, 0.0, 1.0 );
 }

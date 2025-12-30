@@ -1,3 +1,7 @@
+// Texture scroll effect shader for Godot Engine
+//
+// original to the Zombie Game project
+
 shader_type canvas_item;
 
 uniform vec2 scroll_speed = vec2(0.1, 0.1); // UV units per second
