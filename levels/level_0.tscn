@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://kod7e8o8xpep" path="res://entities/items/key.tscn" id="14_juy1h"]
 [ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/props/ZC_Portal.gd" id="14_qgvj7"]
 [ext_resource type="PackedScene" uid="uid://nk5gadv88ni7" path="res://entities/props/objective.tscn" id="15_7di2q"]
-[ext_resource type="PackedScene" uid="uid://tna8f01ql67u" path="res://entities/weapons/bat.tscn" id="15_owf05"]
+[ext_resource type="PackedScene" uid="uid://tna8f01ql67u" path="res://entities/weapons/baseball_bat.tscn" id="15_owf05"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="16_uuq13"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="17_58gyl"]
 [ext_resource type="PackedScene" uid="uid://do56uq0uysdn6" path="res://entities/props/door_wood_breakable.tscn" id="17_g1jay"]
