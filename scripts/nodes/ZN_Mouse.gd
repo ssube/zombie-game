@@ -1,4 +1,10 @@
+# Mouse look input handler for 3D characters.
+#
+# from https://yosoyfreeman.github.io/article/godot/tutorial/achieving-better-mouse-input-in-godot-4-the-perfect-camera-controller/#stretching-the-input-back
+# no special license given
+
 extends Node
+## Mouse look input handler
 class_name ZN_MouseInput
 
 ## Character root node
