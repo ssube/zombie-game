@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://2l2xed0u2ydr"]
-
-[ext_resource type="Shader" uid="uid://ddfagp5osuvg8" path="res://shaders/wobble.gdshader" id="1_y7cay"]
-
-[resource]
-render_priority = 0
-shader = ExtResource("1_y7cay")
-shader_parameter/scale = 2.5
-shader_parameter/height = 0.25
