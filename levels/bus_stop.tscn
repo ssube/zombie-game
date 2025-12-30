@@ -463,7 +463,7 @@ volume_db = -18.0
 script = ExtResource("6_f0s1s")
 play_on_ready = true
 play_on_loop = true
-subtitle_radius = 0.0
+subtitle_text = "Engine Noise"
 remove_on_finished = false
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
@@ -485,7 +485,7 @@ volume_db = -18.0
 script = ExtResource("6_f0s1s")
 play_on_ready = true
 play_on_loop = true
-subtitle_radius = 0.0
+subtitle_text = "Engine Noise"
 remove_on_finished = false
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
