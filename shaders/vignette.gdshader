@@ -1,6 +1,7 @@
 // Vignette effect shader for Godot Engine
 //
-// original to the Zombie Game project
+// from: original to the Zombie Game project
+// licensed under GPL-3.0
 
 shader_type canvas_item;
 
