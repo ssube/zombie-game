@@ -24,8 +24,8 @@ func do_adaptive_aim(raycast: RayCast3D, entity: Entity, delta: float) -> void:
 	elif OptionsManager.options.gameplay.adaptive_aim > 0.0:
 		# From https://docs.godotengine.org/en/latest/tutorials/3d/using_transforms.html#interpolating-with-quaternions
 		var collision_transform = weapon_marker.global_transform.looking_at(collision_point, Vector3.UP)
-		var collision_quaternion = Quaternion(collision_transform.basis)
-		var current_quaternion = Quaternion(weapon_marker.global_transform.basis)
+		var collision_quaternion = collision_transform.basis.get_rotation_quaternion()
+		var current_quaternion = weapon_marker.global_transform.basis.get_rotation_quaternion()
 		var slerped_quaternion = current_quaternion.slerp(collision_quaternion, OptionsManager.options.gameplay.adaptive_aim * delta)
 		weapon_marker.global_transform.basis = Basis(slerped_quaternion)
 
