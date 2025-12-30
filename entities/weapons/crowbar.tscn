@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="9_fkmtx"]
 [ext_resource type="Texture2D" uid="uid://bf75pkr1mij1r" path="res://assets/PSX Mega Pack II/Models/GLB/Structures/rusty_crowbar_mx_1_metal_hr_2.png" id="10_aebpe"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="11_gdwfw"]
-[ext_resource type="AudioStream" uid="uid://bqyix45av3beh" path="res://sounds/Sound Effects/Melee/Hit/blunt_hit_body_ufx_1.ogg" id="12_d4v3t"]
+[ext_resource type="AudioStream" uid="uid://broij1fd8uktr" path="res://sounds/Sound Effects/Melee/Hit/blunt_hit_metal_ufx_1.ogg" id="12_aebpe"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="13_rq4st"]
 [ext_resource type="Script" uid="uid://u512rl8uacud" path="res://scripts/nodes/actions/ZN_DurabilityAction.gd" id="14_n63nw"]
 [ext_resource type="Script" uid="uid://dlb4vkkjdb658" path="res://scripts/nodes/actions/ZN_HealthAction.gd" id="15_yxms2"]
@@ -32,9 +32,9 @@ metadata/_custom_type_script = "uid://dnmn2xmqdrr00"
 
 [sub_resource type="Resource" id="Resource_dy0dc"]
 script = ExtResource("4_6f1u0")
-name = "Baseball Bat"
+name = "Crowbar"
 shimmer_material = ExtResource("5_d7yd0")
-shimmer_nodes = Array[NodePath]([NodePath("")])
+shimmer_nodes = Array[NodePath]([NodePath("Node3D/bar/rusty_crowbar_mx_1")])
 use_sound = ExtResource("6_3hang")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
@@ -147,10 +147,10 @@ shape = SubResource("ConvexPolygonShape3D_hqwjb")
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="Node3D/Area3D"]
 transform = Transform3D(1.0000193, 8.940697e-08, 2.9802322e-08, 0, 1, 4.4703484e-08, 1.4901161e-08, -1.4901161e-08, 1.0000004, 0, 0, 0)
-stream = ExtResource("12_d4v3t")
+stream = ExtResource("12_aebpe")
 script = ExtResource("13_rq4st")
 alerts_enemies = false
-subtitle_text = "Bat Thumping"
+subtitle_text = "Crowbar Clanging"
 remove_on_finished = false
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=243 format=4 uid="uid://b687g8br5b2mv"]
+[gd_scene load_steps=244 format=4 uid="uid://b687g8br5b2mv"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_vf316"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_24vc2"]
@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://ckpw468b6ekwv" path="res://sounds/beach_freesound_372021.wav" id="21_k8bry"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="22_fk3c4"]
 [ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="23_24vc2"]
+[ext_resource type="PackedScene" uid="uid://rtq8nqsaa7st" path="res://entities/weapons/crowbar.tscn" id="29_7ipmy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fnrws"]
 size = Vector3(25, 3, 100)
@@ -890,6 +891,9 @@ curve = SubResource("Curve3D_7ipmy")
 [node name="Car5Red" parent="Entities/Path3D" node_paths=PackedStringArray("path") instance=ExtResource("8_4nd5y")]
 transform = Transform3D(-0.9999953, 0, -0.0020393382, 0, 1, 0, 0.0020393382, 0, -0.9999953, -0.969, 0, 4.03)
 path = NodePath("..")
+
+[node name="WeaponCrowbar" parent="Entities" instance=ExtResource("29_7ipmy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28426808, 0.64204645, -1.6403737)
 
 [node name="Lights" type="Node" parent="."]
 
