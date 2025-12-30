@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://rtq8nqsaa7st"]
+[gd_scene load_steps=31 format=4 uid="uid://rtq8nqsaa7st"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aebpe"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_hqwjb"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="7_icymm"]
 [ext_resource type="PackedScene" uid="uid://cgo4rx8hcv6un" path="res://effects/sounds/bat_break.tscn" id="8_opkuh"]
 [ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="9_fkmtx"]
-[ext_resource type="Texture2D" uid="uid://bf75pkr1mij1r" path="res://assets/PSX Mega Pack II/Models/GLB/Structures/rusty_crowbar_mx_1_metal_hr_2.png" id="10_aebpe"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="11_gdwfw"]
 [ext_resource type="AudioStream" uid="uid://broij1fd8uktr" path="res://sounds/Sound Effects/Melee/Hit/blunt_hit_metal_ufx_1.ogg" id="12_aebpe"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="13_rq4st"]
@@ -57,10 +56,34 @@ metadata/_custom_type_script = "uid://c86wth8kvlbt7"
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_aebpe"]
 points = PackedVector3Array(-0.38677025, 0.07427229, 0.019447148, -0.38677025, 0.07427229, -0.019553442, -0.29242247, 0.0041236132, 0.014240608, 0.50153214, -0.18724914, 0.02245126, 0.4994704, -0.18425374, 0.02245126, 0.5266654, 0.008962333, 0.017447341, 0.5266654, 0.019279823, 0.007448321, -0.29242247, 0.0041236132, -0.014342497, 0.5266654, 0.019279823, -0.0075502107, 0.5266654, 0.008962333, -0.017549232, 0.4994704, -0.18425374, -0.022548743, 0.50153214, -0.18724914, -0.022548743, -0.284372, -0.0017135739, 0.0034443084, -0.25629348, -0.009726912, 0.00444421, -0.22831312, -0.016716167, 0.0054485165, 0.55582386, -0.16971198, 0.01644744, 0.5690777, -0.15901046, 0.017077334, 0.5888112, -0.13192385, 0.017447341, 0.6061885, -0.09761757, 0.017447341, 0.60442126, -0.060239077, 0.017447341, 0.5924437, -0.029004991, 0.017447341, 0.5660342, -0.0025072247, 0.017447341, 0.57261205, 0.0053012967, 0.007448321, -0.22831312, -0.016716167, -0.005550407, -0.25629348, -0.009726912, -0.0045505036, -0.284372, -0.0017135739, -0.0035506021, 0.57261205, 0.0053012967, -0.0075502107, 0.5660342, -0.0025072247, -0.017549232, 0.5924437, -0.029004991, -0.017549232, 0.60442126, -0.060239077, -0.017549232, 0.6061885, -0.09761757, -0.017549232, 0.5888112, -0.13192385, -0.017549232, 0.5690777, -0.15901046, -0.017179225, 0.55582386, -0.16971198, -0.016553735, 0.59578174, -0.13906673, 0.007448321, 0.6162025, -0.09933288, 0.007448321, 0.6145334, -0.057986125, 0.007448321, 0.6010833, -0.02344942, 0.007448321, 0.6010833, -0.02344942, -0.0075502107, 0.6145334, -0.057986125, -0.0075502107, 0.6162025, -0.09933288, -0.0075502107, 0.59578174, -0.13906673, -0.0075502107)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kksis"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_55ljv"]
+load_path = "res://.godot/imported/rusty_crowbar_mx_1_metal_hr_2.png-109db5856db033e237f216649eff23b8.s3tc.ctex"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aebpe"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hqwjb"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_aebpe")
+as_normal_map = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fjom8"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6f1u0"]
+width = 64
+height = 64
+noise = SubResource("FastNoiseLite_fjom8")
+seamless = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7yd0"]
 resource_name = "metal_hr_2"
-cull_mode = 2
-albedo_texture = ExtResource("10_aebpe")
+albedo_color = Color(1, 0.8163333, 0.62, 1)
+albedo_texture = SubResource("CompressedTexture2D_55ljv")
+metallic = 0.5
+metallic_specular = 0.25
+roughness_texture = SubResource("NoiseTexture2D_6f1u0")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_hqwjb")
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_4jyu4"]
@@ -87,7 +110,7 @@ _surfaces = [{
 "index_count": 612,
 "index_data": PackedByteArray("AAABAAIAAAADAAEAFADRANIAFAAVANEA0QDTANIA0QDUANMA1QDTANQA1QDWANMA1wDWANUA1wDYANYA2QDYANcA2QDXANoAEwDZANoAEwAWANkABAAFAAYABAAHAAUA2wDcAN0A2wDdAN4A2wDfANwA2wDeAOAA3wDhANwA4gDgAN4A3wDjAOEA4wCCAOEA4wCBAIIA4gDeAOQAgwDiAOQAgwDkAIQA5QDmAOcA5wDmADYA5wA2ADQA5QDoAOYA6QDoAOUA6QDlAOoA6wDpAOoA6wDqADUA7ADrADUA7AA1AO0AMwDsAO0AMwDtADcACAAJAAoACQAIAAsACwAIAAwACQALAA0A7gAPABAA7wDwAPEA8gDxAPAA7wDzAPAA7wAYAPMA7wAXABgA8gDwAPQA9AD1APIA9AD2APUA9wD1APYA9wD2APgAGgD3APgAGgD4ABkA+QD6APsAJAAlACYAJAAnACUAKAApACoAKAArACkALwAwADEALwAyADAAfAD8AP0AfAB6APwA/AD+AP0A/AD/AP4A/gD/AAAB/gAAAQEBAgEBAQABAgEDAQEBAwECAQQBAwEEAQUBewAFAQQBewB5AAUBOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEABgEHAQgBCAEHAQkBBgFFAAcBCAEJAQoBBgELAUUACgEJAQwBBgENAQsBCwENAUQACwFEAEgACgEMAQ4BDgEMAUcADgFHAEYASQBKAEsASQBMAEoADwF1AHgADwEQAXUADwERARABDwESAREBEQESARMBEQETARQBFQEUARMBFQEWARQBFgEVARcBFgEXARgBGAEXAXYAGAF2AHcAIQAiACMAIQAcACIAHgAZARoBEgARAA4AHwAbACAAHwAbARsATQBOAE8ATQBQAE4AHAEtAC4AHAEsAC0AHQF+AH8AHQEeAX4AHwEeAR0BHwEdASABHwEgASEBHwEhASIBIwEiASEBIwEkASIBJAEjASUBJAElASYBfQAmASUBfQCAACYBUQBSAFMAUQBUAFIAVQBWAFcAVQBYAFYAWQBaAFsAWgBZAFwAXABZAF0AWgBcAF4AXwBgAGEAYgBjAGQAZQBmAGcAZQBoAGYAaQBqAGsAaQBsAGoAbQBuAG8AbQBwAG4AcQByAHMAcQB0AHIAJwEoASkBhQCGAIcAiACJAIoAKgErAR0AiwCMAI0AiwCOAIwALAGtAK4ALAEtAa0ArAAtASwBrACvAC0BjwAuAS8BjwCSAC4BkAAvAS4BkACRAC8BkwAwATEBkwCUADABMQEwAZUAMQGVAJYAMgGYADMBMgGaAJgANAGeADUBNAGgAJ4AnwA0ATUBnwCdADQBNgGiAKMANgE3AaIApQCkAKEApQCmAKQApwCoAKkAqACnAKoAqACqAKsAsACxALIAsQCwALMAsQCzALQAtQC2ALcAuAC5ALoAuwC8AL0AvgC/AMAAwQA4ATkBwQDEADgBOQE4AcIAOQHCAMMAxQA6ATsBxQDIADoBOwE6AcYAOwHGAMcAzQA8AT0BzQDQADwBPQE8Ac4APQHOAM8APgHLAMkAPgE/AcsAzAA/AT4BzADKAD8BmwCXAJkAmwCcAJcA"),
 "lods": [0.06946358, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACQAIAAsACwAIAAwACQALAA0ADgAPABAADgARAA8AEgARAA4AEwAUABUAFgAUABMAFwAYABkAGQAaABcAGwAcAB0AHAAeAB0AHwAcABsAHwAbACAAHgAcACEAIQAcACIAIQAiACMAJAAlACYAJAAnACUAKAApACoAKAArACkAKQAsAC0AKQAtAC4ALwAwADEALwAyADAAMwA0ADUAMwA2ADQAMwA1ADcAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARgBFAEcARABIAEUASQBKAEsASQBMAEoATQBOAE8ATQBQAE4AUQBSAFMAUQBUAFIAVQBWAFcAVQBYAFYAWQBaAFsAWgBZAFwAXABZAF0AWgBcAF4AXwBgAGEAYgBjAGQAZQBmAGcAZQBoAGYAaQBqAGsAaQBsAGoAbQBuAG8AbQBwAG4AcQByAHMAcQB0AHIAdQB2AHcAeAB2AHUAeQB6AHsAegB5AHwAfQB+AH8AfQCAAH4AgQCCAIMAgwCCAIQAhQCGAIcAiACJAIoAiwCMAI0AiwCOAIwAjwCQAJEAjwCSAJAAkwCUAJUAkwCVAJYAlwCYAJkAlwCaAJgAmwCXAJkAmwCcAJcAnQCeAJ8AnQCgAJ4AoQCiAKMAoQCkAKIApQCkAKEApQCmAKQApwCoAKkAqACnAKoAqACqAKsArACtAK4ArACvAK0AsACxALIAsQCwALMAsQCzALQAtQC2ALcAuAC5ALoAuwC8AL0AvgC/AMAAwQDCAMMAwQDEAMIAxQDGAMcAxQDIAMYAyQDKAMsAzADKAMkAzQDOAM8AzQDQAM4A")],
-"material": SubResource("StandardMaterial3D_kksis"),
+"material": SubResource("StandardMaterial3D_d7yd0"),
 "name": "metal_hr_2",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -144,7 +167,6 @@ stream = ExtResource("12_aebpe")
 script = ExtResource("13_rq4st")
 alerts_enemies = false
 subtitle_text = "Crowbar Clanging"
-remove_on_finished = false
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="ZN_DurabilityAction" type="Node" parent="Node3D/Area3D" node_paths=PackedStringArray("entity")]
