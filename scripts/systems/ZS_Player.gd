@@ -342,7 +342,7 @@ func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
 	if broken:
 		weapon.apply_effects(ZR_Weapon_Effect.EffectType.MELEE_BREAK)
 
-	var swing_node = weapon.get_node(c_weapon.swing_path) as PathFollow3D
+	var swing_node = entity.swing_path_follower as PathFollow3D
 	swing_node.progress_ratio = 0.0
 
 	var tween = weapon.create_tween()

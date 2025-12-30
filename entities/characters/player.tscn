@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://busds31ha5tx1"]
+[gd_scene load_steps=32 format=3 uid="uid://busds31ha5tx1"]
 
 [ext_resource type="Script" uid="uid://dyudolkkkb4ut" path="res://scripts/entities/characters/ZE_Player.gd" id="1_ks8m5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_l1ths"]
@@ -89,11 +89,19 @@ metadata/_custom_type_script = "uid://cixmecjncarw5"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_idcse"]
 height = 2.25
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("hands_node", "inventory_node", "weapon_node")]
+[sub_resource type="Curve3D" id="Curve3D_8ug6l"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.7398019, -0.59114224, 0.2882812, 0.6312755, 0.0024660826, 0.044305444, -0.6312755, -0.0024660826, -0.044305444, -0.004025027, -0.27858347, 0.11056697, 0, 0, 0, 0, 0, 0, -0.7903473, -0.62559724, 0.1922524),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("hands_node", "swing_path_follower", "inventory_node", "weapon_node")]
 collision_layer = 8
 collision_mask = 27
 script = ExtResource("1_ks8m5")
 hands_node = NodePath("Head/Hands")
+swing_path_follower = NodePath("Head/Hands/SwingPath/PathFollow3D")
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("Head/Hands/WeaponMarker")
 prefab_path = "res://entities/characters/player.tscn"
@@ -125,9 +133,9 @@ collision_mask = 30
 [node name="Hands" type="Node3D" parent="Head"]
 
 [node name="WeaponMarker" type="Node3D" parent="Head/Hands"]
-transform = Transform3D(0.99845827, 0.0044806385, 0.0553267, 0, 0.99673676, -0.08072083, -0.055507835, 0.08059638, 0.99520004, 0.21910977, -0.25579888, -0.20406437)
+transform = Transform3D(0.7643113, 0.5640393, 0.31251454, -0.45595488, 0.81544286, -0.35658106, -0.45595488, 0.13004899, 0.8804451, 0.7398019, -0.5648068, -0.30062598)
 
-[node name="RayCastProbe" type="CSGCylinder3D" parent="Head/Hands/WeaponMarker"]
+[node name="WeaponDebug" type="CSGCylinder3D" parent="Head/Hands/WeaponMarker"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -0.99999994)
 visible = false
 radius = 0.05
@@ -140,6 +148,18 @@ transform = Transform3D(1, 0, 0, 0, 0.9975641, -0.06975647, 0, 0.06975647, 0.997
 light_size = 0.2
 spot_range = 15.0
 spot_angle = 30.0
+
+[node name="SwingPath" type="Path3D" parent="Head/Hands"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, -0.35065174, -0.92247224)
+curve = SubResource("Curve3D_8ug6l")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Head/Hands/SwingPath"]
+transform = Transform3D(0.7643113, 0.5640393, 0.31251454, 0, 0.48464668, -0.87470967, -0.6448176, 0.6685637, 0.37042788, 0.7398019, -0.59114224, 0.2882812)
+rotation_mode = 4
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head/Hands/SwingPath/PathFollow3D"]
+process_mode = 4
+remote_path = NodePath("../../../WeaponMarker")
 
 [node name="Effects" type="Node3D" parent="."]
 

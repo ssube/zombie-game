@@ -2,6 +2,8 @@
 extends ZE_Base
 class_name ZE_Character
 
+@export var swing_path_follower: PathFollow3D = null
+
 @export_group("Inventory")
 @export var current_armor: ZE_Armor = null
 @export var current_weapon: ZE_Weapon = null

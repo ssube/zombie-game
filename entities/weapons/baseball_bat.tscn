@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://tna8f01ql67u"]
+[gd_scene load_steps=26 format=4 uid="uid://tna8f01ql67u"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aigh8"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_dy0dc"]
@@ -34,7 +34,7 @@ metadata/_custom_type_script = "uid://dnmn2xmqdrr00"
 script = ExtResource("4_ee0de")
 name = "Baseball Bat"
 shimmer_material = ExtResource("5_fnw7o")
-shimmer_nodes = Array[NodePath]([NodePath("Node3D/bat/Cube")])
+shimmer_nodes = Array[NodePath]([NodePath("Node3D/Cube")])
 use_sound = ExtResource("5_55xri")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
@@ -47,13 +47,16 @@ metadata/_custom_type_script = "uid://d3sex4y0oww04"
 
 [sub_resource type="Resource" id="Resource_ee0de"]
 script = ExtResource("3_ee0de")
-swing_path = NodePath("SwingPath/PathFollow3D")
 swing_time = 0.5
 cooldown_time = 0.3
 damage_areas = Array[NodePath]([NodePath("Node3D/Area3D")])
 damage = 10
 effects = Array[ExtResource("5_xpimh")]([SubResource("Resource_dwhqy")])
 metadata/_custom_type_script = "uid://c86wth8kvlbt7"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1fv1"]
+radius = 0.1
+height = 1.25
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00uot"]
 resource_name = "Material"
@@ -95,17 +98,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hodwd")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1fv1"]
-radius = 0.1
-height = 1.25
-
-[sub_resource type="Curve3D" id="Curve3D_xieuc"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.7398019, -0.59114224, 0.2882812, 0.6312755, 0.0024660826, 0.044305444, -0.6312755, -0.0024660826, -0.044305444, -0.004025027, -0.27858347, 0.11056697, 0, 0, 0, 0, 0, 0, -0.7903473, -0.62559724, 0.1922524),
-"tilts": PackedFloat32Array(0, 0, 0)
-}
-point_count = 3
-
 [node name="WeaponBat" type="RigidBody3D"]
 collision_layer = 4
 collision_mask = 23
@@ -114,17 +106,18 @@ script = ExtResource("1_aigh8")
 prefab_path = "res://entities/weapons/bat.tscn"
 component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_42kvg"), SubResource("Resource_dy0dc"), SubResource("Resource_ee0de")])
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475, 0)
+shape = SubResource("CapsuleShape3D_r1fv1")
+
 [node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(0.7643113, 0.5640393, 0.31251454, 0, 0.48464668, -0.87470967, -0.6448176, 0.6685637, 0.37042788, 0.7398019, -0.59114224, -0.7246001)
+transform = Transform3D(0.99998075, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999996, 0, 0.475, 0)
 
 [node name="SoundMarker3D" type="Marker3D" parent="Node3D"]
 transform = Transform3D(0.76434076, 1.1340122e-08, -0.6448424, 0.56403923, 0.48464644, 0.66856354, 0.31251475, -0.87471026, 0.37042817, -0.010933876, 0.55519664, 0.00024962425)
 
-[node name="bat" type="Node3D" parent="Node3D"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.1, 0)
-
-[node name="Cube" type="MeshInstance3D" parent="Node3D/bat"]
-transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+[node name="Cube" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(20, 0, -9.536743e-07, 9.536743e-07, -3.33786e-06, 19.999998, 0, -19.999998, -1.9073486e-06, -1.1920929e-07, -0.099999964, -5.9604645e-08)
 mesh = SubResource("ArrayMesh_j1wg2")
 skeleton = NodePath("")
 
@@ -176,23 +169,3 @@ metadata/_custom_type_script = "uid://crylbd231pgne"
 script = ExtResource("16_v7hob")
 audio_players = [NodePath("../ZN_AudioSubtitle3D")]
 metadata/_custom_type_script = "uid://dga8v5ocxqirt"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.7643113, 0.5640393, 0.31251454, 0, 0.48464668, -0.87470967, -0.6448176, 0.6685637, 0.37042788, 0.7398019, -0.59114224, -0.7246001)
-shape = SubResource("CapsuleShape3D_r1fv1")
-
-[node name="SwingPath" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0128813)
-curve = SubResource("Curve3D_xieuc")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="SwingPath"]
-transform = Transform3D(0.7643113, 0.5640393, 0.31251454, 0, 0.48464668, -0.87470967, -0.6448176, 0.6685637, 0.37042788, 0.7398019, -0.59114224, 0.2882812)
-rotation_mode = 4
-
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="SwingPath/PathFollow3D"]
-process_mode = 4
-remote_path = NodePath("../../../Node3D")
-
-[node name="RemoteTransform3D2" type="RemoteTransform3D" parent="SwingPath/PathFollow3D"]
-process_mode = 4
-remote_path = NodePath("../../../CollisionShape3D")
