@@ -20,6 +20,9 @@ signal hint_shown(hint: String)
 
 
 func on_update() -> void:
+	hints.shuffle()
+	hint_index = -1
+
 	_show_next_hint()
 	_update_level_image()
 	_update_level_label()
