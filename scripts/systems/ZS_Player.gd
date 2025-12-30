@@ -152,28 +152,31 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		if input.use_light:
 			toggle_flashlight(entity, body)
 
-		# Highlight interactive items
 		var ray = entity.get_node(player.view_ray) as RayCast3D
+
+		# Adjust the aim based on the ray's collision point or end point if there is no collision
+		do_adaptive_aim(ray, entity, delta)
+
+		# Highlight interactive items
+		var clear_collider := true
 		if ray.is_colliding():
 			var collider = ray.get_collider()
 			var collider_entity := CollisionUtils.get_collider_entity(collider)
 
-			do_adaptive_aim(ray, entity, delta)
-
-			if collider_entity != last_shimmer.get(entity) and collider_entity != entity.current_weapon:
-				%Menu.clear_target_label()
-				%Menu.reset_crosshair_color()
-				remove_shimmer_key(entity)
-
 			# Use interactive items
-			if collider_entity and collider_entity != entity.current_weapon:
-				if EntityUtils.is_interactive(collider_entity):
-					var interactive = collider_entity.get_component(ZC_Interactive) as ZC_Interactive
+			if EntityUtils.is_interactive(collider_entity):
+				var interactive = collider_entity.get_component(ZC_Interactive) as ZC_Interactive
+				# Check the interactive distance
+				if interactive.shimmer_on_target and interactive.shimmer_range > 0.0:
+					var distance := body.global_position.distance_to(ray.get_collision_point())
+					if distance <= interactive.shimmer_range:
+						if collider_entity != last_shimmer.get(entity) and collider_entity != entity.current_weapon:
+							%Menu.clear_target_label()
+							%Menu.reset_crosshair_color()
+							remove_shimmer_key(entity)
 
-					# Check the interactive distance
-					if interactive.shimmer_on_target and interactive.shimmer_range > 0.0:
-						var distance := body.global_position.distance_to(ray.get_collision_point())
-						if distance <= interactive.shimmer_range:
+						if collider_entity and collider_entity != entity.current_weapon:
+							clear_collider = false
 							%Menu.set_target_label(interactive.name)
 
 							if not EntityUtils.has_shimmer(collider_entity):
@@ -190,12 +193,10 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 							if input.use_interact:
 								use_interactive(collider_entity, entity, player)
 
-		else:
+		if clear_collider:
 			%Menu.clear_target_label()
 			%Menu.reset_crosshair_color()
 			remove_shimmer_key(entity)
-			do_adaptive_aim(ray, entity, delta) # aim straight ahead
-
 
 
 func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_crosshair: bool = true) -> void:
