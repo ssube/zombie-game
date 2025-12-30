@@ -1,6 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4hn3600t205c"]
-
-[ext_resource type="Texture2D" uid="uid://drytlwbsgj63f" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Raindrop1.png" id="1_xvqyc"]
+[gd_scene load_steps=5 format=3 uid="uid://cymlq343i4rdm"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eu4fo"]
 emission_shape = 6
@@ -10,21 +8,24 @@ emission_ring_radius = 5.0
 emission_ring_inner_radius = 2.0
 emission_ring_cone_angle = 90.0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eu4fo"]
+load_path = "res://.godot/imported/fx_Raindrop1.png-7a7307f703374b5ca75bdfbd4411c3cb.s3tc.ctex"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xvqyc"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0.585, 0.7215, 0.9, 1)
-albedo_texture = ExtResource("1_xvqyc")
+albedo_texture = SubResource("CompressedTexture2D_eu4fo")
 billboard_mode = 2
 
 [sub_resource type="QuadMesh" id="QuadMesh_aum3j"]
 material = SubResource("StandardMaterial3D_xvqyc")
-size = Vector2(0.25, 0.25)
+size = Vector2(0.3, 0.4)
 
 [node name="ThunderEffect" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-amount = 128
+amount = 256
 process_material = SubResource("ParticleProcessMaterial_eu4fo")
 draw_pass_1 = SubResource("QuadMesh_aum3j")
