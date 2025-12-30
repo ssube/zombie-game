@@ -192,11 +192,21 @@ A Quake 3 style zombie shooter set in a small town, built with Godot and an Enti
 ## Addons
 
 - **Debug Menu** - Framerate and frame time display
+  - https://github.com/godot-extended-libraries/godot-debug-menu
 - **Dialogue Manager** - Dialogue randomization and conversation trees
+  - https://github.com/nathanhoad/godot_dialogue_manager
 - **Func Godot** - Quake-style map import from Trenchbroom
-- **GECS** - Entity Component System framework
+  - https://github.com/func-godot/func_godot_plugin
+- **GECS** - Entity Componeknt System framework
+  - https://github.com/csprance/gecs/
+- **Godot Object Serializer** - JSON support for save games
+  - https://github.com/Cretezy/godot-object-serializer
+- **Quake-Style Light Animations for Godot** - Light animation support
+  - https://github.com/ioannis-koukourakis/quake-style-light-animations-for-the-godot-engine
 - **VisionCone3D** - Vision cone checks for AI detection
+  - https://github.com/Tattomoosa/VisionCone3D
 - **Zombie Tools** - Custom editor tools (collision mesh fixing, component sorting, lock/objective validation)
+  - https://github.com/ssube/zombie-game/tree/main/addons/zombie_tools
 
 ## Assets
 
