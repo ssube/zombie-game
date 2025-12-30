@@ -1,0 +1,65 @@
+[gd_scene load_steps=13 format=3 uid="uid://epqnio4t0svy"]
+
+[ext_resource type="Script" uid="uid://dp6acnrca27yq" path="res://scripts/entities/weapons/ZE_Bullet.gd" id="1_qfani"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_bttqo"]
+[ext_resource type="Script" uid="uid://d2o34b8fqmhd3" path="res://scripts/components/weapons/ZC_Projectile.gd" id="3_l1is5"]
+[ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="4_l1is5"]
+[ext_resource type="Texture2D" uid="uid://c51guvpg20wcf" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast4.png" id="5_40v0n"]
+
+[sub_resource type="Resource" id="Resource_40v0n"]
+script = ExtResource("3_l1is5")
+collision_ray = NodePath("RayCast3D")
+piercing = 1
+metadata/_custom_type_script = "uid://d2o34b8fqmhd3"
+
+[sub_resource type="Resource" id="Resource_lw322"]
+script = ExtResource("4_l1is5")
+metadata/_custom_type_script = "uid://cixmecjncarw5"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qfd3w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40v0n"]
+albedo_color = Color(0.84416664, 0.14999998, 1, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l1is5"]
+angle_min = -14.9999895
+angle_max = 15.0000105
+angular_velocity_min = -5.000016
+angular_velocity_max = 4.999984
+gravity = Vector3(0, 1, 2)
+radial_accel_min = -5.000002
+radial_accel_max = 4.9999976
+tangential_accel_min = -5.000002
+tangential_accel_max = 4.9999976
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1is5"]
+transparency = 1
+albedo_color = Color(0.46166676, 0.14999998, 1, 1)
+albedo_texture = ExtResource("5_40v0n")
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_40v0n"]
+material = SubResource("StandardMaterial3D_l1is5")
+
+[node name="BulletOrb" type="RigidBody3D"]
+script = ExtResource("1_qfani")
+component_resources = Array[ExtResource("2_bttqo")]([SubResource("Resource_40v0n"), SubResource("Resource_lw322")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_qfd3w")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+material = SubResource("StandardMaterial3D_40v0n")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+target_position = Vector3(0, 0, -1)
+collision_mask = 31
+hit_back_faces = false
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+amount = 10
+visibility_aabb = AABB(-1, -1.0079867, -1.01599, 2, 3.3251343, 4.650296)
+process_material = SubResource("ParticleProcessMaterial_l1is5")
+draw_pass_1 = SubResource("QuadMesh_40v0n")
