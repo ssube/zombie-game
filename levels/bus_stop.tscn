@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=4 uid="uid://v18fidmgep15"]
+[gd_scene load_steps=126 format=4 uid="uid://v18fidmgep15"]
 
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_b7jq5"]
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_dm6vb"]
@@ -6,10 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://djk8f60j3oei0" path="res://entities/props/car_5_red.tscn" id="3_tu73e"]
 [ext_resource type="PackedScene" uid="uid://bsbjr3bmewqll" path="res://entities/props/car_5_police.tscn" id="4_ccg5v"]
 [ext_resource type="PackedScene" uid="uid://tvmpfdtpvbem" path="res://entities/props/street_light.tscn" id="5_dtwg0"]
+[ext_resource type="AudioStream" uid="uid://bskendl4eecji" path="res://assets/PSX Cars/Sound effects/Car_Engine_Loop.ogg" id="5_tjpkw"]
 [ext_resource type="PackedScene" uid="uid://dldnu5jwuvjpo" path="res://entities/props/traffic_cone_double_stripe.tscn" id="5_tr8cq"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="5_y6j6u"]
 [ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel_explosive.tscn" id="6_b7jq5"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="6_dm6vb"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="6_f0s1s"]
 [ext_resource type="Material" uid="uid://dk6tau17b5f76" path="res://textures/Color Maps/concrete_tx_6.tres" id="7_02tq1"]
 [ext_resource type="PackedScene" uid="uid://dfbrotsd7nstf" path="res://entities/props/traffic_cone.tscn" id="7_7khm6"]
 [ext_resource type="Material" uid="uid://d2oaplvcftcrx" path="res://textures/Color Maps/brick_wall_pt_2.tres" id="9_1l5jw"]
@@ -454,6 +456,17 @@ light_color = Color(1, 0, 0, 1)
 light_energy = 0.5
 omni_range = 3.0
 
+[node name="ZN_AudioSubtitle3D2" type="AudioStreamPlayer3D" parent="Entities/Car5Red"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.536743e-07, 1.683947, 2.565721)
+stream = ExtResource("5_tjpkw")
+volume_db = -18.0
+script = ExtResource("6_f0s1s")
+play_on_ready = true
+play_on_loop = true
+subtitle_radius = 0.0
+remove_on_finished = false
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
 [node name="Car5Police" parent="Entities" groups=["level"] instance=ExtResource("4_ccg5v")]
 transform = Transform3D(0.96471816, 0.044020407, -0.25957853, -0.03263053, 0.9983132, 0.048027422, 0.26125482, -0.03786274, 0.96452713, -27.382696, -0.028509647, 15.755138)
 
@@ -464,6 +477,17 @@ shadow_enabled = true
 spot_range = 12.4607115
 spot_angle = 40.0
 spot_angle_attenuation = 0.7320427
+
+[node name="ZN_AudioSubtitle3D2" type="AudioStreamPlayer3D" parent="Entities/Car5Police"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.536743e-07, 1.683947, 2.565721)
+stream = ExtResource("5_tjpkw")
+volume_db = -18.0
+script = ExtResource("6_f0s1s")
+play_on_ready = true
+play_on_loop = true
+subtitle_radius = 0.0
+remove_on_finished = false
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="TrafficCone" parent="Entities" instance=ExtResource("5_tr8cq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.955515, 0.3578602, -1.7691089)
