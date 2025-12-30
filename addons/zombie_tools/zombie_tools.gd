@@ -13,14 +13,20 @@ func _disable_plugin() -> void:
 
 var check_lock_keys_button: Button
 var check_objective_keys_button: Button
-var fix_mesh_button: Button
+var fix_mesh_scale_button: Button
+var fix_mesh_rotation_button: Button
 var sort_components_button: Button
 
 func _enter_tree():
-	fix_mesh_button = Button.new()
-	fix_mesh_button.text = "Fix Collision Mesh"
-	fix_mesh_button.pressed.connect(fix_collision_mesh)
-	add_control_to_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_button)
+	fix_mesh_scale_button = Button.new()
+	fix_mesh_scale_button.text = "Fix Collision Mesh Scale"
+	fix_mesh_scale_button.pressed.connect(fix_collision_mesh_scale)
+	add_control_to_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_scale_button)
+
+	fix_mesh_rotation_button = Button.new()
+	fix_mesh_rotation_button.text = "Fix Collision Mesh Rotation"
+	fix_mesh_rotation_button.pressed.connect(fix_collision_mesh_rotation)
+	add_control_to_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_rotation_button)
 
 	sort_components_button = Button.new()
 	sort_components_button.text = "Sort Components"
@@ -39,14 +45,19 @@ func _enter_tree():
 
 
 func _exit_tree():
-	remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_button)
+	remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_scale_button)
+	remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_rotation_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, sort_components_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, check_lock_keys_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, check_objective_keys_button)
-	fix_mesh_button.queue_free()
+	fix_mesh_scale_button.queue_free()
+	fix_mesh_rotation_button.queue_free()
+	sort_components_button.queue_free()
+	check_lock_keys_button.queue_free()
+	check_objective_keys_button.queue_free()
 
 
-func fix_collision_mesh() -> void:
+func fix_collision_mesh_scale() -> void:
 	var selected = get_editor_interface().get_selection().get_selected_nodes()
 	print("Checking meshes: ", selected)
 
@@ -68,6 +79,32 @@ func fix_collision_mesh() -> void:
 				print("Fixed %d points in shape" % i)
 				shape.points = points
 				selection.scale = Vector3.ONE
+			else:
+				print("Cannot fix shape type: ", shape)
+
+
+func fix_collision_mesh_rotation() -> void:
+	var selected = get_editor_interface().get_selection().get_selected_nodes()
+	print("Checking meshes for rotation: ", selected)
+
+	for selection in selected:
+		if selection is CollisionShape3D:
+			var shape = selection.shape
+			if shape is ConvexPolygonShape3D:
+				var rotation_basis = selection.basis.orthonormalized()
+				print("Fixing rotation: ", shape, " with rotation: ", selection.rotation_degrees)
+
+				var points = shape.points.duplicate()
+				var i = 0
+				while i < points.size():
+					var point = points.get(i)
+					point = rotation_basis * point
+					points.set(i, point)
+					i += 1
+
+				print("Rotated %d points in shape" % i)
+				shape.points = points
+				selection.rotation = Vector3.ZERO
 			else:
 				print("Cannot fix shape type: ", shape)
 
