@@ -20,12 +20,18 @@ class_name ZN_AudioSubtitle3D
 @export var remove_after: float = 0.0
 @export var remove_on_finished: bool = true
 
-@onready var subtitle_tag = "[%s]" % subtitle_text
 @onready var radius_squared := subtitle_radius ** 2
 
+var subtitle_tag := ""
 var remove_timer: SceneTreeTimer
 
 func _ready() -> void:
+	if subtitle_text == "":
+		if subtitle_radius > 0.0:
+			push_warning("ZN_AudioSubtitle3D has empty subtitle text and positive subtitle radius!")
+	else:
+		subtitle_tag = "[%s]" % subtitle_text
+
 	if play_on_ready:
 		play_subtitle()
 
