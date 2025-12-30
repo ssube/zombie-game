@@ -2,6 +2,8 @@ extends System
 class_name ZS_FootstepSystem
 
 @export var sprint_multiplier: float = 2.0
+@export var sprint_volume: float = 0.1
+@export var crouch_volume: float = -0.03
 
 var _footstep_timers: Dictionary[String, float] = {}
 
@@ -47,14 +49,21 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 		collider.add_child(new_footstep)
 		new_footstep.global_position = collision_point
 
+
+
 		var next_variation = randf_range(-footstep.variation, +footstep.variation)
 
+		# TODO: increase the volume based on speed
 		# TODO: reset the timer when the entity starts sprinting
 		var input := entity.get_component(ZC_Input) as ZC_Input
 		if input and input.move_sprint:
 			footstep_timer = next_variation + footstep.sprint_interval
+			if new_footstep is AudioStreamPlayer3D:
+				new_footstep.volume_linear = clampf(new_footstep.volume_linear + sprint_volume, 0.0, 1.0)
 		elif input and input.move_crouch:
 			footstep_timer = next_variation + footstep.crouch_interval
+			if new_footstep is AudioStreamPlayer3D:
+				new_footstep.volume_linear = clampf(new_footstep.volume_linear + crouch_volume, 0.0, 1.0)
 		else:
 			footstep_timer = next_variation + footstep.walk_interval
 
