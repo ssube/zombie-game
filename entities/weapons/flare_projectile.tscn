@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cuf1daja6ucof"]
+[gd_scene load_steps=23 format=3 uid="uid://cuf1daja6ucof"]
 
 [ext_resource type="Script" uid="uid://dp6acnrca27yq" path="res://scripts/entities/weapons/ZE_Bullet.gd" id="1_hbaku"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_mlme4"]
@@ -7,8 +7,10 @@
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="5_ns7lc"]
 [ext_resource type="Texture2D" uid="uid://b6erthm4w6f7v" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Spark1.png" id="6_mlme4"]
 [ext_resource type="Texture2D" uid="uid://dj3ik1kwdyd3k" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Smoke6.png" id="7_dnu5x"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="8_brsgf"]
 [ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="8_lkehq"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="9_ns7lc"]
+[ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="9_s5cgd"]
 
 [sub_resource type="Resource" id="Resource_4s6ep"]
 script = ExtResource("4_lkehq")
@@ -72,6 +74,8 @@ billboard_mode = 2
 [sub_resource type="QuadMesh" id="QuadMesh_i4eog"]
 material = SubResource("StandardMaterial3D_ns7lc")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_xqhaq"]
+
 [node name="Flare" type="RigidBody3D"]
 script = ExtResource("1_hbaku")
 prefab_path = "res://entities/weapons/flare.tscn"
@@ -98,10 +102,30 @@ draw_pass_1 = SubResource("QuadMesh_mlme4")
 [node name="OmniLight3D" type="OmniLight3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16886926)
 light_color = Color(1, 0.100000024, 0.100000024, 1)
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 30.0
+distance_fade_shadow = 25.0
+distance_fade_length = 20.0
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D"]
 process_material = SubResource("ParticleProcessMaterial_lkehq")
 draw_pass_1 = SubResource("QuadMesh_i4eog")
+
+[node name="ZN_TriggerArea3D" type="Area3D" parent="Node3D" node_paths=PackedStringArray("parent_entity")]
+collision_layer = 4
+collision_mask = 30
+script = ExtResource("8_brsgf")
+parent_entity = NodePath("../..")
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+
+[node name="ZN_FireAction" type="Node" parent="Node3D/ZN_TriggerArea3D"]
+script = ExtResource("9_s5cgd")
+metadata/_custom_type_script = "uid://do7trwtn8xc7t"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/ZN_TriggerArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35)
+shape = SubResource("SphereShape3D_xqhaq")
 
 [node name="ZN_VariableTriggerTimer" type="Timer" parent="." node_paths=PackedStringArray("parent_entity")]
 wait_time = 120.0
