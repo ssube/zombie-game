@@ -169,12 +169,13 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			if collider_entity and collider_entity != entity.current_weapon:
 				if EntityUtils.is_interactive(collider_entity):
 					var interactive = collider_entity.get_component(ZC_Interactive) as ZC_Interactive
-					%Menu.set_target_label(interactive.name)
 
 					# Check the interactive distance
 					if interactive.shimmer_on_target and interactive.shimmer_range > 0.0:
 						var distance := body.global_position.distance_to(ray.get_collision_point())
 						if distance <= interactive.shimmer_range:
+							%Menu.set_target_label(interactive.name)
+
 							if not EntityUtils.has_shimmer(collider_entity):
 								var shimmer = ZC_Shimmer.from_interactive(interactive)
 								collider_entity.add_component(shimmer)
