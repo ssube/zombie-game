@@ -26,6 +26,10 @@ static func broadcast(
 				noise.sound_volume = _calculate_intensity(dist_sq, radius_squared, volume)
 				player.add_relationship(RelationshipUtils.make_heard(noise))
 
+	# Skip stimulus broadcast if the no aggro cheat is enabled
+	if OptionsManager.options.cheats.no_aggro:
+		return
+
 	# Broadcast to entities with perception (attention)
 	for entity in ECS.world.query.with_all([ZC_Perception]).execute():
 		if EntityUtils.is_player(entity):
