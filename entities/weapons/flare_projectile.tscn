@@ -1,0 +1,117 @@
+[gd_scene load_steps=20 format=3 uid="uid://cuf1daja6ucof"]
+
+[ext_resource type="Script" uid="uid://dp6acnrca27yq" path="res://scripts/entities/weapons/ZE_Bullet.gd" id="1_hbaku"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_mlme4"]
+[ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="3_dnu5x"]
+[ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/weapons/ZC_Weapon_Ranged.gd" id="4_lkehq"]
+[ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="5_ns7lc"]
+[ext_resource type="Texture2D" uid="uid://b6erthm4w6f7v" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Spark1.png" id="6_mlme4"]
+[ext_resource type="Texture2D" uid="uid://dj3ik1kwdyd3k" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Smoke6.png" id="7_dnu5x"]
+[ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="8_lkehq"]
+[ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="9_ns7lc"]
+
+[sub_resource type="Resource" id="Resource_4s6ep"]
+script = ExtResource("4_lkehq")
+ammo_type = "flare"
+metadata/_custom_type_script = "uid://dwsqxsqwtloma"
+
+[sub_resource type="Resource" id="Resource_24ymc"]
+script = ExtResource("5_ns7lc")
+ammo_count = Dictionary[String, int]({
+"flare": 1
+})
+max_ammo_count = Dictionary[String, int]({
+"flare": 1
+})
+metadata/_custom_type_script = "uid://bsnlq5t650od"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1chp"]
+albedo_color = Color(0.68, 0.0816, 0.0816, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1chp"]
+radius = 0.1
+height = 0.66
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hbaku"]
+particle_flag_align_y = true
+direction = Vector3(0, 0, -1)
+spread = 15.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, -1, 0)
+linear_accel_min = 3.9999976
+linear_accel_max = 5.9999976
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hbaku"]
+transparency = 1
+albedo_color = Color(1, 0.82666665, 0.6, 1)
+albedo_texture = ExtResource("6_mlme4")
+emission_enabled = true
+emission = Color(0.9, 0.59760004, 0.396, 1)
+emission_energy_multiplier = 2.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_mlme4"]
+material = SubResource("StandardMaterial3D_hbaku")
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lkehq"]
+direction = Vector3(0, 0, -1)
+spread = 15.0
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 2, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ns7lc"]
+transparency = 1
+albedo_texture = ExtResource("7_dnu5x")
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_i4eog"]
+material = SubResource("StandardMaterial3D_ns7lc")
+
+[node name="Flare" type="RigidBody3D"]
+script = ExtResource("1_hbaku")
+prefab_path = "res://entities/weapons/flare.tscn"
+component_resources = Array[ExtResource("2_mlme4")]([SubResource("Resource_4s6ep"), SubResource("Resource_24ymc")])
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+radius = 0.1
+height = 0.5
+material = SubResource("StandardMaterial3D_r1chp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_r1chp")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03668645)
+process_material = SubResource("ParticleProcessMaterial_hbaku")
+draw_pass_1 = SubResource("QuadMesh_mlme4")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16886926)
+light_color = Color(1, 0.100000024, 0.100000024, 1)
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D"]
+process_material = SubResource("ParticleProcessMaterial_lkehq")
+draw_pass_1 = SubResource("QuadMesh_i4eog")
+
+[node name="ZN_VariableTriggerTimer" type="Timer" parent="." node_paths=PackedStringArray("parent_entity")]
+wait_time = 120.0
+one_shot = true
+script = ExtResource("8_lkehq")
+parent_entity = NodePath("..")
+metadata/_custom_type_script = "uid://h4hsumlormm8"
+
+[node name="ZN_EntityAction" type="Node" parent="ZN_VariableTriggerTimer" node_paths=PackedStringArray("entity")]
+script = ExtResource("9_ns7lc")
+entity = NodePath("../..")
+remove = true
+metadata/_custom_type_script = "uid://dlpeis5tgmelp"

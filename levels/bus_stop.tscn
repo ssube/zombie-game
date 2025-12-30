@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=4 uid="uid://v18fidmgep15"]
+[gd_scene load_steps=124 format=4 uid="uid://v18fidmgep15"]
 
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_b7jq5"]
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_dm6vb"]
@@ -22,6 +22,7 @@
 [ext_resource type="Material" uid="uid://b230jrvugibiu" path="res://textures/Color Maps/metal_floor_tx_1.tres" id="13_tu73e"]
 [ext_resource type="Material" uid="uid://cjpixhnnwb4gp" path="res://textures/Color Maps/glass_block_windows_pt_1.tres" id="14_ccg5v"]
 [ext_resource type="PackedScene" uid="uid://d4se7f101eb7" path="res://skies/sky_night.tscn" id="15_2vafd"]
+[ext_resource type="PackedScene" uid="uid://bkkaq33vt04ge" path="res://entities/weapons/flare_item.tscn" id="15_morpl"]
 [ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="16_fbayg"]
 [ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="17_tr8cq"]
 [ext_resource type="Material" uid="uid://g5xoeqn2qoy6" path="res://textures/Color Maps/metal_panels_pt_2.tres" id="17_y6j6u"]
@@ -559,6 +560,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.884563, 0.21824193, 1.430
 
 [node name="Mailbox" parent="Entities" instance=ExtResource("27_h6dut")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.096527, 0.25, -0.2670951)
+
+[node name="Flare" parent="Entities" instance=ExtResource("15_morpl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.804863, 0.35000002, -0.22783995)
 
 [node name="Lights" type="Node3D" parent="."]
 
