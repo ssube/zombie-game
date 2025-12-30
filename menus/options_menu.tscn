@@ -303,6 +303,20 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Physical Empty Magazines"
 
+[node name="AdaptiveAimLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Adaptive Aim"
+
+[node name="AdaptiveAimSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+tick_count = 5
+ticks_on_borders = true
+
 [node name="Graphics" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
@@ -519,6 +533,7 @@ text = "Apply"
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3/MouseSensitivitySlider" to="." method="_on_mouse_sensitivity_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3/PhysicalShellsBox" to="." method="_on_physical_shells_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3/PhysicalMagsBox" to="." method="_on_physical_mags_box_toggled"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3/AdaptiveAimSlider" to="." method="_on_adaptive_aim_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2/CRTShader" to="." method="_on_crt_shader_toggled"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2/ResolutionMenu" to="." method="_on_resolution_menu_item_selected"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Graphics/CenterContainer/GridContainer2/WindowModeMenu" to="." method="_on_window_mode_menu_item_selected"]

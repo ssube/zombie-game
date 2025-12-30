@@ -10,7 +10,7 @@ func get_raycast_end_point(raycast: RayCast3D) -> Vector3:
 	return raycast.global_transform * raycast.target_position
 
 
-func do_adaptive_aim(raycast: RayCast3D, entity: Entity) -> void:
+func do_adaptive_aim(raycast: RayCast3D, entity: Entity, delta: float) -> void:
 	var collision_point: Vector3 = Vector3.ZERO
 	if raycast.is_colliding():
 		# adjust the weapon marker to face the point of the collision
@@ -22,8 +22,12 @@ func do_adaptive_aim(raycast: RayCast3D, entity: Entity) -> void:
 	if OptionsManager.options.gameplay.adaptive_aim == 1.0:
 		weapon_marker.look_at(collision_point, Vector3.UP)
 	elif OptionsManager.options.gameplay.adaptive_aim > 0.0:
-		var collision_transform = weapon_marker.transform.looking_at(collision_point, Vector3.UP)
-		weapon_marker.transform = lerp(weapon_marker.transform, collision_transform, OptionsManager.options.gameplay.adaptive_aim)
+		# From https://docs.godotengine.org/en/latest/tutorials/3d/using_transforms.html#interpolating-with-quaternions
+		var collision_transform = weapon_marker.global_transform.looking_at(collision_point, Vector3.UP)
+		var collision_quaternion = Quaternion(collision_transform.basis)
+		var current_quaternion = Quaternion(weapon_marker.global_transform.basis)
+		var slerped_quaternion = current_quaternion.slerp(collision_quaternion, OptionsManager.options.gameplay.adaptive_aim * delta)
+		weapon_marker.global_transform.basis = Basis(slerped_quaternion)
 
 
 func query():
@@ -154,7 +158,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			var collider = ray.get_collider()
 			var collider_entity := CollisionUtils.get_collider_entity(collider)
 
-			do_adaptive_aim(ray, entity)
+			do_adaptive_aim(ray, entity, delta)
 
 			if collider_entity != last_shimmer.get(entity) and collider_entity != entity.current_weapon:
 				%Menu.clear_target_label()
@@ -189,7 +193,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			%Menu.clear_target_label()
 			%Menu.reset_crosshair_color()
 			remove_shimmer_key(entity)
-			do_adaptive_aim(ray, entity) # aim straight ahead
+			do_adaptive_aim(ray, entity, delta) # aim straight ahead
 
 
 

@@ -91,6 +91,7 @@ func on_update() -> void:
 	%MusicVolumeSlider.value = _current_options.audio.music_volume
 	%EffectsVolumeSlider.value = _current_options.audio.effects_volume
 	%SubtitleCheckBox.button_pressed = _current_options.audio.subtitles
+	%AdaptiveAimSlider.value = _current_options.gameplay.adaptive_aim
 
 
 func _on_physical_shells_box_toggled(toggled_on: bool) -> void:
@@ -185,3 +186,8 @@ func _on_subtitle_check_box_toggled(toggled_on: bool) -> void:
 func _on_mouse_sensitivity_slider_value_changed(value: float) -> void:
 	_dirty = true
 	_current_options.controls.mouse_sensitivity = round(value)
+
+
+func _on_adaptive_aim_slider_value_changed(value: float) -> void:
+	_dirty = true
+	_current_options.gameplay.adaptive_aim = value
