@@ -158,7 +158,6 @@ transform = Transform3D(0.7643113, 0.5640393, 0.31251454, 0, 0.48464668, -0.8747
 rotation_mode = 4
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head/Hands/SwingPath/PathFollow3D"]
-process_mode = 4
 remote_path = NodePath("../../../WeaponMarker")
 
 [node name="Effects" type="Node3D" parent="."]

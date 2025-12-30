@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4406rbr42a1e"]
+[gd_scene load_steps=12 format=3 uid="uid://b4406rbr42a1e"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_n0ht5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_3pflf"]
@@ -11,54 +11,22 @@
 
 [sub_resource type="Resource" id="Resource_lu3nb"]
 script = ExtResource("3_82ul1")
-swing_path = NodePath("Path3D/PathFollow3D")
 swing_time = 1.0
 cooldown_time = 0.5
 damage = 10
 metadata/_custom_type_script = "uid://c86wth8kvlbt7"
 
-[sub_resource type="Curve3D" id="Curve3D_4d0u4"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_lu3nb"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3voqo"]
 radius = 0.25
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_lu3nb"]
 
 [node name="ZombieMelee" type="Node3D"]
 script = ExtResource("1_n0ht5")
 prefab_path = "res://entities/weapons/zombie_melee.tscn"
 component_resources = Array[ExtResource("2_3pflf")]([SubResource("Resource_lu3nb")])
 
-[node name="Path3D" type="Path3D" parent="."]
-curve = SubResource("Curve3D_4d0u4")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-
-[node name="Area3D" type="Area3D" parent="Path3D/PathFollow3D" node_paths=PackedStringArray("parent_entity")]
-collision_layer = 16
-collision_mask = 11
-script = ExtResource("5_4d0u4")
-parent_entity = NodePath("../../..")
-metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Area3D"]
-shape = SubResource("SphereShape3D_3voqo")
-
-[node name="ZN_HealthAction" type="Node" parent="Path3D/PathFollow3D/Area3D"]
-script = ExtResource("6_4d0u4")
-health_mode = 0
-
-[node name="ZN_FactionCondition" type="Node" parent="Path3D/PathFollow3D/Area3D/ZN_HealthAction"]
-script = ExtResource("7_3voqo")
-apply_to_factions = Array[String](["friendly_players"])
-metadata/_custom_type_script = "uid://crylbd231pgne"
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Path3D/PathFollow3D"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 visible = false
 radius = 0.25
 radial_segments = 8
@@ -67,3 +35,22 @@ rings = 4
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamGenerator_lu3nb")
 script = ExtResource("5_82ul1")
+
+[node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("parent_entity")]
+collision_layer = 16
+collision_mask = 11
+script = ExtResource("5_4d0u4")
+parent_entity = NodePath("..")
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_3voqo")
+
+[node name="ZN_HealthAction" type="Node" parent="Area3D"]
+script = ExtResource("6_4d0u4")
+health_mode = 0
+
+[node name="ZN_FactionCondition" type="Node" parent="Area3D/ZN_HealthAction"]
+script = ExtResource("7_3voqo")
+apply_to_factions = Array[String](["friendly_players"])
+metadata/_custom_type_script = "uid://crylbd231pgne"

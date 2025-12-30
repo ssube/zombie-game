@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ds0q1crcrv862"]
+[gd_scene load_steps=44 format=3 uid="uid://ds0q1crcrv862"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_rffgv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_2yl8o"]
@@ -100,19 +100,27 @@ metadata/_custom_type_script = "uid://b8oatb3tdywrh"
 script = ExtResource("5_tseq0")
 metadata/_custom_type_script = "uid://cixmecjncarw5"
 
+[sub_resource type="Curve3D" id="Curve3D_j7lgi"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwqt7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uqboj"]
 radius = 0.25
 
-[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("current_weapon", "inventory_node", "weapon_node")]
+[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("swing_path_follower", "current_weapon", "inventory_node", "weapon_node")]
 collision_layer = 16
 collision_mask = 31
 mass = 20.0
 script = ExtResource("1_rffgv")
+swing_path_follower = NodePath("Body/Path3D/PathFollow3D")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
-weapon_node = NodePath("WeaponMarker")
+weapon_node = NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
 prefab_path = "res://entities/characters/zombie.tscn"
 component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_0ios3"), SubResource("Resource_4i4kv"), SubResource("Resource_u6a8x"), SubResource("Resource_8aduj"), SubResource("Resource_ull4n"), SubResource("Resource_euqm3"), SubResource("Resource_jpnnd"), SubResource("Resource_sn1gh"), SubResource("Resource_4bumh"), SubResource("Resource_kwfyu"), SubResource("Resource_mn8kb"), SubResource("Resource_wwun5"), SubResource("Resource_7tmu0")])
 
@@ -125,6 +133,14 @@ material = ExtResource("8_tfdn2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
 radius = 0.25
 material = ExtResource("8_tfdn2")
+
+[node name="Path3D" type="Path3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.65514755)
+curve = SubResource("Curve3D_j7lgi")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Body/Path3D"]
+
+[node name="WeaponMarker" type="Marker3D" parent="Body/Path3D/PathFollow3D"]
 
 [node name="BodyShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_iwqt7")
@@ -150,9 +166,6 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44078487, -0.60281074)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-
-[node name="WeaponMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44078487, -0.60281074)
 
 [node name="DeathBranch" type="Node" parent="."]
 script = ExtResource("35_mn8kb")

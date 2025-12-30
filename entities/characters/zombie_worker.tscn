@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dc22w3kstrlyu"]
+[gd_scene load_steps=46 format=3 uid="uid://dc22w3kstrlyu"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_enhv7"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_g3ik4"]
@@ -98,11 +98,18 @@ script = ExtResource("19_ufuyc")
 state_machine = NodePath("Behavior/FSM")
 metadata/_custom_type_script = "uid://db2qobebs40ku"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g3ik4"]
-albedo_color = Color(1, 1, 0, 1)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enhv7"]
 albedo_color = Color(1, 0.4392157, 0.2, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_oqsy8"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g3ik4"]
+albedo_color = Color(1, 1, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwqt7"]
 
@@ -112,14 +119,15 @@ points = PackedVector3Array(0, 0, -0.6, -0.3, 0, -0.51965547, 0, 0.3, -0.5196554
 [sub_resource type="SphereShape3D" id="SphereShape3D_uqboj"]
 radius = 0.25
 
-[node name="ZombieWorker" type="RigidBody3D" node_paths=PackedStringArray("current_weapon", "inventory_node", "weapon_node")]
+[node name="ZombieWorker" type="RigidBody3D" node_paths=PackedStringArray("swing_path_follower", "current_weapon", "inventory_node", "weapon_node")]
 collision_layer = 16
 collision_mask = 31
 mass = 20.0
 script = ExtResource("1_enhv7")
+swing_path_follower = NodePath("Body/Path3D/PathFollow3D")
 current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
-weapon_node = NodePath("WeaponMarker")
+weapon_node = NodePath("Body/Path3D/PathFollow3D/Hands/WeaponMarker")
 prefab_path = "res://entities/characters/zombie_worker.tscn"
 component_resources = Array[ExtResource("2_g3ik4")]([SubResource("Resource_ufuyc"), SubResource("Resource_8aduj"), SubResource("Resource_23j0l"), SubResource("Resource_fkiag"), SubResource("Resource_jpnnd"), SubResource("Resource_xbif0"), SubResource("Resource_4bumh"), SubResource("Resource_ekadw"), SubResource("Resource_x8nhq"), SubResource("Resource_wwun5"), SubResource("Resource_7tmu0"), SubResource("Resource_6olyw"), SubResource("Resource_b2lq4")])
 
@@ -133,19 +141,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
 radius = 0.25
 material = ExtResource("8_ljrwo")
 
-[node name="CSGFlashlight" type="CSGCylinder3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.5, 0.35, -0.25)
-radius = 0.1
-height = 0.5
-material = SubResource("StandardMaterial3D_g3ik4")
-
-[node name="Flashlight" type="SpotLight3D" parent="Body/CSGFlashlight"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.3, 0)
-light_energy = 1.5
-shadow_enabled = true
-spot_range = 10.0
-spot_angle = 25.0
-
 [node name="CSGHat" type="CSGSphere3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 radius = 0.6
@@ -155,6 +150,30 @@ material = SubResource("StandardMaterial3D_enhv7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 operation = 2
 size = Vector3(1.5, 1, 1.5)
+
+[node name="Path3D" type="Path3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.38536283)
+curve = SubResource("Curve3D_oqsy8")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Body/Path3D"]
+
+[node name="Hands" type="Node3D" parent="Body/Path3D/PathFollow3D"]
+
+[node name="CSGFlashlight" type="CSGCylinder3D" parent="Body/Path3D/PathFollow3D/Hands"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.5, 0.35, -0.25)
+radius = 0.1
+height = 0.5
+material = SubResource("StandardMaterial3D_g3ik4")
+
+[node name="Flashlight" type="SpotLight3D" parent="Body/Path3D/PathFollow3D/Hands/CSGFlashlight"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.3, 0)
+light_energy = 1.5
+shadow_enabled = true
+spot_range = 10.0
+spot_angle = 25.0
+
+[node name="WeaponMarker" type="Marker3D" parent="Body/Path3D/PathFollow3D/Hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4162073, -0.583356)
 
 [node name="BodyShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_iwqt7")
@@ -185,9 +204,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4162073, -0.583356)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-
-[node name="WeaponMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4162073, -0.583356)
 
 [node name="DeathBranch" type="Node" parent="."]
 script = ExtResource("34_x8nhq")
