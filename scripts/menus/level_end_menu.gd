@@ -41,3 +41,7 @@ func on_update() -> void:
 
 func _on_main_menu_button_pressed() -> void:
 	menu_changed.emit(ZM_BaseMenu.Menus.START_MENU)
+
+
+func _on_quit_button_pressed() -> void:
+	pass # Replace with function body.

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://12llaao0w5gu"]
+[gd_scene load_steps=3 format=3 uid="uid://12llaao0w5gu"]
 
 [ext_resource type="Script" uid="uid://dg4ahqxn0tu48" path="res://scripts/menus/objectives_menu.gd" id="1_8ewho"]
+[ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="2_2wljw"]
 
 [node name="ObjectivesMenu" type="AspectRatioContainer" node_paths=PackedStringArray("objective_tree")]
 process_mode = 2
@@ -34,9 +35,9 @@ layout_mode = 2
 columns = 3
 column_titles_visible = true
 
-[node name="Back" type="Button" parent="MarginContainer/VFlowContainer"]
+[node name="BackButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("2_2wljw")]
 layout_mode = 2
 text = "Back"
 
 [connection signal="item_activated" from="MarginContainer/VFlowContainer/ObjectiveTree" to="." method="_on_objective_tree_item_activated"]
-[connection signal="pressed" from="MarginContainer/VFlowContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/BackButton" to="." method="_on_back_pressed"]

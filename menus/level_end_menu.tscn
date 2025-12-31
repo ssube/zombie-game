@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dialawbgdnoap"]
+[gd_scene load_steps=5 format=3 uid="uid://dialawbgdnoap"]
 
 [ext_resource type="Script" uid="uid://d1jb5qko6v5f3" path="res://scripts/menus/level_end_menu.gd" id="1_lr8k6"]
 [ext_resource type="Texture2D" uid="uid://xvvykos6jpvb" path="res://textures/level_placeholder.tres" id="2_2d6ew"]
+[ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="3_rf7jv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lr8k6"]
 
@@ -68,13 +69,19 @@ layout_mode = 2
 text = "Next Level: %s"
 horizontal_alignment = 1
 
-[node name="ContinueButton" type="Button" parent="MarginContainer/LevelEndMenu/MarginContainer/VFlowContainer"]
+[node name="ContinueButton" parent="MarginContainer/LevelEndMenu/MarginContainer/VFlowContainer" instance=ExtResource("3_rf7jv")]
 layout_mode = 2
 text = "Continue"
 
-[node name="MainMenuButton" type="Button" parent="MarginContainer/LevelEndMenu/MarginContainer/VFlowContainer"]
+[node name="MainMenuButton" parent="MarginContainer/LevelEndMenu/MarginContainer/VFlowContainer" instance=ExtResource("3_rf7jv")]
 layout_mode = 2
 text = "Main Menu"
 
+[node name="QuitButton" parent="MarginContainer/LevelEndMenu/MarginContainer/VFlowContainer" instance=ExtResource("3_rf7jv")]
+modulate = Color(1, 0.5, 0.5, 1)
+layout_mode = 2
+text = "Quit"
+
 [connection signal="pressed" from="MarginContainer/LevelEndMenu/MarginContainer/VFlowContainer/ContinueButton" to="." method="_on_next_level_pressed"]
 [connection signal="pressed" from="MarginContainer/LevelEndMenu/MarginContainer/VFlowContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="MarginContainer/LevelEndMenu/MarginContainer/VFlowContainer/QuitButton" to="." method="_on_quit_button_pressed"]

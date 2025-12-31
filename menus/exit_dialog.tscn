@@ -56,7 +56,7 @@ text = "Back"
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_t5x1p")
 
-[node name="MainMenuButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer"]
+[node name="MainMenuButton" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer" instance=ExtResource("2_xhui5")]
 layout_mode = 2
 text = "Main Menu"
 
@@ -64,8 +64,8 @@ text = "Main Menu"
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_t5x1p")
 
-[node name="QuitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer"]
-modulate = Color(1, 0.47000003, 0.47000003, 1)
+[node name="QuitButton" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer" instance=ExtResource("2_xhui5")]
+modulate = Color(1, 0.5, 0.5, 1)
 layout_mode = 2
 text = "Quit"
 

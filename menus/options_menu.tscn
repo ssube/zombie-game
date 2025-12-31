@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyv5b48xquqot"]
+[gd_scene load_steps=9 format=3 uid="uid://dyv5b48xquqot"]
 
 [ext_resource type="Script" uid="uid://dr0t3qprbbuke" path="res://scripts/menus/options_menu.gd" id="1_p3s2b"]
 [ext_resource type="AudioStream" uid="uid://ubdmirg50ful" path="res://sounds/Sound Effects/Firearms/Racking/shotgun_racking_ufx_1.ogg" id="2_cet7k"]
 [ext_resource type="AudioStream" uid="uid://cseclvit36kh1" path="res://sounds/Sound Effects/Break/glass_break_ufx_1.ogg" id="3_1vpws"]
+[ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="4_1vpws"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cet7k"]
 content_margin_left = 0.0
@@ -517,7 +518,7 @@ text = "God mode"
 layout_mode = 2
 alignment = 2
 
-[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="BackButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_1vpws")]
 layout_mode = 2
 text = "Back"
 
@@ -526,7 +527,7 @@ layout_mode = 2
 theme_override_constants/separation = 32
 theme_override_styles/separator = SubResource("StyleBoxEmpty_labby")
 
-[node name="ApplyButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ApplyButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_1vpws")]
 layout_mode = 2
 text = "Apply"
 
@@ -545,5 +546,5 @@ text = "Apply"
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoAggroBox" to="." method="_on_no_aggro_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoClipBox" to="." method="_on_no_clip_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/GodModeBox" to="." method="_on_god_mode_box_toggled"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
