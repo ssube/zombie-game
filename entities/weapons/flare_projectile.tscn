@@ -54,6 +54,7 @@ albedo_texture = ExtResource("6_mlme4")
 emission_enabled = true
 emission = Color(0.9, 0.59760004, 0.396, 1)
 emission_energy_multiplier = 2.5
+disable_receive_shadows = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_mlme4"]
 material = SubResource("StandardMaterial3D_hbaku")
@@ -96,6 +97,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03668645)
+cast_shadow = 0
 process_material = SubResource("ParticleProcessMaterial_hbaku")
 draw_pass_1 = SubResource("QuadMesh_mlme4")
 
@@ -109,6 +111,7 @@ distance_fade_shadow = 25.0
 distance_fade_length = 20.0
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D"]
+cast_shadow = 0
 process_material = SubResource("ParticleProcessMaterial_lkehq")
 draw_pass_1 = SubResource("QuadMesh_i4eog")
 
