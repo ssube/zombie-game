@@ -11,7 +11,7 @@ signal level_loaded
 @export var start_marker: String = ''
 
 @export_group("Debug")
-@export var debug_skips_start_menu: bool = false
+@export var debug_skips_main_menu: bool = false
 @export var debug_level: String = ''
 @export var debug_marker: String = ''
 
