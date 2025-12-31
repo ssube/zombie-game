@@ -47,4 +47,8 @@ func _on_post_shader_toggled(toggled_on: bool) -> void:
 
 
 func _on_main_menu_button_pressed() -> void:
-	menu_changed.emit(ZM_BaseMenu.Menus.MAIN_MENU)
+	menu_changed.emit(Menus.MAIN_MENU)
+
+
+func _on_controls_pressed() -> void:
+	menu_changed.emit(Menus.OPTIONS_MENU, 0)

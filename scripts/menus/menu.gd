@@ -14,6 +14,10 @@ const quit_menus: Array[Menus] = [
 	Menus.EXIT_DIALOG,
 ]
 
+const tabbed_menus: Array[Menus] = [
+	Menus.OPTIONS_MENU,
+]
+
 @onready var menu_nodes: Dictionary[Menus, Control] = {
 	Menus.NONE: $MenuLayer/GameHud,
 	Menus.GAME_OVER_MENU: $MenuLayer/GameOverMenu,
@@ -151,7 +155,7 @@ func toggle_pause() -> void:
 		show_menu(Menus.NONE)
 
 
-func show_menu(menu: Menus) -> void:
+func show_menu(menu: Menus, tab_index: int = -1) -> void:
 	if menu != visible_menu:
 		var menu_name := Menus.keys()[menu] as String
 		print("Show menu: ", menu_name)
@@ -168,7 +172,7 @@ func show_menu(menu: Menus) -> void:
 		previous_menu = visible_menu
 		visible_menu = menu
 
-		for m in menu_nodes.keys():
+		for m: Menus in menu_nodes.keys():
 			var menu_node := menu_nodes[m]
 			if m != visible_menu:
 				menu_node.hide()
@@ -180,6 +184,10 @@ func show_menu(menu: Menus) -> void:
 				menu_node.show()
 				if menu_node is ZM_BaseMenu:
 					menu_node.on_show()
+
+				if tab_index > -1:
+					if m in tabbed_menus:
+						menu_node.active_tab = tab_index
 
 		update_mouse_mode()
 
@@ -279,8 +287,8 @@ func _on_objective_changed(objective: ZN_BaseObjective) -> void:
 	$MenuLayer/GameHud.set_objective_label(objective.title)
 
 
-func _on_menu_changed(menu: ZM_BaseMenu.Menus) -> void:
-	show_menu(menu)
+func _on_menu_changed(menu: ZM_BaseMenu.Menus, tab_index: int = -1) -> void:
+	show_menu(menu, tab_index)
 
 
 func _on_game_saved(_name: String) -> void:

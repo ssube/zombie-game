@@ -20,7 +20,7 @@ func _get_body_entity(body: Node) -> Node:
 
 func _ready() -> void:
 	self.one_shot = not repeat
-	timeout.connect(on_timeout)
+	self.timeout.connect(on_timeout)
 
 	for child in self.get_children():
 		if child is ZN_BaseAction:

@@ -33,7 +33,7 @@ enum Effects {
 
 signal apply_pressed()
 signal back_pressed()
-signal menu_changed(menu: Menus)
+signal menu_changed(menu: Menus, tab_index: int)
 signal menu_quit_requested()
 
 

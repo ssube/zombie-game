@@ -1,6 +1,11 @@
 extends ZM_BaseMenu
 
 @export var tab_container: TabContainer
+@export var active_tab := 0:
+	get():
+		return $MarginContainer/VBoxContainer/TabContainer.current_tab
+	set(value):
+		$MarginContainer/VBoxContainer/TabContainer.current_tab = value
 @export var cheats_tab := 4
 
 
