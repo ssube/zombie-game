@@ -59,6 +59,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			speed *= input.sprint_multiplier
 		elif input.move_crouch:
 			speed *= input.crouch_multiplier
+			# TODO: move camera down
 
 		var horizontal_velocity = direction * speed
 
@@ -406,9 +407,10 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 
 
 func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
-	var light = body.get_node("./Head/Hands/Flashlight") as SpotLight3D
+	# TODO: type this node or use a component
+	var light = body.get_node("./Head/Hands/Flashlight")
 	if light != null:
-		light.visible = not light.visible
+		light.enabled = not light.enabled
 
 
 func _get_level_markers(root: Node = null) -> Dictionary[String, Marker3D]:
