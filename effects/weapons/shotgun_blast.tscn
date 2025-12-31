@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dktd2ekufselm"]
+[gd_scene load_steps=16 format=3 uid="uid://dktd2ekufselm"]
 
 [ext_resource type="Texture2D" uid="uid://bism3fuwsio0w" path="res://textures/Particle Effect Texture Essentials/Transparent Versions/fx_Smoke3.png" id="1_bd4u4"]
 [ext_resource type="AudioStream" uid="uid://cbh3us2kncrl0" path="res://sounds/Sound Effects/Firearms/Fire/shotgun_fire_ufx_1.ogg" id="2_nx8m0"]
+[ext_resource type="Script" uid="uid://0uftjan8jqx7" path="res://addons/QuakeLamp/LampComponent.gd" id="2_wjpqw"]
 [ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/triggers/ZN_TriggerTimer.gd" id="3_bd4u4"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="3_jplj4"]
+[ext_resource type="Script" uid="uid://dx3tgietk0dly" path="res://addons/QuakeLamp/FlickerComponent.gd" id="3_m8jg2"]
 [ext_resource type="Script" uid="uid://b1hfgveu3fvsd" path="res://scripts/nodes/actions/ZN_NodeAction.gd" id="4_dxxuk"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jplj4"]
@@ -69,7 +71,26 @@ draw_pass_1 = SubResource("CapsuleMesh_jplj4")
 process_material = SubResource("ParticleProcessMaterial_kmwy0")
 draw_pass_1 = SubResource("QuadMesh_m8jg2")
 
-[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
+[node name="Flash" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+light_energy = 0.0
+light_indirect_energy = 0.0
+shadow_enabled = true
+
+[node name="cLampComponent" type="Node" parent="Flash" node_paths=PackedStringArray("LightInstances", "FlickerComponent")]
+script = ExtResource("2_wjpqw")
+LightInstances = [NodePath("..")]
+FlickerComponent = NodePath("cFlickerComponent")
+metadata/_custom_type_script = "uid://0uftjan8jqx7"
+
+[node name="cFlickerComponent" type="Node" parent="Flash/cLampComponent"]
+script = ExtResource("3_m8jg2")
+AnimationSpeed = 3.0
+AnimationTable = 11
+CustomAnimationTable = "zoommggddddddaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+metadata/_custom_type_script = "uid://dx3tgietk0dly"
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_nx8m0")
 max_distance = 10.0
 script = ExtResource("3_jplj4")
@@ -78,13 +99,17 @@ subtitle_text = "Shotgun Blast"
 subtitle_radius = 10.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
-[node name="ZN_TriggerTimer" type="Timer" parent="."]
+[node name="Removal" type="Timer" parent="."]
 one_shot = true
 autostart = true
 script = ExtResource("3_bd4u4")
 metadata/_custom_type_script = "uid://b3w64ibj5uxv4"
 
-[node name="ZN_NodeAction" type="Node" parent="ZN_TriggerTimer" node_paths=PackedStringArray("node")]
+[node name="ZN_NodeAction" type="Node" parent="Removal" node_paths=PackedStringArray("node")]
 script = ExtResource("4_dxxuk")
 node = NodePath("../..")
 remove = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5852966)
+visible = false
