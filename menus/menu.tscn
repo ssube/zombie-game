@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dwf44rltpd2up" path="res://effects/screen/water_texture.tres" id="3_50hu0"]
 [ext_resource type="PackedScene" uid="uid://vs3qkjinyhbb" path="res://menus/game_hud.tscn" id="3_nonqb"]
 [ext_resource type="Texture2D" uid="uid://bsyv551fas3wv" path="res://effects/screen/fire_texture.tres" id="4_ph6eu"]
-[ext_resource type="PackedScene" uid="uid://7wq8jy2v0e4b" path="res://menus/start_menu.tscn" id="4_t5x1p"]
+[ext_resource type="PackedScene" uid="uid://7wq8jy2v0e4b" path="res://menus/main_menu.tscn" id="4_t5x1p"]
 [ext_resource type="PackedScene" uid="uid://dyv5b48xquqot" path="res://menus/options_menu.tscn" id="4_tck7o"]
 [ext_resource type="PackedScene" uid="uid://sah33a6m5cm8" path="res://menus/pause_menu.tscn" id="5_j27vk"]
 [ext_resource type="Texture2D" uid="uid://cfqo5agum2br2" path="res://effects/screen/acid_texture.tres" id="5_tvlqr"]

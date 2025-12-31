@@ -3,7 +3,7 @@ class_name ZM_BaseMenu
 
 enum Menus {
 	NONE,
-	START_MENU,
+	MAIN_MENU,
 	PAUSE_MENU,
 	INVENTORY_MENU,
 	OBJECTIVES_MENU,

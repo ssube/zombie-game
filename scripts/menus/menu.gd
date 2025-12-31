@@ -1,7 +1,7 @@
 extends ZM_BaseMenu
 
 @export var visible_menu: Menus = Menus.NONE
-var previous_menu: Menus = Menus.START_MENU
+var previous_menu: Menus = Menus.MAIN_MENU
 
 var pause_menus: Dictionary[Menus, bool] = {
 	Menus.NONE: false,
@@ -18,7 +18,7 @@ var pause_menus: Dictionary[Menus, bool] = {
 	Menus.OPTIONS_MENU: $MenuLayer/OptionsMenu,
 	Menus.PAUSE_MENU: $MenuLayer/PauseMenu,
 	Menus.SAVE_MENU: $MenuLayer/SaveMenu,
-	Menus.START_MENU: $MenuLayer/StartMenu,
+	Menus.MAIN_MENU: $MenuLayer/StartMenu,
 	Menus.EXIT_DIALOG: $MenuLayer/ExitDialog,
 	Menus.DIALOGUE_BALLOON: $MenuLayer/DialogueMenu,
 	Menus.CONSOLE_MENU: $MenuLayer/ConsoleMenu,
@@ -151,7 +151,7 @@ func show_menu(menu: Menus) -> void:
 		print("Show menu: ", menu_name)
 
 		# If this is the start menu, unload the current level before pausing
-		if menu == Menus.START_MENU:
+		if menu == Menus.MAIN_MENU:
 			# TODO: prompt to save before unloading
 			var game := TreeUtils.get_game(self)
 			game.clear_world()
