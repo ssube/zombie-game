@@ -19,7 +19,7 @@
 [ext_resource type="Material" uid="uid://b6b7t3qv6dnry" path="res://textures/Color Maps/grass_1.tres" id="11_sg4l5"]
 [ext_resource type="Material" uid="uid://c1aamlmiyxnnc" path="res://textures/Color Maps/asphalt_old_pt_1_2.tres" id="12_4nd5y"]
 [ext_resource type="Material" uid="uid://x2tvc6oato7" path="res://textures/Color Maps/metal_roof_tx_1.tres" id="13_fk3c4"]
-[ext_resource type="PackedScene" uid="uid://c2iu0e6hys73u" path="res://entities/debug/grass_detail.tscn" id="13_mk2pv"]
+[ext_resource type="PackedScene" uid="uid://c2iu0e6hys73u" path="res://entities/statics/grass_cluster_green.tscn" id="13_mk2pv"]
 [ext_resource type="Material" uid="uid://drg6dytwr6qt2" path="res://textures/Color Maps/building_pt_1_top_wall_1.tres" id="14_24vc2"]
 [ext_resource type="Material" uid="uid://d2oaplvcftcrx" path="res://textures/Color Maps/brick_wall_pt_2.tres" id="15_jb54n"]
 [ext_resource type="Script" uid="uid://c6dan22mbgmgs" path="res://scripts/nodes/ZN_MapGeometry.gd" id="15_tpjaq"]
