@@ -91,7 +91,7 @@ var mutation_cooldown: Timer = Timer.new()
 @onready var dialogue_label: DialogueLabel = %DialogueLabel
 
 ## The menu of responses
-@onready var responses_menu: DialogueResponsesMenu = %ResponsesMenu
+@onready var responses_menu: ZM_DialogueResponsesMenu = %ResponsesMenu
 
 ## Indicator to show that player can progress dialogue.
 @onready var progress: Polygon2D = %Progress
