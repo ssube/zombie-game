@@ -11,6 +11,7 @@ func _disable_plugin() -> void:
 	# Remove autoloads here.
 	pass
 
+var check_level_button: Button
 var check_lock_keys_button: Button
 var check_objective_keys_button: Button
 var fix_mesh_scale_button: Button
@@ -49,6 +50,11 @@ func _enter_tree():
 	convert_ranged_to_thrown_button.pressed.connect(convert_ranged_to_thrown)
 	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, convert_ranged_to_thrown_button)
 
+	check_level_button = Button.new()
+	check_level_button.text = "Check Level Structure"
+	check_level_button.pressed.connect(check_level_structure)
+	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, check_level_button)
+
 
 func _exit_tree():
 	remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_scale_button)
@@ -57,12 +63,14 @@ func _exit_tree():
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, check_lock_keys_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, check_objective_keys_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, convert_ranged_to_thrown_button)
+	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, check_level_button)
 	fix_mesh_scale_button.queue_free()
 	fix_mesh_rotation_button.queue_free()
 	sort_components_button.queue_free()
 	check_lock_keys_button.queue_free()
 	check_objective_keys_button.queue_free()
 	convert_ranged_to_thrown_button.queue_free()
+	check_level_button.queue_free()
 
 
 func fix_collision_mesh_scale() -> void:
@@ -333,3 +341,81 @@ func convert_ranged_to_thrown() -> void:
 				print("Converted entity %s from Ranged to Thrown weapon." % entity.name)
 			else:
 				print("Entity %s does not have a Ranged weapon component." % entity.name)
+
+
+func check_level_structure() -> void:
+	var editor_interface := get_editor_interface()
+	var scene_root := editor_interface.get_edited_scene_root() as ZN_Level
+	if not scene_root:
+		printerr("Current scene is not a ZN_Level!")
+		return
+
+	print("Checking level structure for: ", scene_root.name)
+
+	var errors := false
+	var warnings := false
+
+	if scene_root.level_actions:
+		if scene_root.level_actions.actions.size() == 0:
+			printerr("Level actions exist but contain no actions!")
+			errors = true
+		else:
+			print("Level has %d actions." % scene_root.level_actions.actions.size())
+
+	var areas_node = scene_root.get_node(scene_root.areas_node) as Node
+	if not areas_node:
+		push_warning("Areas node not found at path: %s" % scene_root.areas_node)
+		warnings = true
+	else:
+		print("Areas node found: %s" % areas_node.name)
+
+	var entities_node = scene_root.get_node(scene_root.entities_node) as Node
+	if not entities_node:
+		printerr("Entities node not found at path: %s" % scene_root.entities_node)
+		errors = true
+	else:
+		print("Entities node found: %s" % entities_node.name)
+
+	var lights_node = scene_root.get_node(scene_root.lights_node) as Node
+	if not lights_node:
+		push_warning("Lights node not found at path: %s" % scene_root.lights_node)
+		warnings = true
+	else:
+		print("Lights node found: %s" % lights_node.name)
+
+	var markers_node = scene_root.get_node(scene_root.markers_node) as Node
+	if not markers_node:
+		printerr("Markers node not found at path: %s" % scene_root.markers_node)
+		errors = true
+	else:
+		print("Markers node found: %s" % markers_node.name)
+
+	var map_node = scene_root.get_node(scene_root.map_node) as Node
+	if not map_node:
+		printerr("Map node not found at path: %s" % scene_root.map_node)
+		errors = true
+	else:
+		print("Map node found: %s" % map_node.name)
+
+	var objectives_node = scene_root.get_node(scene_root.objectives_node) as Node
+	if not objectives_node:
+		push_warning("Objectives node not found at path: %s" % scene_root.objectives_node)
+		warnings = true
+	else:
+		print("Objectives node found: %s" % objectives_node.name)
+
+	var environment_node = scene_root.get_node(scene_root.environment_node) as Node
+	if not environment_node:
+		push_warning("Environment node not found at path: %s" % scene_root.environment_node)
+		warnings = true
+	else:
+		print("Environment node found: %s" % environment_node.name)
+
+	print("Level structure check complete.")
+
+	if errors:
+		printerr("Level structure has errors!")
+	elif warnings:
+		push_warning("Level structure has warnings!")
+	else:
+		print("Level structure is valid!")
