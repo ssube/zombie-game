@@ -44,3 +44,7 @@ func on_update() -> void:
 
 func _on_post_shader_toggled(toggled_on: bool) -> void:
 	shader_toggled.emit(toggled_on)
+
+
+func _on_main_menu_button_pressed() -> void:
+	menu_changed.emit(ZM_BaseMenu.Menus.MAIN_MENU)
