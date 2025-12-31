@@ -28,6 +28,8 @@ extends Control
 
 signal dialogue_finished
 
+@export var click_player: AudioStreamPlayer
+
 ## The dialogue resource
 @export var dialogue_resource: DialogueResource
 
@@ -198,6 +200,7 @@ func apply_dialogue_line() -> void:
 
 ## Go to the next line
 func next(next_id: String) -> void:
+	click_player.play()
 	dialogue_line = await dialogue_resource.get_next_dialogue_line(next_id, temporary_game_states)
 
 
@@ -223,6 +226,7 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 		var mouse_was_clicked: bool = event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()
 		var skip_button_was_pressed: bool = event.is_action_pressed(skip_action)
 		if mouse_was_clicked or skip_button_was_pressed:
+			click_player.play()
 			get_viewport().set_input_as_handled()
 			dialogue_label.skip_typing()
 			return
