@@ -43,6 +43,7 @@ func on_hide() -> void:
 
 func on_show() -> void:
 	on_update()
+	self.visible = true
 
 
 func on_update() -> void:
