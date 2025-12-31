@@ -6,9 +6,6 @@ var _last_save_time: int = 0
 @onready var last_save_template: String = %LastSaveLabel.text
 
 
-signal quit_pressed()
-
-
 func _format_duration(a_seconds: int, b_seconds: int) -> String:
 	var diff := abs(a_seconds - b_seconds) as int
 
@@ -72,8 +69,7 @@ func _on_back_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	print("Exit from menu")
-	quit_pressed.emit()
-	get_tree().quit()
+	menu_quit_requested.emit()
 
 
 func _on_main_menu_button_pressed() -> void:

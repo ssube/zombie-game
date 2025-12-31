@@ -44,4 +44,4 @@ func _on_main_menu_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
-	pass # Replace with function body.
+	menu_quit_requested.emit()

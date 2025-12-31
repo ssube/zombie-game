@@ -34,6 +34,7 @@ enum Effects {
 signal apply_pressed()
 signal back_pressed()
 signal menu_changed(menu: Menus)
+signal menu_quit_requested()
 
 
 func on_hide() -> void:

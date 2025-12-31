@@ -11,15 +11,10 @@ extends ZM_BaseMenu
 
 
 signal new_game_pressed()
-signal exit_pressed()
 
 
 func _on_new_game_pressed() -> void:
 	new_game_pressed.emit()
-
-
-func _on_exit_pressed() -> void:
-	exit_pressed.emit()
 
 
 func on_update() -> void:
@@ -38,3 +33,7 @@ func on_update() -> void:
 
 func _on_main_menu_button_pressed() -> void:
 	menu_changed.emit(ZM_BaseMenu.Menus.MAIN_MENU)
+
+
+func _on_quit_pressed() -> void:
+	menu_quit_requested.emit()

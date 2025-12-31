@@ -3,10 +3,16 @@ extends ZM_BaseMenu
 @export var visible_menu: Menus = Menus.NONE
 var previous_menu: Menus = Menus.MAIN_MENU
 
-var pause_menus: Dictionary[Menus, bool] = {
+const pause_menus: Dictionary[Menus, bool] = {
 	Menus.NONE: false,
 	Menus.DIALOGUE_BALLOON: false,
 }
+
+const quit_menus: Array[Menus] = [
+	Menus.GAME_OVER_MENU,
+	Menus.MAIN_MENU,
+	Menus.EXIT_DIALOG,
+]
 
 @onready var menu_nodes: Dictionary[Menus, Control] = {
 	Menus.NONE: $MenuLayer/GameHud,
@@ -227,7 +233,7 @@ func _on_load_game_pressed() -> void:
 
 
 func _on_exit_pressed() -> void:
-	if visible_menu == Menus.GAME_OVER_MENU:
+	if visible_menu in quit_menus:
 		get_tree().quit()
 	else:
 		show_menu(Menus.EXIT_DIALOG)
@@ -293,3 +299,7 @@ func _on_shader_toggled(value: bool) -> void:
 func _on_next_level_pressed() -> void:
 	var game := TreeUtils.get_game(self)
 	game.load_next_level("")
+
+
+func _on_quit_requested() -> void:
+	_on_exit_pressed()

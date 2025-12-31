@@ -73,4 +73,4 @@ text = "Quit"
 
 [connection signal="pressed" from="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/NewGameButton" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/QuitButton" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/QuitButton" to="." method="_on_quit_pressed"]
