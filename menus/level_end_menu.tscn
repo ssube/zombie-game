@@ -72,4 +72,9 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Continue"
 
+[node name="MainMenuButton" type="Button" parent="MarginContainer/LevelEndMenu/MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Main Menu"
+
 [connection signal="pressed" from="MarginContainer/LevelEndMenu/MarginContainer/VFlowContainer/ContinueButton" to="." method="_on_next_level_pressed"]
+[connection signal="pressed" from="MarginContainer/LevelEndMenu/MarginContainer/VFlowContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

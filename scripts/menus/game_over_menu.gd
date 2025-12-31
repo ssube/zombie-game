@@ -34,3 +34,7 @@ func on_update() -> void:
 		score_label.text = score_template % score
 	else:
 		score_label.visible = false
+
+
+func _on_main_menu_button_pressed() -> void:
+	menu_changed.emit(ZM_BaseMenu.Menus.START_MENU)

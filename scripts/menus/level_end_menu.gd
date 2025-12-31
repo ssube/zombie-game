@@ -37,3 +37,7 @@ func on_update() -> void:
 		level_image_rect.visible = true
 	else:
 		level_image_rect.visible = false
+
+
+func _on_main_menu_button_pressed() -> void:
+	menu_changed.emit(ZM_BaseMenu.Menus.START_MENU)

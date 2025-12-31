@@ -150,6 +150,12 @@ func show_menu(menu: Menus) -> void:
 		var menu_name := Menus.keys()[menu] as String
 		print("Show menu: ", menu_name)
 
+		# If this is the start menu, unload the current level before pausing
+		if menu == Menus.START_MENU:
+			# TODO: prompt to save before unloading
+			var game := TreeUtils.get_game(self)
+			game.clear_world()
+
 		var menu_pause := pause_menus.get(menu, true) as bool
 		set_pause(menu_pause)
 
@@ -249,10 +255,6 @@ func _on_level_loading(_old_level: String, _new_level: String) -> void:
 
 func _on_level_loaded(_old_level: String, _new_level: String) -> void:
 	show_menu(Menus.NONE)
-
-
-func _on_check_box_toggled(toggled_on: bool) -> void:
-	$PostLayer.visible = toggled_on
 
 
 func _on_objectives_pressed() -> void:
