@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyv5b48xquqot"]
+[gd_scene load_steps=11 format=3 uid="uid://dyv5b48xquqot"]
 
 [ext_resource type="Script" uid="uid://dr0t3qprbbuke" path="res://scripts/menus/options_menu.gd" id="1_p3s2b"]
 [ext_resource type="AudioStream" uid="uid://ubdmirg50ful" path="res://sounds/Sound Effects/Firearms/Racking/shotgun_racking_ufx_1.ogg" id="2_cet7k"]
+[ext_resource type="Script" uid="uid://dhxffhuroih4k" path="res://menus/tab_container.gd" id="2_l4xqj"]
 [ext_resource type="AudioStream" uid="uid://cseclvit36kh1" path="res://sounds/Sound Effects/Break/glass_break_ufx_1.ogg" id="3_1vpws"]
 [ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="4_1vpws"]
+[ext_resource type="PackedScene" uid="uid://6oyauuvbuys2" path="res://effects/sounds/menu_click.tscn" id="5_eeh4p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cet7k"]
 content_margin_left = 0.0
@@ -42,11 +44,13 @@ theme_override_constants/margin_bottom = 16
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("audio_player")]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_cet7k")
 current_tab = 0
+script = ExtResource("2_l4xqj")
+audio_player = NodePath("AudioStreamPlayer")
 
 [node name="Controls" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 layout_mode = 2
@@ -514,6 +518,8 @@ text = "No clip"
 layout_mode = 2
 text = "God mode"
 
+[node name="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("5_eeh4p")]
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 2
@@ -531,6 +537,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_labby")
 layout_mode = 2
 text = "Apply"
 
+[connection signal="tab_clicked" from="MarginContainer/VBoxContainer/TabContainer" to="MarginContainer/VBoxContainer/TabContainer" method="_on_tab_clicked"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3/MouseSensitivitySlider" to="." method="_on_mouse_sensitivity_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3/PhysicalShellsBox" to="." method="_on_physical_shells_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3/PhysicalMagsBox" to="." method="_on_physical_mags_box_toggled"]
