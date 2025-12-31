@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2iu0e6hys73u"]
+
+[ext_resource type="Material" uid="uid://d0nnc16kfkg6r" path="res://materials/grass_detail.tres" id="1_wk171"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ersfw"]
+material = ExtResource("1_wk171")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 2
+mesh = SubResource("QuadMesh_ersfw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.70710677, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710677, 0, 0, 0)
+cast_shadow = 2
+mesh = SubResource("QuadMesh_ersfw")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.5, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.5, 0, 0, 0)
+cast_shadow = 2
+mesh = SubResource("QuadMesh_ersfw")
