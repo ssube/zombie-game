@@ -713,7 +713,16 @@ func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
 			var old_interactive := old_weapon.get_component(ZC_Interactive) as ZC_Interactive
 			%Menu.push_action("Holstered weapon: %s" % old_interactive.name)
 
+		# set remote transform to a known state
+		entity.weapon_transform.active = false
+		entity.weapon_follower.progress_ratio = 0.0
 		return
+
+	if EntityUtils.is_melee_weapon(new_weapon):
+		entity.weapon_transform.active = true
+		entity.weapon_follower.progress_ratio = 0.0
+	else:
+		entity.weapon_transform.active = false
 
 	new_weapon.emit_action(Enums.ActionEvent.ENTITY_EQUIP, entity)
 

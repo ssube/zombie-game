@@ -2,6 +2,7 @@
 extends ZE_Base
 class_name ZE_Character
 
+## DEPRECATED: use weapon_follower instead
 @export var swing_path_follower: PathFollow3D = null
 
 @export_group("Inventory")
@@ -9,6 +10,8 @@ class_name ZE_Character
 @export var current_weapon: ZE_Weapon = null
 @export var inventory_node: Node = null
 @export var weapon_node: Node3D = null
+@export var weapon_follower: PathFollow3D = null
+@export var weapon_transform: ZN_RemoteTransform3D = null
 
 @onready var rigid_3d := get_node(".") as RigidBody3D
 @onready var static_3d := get_node(".") as StaticBody3D

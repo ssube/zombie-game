@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://busds31ha5tx1"]
+[gd_scene load_steps=34 format=3 uid="uid://busds31ha5tx1"]
 
 [ext_resource type="Script" uid="uid://cerxp3umkugm1" path="res://scripts/entities/characters/ZE_Player_IKCC.gd" id="1_g5okp"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_l1ths"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="14_jq748"]
 [ext_resource type="Script" uid="uid://b7x5tu22015cx" path="res://scripts/components/characters/ZC_Faction.gd" id="15_gmhi3"]
 [ext_resource type="Script" uid="uid://b7fgmwfrg0t73" path="res://scripts/components/characters/ZC_Experience.gd" id="16_8ug6l"]
+[ext_resource type="Script" uid="uid://bfp0km65ktgws" path="res://scripts/nodes/ZN_RemoteTransform3D.gd" id="17_eiif7"]
 [ext_resource type="Script" uid="uid://8srnd548by47" path="res://scripts/components/characters/ZC_Stamina.gd" id="17_g5okp"]
 [ext_resource type="PackedScene" uid="uid://d4hn3600t205c" path="res://effects/rain_effect.tscn" id="18_8ug6l"]
 [ext_resource type="PackedScene" uid="uid://cymlq343i4rdm" path="res://effects/thunder_effect.tscn" id="19_g5okp"]
@@ -97,20 +98,22 @@ _data = {
 }
 point_count = 3
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("hands_node", "ikcc_collider", "swing_path_follower", "inventory_node", "weapon_node")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("ikcc_collider", "hands_node", "swing_path_follower", "inventory_node", "weapon_node", "weapon_follower", "weapon_transform")]
 collision_layer = 8
 collision_mask = 27
 wall_min_slide_angle = 0.0
 floor_block_on_wall = false
 floor_max_angle = 0.0
 script = ExtResource("1_g5okp")
-hands_node = NodePath("Head/Hands")
 ikcc_collider = NodePath("CollisionShape3D")
 floor_block_on_wall = false
 max_step_height = 1.0
+hands_node = NodePath("Head/Hands")
 swing_path_follower = NodePath("Head/Hands/SwingPath/PathFollow3D")
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("Head/Hands/WeaponMarker")
+weapon_follower = NodePath("Head/Hands/SwingPath/PathFollow3D")
+weapon_transform = NodePath("Head/Hands/SwingPath/PathFollow3D/ZN_RemoteTransform3D")
 prefab_path = "res://entities/characters/player.tscn"
 component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_blta8"), SubResource("Resource_gmhi3"), SubResource("Resource_eiif7"), SubResource("Resource_g5okp"), SubResource("Resource_b4uku"), SubResource("Resource_8ug6l"), SubResource("Resource_p37y2"), SubResource("Resource_dv4ir"), SubResource("Resource_25mxy"), SubResource("Resource_e31fi"), SubResource("Resource_l1ths")])
 
@@ -140,7 +143,7 @@ collision_mask = 30
 [node name="Hands" type="Node3D" parent="Head"]
 
 [node name="WeaponMarker" type="Node3D" parent="Head/Hands"]
-transform = Transform3D(0.7643113, 0.5640393, 0.31251454, -0.45595488, 0.81544286, -0.35658106, -0.45595488, 0.13004899, 0.8804451, 0.7398019, -0.5648068, -0.30062598)
+transform = Transform3D(0.7643097, 0.56404024, 0.31251466, -0.45595393, 0.81544423, -0.35658124, -0.45595393, 0.13004923, 0.8804456, 0.7398019, -0.5648068, -0.30062598)
 
 [node name="WeaponDebug" type="CSGCylinder3D" parent="Head/Hands/WeaponMarker"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -0.99999994)
@@ -161,11 +164,16 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 curve = SubResource("Curve3D_8ug6l")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Head/Hands/SwingPath"]
-transform = Transform3D(0.7643113, 0.5640393, 0.31251454, 0, 0.48464668, -0.87470967, -0.6448176, 0.6685637, 0.37042788, 0.7398019, -0.59114224, 0.2882812)
+transform = Transform3D(0.7643097, 0.56404024, 0.31251466, 0, 0.48464748, -0.87471, -0.6448162, 0.66856486, 0.37042803, 0.7398019, -0.59114224, 0.2882812)
 rotation_mode = 4
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head/Hands/SwingPath/PathFollow3D"]
-remote_path = NodePath("../../../WeaponMarker")
+[node name="ZN_RemoteTransform3D" type="Node3D" parent="Head/Hands/SwingPath/PathFollow3D" node_paths=PackedStringArray("target_nodes", "reset_marker")]
+script = ExtResource("17_eiif7")
+target_nodes = [NodePath("../../../WeaponMarker")]
+reset_marker = NodePath("../../../WeaponResetMarker")
+
+[node name="WeaponResetMarker" type="Marker3D" parent="Head/Hands"]
+transform = Transform3D(0.99845827, 0.0044806385, 0.0553267, 0, 0.99673676, -0.08072083, -0.055507835, 0.08059638, 0.99520004, 0.21910977, -0.25579888, -0.20406437)
 
 [node name="Effects" type="Node3D" parent="."]
 
