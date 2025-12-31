@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl0gxcklf0nku"]
+
+[ext_resource type="Script" uid="uid://cj35i1skthooh" path="res://scripts/menus/audio_button.gd" id="1_t5cuq"]
+[ext_resource type="PackedScene" uid="uid://6oyauuvbuys2" path="res://effects/sounds/menu_click.tscn" id="2_hincv"]
+
+[node name="AudioButton" type="Button"]
+modulate = Color(1, 0.39999998, 0.39999998, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+script = ExtResource("1_t5cuq")
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource("2_hincv")]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://6oyauuvbuys2"]
+
+[ext_resource type="AudioStream" uid="uid://b6coc2rvnxvst" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/GUI/gui_click_1.ogg" id="1_jt6h5"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_jt6h5")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bnvthjaufhn5x"]
 
 [ext_resource type="Script" uid="uid://cj35i1skthooh" path="res://scripts/menus/audio_button.gd" id="1_freo1"]
-[ext_resource type="AudioStream" uid="uid://b6coc2rvnxvst" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/GUI/gui_click_1.ogg" id="2_tysbm"]
+[ext_resource type="PackedScene" uid="uid://6oyauuvbuys2" path="res://effects/sounds/menu_click.tscn" id="2_tysbm"]
 
 [node name="AudioButton" type="Button" node_paths=PackedStringArray("audio_stream")]
 anchors_preset = 15
@@ -13,5 +13,4 @@ text = "Press Me"
 script = ExtResource("1_freo1")
 audio_stream = NodePath("AudioStreamPlayer")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_tysbm")
+[node name="AudioStreamPlayer" parent="." instance=ExtResource("2_tysbm")]
