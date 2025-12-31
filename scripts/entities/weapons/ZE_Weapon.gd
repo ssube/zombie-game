@@ -9,13 +9,17 @@ var _effects_cache: Dictionary[ZR_Weapon_Effect.EffectType, Array] = {}
 func _get_effects() -> Array[ZR_Weapon_Effect]:
 	var effects: Array[ZR_Weapon_Effect] = []
 
+	if self.has_component(ZC_Weapon_Melee):
+		var melee := self.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
+		effects.append_array(melee.effects)
+
 	if self.has_component(ZC_Weapon_Ranged):
 		var ranged := self.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
 		effects.append_array(ranged.effects)
 
-	if self.has_component(ZC_Weapon_Melee):
-		var melee := self.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
-		effects.append_array(melee.effects)
+	if self.has_component(ZC_Weapon_Thrown):
+		var thrown := self.get_component(ZC_Weapon_Thrown) as ZC_Weapon_Thrown
+		effects.append_array(thrown.effects)
 
 	return effects
 

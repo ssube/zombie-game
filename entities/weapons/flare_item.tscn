@@ -4,22 +4,15 @@
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_yvdg1"]
 [ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="3_le8od"]
 [ext_resource type="PackedScene" uid="uid://cuf1daja6ucof" path="res://entities/weapons/flare_projectile.tscn" id="4_1jxc5"]
-[ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/weapons/ZC_Weapon_Ranged.gd" id="4_hf08k"]
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="5_i8qfw"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="7_do34u"]
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="8_606wd"]
-
-[sub_resource type="Resource" id="Resource_4s6ep"]
-script = ExtResource("4_hf08k")
-muzzle_marker = NodePath("Marker3D")
-ammo_type = "flare"
-projectile_scene = ExtResource("4_1jxc5")
-metadata/_custom_type_script = "uid://dwsqxsqwtloma"
+[ext_resource type="Script" uid="uid://btveuo4idavpj" path="res://scripts/components/weapons/ZC_Weapon_Thrown.gd" id="8_do34u"]
 
 [sub_resource type="Resource" id="Resource_24ymc"]
 script = ExtResource("5_i8qfw")
 ammo_count = Dictionary[String, int]({
-"flare": 1
+"flare": 3
 })
 max_ammo_count = Dictionary[String, int]({
 "flare": 1
@@ -33,6 +26,13 @@ shimmer_material = ExtResource("8_606wd")
 shimmer_nodes = Array[NodePath]([NodePath("CSGCylinder3D")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
+[sub_resource type="Resource" id="Resource_606wd"]
+script = ExtResource("8_do34u")
+muzzle_velocity = 15.0
+muzzle_marker = NodePath("Marker3D")
+ammo_type = "flare"
+projectile_scene = ExtResource("4_1jxc5")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1chp"]
 albedo_color = Color(0.68, 0.0816, 0.0816, 1)
 
@@ -45,7 +45,7 @@ collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_tnbbk")
 prefab_path = "res://entities/weapons/flare.tscn"
-component_resources = Array[ExtResource("2_yvdg1")]([SubResource("Resource_4s6ep"), SubResource("Resource_24ymc"), SubResource("Resource_doyw5")])
+component_resources = Array[ExtResource("2_yvdg1")]([SubResource("Resource_24ymc"), SubResource("Resource_doyw5"), SubResource("Resource_606wd")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)

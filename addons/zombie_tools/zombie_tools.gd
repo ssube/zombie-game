@@ -16,6 +16,7 @@ var check_objective_keys_button: Button
 var fix_mesh_scale_button: Button
 var fix_mesh_rotation_button: Button
 var sort_components_button: Button
+var convert_ranged_to_thrown_button: Button
 
 func _enter_tree():
 	fix_mesh_scale_button = Button.new()
@@ -43,6 +44,11 @@ func _enter_tree():
 	check_objective_keys_button.pressed.connect(check_objective_keys)
 	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, check_objective_keys_button)
 
+	convert_ranged_to_thrown_button = Button.new()
+	convert_ranged_to_thrown_button.text = "Convert Ranged to Thrown"
+	convert_ranged_to_thrown_button.pressed.connect(convert_ranged_to_thrown)
+	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, convert_ranged_to_thrown_button)
+
 
 func _exit_tree():
 	remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_scale_button)
@@ -50,11 +56,13 @@ func _exit_tree():
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, sort_components_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, check_lock_keys_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, check_objective_keys_button)
+	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, convert_ranged_to_thrown_button)
 	fix_mesh_scale_button.queue_free()
 	fix_mesh_rotation_button.queue_free()
 	sort_components_button.queue_free()
 	check_lock_keys_button.queue_free()
 	check_objective_keys_button.queue_free()
+	convert_ranged_to_thrown_button.queue_free()
 
 
 func fix_collision_mesh_scale() -> void:
@@ -277,3 +285,51 @@ func check_objective_keys() -> void:
 		print("Level has all %d objectives." % objective_names.size())
 	else:
 		printerr("Level is missing %d objectives!" % missing)
+
+
+func serialize(component: Component) -> Dictionary:
+	var data: Dictionary = {}
+	for prop_info in component.get_script().get_script_property_list():
+		# Only include properties that are exported (@export variables)
+		if prop_info.usage & PROPERTY_USAGE_EDITOR:
+			var prop_name: String = prop_info.name
+			var prop_val = component.get(prop_name)
+			data[prop_name] = prop_val
+	return data
+
+
+func convert_ranged_to_thrown() -> void:
+	var editor_interface := get_editor_interface()
+	var scene_root := editor_interface.get_edited_scene_root() as Node3D
+	if not scene_root:
+		return
+
+	# get selected entities
+	var selected = editor_interface.get_selection().get_selected_nodes()
+	print("Converting selected entities: ", selected)
+
+	for selection in selected:
+		if selection is Entity:
+			var entity := selection as Entity
+
+			var has_ranged := false
+			for component in entity.component_resources.duplicate():
+				if component is ZC_Weapon_Ranged:
+					has_ranged = true
+					var ranged_component := component as ZC_Weapon_Ranged
+					var thrown_component := ZC_Weapon_Thrown.new()
+
+					# Copy properties from ranged to thrown
+					var ranged_data := serialize(ranged_component)
+					for key in ranged_data.keys():
+						print("Copying property %s" % key)
+						thrown_component.set(key, ranged_data[key])
+
+					# Remove the ranged component and add the thrown component
+					entity.component_resources.erase(ranged_component)
+					entity.component_resources.append(thrown_component)
+
+			if has_ranged:
+				print("Converted entity %s from Ranged to Thrown weapon." % entity.name)
+			else:
+				print("Entity %s does not have a Ranged weapon component." % entity.name)

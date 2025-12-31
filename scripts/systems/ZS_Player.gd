@@ -290,7 +290,7 @@ func _update_ammo_label(player: Entity) -> void:
 			weapon_durability.max_durability,
 		])
 
-	var ranged_weapon := player_weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	var ranged_weapon := EntityUtils.get_ranged_component(player_weapon)
 	if ranged_weapon != null:
 		var weapon_ammo := player_weapon.get_component(ZC_Ammo) as ZC_Ammo
 		var player_count := player_ammo.get_ammo(ranged_weapon.ammo_type)
@@ -361,7 +361,7 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 		return
 
 	var weapon_ammo := weapon.get_component(ZC_Ammo) as ZC_Ammo
-	var ranged_weapon = weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	var ranged_weapon = EntityUtils.get_ranged_component(weapon)
 	var current_ammo := weapon_ammo.get_ammo(ranged_weapon.ammo_type)
 	if current_ammo <= 0:
 		weapon.apply_effects(ZR_Weapon_Effect.EffectType.RANGED_EMPTY)
@@ -398,6 +398,11 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 		var recoil_tween := weapon.create_tween()
 		recoil_tween.tween_property(recoil_path, "progress_ratio", ranged_weapon.recoil_per_shot, ranged_weapon.recoil_time)
 		recoil_tween.tween_property(recoil_path, "progress_ratio", 0.0, ranged_weapon.recoil_time)
+
+	# unequip thrown weapons when they are out of ammo
+	# TODO: add an option to disable this in the menu
+	if ranged_weapon is ZC_Weapon_Thrown and weapon_ammo.is_all_empty():
+		switch_weapon(entity, null)
 
 
 func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
@@ -745,7 +750,7 @@ func reload_weapon(player: Entity) -> void:
 	if weapon_ammo == null:
 		return
 
-	var ranged_weapon := current_weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	var ranged_weapon := EntityUtils.get_ranged_component(current_weapon)
 	if ranged_weapon == null:
 		return
 

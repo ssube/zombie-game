@@ -1,0 +1,2 @@
+extends ZC_Weapon_Ranged
+class_name ZC_Weapon_Thrown

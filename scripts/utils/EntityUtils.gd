@@ -156,7 +156,8 @@ static func is_weapon(entity: Node) -> bool:
 
 	return (
 		entity.has_component(ZC_Weapon_Melee) or
-		entity.has_component(ZC_Weapon_Ranged)
+		entity.has_component(ZC_Weapon_Ranged) or
+		entity.has_component(ZC_Weapon_Thrown)
 	)
 
 
@@ -171,14 +172,27 @@ static func is_ranged_weapon(entity: Node) -> bool:
 	if entity is not Entity:
 		return false
 
-	return entity.has_component(ZC_Weapon_Ranged)
+	if entity.has_component(ZC_Weapon_Ranged):
+		return true
+
+	if entity.has_component(ZC_Weapon_Thrown):
+		return true
+
+	return false
+
+
+static func is_thrown_weapon(entity: Node) -> bool:
+	if entity is not Entity:
+		return false
+
+	return entity.has_component(ZC_Weapon_Thrown)
 
 
 static func has_ammo(weapon: ZE_Weapon, ammos: Array[ZC_Ammo], min_count: int = 1) -> bool:
 	if weapon is not Entity:
 		return false
 
-	var ranged_weapon := weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	var ranged_weapon := get_ranged_component(weapon)
 	var ammo_type := ranged_weapon.ammo_type
 	var total_count := 0
 	for ammo in ammos:
@@ -316,3 +330,15 @@ static func keep_sounds(entity: Node, target: Node = null, remove_on_finish: boo
 			sound.finished.connect(sound.queue_free)
 
 	return sounds
+
+
+static func get_ranged_component(weapon: ZE_Weapon) -> ZC_Weapon_Ranged:
+	if weapon is not Entity:
+		return null
+
+	var ranged := weapon.get_component(ZC_Weapon_Ranged) as ZC_Weapon_Ranged
+	if ranged != null:
+		return ranged
+
+	var thrown := weapon.get_component(ZC_Weapon_Thrown) as ZC_Weapon_Thrown
+	return thrown

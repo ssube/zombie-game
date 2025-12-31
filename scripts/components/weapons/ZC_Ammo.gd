@@ -66,3 +66,15 @@ func set_ammo(ammo_type: String, count: int) -> ZC_Ammo:
 	assert(count >= 0, "Ammo count must be a positive integer!")
 	ammo_count[ammo_type] = count
 	return self
+
+func is_empty(ammo_type: String) -> bool:
+	return get_ammo(ammo_type) <= 0
+
+func is_full(ammo_type: String) -> bool:
+	return get_ammo(ammo_type) >= get_max_ammo(ammo_type)
+
+func is_all_empty() -> bool:
+	for ammo_type in ammo_count.keys():
+		if get_ammo(ammo_type) > 0:
+			return false
+	return true
