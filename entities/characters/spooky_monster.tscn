@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctpldo10k58u7"]
+[gd_scene load_steps=11 format=3 uid="uid://ctpldo10k58u7"]
 
+[ext_resource type="Script" uid="uid://bktenm65jur4t" path="res://scripts/nodes/ZN_Buoyant.gd" id="1_l4mt0"]
 [ext_resource type="Material" uid="uid://b5lkck7ikthnl" path="res://textures/Color Maps/stone_alien_1.tres" id="1_u62kk"]
 [ext_resource type="AudioStream" uid="uid://c12646njigexm" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/Ambiences/ambience_d3_loop.ogg" id="2_bvsi7"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="3_l4mt0"]
@@ -41,6 +42,7 @@ rings = 4
 
 [node name="SpookyMonster" type="RigidBody3D"]
 gravity_scale = 0.0
+script = ExtResource("1_l4mt0")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 radius = 0.75
