@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bc12xlkdaphu3"]
+[gd_scene load_steps=11 format=3 uid="uid://bc12xlkdaphu3"]
 
 [ext_resource type="Script" uid="uid://hyr2u8jujttn" path="res://scripts/menus/dialogue_menu.gd" id="1_36de5"]
 [ext_resource type="Theme" uid="uid://bdnxpcwbllbem" path="res://menus/theme_dialogue.tres" id="2_5r6f2"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
-[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
+[ext_resource type="Script" uid="uid://csjpbspjdioyt" path="res://scripts/menus/dialogue_responses_menu.gd" id="4_fklyg"]
+[ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="5_kx1nf"]
+[ext_resource type="PackedScene" uid="uid://6oyauuvbuys2" path="res://effects/sounds/menu_click.tscn" id="6_kx1nf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5r6f2"]
 
@@ -130,15 +132,17 @@ grow_vertical = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 2
 alignment = 1
-script = ExtResource("3_72ixx")
+script = ExtResource("4_fklyg")
 response_template = NodePath("ResponseExample")
 
-[node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu"]
+[node name="ResponseExample" parent="Balloon/ResponsesMenu" node_paths=PackedStringArray("audio_stream") instance=ExtResource("5_kx1nf")]
 layout_mode = 2
-text = "Response example"
+audio_stream = NodePath("../../../ClickPlayer")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+
+[node name="ClickPlayer" parent="." instance=ExtResource("6_kx1nf")]
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="Balloon/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
