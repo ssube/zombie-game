@@ -35,17 +35,17 @@ func _enter_tree():
 	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, sort_components_button)
 
 	check_lock_keys_button = Button.new()
-	check_lock_keys_button.text = "Check Lock Keys"
+	check_lock_keys_button.text = "Check Level Locks"
 	check_lock_keys_button.pressed.connect(check_lock_keys)
 	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, check_lock_keys_button)
 
 	check_objective_keys_button = Button.new()
-	check_objective_keys_button.text = "Check Objective Keys"
+	check_objective_keys_button.text = "Check Level Objectives"
 	check_objective_keys_button.pressed.connect(check_objective_keys)
 	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, check_objective_keys_button)
 
 	convert_ranged_to_thrown_button = Button.new()
-	convert_ranged_to_thrown_button.text = "Convert Ranged to Thrown"
+	convert_ranged_to_thrown_button.text = "Convert Ranged Weapon to Thrown"
 	convert_ranged_to_thrown_button.pressed.connect(convert_ranged_to_thrown)
 	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, convert_ranged_to_thrown_button)
 
