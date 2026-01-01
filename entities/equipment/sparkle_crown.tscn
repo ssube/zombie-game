@@ -33,6 +33,7 @@ emission_ring_height = 0.2
 emission_ring_radius = 0.4
 emission_ring_inner_radius = 0.25
 emission_ring_cone_angle = 90.0
+gravity = Vector3(0, -3, 0)
 hue_variation_min = -1.0
 hue_variation_max = 0.99999994
 
@@ -67,5 +68,6 @@ shape = SubResource("ConvexPolygonShape3D_5yu42")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10119957, 0)
 amount = 32
+lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_tjbtv")
 draw_pass_1 = SubResource("QuadMesh_0qpab")
