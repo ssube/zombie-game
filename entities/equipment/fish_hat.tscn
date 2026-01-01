@@ -16,7 +16,7 @@ script = ExtResource("3_mxdth")
 name = "Fishing Hat"
 shimmer_on_proximity = true
 shimmer_material = ExtResource("4_fjv7d")
-shimmer_nodes = Array[NodePath]([NodePath("")])
+shimmer_nodes = Array[NodePath]([NodePath("fish_mx_1")])
 pickup_sound = ExtResource("3_gc6r5")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
