@@ -50,20 +50,30 @@ theme_override_constants/margin_bottom = 4
 layout_mode = 2
 text = "Zombie Game"
 
-[node name="NewGame" parent="MarginContainer/VFlowContainer" instance=ExtResource("3_w3tic")]
+[node name="NewGameButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("3_w3tic")]
 layout_mode = 2
 text = "New Game"
 
-[node name="LoadGame" parent="MarginContainer/VFlowContainer" instance=ExtResource("3_w3tic")]
+[node name="LoadGameButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("3_w3tic")]
 layout_mode = 2
 text = "Load Game"
 
-[node name="Exit" parent="MarginContainer/VFlowContainer" instance=ExtResource("3_w3tic")]
+[node name="ControlsButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("3_w3tic")]
+layout_mode = 2
+text = "Controls"
+
+[node name="OptionsButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("3_w3tic")]
+layout_mode = 2
+text = "Options"
+
+[node name="ExitButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("3_w3tic")]
 layout_mode = 2
 text = "Exit"
 
 [node name="MenuAudio" parent="." instance=ExtResource("4_hys1b")]
 
-[connection signal="pressed" from="MarginContainer/VFlowContainer/NewGame" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="MarginContainer/VFlowContainer/LoadGame" to="." method="_on_load_game_pressed"]
-[connection signal="pressed" from="MarginContainer/VFlowContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/NewGameButton" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/LoadGameButton" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/ExitButton" to="." method="_on_exit_pressed"]
