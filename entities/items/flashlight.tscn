@@ -1,8 +1,24 @@
-[gd_scene load_steps=7 format=4 uid="uid://d00dbkjpj0iyk"]
+[gd_scene load_steps=14 format=4 uid="uid://d00dbkjpj0iyk"]
 
-[ext_resource type="Script" uid="uid://bpgy7p6otbdlt" path="res://scripts/nodes/ZN_LightGroup.gd" id="1_2c5um"]
+[ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_2c5um"]
 [ext_resource type="Texture2D" uid="uid://b0cf1kt4vur5d" path="res://assets/PSX Mega Pack/Models/GLB (recommended)/Items & Weapons/flashlight_mp_1_flashlight_1.png" id="1_tsofw"]
 [ext_resource type="Texture2D" uid="uid://8mk84jbtcai2" path="res://assets/PSX Mega Pack/Models/GLB (recommended)/Items & Weapons/flashlight_mp_1_flashlight_1_emission.png" id="2_2c5um"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_b86fd"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_llh01"]
+[ext_resource type="Material" uid="uid://duorhhvkpiuvo" path="res://materials/effects/shimmer_food.tres" id="4_llh01"]
+[ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="5_mtibp"]
+
+[sub_resource type="Resource" id="Resource_aenru"]
+script = ExtResource("3_llh01")
+name = "Flashlight"
+shimmer_material = ExtResource("4_llh01")
+shimmer_nodes = Array[NodePath]([NodePath("flashlight")])
+metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_epa81"]
+script = ExtResource("5_mtibp")
+slot = "flashlight"
+metadata/_custom_type_script = "uid://bdq3y7j08fnad"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbpuc"]
 resource_name = "flashlight_1"
@@ -46,9 +62,14 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_gi05c")
 
-[node name="Flashlight" type="Node3D" node_paths=PackedStringArray("lights")]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2c5um"]
+points = PackedVector3Array(0.09758132, 0.003601859, 0.0043487996, 0.09020081, -0.0038018625, -0.080852374, 0.086487345, -0.0149154235, -0.07713238, -0.1098157, 0.02212712, -0.03639596, -0.10610224, -0.026028983, -0.014176095, 0.11612544, 0.03694254, -0.062319137, 0.10980818, -0.037292823, -0.033178218, -0.10610224, 0.02582898, -0.014176095, -0.1098157, -0.0149154235, -0.04380258, 0.09020081, 0.03694254, -0.017879404, 0.11612544, -0.037142545, -0.062319137, -0.091294795, 0.00730372, 0.0043487996, 0.09020081, -0.022327123, -0.0030578189, 0.113676235, 0.006686945, -0.0025948877, 0.11612544, 0.02212712, -0.07713238, -0.102411985, 0.00730372, -0.047505893, -0.091294795, -0.0075037233, 0.0043487996, 0.09020081, -0.040852383, -0.028989337, 0.086487345, 0.04065238, -0.047505893, -0.102411985, -0.026028983, -0.028989337, 0.09758132, 0.01841728, 0.0006454922, 0.09758132, -0.037142545, -0.062319137, 0.118991844, -0.017904952, -0.0257848, 0.09391428, 0.02582898, -0.07342907, 0.11612544, -0.022327123, -0.07713238, 0.09020081, -0.037142545, -0.017879404, 0.1093089, 0.033545975, -0.019747423, 0.086487345, -0.040852383, -0.047505893, 0.10897011, -0.020223465, -0.0063887094, 0.09020081, 0.04065238, -0.028989337, 0.09391428, 0.03694254, -0.062319137, 0.11904795, 0.017713713, -0.025778662)
+
+[node name="Flashlight" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 11
 script = ExtResource("1_2c5um")
-lights = [NodePath("flashlight/Flashlight")]
+component_resources = Array[ExtResource("2_b86fd")]([SubResource("Resource_aenru"), SubResource("Resource_epa81")])
 
 [node name="flashlight" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.371139e-08, 1, 0, -0.09214467, -4.0277714e-09, -0.99574566, -0.99574566, -4.3525425e-08, 0.09214467, 0, -0.03072985, 0)
@@ -61,3 +82,7 @@ light_size = 0.2
 shadow_enabled = true
 spot_range = 15.0
 spot_angle = 30.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, 1, 0, -0.09214467, -4.0277714e-09, -0.99574566, -0.99574566, -4.3525425e-08, 0.09214467, 0, -0.03072985, 0)
+shape = SubResource("ConvexPolygonShape3D_2c5um")

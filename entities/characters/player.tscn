@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://busds31ha5tx1"]
+[gd_scene load_steps=34 format=3 uid="uid://busds31ha5tx1"]
 
 [ext_resource type="Script" uid="uid://cerxp3umkugm1" path="res://scripts/entities/characters/ZE_Player_IKCC.gd" id="1_g5okp"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_l1ths"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="14_jq748"]
 [ext_resource type="Script" uid="uid://b7x5tu22015cx" path="res://scripts/components/characters/ZC_Faction.gd" id="15_gmhi3"]
 [ext_resource type="Script" uid="uid://b7fgmwfrg0t73" path="res://scripts/components/characters/ZC_Experience.gd" id="16_8ug6l"]
-[ext_resource type="PackedScene" uid="uid://d00dbkjpj0iyk" path="res://entities/items/flashlight.tscn" id="17_e31fi"]
 [ext_resource type="Script" uid="uid://bfp0km65ktgws" path="res://scripts/nodes/ZN_RemoteTransform3D.gd" id="17_eiif7"]
 [ext_resource type="Script" uid="uid://8srnd548by47" path="res://scripts/components/characters/ZC_Stamina.gd" id="17_g5okp"]
 [ext_resource type="PackedScene" uid="uid://d4hn3600t205c" path="res://effects/rain_effect.tscn" id="18_8ug6l"]
@@ -113,7 +112,10 @@ max_step_height = 1.0
 hands_node = NodePath("Head/Hands")
 swing_path_follower = NodePath("Head/Hands/SwingPath/PathFollow3D")
 equipment_slots = {
-"head": NodePath("CSGCylinder3D/HeadEquipMarker")
+"flashlight": NodePath("Head/Hands/FlashlightEquipMarker"),
+"head": NodePath("CSGCylinder3D/HeadEquipMarker"),
+"weapon_melee": NodePath("Head/Hands/WeaponResetMarker"),
+"weapon_ranged": NodePath("Head/Hands/WeaponResetMarker")
 }
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("Head/Hands/WeaponMarker")
@@ -177,8 +179,8 @@ reset_marker = NodePath("../../../WeaponResetMarker")
 [node name="WeaponResetMarker" type="Marker3D" parent="Head/Hands"]
 transform = Transform3D(0.99845827, 0.0044806385, 0.0553267, 0, 0.99673676, -0.08072083, -0.055507835, 0.08059638, 0.99520004, 0.21910977, -0.25579888, -0.20406437)
 
-[node name="Flashlight" parent="Head/Hands" instance=ExtResource("17_e31fi")]
-transform = Transform3D(0.7643097, 0.5640402, 0.3125147, -0.45595393, 0.8154442, -0.35658124, -0.45595393, 0.1300492, 0.8804456, 0.7398019, -0.5648068, -0.30062598)
+[node name="FlashlightEquipMarker" type="Marker3D" parent="Head/Hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4939164, -0.347758, 0.22236484)
 
 [node name="Effects" type="Node3D" parent="."]
 
