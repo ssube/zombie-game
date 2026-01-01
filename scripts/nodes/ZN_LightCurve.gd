@@ -4,14 +4,33 @@ class_name ZN_LightCurve
 
 @export var duration: float = 1.0
 @export var loop: bool = true
+@export var run_in_editor: bool = true
 
 @export var energy_curve: Curve
 @export var color_curve: Gradient
 
 var _time_elapsed: float = 0.0
 
-func _process(delta: float) -> void:
+
+func _is_valid() -> bool:
 	if not enabled:
+		return false
+
+	if energy_curve == null:
+		return false
+
+	if color_curve == null:
+		return false
+
+	if Engine.is_editor_hint():
+		if not run_in_editor:
+			return false
+
+	return true
+
+
+func _process(delta: float) -> void:
+	if not _is_valid():
 		return
 
 	_time_elapsed += delta
