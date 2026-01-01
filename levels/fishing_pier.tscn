@@ -1,4 +1,4 @@
-[gd_scene load_steps=255 format=4 uid="uid://b687g8br5b2mv"]
+[gd_scene load_steps=256 format=4 uid="uid://b687g8br5b2mv"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_vf316"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_24vc2"]
@@ -38,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://c4gewr3tx3am5" path="res://entities/statics/crate_wood.tscn" id="30_7iyb8"]
 [ext_resource type="PackedScene" uid="uid://femu8fxijdyb" path="res://entities/props/cardboard_box_floating.tscn" id="31_jb54n"]
 [ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/grass_cluster_dark.tscn" id="34_kj7f7"]
+[ext_resource type="PackedScene" uid="uid://1mrkahnnofcf" path="res://entities/equipment/fish_hat.tscn" id="39_85wo0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fnrws"]
 size = Vector3(17.603027, 1.7054443, 100)
@@ -973,20 +974,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.241832, -0.47907186, 36.72
 [node name="CrateWood5" parent="Entities" instance=ExtResource("17_dxih2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1117895, -0.024999857, -2.2832427)
 
+[node name="FishHat" parent="Entities" instance=ExtResource("39_85wo0")]
+transform = Transform3D(0.14150596, 0, -0.9899374, 0, 1, 0, 0.9899374, 0, 0.14150596, -16.888466, 0.14284188, -0.7053266)
+
 [node name="Path3D2" type="Path3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 curve = SubResource("Curve3D_cwllu")
 
 [node name="Seagull" parent="Entities/Path3D2" instance=ExtResource("18_cwllu")]
-transform = Transform3D(-0.034164466, 0, -0.9993908, 0, 1, 0, 0.9993908, 0, -0.034164466, -56.470444, 0, 81.14787)
+transform = Transform3D(-0.03416446, 0, -0.9993906, 0, 1, 0, 0.9993906, 0, -0.03416446, -56.470444, 0, 81.14787)
 duration = 32.0
 
 [node name="Seagull2" parent="Entities/Path3D2" instance=ExtResource("18_cwllu")]
-transform = Transform3D(-0.034164466, 0, -0.9993908, 0, 1, 0, 0.9993908, 0, -0.034164466, -56.470444, 0, 81.14787)
+transform = Transform3D(-0.03416446, 0, -0.9993906, 0, 1, 0, 0.9993906, 0, -0.03416446, -56.470444, 0, 81.14787)
 path_offset = 0.33
 
 [node name="Seagull3" parent="Entities/Path3D2" instance=ExtResource("18_cwllu")]
-transform = Transform3D(-0.034164466, 0, -0.9993908, 0, 1, 0, 0.9993908, 0, -0.034164466, -56.470444, 0, 81.14787)
+transform = Transform3D(-0.03416446, 0, -0.9993906, 0, 1, 0, 0.9993906, 0, -0.03416446, -56.470444, 0, 81.14787)
 duration = 29.0
 path_offset = 0.6
 
