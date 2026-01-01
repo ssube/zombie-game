@@ -41,6 +41,9 @@ func apply_volume() -> void:
 	var effects_bus_index := AudioServer.get_bus_index("Effects")
 	AudioServer.set_bus_volume_linear(effects_bus_index, options.audio.effects_volume / 100.0)
 
+	var menu_bus_index := AudioServer.get_bus_index("Menus")
+	AudioServer.set_bus_volume_linear(menu_bus_index, options.audio.menu_volume / 100.0)
+
 
 func toggle_cheat_no_aggro(_value: bool) -> void:
 	if not options.cheats.enabled:

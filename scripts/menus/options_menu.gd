@@ -95,7 +95,9 @@ func on_update() -> void:
 	%MainVolumeSlider.value = _current_options.audio.main_volume
 	%MusicVolumeSlider.value = _current_options.audio.music_volume
 	%EffectsVolumeSlider.value = _current_options.audio.effects_volume
+	%MenuVolumeSlider.value = _current_options.audio.menu_volume
 	%SubtitleCheckBox.button_pressed = _current_options.audio.subtitles
+	
 	%AdaptiveAimSlider.value = _current_options.gameplay.adaptive_aim
 
 
@@ -196,3 +198,12 @@ func _on_mouse_sensitivity_slider_value_changed(value: float) -> void:
 func _on_adaptive_aim_slider_value_changed(value: float) -> void:
 	_dirty = true
 	_current_options.gameplay.adaptive_aim = value
+
+
+func _on_menu_volume_slider_value_changed(value: float) -> void:
+	_dirty = true
+	_current_options.audio.menu_volume = value
+	# TODO: debounce
+	if _play_audio:
+		OptionsManager.apply_volume()
+		# %MenuPreviewPlayer.play()
