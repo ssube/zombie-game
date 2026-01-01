@@ -1,4 +1,6 @@
+@tool
 extends Node3D
+class_name ZN_LightGroup
 
 @export var enabled: bool = true:
 	set(value):
