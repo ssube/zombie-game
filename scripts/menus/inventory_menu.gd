@@ -2,6 +2,11 @@ extends ZM_BaseMenu
 
 
 @export var inventory_list: ItemList
+@export var use_button: Button
+@export var equip_button: Button
+@export var unequip_button: Button
+@export var drop_button: Button
+
 
 ## Items held by player, not including keys which cannot be used
 var _item_players: Dictionary[Entity, Entity] = {}
@@ -14,6 +19,7 @@ signal item_activated(player: Entity, item: Entity, index: int)
 func on_update() -> void:
 	_item_index.clear()
 	_item_players.clear()
+	_show_action_buttons()
 
 	var players: Array[Entity] = EntityUtils.get_players()
 	var inventory: Array[Entity] = []
@@ -65,9 +71,9 @@ func on_update() -> void:
 			inventory_list.add_item(ammo_text, null, false)
 
 
+# TODO: find a better way to do this, split up the handlers
 func _on_inventory_list_item_activated(index: int) -> void:
-	var list := $MarginContainer/VFlowContainer/InventoryList as ItemList
-	if not list.is_item_selectable(index):
+	if not inventory_list.is_item_selectable(index):
 		return
 
 	var item := _item_index.get(index) as Entity
@@ -87,3 +93,75 @@ func _on_inventory_list_item_activated(index: int) -> void:
 
 func _on_back_pressed() -> void:
 	back_pressed.emit()
+
+
+func _on_use_button_pressed() -> void:
+	_activate_selected_items()
+
+
+func _on_equip_button_pressed() -> void:
+	_activate_selected_items()
+
+
+func _on_unequip_button_pressed() -> void:
+	var selected := inventory_list.get_selected_items()
+	for index in selected:
+		if not inventory_list.is_item_selectable(index):
+			return
+
+		var item := _item_index.get(index) as Entity
+		if item == null:
+			return
+
+		var player = _item_players.get(item) as Entity
+		EntityUtils.unequip_item(player, item)
+
+
+func _on_drop_button_pressed() -> void:
+	var selected := inventory_list.get_selected_items()
+	for index in selected:
+		if not inventory_list.is_item_selectable(index):
+			return
+
+		var item := _item_index.get(index) as Entity
+		if item == null:
+			return
+
+		var player = _item_players.get(item) as Entity
+		assert(false, "TODO: drop item")
+		# EntityUtils.drop_item(player, item)
+
+
+func _activate_selected_items() -> void:
+	var selected := inventory_list.get_selected_items()
+	for index in selected:
+		_on_inventory_list_item_activated(index)
+
+
+func _show_action_buttons() -> void:
+	var show_use := false
+	var show_equip := false
+	var show_unequip := false
+	var show_drop := true
+
+	var selected := inventory_list.get_selected_items()
+	for index in selected:
+		var item := _item_index.get(index) as Entity
+		if item == null:
+			return
+
+		if item.has_component(ZC_Equipment):
+			show_equip = true
+			show_unequip = true
+
+		if item.has_component(ZC_Food):
+			show_use = true
+
+	use_button.disabled = not show_use
+	equip_button.disabled = not show_equip
+	unequip_button.disabled = not show_unequip
+	drop_button.disabled = not show_drop
+
+
+func _on_inventory_list_item_selected(_index: int) -> void:
+	_show_action_buttons()
