@@ -502,12 +502,8 @@ func use_armor(entity: Entity, player_entity: Entity) -> void:
 	var modifier := armor.get_component(ZC_Effect_Armor) as ZC_Effect_Armor
 	var player = player_entity as ZE_Player
 	player.add_relationship(RelationshipUtils.make_modifier_damage(modifier.multiplier))
-	player.add_relationship(RelationshipUtils.make_wearing(armor))
 
-	player.current_armor = entity
-
-	entity.get_parent().remove_child(entity)
-	player.inventory_node.add_child(entity)
+	EntityUtils.equip_item(player, entity)
 
 	var interactive = armor.get_component(ZC_Interactive) as ZC_Interactive
 	%Menu.push_action("Picked up armor: %s" % interactive.name)
@@ -516,7 +512,7 @@ func use_armor(entity: Entity, player_entity: Entity) -> void:
 		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
 		_add_sound(sound, player_entity)
 
-	# TODO: should inventory items follow the player in 3D space?
+	# TODO: this should already be handled in the equip item helper
 	var entity3d := entity.get_node(".") as RigidBody3D
 	entity3d.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
 	entity3d.freeze = true
