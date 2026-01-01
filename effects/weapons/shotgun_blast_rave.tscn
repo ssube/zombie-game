@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://dktd2ekufselm"]
+[gd_scene load_steps=17 format=3 uid="uid://dmqhqdls8p84q"]
 
-[ext_resource type="Texture2D" uid="uid://bism3fuwsio0w" path="res://textures/Particle Effect Texture Essentials/Transparent Versions/fx_Smoke3.png" id="1_bd4u4"]
-[ext_resource type="Script" uid="uid://bwt5xm6trqgoh" path="res://scripts/nodes/ZN_LightCurve.gd" id="2_m8jg2"]
-[ext_resource type="AudioStream" uid="uid://cbh3us2kncrl0" path="res://sounds/Sound Effects/Firearms/Fire/shotgun_fire_ufx_1.ogg" id="2_nx8m0"]
-[ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/triggers/ZN_TriggerTimer.gd" id="3_bd4u4"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="3_jplj4"]
-[ext_resource type="Script" uid="uid://b1hfgveu3fvsd" path="res://scripts/nodes/actions/ZN_NodeAction.gd" id="4_dxxuk"]
+[ext_resource type="Script" uid="uid://bwt5xm6trqgoh" path="res://scripts/nodes/ZN_LightCurve.gd" id="2_8gxve"]
+[ext_resource type="AudioStream" uid="uid://cbh3us2kncrl0" path="res://sounds/Sound Effects/Firearms/Fire/shotgun_fire_ufx_1.ogg" id="3_s7qqg"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="4_h1ulg"]
+[ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/triggers/ZN_TriggerTimer.gd" id="5_c6t7j"]
+[ext_resource type="Script" uid="uid://b1hfgveu3fvsd" path="res://scripts/nodes/actions/ZN_NodeAction.gd" id="6_d34wk"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jplj4"]
 particle_flag_align_y = true
@@ -29,43 +28,49 @@ material = SubResource("StandardMaterial3D_bd4u4")
 radius = 0.05
 height = 0.25
 
-[sub_resource type="Curve" id="Curve_dxxuk"]
+[sub_resource type="Curve" id="Curve_5mrwb"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5014409, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_wjpqw"]
-curve = SubResource("Curve_dxxuk")
+[sub_resource type="CurveTexture" id="CurveTexture_wwqff"]
+curve = SubResource("Curve_5mrwb")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kmwy0"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8gxve"]
 direction = Vector3(0, 0, -1)
 initial_velocity_min = 0.5
 initial_velocity_max = 1.0
 gravity = Vector3(0, 3, -1)
 scale_min = 0.75
 scale_max = 1.25
-alpha_curve = SubResource("CurveTexture_wjpqw")
+alpha_curve = SubResource("CurveTexture_wwqff")
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjpqw"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s7qqg"]
+load_path = "res://.godot/imported/fx_Smoke3.png-1121d58e57d84f3618db7adbf1a6fc95.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1ulg"]
 transparency = 1
 vertex_color_use_as_albedo = true
 albedo_color = Color(1, 1, 1, 0.7764706)
-albedo_texture = ExtResource("1_bd4u4")
+albedo_texture = SubResource("CompressedTexture2D_s7qqg")
 billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="QuadMesh" id="QuadMesh_m8jg2"]
-material = SubResource("StandardMaterial3D_wjpqw")
+[sub_resource type="QuadMesh" id="QuadMesh_c6t7j"]
+material = SubResource("StandardMaterial3D_h1ulg")
 
 [sub_resource type="Curve" id="Curve_ga4vo"]
 _limits = [0.0, 2.0, 0.0, 1.0]
 bake_resolution = 10
-_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.25, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.13930348, 0.9301436), 0.0, 0.0, 0, 0, Vector2(0.27114427, 2), 0.0, 0.0, 0, 0, Vector2(0.420398, 0.79330146), 0.0, 0.0, 0, 0, Vector2(0.58208954, 1.7387561), 0.0, 0.0, 0, 0, Vector2(0.72139305, 0.5569378), 0.0, 0.0, 0, 0, Vector2(0.86567163, 1.477512), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 8
 
 [sub_resource type="Gradient" id="Gradient_xhw3n"]
-colors = PackedColorArray(1, 0.91400003, 0.57, 1, 1, 0.536, 0.13, 1)
+offsets = PackedFloat32Array(0, 0.25, 0.4973404, 0.75265956, 1)
+colors = PackedColorArray(0.57, 1, 0.92116666, 1, 0.37996003, 0.84, 0.31919998, 1, 0.87, 0.80649006, 0.23489998, 1, 1, 0.13, 0.13, 1, 0.82600015, 0.13, 1, 1)
 
 [node name="ShotgunBlast" type="Node3D"]
 
@@ -76,36 +81,39 @@ process_material = SubResource("ParticleProcessMaterial_jplj4")
 draw_pass_1 = SubResource("CapsuleMesh_jplj4")
 
 [node name="Smoke" type="GPUParticles3D" parent="."]
-process_material = SubResource("ParticleProcessMaterial_kmwy0")
-draw_pass_1 = SubResource("QuadMesh_m8jg2")
+process_material = SubResource("ParticleProcessMaterial_8gxve")
+draw_pass_1 = SubResource("QuadMesh_c6t7j")
 
 [node name="Flash" type="OmniLight3D" parent="." node_paths=PackedStringArray("lights")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+light_color = Color(1, 0.53761494, 0.13187978, 1)
+light_energy = 0.0
 shadow_enabled = true
-script = ExtResource("2_m8jg2")
-duration = 0.5
+script = ExtResource("2_8gxve")
+duration = 2.0
 loop = false
 energy_curve = SubResource("Curve_ga4vo")
 color_curve = SubResource("Gradient_xhw3n")
 lights = [NodePath(".")]
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_nx8m0")
+stream = ExtResource("3_s7qqg")
 max_distance = 10.0
-script = ExtResource("3_jplj4")
+script = ExtResource("4_h1ulg")
 play_on_ready = true
 subtitle_text = "Shotgun Blast"
 subtitle_radius = 10.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="Removal" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 autostart = true
-script = ExtResource("3_bd4u4")
+script = ExtResource("5_c6t7j")
 metadata/_custom_type_script = "uid://b3w64ibj5uxv4"
 
 [node name="ZN_NodeAction" type="Node" parent="Removal" node_paths=PackedStringArray("node")]
-script = ExtResource("4_dxxuk")
+script = ExtResource("6_d34wk")
 node = NodePath("../..")
 remove = true
 

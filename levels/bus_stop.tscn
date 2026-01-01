@@ -589,6 +589,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.096527, 0.25, -0.2670951)
 [node name="Flare" parent="Entities" instance=ExtResource("15_morpl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.804863, 0.35000002, -0.22783995)
 
+[node name="WeaponShotgun2" parent="Entities" instance=ExtResource("31_f0s1s")]
+transform = Transform3D(-4.2454538e-08, 0.9712466, -0.2380758, -1, -4.371139e-08, 0, -1.0406623e-08, 0.2380758, 0.9712466, -19.861263, 0.38946128, 33.4655)
+
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="Markers" type="Node3D" parent="."]

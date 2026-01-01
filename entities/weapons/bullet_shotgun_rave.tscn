@@ -1,0 +1,89 @@
+[gd_scene load_steps=16 format=3 uid="uid://dto54xm5wixiq"]
+
+[ext_resource type="Script" uid="uid://dp6acnrca27yq" path="res://scripts/entities/weapons/ZE_Bullet.gd" id="1_tyrxa"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wldp8"]
+[ext_resource type="Script" uid="uid://d2o34b8fqmhd3" path="res://scripts/components/weapons/ZC_Projectile.gd" id="3_llv76"]
+[ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="4_3ngmf"]
+[ext_resource type="Script" uid="uid://bwt5xm6trqgoh" path="res://scripts/nodes/ZN_LightCurve.gd" id="5_wldp8"]
+[ext_resource type="Texture2D" uid="uid://bodjvrnyiukf1" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast3.png" id="6_llv76"]
+
+[sub_resource type="Resource" id="Resource_u10uh"]
+script = ExtResource("3_llv76")
+damage = 25.0
+collision_ray = NodePath("RayCast3D")
+piercing = 1
+metadata/_custom_type_script = "uid://d2o34b8fqmhd3"
+
+[sub_resource type="Resource" id="Resource_74leh"]
+script = ExtResource("4_3ngmf")
+metadata/_custom_type_script = "uid://cixmecjncarw5"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llv76"]
+albedo_color = Color(0.55033344, 0.29000002, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k50w0"]
+radius = 0.1
+
+[sub_resource type="Curve" id="Curve_wldp8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Gradient" id="Gradient_llv76"]
+offsets = PackedFloat32Array(0, 0.18298969, 0.371134, 0.5670103, 0.78608245, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.9713334, 0.13999999, 1, 0.083333254, 1, 0, 1, 0, 0.10000014, 1, 1, 0.7833333, 0, 1, 1, 1, 0, 0, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wldp8"]
+emission_shape = 2
+emission_sphere_radius = 0.25
+gravity = Vector3(0, -2, 3)
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ngmf"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("6_llv76")
+
+[sub_resource type="QuadMesh" id="QuadMesh_llv76"]
+material = SubResource("StandardMaterial3D_3ngmf")
+size = Vector2(0.2, 0.2)
+
+[node name="Bullet" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 31
+continuous_cd = true
+script = ExtResource("1_tyrxa")
+prefab_path = "res://entities/weapons/bullet.tscn"
+component_resources = Array[ExtResource("2_wldp8")]([SubResource("Resource_u10uh"), SubResource("Resource_74leh")])
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+radius = 0.1
+material = SubResource("StandardMaterial3D_llv76")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_k50w0")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+target_position = Vector3(0, 0, -1)
+collision_mask = 31
+hit_back_faces = false
+
+[node name="LightCurve" type="Node3D" parent="." node_paths=PackedStringArray("lights")]
+script = ExtResource("5_wldp8")
+energy_curve = SubResource("Curve_wldp8")
+color_curve = SubResource("Gradient_llv76")
+lights = [NodePath("OmniLight3D")]
+metadata/_custom_type_script = "uid://bwt5xm6trqgoh"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="LightCurve"]
+light_color = Color(0.010890819, 0.21762109, 0.86931, 1)
+omni_range = 10.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 32
+lifetime = 10.0
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_wldp8")
+draw_pass_1 = SubResource("QuadMesh_llv76")
