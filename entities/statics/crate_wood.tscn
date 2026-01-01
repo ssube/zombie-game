@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://c4gewr3tx3am5"]
+[gd_scene load_steps=12 format=4 uid="uid://c4gewr3tx3am5"]
 
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_ptp1i"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_584vn"]
 [ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="3_fu6af"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="4_nh0o1"]
-[ext_resource type="Texture2D" uid="uid://b6co2ljj3d2p4" path="res://assets/PSX Bunkers/Textures/wooden_crate_9.png" id="5_ocadv"]
+[ext_resource type="Material" uid="uid://c6iy3iby2kitf" path="res://materials/crate_wood.tres" id="5_ocadv"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="6_ccmkv"]
 
 [sub_resource type="Resource" id="Resource_drja3"]
@@ -15,12 +15,6 @@ metadata/_custom_type_script = "uid://jokkv7skgimj"
 [sub_resource type="Resource" id="Resource_op0x7"]
 script = ExtResource("4_nh0o1")
 metadata/_custom_type_script = "uid://0ndifcnh0nsp"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2tcfi"]
-resource_name = "wooden_crate_9"
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("5_ocadv")
-emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_023j0"]
 _surfaces = [{
@@ -36,7 +30,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_oqp2m"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ocadv"]
 resource_name = "wooden_crate_9"
 _surfaces = [{
 "aabb": AABB(-0.5500001, 0.009999812, -0.5500001, 1.1000001, 1.1000004, 1.1000001),
@@ -44,7 +38,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 612,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIgAjACAAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwAMAAxADIAMgAzADAANAA1ADYANgA3ADQAOAA5ADoAOgA7ADgAPAA9AD4APgA/ADwAQABBAEIAQgBDAEAARABFAEYARgBHAEQASABJAEoASgBLAEgATABNAE4ATgBPAEwAUABRAFIAUgBTAFAAVABVAFYAVgBXAFQAWABZAFoAWgBbAFgAXABdAF4AXgBfAFwAYABhAGIAYgBjAGAAZABlAGYAZgBnAGQAaABpAGoAagBrAGgAbABtAG4AbgBvAGwAcABxAHIAcgBzAHAAdAB1AHYAdgB3AHQAeAB5AHoAegB7AHgAfAB9AH4AfgB/AHwAgACBAIIAggCDAIAAhACFAIYAhgCHAIQAiACJAIoAigCLAIgAjACNAI4AjgCPAIwAkACRAJIAkgCTAJAAlACVAJYAlgCXAJQAmACZAJoAmgCbAJgAnACdAJ4AngCfAJwAoAChAKIAogCjAKAApAClAKYApgCnAKQAqACpAKoAqgCrAKgArACtAK4ArgCvAKwAsACxALIAsgCzALAAtAC1ALYAtgC3ALQAuAC5ALoAugC7ALgAvAC9AL4AvgC/ALwAwADBAMIAwgDDAMAAxADFAMYAxgDHAMQAyADJAMoAygDLAMgAzADNAM4AzgDPAMwA0ADRANIA0gDTANAA1ADVANYA1gDXANQA2ADZANoA2gDbANgA3ADdAN4A3gDfANwA4ADhAOIA4gDjAOAA5ADlAOYA5gDnAOQA6ADpAOoA6gDrAOgA7ADtAO4A7gDvAOwA8ADxAPIA8gDzAPAA9AD1APYA9gD3APQA+AD5APoA+gD7APgA/AD9AP4A/gD/APwAAAEBAQIBAgEDAQABBAEFAQYBBgEHAQQBCAEJAQoBCgELAQgBDAENAQ4BDgEPAQwBEAERARIBEgETARABFAEVARYBFgEXARQBGAEZARoBGgEbARgBHAEdAR4BHgEfARwBIAEhASIBIgEjASABJAElASYBJgEnASQBKAEpASoBKgErASgBLAEtAS4BLgEvASwBMAExATIBMgEzATABNAE1ATYBNgE3ATQBOAE5AToBOgE7ATgBPAE9AT4BPgE/ATwBQAFBAUIBQgFDAUABRAFFAUYBRgFHAUQBSAFJAUoBSgFLAUgBTAFNAU4BTgFPAUwBUAFRAVIBUgFTAVABVAFVAVYBVgFXAVQBWAFZAVoBWgFbAVgBXAFdAV4BXgFfAVwBYAFhAWIBYgFjAWABZAFlAWYBZgFnAWQBaAFpAWoBagFrAWgBbAFtAW4BbgFvAWwBcAFxAXIBcgFzAXABdAF1AXYBdgF3AXQBeAF5AXoBegF7AXgBfAF9AX4BfgF/AXwBgAGBAYIBggGDAYABhAGFAYYBhgGHAYQBiAGJAYoBigGLAYgBjAGNAY4BjgGPAYwBkAGRAZIBkgGTAZABlAGVAZYBlgGXAZQB"),
-"material": SubResource("StandardMaterial3D_2tcfi"),
+"material": ExtResource("5_ocadv"),
 "name": "wooden_crate_9",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -62,9 +56,9 @@ script = ExtResource("1_ptp1i")
 prefab_path = "res://entities/props/crate_wood.tscn"
 component_resources = Array[ExtResource("2_584vn")]([SubResource("Resource_drja3"), SubResource("Resource_op0x7")])
 
-[node name="wooden_crate_10" type="MeshInstance3D" parent="."]
+[node name="wooden_crate_11" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, -1.6292068e-07, 0, 1.6292068e-07, 1, 0, 0, 0)
-mesh = SubResource("ArrayMesh_oqp2m")
+mesh = SubResource("ArrayMesh_ocadv")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
