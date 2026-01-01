@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dlsl2pxtwq87y" path="res://scripts/menus/inventory_menu.gd" id="1_0fdhb"]
 [ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="2_y7nda"]
 
-[node name="InventoryMenu" type="AspectRatioContainer" node_paths=PackedStringArray("inventory_list")]
+[node name="InventoryMenu" type="AspectRatioContainer" node_paths=PackedStringArray("inventory_list", "use_button", "equip_button", "unequip_button", "drop_button")]
 process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +12,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0fdhb")
 inventory_list = NodePath("MarginContainer/VFlowContainer/InventoryList")
+use_button = NodePath("MarginContainer/VFlowContainer/MarginContainer/HBoxContainer/UseButton")
+equip_button = NodePath("MarginContainer/VFlowContainer/MarginContainer/HBoxContainer/EquipButton")
+unequip_button = NodePath("MarginContainer/VFlowContainer/MarginContainer/HBoxContainer/UnequipButton")
+drop_button = NodePath("MarginContainer/VFlowContainer/MarginContainer/HBoxContainer/DropButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -36,9 +40,37 @@ auto_height = true
 item_count = 1
 item_0/text = "Inventory Items"
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VFlowContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="UseButton" parent="MarginContainer/VFlowContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_y7nda")]
+layout_mode = 2
+text = "Use"
+
+[node name="EquipButton" parent="MarginContainer/VFlowContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_y7nda")]
+layout_mode = 2
+text = "Equip"
+
+[node name="UnequipButton" parent="MarginContainer/VFlowContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_y7nda")]
+layout_mode = 2
+text = "Unequip"
+
+[node name="DropButton" parent="MarginContainer/VFlowContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_y7nda")]
+layout_mode = 2
+text = "Drop"
+
 [node name="BackButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("2_y7nda")]
 layout_mode = 2
 text = "Back"
 
 [connection signal="item_activated" from="MarginContainer/VFlowContainer/InventoryList" to="." method="_on_inventory_list_item_activated"]
+[connection signal="item_selected" from="MarginContainer/VFlowContainer/InventoryList" to="." method="_on_inventory_list_item_selected"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/MarginContainer/HBoxContainer/UseButton" to="." method="_on_use_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/MarginContainer/HBoxContainer/EquipButton" to="." method="_on_equip_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/MarginContainer/HBoxContainer/UnequipButton" to="." method="_on_unequip_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/MarginContainer/HBoxContainer/DropButton" to="." method="_on_drop_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VFlowContainer/BackButton" to="." method="_on_back_pressed"]
