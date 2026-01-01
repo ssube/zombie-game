@@ -48,14 +48,10 @@ static func equip_weapon(character: ZE_Character, weapon: ZE_Weapon) -> ZE_Weapo
 
 	character.current_weapon = weapon
 	if weapon != null:
-		var weapon_parent := weapon.get_parent()
-		if weapon_parent:
-			weapon_parent.remove_child(weapon)
-
-		weapon.visible = true
-		character.weapon_node.add_child(weapon)
-		weapon.global_transform = character.weapon_node.global_transform
-		character.add_relationship(RelationshipUtils.make_equipped(weapon))
+		if equip_item(character, weapon):
+			print("Equipped weapon: %s." % weapon.name)
+		else:
+			printerr("Unable to equip weapon: %s" % weapon.name)
 
 	return old_weapon
 
