@@ -142,7 +142,7 @@ func _show_action_buttons() -> void:
 	var show_use := false
 	var show_equip := false
 	var show_unequip := false
-	var show_drop := true
+	var show_drop := false
 
 	var selected := inventory_list.get_selected_items()
 	for index in selected:
@@ -150,9 +150,11 @@ func _show_action_buttons() -> void:
 		if item == null:
 			return
 
-		if item.has_component(ZC_Equipment):
-			show_equip = true
-			show_unequip = true
+		var equipment := item.get_component(ZC_Equipment) as ZC_Equipment
+		if equipment != null:
+			show_equip = show_equip or not equipment.slot.is_empty()
+			show_unequip = show_unequip or not equipment.slot.is_empty()
+			show_drop = show_drop or equipment.droppable
 
 		if item.has_component(ZC_Food):
 			show_use = true
