@@ -129,7 +129,7 @@ shape = SubResource("CapsuleShape3D_idcse")
 sides = 6
 
 [node name="HeadEquipMarker" type="Marker3D" parent="CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.2416161)
 
 [node name="ZN_MouseInput" type="Node" parent="." node_paths=PackedStringArray("character", "head")]
 script = ExtResource("10_p37y2")

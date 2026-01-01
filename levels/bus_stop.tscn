@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=4 uid="uid://v18fidmgep15"]
+[gd_scene load_steps=128 format=4 uid="uid://v18fidmgep15"]
 
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_b7jq5"]
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_dm6vb"]
@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="16_fbayg"]
 [ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="17_tr8cq"]
 [ext_resource type="Material" uid="uid://g5xoeqn2qoy6" path="res://textures/Color Maps/metal_panels_pt_2.tres" id="17_y6j6u"]
+[ext_resource type="PackedScene" uid="uid://dq3oixjn7s600" path="res://entities/equipment/cone_hat.tscn" id="19_gbhsh"]
 [ext_resource type="PackedScene" uid="uid://b6k3o4n33nlld" path="res://entities/statics/dumpster.tscn" id="21_tu73e"]
 [ext_resource type="PackedScene" uid="uid://cqwe8v0wm6dd4" path="res://entities/statics/mailbox.tscn" id="27_h6dut"]
 [ext_resource type="PackedScene" uid="uid://bvrdhrtkeshuo" path="res://entities/weapons/shotgun_rave.tscn" id="31_f0s1s"]
@@ -591,6 +592,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.804863, 0.35000002, -0.22
 
 [node name="WeaponShotgun2" parent="Entities" instance=ExtResource("31_f0s1s")]
 transform = Transform3D(-4.2454538e-08, 0.9712466, -0.2380758, -1, -4.371139e-08, 0, -1.0406623e-08, 0.2380758, 0.9712466, -19.861263, 0.38946128, 33.4655)
+
+[node name="TrafficConeHat" parent="Entities" instance=ExtResource("19_gbhsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7304, 0.25000024, -0.315305)
 
 [node name="Lights" type="Node3D" parent="."]
 
