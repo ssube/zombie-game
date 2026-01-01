@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkkaq33vt04ge"]
+[gd_scene load_steps=16 format=3 uid="uid://bkkaq33vt04ge"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_tnbbk"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_yvdg1"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="7_do34u"]
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="8_606wd"]
 [ext_resource type="Script" uid="uid://btveuo4idavpj" path="res://scripts/components/weapons/ZC_Weapon_Thrown.gd" id="8_do34u"]
+[ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="9_606wd"]
 
 [sub_resource type="Resource" id="Resource_24ymc"]
 script = ExtResource("5_i8qfw")
@@ -33,6 +34,11 @@ muzzle_marker = NodePath("Marker3D")
 ammo_type = "flare"
 projectile_scene = ExtResource("4_1jxc5")
 
+[sub_resource type="Resource" id="Resource_1wsbd"]
+script = ExtResource("9_606wd")
+slot = "weapon_ranged"
+metadata/_custom_type_script = "uid://bdq3y7j08fnad"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1chp"]
 albedo_color = Color(0.68, 0.0816, 0.0816, 1)
 
@@ -45,7 +51,7 @@ collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_tnbbk")
 prefab_path = "res://entities/weapons/flare.tscn"
-component_resources = Array[ExtResource("2_yvdg1")]([SubResource("Resource_24ymc"), SubResource("Resource_doyw5"), SubResource("Resource_606wd")])
+component_resources = Array[ExtResource("2_yvdg1")]([SubResource("Resource_24ymc"), SubResource("Resource_doyw5"), SubResource("Resource_606wd"), SubResource("Resource_1wsbd")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)

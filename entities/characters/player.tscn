@@ -114,7 +114,7 @@ swing_path_follower = NodePath("Head/Hands/SwingPath/PathFollow3D")
 equipment_slots = {
 "flashlight": NodePath("Head/Hands/FlashlightEquipMarker"),
 "head": NodePath("CSGCylinder3D/HeadEquipMarker"),
-"weapon_melee": NodePath("Head/Hands/WeaponResetMarker"),
+"weapon_melee": NodePath("Head/Hands/WeaponMarker/MeleeEquipMarker"),
 "weapon_ranged": NodePath("Head/Hands/WeaponResetMarker")
 }
 inventory_node = NodePath("Inventory")
@@ -162,6 +162,8 @@ radius = 0.05
 height = 2.5
 sides = 6
 cone = true
+
+[node name="MeleeEquipMarker" type="Marker3D" parent="Head/Hands/WeaponMarker"]
 
 [node name="SwingPath" type="Path3D" parent="Head/Hands"]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, -0.35065174, -0.92247224)

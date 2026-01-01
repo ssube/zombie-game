@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bvrdhrtkeshuo"]
+[gd_scene load_steps=29 format=4 uid="uid://bvrdhrtkeshuo"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_3jif5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_06k2p"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bsryju4igi6gd" path="res://effects/sounds/shotgun_empty.tscn" id="10_ywkqc"]
 [ext_resource type="PackedScene" uid="uid://dto54xm5wixiq" path="res://entities/weapons/bullet_shotgun_rave.tscn" id="11_lgn6d"]
 [ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/weapons/ZC_Weapon_Ranged.gd" id="12_hoqxi"]
+[ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="13_3jif5"]
 [ext_resource type="Texture2D" uid="uid://dm8xysr4gal26" path="res://assets/PSX-Shotgun/Shotgun_Textures/Shotgun_Texture_2.png" id="13_sdtmi"]
 
 [sub_resource type="Resource" id="Resource_bsv6m"]
@@ -63,6 +64,11 @@ ammo_type = "12gauge"
 projectile_scene = ExtResource("11_lgn6d")
 effects = Array[ExtResource("8_fsqdt")]([SubResource("Resource_l5ox4"), SubResource("Resource_sgaoq"), SubResource("Resource_r86bq")])
 metadata/_custom_type_script = "uid://dwsqxsqwtloma"
+
+[sub_resource type="Resource" id="Resource_06k2p"]
+script = ExtResource("13_3jif5")
+slot = "weapon_ranged"
+metadata/_custom_type_script = "uid://bdq3y7j08fnad"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dhvf"]
 resource_name = "Material.002"
@@ -149,7 +155,7 @@ collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_3jif5")
 prefab_path = "res://entities/weapons/shotgun.tscn"
-component_resources = Array[ExtResource("2_06k2p")]([SubResource("Resource_bsv6m"), SubResource("Resource_17hxq"), SubResource("Resource_7rb10")])
+component_resources = Array[ExtResource("2_06k2p")]([SubResource("Resource_bsv6m"), SubResource("Resource_17hxq"), SubResource("Resource_7rb10"), SubResource("Resource_06k2p")])
 
 [node name="Shotgun" type="Node3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.18490055, -0.5303326)
