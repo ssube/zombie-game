@@ -279,6 +279,10 @@ func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_cr
 			%Menu.set_crosshair_color(Color.ORANGE)
 		use_weapon(collider, entity)
 
+	if collider.has_component(ZC_Equipment):
+		pickup_item(collider, entity)
+		EntityUtils.equip_item(entity, collider)
+
 
 func _update_ammo_label(player: Entity) -> void:
 	if player is not ZE_Character:

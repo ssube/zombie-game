@@ -944,7 +944,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.185, 5.454, -2.25)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.760893, -0.88762534, -0.11704117)
 
 [node name="PrettyPrincessSparkleCrown" parent="Entities" instance=ExtResource("8_moy58")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.858615, 1.8511996, -0.38162166)
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 5.858615, 1.8511996, -0.38162166)
 
 [node name="Lights" type="Node" parent="."]
 

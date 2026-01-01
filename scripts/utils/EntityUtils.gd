@@ -76,7 +76,7 @@ static func equip_item(character: ZE_Character, item: ZE_Base) -> bool:
 		ZC_Equipped: {
 			"slot": {
 				"_eq": equipment.slot
-			}
+			},
 		},
 	}, null)
 	var slot_equipped := character.get_relationship(slot_relationship)

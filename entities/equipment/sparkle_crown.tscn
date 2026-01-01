@@ -58,6 +58,7 @@ component_resources = Array[ExtResource("2_wk08h")]([SubResource("Resource_0qpab
 [node name="CSGTorus3D" type="CSGTorus3D" parent="."]
 inner_radius = 0.25
 outer_radius = 0.4
+sides = 16
 material = SubResource("StandardMaterial3D_w54ts")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

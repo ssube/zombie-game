@@ -113,7 +113,7 @@ max_step_height = 1.0
 hands_node = NodePath("Head/Hands")
 swing_path_follower = NodePath("Head/Hands/SwingPath/PathFollow3D")
 equipment_slots = {
-"head": NodePath("Head/HeadEquipMarker")
+"head": NodePath("CSGCylinder3D/HeadEquipMarker")
 }
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("Head/Hands/WeaponMarker")
@@ -127,6 +127,9 @@ shape = SubResource("CapsuleShape3D_idcse")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 sides = 6
+
+[node name="HeadEquipMarker" type="Marker3D" parent="CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.5)
 
 [node name="ZN_MouseInput" type="Node" parent="." node_paths=PackedStringArray("character", "head")]
 script = ExtResource("10_p37y2")
@@ -176,9 +179,6 @@ transform = Transform3D(0.99845827, 0.0044806385, 0.0553267, 0, 0.99673676, -0.0
 
 [node name="Flashlight" parent="Head/Hands" instance=ExtResource("17_e31fi")]
 transform = Transform3D(0.7643097, 0.5640402, 0.3125147, -0.45595393, 0.8154442, -0.35658124, -0.45595393, 0.1300492, 0.8804456, 0.7398019, -0.5648068, -0.30062598)
-
-[node name="HeadEquipMarker" type="Marker3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Effects" type="Node3D" parent="."]
 

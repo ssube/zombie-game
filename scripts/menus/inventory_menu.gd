@@ -75,7 +75,8 @@ func _on_inventory_list_item_activated(index: int) -> void:
 		return
 
 	var player = _item_players.get(item) as Entity
-	if item.has_component(ZC_Equipment):
+	var equipment := item.get_component(ZC_Equipment) as ZC_Equipment
+	if equipment and equipment.equippable:
 		if not EntityUtils.equip_item(player, item):
 			printerr("Unable to equip %s!" % item.name)
 	else:
