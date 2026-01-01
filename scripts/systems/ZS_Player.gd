@@ -158,6 +158,13 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		# Adjust the aim based on the ray's collision point or end point if there is no collision
 		do_adaptive_aim(ray, entity, delta)
 
+		var equipped := entity.get_relationships(RelationshipUtils.any_equipped)
+		for rel in equipped:
+			var item = rel.target
+			if item is Node3D:
+				var parent := item.get_parent() as Node3D
+				item.global_transform = parent.global_transform
+
 		# Highlight interactive items
 		var clear_collider := true
 		if ray.is_colliding():

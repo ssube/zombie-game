@@ -75,7 +75,12 @@ func _on_inventory_list_item_activated(index: int) -> void:
 		return
 
 	var player = _item_players.get(item) as Entity
-	player.add_relationship(RelationshipUtils.make_used(item))
+	if item.has_component(ZC_Equipment):
+		if not EntityUtils.equip_item(player, item):
+			printerr("Unable to equip %s!" % item.name)
+	else:
+		player.add_relationship(RelationshipUtils.make_used(item))
+
 	item_activated.emit(player, item, index)
 
 

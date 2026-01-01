@@ -1,0 +1,70 @@
+[gd_scene load_steps=14 format=3 uid="uid://bay617dekj5is"]
+
+[ext_resource type="Script" uid="uid://bx51blxd4jc27" path="res://scripts/entities/items/ZE_Armor.gd" id="1_osno1"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wk08h"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_tjbtv"]
+[ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="4_8l2fh"]
+[ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_sparkle.tres" id="4_tjbtv"]
+[ext_resource type="Texture2D" uid="uid://df4aal5af40v7" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Flare6.png" id="5_wk08h"]
+
+[sub_resource type="Resource" id="Resource_0qpab"]
+script = ExtResource("3_tjbtv")
+name = "Pretty Princess Sparkle Crown"
+shimmer_on_proximity = true
+shimmer_material = ExtResource("4_tjbtv")
+shimmer_nodes = Array[NodePath]([NodePath("CSGTorus3D")])
+metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_j7mfm"]
+script = ExtResource("4_8l2fh")
+slot = "head"
+metadata/_custom_type_script = "uid://bdq3y7j08fnad"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w54ts"]
+albedo_color = Color(1, 0.14999998, 0.77333355, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5yu42"]
+points = PackedVector3Array(-7.82907e-05, 0, -0.39999998, -7.82907e-05, 0.06495191, -0.3625685, 0.25630385, 0.06495191, -0.2563821, 0.28277212, 0, -0.2828504, 0.25630385, -0.06495191, -0.2563821, -7.82907e-05, -0.06495191, -0.3625685, -0.2828504, 0, -0.2828504, -0.2563821, 0.06495191, -0.2563821, 0.36249024, 0.06495191, -7.82907e-05, 0.39992172, 0, -7.82907e-05, 0.36249024, -0.06495191, -7.82907e-05, -0.2563821, -0.06495191, -0.2563821, -0.3625685, -0.06495191, -7.82907e-05, -0.39999998, 0, -7.82907e-05, -0.3625685, 0.06495191, -7.82907e-05, 0.25630385, 0.06495191, 0.25630385, 0.28277212, 0, 0.28277212, 0.25630385, -0.06495191, 0.25630385, -0.2563821, -0.06495191, 0.25630385, -0.2828504, 0, 0.28277212, -0.2563821, 0.06495191, 0.25630385, -7.82907e-05, 0.06495191, 0.36249024, -7.82907e-05, 0, 0.39992172, -7.82907e-05, -0.06495191, 0.36249024)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tjbtv"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.2
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.25
+emission_ring_cone_angle = 90.0
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8l2fh"]
+transparency = 1
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("5_wk08h")
+emission_enabled = true
+emission = Color(0.5, 0.5, 0.5, 1)
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_0qpab"]
+material = SubResource("StandardMaterial3D_8l2fh")
+size = Vector2(0.2, 0.2)
+
+[node name="PrettyPrincessSparkleCrown" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_osno1")
+component_resources = Array[ExtResource("2_wk08h")]([SubResource("Resource_0qpab"), SubResource("Resource_j7mfm")])
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="."]
+inner_radius = 0.25
+outer_radius = 0.4
+material = SubResource("StandardMaterial3D_w54ts")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_5yu42")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10119957, 0)
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_tjbtv")
+draw_pass_1 = SubResource("QuadMesh_0qpab")

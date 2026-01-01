@@ -193,9 +193,9 @@ static func serialize_entity(entity: Entity) -> ZP_SavedEntity:
 		saved_entity.components.append(serialize_component(component))
 
 	# serialize inventory
-	if "inventory_node" in entity:
-		for item in entity.inventory_node.get_children():
-			saved_entity.inventory.append(serialize_entity(item))
+	var inventory := RelationshipUtils.get_inventory(entity)
+	for item in inventory:
+		saved_entity.inventory.append(serialize_entity(item))
 
 	# serialize relationships
 	for rel in entity.relationships:

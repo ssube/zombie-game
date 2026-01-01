@@ -60,6 +60,48 @@ static func equip_weapon(character: ZE_Character, weapon: ZE_Weapon) -> ZE_Weapo
 	return old_weapon
 
 
+## Equip an item and return true if the item could be equipped in its preferred slot
+static func equip_item(character: ZE_Character, item: ZE_Base) -> bool:
+	var equipment := item.get_component(ZC_Equipment) as ZC_Equipment
+	if equipment == null:
+		return false
+
+	# TODO: support multiple slots, find first unused
+	var slots := character.equipment_slots
+	if equipment.slot not in slots:
+		return false
+
+	# check if the slot is full (already has an item equipped)
+	var slot_relationship := Relationship.new({
+		ZC_Equipped: {
+			"slot": {
+				"_eq": equipment.slot
+			}
+		},
+	}, null)
+	var slot_equipped := character.get_relationship(slot_relationship)
+	if slot_equipped:
+		return false
+
+	# finally, equip the item at the marker associated with the slot
+	var previous_parent := item.get_parent()
+	if previous_parent:
+		previous_parent.remove_child(item)
+
+	var parent := character.equipment_slots[equipment.slot]
+	parent.add_child(item)
+
+	character.add_relationship(RelationshipUtils.make_equipped(item))
+	item.visible = parent.visible
+	item.transform = Transform3D.IDENTITY
+
+	if item.get_node(".") is RigidBody3D:
+		item.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+		item.freeze = true
+
+	return true
+
+
 static func get_players() -> Array[Entity]:
 	return ECS.world.query.with_all([ZC_Player]).execute()
 

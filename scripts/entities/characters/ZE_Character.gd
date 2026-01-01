@@ -8,6 +8,7 @@ class_name ZE_Character
 @export_group("Inventory")
 @export var current_armor: ZE_Armor = null
 @export var current_weapon: ZE_Weapon = null
+@export var equipment_slots: Dictionary[String, Marker3D] = {}
 @export var inventory_node: Node = null
 @export var weapon_node: Node3D = null
 @export var weapon_follower: PathFollow3D = null

@@ -2,6 +2,7 @@ class_name RelationshipUtils
 
 static var any_damage = Relationship.new(ZC_Damaged.new(""), null)
 static var any_effect = Relationship.new(ZC_Effected.new(), null)
+static var any_equipped = Relationship.new(ZC_Equipped.new(), null)
 static var any_fired = Relationship.new(ZC_Fired.new(), null)
 static var any_heard = Relationship.new(ZC_Heard.new(), null)
 static var any_hit = Relationship.new(ZC_Hit.new(), null)
@@ -61,6 +62,15 @@ static func get_wielder(item: Entity) -> Entity:
 	]).execute() as Array
 	assert(relationships.size() <= 1, "Item has more than one entity wielding it, relationships are leaking!")
 	return relationships.get(0)
+
+static func get_inventory(target: Entity) -> Array[Entity]:
+	var relationships := target.get_relationships(RelationshipUtils.any_holding)
+	var entities: Array[Entity] = []
+	for rel in relationships:
+		entities.append(rel.target)
+
+	return entities
+
 
 static func make_damage(actor: Entity, damage_amount: int) -> Relationship:
 	var actor_id := ""

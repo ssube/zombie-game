@@ -1,4 +1,4 @@
-[gd_scene load_steps=270 format=4 uid="uid://cpgmxyybvd4x8"]
+[gd_scene load_steps=271 format=4 uid="uid://cpgmxyybvd4x8"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_43fyf"]
 [ext_resource type="Texture2D" uid="uid://c51guvpg20wcf" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast4.png" id="1_qbcix"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="6_hqmqq"]
 [ext_resource type="Material" uid="uid://dmag34gr8mm06" path="res://textures/Color Maps/brick_wall_pt_1.tres" id="7_dfgex"]
 [ext_resource type="Material" uid="uid://vq88t5vuqjfq" path="res://textures/Color Maps/wood_pt_4.tres" id="8_408hf"]
+[ext_resource type="PackedScene" uid="uid://bay617dekj5is" path="res://entities/equipment/sparkle_crown.tscn" id="8_moy58"]
 [ext_resource type="Material" uid="uid://q11wc28gwgth" path="res://textures/Color Maps/wood_5.tres" id="9_lt4xk"]
 [ext_resource type="Material" uid="uid://c7t1xu02xsc03" path="res://textures/Color Maps/wood_floor_1.tres" id="10_x4l7f"]
 [ext_resource type="Material" uid="uid://bu5p82csdpnmw" path="res://textures/Color Maps/wood_3.tres" id="11_lt4xk"]
@@ -941,6 +942,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.185, 5.454, -2.25)
 
 [node name="Rocks" parent="Entities" instance=ExtResource("21_2vnsd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.760893, -0.88762534, -0.11704117)
+
+[node name="PrettyPrincessSparkleCrown" parent="Entities" instance=ExtResource("8_moy58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.858615, 1.8511996, -0.38162166)
 
 [node name="Lights" type="Node" parent="."]
 
