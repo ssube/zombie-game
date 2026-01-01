@@ -13,6 +13,16 @@
 [ext_resource type="PackedScene" uid="uid://bse6riebwmfln" path="res://levels/level_1.tscn" id="11_x2vpa"]
 [ext_resource type="Script" uid="uid://b2epsdmony1gs" path="res://scripts/resources/ZR_Campaign.gd" id="15_fe0ao"]
 
+[sub_resource type="Resource" id="Resource_7xqtk"]
+script = ExtResource("1_jaugy")
+key = "fishing_pier"
+title = "Fishing Pier"
+scene = ExtResource("7_cvp7w")
+loading_hints = Array[String](["Fish are food, if you're a zombie."])
+loading_image = ExtResource("6_cmnru")
+min_load_time = 5.0
+metadata/_custom_type_script = "uid://6e7chkl4nt6l"
+
 [sub_resource type="Resource" id="Resource_3xt08"]
 script = ExtResource("1_jaugy")
 key = "bus_stop"
@@ -28,16 +38,6 @@ key = "spooky_church"
 title = "Spooky Church"
 scene = ExtResource("5_gefcm")
 loading_image = ExtResource("4_nbnqx")
-metadata/_custom_type_script = "uid://6e7chkl4nt6l"
-
-[sub_resource type="Resource" id="Resource_7xqtk"]
-script = ExtResource("1_jaugy")
-key = "fishing_pier"
-title = "Fishing Pier"
-scene = ExtResource("7_cvp7w")
-loading_hints = Array[String](["Fish are food, if you're a zombie."])
-loading_image = ExtResource("6_cmnru")
-min_load_time = 5.0
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
 [sub_resource type="Resource" id="Resource_ucckl"]
@@ -61,5 +61,5 @@ metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
 [resource]
 script = ExtResource("15_fe0ao")
-levels = Array[ExtResource("1_jaugy")]([SubResource("Resource_3xt08"), SubResource("Resource_2rk21"), SubResource("Resource_7xqtk"), SubResource("Resource_ucckl"), SubResource("Resource_apgre")])
+levels = Array[ExtResource("1_jaugy")]([SubResource("Resource_7xqtk"), SubResource("Resource_3xt08"), SubResource("Resource_2rk21"), SubResource("Resource_ucckl"), SubResource("Resource_apgre")])
 metadata/_custom_type_script = "uid://b2epsdmony1gs"
