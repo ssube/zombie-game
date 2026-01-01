@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2iu0e6hys73u"]
+[gd_scene load_steps=3 format=3 uid="uid://dc6fb6duw8ut8"]
 
-[ext_resource type="Material" uid="uid://d0nnc16kfkg6r" path="res://materials/grass_detail.tres" id="1_wk171"]
+[ext_resource type="Material" uid="uid://xc6fuc488eln" path="res://materials/grass_dark.tres" id="1_hss43"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_ersfw"]
-material = ExtResource("1_wk171")
+material = ExtResource("1_hss43")
 
-[node name="GrassClusterGreen" type="Node3D"]
+[node name="GrassClusterDark" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 cast_shadow = 2

@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://xc6fuc488eln"]
+
+[ext_resource type="Texture2D" uid="uid://b81bjlve7qvui" path="res://textures/Foliage Sprites/PNG/Shaded/sprite_0068.png" id="1_lg3if"]
+[ext_resource type="Texture2D" uid="uid://cv366ht0q4udd" path="res://textures/Color Maps/grass_2.png" id="2_lg3if"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+shading_mode = 2
+albedo_color = Color(0.98, 0.98, 0.98, 1)
+albedo_texture = ExtResource("1_lg3if")
+metallic_specular = 0.0
+roughness = 0.5
+detail_enabled = true
+detail_blend_mode = 3
+detail_albedo = ExtResource("2_lg3if")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=249 format=4 uid="uid://b687g8br5b2mv"]
+[gd_scene load_steps=252 format=4 uid="uid://b687g8br5b2mv"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_vf316"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_24vc2"]
@@ -22,7 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://c2iu0e6hys73u" path="res://entities/statics/grass_cluster_green.tscn" id="13_mk2pv"]
 [ext_resource type="Material" uid="uid://drg6dytwr6qt2" path="res://textures/Color Maps/building_pt_1_top_wall_1.tres" id="14_24vc2"]
 [ext_resource type="Material" uid="uid://d2oaplvcftcrx" path="res://textures/Color Maps/brick_wall_pt_2.tres" id="15_jb54n"]
+[ext_resource type="PackedScene" uid="uid://co2strl7y2n7h" path="res://entities/props/crate_metal.tscn" id="15_l4rb4"]
 [ext_resource type="Script" uid="uid://c6dan22mbgmgs" path="res://scripts/nodes/ZN_MapGeometry.gd" id="15_tpjaq"]
+[ext_resource type="PackedScene" uid="uid://cxon0lgaw3k5j" path="res://entities/props/puddle_oil.tscn" id="16_4as1p"]
 [ext_resource type="Material" uid="uid://c67ov6fslkehf" path="res://textures/Color Maps/water_1.tres" id="16_r8vtg"]
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="17_mk2pv"]
 [ext_resource type="PackedScene" uid="uid://bu2ntm7c8cyn8" path="res://skies/sky_day.tscn" id="18_tpjaq"]
@@ -33,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://rtq8nqsaa7st" path="res://entities/weapons/crowbar.tscn" id="29_7ipmy"]
 [ext_resource type="PackedScene" uid="uid://c4gewr3tx3am5" path="res://entities/props/crate_wood.tscn" id="30_7iyb8"]
 [ext_resource type="PackedScene" uid="uid://femu8fxijdyb" path="res://entities/props/cardboard_box_floating.tscn" id="31_jb54n"]
+[ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/grass_cluster_dark.tscn" id="34_kj7f7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fnrws"]
 size = Vector3(17.603027, 1.7054443, 100)
@@ -941,6 +944,15 @@ transform = Transform3D(-0.88775915, 0, -0.46030828, 0, 1, 0, 0.46030828, 0, -0.
 
 [node name="Node3D3" parent="Entities" instance=ExtResource("13_mk2pv")]
 transform = Transform3D(-0.83301246, -0.18412289, 0.5217174, -0.15604451, 0.98290324, 0.097731, -0.53079224, 0, -0.847502, -0.6167405, -3.6781902, 42.892403)
+
+[node name="GrassClusterDark" parent="Entities" instance=ExtResource("34_kj7f7")]
+transform = Transform3D(0.9207161, 0, -0.39023304, 0, 1, 0, 0.39023304, 0, 0.9207161, 1.7443166, -3.570212, 41.93368)
+
+[node name="CrateWood2" parent="Entities" instance=ExtResource("15_l4rb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.433176, 0.24999976, 37.090446)
+
+[node name="PuddleOil" parent="Entities" instance=ExtResource("16_4as1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.241832, -0.47907186, 36.728203)
 
 [node name="Lights" type="Node" parent="."]
 
