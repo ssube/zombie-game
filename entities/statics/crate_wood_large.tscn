@@ -1,25 +1,25 @@
-[gd_scene load_steps=13 format=4 uid="uid://c4gewr3tx3am5"]
+[gd_scene load_steps=13 format=4 uid="uid://c12ddoy4goc5x"]
 
-[ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_ptp1i"]
-[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_584vn"]
-[ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="3_fu6af"]
-[ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="4_nh0o1"]
-[ext_resource type="Texture2D" uid="uid://b6co2ljj3d2p4" path="res://assets/PSX Bunkers/Textures/wooden_crate_9.png" id="5_ocadv"]
-[ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="6_ccmkv"]
+[ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_nt7rs"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_j4mia"]
+[ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="3_p6yl4"]
+[ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="4_yrtoc"]
+[ext_resource type="Texture2D" uid="uid://b6co2ljj3d2p4" path="res://assets/PSX Bunkers/Textures/wooden_crate_9.png" id="5_peimn"]
+[ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="6_xipbb"]
 
 [sub_resource type="Resource" id="Resource_drja3"]
-script = ExtResource("3_fu6af")
+script = ExtResource("3_p6yl4")
 effect_path = NodePath("FireEffect")
 metadata/_custom_type_script = "uid://jokkv7skgimj"
 
 [sub_resource type="Resource" id="Resource_op0x7"]
-script = ExtResource("4_nh0o1")
+script = ExtResource("4_yrtoc")
 metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2tcfi"]
 resource_name = "wooden_crate_9"
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("5_ocadv")
+albedo_texture = ExtResource("5_peimn")
 emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_023j0"]
@@ -58,19 +58,19 @@ shadow_mesh = SubResource("ArrayMesh_023j0")
 size = Vector3(1.1, 1.1, 1.1)
 
 [node name="CrateWood" type="StaticBody3D"]
-script = ExtResource("1_ptp1i")
+script = ExtResource("1_nt7rs")
 prefab_path = "res://entities/props/crate_wood.tscn"
-component_resources = Array[ExtResource("2_584vn")]([SubResource("Resource_drja3"), SubResource("Resource_op0x7")])
+component_resources = Array[ExtResource("2_j4mia")]([SubResource("Resource_drja3"), SubResource("Resource_op0x7")])
 
 [node name="wooden_crate_10" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, -1.6292068e-07, 0, 1.6292068e-07, 1, 0, 0, 0)
+transform = Transform3D(1.15, 0, 0, 0, 1.15, -1.8735878e-07, 0, 1.8735878e-07, 1.15, 0, 0, 0)
 mesh = SubResource("ArrayMesh_oqp2m")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56, 0)
+transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, 0.65046066, 0)
 shape = SubResource("BoxShape3D_l5l63")
 
-[node name="FireEffect" parent="." instance=ExtResource("6_ccmkv")]
+[node name="FireEffect" parent="." instance=ExtResource("6_xipbb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2037421, 0)
 visible = false
