@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_43fyf"]
 [ext_resource type="Texture2D" uid="uid://c51guvpg20wcf" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast4.png" id="1_qbcix"]
-[ext_resource type="PackedScene" uid="uid://dsjfc00ufve4t" path="res://entities/props/pine_tree_1_1.tscn" id="2_2rajt"]
+[ext_resource type="PackedScene" uid="uid://dsjfc00ufve4t" path="res://entities/statics/pine_tree_1_1.tscn" id="2_2rajt"]
 [ext_resource type="Script" uid="uid://bbgu5yekfkubs" path="res://scripts/resources/ZR_Weather.gd" id="2_2vnsd"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="4_gxru8"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="5_c71tc"]
