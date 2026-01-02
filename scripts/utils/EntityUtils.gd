@@ -98,6 +98,29 @@ static func equip_item(character: ZE_Character, item: ZE_Base) -> bool:
 	return true
 
 
+static func unequip_item(character: ZE_Character, item: ZE_Base) -> bool:
+	var equipment := item.get_component(ZC_Equipment) as ZC_Equipment
+	if equipment == null:
+		return false
+
+	var relationship := Relationship.new({
+		ZC_Equipped: {
+			"slot": {
+				"_eq": equipment.slot,
+			},
+		},
+	}, item)
+	character.remove_relationship(relationship, 1)
+
+	var parent := item.get_parent()
+	if parent:
+		parent.remove_child(item)
+
+	character.inventory_node.add_child(item)
+
+	return true
+
+
 static func get_players() -> Array[Entity]:
 	return ECS.world.query.with_all([ZC_Player]).execute()
 

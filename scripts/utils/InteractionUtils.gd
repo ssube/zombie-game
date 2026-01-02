@@ -7,11 +7,6 @@ enum HandlerStatus {
 }
 
 
-# TODO: add with every EntityUtils.remove call
-static func remove_shimmer_target(target: Entity) -> void:
-	pass # assert(false, "TODO")
-
-
 static func _add_sound(sound: ZN_AudioSubtitle3D, parent: Node) -> void:
 	parent.add_child(sound)
 
@@ -122,7 +117,7 @@ static func use_armor(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	if armor == null:
 		return HandlerStatus.SKIP
 
-	remove_shimmer_target(target)
+	target.remove_component(ZC_Shimmer)
 
 	var modifier := armor.get_component(ZC_Effect_Armor) as ZC_Effect_Armor
 	var player = actor as ZE_Player
@@ -304,7 +299,7 @@ static func use_weapon(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	if weapon == null:
 		return HandlerStatus.SKIP
 
-	remove_shimmer_target(weapon)
+	weapon.remove_component(ZC_Shimmer)
 
 	# reparent weapon to player
 	var weapon_body = weapon.get_node(".") as RigidBody3D
@@ -330,7 +325,7 @@ static func has_interactive(entity: Entity) -> bool:
 
 static func pickup_item(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	var interactive = target.get_component(ZC_Interactive) as ZC_Interactive
-	remove_shimmer_target(target)
+	target.remove_component(ZC_Shimmer)
 
 	target.get_parent().remove_child(target)
 	# target.visible = false

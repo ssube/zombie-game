@@ -4,6 +4,9 @@ class_name ZE_Player
 
 @export var hands_node: Node3D = null
 
+## Tracks the last entity this player looked at for shimmer effect management
+var last_shimmer_target: Entity = null
+
 func on_ready():
 	super.on_ready()
 	sync_experience()

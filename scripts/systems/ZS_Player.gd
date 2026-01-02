@@ -3,8 +3,6 @@ extends System
 
 @export var shimmer_offset: float = 4.0
 
-var last_shimmer: Dictionary[Entity, Entity] = {} # dict for multiplayer
-
 
 # TODO: move to ray utils
 func get_raycast_end_point(raycast: RayCast3D) -> Vector3:
@@ -119,6 +117,13 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		# Finally, update equipped items' transforms after any movement, equip/unequip, etc.
 		_update_equipped_items(entity)
 
+	# Clean up invalid shimmer references
+	for entity in entities:
+		var player = entity as ZE_Player
+		if player.last_shimmer_target:
+			if not is_instance_valid(player.last_shimmer_target) or not player.last_shimmer_target.has_component(ZC_Shimmer):
+				player.last_shimmer_target = null
+
 
 func _apply_gravity(velocity: ZC_Velocity, body: CharacterBody3D, delta: float) -> void:
 	var no_clip := OptionsManager.options.cheats.no_clip
@@ -147,7 +152,7 @@ func _process_screen_effects(entity: Entity, delta: float) -> void:
 		if effect == null:
 			continue
 
-		%Menu.set_effect_strength(effect, effect_strength[effect], delta * 8)
+		%Menu.set_effect_strength(effect, effect_strength[effect], delta * 8) # TODO: magic number
 
 
 func _process_heard_noises(entity: Entity) -> void:
@@ -201,10 +206,11 @@ func _handle_interactive(entity: Entity, input: ZC_Input, body: CharacterBody3D,
 			if interactive.shimmer_on_target and interactive.shimmer_range > 0.0:
 				var distance := body.global_position.distance_to(ray.get_collision_point())
 				if distance <= interactive.shimmer_range:
-					if collider_entity != last_shimmer.get(entity) and collider_entity != entity.current_weapon:
+					var player = entity as ZE_Player
+					if collider_entity != player.last_shimmer_target and collider_entity != entity.current_weapon:
 						%Menu.clear_target_label()
 						%Menu.reset_crosshair_color()
-						remove_shimmer_key(entity)
+						_clear_player_shimmer(player)
 
 					if collider_entity and collider_entity != entity.current_weapon:
 						clear_collider = false
@@ -213,7 +219,7 @@ func _handle_interactive(entity: Entity, input: ZC_Input, body: CharacterBody3D,
 						if not EntityUtils.has_shimmer(collider_entity):
 							var shimmer = ZC_Shimmer.from_interactive(interactive)
 							collider_entity.add_component(shimmer)
-							last_shimmer[entity] = collider_entity
+							player.last_shimmer_target = collider_entity
 
 							var shimmer_start := (Time.get_ticks_msec() / 1000.0) + shimmer_offset
 							RenderingServer.global_shader_parameter_set("shimmer_time", shimmer_start)
@@ -229,7 +235,7 @@ func _handle_interactive(entity: Entity, input: ZC_Input, body: CharacterBody3D,
 	if clear_collider:
 		%Menu.clear_target_label()
 		%Menu.reset_crosshair_color()
-		remove_shimmer_key(entity)
+		_clear_player_shimmer(entity as ZE_Player)
 
 
 func _update_ammo_label(player: Entity) -> void:
@@ -273,7 +279,7 @@ func _handle_collisions(body: CharacterBody3D, delta: float) -> void:
 		if collider is RigidBody3D:
 			var push_direction := -collision.get_normal()
 			var push_position = position - collider.global_position
-			collider.apply_impulse(push_direction * 50 * delta, push_position)
+			collider.apply_impulse(push_direction * 50 * delta, push_position) # TODO: magic number
 
 
 func _set_damage_areas(entity: Entity, weapon: ZC_Weapon_Melee, enable: bool) -> void:
@@ -374,35 +380,30 @@ func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
 		light.enabled = not light.enabled
 
 
-func remove_shimmer_key(entity: Entity) -> void:
-	if entity in last_shimmer:
-		var last_target = last_shimmer.get(entity)
-		last_shimmer.erase(entity)
-
-		if last_target == null:
-			printerr("Removing shimmer from null entity: ", entity, last_target)
-		else:
-			last_target.remove_component(ZC_Shimmer)
+func _clear_player_shimmer(player: ZE_Player) -> void:
+	if player.last_shimmer_target:
+		if is_instance_valid(player.last_shimmer_target):
+			player.last_shimmer_target.remove_component(ZC_Shimmer)
+		player.last_shimmer_target = null
 
 
-func remove_shimmer_target(entity: Entity) -> void:
-	for shimmer_key in last_shimmer.keys():
-		var shimmer_node = last_shimmer[shimmer_key]
-		if entity == shimmer_node:
-			last_shimmer.erase(shimmer_key)
-
-			if entity != null:
-				entity.remove_component(ZC_Shimmer)
-
-
-## Equip the next weapon (always the first weapon in the player's inventory)
+## Equip the next weapon
 func equip_next_weapon(entity: ZE_Player) -> void:
 	var weapons := RelationshipUtils.get_weapons(entity)
 	if weapons.size() == 0:
 		return
 
-	var next_weapon = weapons[0]
-	EntityUtils.switch_weapon(entity, next_weapon, %Menu)
+	var next_weapon := false
+	for weapon in weapons:
+		if next_weapon:
+			EntityUtils.switch_weapon(entity, weapon as ZE_Weapon, %Menu)
+			return
+		if weapon == entity.current_weapon: # TODO: use relationship instead of node
+			next_weapon = true
+
+	# If we could not find the current weapon, default to the first weapon
+	var first_weapon = weapons[0] as ZE_Weapon
+	EntityUtils.switch_weapon(entity, first_weapon, %Menu)
 
 
 func equip_previous_weapon(entity: ZE_Player) -> void:
@@ -410,6 +411,14 @@ func equip_previous_weapon(entity: ZE_Player) -> void:
 	if weapons.size() == 0:
 		return
 
-	var previous_index = weapons.size() - 1
-	var previous_weapon = weapons[previous_index] as ZE_Weapon
-	EntityUtils.switch_weapon(entity, previous_weapon, %Menu)
+	var previous_weapon = null
+	for weapon in weapons:
+		if weapon == entity.current_weapon: # TODO: use relationship instead of node
+			if previous_weapon != null:
+				EntityUtils.switch_weapon(entity, previous_weapon as ZE_Weapon, %Menu)
+				return
+		previous_weapon = weapon
+
+	# If we could not find the current weapon, default to the last weapon
+	var last_weapon = weapons[weapons.size() - 1] as ZE_Weapon
+	EntityUtils.switch_weapon(entity, last_weapon, %Menu)
