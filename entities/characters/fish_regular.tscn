@@ -92,7 +92,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0rpsf")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m5dol"]
-size = Vector3(7.7466965, 1, 7.090454)
+size = Vector3(8, 1, 6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mwldp"]
 size = Vector3(1.1421509, 0.44812012, 0.16217041)
@@ -108,7 +108,7 @@ script = ExtResource("1_qdp1r")
 component_resources = Array[ExtResource("2_1yy17")]([SubResource("Resource_m5dol"), SubResource("Resource_rp6xk"), SubResource("Resource_lpkny"), SubResource("Resource_3qwwp"), SubResource("Resource_cemfp"), SubResource("Resource_el7xw")])
 
 [node name="fish_mx_1" type="MeshInstance3D" parent="."]
-transform = Transform3D(-8.742278e-08, 1.7484555e-07, -2, 0, -2, -1.7484555e-07, -2, -7.642742e-15, 8.742278e-08, -0.08772266, 0, -0.08325696)
+transform = Transform3D(-8.742278e-08, 1.7484555e-07, -2, 0, -2, -1.7484555e-07, -2, -7.642742e-15, 8.742278e-08, -0.06020978, 0, -0.058779508)
 mesh = SubResource("ArrayMesh_qdp1r")
 skeleton = NodePath("")
 
@@ -123,7 +123,6 @@ trigger_on_exit = true
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="fish_mx_1/DetectionArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9694653, 0, 0.2474976)
 shape = SubResource("BoxShape3D_m5dol")
 
 [node name="SetPositionBlackboard" type="Node" parent="fish_mx_1/DetectionArea"]
@@ -140,7 +139,7 @@ try_transition = false
 metadata/_custom_type_script = "uid://d1xf73mn6pulk"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.371139e-08, 1.509958e-07, -1, 0, -1, -1.509958e-07, -1, -6.600236e-15, 4.371139e-08, -0.024337646, -0.0016479488, 0.028803349)
+transform = Transform3D(-4.371139e-08, 1.509958e-07, -1, 0, -1, -1.509958e-07, -1, -6.600236e-15, 4.371139e-08, 0.0031752326, -0.0016479488, 0.0532808)
 shape = SubResource("BoxShape3D_mwldp")
 
 [node name="Behavior" type="Node3D" parent="."]
