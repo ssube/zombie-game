@@ -72,8 +72,10 @@
 - Hit indicator
 - Low health vignette
 - Underwater distortion with scrolling shader
-- Fire and acid/poison effects
-- Rain and thunder effects
+- Fire effects
+- Acid/poison effects **(in-progress)**
+- Rain effects
+- Thunder effects **(in-progress)**
 - Support for multiple simultaneous effects with fade in/out
 - Armor and healing effects
 - Effect strength curves for customizable fade behavior
