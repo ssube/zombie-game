@@ -153,8 +153,10 @@ func _show_action_buttons() -> void:
 
 		var equipment := item.get_component(ZC_Equipment) as ZC_Equipment
 		if equipment != null:
-			show_equip = show_equip or not equipment.slot.is_empty()
-			show_unequip = show_unequip or not equipment.slot.is_empty()
+			var player := _item_players.get(item) as Entity
+			var is_equipped := player.has_relationship(RelationshipUtils.make_equipped(item))
+			show_equip = show_equip or not is_equipped # equipment.slot.is_empty()
+			show_unequip = show_unequip or is_equipped # not equipment.slot.is_empty()
 			show_drop = show_drop or equipment.droppable
 
 		if item.has_component(ZC_Food):
