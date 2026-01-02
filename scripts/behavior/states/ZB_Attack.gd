@@ -27,12 +27,12 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 				return TickResult.FORCE_EXIT
 
 		var movement := entity.get_component(ZC_Movement) as ZC_Movement
-		movement.target_look_position = target_position
+		movement.set_look_target(target_position)
 
 		attack_timer -= delta
 		if attack_timer > 0.0:
 			return TickResult.CONTINUE
-				
+
 		if attack_tween and attack_tween.is_running():
 			return TickResult.CONTINUE
 

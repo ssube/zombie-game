@@ -29,10 +29,10 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 								attention.target_position = target_position  # Keep attention updated
 
 		var movement := entity.get_component(ZC_Movement) as ZC_Movement
-		movement.target_look_position = target_position
+		movement.set_look_target(target_position)
 
 		var node_3d := entity.root_3d as Node3D
-		NavigationUtils.follow_navigation_path(node_3d, navigation_path, point_proximity)
+		navigation_path = NavigationUtils.follow_navigation_path(node_3d, navigation_path, point_proximity)
 
 		navigation_timer -= delta
 		if navigation_timer > 0.0:

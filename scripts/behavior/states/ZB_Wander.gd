@@ -22,9 +22,9 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 
 	# follow nav path
 	var movement := entity.get_component(ZC_Movement) as ZC_Movement
-	movement.target_look_position = target_position
+	movement.set_look_target(target_position)
 
-	NavigationUtils.follow_navigation_path(node_3d, navigation_path, point_proximity)
+	navigation_path = NavigationUtils.follow_navigation_path(node_3d, navigation_path, point_proximity)
 
 	wander_timer -= delta
 	if wander_timer > 0.0:

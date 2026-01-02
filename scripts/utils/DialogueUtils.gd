@@ -2,7 +2,7 @@ class_name DialogueUtils
 
 static func look_at_position(entity: Entity, position: Vector3) -> void:
 	var movement := entity.get_component(ZC_Movement) as ZC_Movement
-	movement.target_look_position = position
+	movement.set_look_target(position)
 
 static func look_at_entity(entity: Entity, target: Entity) -> void:
 	var target3d := target.get_node(".") as Node3D

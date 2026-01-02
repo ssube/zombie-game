@@ -23,10 +23,13 @@ func _physics_process(delta: float) -> void:
 	var buoyant_force: float = height_diff * buoyancy_strength
 	buoyant_force = clamp(buoyant_force, -max_velocity, max_velocity)
 
-	var damped_linear_velocity: Vector3 = self.linear_velocity.lerp(Vector3.ZERO, linear_damping * delta)
+	# Clamp damping factors to prevent lerp extrapolation (must be 0-1)
+	var linear_damp_factor := clampf(linear_damping * delta, 0.0, 1.0)
+	var damped_linear_velocity: Vector3 = self.linear_velocity.lerp(Vector3.ZERO, linear_damp_factor)
 	self.linear_velocity = damped_linear_velocity
 
-	var damped_angular_velocity: Vector3 = self.angular_velocity.lerp(Vector3.ZERO, angular_damping * delta)
+	var angular_damp_factor := clampf(angular_damping * delta, 0.0, 1.0)
+	var damped_angular_velocity: Vector3 = self.angular_velocity.lerp(Vector3.ZERO, angular_damp_factor)
 	self.angular_velocity = damped_angular_velocity
 
 	self.apply_central_force(Vector3.UP * buoyant_force)

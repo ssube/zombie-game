@@ -1,15 +1,17 @@
 class_name NavigationUtils
 
-static func follow_navigation_path(entity: Node3D, navigation_path: PackedVector3Array, point_proximity: float) -> void:
+static func follow_navigation_path(entity: Node3D, navigation_path: PackedVector3Array, point_proximity: float) -> PackedVector3Array:
 	if len(navigation_path) == 0:
-		return
+		return navigation_path
 
 	var next_point := navigation_path[0]
 	if NavigationUtils.is_point_nearby(entity, next_point, point_proximity):
 		navigation_path.remove_at(0)
 	else:
 		var movement := entity.get_component(ZC_Movement) as ZC_Movement
-		movement.target_move_position = next_point
+		movement.set_move_target(next_point)
+
+	return navigation_path
 
 ## Check if the node is close to a point
 static func is_point_nearby(entity: Node3D, point: Vector3, proximity: float) -> bool:

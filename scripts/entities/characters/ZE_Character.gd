@@ -49,8 +49,43 @@ func _physics_process(delta: float) -> void:
 
 
 func _apply_rigid_physics(_delta: float, movement: ZC_Movement, velocity: ZC_Velocity) -> void:
-	_apply_rigid_movement_force(movement, velocity)
-	_apply_rigid_look_torque(movement, velocity)
+	# FIRST: Clamp velocities from previous frame's collisions BEFORE applying new forces
+	var current_linear_vel := rigid_3d.linear_velocity
+	var horizontal_vel := Vector3(current_linear_vel.x, 0, current_linear_vel.z)
+	var horizontal_speed := horizontal_vel.length()
+	var vertical_speed := absf(current_linear_vel.y)
+
+	# Calculate safe maximum speeds
+	var max_horizontal_speed := movement.move_speed * velocity.speed_multiplier * 3.0
+	var max_vertical_speed := 50.0
+
+	# Clamp horizontal velocity (from collision responses in previous frame)
+	if horizontal_speed > max_horizontal_speed:
+		printerr("CLAMPING HORIZONTAL VELOCITY on entity: ", self.id)
+		printerr("  From: ", horizontal_vel, " (speed: ", horizontal_speed, ")")
+		printerr("  To max: ", max_horizontal_speed)
+		printerr("  Mass: ", rigid_3d.mass, ", Contacts: ", rigid_3d.get_contact_count())
+		var clamped_horizontal := horizontal_vel.normalized() * max_horizontal_speed
+		rigid_3d.linear_velocity = Vector3(clamped_horizontal.x, current_linear_vel.y, clamped_horizontal.z)
+
+	# Clamp vertical velocity
+	if vertical_speed > max_vertical_speed:
+		printerr("CLAMPING VERTICAL VELOCITY on entity: ", self.id)
+		printerr("  From: ", current_linear_vel.y, " to: ", signf(current_linear_vel.y) * max_vertical_speed)
+		rigid_3d.linear_velocity.y = signf(current_linear_vel.y) * max_vertical_speed
+
+	# Now apply movement forces with clamped velocities
+	if movement.has_move_target:
+		_apply_rigid_movement_force(movement, velocity)
+
+	if movement.has_look_target:
+		_apply_rigid_look_torque(movement, velocity)
+
+	# Debug: Log collision info
+	var collision_count := rigid_3d.get_contact_count()
+	if collision_count > 2:
+		printerr("Entity ", self.id, " has ", collision_count, " contacts (may be stuck)")
+		printerr("  Velocity after forces: ", rigid_3d.linear_velocity)
 
 
 func _apply_rigid_movement_force(movement: ZC_Movement, velocity: ZC_Velocity) -> void:
@@ -63,6 +98,14 @@ func _apply_rigid_movement_force(movement: ZC_Movement, velocity: ZC_Velocity) -
 
 	var velocity_diff := target_horizontal - current_horizontal
 	var force := velocity_diff * rigid_3d.mass * movement.move_acceleration
+
+	# Ensure force is horizontal only (no vertical component)
+	force.y = 0
+
+	# Clamp the force to prevent extreme accelerations
+	var max_force := rigid_3d.mass * movement.move_speed * movement.move_acceleration * 2.0
+	force = force.limit_length(max_force)
+
 	rigid_3d.apply_central_force(force)
 
 
