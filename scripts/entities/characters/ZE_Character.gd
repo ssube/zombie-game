@@ -90,17 +90,22 @@ func _apply_rigid_physics(_delta: float, movement: ZC_Movement, velocity: ZC_Vel
 
 func _apply_rigid_movement_force(movement: ZC_Movement, velocity: ZC_Velocity) -> void:
 	var current_vel := rigid_3d.linear_velocity
-	var current_horizontal := Vector3(current_vel.x, 0, current_vel.z)
 
 	# Read from velocity component, apply movement config
-	var target_horizontal := velocity.linear_velocity * movement.move_speed * velocity.speed_multiplier
-	target_horizontal.y = 0
+	var target_velocity := velocity.linear_velocity * movement.move_speed * velocity.speed_multiplier
 
-	var velocity_diff := target_horizontal - current_horizontal
+	# For ground-based entities, zero out vertical component
+	if not movement.allow_3d_movement:
+		target_velocity.y = 0
+		# Use only horizontal component of current velocity for 2D movement
+		current_vel.y = 0
+
+	var velocity_diff := target_velocity - current_vel
 	var force := velocity_diff * rigid_3d.mass * movement.move_acceleration
 
-	# Ensure force is horizontal only (no vertical component)
-	force.y = 0
+	# Ensure force is horizontal only for ground-based entities
+	if not movement.allow_3d_movement:
+		force.y = 0
 
 	# Clamp the force to prevent extreme accelerations
 	var max_force := rigid_3d.mass * movement.move_speed * movement.move_acceleration * 2.0

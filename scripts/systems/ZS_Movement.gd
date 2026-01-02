@@ -29,7 +29,9 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		var current_pos := entity3d.global_position
 		var target_pos := movement.target_move_position
 		var to_target := target_pos - current_pos
-		to_target.y = 0  # Horizontal movement only
+		# Zero out Y component for 2D movement (ground-based entities)
+		if not movement.allow_3d_movement:
+			to_target.y = 0
 
 		# Apply velocity from component to movement target
 		if to_target.length_squared() < movement.target_proximity:

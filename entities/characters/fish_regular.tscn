@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://bxxgl1bih2pk4"]
+[gd_scene load_steps=30 format=4 uid="uid://bxxgl1bih2pk4"]
 
 [ext_resource type="Texture2D" uid="uid://df0shx4oblcdj" path="res://assets/PSX Mega Pack II/Models/GLB/Props/fish_mx_1_fish_mx_1.png" id="1_iuufb"]
 [ext_resource type="Script" uid="uid://bcl4s07i5wm66" path="res://scripts/entities/characters/ZE_Character.gd" id="1_qdp1r"]
@@ -11,9 +11,10 @@
 [ext_resource type="Script" uid="uid://di74g8tmachs3" path="res://scripts/behavior/fsm/ZB_StateMachine.gd" id="7_wjynt"]
 [ext_resource type="Script" uid="uid://c6pla5ya01llv" path="res://scripts/behavior/fsm/ZB_Transition.gd" id="8_bbmdm"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="8_pvaww"]
-[ext_resource type="Script" uid="uid://spbk6hwrc5ow" path="res://scripts/behavior/states/ZB_Wander.gd" id="8_rp6xk"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="9_j5grx"]
 [ext_resource type="Script" uid="uid://d1xf73mn6pulk" path="res://scripts/nodes/actions/ZN_BehaviorStateAction.gd" id="10_m5dol"]
+[ext_resource type="Script" uid="uid://4eo2jh622p6y" path="res://scripts/behavior/states/ZB_Wander_Swim.gd" id="11_mwldp"]
+[ext_resource type="Script" uid="uid://bcxbkfwckp5jy" path="res://scripts/behavior/states/ZB_Flee.gd" id="12_pvaww"]
 [ext_resource type="Script" uid="uid://dejf0mustesyw" path="res://scripts/nodes/actions/ZN_BehaviorBlackboardAction.gd" id="13_3wjn7"]
 [ext_resource type="Script" uid="uid://bp8kk4kmch5fg" path="res://scripts/behavior/conditions/ZB_IsPlayerInArea.gd" id="14_mwldp"]
 [ext_resource type="Script" uid="uid://chp0wimffmeus" path="res://scripts/behavior/conditions/utils/ZB_Not.gd" id="15_pvaww"]
@@ -35,6 +36,7 @@ metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_3qwwp"]
 script = ExtResource("6_xd0h5")
+allow_3d_movement = true
 metadata/_custom_type_script = "uid://c7dv7vmk2ynqt"
 
 [sub_resource type="Resource" id="Resource_cemfp"]
@@ -95,7 +97,7 @@ size = Vector3(4.060425, 1, 7.090454)
 [node name="FishRegular" type="RigidBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-contact_monitor = true
+gravity_scale = 0.0
 max_contacts_reported = 8
 script = ExtResource("1_qdp1r")
 component_resources = Array[ExtResource("2_1yy17")]([SubResource("Resource_m5dol"), SubResource("Resource_rp6xk"), SubResource("Resource_lpkny"), SubResource("Resource_3qwwp"), SubResource("Resource_cemfp"), SubResource("Resource_el7xw")])
@@ -113,22 +115,28 @@ shape = SubResource("BoxShape3D_mwldp")
 
 [node name="FishBehavior" type="Node" parent="Behavior" node_paths=PackedStringArray("default_state", "entity")]
 script = ExtResource("7_wjynt")
-default_state = NodePath("States/ZB_State_Wander")
+default_state = NodePath("States/ZB_State_Wander_Swim")
 entity = NodePath("../..")
 metadata/_custom_type_script = "uid://di74g8tmachs3"
 
 [node name="States" type="Node" parent="Behavior/FishBehavior"]
 
-[node name="ZB_State_Wander" type="Node" parent="Behavior/FishBehavior/States"]
-script = ExtResource("8_rp6xk")
-metadata/_custom_type_script = "uid://spbk6hwrc5ow"
+[node name="ZB_State_Wander_Swim" type="Node" parent="Behavior/FishBehavior/States"]
+script = ExtResource("11_mwldp")
+swim_height_min = 0.0
+swim_height_max_absolute = -6.5
+metadata/_custom_type_script = "uid://4eo2jh622p6y"
+
+[node name="ZB_State_Flee" type="Node" parent="Behavior/FishBehavior/States"]
+script = ExtResource("12_pvaww")
+metadata/_custom_type_script = "uid://bcxbkfwckp5jy"
 
 [node name="Transitions" type="Node" parent="Behavior/FishBehavior"]
 
 [node name="AnyToWander" type="Node" parent="Behavior/FishBehavior/Transitions" node_paths=PackedStringArray("target_state")]
 script = ExtResource("8_bbmdm")
 any_source = true
-target_state = NodePath("../../States/ZB_State_Wander")
+target_state = NodePath("../../States/ZB_State_Wander_Swim")
 metadata/_custom_type_script = "uid://c6pla5ya01llv"
 
 [node name="ZB_Condition_Not" type="Node" parent="Behavior/FishBehavior/Transitions/AnyToWander"]
@@ -138,6 +146,17 @@ metadata/_custom_type_script = "uid://chp0wimffmeus"
 [node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/FishBehavior/Transitions/AnyToWander/ZB_Condition_Not" node_paths=PackedStringArray("detection_area")]
 script = ExtResource("14_mwldp")
 detection_area = NodePath("../../../../../DetectionArea")
+metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
+
+[node name="WanderToFlee" type="Node" parent="Behavior/FishBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]
+script = ExtResource("8_bbmdm")
+source_state = NodePath("../../States/ZB_State_Wander_Swim")
+target_state = NodePath("../../States/ZB_State_Flee")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/FishBehavior/Transitions/WanderToFlee" node_paths=PackedStringArray("detection_area")]
+script = ExtResource("14_mwldp")
+detection_area = NodePath("../../../../DetectionArea")
 metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
 
 [node name="DetectionArea" type="Area3D" parent="Behavior" node_paths=PackedStringArray("parent_entity")]
@@ -160,18 +179,9 @@ set_key = &"flee_position"
 save_entity_as = 1
 metadata/_custom_type_script = "uid://dejf0mustesyw"
 
-[node name="SetFleeState" type="Node" parent="Behavior/DetectionArea" node_paths=PackedStringArray("state_machine")]
+[node name="SetFleeState" type="Node" parent="Behavior/DetectionArea" node_paths=PackedStringArray("state_machine", "set_state")]
 script = ExtResource("10_m5dol")
 state_machine = NodePath("../../FishBehavior")
+set_state = NodePath("../../FishBehavior/States/ZB_State_Flee")
+try_transition = false
 metadata/_custom_type_script = "uid://d1xf73mn6pulk"
-
-[node name="WanderToFlee" type="Node" parent="." node_paths=PackedStringArray("source_state", "target_state")]
-script = ExtResource("8_bbmdm")
-source_state = NodePath("../Behavior/FishBehavior/States/ZB_State_Wander")
-target_state = NodePath("../Behavior/FishBehavior/States/ZB_State_Wander")
-metadata/_custom_type_script = "uid://c6pla5ya01llv"
-
-[node name="ZB_IsPlayerInArea" type="Node" parent="WanderToFlee" node_paths=PackedStringArray("detection_area")]
-script = ExtResource("14_mwldp")
-detection_area = NodePath("../../Behavior/DetectionArea")
-metadata/_custom_type_script = "uid://bp8kk4kmch5fg"

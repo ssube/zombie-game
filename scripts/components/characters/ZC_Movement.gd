@@ -4,6 +4,7 @@ class_name ZC_Movement
 @export_group("Movement")
 @export var move_speed: float = 5.0
 @export var move_acceleration: float = 2.0
+@export var allow_3d_movement: bool = false
 
 @export_group("Look")
 @export var look_speed: float = 5.0
