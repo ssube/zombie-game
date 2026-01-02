@@ -1,4 +1,5 @@
 extends ZM_BaseMenu
+class_name ZM_Menu
 
 @export var visible_menu: Menus = Menus.NONE
 var previous_menu: Menus = Menus.MAIN_MENU

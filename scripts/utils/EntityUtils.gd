@@ -380,3 +380,55 @@ static func get_ranged_component(weapon: ZE_Weapon) -> ZC_Weapon_Ranged:
 
 	var thrown := weapon.get_component(ZC_Weapon_Thrown) as ZC_Weapon_Thrown
 	return thrown
+
+
+static func switch_weapon(entity: ZE_Character, new_weapon: ZE_Weapon, menu: ZM_Menu) -> void:
+	var old_weapon = EntityUtils.equip_weapon(entity, new_weapon)
+
+	if new_weapon == null:
+		menu.clear_weapon_label()
+		menu.clear_ammo_label()
+
+		if old_weapon != null:
+			var old_interactive := old_weapon.get_component(ZC_Interactive) as ZC_Interactive
+			menu.push_action("Holstered weapon: %s" % old_interactive.name)
+
+		# set remote transform to a known state
+		entity.weapon_transform.active = false
+		entity.weapon_follower.progress_ratio = 0.0
+		return
+
+	if EntityUtils.is_melee_weapon(new_weapon):
+		entity.weapon_transform.active = true
+		entity.weapon_follower.progress_ratio = 0.0
+	else:
+		entity.weapon_transform.active = false
+
+	new_weapon.emit_action(Enums.ActionEvent.ENTITY_EQUIP, entity)
+
+	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
+	menu.set_weapon_label(c_interactive.name)
+	# TODO: _update_ammo_label(entity)
+	menu.push_action("Switched to weapon: %s" % c_interactive.name)
+
+	if c_interactive.use_sound:
+		var sound := c_interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
+		entity.add_child(sound)
+
+
+static func reload_weapon(player: ZE_Character) -> void:
+	var current_weapon := player.current_weapon as ZE_Weapon
+	var weapon_ammo := current_weapon.get_component(ZC_Ammo) as ZC_Ammo
+	if weapon_ammo == null:
+		return
+
+	var ranged_weapon := EntityUtils.get_ranged_component(current_weapon)
+	if ranged_weapon == null:
+		return
+
+	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
+	if player_ammo.get_ammo(ranged_weapon.ammo_type) == 0:
+		return
+
+	weapon_ammo.transfer(player_ammo)
+	current_weapon.apply_effects(ZR_Weapon_Effect.EffectType.RANGED_RELOAD)

@@ -121,7 +121,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		# Process any usage relationships
 		var used_items := entity.get_relationships(RelationshipUtils.any_used) as Array[Relationship]
 		for rel in used_items:
-			use_interactive(rel.target, entity, player, false)
+			InteractionUtils.interact(rel.target, entity, %Menu)
 		entity.remove_relationships(used_items)
 
 		# Pause menu
@@ -145,11 +145,12 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 		# Holster weapon
 		if input.use_holster:
-			switch_weapon(entity, null)
+			EntityUtils.switch_weapon(entity, null, %Menu)
 
 		# Reloading weapon
 		if input.use_reload:
-			reload_weapon(entity)
+			EntityUtils.reload_weapon(entity)
+			_update_ammo_label(entity)
 
 		# Toggle flashlight
 		if input.use_light:
@@ -163,7 +164,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		var equipped := entity.get_relationships(RelationshipUtils.any_equipped)
 		for rel in equipped:
 			var item = rel.target
-			if item is Node3D:
+			if is_instance_valid(item) and item is Node3D:
 				var parent := item.get_parent() as Node3D
 				item.global_transform = parent.global_transform
 
@@ -198,92 +199,15 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 								RenderingServer.global_shader_parameter_set("shimmer_time", shimmer_start)
 
 							if input.use_pickup:
-								pickup_item(collider_entity, entity)
+								InteractionUtils.pickup(entity, collider_entity, %Menu)
 
 							if input.use_interact:
-								use_interactive(collider_entity, entity, player)
+								InteractionUtils.interact(entity, collider_entity, %Menu)
 
 		if clear_collider:
 			%Menu.clear_target_label()
 			%Menu.reset_crosshair_color()
 			remove_shimmer_key(entity)
-
-
-func use_interactive(collider: Entity, entity: Entity, player: ZC_Player, set_crosshair: bool = true) -> void:
-	# TODO: queue entities for removal but don't fully remove them until after all of the components have been processed
-	if collider.has_component(ZC_Cooldown):
-		return
-
-	var interactive = collider.get_component(ZC_Interactive) as ZC_Interactive
-	if EntityUtils.is_locked(collider):
-		var locked := collider.get_component(ZC_Locked) as ZC_Locked
-		if player.has_key(locked.key_name):
-			locked.is_locked = false
-			%Menu.push_action("Used %s key to unlock %s" % [locked.key_name, interactive.name])
-		else:
-			%Menu.push_action("Need %s key to use %s" % [locked.key_name, interactive.name])
-			return
-
-	# add used-by relationship, replacing any existing ones
-	RelationshipUtils.add_unique_relationship(collider, Relationship.new(ZC_Used.new(), entity))
-
-	collider.emit_action(Enums.ActionEvent.ENTITY_USE, entity)
-
-	if collider.has_component(ZC_Dialogue):
-		if set_crosshair:
-			%Menu.set_crosshair_color(Color.DODGER_BLUE)
-
-		use_dialogue(collider, entity)
-
-	if collider.has_component(ZC_Objective):
-		if set_crosshair:
-			%Menu.set_crosshair_color(Color.GOLD)
-		use_objective(collider, player)
-
-	# Check for weapons to avoid unloading and removing weapons
-	if collider.has_component(ZC_Ammo) and not EntityUtils.is_weapon(collider):
-		if set_crosshair:
-			%Menu.set_crosshair_color(Color.GREEN)
-		use_ammo(collider, entity)
-
-	if collider.has_component(ZC_Effect_Armor):
-		if set_crosshair:
-			%Menu.set_crosshair_color(Color.GREEN)
-		use_armor(collider, entity)
-
-	if collider.has_component(ZC_Button):
-		if set_crosshair:
-			%Menu.set_crosshair_color(Color.GOLD)
-		use_button(collider, entity)
-
-	if collider.has_component(ZC_Food):
-		if set_crosshair:
-			%Menu.set_crosshair_color(Color.GREEN)
-		use_food(collider, entity)
-
-	if collider.has_component(ZC_Key):
-		if set_crosshair:
-			%Menu.set_crosshair_color(Color.YELLOW)
-		use_key(collider, entity, player)
-
-	if collider.has_component(ZC_Door):
-		if set_crosshair:
-			%Menu.set_crosshair_color(Color.DODGER_BLUE)
-		use_door(collider, entity)
-
-	if collider.has_component(ZC_Portal):
-		if set_crosshair:
-			%Menu.set_crosshair_color(Color.GOLD)
-		use_portal(collider, entity)
-
-	if EntityUtils.is_weapon(collider):
-		if set_crosshair:
-			%Menu.set_crosshair_color(Color.ORANGE)
-		use_weapon(collider, entity)
-
-	if collider.has_component(ZC_Equipment):
-		pickup_item(collider, entity)
-		EntityUtils.equip_item(entity, collider)
 
 
 func _update_ammo_label(player: Entity) -> void:
@@ -416,7 +340,7 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	# unequip thrown weapons when they are out of ammo
 	# TODO: add an option to disable this in the menu
 	if ranged_weapon is ZC_Weapon_Thrown and weapon_ammo.is_all_empty():
-		switch_weapon(entity, null)
+		EntityUtils.switch_weapon(entity, null, %Menu)
 
 
 func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
@@ -424,238 +348,6 @@ func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
 	var light = body.get_node("./Head/Hands/Flashlight")
 	if light != null:
 		light.enabled = not light.enabled
-
-
-func _get_level_markers(root: Node = null) -> Dictionary[String, Marker3D]:
-	var markers: Dictionary[String, Marker3D] = {}
-
-	if root == null:
-		root = %Level
-
-	for child in root.get_children():
-		if child is Marker3D:
-			markers[child.name] = child
-		elif child is Entity:
-			continue # skip markers within entities
-		else:
-			# recurse into the world to find markers
-			markers.merge(_get_level_markers(child))
-
-	return markers
-
-
-func _add_sound(sound: ZN_AudioSubtitle3D, player_entity: Entity) -> void:
-	player_entity.add_child(sound)
-	# sound.play_subtitle()
-
-
-func pickup_item(entity: Entity, player_entity: Entity) -> void:
-	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
-	remove_shimmer_target(entity)
-
-	entity.get_parent().remove_child(entity)
-	entity.visible = false
-
-	var player := player_entity as ZE_Player
-	player.inventory_node.add_child(entity)
-
-	player_entity.add_relationship(RelationshipUtils.make_holding(entity))
-
-	%Menu.push_action("Picked up item: %s" % interactive.name)
-
-	if interactive.pickup_sound:
-		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
-		_add_sound(sound, player_entity)
-
-
-func use_ammo(entity: Entity, player_entity: Entity) -> void:
-	var entity_ammo := entity.get_component(ZC_Ammo) as ZC_Ammo
-	var player_ammo := player_entity.get_component(ZC_Ammo) as ZC_Ammo
-	player_ammo.transfer(entity_ammo)
-	_update_ammo_label(player_entity)
-
-	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
-	%Menu.push_action("Picked up ammo: %s" % interactive.name)
-
-	if interactive.pickup_sound:
-		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
-		_add_sound(sound, player_entity)
-
-	if EntityUtils.is_ammo_empty(entity_ammo):
-		remove_entity(entity)
-
-
-func use_armor(entity: Entity, player_entity: Entity) -> void:
-	var armor = entity as ZE_Armor
-	if armor == null:
-		return
-
-	remove_shimmer_target(armor)
-
-	var modifier := armor.get_component(ZC_Effect_Armor) as ZC_Effect_Armor
-	var player = player_entity as ZE_Player
-	player.add_relationship(RelationshipUtils.make_modifier_damage(modifier.multiplier))
-
-	EntityUtils.equip_item(player, entity)
-
-	var interactive = armor.get_component(ZC_Interactive) as ZC_Interactive
-	%Menu.push_action("Picked up armor: %s" % interactive.name)
-
-	if interactive.use_sound:
-		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-		_add_sound(sound, player_entity)
-
-	# TODO: this should already be handled in the equip item helper
-	var entity3d := entity.get_node(".") as RigidBody3D
-	entity3d.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
-	entity3d.freeze = true
-	entity3d.visible = false
-
-	for child in entity3d.get_children():
-		if child is CollisionShape3D:
-			child.disabled = true
-
-
-func _format_button_pressed(pressed: bool) -> String:
-	if pressed:
-		return "on"
-	else:
-		return "off"
-
-
-func use_button(entity: Entity, _player_entity: Entity) -> void:
-	var button := entity.get_component(ZC_Button) as ZC_Button
-	if not button.is_active:
-		return
-
-	# TODO: should add a pressed-by relationship that is used by the button observer
-	if button.is_toggle:
-		button.is_pressed = not button.is_pressed
-		var pressed_message := _format_button_pressed(button.is_pressed)
-		%Menu.push_action("Toggled button %s" % pressed_message)
-	else:
-		button.is_pressed = true
-		%Menu.push_action("Pressed button")
-
-
-func use_dialogue(entity: Entity, player_entity: Entity) -> void:
-	# get level markers
-	var markers := _get_level_markers()
-
-	# start dialogue
-	var helpers := DialogueUtils.DialogueHelper.new(entity, markers)
-	var dialogue = entity.get_component(ZC_Dialogue)
-	%Menu.start_dialogue(dialogue.dialogue_tree, dialogue.start_title, [
-		{
-			"dialogue" = dialogue,
-			"helpers" = helpers,
-			"markers" = markers,
-			"player" = player_entity,
-			"speaker" = entity,
-		}
-	])
-
-
-func use_door(entity: Entity, _player_entity: Entity) -> void:
-	var door := entity.get_component(ZC_Door) as ZC_Door
-
-	if door.open_on_use and not EntityUtils.is_locked(entity):
-		door.is_open = !door.is_open
-		print("Door is open: ", door)
-
-		var interactive := entity.get_component(ZC_Interactive) as ZC_Interactive
-		if interactive.use_sound:
-			var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-			_add_sound(sound, entity)
-
-
-func use_food(entity: Entity, player_entity: Entity) -> void:
-	var health = player_entity.get_component(ZC_Health) as ZC_Health
-	if health.current_health >= health.max_health:
-		pickup_item(entity, player_entity)
-		return
-
-	var food = entity.get_component(ZC_Food) as ZC_Food
-	health.current_health += food.health
-
-	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
-	%Menu.push_action("Used food: %s" % interactive.name)
-
-	if interactive.use_sound:
-		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-		_add_sound(sound, player_entity)
-
-	remove_entity(entity)
-
-
-func use_key(entity: Entity, player_entity: Entity, player: ZC_Player) -> void:
-	var key = entity.get_component(ZC_Key)
-	player.add_key(key.name)
-	%Menu.push_action("Found key: %s" % key.name)
-
-	var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
-	if interactive.pickup_sound:
-		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
-		_add_sound(sound, player_entity)
-
-	remove_entity(entity)
-
-
-func use_objective(entity: Entity, _player: ZC_Player) -> void:
-	var objective = entity.get_component(ZC_Objective) as ZC_Objective
-	if objective.is_active and objective.complete_on_interaction:
-		objective.is_complete = true
-		print("Completed objective: ", objective.key)
-
-		var interactive := entity.get_component(ZC_Interactive) as ZC_Interactive
-		if interactive.use_sound:
-			var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-			_add_sound(sound, entity)
-
-
-func use_portal(entity: Entity, _player_entity: Entity) -> void:
-	var portal = entity.get_component(ZC_Portal) as ZC_Portal
-	if portal.is_open:
-		portal.is_active = true
-		print("Activated portal: ", portal)
-
-		var interactive := entity.get_component(ZC_Interactive) as ZC_Interactive
-		if interactive.use_sound:
-			var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-			_add_sound(sound, entity)
-
-
-func use_weapon(entity: Entity, player_entity: Entity) -> void:
-	var weapon = entity as ZE_Weapon
-	if weapon == null:
-		return
-
-	remove_shimmer_target(weapon)
-
-	# reparent weapon to player
-	var weapon_body = weapon.get_node(".") as RigidBody3D
-	weapon_body.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
-	weapon_body.freeze = true
-	weapon_body.linear_velocity = Vector3.ZERO
-	weapon_body.angular_velocity = Vector3.ZERO
-	weapon_body.transform = Transform3D.IDENTITY
-
-	var player = player_entity as ZE_Player
-	player.add_relationship(RelationshipUtils.make_holding(weapon))
-	switch_weapon(player, weapon)
-
-	var interactive = weapon.get_component(ZC_Interactive) as ZC_Interactive
-	%Menu.push_action("Found new weapon: %s" % interactive.name)
-
-	#if interactive.use_sound:
-	#	var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-	#	_add_sound(sound, entity)
-
-
-func remove_entity(entity: Entity) -> void:
-	remove_shimmer_target(entity)
-	EntityUtils.keep_sounds(entity)
-	EntityUtils.remove(entity)
 
 
 func remove_shimmer_key(entity: Entity) -> void:
@@ -679,6 +371,7 @@ func remove_shimmer_target(entity: Entity) -> void:
 				entity.remove_component(ZC_Shimmer)
 
 
+# TODO: move to EntityUtils
 func _list_player_weapons(entity: ZE_Player) -> Array[ZE_Weapon]:
 	var inventory = entity.get_inventory()
 	var weapons: Array[ZE_Weapon] = []
@@ -696,7 +389,7 @@ func equip_next_weapon(entity: ZE_Player) -> void:
 		return
 
 	var next_weapon = weapons[0]
-	switch_weapon(entity, next_weapon)
+	EntityUtils.switch_weapon(entity, next_weapon, %Menu)
 
 
 func equip_previous_weapon(entity: ZE_Player) -> void:
@@ -706,60 +399,4 @@ func equip_previous_weapon(entity: ZE_Player) -> void:
 
 	var previous_index = weapons.size() - 1
 	var previous_weapon = weapons[previous_index] as ZE_Weapon
-	switch_weapon(entity, previous_weapon)
-
-
-func switch_weapon(entity: ZE_Player, new_weapon: ZE_Weapon) -> void:
-	var old_weapon = EntityUtils.equip_weapon(entity, new_weapon)
-
-	if new_weapon == null:
-		%Menu.clear_weapon_label()
-		%Menu.clear_ammo_label()
-
-		if old_weapon != null:
-			var old_interactive := old_weapon.get_component(ZC_Interactive) as ZC_Interactive
-			%Menu.push_action("Holstered weapon: %s" % old_interactive.name)
-
-		# set remote transform to a known state
-		entity.weapon_transform.active = false
-		entity.weapon_follower.progress_ratio = 0.0
-		return
-
-	if EntityUtils.is_melee_weapon(new_weapon):
-		entity.weapon_transform.active = true
-		entity.weapon_follower.progress_ratio = 0.0
-	else:
-		entity.weapon_transform.active = false
-
-	new_weapon.emit_action(Enums.ActionEvent.ENTITY_EQUIP, entity)
-
-	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
-	%Menu.set_weapon_label(c_interactive.name)
-	_update_ammo_label(entity)
-	%Menu.push_action("Switched to weapon: %s" % c_interactive.name)
-
-	if c_interactive.use_sound:
-		var sound := c_interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-		_add_sound(sound, entity)
-
-
-func reload_weapon(player: Entity) -> void:
-	if player is not ZE_Character:
-		return
-
-	var current_weapon := player.current_weapon as ZE_Weapon
-	var weapon_ammo := current_weapon.get_component(ZC_Ammo) as ZC_Ammo
-	if weapon_ammo == null:
-		return
-
-	var ranged_weapon := EntityUtils.get_ranged_component(current_weapon)
-	if ranged_weapon == null:
-		return
-
-	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
-	if player_ammo.get_ammo(ranged_weapon.ammo_type) == 0:
-		return
-
-	weapon_ammo.transfer(player_ammo)
-	current_weapon.apply_effects(ZR_Weapon_Effect.EffectType.RANGED_RELOAD)
-	_update_ammo_label(player)
+	EntityUtils.switch_weapon(entity, previous_weapon, %Menu)
