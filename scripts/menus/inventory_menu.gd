@@ -35,9 +35,8 @@ func on_update() -> void:
 			for ammo_type in player_ammo.ammo_count.keys():
 				ammo[ammo_type] = player_ammo.get_ammo(ammo_type) + ammo.get(ammo_type, 0)
 
-		var inventory_relationships := player.get_relationships(RelationshipUtils.any_holding)
-		for rel in inventory_relationships:
-			var item = rel.target as Entity
+		var player_inventory := RelationshipUtils.get_inventory(player)
+		for item in player_inventory:
 			if item != null:
 				inventory.append(item)
 				_item_players[item] = player
