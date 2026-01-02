@@ -1,3 +1,3 @@
 @tool
 extends ZE_Base
-class_name ZE_Static
+class_name ZE_Item

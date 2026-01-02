@@ -1,3 +1,3 @@
 @tool
 extends ZE_Equipment
-class_name ZE_Armor
+class_name ZE_Clothing

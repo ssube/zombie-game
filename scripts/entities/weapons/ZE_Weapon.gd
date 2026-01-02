@@ -1,5 +1,5 @@
 @tool
-extends ZE_Base
+extends ZE_Equipment
 class_name ZE_Weapon
 
 
