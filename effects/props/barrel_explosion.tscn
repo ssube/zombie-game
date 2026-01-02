@@ -37,7 +37,6 @@ script = ExtResource("1_ma1qw")
 collision_layer = 2
 collision_mask = 30
 script = ExtResource("4_uou4s")
-trigger_on_timer = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_ma1qw")
@@ -79,4 +78,3 @@ metadata/_custom_type_script = "uid://b3w64ibj5uxv4"
 script = ExtResource("11_nhl2p")
 node = NodePath("../..")
 remove = true
-entity_only = false
