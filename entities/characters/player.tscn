@@ -28,10 +28,10 @@ metadata/_custom_type_script = "uid://ueea117e6ncx"
 [sub_resource type="Resource" id="Resource_gmhi3"]
 script = ExtResource("14_jq748")
 ammo_count = Dictionary[String, int]({
-"12gauge": 2
+"12 Gauge": 2
 })
 max_ammo_count = Dictionary[String, int]({
-"12gauge": 30
+"12 Gauge": 30
 })
 metadata/_custom_type_script = "uid://bsnlq5t650od"
 
