@@ -220,9 +220,11 @@ func _handle_interactive(entity: Entity, input: ZC_Input, body: CharacterBody3D,
 
 						if input.use_pickup:
 							InteractionUtils.pickup(entity, collider_entity, %Menu)
+							_update_ammo_label(entity)
 
 						if input.use_interact:
 							InteractionUtils.interact(entity, collider_entity, %Menu)
+							_update_ammo_label(entity)
 
 	if clear_collider:
 		%Menu.clear_target_label()

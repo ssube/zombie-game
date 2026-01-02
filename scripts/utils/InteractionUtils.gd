@@ -11,10 +11,6 @@ enum HandlerStatus {
 static func remove_shimmer_target(target: Entity) -> void:
 	pass # assert(false, "TODO")
 
-# TODO: figure out where this one should live
-static func _update_ammo_label(actor: Entity) -> void:
-	pass # assert(false, "TODO")
-
 
 static func _add_sound(sound: ZN_AudioSubtitle3D, parent: Node) -> void:
 	parent.add_child(sound)
@@ -43,16 +39,13 @@ static var interactions: Dictionary[String, Array] = {
 	"use_weapon": [EntityUtils.is_weapon, use_weapon],
 	"use_ammo": [has_ammo, use_ammo],
 	"pickup_equipment": [has_equipment, pickup_equipment],
-	"pickup_other": [has_interactive, pickup],
+	"pickup_item": [has_interactive, pickup_item],
 	# using portal should be last, since it will change the level
 	"use_portal": [has_portal, use_portal],
 }
 
 
-static func has_interactive(entity: Entity) -> bool:
-	return entity.has_component(ZC_Interactive)
-
-
+#region Public Methods
 static func interact(actor: Entity, target: Entity, menu) -> bool:
 	if target.has_component(ZC_Cooldown):
 		return false
@@ -90,25 +83,10 @@ static func interact(actor: Entity, target: Entity, menu) -> bool:
 	return handled
 
 
-static func pickup(actor: Entity, target: Entity, menu) -> HandlerStatus:
-	var interactive = target.get_component(ZC_Interactive) as ZC_Interactive
-	remove_shimmer_target(target)
-
-	target.get_parent().remove_child(target)
-	# target.visible = false
-
-	var player := actor as ZE_Player
-	player.inventory_node.add_child(target)
-
-	actor.add_relationship(RelationshipUtils.make_holding(target))
-
-	menu.push_action("Picked up item: %s" % interactive.name)
-
-	if interactive.pickup_sound:
-		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
-		_add_sound(sound, actor)
-
-	return HandlerStatus.CONTINUE
+static func pickup(actor: Entity, target: Entity, menu) -> bool:
+	var status := pickup_item(actor, target, menu)
+	return status == HandlerStatus.CONTINUE
+#endregion
 
 
 #region Handlers
@@ -120,7 +98,6 @@ static func use_ammo(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	var actor_ammo := actor.get_component(ZC_Ammo) as ZC_Ammo
 	var target_ammo := target.get_component(ZC_Ammo) as ZC_Ammo
 	actor_ammo.transfer(target_ammo)
-	_update_ammo_label(actor)
 
 	var interactive = target.get_component(ZC_Interactive) as ZC_Interactive
 	menu.push_action("Picked up ammo: %s" % interactive.name)
@@ -246,7 +223,7 @@ static func has_food(entity: Entity) -> bool:
 static func use_food(actor: Entity, target: Entity, menu: ZM_Menu) -> HandlerStatus:
 	var health = actor.get_component(ZC_Health) as ZC_Health
 	if health.current_health >= health.max_health:
-		return pickup(actor, target, menu)
+		return pickup_item(actor, target, menu)
 
 	var food = target.get_component(ZC_Food) as ZC_Food
 	health.current_health += food.health
@@ -340,7 +317,6 @@ static func use_weapon(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	var player = actor as ZE_Player
 	player.add_relationship(RelationshipUtils.make_holding(weapon))
 	EntityUtils.switch_weapon(player, weapon, menu)
-	_update_ammo_label(player)
 
 	var interactive = weapon.get_component(ZC_Interactive) as ZC_Interactive
 	menu.push_action("Found new weapon: %s" % interactive.name)
@@ -348,12 +324,37 @@ static func use_weapon(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	return HandlerStatus.STOP
 
 
+static func has_interactive(entity: Entity) -> bool:
+	return entity.has_component(ZC_Interactive)
+
+
+static func pickup_item(actor: Entity, target: Entity, menu) -> HandlerStatus:
+	var interactive = target.get_component(ZC_Interactive) as ZC_Interactive
+	remove_shimmer_target(target)
+
+	target.get_parent().remove_child(target)
+	# target.visible = false
+
+	var player := actor as ZE_Player
+	player.inventory_node.add_child(target)
+
+	actor.add_relationship(RelationshipUtils.make_holding(target))
+
+	menu.push_action("Picked up item: %s" % interactive.name)
+
+	if interactive.pickup_sound:
+		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
+		_add_sound(sound, actor)
+
+	return HandlerStatus.CONTINUE
+
+
 static func has_equipment(entity: Entity) -> bool:
 	return entity.has_component(ZC_Equipment)
 
 
 static func pickup_equipment(actor: Entity, target: Entity, menu) -> HandlerStatus:
-	var status := pickup(actor, target, menu)
+	var status := pickup_item(actor, target, menu)
 	assert(actor is ZE_Character, "Actor must be a character to equip equipment!")
 	EntityUtils.equip_item(actor as ZE_Character, target)
 	if status == HandlerStatus.CONTINUE:
