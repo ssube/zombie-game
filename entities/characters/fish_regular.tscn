@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://bxxgl1bih2pk4"]
+[gd_scene load_steps=32 format=4 uid="uid://bxxgl1bih2pk4"]
 
 [ext_resource type="Texture2D" uid="uid://df0shx4oblcdj" path="res://assets/PSX Mega Pack II/Models/GLB/Props/fish_mx_1_fish_mx_1.png" id="1_iuufb"]
 [ext_resource type="Script" uid="uid://bcl4s07i5wm66" path="res://scripts/entities/characters/ZE_Character.gd" id="1_qdp1r"]
@@ -16,8 +16,10 @@
 [ext_resource type="Script" uid="uid://4eo2jh622p6y" path="res://scripts/behavior/states/ZB_Wander_Swim.gd" id="11_mwldp"]
 [ext_resource type="Script" uid="uid://bcxbkfwckp5jy" path="res://scripts/behavior/states/ZB_Flee.gd" id="12_pvaww"]
 [ext_resource type="Script" uid="uid://dejf0mustesyw" path="res://scripts/nodes/actions/ZN_BehaviorBlackboardAction.gd" id="13_3wjn7"]
+[ext_resource type="Script" uid="uid://bj8ujc6bfya2g" path="res://scripts/behavior/states/ZB_Swim_Idle.gd" id="13_cemfp"]
 [ext_resource type="Script" uid="uid://bp8kk4kmch5fg" path="res://scripts/behavior/conditions/ZB_IsPlayerInArea.gd" id="14_mwldp"]
 [ext_resource type="Script" uid="uid://chp0wimffmeus" path="res://scripts/behavior/conditions/utils/ZB_Not.gd" id="15_pvaww"]
+[ext_resource type="Script" uid="uid://ccjqwf2jo717o" path="res://scripts/behavior/conditions/utils/ZB_Random.gd" id="17_el7xw"]
 
 [sub_resource type="Resource" id="Resource_m5dol"]
 script = ExtResource("3_wjynt")
@@ -131,22 +133,21 @@ metadata/_custom_type_script = "uid://4eo2jh622p6y"
 script = ExtResource("12_pvaww")
 metadata/_custom_type_script = "uid://bcxbkfwckp5jy"
 
+[node name="ZB_State_Swim_Idle" type="Node" parent="Behavior/FishBehavior/States"]
+script = ExtResource("13_cemfp")
+bob_amplitude = 1.0
+
 [node name="Transitions" type="Node" parent="Behavior/FishBehavior"]
 
-[node name="AnyToWander" type="Node" parent="Behavior/FishBehavior/Transitions" node_paths=PackedStringArray("target_state")]
+[node name="WanderToIdle" type="Node" parent="Behavior/FishBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]
 script = ExtResource("8_bbmdm")
-any_source = true
-target_state = NodePath("../../States/ZB_State_Wander_Swim")
+source_state = NodePath("../../States/ZB_State_Wander_Swim")
+target_state = NodePath("../../States/ZB_State_Swim_Idle")
 metadata/_custom_type_script = "uid://c6pla5ya01llv"
 
-[node name="ZB_Condition_Not" type="Node" parent="Behavior/FishBehavior/Transitions/AnyToWander"]
-script = ExtResource("15_pvaww")
-metadata/_custom_type_script = "uid://chp0wimffmeus"
-
-[node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/FishBehavior/Transitions/AnyToWander/ZB_Condition_Not" node_paths=PackedStringArray("detection_area")]
-script = ExtResource("14_mwldp")
-detection_area = NodePath("../../../../../DetectionArea")
-metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
+[node name="ZB_Condition_Random" type="Node" parent="Behavior/FishBehavior/Transitions/WanderToIdle"]
+script = ExtResource("17_el7xw")
+metadata/_custom_type_script = "uid://ccjqwf2jo717o"
 
 [node name="WanderToFlee" type="Node" parent="Behavior/FishBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]
 script = ExtResource("8_bbmdm")
@@ -157,6 +158,32 @@ metadata/_custom_type_script = "uid://c6pla5ya01llv"
 [node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/FishBehavior/Transitions/WanderToFlee" node_paths=PackedStringArray("detection_area")]
 script = ExtResource("14_mwldp")
 detection_area = NodePath("../../../../DetectionArea")
+metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
+
+[node name="IdleToFlee" type="Node" parent="Behavior/FishBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]
+script = ExtResource("8_bbmdm")
+source_state = NodePath("../../States/ZB_State_Swim_Idle")
+target_state = NodePath("../../States/ZB_State_Flee")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/FishBehavior/Transitions/IdleToFlee" node_paths=PackedStringArray("detection_area")]
+script = ExtResource("14_mwldp")
+detection_area = NodePath("../../../../DetectionArea")
+metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
+
+[node name="FleeToWander" type="Node" parent="Behavior/FishBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]
+script = ExtResource("8_bbmdm")
+source_state = NodePath("../../States/ZB_State_Flee")
+target_state = NodePath("../../States/ZB_State_Wander_Swim")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="ZB_Condition_Not" type="Node" parent="Behavior/FishBehavior/Transitions/FleeToWander"]
+script = ExtResource("15_pvaww")
+metadata/_custom_type_script = "uid://chp0wimffmeus"
+
+[node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/FishBehavior/Transitions/FleeToWander/ZB_Condition_Not" node_paths=PackedStringArray("detection_area")]
+script = ExtResource("14_mwldp")
+detection_area = NodePath("../../../../../DetectionArea")
 metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
 
 [node name="DetectionArea" type="Area3D" parent="Behavior" node_paths=PackedStringArray("parent_entity")]
