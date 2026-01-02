@@ -177,6 +177,18 @@ metadata/_custom_type_script = "uid://c6pla5ya01llv"
 
 [node name="ZB_Condition_Random" type="Node" parent="Behavior/FishBehavior/Transitions/WanderToIdle"]
 script = ExtResource("17_el7xw")
+probability = 0.33
+metadata/_custom_type_script = "uid://ccjqwf2jo717o"
+
+[node name="IdleToWander" type="Node" parent="Behavior/FishBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]
+script = ExtResource("8_bbmdm")
+source_state = NodePath("../../States/ZB_State_Idle_Swim")
+target_state = NodePath("../../States/ZB_State_Wander_Swim")
+metadata/_custom_type_script = "uid://c6pla5ya01llv"
+
+[node name="ZB_Condition_Random" type="Node" parent="Behavior/FishBehavior/Transitions/IdleToWander"]
+script = ExtResource("17_el7xw")
+probability = 0.33
 metadata/_custom_type_script = "uid://ccjqwf2jo717o"
 
 [node name="WanderToFlee" type="Node" parent="Behavior/FishBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]

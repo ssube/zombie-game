@@ -5,18 +5,22 @@ class_name ZB_State_Idle_Swim
 @export var bob_amplitude: float = 0.5
 
 ## How fast to bob (cycles per second)
-@export var bob_frequency: float = 0.3
+@export var bob_frequency: float = 0.5
 
 ## Horizontal drift radius (0 = no drift)
 @export var drift_radius: float = 0.5
 
 ## How often to pick a new drift target (seconds)
-@export var drift_interval: float = 5.0
+@export var drift_interval: float = 3.0
+
+## How often to check for state transitions (seconds)
+@export var check_interval: float = 5.0
 
 var center_position: Vector3 = Vector3.ZERO
 var bob_time: float = 0.0
 var drift_timer: float = 0.0
 var drift_offset: Vector3 = Vector3.ZERO
+var check_timer: float = 0.0
 
 
 func enter(entity: Entity) -> void:
@@ -25,11 +29,13 @@ func enter(entity: Entity) -> void:
 	bob_time = 0.0
 	drift_timer = 0.0
 	drift_offset = Vector3.ZERO
+	check_timer = check_interval
 
 
 func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 	bob_time += delta
 	drift_timer -= delta
+	check_timer -= delta
 
 	var node_3d := entity.root_3d as Node3D
 
@@ -64,5 +70,10 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		movement.set_move_target(target_position)
 		# Clear look target to prevent rotation during idle
 		movement.clear_look_target()
+
+	# Check for transitions periodically
+	if check_timer <= 0.0:
+		check_timer = check_interval
+		return TickResult.CHECK
 
 	return TickResult.CONTINUE
