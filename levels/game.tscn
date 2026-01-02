@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c32dl721ugeb0"]
+[gd_scene load_steps=32 format=3 uid="uid://c32dl721ugeb0"]
 
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/nodes/ZN_World.gd" id="1_7ti0h"]
 [ext_resource type="Resource" uid="uid://co3r3cmvc6wyg" path="res://campaigns/demo.tres" id="2_raxgq"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://cmt101c6etawn" path="res://scripts/observers/ZO_Weather.gd" id="13_kck2e"]
 [ext_resource type="Script" uid="uid://bxs4yliwwtxr" path="res://scripts/systems/ZS_Effect.gd" id="13_pb6kn"]
 [ext_resource type="Script" uid="uid://dyutgptbapg76" path="res://scripts/observers/ZO_Button.gd" id="13_si8kf"]
+[ext_resource type="Script" uid="uid://dblajj681gvxm" path="res://scripts/observers/ZO_Light.gd" id="14_a17x3"]
 [ext_resource type="Script" uid="uid://rlyjuahjpvyv" path="res://scripts/systems/ZS_Stamina.gd" id="17_kw56w"]
 [ext_resource type="Script" uid="uid://c5v1jn1s0niq2" path="res://scripts/systems/ZS_Footstep.gd" id="19_tkgql"]
 [ext_resource type="Script" uid="uid://dxu3llv6t4pyu" path="res://scripts/systems/ZS_Cooldown.gd" id="21_mgpep"]
@@ -80,6 +81,10 @@ script = ExtResource("12_xr5dp")
 [node name="ZO_WeatherObserver" type="Node" parent="World/Observers" node_paths=PackedStringArray("thunder_system")]
 script = ExtResource("13_kck2e")
 thunder_system = NodePath("../../Systems/ZS_ThunderSystem")
+
+[node name="ZO_LightObserver" type="Node" parent="World/Observers"]
+script = ExtResource("14_a17x3")
+metadata/_custom_type_script = "uid://dblajj681gvxm"
 
 [node name="Systems" type="Node" parent="World"]
 unique_name_in_owner = true
@@ -141,8 +146,14 @@ script = ExtResource("27_raxgq")
 [node name="Entities" type="Node" parent="World"]
 unique_name_in_owner = true
 
-[node name="Player" parent="World/Entities" instance=ExtResource("5_b84gv")]
+[node name="Player" parent="World/Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("5_b84gv")]
 transform = Transform3D(0.7582368, 0, -0.6519793, 0, 1, 0, 0.6519793, 0, 0.7582368, 0, 1.3329782, 0)
+equipment_slots = {
+"flashlight": NodePath("Head/Hands/FlashlightEquipMarker"),
+"head": NodePath("CSGCylinder3D/HeadEquipMarker"),
+"weapon_melee": NodePath("Head/Hands/WeaponMarker/MeleeEquipMarker"),
+"weapon_ranged": NodePath("Head/Hands/WeaponResetMarker")
+}
 id = "Player_0"
 
 [node name="Menu" parent="." instance=ExtResource("26_ohs1m")]

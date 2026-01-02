@@ -373,11 +373,15 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 		EntityUtils.switch_weapon(entity, null, %Menu)
 
 # todo: toggle a light component on all equipped flashlights
-func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
+func toggle_flashlight(entity: Entity, _body: CharacterBody3D) -> void:
 	# TODO: type this node or use a component
-	var light = body.get_node("./Head/Hands/Flashlight")
-	if light != null:
-		light.enabled = not light.enabled
+	var equipped := entity.get_relationships(RelationshipUtils.any_equipped)
+	for rel in equipped:
+		var item = rel.target
+		if item is Entity:
+			var light := item.get_component(ZC_Light) as ZC_Light
+			if light != null:
+				light.enabled = not light.enabled
 
 
 func _clear_player_shimmer(player: ZE_Player) -> void:
