@@ -900,6 +900,8 @@ metadata/_custom_type_script = "uid://hu6tpnmjxa07"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.108992, -5.273324, 0)
 collision_mask = 30
 gravity_space_override = 3
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
 gravity = 0.0
 linear_damp_space_override = 1
 linear_damp = 0.25
@@ -1004,15 +1006,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 curve = SubResource("Curve3D_cwllu")
 
 [node name="Seagull" parent="Entities/Path3D2" instance=ExtResource("18_cwllu")]
-transform = Transform3D(-0.034164414, 0, -0.99938923, 0, 1, 0, 0.99938923, 0, -0.034164414, -56.470444, 0, 81.14787)
+transform = Transform3D(-0.03416441, 0, -0.9993891, 0, 1, 0, 0.9993891, 0, -0.03416441, -56.470444, 0, 81.14787)
 duration = 32.0
 
 [node name="Seagull2" parent="Entities/Path3D2" instance=ExtResource("18_cwllu")]
-transform = Transform3D(-0.034164414, 0, -0.99938923, 0, 1, 0, 0.99938923, 0, -0.034164414, -56.470444, 0, 81.14787)
+transform = Transform3D(-0.03416441, 0, -0.9993891, 0, 1, 0, 0.9993891, 0, -0.03416441, -56.470444, 0, 81.14787)
 path_offset = 0.33
 
 [node name="Seagull3" parent="Entities/Path3D2" instance=ExtResource("18_cwllu")]
-transform = Transform3D(-0.034164414, 0, -0.99938923, 0, 1, 0, 0.99938923, 0, -0.034164414, -56.470444, 0, 81.14787)
+transform = Transform3D(-0.03416441, 0, -0.9993891, 0, 1, 0, 0.9993891, 0, -0.03416441, -56.470444, 0, 81.14787)
 duration = 29.0
 path_offset = 0.6
 
