@@ -1,4 +1,4 @@
-# Zombie Game
+# Zombie Game 🧟
 
 A Quake 3 style zombie shooter set in a small town, built with Godot and an Entity Component System architecture. Open source code with paid assets.
 
@@ -8,13 +8,14 @@ For a complete list of features, see [docs/features.md](docs/features.md).
 
 ### Highlights
 
-- **Dynamic Health and Stamina Systems** - Manage your resources carefully as you sprint, fight, and survive. Health regenerates slowly while stamina drains with every action, creating tactical choices in combat.
+- **Dynamic Health and Stamina Systems** - Manage your resources carefully as you sprint, fight, and survive. Health be restored with food while stamina drains with every action and regenerates over time, creating tactical choices in combat.
+- **Critical Hits and Headshots** 💀 - Aim for the head to deal devastating damage! Body region targeting with configurable damage multipliers rewards precision and skill.
 - **Full Persistence with ECS** - Built on GECS with complete save/load support including entity relationships and deletion tracking. Your progress persists exactly as you left it, down to which zombies you've eliminated.
-- **Mod-Friendly Custom Levels** - Create your own campaigns using Trenchbroom's Quake-style brush mapping through FuncGodot integration. Build entire towns with minimal setup and automatic surface type detection.
+- **Mod-Friendly Custom Levels** 🗺️ - Create your own campaigns using Trenchbroom's Quake-style brush mapping through FuncGodot integration. Build entire towns with minimal setup and automatic surface type detection.
 - **Physics-Based Combat** - Every weapon uses precise physics with accurate hitboxes. Bullets trace realistic paths, melee weapons only damage during swing animations, and explosions check line-of-sight.
 - **Visible Equipment System** - Equip weapons, flashlights, and cosmetic items that attach to 3D markers on your character. See your gear in real-time as you switch between tools and weapons.
 - **Node-Based Interaction System** - Build complex triggers and actions with visual node trees. Add interactive doors, pressure plates, timed events, and custom behaviors without writing code.
-- **Intelligent Zombie AI** - Zombies use finite state machines integrated with the ECS architecture, complete with persistent blackboards for memory. They hunt, wander, and swarm based on what they see and hear.
+- **Intelligent Zombie AI** 🧠 - Zombies use finite state machines integrated with the ECS architecture, complete with persistent blackboards for memory. They hunt, wander, and swarm based on what they see and hear.
 - **Branching Survivor Dialogue** - Encounter friendly survivors with full dialogue trees powered by Dialogue Manager. NPCs react to your choices and remember previous conversations.
 
 ## Addons
@@ -84,7 +85,7 @@ sounds and visual effects:
 - **Metal** - Sparks and metallic ping sounds
 - **Stone** - Stone chips and hard impact sounds
 - **Wood** - Splinters and thud sounds
-- **Zombie** - Green goo and squelch sounds
+- **Zombie** 🧟 - Green goo and squelch sounds
 
 Impact decals are aligned with the surface normal of the hit location. Decals use the Sprite3D class to support Godot's
 compatibility renderer.
@@ -135,6 +136,45 @@ The EntityUtils singleton provides helper functions for common entity operations
 - **Entity removal** - Safe entity cleanup with sound persistence
 
 These utilities are used throughout the codebase to maintain consistent entity handling across systems and observers.
+
+## Reusable ECS Components and Systems
+
+The game includes several ECS components and systems that can be extracted and reused in other projects:
+
+### Health System
+- **ZC_Health** - Component tracking current and maximum health with configurable hurt/death sounds and automatic property change notifications.
+- **ZS_HealthSystem** - Processes damage relationships and applies damage to entities. Supports multiple damage calculation modes (last damage source vs. most damage source) and includes armor multipliers and healing.
+
+### Movement System
+- **ZC_Velocity** - Component storing linear velocity, gravity, and speed multipliers for physics-based movement.
+- **ZS_MovementSystem** - Processes entities with movement targets, calculating directions and applying velocity. Integrates with effect modifiers (speed buffs/debuffs) and supports both 2D ground-based and 3D aerial movement.
+
+### Footstep System
+- **ZC_Footstep** - Component defining footstep intervals for different movement speeds (crouch, walk, sprint) with configurable sound variations.
+- **ZS_FootstepSystem** - Automatically plays surface-appropriate footstep sounds based on entity velocity and raycast collision detection. Adjusts volume and timing based on movement state (sprinting, crouching, walking).
+
+### Projectile System
+- **ZC_Projectile** - Component defining projectile properties including velocity, damage, lifetime, piercing count, and mass for physics interactions.
+- **ZS_ProjectileSystem** - Handles raycast-based projectile collisions with body region damage multipliers, impact decals, surface-specific sounds, and physics impulses. Automatically tracks projectile sources through ECS relationships.
+
+### Screen Effect System
+- **ZC_Screen_Effect** - Component for timed visual effects with configurable strength and duration (damage overlays, screen filters, etc.).
+- **ZS_EffectSystem** - Processes screen effects with automatic expiration, allowing stacking and blending of multiple simultaneous effects.
+
+### And Many More...
+
+Additional reusable components for common game mechanics:
+
+- **ZC_Door** - Interactive doors with proximity, touch, or use triggers. Supports automatic closing, bidirectional rotation, and configurable open/close animations with sound effects.
+- **ZC_Locked** - Lock component requiring specific keys to unlock, with property change notifications for observer systems.
+- **ZC_Key** - Named key component for inventory-based lock systems.
+- **ZC_Button** - Pressable button with toggle mode, cooldown timers, and reset delays. Integrates with the node-based interaction system.
+- **ZC_Light** - Controllable light component that can toggle multiple light nodes on/off through property changes.
+- **ZC_Portal** - Level transition component with target level and spawn point configuration for seamless scene changes.
+- **ZC_Cooldown** - Generic cooldown timer component for abilities, weapons, and interactions.
+- **ZC_Noise** - Audio emission component for AI detection systems.
+
+All systems use GECS query builders for efficient entity filtering and support ECS relationships for tracking entity interactions (damage sources, kills, effects). The relationship-based architecture enables complex interactions without tight coupling between systems.
 
 ## Roadmap
 
