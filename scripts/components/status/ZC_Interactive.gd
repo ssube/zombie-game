@@ -4,8 +4,6 @@ class_name ZC_Interactive
 enum CrosshairType {
 	NONE,
 	DEFAULT,
-	INTERACT,
-	ATTACK
 }
 
 @export var name: String = "Interactive Object"
