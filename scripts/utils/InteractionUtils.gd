@@ -7,9 +7,6 @@ enum HandlerStatus {
 }
 
 
-static func _add_sound(sound: ZN_AudioSubtitle3D, parent: Node) -> void:
-	parent.add_child(sound)
-
 # TODO: add with every EntityUtils.remove call
 static func remove_shimmer_target(target: Entity) -> void:
 	pass # assert(false, "TODO")
@@ -17,6 +14,11 @@ static func remove_shimmer_target(target: Entity) -> void:
 # TODO: figure out where this one should live
 static func _update_ammo_label(actor: Entity) -> void:
 	pass # assert(false, "TODO")
+
+
+static func _add_sound(sound: ZN_AudioSubtitle3D, parent: Node) -> void:
+	parent.add_child(sound)
+
 
 static func _format_button_pressed(pressed: bool) -> String:
 	if pressed:
@@ -338,6 +340,7 @@ static func use_weapon(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	var player = actor as ZE_Player
 	player.add_relationship(RelationshipUtils.make_holding(weapon))
 	EntityUtils.switch_weapon(player, weapon, menu)
+	_update_ammo_label(player)
 
 	var interactive = weapon.get_component(ZC_Interactive) as ZC_Interactive
 	menu.push_action("Found new weapon: %s" % interactive.name)

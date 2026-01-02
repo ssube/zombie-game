@@ -6,6 +6,7 @@ extends System
 var last_shimmer: Dictionary[Entity, Entity] = {} # dict for multiplayer
 
 
+# TODO: move to ray utils
 func get_raycast_end_point(raycast: RayCast3D) -> Vector3:
 	return raycast.global_transform * raycast.target_position
 
@@ -67,24 +68,8 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		velocity.linear_velocity.x = horizontal_velocity.x
 		velocity.linear_velocity.z = horizontal_velocity.z
 
-		# Apply gravity
-		var no_clip := OptionsManager.options.cheats.no_clip
-		if no_clip:
-			pass
-		elif body.is_on_floor():
-			pass
-		else: # clipping and off the floor
-			velocity.linear_velocity += velocity.gravity * delta
-
-			# a basic approximation of terminal velocity
-			if velocity.linear_velocity.y < 0:
-				velocity.linear_velocity.y = max(velocity.gravity.y, velocity.linear_velocity.y)
-
-		# Apply jump
-		if input.move_jump and stamina.can_jump():
-			if body.is_on_floor():
-				stamina.current_stamina -= stamina.jump_cost
-				velocity.linear_velocity.y = input.jump_speed
+		_apply_gravity(velocity, body, delta)
+		_apply_jump(velocity, input, stamina, body)
 
 		# TODO: move this into the MovementSystem
 		# Sync to CharacterBody3D (Node assumed attached to entity)
@@ -93,36 +78,9 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		body.move_and_slide()
 		_handle_collisions(body, delta)
 
-		# Move weapon to follow hands
-		if entity.current_weapon != null:
-			var weapon_body = entity.current_weapon.get_node(".") as RigidBody3D
-			weapon_body.global_transform = entity.weapon_node.global_transform
-
-		# Process any effect relationships
-		var effect_strength := EntityUtils.get_screen_effects(entity)
-		for effect in effect_strength:
-			if effect == null:
-				continue
-
-			%Menu.set_effect_strength(effect, effect_strength[effect], delta * 8)
-
-		# Process any heard relationships
-		var heard_noises := entity.get_relationships(RelationshipUtils.any_heard) as Array[Relationship]
-		for rel in heard_noises:
-			var noise := rel.target as ZC_Noise
-			if noise.subtitle_tag == "":
-				continue
-
-			if OptionsManager.options.audio.subtitles:
-				%Menu.push_action(noise.subtitle_tag)
-
-		entity.remove_relationships(heard_noises)
-
-		# Process any usage relationships
-		var used_items := entity.get_relationships(RelationshipUtils.any_used) as Array[Relationship]
-		for rel in used_items:
-			InteractionUtils.interact(rel.target, entity, %Menu)
-		entity.remove_relationships(used_items)
+		_process_screen_effects(entity, delta)
+		_process_heard_noises(entity)
+		_process_used_items(entity)
 
 		# Pause menu
 		if input.menu_pause:
@@ -136,12 +94,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 		# Attack with weapon
 		if input.use_attack:
-			if entity.current_weapon != null:
-				# Weapons can have both types
-				if EntityUtils.is_melee_weapon(entity.current_weapon):
-					swing_weapon(entity, body)
-				if EntityUtils.is_ranged_weapon(entity.current_weapon):
-					spawn_projectile(entity, body)
+			_handle_weapon_attack(entity, body)
 
 		# Holster weapon
 		if input.use_holster:
@@ -156,58 +109,125 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		if input.use_light:
 			toggle_flashlight(entity, body)
 
-		var ray = entity.get_node(player.view_ray) as RayCast3D
-
 		# Adjust the aim based on the ray's collision point or end point if there is no collision
+		var ray = entity.get_node(player.view_ray) as RayCast3D
 		do_adaptive_aim(ray, entity, delta)
 
-		var equipped := entity.get_relationships(RelationshipUtils.any_equipped)
-		for rel in equipped:
-			var item = rel.target
-			if is_instance_valid(item) and item is Node3D:
-				var parent := item.get_parent() as Node3D
-				item.global_transform = parent.global_transform
+		# Handle interactions
+		_handle_interactive(entity, input, body, ray)
 
-		# Highlight interactive items
-		var clear_collider := true
-		if ray.is_colliding():
-			var collider = ray.get_collider()
-			var collider_entity := CollisionUtils.get_collider_entity(collider)
+		# Finally, update equipped items' transforms after any movement, equip/unequip, etc.
+		_update_equipped_items(entity)
 
-			# Use interactive items
-			if EntityUtils.is_interactive(collider_entity):
-				var interactive = collider_entity.get_component(ZC_Interactive) as ZC_Interactive
-				# Check the interactive distance
-				if interactive.shimmer_on_target and interactive.shimmer_range > 0.0:
-					var distance := body.global_position.distance_to(ray.get_collision_point())
-					if distance <= interactive.shimmer_range:
-						if collider_entity != last_shimmer.get(entity) and collider_entity != entity.current_weapon:
-							%Menu.clear_target_label()
-							%Menu.reset_crosshair_color()
-							remove_shimmer_key(entity)
 
-						if collider_entity and collider_entity != entity.current_weapon:
-							clear_collider = false
-							%Menu.set_target_label(interactive.name)
+func _apply_gravity(velocity: ZC_Velocity, body: CharacterBody3D, delta: float) -> void:
+	var no_clip := OptionsManager.options.cheats.no_clip
+	if no_clip:
+		pass
+	elif body.is_on_floor():
+		pass
+	else: # clipping and off the floor
+		velocity.linear_velocity += velocity.gravity * delta
 
-							if not EntityUtils.has_shimmer(collider_entity):
-								var shimmer = ZC_Shimmer.from_interactive(interactive)
-								collider_entity.add_component(shimmer)
-								last_shimmer[entity] = collider_entity
+		# a basic approximation of terminal velocity
+		if velocity.linear_velocity.y < 0:
+			velocity.linear_velocity.y = max(velocity.gravity.y, velocity.linear_velocity.y)
 
-								var shimmer_start := (Time.get_ticks_msec() / 1000.0) + shimmer_offset
-								RenderingServer.global_shader_parameter_set("shimmer_time", shimmer_start)
 
-							if input.use_pickup:
-								InteractionUtils.pickup(entity, collider_entity, %Menu)
+func _apply_jump(velocity: ZC_Velocity, input: ZC_Input, stamina: ZC_Stamina, body: CharacterBody3D) -> void:
+	if input.move_jump and stamina.can_jump():
+		if body.is_on_floor():
+			stamina.current_stamina -= stamina.jump_cost
+			velocity.linear_velocity.y = input.jump_speed
 
-							if input.use_interact:
-								InteractionUtils.interact(entity, collider_entity, %Menu)
 
-		if clear_collider:
-			%Menu.clear_target_label()
-			%Menu.reset_crosshair_color()
-			remove_shimmer_key(entity)
+func _process_screen_effects(entity: Entity, delta: float) -> void:
+	var effect_strength := EntityUtils.get_screen_effects(entity)
+	for effect in effect_strength:
+		if effect == null:
+			continue
+
+		%Menu.set_effect_strength(effect, effect_strength[effect], delta * 8)
+
+
+func _process_heard_noises(entity: Entity) -> void:
+	var heard_noises := entity.get_relationships(RelationshipUtils.any_heard) as Array[Relationship]
+	for rel in heard_noises:
+		var noise := rel.target as ZC_Noise
+		if noise.subtitle_tag == "":
+			continue
+
+		if OptionsManager.options.audio.subtitles:
+			%Menu.push_action(noise.subtitle_tag)
+
+	entity.remove_relationships(heard_noises)
+
+
+func _process_used_items(entity: Entity) -> void:
+	var used_items := entity.get_relationships(RelationshipUtils.any_used) as Array[Relationship]
+	for rel in used_items:
+		InteractionUtils.interact(entity, rel.target, %Menu)
+	entity.remove_relationships(used_items)
+
+
+func _handle_weapon_attack(entity: Entity, body: CharacterBody3D) -> void:
+	if entity.current_weapon != null:
+		# Weapons can have both types
+		if EntityUtils.is_melee_weapon(entity.current_weapon):
+			swing_weapon(entity, body)
+		if EntityUtils.is_ranged_weapon(entity.current_weapon):
+			spawn_projectile(entity, body)
+
+
+func _update_equipped_items(entity: Entity) -> void:
+	var equipped := entity.get_relationships(RelationshipUtils.any_equipped)
+	for rel in equipped:
+		var item = rel.target
+		if is_instance_valid(item) and item is Node3D:
+			var parent := item.get_parent() as Node3D
+			item.global_transform = parent.global_transform
+
+
+func _handle_interactive(entity: Entity, input: ZC_Input, body: CharacterBody3D, ray: RayCast3D) -> void:
+	var clear_collider := true
+	if ray.is_colliding():
+		var collider = ray.get_collider()
+		var collider_entity := CollisionUtils.get_collider_entity(collider)
+
+		# Use interactive items
+		if EntityUtils.is_interactive(collider_entity):
+			var interactive = collider_entity.get_component(ZC_Interactive) as ZC_Interactive
+			# Check the interactive distance
+			if interactive.shimmer_on_target and interactive.shimmer_range > 0.0:
+				var distance := body.global_position.distance_to(ray.get_collision_point())
+				if distance <= interactive.shimmer_range:
+					if collider_entity != last_shimmer.get(entity) and collider_entity != entity.current_weapon:
+						%Menu.clear_target_label()
+						%Menu.reset_crosshair_color()
+						remove_shimmer_key(entity)
+
+					if collider_entity and collider_entity != entity.current_weapon:
+						clear_collider = false
+						%Menu.set_target_label(interactive.name)
+
+						if not EntityUtils.has_shimmer(collider_entity):
+							var shimmer = ZC_Shimmer.from_interactive(interactive)
+							collider_entity.add_component(shimmer)
+							last_shimmer[entity] = collider_entity
+
+							var shimmer_start := (Time.get_ticks_msec() / 1000.0) + shimmer_offset
+							RenderingServer.global_shader_parameter_set("shimmer_time", shimmer_start)
+
+						if input.use_pickup:
+							InteractionUtils.pickup(entity, collider_entity, %Menu)
+
+						if input.use_interact:
+							InteractionUtils.interact(entity, collider_entity, %Menu)
+
+	if clear_collider:
+		%Menu.clear_target_label()
+		%Menu.reset_crosshair_color()
+		remove_shimmer_key(entity)
 
 
 func _update_ammo_label(player: Entity) -> void:
@@ -264,6 +284,7 @@ func _set_damage_areas(entity: Entity, weapon: ZC_Weapon_Melee, enable: bool) ->
 			area.monitoring = enable
 
 
+# TODO: move to weapon utils or system
 func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
 	var weapon = entity.current_weapon as ZE_Weapon
 	if weapon == null:
@@ -293,6 +314,7 @@ func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
 		tween.tween_callback(_update_ammo_label.bind(entity))
 
 
+# TODO: move to weapon utils or system
 func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	var weapon = entity.current_weapon as ZE_Weapon
 	if weapon == null:
@@ -342,7 +364,7 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	if ranged_weapon is ZC_Weapon_Thrown and weapon_ammo.is_all_empty():
 		EntityUtils.switch_weapon(entity, null, %Menu)
 
-
+# todo: toggle a light component on all equipped flashlights
 func toggle_flashlight(_entity: Entity, body: CharacterBody3D) -> void:
 	# TODO: type this node or use a component
 	var light = body.get_node("./Head/Hands/Flashlight")
@@ -371,20 +393,9 @@ func remove_shimmer_target(entity: Entity) -> void:
 				entity.remove_component(ZC_Shimmer)
 
 
-# TODO: move to EntityUtils
-func _list_player_weapons(entity: ZE_Player) -> Array[ZE_Weapon]:
-	var inventory = entity.get_inventory()
-	var weapons: Array[ZE_Weapon] = []
-	for item in inventory:
-		if EntityUtils.is_weapon(item):
-			weapons.append(item)
-
-	return weapons
-
-
 ## Equip the next weapon (always the first weapon in the player's inventory)
 func equip_next_weapon(entity: ZE_Player) -> void:
-	var weapons := _list_player_weapons(entity)
+	var weapons := RelationshipUtils.get_weapons(entity)
 	if weapons.size() == 0:
 		return
 
@@ -393,7 +404,7 @@ func equip_next_weapon(entity: ZE_Player) -> void:
 
 
 func equip_previous_weapon(entity: ZE_Player) -> void:
-	var weapons := _list_player_weapons(entity)
+	var weapons := RelationshipUtils.get_weapons(entity)
 	if weapons.size() == 0:
 		return
 

@@ -123,3 +123,13 @@ static func make_modifier_speed(multiplier: float) -> Relationship:
 	var speed_modifier := ZC_Effect_Speed.new(multiplier)
 	var link = ZC_Modifier.new()
 	return Relationship.new(link, speed_modifier)
+
+
+static func get_weapons(entity: Entity) -> Array[ZE_Weapon]:
+	var weapons: Array[ZE_Weapon] = []
+	var inventory := RelationshipUtils.get_inventory(entity)
+	for item in inventory:
+		if EntityUtils.is_weapon(item):
+			weapons.append(item as ZE_Weapon)
+
+	return weapons

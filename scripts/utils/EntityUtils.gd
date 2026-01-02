@@ -408,7 +408,6 @@ static func switch_weapon(entity: ZE_Character, new_weapon: ZE_Weapon, menu: ZM_
 
 	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
 	menu.set_weapon_label(c_interactive.name)
-	# TODO: _update_ammo_label(entity)
 	menu.push_action("Switched to weapon: %s" % c_interactive.name)
 
 	if c_interactive.use_sound:
