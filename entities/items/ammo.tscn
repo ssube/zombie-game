@@ -11,6 +11,7 @@
 [sub_resource type="Resource" id="Resource_yjsqk"]
 script = ExtResource("3_oqkq5")
 name = "12 Gauge Ammo"
+crosshair_color = Color(0, 1, 0, 1)
 shimmer_material = ExtResource("4_58w03")
 shimmer_nodes = Array[NodePath]([NodePath("Toolbox")])
 use_sound = ExtResource("5_siy5l")

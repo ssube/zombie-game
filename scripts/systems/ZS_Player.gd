@@ -206,6 +206,8 @@ func _handle_interactive(entity: Entity, input: ZC_Input, body: CharacterBody3D,
 			if interactive.shimmer_on_target and interactive.shimmer_range > 0.0:
 				var distance := body.global_position.distance_to(ray.get_collision_point())
 				if distance <= interactive.shimmer_range:
+					%Menu.set_crosshair_color(interactive.crosshair_color)
+
 					var player = entity as ZE_Player
 					if collider_entity != player.last_shimmer_target and collider_entity != entity.current_weapon:
 						%Menu.clear_target_label()

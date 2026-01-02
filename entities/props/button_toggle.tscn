@@ -27,6 +27,7 @@ metadata/_custom_type_script = "uid://c8jci3yicdcmm"
 [sub_resource type="Resource" id="Resource_qcbqw"]
 script = ExtResource("4_3n38l")
 name = "Red Button"
+crosshair_color = Color(1, 0.92941177, 0, 1)
 shimmer_material = ExtResource("5_nqh2g")
 shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"

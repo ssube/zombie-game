@@ -30,6 +30,7 @@ metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 [sub_resource type="Resource" id="Resource_0kgpt"]
 script = ExtResource("6_k4gqj")
 name = "Explosive Barrel"
+crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
 shimmer_material = ExtResource("7_bv25f")
 shimmer_nodes = Array[NodePath]([NodePath("Barrel/Barrel")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"

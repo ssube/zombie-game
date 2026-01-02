@@ -33,6 +33,7 @@ metadata/_custom_type_script = "uid://dnmn2xmqdrr00"
 [sub_resource type="Resource" id="Resource_dy0dc"]
 script = ExtResource("4_6f1u0")
 name = "Crowbar"
+crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
 shimmer_material = ExtResource("5_d7yd0")
 shimmer_nodes = Array[NodePath]([NodePath("Node3D/rusty_crowbar_mx_1")])
 use_sound = ExtResource("6_3hang")

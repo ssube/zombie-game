@@ -10,6 +10,7 @@
 [sub_resource type="Resource" id="Resource_6y5fu"]
 script = ExtResource("3_x6vs8")
 name = "Objective"
+crosshair_color = Color(1, 0.92941177, 0, 1)
 shimmer_material = ExtResource("4_3q266")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 

@@ -34,6 +34,7 @@ metadata/_custom_type_script = "uid://dnmn2xmqdrr00"
 [sub_resource type="Resource" id="Resource_dy0dc"]
 script = ExtResource("4_ee0de")
 name = "Baseball Bat"
+crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
 shimmer_material = ExtResource("5_fnw7o")
 shimmer_nodes = Array[NodePath]([NodePath("Node3D/Cube")])
 use_sound = ExtResource("5_55xri")

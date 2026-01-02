@@ -20,6 +20,7 @@ metadata/_custom_type_script = "uid://q5lsf8fn6s2"
 [sub_resource type="Resource" id="Resource_g03v2"]
 script = ExtResource("4_nq5s6")
 name = "Key"
+crosshair_color = Color(1, 0.92941177, 0, 1)
 shimmer_material = ExtResource("5_nq5s6")
 shimmer_nodes = Array[NodePath]([NodePath("TrafficCone/TrafficCone")])
 pickup_sound = ExtResource("4_rlvp5")

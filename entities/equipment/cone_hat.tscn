@@ -10,6 +10,7 @@
 [sub_resource type="Resource" id="Resource_0qpab"]
 script = ExtResource("3_m8o52")
 name = "Traffic Cone Hat"
+crosshair_color = Color(0.78431374, 0, 0.92156863, 1)
 shimmer_on_proximity = true
 shimmer_material = ExtResource("4_k5rx5")
 shimmer_nodes = Array[NodePath]([NodePath("TrafficCone")])

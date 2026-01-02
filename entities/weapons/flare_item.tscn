@@ -23,6 +23,7 @@ metadata/_custom_type_script = "uid://bsnlq5t650od"
 [sub_resource type="Resource" id="Resource_doyw5"]
 script = ExtResource("7_do34u")
 name = "Flare"
+crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
 shimmer_material = ExtResource("8_606wd")
 shimmer_nodes = Array[NodePath]([NodePath("CSGCylinder3D")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"

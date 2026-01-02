@@ -28,6 +28,7 @@ metadata/_custom_type_script = "uid://bsnlq5t650od"
 [sub_resource type="Resource" id="Resource_17hxq"]
 script = ExtResource("5_6rt4r")
 name = "Rave Shotgun"
+crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
 shimmer_material = ExtResource("6_3jif5")
 shimmer_nodes = Array[NodePath]([NodePath("../WeaponShotgun/Shotgun/Shotgun"), NodePath("../WeaponShotgun/Shotgun/Shotgun-Detach")])
 pickup_sound = ExtResource("4_aq6qf")

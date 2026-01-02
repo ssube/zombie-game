@@ -22,6 +22,7 @@ metadata/_custom_type_script = "uid://qjr7o31fiedq"
 [sub_resource type="Resource" id="Resource_auxoi"]
 script = ExtResource("6_op7jg")
 name = "Door"
+crosshair_color = Color(0.3764706, 0.7764706, 1, 1)
 shimmer_material = ExtResource("7_beik1")
 shimmer_nodes = Array[NodePath]([NodePath("StaticBody3D/CSGBox3D")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"

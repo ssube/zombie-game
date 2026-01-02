@@ -1,7 +1,33 @@
 extends Component
 class_name ZC_Interactive
 
+enum CrosshairType {
+	NONE,
+	DEFAULT,
+	INTERACT,
+	ATTACK
+}
+
 @export var name: String = "Interactive Object"
+
+@export_group("Crosshair")
+@export var show_crosshair: bool = true
+@export var crosshair_type: CrosshairType = CrosshairType.DEFAULT:
+	get():
+		if show_crosshair:
+			return crosshair_type
+		else:
+			return CrosshairType.NONE
+
+@export var crosshair_color: Color = Color.WHITE:
+	get():
+		if show_crosshair:
+			return crosshair_color
+		else:
+			return Color.TRANSPARENT
+
+# TODO: custom crosshair icon
+# @export var crosshair_icon: Texture2D
 
 @export_group("Shimmer")
 @export_subgroup("Shimmer Flags")
