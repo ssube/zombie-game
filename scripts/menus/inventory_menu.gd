@@ -30,23 +30,17 @@ func on_update() -> void:
 		var c_player := player.get_component(ZC_Player) as ZC_Player
 		keys.append_array(c_player.held_keys)
 
-		if "current_weapon" in player:
-			var player_weapon = player.current_weapon as Node
-			if player_weapon != null and player_weapon is Entity:
-				inventory.append(player_weapon)
-				_item_players[player.current_weapon] = player
-
-		if "inventory_node" in player:
-			var player_inventory = player.inventory_node.get_children()
-			for item in player_inventory:
-				if item is Entity:
-					inventory.append(item)
-					_item_players[item] = player
-
 		var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
 		if player_ammo:
 			for ammo_type in player_ammo.ammo_count.keys():
 				ammo[ammo_type] = player_ammo.get_ammo(ammo_type) + ammo.get(ammo_type, 0)
+
+		var inventory_relationships := player.get_relationships(RelationshipUtils.any_holding)
+		for rel in inventory_relationships:
+			var item = rel.target as Entity
+			if item != null:
+				inventory.append(item)
+				_item_players[item] = player
 
 	inventory_list.clear()
 	if inventory.size() == 0:
