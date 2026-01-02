@@ -46,13 +46,13 @@ static func equip_weapon(character: ZE_Character, weapon: ZE_Weapon) -> ZE_Weapo
 		character.inventory_node.add_child(old_weapon)
 		character.remove_relationship(RelationshipUtils.make_equipped(old_weapon))
 
-	character.current_weapon = weapon
 	if weapon != null:
 		if equip_item(character, weapon):
 			print("Equipped weapon: %s." % weapon.name)
 		else:
-			printerr("Unable to equip weapon: %s" % weapon.name)
+			printerr("Unable to equip weapon: %s" % weapon.name) # TODO: find a way to return this instead of the old weapon
 
+	character.current_weapon = weapon
 	return old_weapon
 
 

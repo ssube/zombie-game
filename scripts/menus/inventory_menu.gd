@@ -76,7 +76,15 @@ func _on_inventory_list_item_activated(index: int) -> void:
 	var player = _item_players.get(item) as Entity
 	var equipment := item.get_component(ZC_Equipment) as ZC_Equipment
 	if equipment and equipment.equippable:
-		if not EntityUtils.equip_item(player, item):
+		var equipped := false
+		if EntityUtils.is_weapon(item):
+			EntityUtils.equip_weapon(player, item as ZE_Weapon)
+			# TODO: assume it succeeds for now
+			equipped = true
+		else:
+			equipped = EntityUtils.equip_item(player, item)
+
+		if not equipped:
 			printerr("Unable to equip %s!" % item.name)
 	else:
 		player.add_relationship(RelationshipUtils.make_used(item))

@@ -393,17 +393,18 @@ func equip_next_weapon(entity: ZE_Player) -> void:
 	if weapons.size() == 0:
 		return
 
-	var next_weapon := false
-	for weapon in weapons:
-		if next_weapon:
-			EntityUtils.switch_weapon(entity, weapon as ZE_Weapon, %Menu)
-			return
-		if weapon == entity.current_weapon: # TODO: use relationship instead of node
-			next_weapon = true
+	var current_index := weapons.find(entity.current_weapon)
+	assert(current_index != -1, "Current weapon not found in player's weapons.")
 
-	# If we could not find the current weapon, default to the first weapon
-	var first_weapon = weapons[0] as ZE_Weapon
-	EntityUtils.switch_weapon(entity, first_weapon, %Menu)
+	var next_index := (current_index + 1) % weapons.size()
+	var chosen_weapon = weapons[next_index] as ZE_Weapon
+
+	# If we could not find the next weapon, default to the first weapon
+	if chosen_weapon == null:
+		chosen_weapon = weapons[0] as ZE_Weapon
+
+	EntityUtils.switch_weapon(entity, chosen_weapon, %Menu)
+	_update_ammo_label(entity)
 
 
 func equip_previous_weapon(entity: ZE_Player) -> void:
@@ -411,14 +412,14 @@ func equip_previous_weapon(entity: ZE_Player) -> void:
 	if weapons.size() == 0:
 		return
 
-	var previous_weapon = null
-	for weapon in weapons:
-		if weapon == entity.current_weapon: # TODO: use relationship instead of node
-			if previous_weapon != null:
-				EntityUtils.switch_weapon(entity, previous_weapon as ZE_Weapon, %Menu)
-				return
-		previous_weapon = weapon
+	var current_index := weapons.find(entity.current_weapon)
+	assert(current_index != -1, "Current weapon not found in player's weapons.")
+	var previous_index := (current_index - 1 + weapons.size()) % weapons.size()
+	var chosen_weapon = weapons[previous_index] as ZE_Weapon
 
 	# If we could not find the current weapon, default to the last weapon
-	var last_weapon = weapons[weapons.size() - 1] as ZE_Weapon
-	EntityUtils.switch_weapon(entity, last_weapon, %Menu)
+	if chosen_weapon == null:
+		chosen_weapon = weapons[weapons.size() - 1] as ZE_Weapon
+
+	EntityUtils.switch_weapon(entity, chosen_weapon, %Menu)
+	_update_ammo_label(entity)
