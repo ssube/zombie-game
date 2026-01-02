@@ -91,7 +91,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0rpsf")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m5dol"]
-size = Vector3(4.060425, 1, 7.090454)
+size = Vector3(7.7466965, 1, 7.090454)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mwldp"]
 size = Vector3(1.1421509, 0.44812012, 0.16217041)
@@ -122,7 +122,7 @@ trigger_on_exit = true
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="fish_mx_1/DetectionArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6039753, 0, 0.24749756)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9694653, 0, 0.2474976)
 shape = SubResource("BoxShape3D_m5dol")
 
 [node name="SetPositionBlackboard" type="Node" parent="fish_mx_1/DetectionArea"]
