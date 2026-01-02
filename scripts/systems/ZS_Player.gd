@@ -69,12 +69,14 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 		# Apply gravity
 		var no_clip := OptionsManager.options.cheats.no_clip
-		if no_clip or body.is_on_floor():
-			velocity.linear_velocity.y = 0
-		else:
+		if no_clip:
+			pass
+		elif body.is_on_floor():
+			pass
+		else: # clipping and off the floor
 			velocity.linear_velocity += velocity.gravity * delta
 
-			# TODO: fix infinite gravity
+			# a basic approximation of terminal velocity
 			if velocity.linear_velocity.y < 0:
 				velocity.linear_velocity.y = max(velocity.gravity.y, velocity.linear_velocity.y)
 
