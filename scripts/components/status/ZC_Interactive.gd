@@ -9,6 +9,7 @@ enum CrosshairType {
 }
 
 @export var name: String = "Interactive Object"
+@export var pickup: bool = true
 
 @export_group("Crosshair")
 @export var show_crosshair: bool = true

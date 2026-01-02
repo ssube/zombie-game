@@ -28,6 +28,7 @@ metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
 [sub_resource type="Resource" id="Resource_7sij5"]
 script = ExtResource("4_l4c1e")
+pickup = false
 crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 

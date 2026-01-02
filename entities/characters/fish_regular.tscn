@@ -34,6 +34,7 @@ metadata/_custom_type_script = "uid://gy1d5pnk4rwg"
 [sub_resource type="Resource" id="Resource_lpkny"]
 script = ExtResource("5_j5grx")
 name = "Fish"
+pickup = false
 crosshair_color = Color(0.3764706, 0.7764706, 1, 1)
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 

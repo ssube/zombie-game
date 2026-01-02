@@ -66,6 +66,7 @@ static func interact(actor: Entity, target: Entity, menu) -> bool:
 		var check_func := handler[0] as Callable
 		var handle_func := handler[1] as Callable
 		if check_func.call(target):
+			print("Running interaction handler %s for target %s" % [key, target.name])
 			var status := handle_func.call(actor, target, menu) as HandlerStatus
 			match status:
 				HandlerStatus.CONTINUE:
@@ -80,7 +81,7 @@ static func interact(actor: Entity, target: Entity, menu) -> bool:
 
 static func pickup(actor: Entity, target: Entity, menu) -> bool:
 	var status := pickup_item(actor, target, menu)
-	return status == HandlerStatus.CONTINUE
+	return status != HandlerStatus.SKIP
 #endregion
 
 
@@ -325,6 +326,9 @@ static func has_interactive(entity: Entity) -> bool:
 
 static func pickup_item(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	var interactive = target.get_component(ZC_Interactive) as ZC_Interactive
+	if not interactive.pickup:
+		return HandlerStatus.SKIP
+
 	target.remove_component(ZC_Shimmer)
 
 	target.get_parent().remove_child(target)
