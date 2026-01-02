@@ -4,15 +4,21 @@ class_name ZB_State_Wander_Swim
 ## Minimum swim height offset above navmesh (ocean floor)
 @export var swim_height_min: float = 1.0
 
-## Absolute maximum swim height (if > 0, overrides spawn height)
-@export var swim_height_max_absolute: float = 0.0
+## Node3D to use for initial position reference (sets swim_height_max_absolute)
+@export var initial_position: Node3D
 
 var spawn_height: float = 0.0
+var swim_height_max_absolute: float = 0.0
+
+
+func _ready() -> void:
+	if initial_position != null:
+		swim_height_max_absolute = initial_position.global_position.y
 
 
 func enter(entity: Entity) -> void:
 	super.enter(entity)
-	# Store the entity's spawn height as the max swimming height
+	# Store the entity's spawn height as fallback
 	spawn_height = entity.root_3d.global_position.y
 
 
@@ -29,8 +35,6 @@ func update_wander_target(entity) -> void:
 	var target_y := randf_range(min_swim_y, max_swim_y)
 
 	target_position = Vector3(random_pos.x, target_y, random_pos.z)
-
-	print("Fish picked new swim target: ", target_position, " (floor: ", navmesh_y, ", range: ", min_swim_y, " to ", max_swim_y, ")")
 
 	# Get navigation path to the horizontal position (navmesh), we'll handle vertical separately
 	navigation_path = NavigationUtils.update_navigation_path(entity, random_pos)

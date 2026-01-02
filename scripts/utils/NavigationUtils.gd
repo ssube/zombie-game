@@ -1,6 +1,6 @@
 class_name NavigationUtils
 
-static func follow_navigation_path(entity: Node3D, navigation_path: PackedVector3Array, point_proximity: float) -> PackedVector3Array:
+static func follow_navigation_path(entity: Node3D, navigation_path: PackedVector3Array, point_proximity: float, look_at_target: bool = true) -> PackedVector3Array:
 	if len(navigation_path) == 0:
 		return navigation_path
 
@@ -10,6 +10,14 @@ static func follow_navigation_path(entity: Node3D, navigation_path: PackedVector
 	else:
 		var movement := entity.get_component(ZC_Movement) as ZC_Movement
 		movement.set_move_target(next_point)
+
+		# Set look target if enabled
+		if look_at_target:
+			var look_target := next_point
+			# For 3D movement entities, only look horizontally (ignore Y difference)
+			if movement.allow_3d_movement:
+				look_target = Vector3(next_point.x, entity.global_position.y, next_point.z)
+			movement.set_look_target(look_target)
 
 	return navigation_path
 

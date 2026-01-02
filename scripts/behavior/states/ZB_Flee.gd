@@ -39,10 +39,6 @@ func tick(entity: Entity, delta: float, behavior: ZC_Behavior) -> TickResult:
 		target_position = flee_position + flee_direction * safe_radius
 
 	# Update movement to look away from threat
-	var movement := entity.get_component(ZC_Movement) as ZC_Movement
-	if movement != null:
-		movement.set_look_target(target_position)
-
 	# Follow navigation path
 	navigation_path = NavigationUtils.follow_navigation_path(node_3d, navigation_path, point_proximity)
 

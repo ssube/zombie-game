@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _apply_rigid_physics(_delta: float, movement: ZC_Movement, velocity: ZC_Velocity) -> void:
-	# FIRST: Clamp velocities from previous frame's collisions BEFORE applying new forces
+	# Clamp velocities from previous frame's collisions BEFORE applying new forces
 	var current_linear_vel := rigid_3d.linear_velocity
 	var horizontal_vel := Vector3(current_linear_vel.x, 0, current_linear_vel.z)
 	var horizontal_speed := horizontal_vel.length()
@@ -61,31 +61,19 @@ func _apply_rigid_physics(_delta: float, movement: ZC_Movement, velocity: ZC_Vel
 
 	# Clamp horizontal velocity (from collision responses in previous frame)
 	if horizontal_speed > max_horizontal_speed:
-		printerr("CLAMPING HORIZONTAL VELOCITY on entity: ", self.id)
-		printerr("  From: ", horizontal_vel, " (speed: ", horizontal_speed, ")")
-		printerr("  To max: ", max_horizontal_speed)
-		printerr("  Mass: ", rigid_3d.mass, ", Contacts: ", rigid_3d.get_contact_count())
 		var clamped_horizontal := horizontal_vel.normalized() * max_horizontal_speed
 		rigid_3d.linear_velocity = Vector3(clamped_horizontal.x, current_linear_vel.y, clamped_horizontal.z)
 
 	# Clamp vertical velocity
 	if vertical_speed > max_vertical_speed:
-		printerr("CLAMPING VERTICAL VELOCITY on entity: ", self.id)
-		printerr("  From: ", current_linear_vel.y, " to: ", signf(current_linear_vel.y) * max_vertical_speed)
 		rigid_3d.linear_velocity.y = signf(current_linear_vel.y) * max_vertical_speed
 
-	# Now apply movement forces with clamped velocities
+	# Apply movement forces with clamped velocities
 	if movement.has_move_target:
 		_apply_rigid_movement_force(movement, velocity)
 
 	if movement.has_look_target:
 		_apply_rigid_look_torque(movement, velocity)
-
-	# Debug: Log collision info
-	var collision_count := rigid_3d.get_contact_count()
-	if collision_count > 2:
-		printerr("Entity ", self.id, " has ", collision_count, " contacts (may be stuck)")
-		printerr("  Velocity after forces: ", rigid_3d.linear_velocity)
 
 
 func _apply_rigid_movement_force(movement: ZC_Movement, velocity: ZC_Velocity) -> void:

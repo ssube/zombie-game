@@ -121,10 +121,10 @@ metadata/_custom_type_script = "uid://di74g8tmachs3"
 
 [node name="States" type="Node" parent="Behavior/FishBehavior"]
 
-[node name="ZB_State_Wander_Swim" type="Node" parent="Behavior/FishBehavior/States"]
+[node name="ZB_State_Wander_Swim" type="Node" parent="Behavior/FishBehavior/States" node_paths=PackedStringArray("initial_position")]
 script = ExtResource("11_mwldp")
 swim_height_min = 0.0
-swim_height_max_absolute = -6.5
+initial_position = NodePath("../../../..")
 metadata/_custom_type_script = "uid://4eo2jh622p6y"
 
 [node name="ZB_State_Flee" type="Node" parent="Behavior/FishBehavior/States"]
