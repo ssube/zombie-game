@@ -1,5 +1,5 @@
 extends ZB_State
-class_name ZB_State_Swim_Idle
+class_name ZB_State_Idle_Swim
 
 ## How far up and down to bob (in meters)
 @export var bob_amplitude: float = 0.5
@@ -62,7 +62,7 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 	var movement := entity.get_component(ZC_Movement) as ZC_Movement
 	if movement != null:
 		movement.set_move_target(target_position)
-		# Clear look target so fish doesn't rotate during idle
+		# Clear look target to prevent rotation during idle
 		movement.clear_look_target()
 
 	return TickResult.CONTINUE

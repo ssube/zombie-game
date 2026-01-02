@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://4eo2jh622p6y" path="res://scripts/behavior/states/ZB_Wander_Swim.gd" id="11_mwldp"]
 [ext_resource type="Script" uid="uid://bcxbkfwckp5jy" path="res://scripts/behavior/states/ZB_Flee.gd" id="12_pvaww"]
 [ext_resource type="Script" uid="uid://dejf0mustesyw" path="res://scripts/nodes/actions/ZN_BehaviorBlackboardAction.gd" id="13_3wjn7"]
-[ext_resource type="Script" uid="uid://bj8ujc6bfya2g" path="res://scripts/behavior/states/ZB_Swim_Idle.gd" id="13_cemfp"]
+[ext_resource type="Script" uid="uid://bj8ujc6bfya2g" path="res://scripts/behavior/states/ZB_Idle_Swim.gd" id="13_cemfp"]
 [ext_resource type="Script" uid="uid://bp8kk4kmch5fg" path="res://scripts/behavior/conditions/ZB_IsPlayerInArea.gd" id="14_mwldp"]
 [ext_resource type="Script" uid="uid://chp0wimffmeus" path="res://scripts/behavior/conditions/utils/ZB_Not.gd" id="15_pvaww"]
 [ext_resource type="Script" uid="uid://ccjqwf2jo717o" path="res://scripts/behavior/conditions/utils/ZB_Random.gd" id="17_el7xw"]
@@ -90,13 +90,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0rpsf")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mwldp"]
-size = Vector3(1.1421509, 0.44812012, 0.16217041)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_m5dol"]
 size = Vector3(4.060425, 1, 7.090454)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_mwldp"]
+size = Vector3(1.1421509, 0.44812012, 0.16217041)
+
 [node name="FishRegular" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 27
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 gravity_scale = 0.0
@@ -105,12 +107,39 @@ script = ExtResource("1_qdp1r")
 component_resources = Array[ExtResource("2_1yy17")]([SubResource("Resource_m5dol"), SubResource("Resource_rp6xk"), SubResource("Resource_lpkny"), SubResource("Resource_3qwwp"), SubResource("Resource_cemfp"), SubResource("Resource_el7xw")])
 
 [node name="fish_mx_1" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, -2, -1.7484555e-07, 0, 1.7484555e-07, -2, 0, 0, -0.05891931)
+transform = Transform3D(-8.742278e-08, 1.7484555e-07, -2, 0, -2, -1.7484555e-07, -2, -7.642742e-15, 8.742278e-08, -0.08772266, 0, -0.08325696)
 mesh = SubResource("ArrayMesh_qdp1r")
 skeleton = NodePath("")
 
+[node name="DetectionArea" type="Area3D" parent="fish_mx_1" node_paths=PackedStringArray("parent_entity")]
+transform = Transform3D(0.5, 0, 0, 0, -0.5, 4.371139e-08, 0, -4.371139e-08, -0.5, 0.17630944, 2.575445e-09, -0.029459655)
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("9_j5grx")
+parent_entity = NodePath("../..")
+body_interval = 2.0
+trigger_on_exit = true
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fish_mx_1/DetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6039753, 0, 0.24749756)
+shape = SubResource("BoxShape3D_m5dol")
+
+[node name="SetPositionBlackboard" type="Node" parent="fish_mx_1/DetectionArea"]
+script = ExtResource("13_3wjn7")
+set_key = &"flee_position"
+save_entity_as = 1
+metadata/_custom_type_script = "uid://dejf0mustesyw"
+
+[node name="SetFleeState" type="Node" parent="fish_mx_1/DetectionArea" node_paths=PackedStringArray("state_machine", "set_state")]
+script = ExtResource("10_m5dol")
+state_machine = NodePath("../../../Behavior/FishBehavior")
+set_state = NodePath("../../../Behavior/FishBehavior/States/ZB_State_Flee")
+try_transition = false
+metadata/_custom_type_script = "uid://d1xf73mn6pulk"
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, -1.509958e-07, 0, 1.509958e-07, -1, -0.11206031, -0.0016479488, 0.0044657)
+transform = Transform3D(-4.371139e-08, 1.509958e-07, -1, 0, -1, -1.509958e-07, -1, -6.600236e-15, 4.371139e-08, -0.024337646, -0.0016479488, 0.028803349)
 shape = SubResource("BoxShape3D_mwldp")
 
 [node name="Behavior" type="Node3D" parent="."]
@@ -133,7 +162,7 @@ metadata/_custom_type_script = "uid://4eo2jh622p6y"
 script = ExtResource("12_pvaww")
 metadata/_custom_type_script = "uid://bcxbkfwckp5jy"
 
-[node name="ZB_State_Swim_Idle" type="Node" parent="Behavior/FishBehavior/States"]
+[node name="ZB_State_Idle_Swim" type="Node" parent="Behavior/FishBehavior/States"]
 script = ExtResource("13_cemfp")
 bob_amplitude = 1.0
 
@@ -142,7 +171,7 @@ bob_amplitude = 1.0
 [node name="WanderToIdle" type="Node" parent="Behavior/FishBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]
 script = ExtResource("8_bbmdm")
 source_state = NodePath("../../States/ZB_State_Wander_Swim")
-target_state = NodePath("../../States/ZB_State_Swim_Idle")
+target_state = NodePath("../../States/ZB_State_Idle_Swim")
 metadata/_custom_type_script = "uid://c6pla5ya01llv"
 
 [node name="ZB_Condition_Random" type="Node" parent="Behavior/FishBehavior/Transitions/WanderToIdle"]
@@ -157,18 +186,18 @@ metadata/_custom_type_script = "uid://c6pla5ya01llv"
 
 [node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/FishBehavior/Transitions/WanderToFlee" node_paths=PackedStringArray("detection_area")]
 script = ExtResource("14_mwldp")
-detection_area = NodePath("../../../../DetectionArea")
+detection_area = NodePath("../../../../../fish_mx_1/DetectionArea")
 metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
 
 [node name="IdleToFlee" type="Node" parent="Behavior/FishBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]
 script = ExtResource("8_bbmdm")
-source_state = NodePath("../../States/ZB_State_Swim_Idle")
+source_state = NodePath("../../States/ZB_State_Idle_Swim")
 target_state = NodePath("../../States/ZB_State_Flee")
 metadata/_custom_type_script = "uid://c6pla5ya01llv"
 
 [node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/FishBehavior/Transitions/IdleToFlee" node_paths=PackedStringArray("detection_area")]
 script = ExtResource("14_mwldp")
-detection_area = NodePath("../../../../DetectionArea")
+detection_area = NodePath("../../../../../fish_mx_1/DetectionArea")
 metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
 
 [node name="FleeToWander" type="Node" parent="Behavior/FishBehavior/Transitions" node_paths=PackedStringArray("source_state", "target_state")]
@@ -183,32 +212,5 @@ metadata/_custom_type_script = "uid://chp0wimffmeus"
 
 [node name="ZB_IsPlayerInArea" type="Node" parent="Behavior/FishBehavior/Transitions/FleeToWander/ZB_Condition_Not" node_paths=PackedStringArray("detection_area")]
 script = ExtResource("14_mwldp")
-detection_area = NodePath("../../../../../DetectionArea")
+detection_area = NodePath("../../../../../../fish_mx_1/DetectionArea")
 metadata/_custom_type_script = "uid://bp8kk4kmch5fg"
-
-[node name="DetectionArea" type="Area3D" parent="Behavior" node_paths=PackedStringArray("parent_entity")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35261887, 0, 0)
-collision_layer = 16
-collision_mask = 8
-script = ExtResource("9_j5grx")
-parent_entity = NodePath("../..")
-body_interval = 2.0
-trigger_on_exit = true
-metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Behavior/DetectionArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6039753, 0, 0.24749756)
-shape = SubResource("BoxShape3D_m5dol")
-
-[node name="SetPositionBlackboard" type="Node" parent="Behavior/DetectionArea"]
-script = ExtResource("13_3wjn7")
-set_key = &"flee_position"
-save_entity_as = 1
-metadata/_custom_type_script = "uid://dejf0mustesyw"
-
-[node name="SetFleeState" type="Node" parent="Behavior/DetectionArea" node_paths=PackedStringArray("state_machine", "set_state")]
-script = ExtResource("10_m5dol")
-state_machine = NodePath("../../FishBehavior")
-set_state = NodePath("../../FishBehavior/States/ZB_State_Flee")
-try_transition = false
-metadata/_custom_type_script = "uid://d1xf73mn6pulk"
