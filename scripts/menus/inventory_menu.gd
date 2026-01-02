@@ -127,7 +127,7 @@ func _on_drop_button_pressed() -> void:
 		if item == null:
 			return
 
-		var player = _item_players.get(item) as Entity
+		var _player = _item_players.get(item) as Entity
 		assert(false, "TODO: drop item")
 		# EntityUtils.drop_item(player, item)
 
