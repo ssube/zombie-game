@@ -67,8 +67,8 @@ alignment = 2
 layout_mode = 2
 text = "Interaction Target"
 horizontal_alignment = 1
-metadata/diagram_label = ""
-metadata/diagram_outline = Color(0, 0, 0, 1)
+metadata/diagram_label = "Interaction Target"
+metadata/diagram_outline = Color(0.6392157, 0.6392157, 0.6392157, 1)
 
 [node name="HSeparator" type="HSeparator" parent="BottomContainer"]
 layout_mode = 2
@@ -85,16 +85,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Current Weapon"
 horizontal_alignment = 1
-metadata/diagram_outline = Color(0, 0, 0, 1)
-metadata/diagram_label = ""
+metadata/diagram_outline = Color(0.6392157, 0.6392157, 0.6392157, 1)
+metadata/diagram_label = "Current Weapon"
 
 [node name="AmmoLabel" type="Label" parent="BottomContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Ammo Count"
 horizontal_alignment = 1
-metadata/diagram_outline = Color(0, 0, 0, 1)
-metadata/diagram_label = ""
+metadata/diagram_outline = Color(0.6392157, 0.6392157, 0.6392157, 1)
+metadata/diagram_label = "Ammo Count"
 
 [node name="HSeparator2" type="HSeparator" parent="BottomContainer"]
 layout_mode = 2
@@ -112,8 +112,8 @@ size_flags_vertical = 8
 theme_override_styles/fill = SubResource("StyleBoxFlat_jew8s")
 value = 25.0
 show_percentage = false
-metadata/diagram_outline = Color(0, 0, 0, 1)
-metadata/diagram_label = ""
+metadata/diagram_outline = Color(0.6392157, 0, 0, 1)
+metadata/diagram_label = "Health Bar"
 
 [node name="HealthLabel" type="Label" parent="BottomContainer/HBoxContainer2/HealthBar"]
 layout_mode = 1
@@ -134,8 +134,8 @@ size_flags_vertical = 8
 theme_override_styles/fill = SubResource("StyleBoxFlat_pua1y")
 value = 25.0
 show_percentage = false
-metadata/diagram_outline = Color(0, 0, 0, 1)
-metadata/diagram_label = ""
+metadata/diagram_outline = Color(0, 0.6392157, 0, 1)
+metadata/diagram_label = "Stamina Bar"
 
 [node name="StaminaLabel" type="Label" parent="BottomContainer/HBoxContainer2/StaminaBar"]
 layout_mode = 1
@@ -161,7 +161,7 @@ layout_mode = 2
 text = "Current Objective"
 horizontal_alignment = 1
 metadata/diagram_label = "Current Objective"
-metadata/diagram_outline = Color(1, 0, 0, 1)
+metadata/diagram_outline = Color(0.6392157, 0.6392157, 0.6392157, 1)
 
 [node name="HSeparator3" type="HSeparator" parent="TopContainer"]
 layout_mode = 2
@@ -172,5 +172,5 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
 layout_mode = 2
 text = "Recent Actions"
 horizontal_alignment = 1
-metadata/diagram_outline = Color(0, 0, 0, 1)
-metadata/diagram_label = ""
+metadata/diagram_outline = Color(0.6392157, 0.6392157, 0.6392157, 1)
+metadata/diagram_label = "Recent Actions"

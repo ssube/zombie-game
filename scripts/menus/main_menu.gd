@@ -34,4 +34,4 @@ func _on_controls_button_pressed() -> void:
 
 
 func _on_options_button_pressed() -> void:
-	menu_changed.emit(Menus.OPTIONS_MENU, 1)
+	menu_changed.emit(Menus.OPTIONS_MENU, 2)

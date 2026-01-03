@@ -31,7 +31,7 @@ func _on_load_game_pressed() -> void:
 
 
 func _on_options_pressed() -> void:
-	options_pressed.emit()
+	menu_changed.emit(Menus.OPTIONS_MENU, 2)
 
 
 func _on_exit_pressed() -> void:

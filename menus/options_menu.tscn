@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dyv5b48xquqot"]
+[gd_scene load_steps=14 format=3 uid="uid://dyv5b48xquqot"]
 
 [ext_resource type="Script" uid="uid://dr0t3qprbbuke" path="res://scripts/menus/options_menu.gd" id="1_p3s2b"]
 [ext_resource type="AudioStream" uid="uid://ubdmirg50ful" path="res://sounds/Sound Effects/Firearms/Racking/shotgun_racking_ufx_1.ogg" id="2_cet7k"]
 [ext_resource type="Script" uid="uid://dhxffhuroih4k" path="res://menus/tab_container.gd" id="2_l4xqj"]
 [ext_resource type="AudioStream" uid="uid://cseclvit36kh1" path="res://sounds/Sound Effects/Break/glass_break_ufx_1.ogg" id="3_1vpws"]
+[ext_resource type="Texture2D" uid="uid://s2mafkes46we" path="res://menus/game_hud.png" id="3_t77c5"]
 [ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="4_1vpws"]
 [ext_resource type="PackedScene" uid="uid://6oyauuvbuys2" path="res://effects/sounds/menu_click.tscn" id="5_eeh4p"]
 [ext_resource type="PackedScene" uid="uid://calgaewey8pnp" path="res://menus/menu_audio.tscn" id="5_t77c5"]
@@ -23,6 +24,13 @@ corner_detail = 5
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6r3ve"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wyyb7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t77c5"]
+bg_color = Color(0.6, 0.6, 0.6, 0.1254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_labby"]
 
@@ -277,10 +285,29 @@ layout_mode = 2
 text = "X / Mouse / Right Stick"
 horizontal_alignment = 1
 
+[node name="HUD" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+metadata/_tab_index = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/TabContainer/HUD"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t77c5")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/TabContainer/HUD/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("3_t77c5")
+expand_mode = 5
+stretch_mode = 5
+
 [node name="Gameplay" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 1
+metadata/_tab_index = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TabContainer/Gameplay"]
 layout_mode = 2
@@ -326,7 +353,7 @@ ticks_on_borders = true
 [node name="Graphics" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 2
+metadata/_tab_index = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TabContainer/Graphics"]
 layout_mode = 2
@@ -421,7 +448,7 @@ popup/item_7/id = 7
 [node name="Audio" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 3
+metadata/_tab_index = 4
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TabContainer/Audio"]
 layout_mode = 2
@@ -509,7 +536,7 @@ bus = &"Effects"
 [node name="Cheats" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 4
+metadata/_tab_index = 5
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TabContainer/Cheats"]
 layout_mode = 2
