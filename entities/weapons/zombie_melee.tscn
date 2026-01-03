@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4406rbr42a1e"]
+[gd_scene load_steps=10 format=3 uid="uid://b4406rbr42a1e"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_n0ht5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_3pflf"]
 [ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="3_82ul1"]
 [ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="3_lu3nb"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="5_4d0u4"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="5_82ul1"]
 [ext_resource type="Script" uid="uid://dlb4vkkjdb658" path="res://scripts/nodes/actions/ZN_HealthAction.gd" id="6_4d0u4"]
 [ext_resource type="Script" uid="uid://crylbd231pgne" path="res://scripts/nodes/conditions/ZN_FactionCondition.gd" id="7_3voqo"]
 
@@ -15,8 +14,6 @@ swing_time = 1.0
 cooldown_time = 0.5
 damage = 10
 metadata/_custom_type_script = "uid://c86wth8kvlbt7"
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_lu3nb"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3voqo"]
 radius = 0.25
@@ -31,10 +28,6 @@ visible = false
 radius = 0.25
 radial_segments = 8
 rings = 4
-
-[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamGenerator_lu3nb")
-script = ExtResource("5_82ul1")
 
 [node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("parent_entity")]
 collision_layer = 16

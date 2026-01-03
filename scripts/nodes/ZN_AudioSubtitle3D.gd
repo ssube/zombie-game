@@ -28,7 +28,7 @@ var remove_timer: SceneTreeTimer
 func _ready() -> void:
 	if subtitle_text == "":
 		if subtitle_radius > 0.0:
-			push_warning("ZN_AudioSubtitle3D has empty subtitle text and positive subtitle radius!")
+			push_warning("ZN_AudioSubtitle3D %s has empty subtitle text and positive subtitle radius!" % get_path())
 	else:
 		subtitle_tag = "[%s]" % subtitle_text
 
