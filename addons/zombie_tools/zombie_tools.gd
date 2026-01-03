@@ -1,6 +1,7 @@
 @tool
 extends EditorPlugin
 
+const DIAGRAM_FONT_SIZE = 16
 
 func _enable_plugin() -> void:
 	# Add autoloads here.
@@ -18,6 +19,7 @@ var fix_mesh_scale_button: Button
 var fix_mesh_rotation_button: Button
 var sort_components_button: Button
 var convert_ranged_to_thrown_button: Button
+var generate_diagram_button: Button
 
 func _enter_tree():
 	fix_mesh_scale_button = Button.new()
@@ -55,6 +57,11 @@ func _enter_tree():
 	check_level_button.pressed.connect(check_level_structure)
 	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, check_level_button)
 
+	generate_diagram_button = Button.new()
+	generate_diagram_button.text = "Generate UI Diagram"
+	generate_diagram_button.pressed.connect(generate_ui_diagram)
+	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, generate_diagram_button)
+
 
 func _exit_tree():
 	remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_scale_button)
@@ -64,6 +71,7 @@ func _exit_tree():
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, check_objective_keys_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, convert_ranged_to_thrown_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, check_level_button)
+	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, generate_diagram_button)
 	fix_mesh_scale_button.queue_free()
 	fix_mesh_rotation_button.queue_free()
 	sort_components_button.queue_free()
@@ -71,6 +79,7 @@ func _exit_tree():
 	check_objective_keys_button.queue_free()
 	convert_ranged_to_thrown_button.queue_free()
 	check_level_button.queue_free()
+	generate_diagram_button.queue_free()
 
 
 func fix_collision_mesh_scale() -> void:
@@ -419,3 +428,175 @@ func check_level_structure() -> void:
 		push_warning("Level structure has warnings!")
 	else:
 		print("Level structure is valid!")
+
+
+func _find_all_nodes(node: Node) -> Array[Node]:
+	var nodes: Array[Node] = [node]
+	for child in node.get_children():
+		nodes.append_array(_find_all_nodes(child))
+	return nodes
+
+
+func _draw_rect_outline(image: Image, rect: Rect2, color: Color, thickness: int = 1) -> void:
+	var x1 := int(rect.position.x)
+	var y1 := int(rect.position.y)
+	var x2 := int(rect.position.x + rect.size.x - 1)
+	var y2 := int(rect.position.y + rect.size.y - 1)
+
+	var width := image.get_width()
+	var height := image.get_height()
+
+	# Draw horizontal edges (top and bottom)
+	for t in range(thickness):
+		for x in range(x1, x2 + 1):
+			if x >= 0 and x < width:
+				# Top edge
+				var y_top := y1 + t
+				if y_top >= 0 and y_top < height:
+					image.set_pixel(x, y_top, color)
+				# Bottom edge
+				var y_bottom := y2 - t
+				if y_bottom >= 0 and y_bottom < height:
+					image.set_pixel(x, y_bottom, color)
+
+	# Draw vertical edges (left and right)
+	for t in range(thickness):
+		for y in range(y1, y2 + 1):
+			if y >= 0 and y < height:
+				# Left edge
+				var x_left := x1 + t
+				if x_left >= 0 and x_left < width:
+					image.set_pixel(x_left, y, color)
+				# Right edge
+				var x_right := x2 - t
+				if x_right >= 0 and x_right < width:
+					image.set_pixel(x_right, y, color)
+
+
+func _draw_text_on_image(image: Image, position: Vector2, text: String, color: Color) -> void:
+	# Create a temporary SubViewport to render the text
+	var viewport := SubViewport.new()
+	viewport.size = Vector2i(image.get_width(), image.get_height())
+	viewport.transparent_bg = true
+	viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+
+	# Create a label for the text
+	var label := Label.new()
+	label.text = text
+	label.add_theme_font_size_override("font_size", DIAGRAM_FONT_SIZE)
+	label.add_theme_color_override("font_color", color)
+	label.position = position
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+
+	# Add an outline for better readability
+	label.add_theme_constant_override("outline_size", 2)
+	label.add_theme_color_override("font_outline_color", Color.BLACK)
+
+	viewport.add_child(label)
+	add_child(viewport)
+
+	# Wait for render
+	await RenderingServer.frame_post_draw
+
+	# Get the rendered image
+	var text_image := viewport.get_texture().get_image()
+
+	# Blend the text image onto our main image
+	if text_image:
+		image.blend_rect(text_image, Rect2i(Vector2i.ZERO, viewport.size), Vector2i.ZERO)
+
+	# Clean up
+	viewport.queue_free()
+
+
+func generate_ui_diagram() -> void:
+	var editor_interface := get_editor_interface()
+	var scene_root := editor_interface.get_edited_scene_root()
+	if not scene_root:
+		printerr("No scene is currently loaded!")
+		return
+
+	# Get the size of the root control
+	var root_size: Vector2
+	if scene_root is Control:
+		root_size = scene_root.size
+	else:
+		printerr("Scene root is not a Control node! Cannot generate diagram.")
+		return
+
+	if root_size.x <= 0 or root_size.y <= 0:
+		printerr("Scene root has invalid size: %v" % root_size)
+		return
+
+	print("Generating diagram for scene: %s (size: %v)" % [scene_root.name, root_size])
+
+	# Create an image with the same size as the root control
+	var image := Image.create(int(root_size.x), int(root_size.y), false, Image.FORMAT_RGBA8)
+	image.fill(Color(0, 0, 0, 0))  # Transparent background
+
+	# Find all nodes in the scene
+	var all_nodes := _find_all_nodes(scene_root)
+	print("Found %d nodes in scene" % all_nodes.size())
+
+	var diagram_count := 0
+
+	# Process each node
+	for node in all_nodes:
+		if not node is Control:
+			continue
+
+		var control := node as Control
+
+		# Check for diagram metadata
+		var diagram_label := ""
+		var diagram_outline: Color = Color.TRANSPARENT
+
+		if node.has_meta("diagram_label"):
+			diagram_label = str(node.get_meta("diagram_label"))
+
+		if node.has_meta("diagram_outline"):
+			var meta_value = node.get_meta("diagram_outline")
+			if meta_value is Color:
+				diagram_outline = meta_value
+			elif meta_value is String:
+				diagram_outline = Color(meta_value)
+
+		# Skip if no diagram metadata
+		if diagram_label == "" and diagram_outline == Color.TRANSPARENT:
+			continue
+
+		diagram_count += 1
+		print("Processing diagram node: %s (label: '%s', outline: %v)" % [node.name, diagram_label, diagram_outline])
+
+		# Get the control's global rect
+		var rect := control.get_global_rect()
+
+		# Draw outline if color is set
+		if diagram_outline != Color.TRANSPARENT:
+			_draw_rect_outline(image, rect, diagram_outline, 2)
+
+		# Draw label if set
+		if diagram_label != "":
+			var label_color := diagram_outline if diagram_outline != Color.TRANSPARENT else Color.WHITE
+			var center := rect.position + rect.size / 2
+			# Offset to center the text (approximate)
+			center.x -= (diagram_label.length() * DIAGRAM_FONT_SIZE) / 4
+			center.y -= DIAGRAM_FONT_SIZE # / 2
+			await _draw_text_on_image(image, center, diagram_label, label_color)
+
+	print("Processed %d diagram elements" % diagram_count)
+
+	# Save the image
+	var scene_path := scene_root.scene_file_path
+	if scene_path == "":
+		printerr("Scene has not been saved yet! Cannot determine output path.")
+		return
+
+	var output_path := scene_path.get_basename() + ".png"
+
+	var err := image.save_png(output_path)
+	if err != OK:
+		printerr("Failed to save diagram to: %s (error: %d)" % [output_path, err])
+	else:
+		print("Diagram saved to: %s" % output_path)
