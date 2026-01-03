@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=4 uid="uid://v18fidmgep15"]
+[gd_scene load_steps=130 format=4 uid="uid://v18fidmgep15"]
 
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_b7jq5"]
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_dm6vb"]
@@ -30,6 +30,7 @@
 [ext_resource type="Material" uid="uid://g5xoeqn2qoy6" path="res://textures/Color Maps/metal_panels_pt_2.tres" id="17_y6j6u"]
 [ext_resource type="PackedScene" uid="uid://dq3oixjn7s600" path="res://entities/equipment/cone_hat.tscn" id="19_gbhsh"]
 [ext_resource type="PackedScene" uid="uid://d00dbkjpj0iyk" path="res://entities/items/flashlight.tscn" id="20_i2a6y"]
+[ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="21_g2fch"]
 [ext_resource type="PackedScene" uid="uid://b6k3o4n33nlld" path="res://entities/statics/dumpster.tscn" id="21_tu73e"]
 [ext_resource type="PackedScene" uid="uid://cqwe8v0wm6dd4" path="res://entities/statics/mailbox.tscn" id="27_h6dut"]
 [ext_resource type="PackedScene" uid="uid://bvrdhrtkeshuo" path="res://entities/weapons/shotgun_rave.tscn" id="31_f0s1s"]
@@ -599,6 +600,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7304, 0.25000024, -0.31530
 
 [node name="Flashlight" parent="Entities" instance=ExtResource("20_i2a6y")]
 transform = Transform3D(-0.96024495, 0, -0.2791587, 0.07169611, 0.96645683, -0.24661894, 0.26979485, -0.2568292, -0.9280353, 12.397218, 0.4006424, -0.62662554)
+
+[node name="Zombie" parent="Entities" instance=ExtResource("21_g2fch")]
+transform = Transform3D(0.90169674, 0, 0.43236905, 0, 1, 0, -0.43236905, 0, 0.90169674, -2.5394058, 1.1159406, -7.9311886)
+
+[node name="Zombie2" parent="Entities" instance=ExtResource("21_g2fch")]
+transform = Transform3D(-0.6428945, 0, -0.7659546, 0, 1, 0, 0.7659546, 0, -0.6428945, -23.15719, 1.147541, 8.470541)
+
+[node name="Zombie5" parent="Entities" instance=ExtResource("21_g2fch")]
+transform = Transform3D(0.40520534, 0, -0.9142255, 0, 1, 0, 0.9142255, 0, 0.40520534, -42.035553, 1.1475391, -5.3892593)
+
+[node name="Zombie3" parent="Entities" instance=ExtResource("21_g2fch")]
+transform = Transform3D(-0.74588287, 0, 0.66607684, 0, 1, 0, -0.66607684, 0, -0.74588287, -18.546234, 3.0830746, 27.888268)
+
+[node name="Zombie4" parent="Entities" instance=ExtResource("21_g2fch")]
+transform = Transform3D(0.9933907, 0, 0.11478108, 0, 1, 0, -0.11478108, 0, 0.9933907, -29.823896, 3.0830746, 37.790928)
 
 [node name="Lights" type="Node3D" parent="."]
 

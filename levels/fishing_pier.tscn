@@ -1,4 +1,4 @@
-[gd_scene load_steps=258 format=4 uid="uid://b687g8br5b2mv"]
+[gd_scene load_steps=259 format=4 uid="uid://b687g8br5b2mv"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_vf316"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_24vc2"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://8f7bugrofvmc" path="res://entities/props/barrel_fire.tscn" id="19_xtxad"]
 [ext_resource type="AudioStream" uid="uid://ckpw468b6ekwv" path="res://sounds/beach_freesound_372021.wav" id="21_k8bry"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="22_fk3c4"]
+[ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="22_trkbb"]
 [ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="23_24vc2"]
 [ext_resource type="PackedScene" uid="uid://rtq8nqsaa7st" path="res://entities/weapons/crowbar.tscn" id="29_7ipmy"]
 [ext_resource type="PackedScene" uid="uid://c4gewr3tx3am5" path="res://entities/statics/crate_wood.tscn" id="30_7iyb8"]
@@ -1007,20 +1008,53 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 curve = SubResource("Curve3D_cwllu")
 
 [node name="Seagull" parent="Entities/Path3D2" instance=ExtResource("18_cwllu")]
-transform = Transform3D(-0.034164406, 0, -0.99938905, 0, 1, 0, 0.99938905, 0, -0.034164406, -56.470444, 0, 81.14787)
+transform = Transform3D(-0.034164384, 0, -0.9993884, 0, 1, 0, 0.9993884, 0, -0.034164384, -56.470444, 0, 81.14787)
 duration = 32.0
 
 [node name="Seagull2" parent="Entities/Path3D2" instance=ExtResource("18_cwllu")]
-transform = Transform3D(-0.034164406, 0, -0.99938905, 0, 1, 0, 0.99938905, 0, -0.034164406, -56.470444, 0, 81.14787)
+transform = Transform3D(-0.034164384, 0, -0.9993884, 0, 1, 0, 0.9993884, 0, -0.034164384, -56.470444, 0, 81.14787)
 path_offset = 0.33
 
 [node name="Seagull3" parent="Entities/Path3D2" instance=ExtResource("18_cwllu")]
-transform = Transform3D(-0.034164406, 0, -0.99938905, 0, 1, 0, 0.99938905, 0, -0.034164406, -56.470444, 0, 81.14787)
+transform = Transform3D(-0.034164384, 0, -0.9993884, 0, 1, 0, 0.9993884, 0, -0.034164384, -56.470444, 0, 81.14787)
 duration = 29.0
 path_offset = 0.6
 
 [node name="WeaponPistol" parent="Entities" instance=ExtResource("41_y3vix")]
 transform = Transform3D(-0.23910312, 0.36272907, 0.90069824, 0.8349247, 0.5503642, 0, -0.49571207, 0.75201523, -0.43444526, -16.409548, 0.46792176, -0.8161388)
+
+[node name="Zombie" parent="Entities" instance=ExtResource("22_trkbb")]
+transform = Transform3D(0.51986206, 0, 0.8542502, 0, 1, 0, -0.8542502, 0, 0.51986206, -19.059742, -5.850259, -17.352448)
+
+[node name="Zombie2" parent="Entities" instance=ExtResource("22_trkbb")]
+transform = Transform3D(-0.81558245, 0, 0.5786408, 0, 1, 0, -0.5786408, 0, -0.81558245, -20.940372, -5.8502607, 19.650583)
+
+[node name="Zombie3" parent="Entities" instance=ExtResource("22_trkbb")]
+transform = Transform3D(0.5540457, 0, 0.8324863, 0, 1, 0, -0.8324863, 0, 0.5540457, -10.405901, -4.211994, 51.3804)
+
+[node name="Zombie5" parent="Entities" instance=ExtResource("22_trkbb")]
+transform = Transform3D(0.33295098, 0, -0.94294417, 0, 1, 0, 0.94294417, 0, 0.33295098, -4.5773296, -3.591595, 15.599327)
+
+[node name="Zombie6" parent="Entities" instance=ExtResource("22_trkbb")]
+transform = Transform3D(-0.032928646, 0, -0.9994577, 0, 1, 0, 0.9994577, 0, -0.032928646, -4.5773296, -3.591595, 0.65623665)
+
+[node name="Zombie7" parent="Entities" instance=ExtResource("22_trkbb")]
+transform = Transform3D(0.6271208, 0, 0.778922, 0, 1, 0, -0.778922, 0, 0.6271208, -5.3598957, -3.591595, -27.85342)
+
+[node name="Zombie8" parent="Entities" instance=ExtResource("22_trkbb")]
+transform = Transform3D(0.6271208, 0, 0.778922, 0, 1, 0, -0.778922, 0, 0.6271208, 5.906096, 1.0754642, -23.563295)
+
+[node name="Zombie9" parent="Entities" instance=ExtResource("22_trkbb")]
+transform = Transform3D(-0.16205132, 0, 0.9867823, 0, 1, 0, -0.9867823, 0, -0.16205132, 9.420336, 1.0754642, -12.100429)
+
+[node name="Zombie10" parent="Entities" instance=ExtResource("22_trkbb")]
+transform = Transform3D(0.99558336, 0, -0.093882784, 0, 1, 0, 0.093882784, 0, 0.99558336, 1.0335469, 1.2583246, 28.035778)
+
+[node name="Zombie11" parent="Entities" instance=ExtResource("22_trkbb")]
+transform = Transform3D(-0.3239507, 0, -0.9460741, 0, 1, 0, 0.9460741, 0, -0.3239507, 8.760757, 0.88194084, 56.375053)
+
+[node name="Zombie4" parent="Entities" instance=ExtResource("22_trkbb")]
+transform = Transform3D(0.9996284, 0, -0.027258754, 0, 1, 0, 0.027258754, 0, 0.9996284, -4.9874096, -3.714553, 60.986404)
 
 [node name="Lights" type="Node" parent="."]
 
