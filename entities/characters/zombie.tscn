@@ -82,6 +82,9 @@ metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
 [sub_resource type="Resource" id="Resource_kwfyu"]
 script = ExtResource("4_rcyyt")
+move_acceleration = 2.5
+look_speed = 20.0
+look_acceleration = 5.0
 metadata/_custom_type_script = "uid://c7dv7vmk2ynqt"
 
 [sub_resource type="Resource" id="Resource_mn8kb"]
