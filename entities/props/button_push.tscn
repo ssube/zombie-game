@@ -11,8 +11,8 @@
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="7_c6nwv"]
 [ext_resource type="Material" uid="uid://divxfmiycw33x" path="res://materials/button_green_disabled.tres" id="7_iasvb"]
 [ext_resource type="Material" uid="uid://c4ihe7nrnnjeg" path="res://materials/button_green_enabled.tres" id="7_ysgk6"]
-[ext_resource type="AudioStream" uid="uid://brrg1fnj5tpo3" path="res://sounds/1000 Retro Sound Effects/General Sounds/Buttons/sfx_sounds_button3.wav" id="8_b5ffr"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="9_wlayu"]
+[ext_resource type="AudioStream" uid="uid://bwlk2khji1e0a" path="res://sounds/1000 Retro Sound Effects/General Sounds/Buttons/sfx_sounds_button3.ogg" id="10_iasvb"]
 [ext_resource type="Script" uid="uid://w4f2ylmprmmj" path="res://scripts/nodes/actions/ZN_SkinAction.gd" id="11_wlayu"]
 
 [sub_resource type="Resource" id="Resource_0h2if"]
@@ -114,7 +114,7 @@ material = ExtResource("7_ysgk6")
 shape = SubResource("BoxShape3D_0h2if")
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("8_b5ffr")
+stream = ExtResource("10_iasvb")
 volume_db = -24.0
 script = ExtResource("9_wlayu")
 subtitle_text = "Button Pressed"

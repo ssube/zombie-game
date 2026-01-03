@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_je1kp"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="3_g4ime"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="4_howg4"]
-[ext_resource type="AudioStream" uid="uid://bw1yn5cp3l4qe" path="res://sounds/water_splash_freesound_270429.wav" id="4_je1kp"]
+[ext_resource type="AudioStream" uid="uid://ckpwhwxqopkyd" path="res://sounds/water_splash_freesound_270429.ogg" id="4_je1kp"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ut0u3"]
 height = 0.2

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://yf1xc23rqo27"]
 
 [ext_resource type="Texture2D" uid="uid://cmpugrrinf3bw" path="res://textures/bullet_hole_32px.png" id="1_qnpub"]
-[ext_resource type="AudioStream" uid="uid://0w6ilyin7ah4" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/IMPACTS and CONTACTS/Short Contact Sounds/sfx_short_contact_sound_230.wav" id="2_m026x"]
+[ext_resource type="AudioStream" uid="uid://cwjpmwv1ctl1h" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/IMPACTS and CONTACTS/Short Contact Sounds/sfx_short_contact_sound_230.ogg" id="2_m026x"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="3_vagcv"]
 
 [node name="BulletHoleWood" type="Sprite3D"]

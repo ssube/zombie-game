@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dtg1xmuw8iq70"]
 
-[ext_resource type="AudioStream" uid="uid://bw1yn5cp3l4qe" path="res://sounds/water_splash_freesound_270429.wav" id="1_v5pmj"]
+[ext_resource type="AudioStream" uid="uid://ckpwhwxqopkyd" path="res://sounds/water_splash_freesound_270429.ogg" id="1_v5pmj"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_8yfow"]
 
 [node name="WaterSplash" type="AudioStreamPlayer3D"]

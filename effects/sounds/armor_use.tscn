@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://diyfuvos7geoj"]
 
-[ext_resource type="AudioStream" uid="uid://cdoku0tsmp56s" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/ITEMS and POWERUPS/sfx_PowerUp13.wav" id="1_64reh"]
+[ext_resource type="AudioStream" uid="uid://dldgemmmbd52a" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/ITEMS and POWERUPS/sfx_PowerUp13.ogg" id="1_64reh"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_mtqxp"]
 
 [node name="Node3D" type="AudioStreamPlayer3D"]

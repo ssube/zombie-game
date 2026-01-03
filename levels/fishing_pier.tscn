@@ -32,7 +32,6 @@
 [ext_resource type="PackedScene" uid="uid://bu2ntm7c8cyn8" path="res://skies/sky_day.tscn" id="18_tpjaq"]
 [ext_resource type="PackedScene" uid="uid://bxxgl1bih2pk4" path="res://entities/characters/fish_regular.tscn" id="19_2a613"]
 [ext_resource type="PackedScene" uid="uid://8f7bugrofvmc" path="res://entities/props/barrel_fire.tscn" id="19_xtxad"]
-[ext_resource type="AudioStream" uid="uid://ckpw468b6ekwv" path="res://sounds/beach_freesound_372021.wav" id="21_k8bry"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="22_fk3c4"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="22_trkbb"]
 [ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="23_24vc2"]
@@ -41,6 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://femu8fxijdyb" path="res://entities/props/cardboard_box_floating.tscn" id="31_jb54n"]
 [ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/grass_cluster_dark.tscn" id="34_kj7f7"]
 [ext_resource type="PackedScene" uid="uid://1mrkahnnofcf" path="res://entities/equipment/fish_hat.tscn" id="39_85wo0"]
+[ext_resource type="AudioStream" uid="uid://cjf5j8cwsl6hf" path="res://sounds/beach_freesound_372021.ogg" id="40_3d2ce"]
 [ext_resource type="PackedScene" uid="uid://lvteuslo4wik" path="res://entities/weapons/pistol.tscn" id="41_y3vix"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fnrws"]
@@ -1008,15 +1008,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 curve = SubResource("Curve3D_cwllu")
 
 [node name="Seagull" parent="Entities/Path3D2" instance=ExtResource("18_cwllu")]
-transform = Transform3D(-0.034164384, 0, -0.9993884, 0, 1, 0, 0.9993884, 0, -0.034164384, -56.470444, 0, 81.14787)
+transform = Transform3D(-0.034164384, 0, -0.99938834, 0, 1, 0, 0.99938834, 0, -0.034164384, -56.470444, 0, 81.14787)
 duration = 32.0
 
 [node name="Seagull2" parent="Entities/Path3D2" instance=ExtResource("18_cwllu")]
-transform = Transform3D(-0.034164384, 0, -0.9993884, 0, 1, 0, 0.9993884, 0, -0.034164384, -56.470444, 0, 81.14787)
+transform = Transform3D(-0.034164384, 0, -0.99938834, 0, 1, 0, 0.99938834, 0, -0.034164384, -56.470444, 0, 81.14787)
 path_offset = 0.33
 
 [node name="Seagull3" parent="Entities/Path3D2" instance=ExtResource("18_cwllu")]
-transform = Transform3D(-0.034164384, 0, -0.9993884, 0, 1, 0, 0.9993884, 0, -0.034164384, -56.470444, 0, 81.14787)
+transform = Transform3D(-0.034164384, 0, -0.99938834, 0, 1, 0, 0.99938834, 0, -0.034164384, -56.470444, 0, 81.14787)
 duration = 29.0
 path_offset = 0.6
 
@@ -1755,7 +1755,7 @@ transform = Transform3D(0.9659258, 0.06698735, -0.25000006, 0, 0.9659259, 0.2588
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="Sounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.983921, 0, 38.22873)
-stream = ExtResource("21_k8bry")
+stream = ExtResource("40_3d2ce")
 volume_db = -6.0
 unit_size = 25.0
 script = ExtResource("22_fk3c4")
@@ -1767,7 +1767,7 @@ metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="ZN_AudioSubtitle3D2" type="AudioStreamPlayer3D" parent="Sounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.889084, 0, 4.7788467)
-stream = ExtResource("21_k8bry")
+stream = ExtResource("40_3d2ce")
 volume_db = -6.0
 unit_size = 25.0
 script = ExtResource("22_fk3c4")

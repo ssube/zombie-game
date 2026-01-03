@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="2_41ouj"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="3_uequm"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_xiqq5"]
-[ext_resource type="AudioStream" uid="uid://b86kqelvs3lk1" path="res://sounds/seagull_699979_freesound.mp3" id="5_bmjb6"]
+[ext_resource type="AudioStream" uid="uid://c40b3wlewsgxl" path="res://sounds/seagull_699979_freesound.ogg" id="5_5wfb3"]
 [ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="7_kluql"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="8_5wfb3"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="9_4o7yy"]
@@ -78,7 +78,7 @@ transform = Transform3D(0.99999994, 8.447444e-09, 1.7443645e-07, 8.447444e-09, 0
 shape = SubResource("ConvexPolygonShape3D_bmjb6")
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="Seagull"]
-stream = ExtResource("5_bmjb6")
+stream = ExtResource("5_5wfb3")
 volume_db = 6.0
 script = ExtResource("9_4o7yy")
 subtitle_text = "Seagulls"

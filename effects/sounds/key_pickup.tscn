@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dyenf2chlolgq"]
 
-[ext_resource type="AudioStream" uid="uid://jqxm4ibl6w4q" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/INTERACTIONS/sfx_short_interaction_sound_386.wav" id="1_euh7n"]
+[ext_resource type="AudioStream" uid="uid://dbcnssm6fpug4" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/INTERACTIONS/sfx_short_interaction_sound_386.ogg" id="1_euh7n"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="1_vwpmr"]
 
 [node name="KeyPickup" type="AudioStreamPlayer3D"]

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bypbk1livtqai" path="res://entities/props/puddle_water.tscn" id="6_ne41f"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="7_6v5qc"]
 [ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="7_jwf3j"]
-[ext_resource type="AudioStream" uid="uid://1738ctor0i17" path="res://sounds/water_drip_freesound_353686.mp3" id="7_regav"]
+[ext_resource type="AudioStream" uid="uid://b50ph88wstmq2" path="res://sounds/water_drip_freesound_353686.ogg" id="7_ne41f"]
 [ext_resource type="Script" uid="uid://pc2kccompvhn" path="res://scripts/nodes/actions/ZN_ParticleAction.gd" id="8_4d0wg"]
 [ext_resource type="Script" uid="uid://d02hvl1dgf3eu" path="res://scripts/nodes/actions/ZN_DelayAction.gd" id="10_regav"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="11_a0utn"]
@@ -85,7 +85,7 @@ metadata/_custom_type_script = "uid://do7trwtn8xc7t"
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -2, 0)
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("7_regav")
+stream = ExtResource("7_ne41f")
 max_distance = 5.0
 script = ExtResource("7_6v5qc")
 sound_radius = 5.0

@@ -9,7 +9,7 @@
 [ext_resource type="Material" uid="uid://divxfmiycw33x" path="res://materials/button_green_disabled.tres" id="7_21ppk"]
 [ext_resource type="Material" uid="uid://c4ihe7nrnnjeg" path="res://materials/button_green_enabled.tres" id="8_vfdcv"]
 [ext_resource type="Script" uid="uid://b8oatb3tdywrh" path="res://scripts/components/characters/ZC_Skin.gd" id="9_2nhmx"]
-[ext_resource type="AudioStream" uid="uid://brrg1fnj5tpo3" path="res://sounds/1000 Retro Sound Effects/General Sounds/Buttons/sfx_sounds_button3.wav" id="10_nvqgh"]
+[ext_resource type="AudioStream" uid="uid://bwlk2khji1e0a" path="res://sounds/1000 Retro Sound Effects/General Sounds/Buttons/sfx_sounds_button3.ogg" id="10_tjtal"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="11_vaesf"]
 [ext_resource type="Script" uid="uid://djt2jgsv2ihkt" path="res://scripts/nodes/actions/ZN_AnimationAction.gd" id="12_bihfo"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="13_fw6mk"]
@@ -117,7 +117,7 @@ material = SubResource("StandardMaterial3D_gdqc6")
 shape = SubResource("BoxShape3D_0h2if")
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("10_nvqgh")
+stream = ExtResource("10_tjtal")
 volume_db = -24.0
 script = ExtResource("11_vaesf")
 subtitle_text = "Button Pressed"
