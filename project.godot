@@ -40,10 +40,12 @@ runtime/balloon_path="res://menus/dialogue_menu.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=1024
+mouse_cursor/custom_image="uid://culu7tvcc60gf"
+mouse_cursor/custom_image_hotspot=Vector2(3, 3)
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/func_godot/plugin.cfg", "res://addons/gecs/plugin.cfg", "res://addons/godot_object_serializer/plugin.cfg", "res://addons/tattomoosa.vision_cone_3d/plugin.cfg", "res://addons/zombie_tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/func_godot/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/gecs/plugin.cfg", "res://addons/godot_object_serializer/plugin.cfg", "res://addons/tattomoosa.vision_cone_3d/plugin.cfg", "res://addons/zombie_tools/plugin.cfg")
 
 [filesystem]
 
