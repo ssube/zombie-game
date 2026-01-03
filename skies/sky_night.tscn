@@ -11,6 +11,12 @@ sky = SubResource("Sky_fwpx5")
 ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 2
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.052800003, 0.2012266, 0.44, 1)
+fog_density = 0.25
+fog_sky_affect = 0.05
+fog_depth_curve = 2.0
 
 [node name="SkyNight" type="Node3D"]
 
