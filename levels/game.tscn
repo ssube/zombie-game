@@ -151,8 +151,8 @@ transform = Transform3D(0.7582368, 0, -0.6519793, 0, 1, 0, 0.6519793, 0, 0.75823
 equipment_slots = {
 "flashlight": NodePath("Head/Hands/FlashlightEquipMarker"),
 "head": NodePath("CSGCylinder3D/HeadEquipMarker"),
-"weapon_melee": NodePath("Head/Hands/WeaponMarker/MeleeEquipMarker"),
-"weapon_ranged": NodePath("Head/Hands/WeaponResetMarker")
+"weapon_melee": NodePath("Head/Hands/SwingPath/PathFollow3D/MeleeEquipMarker"),
+"weapon_ranged": NodePath("Head/Hands/RangedEquipMarker")
 }
 id = "Player_0"
 
