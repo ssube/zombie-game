@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dixp3emrvmp7g"]
+[gd_scene load_steps=6 format=3 uid="uid://dixp3emrvmp7g"]
 
 [ext_resource type="Script" uid="uid://b1r47a8u2balb" path="res://scripts/menus/save_menu.gd" id="1_x4sum"]
 [ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="2_vaepa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_unvut"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vaepa"]
 
@@ -51,11 +53,19 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
 
-[node name="NewSaveButton" parent="SaveListContainer/VFlowContainer" instance=ExtResource("2_vaepa")]
+[node name="HFlowContainer" type="HFlowContainer" parent="SaveListContainer/VFlowContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="NewSaveButton" parent="SaveListContainer/VFlowContainer/HFlowContainer" instance=ExtResource("2_vaepa")]
 layout_mode = 2
 text = "New Save"
 
-[node name="BackButton" parent="SaveListContainer/VFlowContainer" instance=ExtResource("2_vaepa")]
+[node name="VSeparator" type="VSeparator" parent="SaveListContainer/VFlowContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_unvut")
+
+[node name="BackButton" parent="SaveListContainer/VFlowContainer/HFlowContainer" instance=ExtResource("2_vaepa")]
 layout_mode = 2
 text = "Back"
 
@@ -157,8 +167,8 @@ layout_mode = 2
 text = "Back"
 
 [connection signal="item_activated" from="SaveListContainer/VFlowContainer/SavedGames" to="." method="_on_saved_games_item_activated"]
-[connection signal="pressed" from="SaveListContainer/VFlowContainer/NewSaveButton" to="." method="_on_new_save_pressed"]
-[connection signal="pressed" from="SaveListContainer/VFlowContainer/BackButton" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="SaveListContainer/VFlowContainer/HFlowContainer/NewSaveButton" to="." method="_on_new_save_pressed"]
+[connection signal="pressed" from="SaveListContainer/VFlowContainer/HFlowContainer/BackButton" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="SaveNameContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer/SaveButton" to="." method="_on_dialog_save_button_pressed"]
 [connection signal="pressed" from="SaveNameContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer/BackButton" to="." method="_on_dialog_back_button_pressed"]
 [connection signal="pressed" from="ReplaceConfirmContainer/PanelContainer/MarginContainer/VFlowContainer/HFlowContainer/ReplaceButton" to="." method="_on_dialog_replace_button_pressed"]

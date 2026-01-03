@@ -37,6 +37,7 @@ column_titles_visible = true
 
 [node name="BackButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("2_2wljw")]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Back"
 
 [connection signal="item_activated" from="MarginContainer/VFlowContainer/ObjectiveTree" to="." method="_on_objective_tree_item_activated"]

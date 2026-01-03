@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://r5xbo2n5wsid"]
+[gd_scene load_steps=5 format=3 uid="uid://r5xbo2n5wsid"]
 
 [ext_resource type="Script" uid="uid://dsu0r4lmmurt6" path="res://scripts/menus/game_over_menu.gd" id="1_kqwex"]
 [ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="2_p4gbp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqwex"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p4gbp"]
 
 [node name="GameOverMenu" type="MarginContainer" node_paths=PackedStringArray("killed_label", "score_label")]
 anchors_preset = 15
@@ -33,6 +35,7 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_bottom = 64
 
 [node name="VFlowContainer" type="VFlowContainer" parent="MarginContainer3/GameOverMenu/MarginContainer"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/v_separation = 16
@@ -58,19 +61,35 @@ layout_mode = 2
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_kqwex")
 
-[node name="NewGameButton" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer" instance=ExtResource("2_p4gbp")]
+[node name="HBoxContainer" type="HFlowContainer" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="NewGameButton" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/HBoxContainer" instance=ExtResource("2_p4gbp")]
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "New Game"
 
-[node name="MainMenuButton" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer" instance=ExtResource("2_p4gbp")]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_p4gbp")
+
+[node name="MainMenuButton" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/HBoxContainer" instance=ExtResource("2_p4gbp")]
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Main Menu"
 
-[node name="QuitButton" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer" instance=ExtResource("2_p4gbp")]
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_p4gbp")
+
+[node name="QuitButton" parent="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/HBoxContainer" instance=ExtResource("2_p4gbp")]
 modulate = Color(1, 0.5, 0.5, 1)
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/NewGameButton" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/HBoxContainer/NewGameButton" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="MarginContainer3/GameOverMenu/MarginContainer/VFlowContainer/HBoxContainer/QuitButton" to="." method="_on_quit_pressed"]

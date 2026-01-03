@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuod00oetrc32"]
+[gd_scene load_steps=4 format=3 uid="uid://cuod00oetrc32"]
 
 [ext_resource type="Script" uid="uid://bhgepm2jktnut" path="res://scripts/menus/load_menu.gd" id="1_othn1"]
 [ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="2_xruqe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xruqe"]
 
 [node name="LoadMenu" type="AspectRatioContainer" node_paths=PackedStringArray("save_list")]
 process_mode = 2
@@ -47,14 +49,22 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
 
-[node name="LoadButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("2_xruqe")]
+[node name="HFlowContainer" type="HFlowContainer" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LoadButton" parent="MarginContainer/VFlowContainer/HFlowContainer" instance=ExtResource("2_xruqe")]
 layout_mode = 2
 text = "Load"
 
-[node name="BackButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("2_xruqe")]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VFlowContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xruqe")
+
+[node name="BackButton" parent="MarginContainer/VFlowContainer/HFlowContainer" instance=ExtResource("2_xruqe")]
 layout_mode = 2
 text = "Back"
 
 [connection signal="item_activated" from="MarginContainer/VFlowContainer/SavedGames" to="." method="_on_saved_games_item_activated"]
-[connection signal="pressed" from="MarginContainer/VFlowContainer/LoadButton" to="." method="_on_load_pressed"]
-[connection signal="pressed" from="MarginContainer/VFlowContainer/BackButton" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/HFlowContainer/LoadButton" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/HFlowContainer/BackButton" to="." method="_on_back_pressed"]

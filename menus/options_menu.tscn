@@ -572,7 +572,6 @@ text = "Back"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 32
 theme_override_styles/separator = SubResource("StyleBoxEmpty_labby")
 
 [node name="ApplyButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_1vpws")]

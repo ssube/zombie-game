@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://6oyauuvbuys2" path="res://effects/sounds/menu_click.tscn" id="2_tysbm"]
 
 [node name="AudioButton" type="Button" node_paths=PackedStringArray("audio_stream")]
+custom_minimum_size = Vector2(75, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

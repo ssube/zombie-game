@@ -45,6 +45,7 @@ text = "Your last save was %s ago."
 horizontal_alignment = 1
 
 [node name="HFlowContainer" type="HFlowContainer" parent="CenterContainer/PanelContainer/MarginContainer/VFlowContainer"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 alignment = 1
 

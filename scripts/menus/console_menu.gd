@@ -49,3 +49,8 @@ func on_show() -> void:
 func on_update() -> void:
 	var history := "\n".join(_history)
 	command_history.text = history
+
+
+func _on_run_button_pressed() -> void:
+	var text := command_input.text
+	_on_console_input_text_submitted(text)
