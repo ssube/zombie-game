@@ -113,16 +113,18 @@ static func make_wearing(item: Entity) -> Relationship:
 static func make_used(item: Entity) -> Relationship:
 	var used_component := ZC_Used.new()
 	return Relationship.new(used_component, item)
+	
+static func make_modifier(effect: Component) -> Relationship:
+	var link = ZC_Modifier.new()
+	return Relationship.new(link, effect)
 
 static func make_modifier_damage(multiplier: float) -> Relationship:
 	var damage_modifier := ZC_Effect_Armor.new(multiplier)
-	var link = ZC_Modifier.new()
-	return Relationship.new(link, damage_modifier)
+	return make_modifier(damage_modifier)
 
 static func make_modifier_speed(multiplier: float) -> Relationship:
 	var speed_modifier := ZC_Effect_Speed.new(multiplier)
-	var link = ZC_Modifier.new()
-	return Relationship.new(link, speed_modifier)
+	return make_modifier(speed_modifier)
 
 
 static func get_weapons(entity: Entity) -> Array[ZE_Weapon]:
