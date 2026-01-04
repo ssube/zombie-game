@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://b66j8kby8r4us"]
+
+[ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_0ettg"]
+
+[node name="MainMenu" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
+script = ExtResource("1_0ettg")
+screenshot_camera = NodePath("Screenshot")
+metadata/_custom_type_script = "uid://btaxq2wx10f5v"
+
+[node name="Areas" type="Node3D" parent="."]
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="Markers" type="Node3D" parent="."]
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="Objectives" type="Node3D" parent="."]
+
+[node name="Screenshot" type="Camera3D" parent="."]
