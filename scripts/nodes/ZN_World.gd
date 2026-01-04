@@ -175,7 +175,7 @@ func load_level(level_name: String, spawn_point: String) -> void:
 
 	ECS.world._invalidate_cache("level_loaded")
 
-	%Menu.push_action("Loaded level: %s" % level_name)
+	%Menu.push_action("Loaded level: %s" % level_data.title)
 	level_loaded.emit(last_level, level_name)
 	last_level = level_name
 
