@@ -5,12 +5,19 @@ var attack_timer: float = 0.0
 var attack_tween: Tween = null
 
 func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
+		if OptionsManager.options.cheats.no_aggro:
+			return TickResult.FORCE_EXIT
+
+		attack_timer -= delta
+		if attack_timer > 0.0:
+			return TickResult.CONTINUE
+
+		if attack_tween and attack_tween.is_running():
+			return TickResult.CONTINUE
+
 		var attention := entity.get_component(ZC_Attention) as ZC_Attention
 		if attention == null or not attention.has_target_entity:
 				return TickResult.FORCE_EXIT
-
-		if OptionsManager.options.cheats.no_aggro:
-			return TickResult.FORCE_EXIT
 
 		var target_entity := ECS.world.get_entity_by_id(attention.target_entity)
 		if target_entity == null:
@@ -20,21 +27,16 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 
 		var target_position: Vector3 = target_entity.global_position
 
+		# try to find a valid weapon if we don't have one
 		if entity.current_weapon == null:
 				switch_weapon(entity)
 
+		# no more weapons after switching
 		if entity.current_weapon == null:
 				return TickResult.FORCE_EXIT
 
 		var movement := entity.get_component(ZC_Movement) as ZC_Movement
 		movement.set_look_target(target_position)
-
-		attack_timer -= delta
-		if attack_timer > 0.0:
-			return TickResult.CONTINUE
-
-		if attack_tween and attack_tween.is_running():
-			return TickResult.CONTINUE
 
 		ZombieLogger.debug("Entity attacks target: {0}", [target_entity.name])
 
