@@ -100,6 +100,7 @@ func on_load() -> void:
 
 
 func cache_markers() -> void:
+	clear_markers()
 	var markers := self.get_node(markers_node).get_children()
 	for marker in markers:
 		if marker is Marker3D:
