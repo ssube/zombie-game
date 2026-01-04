@@ -4,5 +4,6 @@
 
 [node name="ImpactBloodZombie" type="AudioStreamPlayer3D"]
 script = ExtResource("1_bwug0")
+subtitle_text = "Zombie pain"
 remove_after = 2.5
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
