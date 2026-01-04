@@ -18,16 +18,22 @@ func _ready() -> void:
 
 
 func tick(entity: Entity, delta: float, behavior: ZC_Behavior) -> int:
+	_tick_delta += 1
+	_time_delta += delta
+
 	var should_run := false
+	var run_delta := delta
+
 	if _tick_delta >= frame_interval:
 		_tick_delta = 0
 		should_run = true
 
 	if _time_delta >= time_interval:
+		run_delta = _time_delta
 		_time_delta = 0.0
 		should_run = true
 
 	if should_run:
-		return _child.tick(entity, delta, behavior)
+		return _child.tick(entity, run_delta, behavior)
 
 	return skip_state
