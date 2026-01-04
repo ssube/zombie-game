@@ -8,15 +8,16 @@ material = ExtResource("1_wk171")
 [node name="GrassClusterGreen" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99559313, 0.09377817, 0, -0.09377817, 0.99559313, 0, 0, 0)
 cast_shadow = 2
 mesh = SubResource("QuadMesh_ersfw")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.70710677, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710677, 0, 0, 0)
+transform = Transform3D(0.70710677, -0.08681158, -0.70175767, 0, 0.99243516, -0.122770116, 0.7071068, 0.08681157, 0.7017576, -0.033086468, -0.0057883654, 0.033086464)
 cast_shadow = 2
 mesh = SubResource("QuadMesh_ersfw")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.5, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.5, 0, 0, 0)
+transform = Transform3D(-0.5, -0.08995306, -0.861341, 0, 0.994591, -0.10386884, 0.8660254, -0.051934425, -0.4972955, 0, 0, 0)
 cast_shadow = 2
 mesh = SubResource("QuadMesh_ersfw")
