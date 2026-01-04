@@ -57,6 +57,23 @@ func _update_effects(entity: Entity, stamina: ZC_Stamina) -> void:
 	entity.add_relationship(RelationshipUtils.make_effect(effect))
 
 
+func _get_body_velocity(entity: Entity) -> Vector3:
+	var node := entity as Node
+	if node is RigidBody3D:
+		var physics_body := node as RigidBody3D
+		return physics_body.linear_velocity
+
+	if node is CharacterBody3D:
+		var character_body := node as CharacterBody3D
+		return character_body.velocity
+
+	if entity.has_component(ZC_Velocity):
+		var c_velocity := entity.get_component(ZC_Velocity) as ZC_Velocity
+		return c_velocity.velocity
+
+	return Vector3.ZERO
+
+
 func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 	var should_update_effects := _should_update_effects(delta)
 
@@ -66,7 +83,8 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 			continue
 
 		# Only recharge if they are still
-		var velocity := entity.get_component(ZC_Velocity) as ZC_Velocity
+		var velocity := _get_body_velocity(entity)
+
 		var recharge: float = 0.0
 		if is_zero_approx(velocity.linear_velocity.length_squared()):
 			recharge += stamina.still_recharge_rate
