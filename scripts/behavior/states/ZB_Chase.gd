@@ -10,7 +10,14 @@ var navigation_path: PackedVector3Array = []
 
 func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		var attention := entity.get_component(ZC_Attention) as ZC_Attention
-		if attention == null or not attention.has_target_position:
+		if attention == null:
+				return TickResult.FORCE_EXIT
+
+		var movement := entity.get_component(ZC_Movement) as ZC_Movement
+		if movement == null:
+				return TickResult.FORCE_EXIT
+
+		if not attention.has_target_position:
 				return TickResult.FORCE_EXIT
 
 		if OptionsManager.options.cheats.no_aggro:
@@ -37,4 +44,5 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 
 		navigation_timer = navigation_interval
 		navigation_path = NavigationUtils.update_navigation_path(node_3d, target_position)
+		movement.set_move_target(target_position) # TODO: check if this should use the navigation path
 		return TickResult.CONTINUE

@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4406rbr42a1e"]
+[gd_scene load_steps=13 format=3 uid="uid://b4406rbr42a1e"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_n0ht5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_3pflf"]
 [ext_resource type="Script" uid="uid://c86wth8kvlbt7" path="res://scripts/components/weapons/ZC_Weapon_Melee.gd" id="3_82ul1"]
 [ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="3_lu3nb"]
+[ext_resource type="Material" uid="uid://bajoa8ksbfb81" path="res://materials/skins/zombie_healthy.tres" id="5_3voqo"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="5_4d0u4"]
+[ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="5_wmxwu"]
 [ext_resource type="Script" uid="uid://dlb4vkkjdb658" path="res://scripts/nodes/actions/ZN_HealthAction.gd" id="6_4d0u4"]
 [ext_resource type="Script" uid="uid://crylbd231pgne" path="res://scripts/nodes/conditions/ZN_FactionCondition.gd" id="7_3voqo"]
 
@@ -15,21 +17,36 @@ cooldown_time = 0.5
 damage = 10
 metadata/_custom_type_script = "uid://c86wth8kvlbt7"
 
+[sub_resource type="Resource" id="Resource_qr5cl"]
+script = ExtResource("5_wmxwu")
+droppable = false
+slot = "weapon_melee"
+metadata/_custom_type_script = "uid://bdq3y7j08fnad"
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_3voqo"]
 radius = 0.25
 
 [node name="ZombieMelee" type="Node3D"]
 script = ExtResource("1_n0ht5")
 prefab_path = "res://entities/weapons/zombie_melee.tscn"
-component_resources = Array[ExtResource("2_3pflf")]([SubResource("Resource_lu3nb")])
+component_resources = Array[ExtResource("2_3pflf")]([SubResource("Resource_lu3nb"), SubResource("Resource_qr5cl")])
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-visible = false
-radius = 0.25
-radial_segments = 8
-rings = 4
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.3, 0, 0)
+radius = 0.1
+height = 1.0
+material = ExtResource("5_3voqo")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.3, 0, 0)
+radius = 0.1
+height = 1.0
+material = ExtResource("5_3voqo")
 
 [node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("parent_entity")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.43529963)
 collision_layer = 16
 collision_mask = 11
 script = ExtResource("5_4d0u4")
@@ -47,3 +64,7 @@ health_mode = 0
 script = ExtResource("7_3voqo")
 apply_to_factions = Array[String](["friendly_players"])
 metadata/_custom_type_script = "uid://crylbd231pgne"
+
+[node name="DebugSphere" type="CSGSphere3D" parent="Area3D"]
+visible = false
+radius = 0.25

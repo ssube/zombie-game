@@ -113,17 +113,21 @@ point_count = 2
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwqt7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uqboj"]
-radius = 0.25
+radius = 0.32
 
-[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("swing_path_follower", "current_weapon", "inventory_node", "weapon_node")]
+[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("swing_path_follower", "current_weapon", "equipment_slots", "inventory_node", "weapon_node")]
 collision_layer = 16
 collision_mask = 31
 mass = 20.0
 script = ExtResource("1_rffgv")
 swing_path_follower = NodePath("Body/Path3D/PathFollow3D")
 current_weapon = NodePath("Inventory/ZombieMelee")
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+extra_components = null
 prefab_path = "res://entities/characters/zombie.tscn"
 component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_0ios3"), SubResource("Resource_4i4kv"), SubResource("Resource_u6a8x"), SubResource("Resource_8aduj"), SubResource("Resource_ull4n"), SubResource("Resource_euqm3"), SubResource("Resource_jpnnd"), SubResource("Resource_sn1gh"), SubResource("Resource_4bumh"), SubResource("Resource_kwfyu"), SubResource("Resource_mn8kb"), SubResource("Resource_wwun5"), SubResource("Resource_7tmu0")])
 
@@ -134,7 +138,7 @@ material = ExtResource("8_tfdn2")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.5)
-radius = 0.25
+radius = 0.3
 material = ExtResource("8_tfdn2")
 
 [node name="Path3D" type="Path3D" parent="Body"]
@@ -144,6 +148,7 @@ curve = SubResource("Curve3D_j7lgi")
 [node name="PathFollow3D" type="PathFollow3D" parent="Body/Path3D"]
 
 [node name="WeaponMarker" type="Marker3D" parent="Body/Path3D/PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14615315, 0)
 
 [node name="BodyShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_iwqt7")
@@ -166,7 +171,7 @@ visible = false
 [node name="Inventory" type="Node3D" parent="."]
 
 [node name="ZombieMelee" parent="Inventory" instance=ExtResource("27_j7lgi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44078487, -0.60281074)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19761527, -0.6243353)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 

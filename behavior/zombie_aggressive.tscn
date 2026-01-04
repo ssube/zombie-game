@@ -135,15 +135,16 @@ any_source = true
 target_state = NodePath("../../States/ZB_State_Idle")
 metadata/_custom_type_script = "uid://c6pla5ya01llv"
 
-[node name="VisionCone3D" type="Area3D" parent="." node_paths=PackedStringArray("vision_test_ignore_bodies")]
+[node name="VisionCone3D" type="Area3D" parent="."]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 16
 collision_mask = 26
 monitoring = false
 script = ExtResource("2_jabh2")
 active = false
+angle = 60.0
+debug_draw = true
 vision_test_mode = 0
-vision_test_ignore_bodies = [null]
 collision_layer_ = 16
 collision_mask_ = 26
 

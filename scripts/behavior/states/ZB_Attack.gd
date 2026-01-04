@@ -42,6 +42,8 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		if EntityUtils.is_broken(weapon):
 				weapon = switch_weapon(entity)
 
+		EntityUtils.equip_weapon(entity, weapon)
+
 		var melee_weapon = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
 		attack_timer = melee_weapon.cooldown_time
 
