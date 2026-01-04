@@ -48,7 +48,7 @@ func _time_of_day_changed(_entity: Entity, component: ZC_Weather, new_value: Var
 	var time_group := "time_%s" % time_name.to_lower()
 
 	var group_nodes := get_tree().get_nodes_in_group(time_group)
-	print("Time group %s has %d nodes" % [time_name, group_nodes.size()])
+	ZombieLogger.debug("Time group {0} has {1} nodes", [time_name, group_nodes.size()])
 	for node in group_nodes:
 		_toggle_node(node, true)
 
@@ -66,7 +66,7 @@ func _weather_type_changed(_entity: Entity, component: ZC_Weather, new_value: Va
 	var weather_name := ZC_Weather.WeatherType.keys()[new_value] as String
 	var weather_group := "weather_%s" % weather_name.to_lower()
 	var group_nodes := get_tree().get_nodes_in_group(weather_group)
-	print("Weather group %s has %d nodes" % [weather_group, group_nodes.size()])
+	ZombieLogger.debug("Weather group {0} has {1} nodes", [weather_group, group_nodes.size()])
 	for node in group_nodes:
 		_toggle_node(node, true)
 
@@ -109,7 +109,7 @@ func _set_level_environment(component: ZC_Weather) -> void:
 	if environment == null:
 		var time_name := ZC_Weather.TimeOfDay.keys()[component.time_of_day] as String
 		var weather_name := ZC_Weather.WeatherType.keys()[component.weather_type] as String
-		printerr("No matching environment for conditions %s and %s" % [time_name, weather_name])
+		ZombieLogger.warning("No matching environment for conditions {0} and {1}", [time_name, weather_name])
 		return
 
 	var level_environment := level.get_node(level.environment_node)

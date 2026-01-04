@@ -15,7 +15,7 @@ static func _register_scripts() -> void:
 	ObjectSerializer.register_script("ZP_Level", ZP_SavedLevel)
 	ObjectSerializer.register_script("ZP_Objectives", ZP_SavedObjectives)
 	ObjectSerializer.register_script("ZP_Relationship", ZP_SavedRelationship)
-	print("Registered serialization scripts.")
+	ZombieLogger.info("Registered serialization scripts.")
 
 
 static func create_path() -> bool:
@@ -54,9 +54,9 @@ static func list_saves() -> Array[String]:
 	var file_name = save_dir.get_next()
 	while file_name != "":
 		if save_dir.current_is_dir():
-			printerr("Nested save folders are not supported!")
+			ZombieLogger.warning("Nested save folders are not supported!")
 		else:
-			print("Found save: ", file_name)
+			ZombieLogger.debug("Found save: {0}", [file_name])
 			var clean_name = file_name.replace("_entities.tres", "").replace("_objectives.tres", "").replace(".tres", "")
 			var modified_at = FileAccess.get_modified_time("user://saves/" + file_name)
 			save_names[clean_name] = modified_at
@@ -100,7 +100,7 @@ static func save_game_json(_name: String, root: Node) -> bool:
 
 	var serialized: Variant = DictionarySerializer.serialize_var(game_data)
 	var json := JSON.stringify(serialized, "\t")
-	print(json)
+	ZombieLogger.debug("Serialized game data JSON:\n\n{0}", [json])
 
 	return true
 
@@ -139,7 +139,7 @@ static func load_game(name: String, root: Node, use_json: bool = false) -> bool:
 static func load_game_resource(name: String, root: Node) -> bool:
 	var game_data := ResourceLoader.load("user://saves/%s.tres" % name, "ZP_SavedGame") as ZP_SavedGame
 	if game_data == null:
-		printerr("Failed to load save game: ", name)
+		ZombieLogger.error("Failed to load save game: {0}", [name])
 		return false
 
 	_cache_components()
@@ -150,7 +150,7 @@ static func load_game_resource(name: String, root: Node) -> bool:
 
 	var level_data := game_data.levels.get(game_data.current_level, null) as ZP_SavedLevel
 	if level_data == null:
-		printerr("No saved data for level: ", game_data.current_level)
+		ZombieLogger.error("No saved data for level: {0}", [game_data.current_level])
 		return false
 
 	deserialize_level(level_data)
@@ -218,7 +218,7 @@ static func serialize_relationship(relationship: Relationship) -> ZP_SavedRelati
 		else:
 			var target_type := type_string(typeof(relationship.target))
 			assert(false, "Unknown relationship target type!")
-			printerr("Unknown relationship target type: %s" % target_type)
+			ZombieLogger.error("Unknown relationship target type: {0}", [target_type])
 
 	return saved_relationship
 
@@ -253,7 +253,7 @@ static func deserialize_component(saved_component: ZP_SavedComponent) -> Compone
 		for key in saved_component.data.keys():
 			component[key] = saved_component.data[key]
 	else:
-		printerr("Unknown component type during deserialization: ", saved_component.type)
+		ZombieLogger.error("Unknown component type during deserialization: {0}", [saved_component.type])
 
 	return component
 
@@ -265,7 +265,7 @@ static func _get_or_create_entity(saved_entity: ZP_SavedEntity) -> Entity:
 		assert(saved_entity.prefab_path != "", "Prefab path is empty, cannot load entity prefab")
 		var prefab := ResourceLoader.load(saved_entity.prefab_path) as PackedScene
 		if prefab == null:
-			printerr("Failed to load prefab at path: ", saved_entity.prefab_path)
+			ZombieLogger.error("Failed to load prefab at path: {0}", [saved_entity.prefab_path])
 
 		entity = prefab.instantiate() as Entity
 		entity.id = saved_entity.id
@@ -305,7 +305,7 @@ static func deserialize_relationship(saved_relationship: ZP_SavedRelationship, e
 		if saved_relationship.target_entity_id in entity_lookup:
 			relationship.target = entity_lookup[saved_relationship.target_entity_id]
 		else:
-			printerr("Unknown target entity ID during relationship deserialization: ", saved_relationship.target_entity_id)
+			ZombieLogger.error("Unknown target entity ID during relationship deserialization: {0}", [saved_relationship.target_entity_id])
 	else:
 		relationship.target = deserialize_component(saved_relationship.target_component)
 

@@ -32,19 +32,19 @@ func _ready():
 	var system_root = %Systems
 	for child in system_root.get_children():
 		if child is System:
-			print("Registering system: ", child.get_path())
+			ZombieLogger.info("Registering system: {0}", [child.get_path()])
 			ECS.world.add_system(child)
 		else:
-			printerr("Child is not a system: ", child.get_path())
+			ZombieLogger.error("Child is not a system: {0}", [child.get_path()])
 
 	# Create the observers
 	var observer_root = %Observers
 	for child in observer_root.get_children():
 		if child is Observer:
-			print("Registering observer: ", child.get_path())
+			ZombieLogger.info("Registering observer: {0}", [child.get_path()])
 			ECS.world.add_observer(child)
 		else:
-			printerr("Child is not an observer: ", child)
+			ZombieLogger.error("Child is not an observer: {0}", [child.get_path()])
 
 	# Create the root entities
 	var entity_root = %Entities
@@ -55,7 +55,7 @@ func _ready():
 	if CommandLineArgs.check_help(user_args):
 		get_tree().quit()
 
-	print("Running with user arguments: ", JSON.stringify(user_args))
+	ZombieLogger.info("Running with user arguments: {0}", [JSON.stringify(user_args)])
 
 	CommandLineArgs.load_mods_from_args(user_args)
 
@@ -63,7 +63,8 @@ func _ready():
 		campaign.merge_campaign(CommandLineArgs.get_campaign(user_args, campaign))
 	else:
 		campaign = CommandLineArgs.get_campaign(user_args, campaign)
-	print("Loaded campaign: %s" % campaign.title)
+
+	ZombieLogger.info("Loaded campaign: {0}", [campaign.title])
 
 	if OS.is_debug_build() and debug_skips_main_menu:
 		# look up debug level from CLI args
@@ -82,12 +83,12 @@ func _process(delta):
 func _register_level_entities() -> void:
 	var level_node = self.find_child("Level", false)
 	if level_node == null:
-		printerr("Missing level node!")
+		ZombieLogger.error("Missing level node!")
 		return
 
 	var level_entity_root = level_node.get_child(0).get_node("Entities")
 	if level_entity_root == null:
-		printerr("Level is missing Entities node!")
+		ZombieLogger.error("Level is missing Entities node!")
 
 	for child in level_entity_root.get_children():
 		add_entity(child)
@@ -108,11 +109,11 @@ func clear_world(keep_players: bool = true) -> void:
 	var entity_list := ECS.world.entities.duplicate()
 	for entity in entity_list:
 		if entity == null:
-			printerr("Remove null node from ECS: ", entity)
+			ZombieLogger.warning("Remove null node from ECS: {0}", [entity])
 			continue
 
 		if entity.is_queued_for_deletion() or not entity.is_inside_tree():
-			printerr("Tried to remove invalid node: ", entity, entity.is_queued_for_deletion(), entity.is_inside_tree())
+			ZombieLogger.warning("Tried to remove invalid node: {0} {1} {2}", [entity, entity.is_queued_for_deletion(), entity.is_inside_tree()])
 			continue
 
 		if entity in keepers:
@@ -136,10 +137,10 @@ func load_level(level_name: String, spawn_point: String) -> void:
 
 	var level_data := campaign.get_level(level_name)
 	if level_data == null:
-		printerr("Invalid level name: ", level_name)
+		ZombieLogger.error("Invalid level name: {0}", [level_name])
 		return
 
-	print("Loading level: %s" % level_data.title)
+	ZombieLogger.debug("Loading level: {0}", [level_data.title])
 
 	var level_hints := level_data.loading_hints.duplicate()
 	if level_data.hint_mode == level_data.HintMode.APPEND:
@@ -181,12 +182,12 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	var spawn_node := next_level.get_node(spawn_point) as Node3D
 	last_spawn = spawn_point
 	if spawn_point == "" or spawn_node == null:
-		printerr("Invalid spawn point: ", spawn_point)
+		ZombieLogger.warning("Invalid spawn point: {0}", [spawn_point])
 		spawn_node = next_level.get_node("Markers/Start") as Node3D
 		last_spawn = "Markers/Start"
 
 	if spawn_node == null:
-		printerr("No fallback spawn point: Markers/Start")
+		ZombieLogger.error("No fallback spawn point: Markers/Start")
 		return
 
 	var players: Array[Entity] = QueryBuilder.new(ECS.world).with_all([ZC_Player]).execute()
@@ -201,13 +202,13 @@ func load_level(level_name: String, spawn_point: String) -> void:
 
 func add_entity(node: Node) -> void:
 	if node is Entity:
-		print("Registering entity: ", node)
+		ZombieLogger.debug("Registering entity: {0}", [node.get_path()])
 		ECS.world.add_entity(node)
 	elif node is Node:
 		for child in node.get_children():
 			add_entity(child)
 	else:
-		printerr("Child is not an entity: ", node.get_path(), node.get_class())
+		ZombieLogger.warning("Child is not an entity: {0} {1}", [node.get_path(), node.get_class()])
 
 
 func _register_level_objectives() -> void:
@@ -215,12 +216,12 @@ func _register_level_objectives() -> void:
 
 	var level_node = self.find_child("Level", false)
 	if level_node == null:
-		printerr("Missing level node!")
+		ZombieLogger.error("Missing level node!")
 		return
 
 	var level_objective_root = level_node.get_child(0).get_node("Objectives")
 	if level_objective_root == null:
-		printerr("Level is missing Objectives node!")
+		ZombieLogger.error("Level is missing Objectives node!")
 		return
 
 	var objectives: Array[ZN_BaseObjective] = []
@@ -228,5 +229,5 @@ func _register_level_objectives() -> void:
 		if child is ZN_BaseObjective:
 			objectives.append(child)
 
-	print("Loading %d root objectives" % objectives.size())
+		ZombieLogger.info("Loading {0} root objectives", [objectives.size()])
 	ObjectiveManager.set_objectives(objectives)

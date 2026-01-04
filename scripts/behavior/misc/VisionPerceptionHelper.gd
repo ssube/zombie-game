@@ -39,7 +39,7 @@ func _on_vision_area_body_sighted(body: Node) -> void:
 	if not _cache_perception():
 		return
 
-	print("Zombie saw body: ", body.name)
+	ZombieLogger.debug("Zombie saw body: {0}", [body.name])
 	var seen_entity := CollisionUtils.get_collider_entity(body)
 	if seen_entity == null:
 		return
@@ -57,7 +57,7 @@ func _on_vision_area_body_hidden(body: Node) -> void:
 	if not _cache_perception():
 		return
 
-	print("Zombie lost sight of body: ", body.name)
+	ZombieLogger.debug("Zombie lost sight of body: {0}", [body.name])
 	var seen_entity := CollisionUtils.get_collider_entity(body)
 	if seen_entity == null:
 		return

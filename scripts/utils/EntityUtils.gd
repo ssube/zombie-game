@@ -48,9 +48,9 @@ static func equip_weapon(character: ZE_Character, weapon: ZE_Weapon) -> ZE_Weapo
 
 	if weapon != null:
 		if equip_item(character, weapon):
-			print("Equipped weapon: %s." % weapon.name)
+			ZombieLogger.debug("Equipped weapon: {0}", [weapon.name])
 		else:
-			printerr("Unable to equip weapon: %s" % weapon.name) # TODO: find a way to return this instead of the old weapon
+			ZombieLogger.error("Unable to equip weapon: {0}", [weapon.name]) # TODO: find a way to return this instead of the old weapon
 
 	character.current_weapon = weapon
 	return old_weapon

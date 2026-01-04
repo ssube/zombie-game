@@ -22,7 +22,7 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 	if property == "current_skin":
 		var old_name := ZC_Skin.SkinType.keys()[old_value] as String
 		var new_name := ZC_Skin.SkinType.keys()[new_value] as String
-		print("Current skin changed from %s to %s" % [old_name, new_name])
+		ZombieLogger.debug("Current skin changed from {0} to {1}", [old_name, new_name])
 
 		# TODO: find a better way to hide old groups
 		var hide_groups: Array = []

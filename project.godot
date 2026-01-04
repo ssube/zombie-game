@@ -23,6 +23,7 @@ ObjectiveManager="*res://scripts/singletons/ObjectiveManager.gd"
 OptionsManager="*res://scripts/singletons/OptionsManager.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 ECS="*res://addons/gecs/ecs/ecs.gd"
+ZombieLogger="*res://scripts/singletons/Logger.gd"
 
 [debug]
 

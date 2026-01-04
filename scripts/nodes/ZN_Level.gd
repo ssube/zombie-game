@@ -31,17 +31,17 @@ var _marker_cache: Dictionary[String, Marker3D] = {}
 
 func _take_level_screenshot() -> void:
 	if not Engine.is_editor_hint():
-		push_error("Screenshot function should only be used in the editor.")
+		ZombieLogger.error("Screenshot function should only be used in the editor.")
 		return
 
 	if screenshot_camera == null:
-		push_error("No screenshot camera assigned.")
+		ZombieLogger.error("No screenshot camera assigned.")
 		return
 
 	# Get the scene file path to derive the screenshot name
 	var scene_path := self.scene_file_path
 	if scene_path.is_empty():
-		push_error("Scene has not been saved yet. Save the scene first.")
+		ZombieLogger.error("Scene has not been saved yet. Save the scene first.")
 		return
 
 	# Create a SubViewport to render from the screenshot camera
@@ -57,7 +57,7 @@ func _take_level_screenshot() -> void:
 	viewport.add_child(camera_copy)
 	add_child(viewport)
 	camera_copy.global_transform = screenshot_camera.global_transform
-	print("camera copy position: ", camera_copy.global_position)
+	ZombieLogger.info("Camera copy position: {0}", [camera_copy.global_position])
 
 	# Force render update
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
@@ -82,10 +82,10 @@ func _take_level_screenshot() -> void:
 	# Save the image
 	var error := image.save_png(output_path)
 	if error != OK:
-		push_error("Failed to save screenshot: " + str(error))
+		ZombieLogger.error("Failed to save screenshot: {0}", [error])
 		return
 
-	print("Screenshot saved to: ", output_path)
+	ZombieLogger.info("Screenshot saved to: {0}", [output_path])
 
 	# Refresh the filesystem so the image appears in the editor
 	#if Engine.is_editor_hint():

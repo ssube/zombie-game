@@ -22,7 +22,7 @@ func tick(entity: Entity, delta: float, behavior: ZC_Behavior) -> TickResult:
 	# Get flee position from blackboard
 	var flee_position = behavior.blackboard.get(BehaviorUtils.flee_position)
 	if flee_position == null:
-		printerr("No flee_position in blackboard for entity: ", entity.id)
+		ZombieLogger.error("No flee_position in blackboard for entity: {0}", [entity.id])
 		return TickResult.FORCE_EXIT
 
 	var node_3d := entity.root_3d as Node3D

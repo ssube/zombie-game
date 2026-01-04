@@ -85,7 +85,7 @@ func _on_inventory_list_item_activated(index: int) -> void:
 			equipped = EntityUtils.equip_item(player, item)
 
 		if not equipped:
-			printerr("Unable to equip %s!" % item.name)
+			ZombieLogger.error("Unable to equip {0}!", [item.name])
 	else:
 		player.add_relationship(RelationshipUtils.make_used(item))
 

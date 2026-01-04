@@ -120,7 +120,7 @@ func set_current_objective(key: String) -> bool:
 
 func add_objective(objective: ZN_BaseObjective) -> void:
 	if objective.key in objectives:
-		printerr("Duplicate objective key: ", objective, objectives[objective.key])
+		ZombieLogger.error("Duplicate objective key: {0}", [objective.key])
 		return
 
 	objectives[objective.key] = objective

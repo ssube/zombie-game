@@ -38,15 +38,15 @@ func _on_objective_tree_item_activated() -> void:
 	# check if objective is active and not completed - ready to select
 	var objective := ObjectiveManager.find_objective_title(objective_title)
 	if objective == null:
-		printerr("Objective not found: ", objective_title)
+		ZombieLogger.warning("Objective not found: {0}", [objective_title])
 		return
 
 	if not objective.active:
-		printerr("Objective is not active: ", objective_title)
+		ZombieLogger.warning("Objective is not active: {0}", [objective_title])
 		return
 
 	if objective.is_completed():
-		printerr("Objective is already completed: ", objective_title)
+		ZombieLogger.warning("Objective is already completed: {0}", [objective_title])
 		return
 
 	objective_changed.emit(objective)

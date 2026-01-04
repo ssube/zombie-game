@@ -59,7 +59,7 @@ func toggle_cheat_no_clip(value: bool) -> void:
 	for player in players:
 		var character_player := player.get_node(".") as CharacterBody3D
 		var physics_player := player.get_node(".") as PhysicsBody3D
-		print("Enabling no-clip for player %s" % player.name)
+		ZombieLogger.debug("Enabling no-clip for player {0}", [player.name])
 		physics_player.set_collision_layer_value(4, not value)
 		physics_player.set_collision_layer_value(8, value)
 		physics_player.set_collision_mask_value(1, not value)

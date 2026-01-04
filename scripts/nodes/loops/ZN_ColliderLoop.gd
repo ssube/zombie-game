@@ -17,7 +17,7 @@ func _get_area(source: Node) -> ZN_TriggerArea3D:
 func _run(source: Node, event: Enums.ActionEvent, _actor: Node) -> void:
 	var target := _get_area(source)
 	if target == null:
-		printerr("Loop area must be a trigger area!")
+		ZombieLogger.error("Loop area must be a trigger area!")
 		return
 
 	for collider in target._colliders:

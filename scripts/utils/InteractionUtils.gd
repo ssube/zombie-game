@@ -66,7 +66,7 @@ static func interact(actor: Entity, target: Entity, menu) -> bool:
 		var check_func := handler[0] as Callable
 		var handle_func := handler[1] as Callable
 		if check_func.call(target):
-			print("Running interaction handler %s for target %s" % [key, target.name])
+			ZombieLogger.debug("Running interaction handler {0} for target {1}", [key, target.name])
 			var status := handle_func.call(actor, target, menu) as HandlerStatus
 			match status:
 				HandlerStatus.CONTINUE:
@@ -202,7 +202,7 @@ static func use_door(_actor: Entity, target: Entity, _menu: ZM_Menu) -> HandlerS
 
 	if door.open_on_use and not EntityUtils.is_locked(target):
 		door.is_open = !door.is_open
-		print("Door is open: ", door)
+		ZombieLogger.debug("Door is open: {0}", [door.is_open])
 
 		var interactive := target.get_component(ZC_Interactive) as ZC_Interactive
 		if interactive.use_sound:
@@ -265,7 +265,7 @@ static func complete_objective(_actor: Entity, target: Entity, _menu: ZM_Menu) -
 		return HandlerStatus.SKIP
 
 	objective.is_complete = true
-	print("Completed objective: ", objective.key)
+	ZombieLogger.info("Completed objective: {0}", [objective.key])
 
 	var interactive := target.get_component(ZC_Interactive) as ZC_Interactive
 	if interactive.use_sound:
@@ -285,7 +285,7 @@ static func use_portal(_actor: Entity, target: Entity, _menu: ZM_Menu) -> Handle
 		return HandlerStatus.SKIP
 
 	portal.is_active = true
-	print("Activated portal: ", portal)
+	ZombieLogger.info("Activated portal: {0}", [portal])
 
 	var interactive := target.get_component(ZC_Interactive) as ZC_Interactive
 	if interactive.use_sound:

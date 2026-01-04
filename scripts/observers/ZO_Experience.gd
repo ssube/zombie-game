@@ -33,7 +33,7 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 			_on_level_up(entity, c_experience, old_level, new_level)
 
 		if EntityUtils.is_player(entity):
-			print("Experience changed for player: ", property, " from ", old_value, " to ", new_value, " (Level: ", new_level, ")")
+			ZombieLogger.debug("Experience changed for player: {0} from {1} to {2} (level: {3})", [entity.get_path(), old_value, new_value, new_level])
 			if show_experience_messages:
 				%Menu.push_action("Gained %d Experience" % (new_value - old_value))
 
@@ -58,7 +58,7 @@ func _calculate_level(c_experience: ZC_Experience) -> int:
 
 
 func _on_level_up(entity: Entity, _c_experience: ZC_Experience, old_level: int, new_level: int) -> void:
-	print("Entity %s leveled up from %d to %d!" % [entity.id, old_level, new_level])
+	ZombieLogger.info("Entity {0} leveled up from {1} to {2}!", [entity.id, old_level, new_level])
 
 	# TODO: Show level-up menu for players
 	if EntityUtils.is_player(entity):
@@ -68,5 +68,5 @@ func _on_level_up(entity: Entity, _c_experience: ZC_Experience, old_level: int, 
 func _show_level_up_menu(_entity: Entity, old_level: int, new_level: int) -> void:
 	# TODO: Implement level-up menu
 	# For now, just log to console
-	print("Player leveled up! Old level: %d, New level: %d" % [old_level, new_level])
+	ZombieLogger.info("Player leveled up! Old level: {0}, new level: {1}", [old_level, new_level])
 	# %Menu.show_level_up(old_level, new_level)

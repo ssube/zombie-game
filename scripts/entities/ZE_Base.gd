@@ -17,7 +17,7 @@ signal action_event(event: Enums.ActionEvent, actor: Node)
 func _generate_instance_id() -> void:
 	var root := self.owner
 	if root == null:
-		push_error("Owner is null, cannot generate ID.")
+		ZombieLogger.error("Owner is null, cannot generate ID.")
 		return
 
 	var script := self.get_script() as Script
@@ -33,7 +33,7 @@ func _generate_instance_id() -> void:
 		str(salt)
 	]
 	self.id = "_".join(parts)
-	print("Generated new entity ID: ", self.id)
+	ZombieLogger.info("Generated new entity ID: {0}", [self.id])
 
 
 func _save_prefab_path() -> void:

@@ -76,7 +76,7 @@ func _check_transitions(delta: float, behavior: ZC_Behavior, force_exit: bool = 
 		if force_exit:
 				if default_state:
 					if default_state.name == current_state.name:
-						printerr("State tried to force exit, but it is the default state")
+						ZombieLogger.warning("State tried to force exit, but it is the default state! {0}", [current_state.name])
 					else:
 						set_state(default_state.name)
 
@@ -110,7 +110,7 @@ func tick(delta: float):
 
 	if debug:
 		var result_name: String = ZB_State.TickResult.keys()[result]
-		print("Entity %s ticked state %s with result: %s" % [entity.name, current_state.name, result_name])
+		ZombieLogger.debug("Entity {0} ticked state {1} with result: {2}", [entity.name, current_state.name, result_name])
 
 	match result:
 			ZB_State.TickResult.CONTINUE:

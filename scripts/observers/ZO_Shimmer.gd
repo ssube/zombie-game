@@ -24,7 +24,7 @@ func on_component_removed(entity: Entity, component: Resource):
 func on_component_changed(_entity: Entity, _component: Resource, property: String, new_value: Variant, old_value: Variant):
 	if property == 'enabled':
 		if new_value and not old_value:
-			print("add shimmer")
+			assert(false, "TODO: add shimmer")
 
 		if old_value and not new_value:
-			print("remove shimmer")
+			assert(false, "TODO: remove shimmer")

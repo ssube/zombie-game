@@ -37,7 +37,7 @@ func _open_door(entity: Entity, entity3d: Node3D, door: ZC_Door) -> void:
 	# TODO: figure out which way to swing
 	# var open_marker_away := entity.get_node(door.open_marker_away) as Marker3D
 
-	print("Opening door")
+	ZombieLogger.debug("Opening door: {0}", [entity.get_path()])
 	var open_marker := entity.get_node(door.open_marker) as Marker3D
 	_tween_to_marker(entity3d, open_marker, door.open_time)
 
@@ -47,7 +47,7 @@ func _open_door(entity: Entity, entity3d: Node3D, door: ZC_Door) -> void:
 
 
 func _close_door(entity: Entity, entity3d: Node3D, door: ZC_Door) -> void:
-	print("Closing door")
+	ZombieLogger.debug("Closing door: {0}", [entity.get_path()])
 	var close_marker := entity.get_node(door.close_marker) as Marker3D
 	_tween_to_marker(entity3d, close_marker, door.close_time)
 

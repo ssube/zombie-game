@@ -10,6 +10,6 @@ func on_component_changed(_entity: Entity, component: Resource, property: String
 	var portal := component as ZC_Portal
 	if property == 'is_active':
 		if new_value:
-			print("Portal is active, loading level: ", portal.next_level)
+			ZombieLogger.debug("Portal is active, loading level: {0}", [portal.next_level])
 			var game := TreeUtils.get_game(self)
 			game.load_level(portal.next_level, portal.spawn_point)

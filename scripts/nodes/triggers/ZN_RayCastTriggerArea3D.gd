@@ -24,7 +24,7 @@ func _physics_process(_delta: float) -> void:
 			if collider == null:
 				continue
 
-			print("Area is colliding with: ", collider)
+			ZombieLogger.debug("Area is colliding with: {0}", [collider.get_path()])
 			if collider == body:
 				sight_queue.append(body)
 

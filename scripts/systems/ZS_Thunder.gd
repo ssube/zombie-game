@@ -14,5 +14,5 @@ func query() -> QueryBuilder:
 	}])
 
 func process(_entities: Array[Entity], _components: Array, _delta: float) -> void:
-	printerr("TODO: implement thunder")
+	ZombieLogger.warning("TODO: implement thunder")
 	self.active = false

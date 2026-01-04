@@ -12,7 +12,7 @@ class_name ZN_PortalAction
 func run_entity(_source: Node, _event: Enums.ActionEvent, _actor: Entity) -> void:
 	var portal := target.get_component(ZC_Portal) as ZC_Portal
 	if portal == null:
-		printerr("Target entity is not a portal: ", target)
+		ZombieLogger.error("Target entity is not a portal: {0}", [target.get_path()])
 		return
 
 	match open:

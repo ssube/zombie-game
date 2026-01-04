@@ -34,7 +34,7 @@ func _func_godot_apply_properties(entity_properties: Dictionary) -> void:
 
 	var texture_names: Array[StringName] = metadata.get("texture_names")
 	if texture_names.size() > 1:
-		push_warning("Map entities should have one texture each!", self.name)
+		ZombieLogger.warning("Map entities should have one texture each! {0}", [self.name])
 
 	# Use the value given in the entity properties, if any
 	var surface_type := entity_properties.get("surface_type", "") as String

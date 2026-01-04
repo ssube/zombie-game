@@ -21,7 +21,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 			var target_object = CollisionUtils.get_collider_entity(collider)
 			var target_shape = CollisionUtils.get_collision_shape(ray)
 
-			print("Bullet is colliding with: ", target_object, ", ", target_shape)
+			ZombieLogger.debug("Bullet is colliding with: {0}, {1}", [target_object, target_shape])
 			apply_decal(ray, collider)
 			apply_sound(ray, collider)
 
@@ -56,7 +56,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 
 			projectile.piercing -= 1
 			if projectile.piercing <= 0:
-				print("Bullet has expired: ", entity)
+				ZombieLogger.debug("Bullet has expired: {0}", [entity.get_path()])
 				EntityUtils.remove(entity)
 
 

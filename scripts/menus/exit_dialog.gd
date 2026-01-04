@@ -68,7 +68,7 @@ func _on_back_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
-	print("Exit from menu")
+	ZombieLogger.info("Exit from menu") # TODO: include name of the previous menu
 	menu_quit_requested.emit()
 
 

@@ -17,7 +17,7 @@ static func load_path(path: String = "user://options.tres") -> ZR_Options:
 func save_path(path: String = "user://options.tres") -> bool:
 	var error := ResourceSaver.save(self, path)
 	if error != OK:
-		printerr("Error saving options: ", error)
+		ZombieLogger.error("Error saving options: {0}", [error])
 		return false
 
 	return true

@@ -27,13 +27,13 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 	if wander_timer > 0.0:
 		return TickResult.CONTINUE
 
-	print("Wander timed out")
+	ZombieLogger.debug("Wander timed out")
 	update_wander_target(entity)
 	return TickResult.CHECK
 
 func update_wander_target(entity) -> void:
 	var random_pos := NavigationUtils.pick_random_position(entity, wander_radius)
-	print("Picked new wander target position: ", random_pos)
+	ZombieLogger.debug("Picked new wander target position: {0}", [random_pos])
 	target_position = random_pos
 	navigation_path = NavigationUtils.update_navigation_path(entity, target_position)
 	wander_timer = wander_interval

@@ -9,7 +9,7 @@ class_name ZN_DoorAction
 func run_entity(_source: Node, _event: Enums.ActionEvent, _actor: Entity) -> void:
 	var door := target.get_component(ZC_Door) as ZC_Door
 	if door == null:
-		printerr("Target is not a door: ", target)
+		ZombieLogger.warning("Target is not a door: {0}", [target.get_path()])
 		return
 
 	# TODO: should open actions run if the door is locked?

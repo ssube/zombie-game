@@ -159,7 +159,7 @@ func toggle_pause() -> void:
 func show_menu(menu: Menus, tab_index: int = -1) -> void:
 	if menu != visible_menu:
 		var menu_name := Menus.keys()[menu] as String
-		print("Show menu: ", menu_name)
+		ZombieLogger.info("Show menu: {0}", [menu_name])
 
 		# If this is the start menu, unload the current level before pausing
 		if menu == Menus.MAIN_MENU:

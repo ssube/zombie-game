@@ -369,7 +369,7 @@ static func solve_kinematic_constraints(
 			return Vector3.ZERO
 
 	if iteration_count == MAX_CONSTRAINT_ITERATIONS - 1:
-		printerr(
+		ZombieLogger.warning(
 				'IKCC: Looped for maximum amount of constraint iterations. (%d)'
 				% MAX_CONSTRAINT_ITERATIONS
 		)
@@ -531,7 +531,7 @@ static func solve_dynamic_constraints(
 ## Returns true if collision happened.
 func ikcc_move_and_slide() -> bool:
 	if self_physics == null:
-		printerr("IKCC: self_physics is null, cannot move")
+		ZombieLogger.error("IKCC: self_physics is null, cannot move")
 		return false
 
 	var delta_t: float = (
@@ -893,11 +893,11 @@ func _collide_and_slide(
 		p_step_move_enabled: bool = true
 ) -> void:
 	if p_io.iteration_count > MAX_SLIDE_ITERATIONS:
-		printerr("IKCC: Max slides surpassed! (%d)" % MAX_SLIDE_ITERATIONS)
+		ZombieLogger.error("IKCC: Max slides surpassed! ({0})", [MAX_SLIDE_ITERATIONS])
 		return
 
 	if is_zero_approx(p_io.time_remaining) or p_io.time_remaining <= 0.0:
-		printerr("IKCC: Simulation time provided to 'move_shape' is zero!")
+		ZombieLogger.error("IKCC: Simulation time provided to 'move_shape' is zero!")
 		return
 
 	p_io.iteration_count += 1
@@ -1610,9 +1610,9 @@ func _get_feet_position(p_global_position: Vector3) -> Vector3:
 		var sphere := ikcc_collider.shape as SphereShape3D
 		return collider_global_position + (sphere.radius) * -up_direction
 
-	printerr(
-			"IKCC: Collider shape not handled by get_feet_position()! (%s)"
-			% ikcc_collider.shape.get_class()
+	ZombieLogger.error(
+			"IKCC: Collider shape not handled by get_feet_position()! ({0})",
+			[ikcc_collider.shape.get_class()]
 	)
 
 	return collider_global_position

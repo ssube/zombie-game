@@ -9,7 +9,7 @@ enum DetectionMode { FIRST, NEAREST }
 
 func _ready() -> void:
 	if detection_area == null:
-		printerr("Behavior node missing detection area: ", self)
+		ZombieLogger.error("Behavior node missing detection area: {0}", [self.get_path()])
 
 
 func test(actor: Node, _delta: float, behavior: ZC_Behavior) -> bool:
@@ -27,7 +27,7 @@ func test(actor: Node, _delta: float, behavior: ZC_Behavior) -> bool:
 	elif detection_mode == DetectionMode.NEAREST:
 		target_player = find_nearest_player(actor3d)
 	else:
-		printerr("Unknown detection mode: ", detection_mode)
+		ZombieLogger.error("Unknown detection mode: {0}", [detection_mode])
 
 	if target_player == null:
 		return false

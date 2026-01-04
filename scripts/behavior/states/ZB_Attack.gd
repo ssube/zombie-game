@@ -36,7 +36,7 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		if attack_tween and attack_tween.is_running():
 			return TickResult.CONTINUE
 
-		print("Entity attacks target: ", target_entity.name)
+		ZombieLogger.debug("Entity attacks target: {0}", [target_entity.name])
 
 		var weapon = entity.current_weapon as ZE_Weapon
 		if EntityUtils.is_broken(weapon):

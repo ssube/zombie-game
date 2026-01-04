@@ -58,7 +58,7 @@ func equip_weapon(weapon_name: String) -> bool:
 			var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
 			if interactive.name == weapon_name:
 				current_weapon = entity as ZE_Weapon
-				print("Equipped weapon: ", current_weapon)
+				ZombieLogger.debug("Equipped weapon: {0}", [current_weapon])
 				return true
 
 	return false

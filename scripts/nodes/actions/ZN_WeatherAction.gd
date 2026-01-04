@@ -29,10 +29,10 @@ func _update_weather(actor: Entity) -> void:
 
 	if set_time:
 		var time_name := ZC_Weather.TimeOfDay.keys()[time_of_day] as String
-		print("Changing time of day to %s" % time_name)
+		ZombieLogger.info("Changing time of day to {0}", [time_name])
 		weather.time_of_day = time_of_day
 
 	if set_weather:
 		var weather_name := ZC_Weather.WeatherType.keys()[weather_type] as String
-		print("Changing weather to %s" % weather_name)
+		ZombieLogger.info("Changing weather to {0}", [weather_name])
 		weather.weather_type = weather_type

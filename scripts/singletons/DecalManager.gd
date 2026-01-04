@@ -24,7 +24,7 @@ func spawn_decal(surface_type: StringName, collider: Node3D, position: Vector3, 
 	# Determine which decal scene to use based on surface_type (e.g. group name)
 	var scene: PackedScene = decal_scenes.get(surface_type, default_decal)
 	if scene == null:
-		printerr("No decal available for surface type: %s" % surface_type)
+		ZombieLogger.warning("No decal available for surface type: {0}", [surface_type])
 		return
 
 	# Add a new decal to the scene (as child of the collider)

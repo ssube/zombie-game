@@ -23,7 +23,7 @@ func _run_command(text: String) -> void:
 			if words.size() > 2:
 				spawn = words[2]
 
-			print("Loading level %s from the console..." % level)
+			ZombieLogger.info("Loading level {0} from the console...", [level])
 			var game := TreeUtils.get_game(self)
 			game.load_level(level, spawn)
 		"menu":

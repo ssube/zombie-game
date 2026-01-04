@@ -16,7 +16,7 @@ func query():
 func process(entities: Array[Entity], _components: Array, _delta: float):
 	for entity in entities:
 		if entity == null:
-			printerr("Processing null entity")
+			ZombieLogger.error("Processing null entity")
 			continue
 
 		var damages := RelationshipUtils.get_damage(entity)

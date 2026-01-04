@@ -31,7 +31,7 @@ func merge_campaign(other: ZR_Campaign) -> ZR_Campaign:
 
 	for level in other.levels:
 		if level_keys.has(level.key):
-			print("Campaign %s is replacing level %s!" % [other.title, level.key])
+			ZombieLogger.warning("Campaign {0} is replacing level {1}!", [other.title, level.key])
 
 	self.hints.append_array(other.hints)
 	self.levels.append_array(other.levels)

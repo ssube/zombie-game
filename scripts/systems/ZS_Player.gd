@@ -285,7 +285,7 @@ func _handle_collisions(body: CharacterBody3D, delta: float) -> void:
 
 
 func _set_damage_areas(entity: Entity, weapon: ZC_Weapon_Melee, enable: bool) -> void:
-	print("Setting damage areas to ", enable, " for entity: ", entity)
+	ZombieLogger.debug("Setting damage areas to {0} for entity: {1}", [enable, entity.get_path()])
 	for area_path in weapon.damage_areas:
 		var area = entity.get_node(area_path) as Area3D
 		if "active" in area:
@@ -342,7 +342,7 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 
 	var marker = weapon.get_node(ranged_weapon.muzzle_marker) as Marker3D
 	if marker == null:
-		printerr("Muzzle marker not found: ", ranged_weapon.muzzle_marker)
+		ZombieLogger.warning("Muzzle marker not found: {0}", [ranged_weapon.muzzle_marker])
 		return
 
 	var new_projectile = ranged_weapon.projectile_scene.instantiate() as RigidBody3D
@@ -352,7 +352,7 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 		ECS.world.add_entity(new_projectile)
 		new_projectile.add_relationship(RelationshipUtils.make_fired(entity))
 	else:
-		printerr("Projectile is not an entity: ", new_projectile)
+		ZombieLogger.warning("Projectile is not an entity: {0}", [new_projectile])
 
 	new_projectile.global_position = marker.global_position
 	new_projectile.global_rotation = marker.global_rotation

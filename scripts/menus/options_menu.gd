@@ -41,7 +41,7 @@ func _on_apply_button_pressed() -> void:
 
 func _on_back_button_pressed() -> void:
 	if _dirty:
-		printerr("TODO: confirm discarding changes")
+		ZombieLogger.warning("TODO: show confirmation dialog before discarding changes")
 		_dirty = false
 
 	back_pressed.emit()
@@ -97,7 +97,7 @@ func on_update() -> void:
 	%EffectsVolumeSlider.value = _current_options.audio.effects_volume
 	%MenuVolumeSlider.value = _current_options.audio.menu_volume
 	%SubtitleCheckBox.button_pressed = _current_options.audio.subtitles
-	
+
 	%AdaptiveAimSlider.value = _current_options.gameplay.adaptive_aim
 
 

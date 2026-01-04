@@ -90,15 +90,15 @@ static func load_mods_from_args(parsed_args: Dictionary) -> Dictionary:
 ## Loads a single PCK file. Returns true on success.
 static func load_pck(path: String) -> bool:
 	if not FileAccess.file_exists(path):
-		push_error("Mod PCK not found: %s" % path)
+		ZombieLogger.error("Mod PCK not found: {0}", [path])
 		return false
 
 	var success := ProjectSettings.load_resource_pack(path)
 
 	if success:
-		print("Loaded mod: %s" % path)
+		ZombieLogger.info("Loaded mod: {0}", [path])
 	else:
-		push_error("Failed to load mod: %s" % path)
+		ZombieLogger.error("Failed to load mod: {0}", [path])
 
 	return success
 
@@ -122,7 +122,7 @@ static func get_debug_level(parsed_args: Dictionary, campaign: Variant, default_
 			if campaign.has_level(arg_level):
 				level = arg_level
 			else:
-				printerr("Requested level %s is not in the levels table!" % arg_level)
+				ZombieLogger.error("Requested level {0} is not in the levels table!" , [arg_level])
 
 	# Check for --marker argument (no way to validate until level is loaded)
 	if parsed_args.has("marker"):
@@ -134,7 +134,7 @@ static func get_debug_level(parsed_args: Dictionary, campaign: Variant, default_
 		if arg_marker is String and arg_marker != "":
 			marker = arg_marker
 
-	print("Loading debug level %s at marker %s" % [level, marker])
+	ZombieLogger.info("Loading debug level {0} at marker {1}", [level, marker])
 
 	return [level, marker]
 
@@ -164,20 +164,20 @@ static func get_campaign(parsed_args: Dictionary, default_campaign: ZR_Campaign)
 		campaign_path = "res://campaigns/%s" % campaign_path
 
 	if not ResourceLoader.exists(campaign_path):
-		printerr("Campaign resource not found: %s" % campaign_path)
+		ZombieLogger.error("Campaign resource not found: {0}", [campaign_path])
 		return default_campaign
 
 	var loaded: Resource = load(campaign_path)
 
 	if loaded == null:
-		printerr("Failed to load campaign: %s" % campaign_path)
+		ZombieLogger.error("Failed to load campaign: {0}", [campaign_path])
 		return default_campaign
 
 	if not loaded is ZR_Campaign:
-		printerr("Resource is not a ZR_Campaign: %s" % campaign_path)
+		ZombieLogger.error("Resource is not a ZR_Campaign: {0}", [campaign_path])
 		return default_campaign
 
-	print("Loaded campaign: %s" % campaign_path)
+	ZombieLogger.info("Loaded campaign: {0}", [campaign_path])
 	return loaded as ZR_Campaign
 
 ## Checks for --help flag and prints usage if present.

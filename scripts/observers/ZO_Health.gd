@@ -7,7 +7,7 @@ func watch() -> Resource:
 
 func on_component_changed(entity: Entity, component: Resource, property: String, new_value: Variant, old_value: Variant):
 	if new_value == old_value:
-		printerr("Health triggered fake change: ", entity, new_value)
+		ZombieLogger.warning("Health triggered fake change: {0} {1}", [entity.get_path(), new_value])
 		return
 
 	var c_health := component as ZC_Health
@@ -19,7 +19,7 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 	call_deferred("_update_skin", entity, c_health, new_value)
 
 	if EntityUtils.is_player(entity):
-		print("Health changed: ", property, " from ", old_value, " to ", new_value)
+		ZombieLogger.debug("Health changed: {0} from {1} to {2}", [property, old_value, new_value])
 		if new_value != old_value:
 			call_deferred("_update_hud", new_value)
 
