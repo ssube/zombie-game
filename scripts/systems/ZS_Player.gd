@@ -10,19 +10,19 @@ func get_raycast_end_point(raycast: RayCast3D) -> Vector3:
 
 
 func _apply_adaptive_aim(raycast: RayCast3D, entity: Entity, delta: float) -> void:
-	var collision_point: Vector3 = Vector3.ZERO
+	var aim_point: Vector3 = Vector3.ZERO
 	if raycast.is_colliding():
 		# adjust the weapon marker to face the point of the collision
-		collision_point = raycast.get_collision_point()
+		aim_point = raycast.get_collision_point()
 	else:
-		collision_point = get_raycast_end_point(raycast)
+		aim_point = get_raycast_end_point(raycast)
 
 	for node: Node3D in entity.aim_nodes:
 		if OptionsManager.options.gameplay.adaptive_aim == 1.0:
-			node.look_at(collision_point, Vector3.UP)
+			node.look_at(aim_point, Vector3.UP)
 		elif OptionsManager.options.gameplay.adaptive_aim > 0.0:
 			# From https://docs.godotengine.org/en/latest/tutorials/3d/using_transforms.html#interpolating-with-quaternions
-			var collision_transform = node.global_transform.looking_at(collision_point, Vector3.UP)
+			var collision_transform = node.global_transform.looking_at(aim_point, Vector3.UP)
 			var collision_quaternion = collision_transform.basis.get_rotation_quaternion()
 			var current_quaternion = node.global_transform.basis.get_rotation_quaternion()
 			var slerped_quaternion = current_quaternion.slerp(collision_quaternion, OptionsManager.options.gameplay.adaptive_aim * delta)
