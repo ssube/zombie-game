@@ -7,7 +7,7 @@ class_name ZS_InputSystem
 func query():
 	return q.with_all([ZC_Input])
 
-func process(entities: Array[Entity], _components: Array, _delta: float):
+func process(entities: Array[Entity], _components: Array, delta: float):
 	for entity in entities:
 		var input = entity.get_component(ZC_Input) as ZC_Input
 
@@ -33,13 +33,13 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 		else:
 			input.turn_direction.z = 0
 
-		input.menu_pause = false # Input.is_action_just_pressed("menu_pause")
+		input.menu_pause = false
 
 		input.move_jump = Input.is_action_just_pressed("move_jump")
 		input.move_crouch = Input.is_action_pressed("move_crouch")
 		input.move_sprint = Input.is_action_pressed("move_sprint")
 
-		input.use_attack = Input.is_action_just_pressed("use_attack")
+		input.use_attack = Input.is_action_pressed("use_attack") # can be held
 		input.use_heal = Input.is_action_just_pressed("use_heal")
 		input.use_holster = Input.is_action_just_pressed("use_holster")
 		input.use_interact = Input.is_action_just_pressed("use_interact")
@@ -49,3 +49,25 @@ func process(entities: Array[Entity], _components: Array, _delta: float):
 
 		input.weapon_next = Input.is_action_just_pressed("weapon_next")
 		input.weapon_previous = Input.is_action_just_pressed("weapon_previous")
+
+		_update_attack_edges(input, delta)
+
+
+func _update_attack_edges(input: ZC_Input, delta: float):
+	if input.use_attack:
+		input.attack_ending = false
+		if input.was_attacking: # use + was
+			input.attack_starting = false
+			input.attack_held_duration += delta
+		else: # use + !was
+			input.attack_starting = true
+			input.attack_held_duration = 0.0
+	else:
+		input.attack_starting = false
+		input.attack_held_duration = 0.0
+		if input.was_attacking: # !use + was
+			input.attack_ending = true
+		else: # !use + !was
+			input.attack_ending = false
+
+	input.was_attacking = input.use_attack

@@ -29,6 +29,12 @@ class_name ZC_Input
 			use_reload
 		)
 
+@export_group("Attacks")
+@export var was_attacking: bool = false
+@export var attack_starting: bool = false
+@export var attack_ending: bool = false
+@export var attack_held_duration: float = 0.0
+
 @export_group("Menus")
 @export var menu_pause: bool = false
 @export var menu_inventory: bool = false
