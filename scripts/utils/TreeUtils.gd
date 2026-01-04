@@ -11,12 +11,11 @@ static func get_level(node: Node) -> Node:
 
 static func get_markers(node: Node) -> Dictionary[String, Marker3D]:
 	var level_node := get_level(node)
-	var markers_node := level_node.get_node("Markers")
 	if level_node is ZN_Level:
-		var level := level_node as ZN_Level
-		markers_node = level_node.get_node(level.markers_node)
+		return level_node.get_markers()
 
 	var markers: Dictionary[String, Marker3D] = {}
+	var markers_node := level_node.get_node("Markers")
 	if markers_node == null:
 		return markers
 

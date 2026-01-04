@@ -25,6 +25,10 @@ class_name ZN_Level
 @export_tool_button("Take Level Screenshot")
 var take_screenshot_button = _take_level_screenshot
 
+
+var _marker_cache: Dictionary[String, Marker3D] = {}
+
+
 func _take_level_screenshot() -> void:
 	if not Engine.is_editor_hint():
 		push_error("Screenshot function should only be used in the editor.")
@@ -93,3 +97,30 @@ func on_load() -> void:
 
 	if level_actions:
 		ActionUtils.run_component(level_actions, self, Enums.ActionEvent.LEVEL_LOAD, null)
+
+
+func cache_markers() -> void:
+	var markers := self.get_node(markers_node).get_children()
+	for marker in markers:
+		if marker is Marker3D:
+			_marker_cache[marker.name] = marker
+
+
+func clear_markers() -> void:
+	_marker_cache.clear()
+
+
+func add_marker(key: String, marker: Marker3D) -> void:
+	_marker_cache[key] = marker
+
+
+func get_marker(key: String) -> Marker3D:
+	return _marker_cache.get(key, null)
+
+
+func get_markers() -> Array[Marker3D]:
+	return _marker_cache.values()
+
+
+func remove_marker(key: String) -> void:
+	_marker_cache.erase(key)

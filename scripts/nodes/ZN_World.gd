@@ -162,6 +162,10 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	if 'on_load' in next_level:
 		next_level.on_load()
 
+	if next_level is ZN_Level:
+		var zn_level := next_level as ZN_Level
+		zn_level.cache_markers()
+
 	current_level_name = level_name
 	next_level_name = level_data.next_level
 
