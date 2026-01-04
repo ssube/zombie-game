@@ -143,7 +143,6 @@ monitoring = false
 script = ExtResource("2_jabh2")
 active = false
 angle = 60.0
-debug_draw = true
 vision_test_mode = 0
 collision_layer_ = 16
 collision_mask_ = 26

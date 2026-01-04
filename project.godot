@@ -79,6 +79,7 @@ weather_thunder=""
 weather_snow=""
 weather_custom=""
 level_markers=""
+skin_material=""
 
 [input]
 

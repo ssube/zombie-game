@@ -33,13 +33,13 @@ component_resources = Array[ExtResource("2_3pflf")]([SubResource("Resource_lu3nb
 
 [node name="Node3D" type="Node3D" parent="."]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D" groups=["skin_material"]]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.3, 0, 0)
 radius = 0.1
 height = 1.0
 material = ExtResource("5_3voqo")
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Node3D"]
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Node3D" groups=["skin_material"]]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.3, 0, 0)
 radius = 0.1
 height = 1.0

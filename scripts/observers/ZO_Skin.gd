@@ -53,10 +53,20 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 
 
 func update_skin_material(entity: Node, skin: ZC_Skin, material: BaseMaterial3D):
+	# TODO: add an option to use the overlay or override material slots
 	for shape_path in skin.skin_shapes:
 		var shape = entity.get_node(shape_path) as GeometryInstance3D
 		# shape.material_overlay = material
 		shape.material_override = material
+
+	# TODO: do this search once, combine with show_skin_group
+	var all_children := entity.find_children("*")
+	for child in all_children:
+		if child.is_in_group("skin_material"):
+			if child is GeometryInstance3D:
+				var geom_instance := child as GeometryInstance3D
+				# geom_instance.material_overlay = material
+				geom_instance.material_override = material
 
 
 func show_skin_group(entity: Node, show_group: String, hide_groups: Array = []) -> void:
