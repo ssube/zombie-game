@@ -578,7 +578,6 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_labby")
 layout_mode = 2
 text = "Apply"
 
-[connection signal="tab_clicked" from="MarginContainer/VBoxContainer/TabContainer" to="MarginContainer/VBoxContainer/TabContainer" method="_on_tab_clicked"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Controls/CenterContainer/GridContainer3/MouseSensitivitySlider" to="." method="_on_mouse_sensitivity_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3/PhysicalShellsBox" to="." method="_on_physical_shells_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Gameplay/CenterContainer/GridContainer3/PhysicalMagsBox" to="." method="_on_physical_mags_box_toggled"]
