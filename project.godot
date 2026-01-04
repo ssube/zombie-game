@@ -17,12 +17,12 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ECS="*res://addons/gecs/ecs/ecs.gd"
 DecalManager="*res://scripts/singletons/DecalManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 ObjectiveManager="*res://scripts/singletons/ObjectiveManager.gd"
 OptionsManager="*res://scripts/singletons/OptionsManager.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+ECS="*res://addons/gecs/ecs/ecs.gd"
 
 [debug]
 
@@ -54,6 +54,10 @@ import/blender/enabled=false
 [func_godot]
 
 default_map_settings="uid://dkql5djyx2s23"
+
+[gdunit4]
+
+ui/toolbar/run_overall=true
 
 [gecs]
 
