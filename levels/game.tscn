@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c32dl721ugeb0"]
+[gd_scene load_steps=33 format=3 uid="uid://c32dl721ugeb0"]
 
 [ext_resource type="Script" uid="uid://bocc4dbiyss57" path="res://scripts/nodes/ZN_World.gd" id="1_7ti0h"]
 [ext_resource type="Resource" uid="uid://co3r3cmvc6wyg" path="res://campaigns/demo.tres" id="2_raxgq"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://c56mnlw3od4ni" path="res://scripts/systems/ZS_Thunder.gd" id="26_6w6r6"]
 [ext_resource type="PackedScene" uid="uid://vcyq2fbg0dts" path="res://menus/menu.tscn" id="26_ohs1m"]
 [ext_resource type="Script" uid="uid://c667rr27xa6do" path="res://scripts/systems/ZS_Behavior.gd" id="27_raxgq"]
+[ext_resource type="Script" uid="uid://b5c8ofwwxulym" path="res://scripts/systems/ZS_PathFollow.gd" id="29_3wro5"]
 
 [sub_resource type="Curve" id="Curve_6w6r6"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.17064846, 0.88231206), 0.0, 0.0, 0, 0, Vector2(0.3139932, 0.121866345), 0.0, 0.0, 0, 0, Vector2(0.48464167, 0.67409474), 0.0, 0.0, 0, 0, Vector2(0.6040956, 0.031337023), 0.0, 0.0, 0, 0, Vector2(0.75085324, 0.13997209), 0.0, 0.0, 0, 0, Vector2(0.784983, 0.82799447), 0.0, 0.0, 0, 0, Vector2(0.9010239, 0.8551533), 0.0, 0.0, 0, 0, Vector2(1, 0.18523681), 0.0, 0.0, 0, 0]
@@ -142,6 +143,9 @@ active = false
 
 [node name="ZS_BehaviorSystem" type="Node" parent="World/Systems"]
 script = ExtResource("27_raxgq")
+
+[node name="ZS_PathFollowSystem" type="Node" parent="World/Systems"]
+script = ExtResource("29_3wro5")
 
 [node name="Entities" type="Node" parent="World"]
 unique_name_in_owner = true

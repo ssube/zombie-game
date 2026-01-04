@@ -1,6 +1,5 @@
-[gd_scene load_steps=14 format=4 uid="uid://qemexdn3fydy"]
+[gd_scene load_steps=13 format=4 uid="uid://qemexdn3fydy"]
 
-[ext_resource type="Script" uid="uid://cjvkfldy60doi" path="res://scripts/nodes/ZN_PathFollow3D.gd" id="1_rjqwo"]
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="2_41ouj"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="3_uequm"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_xiqq5"]
@@ -59,25 +58,21 @@ shadow_mesh = SubResource("ArrayMesh_dtfkp")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_bmjb6"]
 points = PackedVector3Array(-0.082713164, 0.17977299, -0.3637136, -0.020645829, 0.46985745, 0.52747774, -0.43525043, 0.4491528, -0.052743904, 0.020645829, 0.55282223, 0.25794578, -0.64235795, 0.2834059, -0.13561937, 0.062067334, 0.40770695, -0.42596352, 0.017074697, 0.22918993, 0.033699192, 0.64235795, 0.2834059, -0.13561937, 0.55951494, 0.40770695, -0.09418164, -0.16568601, 0.40770695, -0.4051513, 0.020645829, 0.4284116, 0.5066655, 0.082713164, 0.17977299, -0.3637136, -0.6010663, 0.38696575, -0.114900514, 0.64235795, 0.30414706, -0.19796264, -0.64235795, 0.2834059, -0.19796264, 0.16568601, 0.40770695, -0.4051513, -0.018699797, 0.5352408, 0.38862878, 0.020645829, 0.46985745, 0.52747774, 0.43525043, 0.4491528, -0.052743904, -0.5802906, 0.32485175, -0.011306167, 0.64235795, 0.32485175, -0.07346277, -0.020645829, 0.4284116, 0.5066655, 0.037120428, 0.5339798, 0.36748087, -0.017074697, 0.22918993, 0.033699192, -0.020645829, 0.55282223, 0.25794578, 0.082713164, 0.17977299, -0.3221825, -0.082713164, 0.17977299, -0.3221825, 0.64235795, 0.2834059, -0.19796264, -0.64235795, 0.32485175, -0.07346277, 0.6010663, 0.38696575, -0.114900514, -0.64235795, 0.30414706, -0.19796264, -0.062067334, 0.40770695, -0.42596352)
 
-[node name="ZN_PathFollow3D" type="PathFollow3D"]
-script = ExtResource("1_rjqwo")
-duration = 30.0
-
-[node name="Seagull" type="StaticBody3D" parent="."]
+[node name="Seagull" type="StaticBody3D"]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 script = ExtResource("2_41ouj")
 component_resources = Array[ExtResource("3_uequm")]([SubResource("Resource_helhp")])
 
-[node name="Seagull_Fly" type="MeshInstance3D" parent="Seagull"]
+[node name="Seagull_Fly" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.99999994, 8.447444e-09, 1.7443645e-07, 8.447444e-09, 0.99532056, -0.096627496, -1.7443645e-07, 0.096627496, 0.99532056, 0, 0, 0)
 mesh = SubResource("ArrayMesh_xgvv7")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Seagull"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.99999994, 8.447444e-09, 1.7443645e-07, 8.447444e-09, 0.99532056, -0.096627496, -1.7443645e-07, 0.096627496, 0.99532056, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_bmjb6")
 
-[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="Seagull"]
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_5wfb3")
 volume_db = 6.0
 script = ExtResource("9_4o7yy")
@@ -85,7 +80,7 @@ subtitle_text = "Seagulls"
 remove_on_finished = false
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
-[node name="ZN_VariableTriggerTimer" type="Timer" parent="Seagull" node_paths=PackedStringArray("parent_entity")]
+[node name="ZN_VariableTriggerTimer" type="Timer" parent="." node_paths=PackedStringArray("parent_entity")]
 wait_time = 20.0
 script = ExtResource("7_kluql")
 min_variation = -10.0
@@ -94,7 +89,7 @@ repeat = true
 parent_entity = NodePath("..")
 metadata/_custom_type_script = "uid://h4hsumlormm8"
 
-[node name="ZN_AudioAction" type="Node" parent="Seagull/ZN_VariableTriggerTimer" node_paths=PackedStringArray("audio_players")]
+[node name="ZN_AudioAction" type="Node" parent="ZN_VariableTriggerTimer" node_paths=PackedStringArray("audio_players")]
 script = ExtResource("8_5wfb3")
 audio_players = [NodePath("../../ZN_AudioSubtitle3D")]
 metadata/_custom_type_script = "uid://dga8v5ocxqirt"
