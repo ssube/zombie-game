@@ -116,11 +116,20 @@ func add_marker(key: String, marker: Marker3D) -> void:
 
 
 func get_marker(key: String) -> Marker3D:
-	return _marker_cache.get(key, null)
+	var markers := get_markers()
+	return markers.get(key, null)
 
 
-func get_markers() -> Array[Marker3D]:
-	return _marker_cache.values()
+func get_markers() -> Dictionary[String, Marker3D]:
+	var markers := _marker_cache.duplicate()
+
+	var group_markers := self.get_tree().get_nodes_in_group("level_markers")
+	for marker in group_markers:
+		if marker is Marker3D:
+			# if marker.name not in markers:
+			markers[marker.name] = marker as Marker3D
+
+	return markers
 
 
 func remove_marker(key: String) -> void:
