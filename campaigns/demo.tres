@@ -20,7 +20,7 @@ title = "Fishing Pier"
 scene = ExtResource("7_cvp7w")
 loading_hints = Array[String](["Fish are food, if you're a zombie."])
 loading_image = ExtResource("6_cmnru")
-min_load_time = 5.0
+min_load_time = 1.5
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
 [sub_resource type="Resource" id="Resource_3xt08"]
@@ -29,7 +29,7 @@ key = "bus_stop"
 title = "Bus Stop"
 scene = ExtResource("3_jcc15")
 loading_image = ExtResource("2_grl8t")
-min_load_time = 5.0
+min_load_time = 1.5
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
 [sub_resource type="Resource" id="Resource_2rk21"]
@@ -38,6 +38,7 @@ key = "spooky_church"
 title = "Spooky Church"
 scene = ExtResource("5_gefcm")
 loading_image = ExtResource("4_nbnqx")
+min_load_time = 1.5
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
 [sub_resource type="Resource" id="Resource_ucckl"]
@@ -48,7 +49,7 @@ scene = ExtResource("9_t8rcy")
 next_level = "zone_1"
 loading_hints = Array[String](["Zombies are not made of cheese."])
 loading_image = ExtResource("8_ijyp1")
-min_load_time = 3.0
+min_load_time = 1.5
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
 [sub_resource type="Resource" id="Resource_apgre"]
@@ -57,6 +58,7 @@ key = "debug_red"
 title = "Debug Red"
 scene = ExtResource("11_x2vpa")
 loading_image = ExtResource("10_edbmx")
+min_load_time = 1.5
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
 [resource]
