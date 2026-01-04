@@ -5,6 +5,7 @@
 addons/*
 !addons/zombie_tools
 
+asset_packs/
 assets/
 ExampleScene/
 examples_*/
