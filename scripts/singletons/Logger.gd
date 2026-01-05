@@ -1,6 +1,6 @@
 extends Node
 
-enum LogLevel {
+enum Level {
 	TRACE,
 	DEBUG,
 	INFO,
@@ -9,28 +9,28 @@ enum LogLevel {
 	CRITICAL,
 }
 
-@export var level: LogLevel = LogLevel.INFO
+@export var level: Level = Level.INFO
 @export var stack_on_error: bool = true
 @export var stack_on_warning: bool = false
 
 
-func log_level(message_level: LogLevel, message: String, args: Array = []):
+func log_level(message_level: Level, message: String, args: Array = []):
 	if message_level < level:
 		return
 
 	var level_str: String
 	match message_level:
-		LogLevel.TRACE:
+		Level.TRACE:
 			level_str = "TRACE"
-		LogLevel.DEBUG:
+		Level.DEBUG:
 			level_str = "DEBUG"
-		LogLevel.INFO:
+		Level.INFO:
 			level_str = "INFO"
-		LogLevel.WARNING:
+		Level.WARNING:
 			level_str = "WARNING"
-		LogLevel.ERROR:
+		Level.ERROR:
 			level_str = "ERROR"
-		LogLevel.CRITICAL:
+		Level.CRITICAL:
 			level_str = "CRITICAL"
 		_:
 			level_str = "UNKNOWN"
@@ -39,41 +39,41 @@ func log_level(message_level: LogLevel, message: String, args: Array = []):
 	var timestamp := Time.get_date_string_from_system()
 	var output := "%s - %s - %s" % [timestamp, level_str, formatted_message]
 
-	if message_level >= LogLevel.ERROR:
+	if message_level >= Level.ERROR:
 		printerr(output)
 		push_error(output)
 	else:
 		print(output)
-		if message_level == LogLevel.WARNING:
+		if message_level == Level.WARNING:
 			push_warning(output)
 
 
 func trace(message: String, args: Array = []):
-	log_level(LogLevel.TRACE, message, args)
+	log_level(Level.TRACE, message, args)
 
 
 func debug(message: String, args: Array = []):
-	log_level(LogLevel.DEBUG, message, args)
+	log_level(Level.DEBUG, message, args)
 
 
 func info(message: String, args: Array = []):
-	log_level(LogLevel.INFO, message, args)
+	log_level(Level.INFO, message, args)
 
 
 func warning(message: String, args: Array = []):
-	log_level(LogLevel.WARNING, message, args)
+	log_level(Level.WARNING, message, args)
 	if stack_on_warning:
 		print_stack()
 
 
 func error(message: String, args: Array = []):
-	log_level(LogLevel.ERROR, message, args)
+	log_level(Level.ERROR, message, args)
 	if stack_on_error:
 		print_stack()
 
 
 func critical(message: String, args: Array = []):
-	log_level(LogLevel.CRITICAL, message, args)
+	log_level(Level.CRITICAL, message, args)
 	print_stack()
 
 
