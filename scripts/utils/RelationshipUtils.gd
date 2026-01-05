@@ -71,6 +71,13 @@ static func get_inventory(target: Entity) -> Array[Entity]:
 
 	return entities
 
+static func get_equipment(target: Entity) -> Array[Entity]:
+	var relationships := target.get_relationships(RelationshipUtils.any_equipped)
+	var entities: Array[Entity] = []
+	for rel in relationships:
+		entities.append(rel.target)
+
+	return entities
 
 static func make_damage(actor: Entity, damage_amount: int) -> Relationship:
 	var actor_id := ""
@@ -113,7 +120,7 @@ static func make_wearing(item: Entity) -> Relationship:
 static func make_used(item: Entity) -> Relationship:
 	var used_component := ZC_Used.new()
 	return Relationship.new(used_component, item)
-	
+
 static func make_modifier(effect: Component) -> Relationship:
 	var link = ZC_Modifier.new()
 	return Relationship.new(link, effect)

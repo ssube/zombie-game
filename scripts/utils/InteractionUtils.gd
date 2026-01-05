@@ -335,7 +335,9 @@ static func pickup_item(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	# target.visible = false
 
 	var player := actor as ZE_Player
-	player.inventory_node.add_child(target)
+	var inventory_node := EntityUtils.get_inventory_node(player)
+	assert(inventory_node != null, "Player does not have an inventory node to pick up items into.")
+	inventory_node.add_item(target)
 
 	actor.add_relationship(RelationshipUtils.make_holding(target))
 

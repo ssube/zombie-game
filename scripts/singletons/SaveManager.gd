@@ -288,10 +288,11 @@ static func deserialize_entity(saved_entity: ZP_SavedEntity) -> Entity:
 			entity.add_component(component)
 
 	# deserialize inventory
-	if "inventory_node" in entity:
+	var inventory_node := EntityUtils.get_inventory_node(entity)
+	if inventory_node != null:
 		for saved_item in saved_entity.inventory:
 			var item_entity := deserialize_entity(saved_item)
-			entity.inventory_node.add_child(item_entity)
+			inventory_node.add_item(item_entity)
 
 	# deserialize relationships after all entities are created
 

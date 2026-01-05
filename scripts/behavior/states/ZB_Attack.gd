@@ -65,12 +65,12 @@ func switch_weapon(entity: Entity) -> ZE_Weapon:
 				return null
 
 		var entity_ammo := entity.get_component(ZC_Ammo) as ZC_Ammo
-		var inventory := entity.inventory_node.get_children() as Array[Node]
+		var inventory := RelationshipUtils.get_weapons(entity)
 		for item in inventory:
-				if EntityUtils.is_weapon(item):
-						var loaded := EntityUtils.has_ammo(item, [entity_ammo])
-						var broken := EntityUtils.is_broken(item)
-						if loaded and not broken:
-								EntityUtils.equip_weapon(entity, item)
+			var loaded := EntityUtils.has_ammo(item, [entity_ammo])
+			var broken := EntityUtils.is_broken(item)
+			if loaded and not broken:
+				EntityUtils.equip_weapon(entity, item)
+				return item as ZE_Weapon
 
 		return null

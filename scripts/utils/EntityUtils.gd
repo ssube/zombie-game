@@ -1,6 +1,16 @@
 class_name EntityUtils
 
 
+static func is_valid_entity(entity: Node) -> bool:
+	if not is_instance_valid(entity):
+		return false
+
+	if entity is not Entity:
+		return false
+
+	return true
+
+
 static func apply_damage(actor: Entity, target: Node, base_damage: int, multiplier: float = 1.0) -> int:
 	if target is not Entity:
 		return 0
@@ -13,6 +23,7 @@ static func apply_damage(actor: Entity, target: Node, base_damage: int, multipli
 	return damage
 
 
+# TODO: turn into drop_item
 static func drop_weapon(character: ZE_Character) -> ZE_Weapon:
 	var old_weapon := character.current_weapon
 	if old_weapon == null:
@@ -41,10 +52,7 @@ static func drop_weapon(character: ZE_Character) -> ZE_Weapon:
 static func equip_weapon(character: ZE_Character, weapon: ZE_Weapon) -> ZE_Weapon:
 	var old_weapon := character.current_weapon
 	if old_weapon != null:
-		old_weapon.get_parent().remove_child(old_weapon)
-		old_weapon.visible = false
-		character.inventory_node.add_child(old_weapon)
-		character.remove_relationship(RelationshipUtils.make_equipped(old_weapon))
+		unequip_item(character, old_weapon)
 
 	if weapon != null:
 		if equip_item(character, weapon):
@@ -57,7 +65,7 @@ static func equip_weapon(character: ZE_Character, weapon: ZE_Weapon) -> ZE_Weapo
 
 
 ## Equip an item and return true if the item could be equipped in its preferred slot
-static func equip_item(character: ZE_Character, item: ZE_Base) -> bool:
+static func equip_item(character: ZE_Character, item: ZE_Base, _replace: bool = true) -> bool:
 	var equipment := item.get_component(ZC_Equipment) as ZC_Equipment
 	if equipment == null:
 		return false
@@ -76,6 +84,8 @@ static func equip_item(character: ZE_Character, item: ZE_Base) -> bool:
 		},
 	}, null)
 	var slot_equipped := character.get_relationship(slot_relationship)
+
+	# TODO: support replacing existing item
 	if slot_equipped:
 		return false
 
@@ -103,6 +113,11 @@ static func unequip_item(character: ZE_Character, item: ZE_Base) -> bool:
 	if equipment == null:
 		return false
 
+	var inventory_node := EntityUtils.get_inventory_node(character)
+	if inventory_node == null:
+		# TODO: drop item on ground instead
+		return false
+
 	var relationship := Relationship.new({
 		ZC_Equipped: {
 			"slot": {
@@ -116,7 +131,7 @@ static func unequip_item(character: ZE_Character, item: ZE_Base) -> bool:
 	if parent:
 		parent.remove_child(item)
 
-	character.inventory_node.add_child(item)
+	inventory_node.add_item(item)
 
 	return true
 
@@ -450,3 +465,13 @@ static func reload_weapon(player: ZE_Character) -> void:
 
 	weapon_ammo.transfer(player_ammo)
 	current_weapon.apply_effects(ZR_Weapon_Effect.EffectType.RANGED_RELOAD)
+
+
+## This does not get the list of inventory items. You probably want RelationshipUtils.get_inventory()
+static func get_inventory_node(entity: Entity) -> ZN_Inventory:
+	var inventory_component := entity.get_component(ZC_Inventory) as ZC_Inventory
+	if inventory_component == null:
+		return null
+
+	var inventory_node := entity.get_node_or_null(inventory_component.node_path) as ZN_Inventory
+	return inventory_node

@@ -22,9 +22,26 @@ func _cache_items() -> Array[Entity]:
 		if child is Entity:
 			_item_cache.append(child)
 
-	# TODO: sync to the component's item_ids
+	# sync to the component
+	# the ECS world may not be fully initialized yet, so the component may not exist
+	if parent_entity.has_component(ZC_Inventory):
+		var component := parent_entity.get_component(ZC_Inventory) as ZC_Inventory
+		component.item_ids.clear()
+		for item in _item_cache:
+			component.item_ids[item.id] = true
 
 	return _item_cache
+
+
+func _on_direct_add(_item: Entity) -> void:
+	# TODO: drop item if inventory full
+	# TODO: update this item, not the whole cache
+	_cache_items()
+
+
+func _on_direct_remove(_item: Entity) -> void:
+	# TODO: update this item, not the whole cache
+	_cache_items()
 
 
 func _get_holder_inventory() -> ZC_Inventory:
@@ -35,7 +52,12 @@ func _get_holder_inventory() -> ZC_Inventory:
 
 
 func _ready() -> void:
+	# TODO: make sure any initial children get a Holding relationship added to the parent entity
 	_cache_items()
+
+	# bind to child_entered_tree and child_exiting_tree signals to keep cache updated
+	child_entered_tree.connect(_on_direct_add)
+	child_exiting_tree.connect(_on_direct_remove)
 
 
 func size() -> int:
