@@ -54,9 +54,16 @@ func _process_stimulus(attention: ZC_Attention, stimulus: ZC_Stimulus) -> bool:
 
 func _update_visible_target(attention: ZC_Attention, perception: ZC_Perception) -> void:
 	# If we have a target entity, check if still visible
-	if attention.target_entity != "":
-		# If not visible, we keep the last known position (memory)
-		if attention.target_entity in perception.visible_entities:
-			# Update position to current (we can see them)
-			var entity := ECS.world.get_entity_by_id(attention.target_entity)
-			attention.target_position = entity.global_position
+	if attention.target_entity == "":
+		return
+		
+	# If not visible, we keep the last known position (memory)
+	if attention.target_entity not in perception.visible_entities:
+		return
+		
+	# Update position to current (we can see them)
+	var entity := ECS.world.get_entity_by_id(attention.target_entity)
+	if entity == null or not is_instance_valid(entity):
+		return
+		
+	attention.target_position = entity.global_position
