@@ -1,14 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://vev1dnehdot4"]
 
 [ext_resource type="AudioStream" uid="uid://7ao4fyj2x6mo" path="res://sounds/1000 Retro Sound Effects/Movement/Footsteps/sfx_walk9.ogg" id="1_fgsxv"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_3ibnr"]
+[ext_resource type="Script" uid="uid://bf5mlyrquihqy" path="res://scripts/nodes/ZN_AudioVariable3D.gd" id="2_fgsxv"]
 
 [node name="FootstepWood" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_fgsxv")
 volume_db = -18.0
-script = ExtResource("2_3ibnr")
+script = ExtResource("2_fgsxv")
 play_on_ready = true
 subtitle_text = "Footsteps"
 subtitle_radius = 5.0
 remove_after = 1.0
-metadata/_custom_type_script = "uid://mcuf24u8q14t"
