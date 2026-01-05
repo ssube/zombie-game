@@ -142,6 +142,7 @@ audio_stream = NodePath("../../../ClickPlayer")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+bus = &"Menus"
 
 [node name="ClickPlayer" parent="." instance=ExtResource("6_kx1nf")]
 

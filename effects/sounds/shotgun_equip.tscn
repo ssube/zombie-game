@@ -5,6 +5,7 @@
 
 [node name="ShotgunEquip" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_da2ck")
+bus = &"Effects"
 script = ExtResource("2_pboaa")
 play_on_ready = true
 subtitle_text = "Shotgun Racking"

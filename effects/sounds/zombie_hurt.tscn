@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="1_bwug0"]
 
 [node name="ImpactBloodZombie" type="AudioStreamPlayer3D"]
+bus = &"Effects"
 script = ExtResource("1_bwug0")
 subtitle_text = "Zombie pain"
 remove_after = 2.5

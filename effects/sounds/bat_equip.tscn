@@ -5,6 +5,7 @@
 
 [node name="BatEquip" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_oebxg")
+bus = &"Effects"
 script = ExtResource("2_y3qm4")
 play_on_ready = true
 subtitle_text = "Wooden Bat"

@@ -5,6 +5,7 @@
 
 [node name="ShotgunEmpty" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_gaiim")
+bus = &"Effects"
 script = ExtResource("2_ync1d")
 play_on_ready = true
 subtitle_text = "Shotgun Empty"

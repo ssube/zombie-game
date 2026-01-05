@@ -5,6 +5,7 @@
 
 [node name="WaterSplash" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_v5pmj")
+bus = &"Effects"
 script = ExtResource("2_8yfow")
 play_on_ready = true
 subtitle_text = "Water Splashing"

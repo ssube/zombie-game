@@ -5,6 +5,7 @@
 
 [node name="PlayerHurt" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_jddik")
+bus = &"Effects"
 script = ExtResource("2_s5vsk")
 play_on_ready = true
 subtitle_text = "Player hurt"

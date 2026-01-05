@@ -5,6 +5,7 @@
 
 [node name="FoodPickup" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_7gta3")
+bus = &"Effects"
 script = ExtResource("2_5fala")
 play_on_ready = true
 subtitle_text = "Picked up item"

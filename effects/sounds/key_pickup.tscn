@@ -5,6 +5,7 @@
 
 [node name="KeyPickup" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_euh7n")
+bus = &"Effects"
 script = ExtResource("1_vwpmr")
 play_on_ready = true
 subtitle_text = "Picked up key"

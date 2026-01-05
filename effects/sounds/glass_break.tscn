@@ -5,6 +5,7 @@
 
 [node name="GlassBreak" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_ix7gw")
+bus = &"Effects"
 script = ExtResource("2_hyiyc")
 play_on_ready = true
 subtitle_text = "Breaking Glass"

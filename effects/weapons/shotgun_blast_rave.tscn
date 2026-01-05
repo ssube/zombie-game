@@ -99,6 +99,7 @@ lights = [NodePath(".")]
 [node name="Sound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_s7qqg")
 max_distance = 10.0
+bus = &"Effects"
 script = ExtResource("4_h1ulg")
 play_on_ready = true
 subtitle_text = "Shotgun Blast"

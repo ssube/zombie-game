@@ -6,6 +6,7 @@
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_2vuy3")
 max_distance = 5.0
+bus = &"Effects"
 script = ExtResource("2_knjnv")
 play_on_ready = true
 subtitle_text = "Healing Effect"

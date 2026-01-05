@@ -5,6 +5,7 @@
 
 [node name="DoorOpen" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_p3w6s")
+bus = &"Effects"
 script = ExtResource("1_jfjfn")
 play_on_ready = true
 subtitle_text = "Door Opening"

@@ -6,6 +6,7 @@
 [node name="FootstepWood" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_fgsxv")
 volume_db = -18.0
+bus = &"Effects"
 script = ExtResource("2_fgsxv")
 play_on_ready = true
 subtitle_text = "Footsteps"

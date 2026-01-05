@@ -12,6 +12,7 @@ texture = ExtResource("1_owvoc")
 
 [node name="ImpactBulletMetal" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_dbkxs")
+bus = &"Effects"
 script = ExtResource("3_n1fic")
 play_on_ready = true
 subtitle_text = "Bullet Impact"

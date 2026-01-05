@@ -5,6 +5,7 @@
 
 [node name="BatBreak" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_yixvk")
+bus = &"Effects"
 script = ExtResource("1_e7lok")
 play_on_ready = true
 subtitle_text = "Bat Broken"

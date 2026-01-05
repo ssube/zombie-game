@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="1_f15kb"]
 
 [node name="WeaponPickup" type="AudioStreamPlayer3D"]
+bus = &"Effects"
 script = ExtResource("1_f15kb")
 subtitle_text = "Weapon Pickup"
 metadata/_custom_type_script = "uid://mcuf24u8q14t"

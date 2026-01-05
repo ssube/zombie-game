@@ -5,6 +5,7 @@
 
 [node name="ImpactBulletZombie" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_koid2")
+bus = &"Effects"
 script = ExtResource("2_e2jdi")
 subtitle_text = "Zombie Groaning"
 subtitle_radius = 5.0
