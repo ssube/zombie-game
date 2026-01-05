@@ -8,3 +8,4 @@ class_name ZR_AudioOptions
 @export_range(0.0, 100.0) var music_volume: float = 100.0
 @export_range(0.0, 100.0) var effects_volume: float = 100.0
 @export_range(0.0, 100.0) var menu_volume: float = 75.0
+@export_range(0.0, 100.0) var voices_volume: float = 100.0

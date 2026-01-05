@@ -9,10 +9,32 @@ extends ZM_BaseMenu
 @export var cheats_tab := 4
 
 
+@onready var debounced_main_preview = TimeUtils.debounce(self, 0.2, _play_main_preview)
+@onready var debounced_music_preview = TimeUtils.debounce(self, 0.2, _play_music_preview)
+@onready var debounced_effects_preview = TimeUtils.debounce(self, 0.2, _play_effects_preview)
+@onready var debounced_voices_preview = TimeUtils.debounce(self, 0.2, _play_voices_preview)
+
+
 var _applied_options: ZR_Options
 var _current_options: ZR_Options
 var _dirty: bool = false
 var _play_audio: bool = false
+
+
+func _play_main_preview() -> void:
+	%MainPreviewPlayer.play()
+
+
+func _play_music_preview() -> void:
+	%MusicPreviewPlayer.play()
+
+
+func _play_effects_preview() -> void:
+	%EffectsPreviewPlayer.play()
+
+
+func _play_voices_preview() -> void:
+	%VoicesPreviewPlayer.play()
 
 
 func _apply_options() -> void:
@@ -96,6 +118,7 @@ func on_update() -> void:
 	%MusicVolumeSlider.value = _current_options.audio.music_volume
 	%EffectsVolumeSlider.value = _current_options.audio.effects_volume
 	%MenuVolumeSlider.value = _current_options.audio.menu_volume
+	%VoicesVolumeSlider.value = _current_options.audio.voices_volume
 	%SubtitleCheckBox.button_pressed = _current_options.audio.subtitles
 
 	%AdaptiveAimSlider.value = _current_options.gameplay.adaptive_aim
@@ -140,28 +163,25 @@ func _on_shader_resolution_menu_item_selected(index: int) -> void:
 func _on_main_volume_slider_value_changed(value: float) -> void:
 	_dirty = true
 	_current_options.audio.main_volume = value
-	# TODO: debounce
 	if _play_audio:
 		OptionsManager.apply_volume()
-		%MainPreviewPlayer.play()
+		debounced_main_preview.start()
 
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
 	_dirty = true
 	_current_options.audio.music_volume = value
-	# TODO: debounce
 	if _play_audio:
 		OptionsManager.apply_volume()
-		%MusicPreviewPlayer.play()
+		debounced_music_preview.start()
 
 
 func _on_effects_volume_slider_value_changed(value: float) -> void:
 	_dirty = true
 	_current_options.audio.effects_volume = value
-	# TODO: debounce
 	if _play_audio:
 		OptionsManager.apply_volume()
-		%EffectsPreviewPlayer.play()
+		debounced_effects_preview.start()
 
 
 func _on_window_mode_menu_item_selected(_index: int) -> void:
@@ -203,7 +223,14 @@ func _on_adaptive_aim_slider_value_changed(value: float) -> void:
 func _on_menu_volume_slider_value_changed(value: float) -> void:
 	_dirty = true
 	_current_options.audio.menu_volume = value
-	# TODO: debounce
 	if _play_audio:
 		OptionsManager.apply_volume()
-		# %MenuPreviewPlayer.play()
+		# no preview node since menu audio is already playing
+
+
+func _on_voices_volume_slider_value_changed(value: float) -> void:
+	_dirty = true
+	_current_options.audio.voices_volume = value
+	if _play_audio:
+		OptionsManager.apply_volume()
+		debounced_voices_preview.start()

@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://dyv5b48xquqot"]
+[gd_scene load_steps=15 format=3 uid="uid://dyv5b48xquqot"]
 
 [ext_resource type="Script" uid="uid://dr0t3qprbbuke" path="res://scripts/menus/options_menu.gd" id="1_p3s2b"]
-[ext_resource type="AudioStream" uid="uid://ubdmirg50ful" path="res://sounds/Sound Effects/Firearms/Racking/shotgun_racking_ufx_1.ogg" id="2_cet7k"]
 [ext_resource type="Script" uid="uid://dhxffhuroih4k" path="res://menus/tab_container.gd" id="2_l4xqj"]
-[ext_resource type="AudioStream" uid="uid://cseclvit36kh1" path="res://sounds/Sound Effects/Break/glass_break_ufx_1.ogg" id="3_1vpws"]
 [ext_resource type="Texture2D" uid="uid://s2mafkes46we" path="res://menus/game_hud.png" id="3_t77c5"]
 [ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="4_1vpws"]
+[ext_resource type="AudioStream" uid="uid://ckpwhwxqopkyd" path="res://sounds/water_splash_freesound_270429.ogg" id="4_2k4wj"]
+[ext_resource type="AudioStream" uid="uid://c4gct48ef8kao" path="res://sounds/Sound Effects/Firearms/Racking/shotgun_racking_ufx_2.ogg" id="5_2k4wj"]
 [ext_resource type="PackedScene" uid="uid://6oyauuvbuys2" path="res://effects/sounds/menu_click.tscn" id="5_eeh4p"]
 [ext_resource type="PackedScene" uid="uid://calgaewey8pnp" path="res://menus/menu_audio.tscn" id="5_t77c5"]
+[ext_resource type="AudioStream" uid="uid://c40b3wlewsgxl" path="res://sounds/seagull_699979_freesound.ogg" id="6_2k4wj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cet7k"]
 content_margin_left = 0.0
@@ -510,6 +511,16 @@ size_flags_vertical = 4
 tick_count = 5
 ticks_on_borders = true
 
+[node name="VoicesVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "Voices Volume"
+
+[node name="VoicesVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tick_count = 5
+ticks_on_borders = true
+
 [node name="SubtitleLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer"]
 layout_mode = 2
 
@@ -520,7 +531,7 @@ text = "Enable Subtitles"
 
 [node name="MainPreviewPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/TabContainer/Audio"]
 unique_name_in_owner = true
-stream = ExtResource("2_cet7k")
+stream = ExtResource("4_2k4wj")
 
 [node name="MusicPreviewPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/TabContainer/Audio"]
 unique_name_in_owner = true
@@ -528,8 +539,13 @@ bus = &"Music"
 
 [node name="EffectsPreviewPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/TabContainer/Audio"]
 unique_name_in_owner = true
-stream = ExtResource("3_1vpws")
+stream = ExtResource("5_2k4wj")
 bus = &"Effects"
+
+[node name="VoicesPreviewPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/TabContainer/Audio"]
+unique_name_in_owner = true
+stream = ExtResource("6_2k4wj")
+bus = &"Voices"
 
 [node name="MenuAudio" parent="MarginContainer/VBoxContainer/TabContainer/Audio" instance=ExtResource("5_t77c5")]
 
@@ -590,6 +606,7 @@ text = "Apply"
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/EffectsVolumeSlider" to="." method="_on_effects_volume_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/MenuVolumeSlider" to="." method="_on_menu_volume_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/VoicesVolumeSlider" to="." method="_on_voices_volume_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Audio/CenterContainer/GridContainer/SubtitleCheckBox" to="." method="_on_subtitle_check_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoAggroBox" to="." method="_on_no_aggro_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoClipBox" to="." method="_on_no_clip_box_toggled"]
