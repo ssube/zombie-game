@@ -953,6 +953,8 @@ linear_damp_space_override = 1
 linear_damp = 0.25
 angular_damp_space_override = 1
 angular_damp = 0.25
+audio_bus_override = true
+audio_bus_name = &"Underwater"
 script = ExtResource("2_24vc2")
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
