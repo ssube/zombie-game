@@ -180,6 +180,28 @@ static func get_campaign(parsed_args: Dictionary, default_campaign: ZR_Campaign)
 	ZombieLogger.info("Loaded campaign: {0}", [campaign_path])
 	return loaded as ZR_Campaign
 
+
+static func set_log_level_from_args(parsed_args: Dictionary) -> void:
+	if parsed_args.has("log-level"):
+		var level_str: Variant = parsed_args["log-level"]
+		# If multiple were provided, use the last one
+		if level_str is Array:
+			level_str = level_str[-1]
+
+		if level_str is String:
+			match level_str.to_lower():
+				"debug":
+					ZombieLogger.level = ZombieLogger.Level.DEBUG
+				"info":
+					ZombieLogger.level = ZombieLogger.Level.INFO
+				"warning":
+					ZombieLogger.level = ZombieLogger.Level.WARNING
+				"error":
+					ZombieLogger.level = ZombieLogger.Level.ERROR
+				_:
+					ZombieLogger.error("Invalid log level specified: {0}", [level_str])
+
+
 ## Checks for --help flag and prints usage if present.
 ## Returns true if help was shown (caller should quit), false otherwise.
 static func check_help(parsed_args: Dictionary) -> bool:
@@ -208,6 +230,8 @@ OPTIONS:
                             Short names look in res://campaigns/
 
   --level=NAME              Start at a specific level (must exist in campaign)
+
+	--log-level=LEVEL        Set the logging level (debug, info, warning, error)
 
   --marker=PATH             Spawn at a specific marker node path
                             (e.g., Markers/FrontDoor)

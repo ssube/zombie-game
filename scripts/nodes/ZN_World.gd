@@ -63,6 +63,7 @@ func _ready():
 	if CommandLineArgs.check_help(user_args):
 		get_tree().quit()
 
+	CommandLineArgs.set_log_level_from_args(user_args)
 	ZombieLogger.info("Running with user arguments: {0}", [JSON.stringify(user_args)])
 
 	CommandLineArgs.load_mods_from_args(user_args)
