@@ -60,7 +60,7 @@ func update_skin_material(entity: Node, skin: ZC_Skin, material: BaseMaterial3D)
 		shape.material_override = material
 
 	# TODO: do this search once, combine with show_skin_group
-	var all_children := entity.find_children("*")
+	var all_children := entity.find_children("*", "GeometryInstance3D", true, false)
 	for child in all_children:
 		if child.is_in_group("skin_material"):
 			if child is GeometryInstance3D:
@@ -70,7 +70,7 @@ func update_skin_material(entity: Node, skin: ZC_Skin, material: BaseMaterial3D)
 
 
 func show_skin_group(entity: Node, show_group: String, hide_groups: Array = []) -> void:
-	var all_children := entity.find_children("*")
+	var all_children := entity.find_children("*", "", true, false)
 	for child in all_children:
 		if child.is_in_group(show_group):
 			_toggle_node(child, true)
