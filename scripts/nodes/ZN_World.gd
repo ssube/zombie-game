@@ -1,6 +1,9 @@
 extends Node
 class_name ZN_World
 
+const DEBUG_LEVEL: ZombieLogger.Level = ZombieLogger.Level.DEBUG
+const RELEASE_LEVEL: ZombieLogger.Level = ZombieLogger.Level.INFO
+
 signal level_loading
 signal level_loaded
 
@@ -24,6 +27,11 @@ var deleted_entities: Array[String] = []
 
 
 func _ready():
+	if OS.is_debug_build():
+		ZombieLogger.level = DEBUG_LEVEL
+	else:
+		ZombieLogger.level = RELEASE_LEVEL
+
 	campaign.cache()
 
 	ECS.world = %World
