@@ -39,7 +39,7 @@ func test(actor: Node, _delta: float, behavior: ZC_Behavior) -> bool:
 func find_players() -> Array[Node3D]:
 	var players: Array[Node3D] = []
 	for body in detection_area.get_overlapping_bodies():
-		var body_root = body.get_node(".")
+		var body_root = body as Node
 		if body_root is Entity:
 			if EntityUtils.is_player(body_root):
 				players.append(body)

@@ -17,7 +17,7 @@ func test(actor: Node, _delta: float, behavior: ZC_Behavior) -> bool:
 		vision_cone.get_overlapping_bodies()
 
 	for body: Node3D in visible:
-		var body_root = body.get_node(".")
+		var body_root = body as Node
 		if body_root is Entity:
 			if EntityUtils.is_player(body_root):
 				behavior.set_value("visible_player", body)

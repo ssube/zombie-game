@@ -24,7 +24,7 @@ func _get_position(source: Node3D, body: Node3D) -> Vector3:
 
 
 func run_entity(source: Node, event: Enums.ActionEvent, actor: Entity) -> void:
-	var body := actor.get_node(".")
+	var body := actor as Node
 	if body is PhysicsBody3D:
 		run_physics(source, event, body)
 
