@@ -40,15 +40,8 @@ func sync_stamina():
 
 
 func get_inventory() -> Array[Entity]:
-	var items: Array[Entity] = []
-	if inventory_node == null:
-		return items
-
-	for child in inventory_node.get_children():
-		if child is Entity:
-			items.append(child as Entity)
-
-	return items
+	assert(false, "Deprecated: Use RelationshipUtils.get_inventory() instead.")
+	return RelationshipUtils.get_inventory(self)
 
 
 func equip_weapon(weapon_name: String) -> bool:

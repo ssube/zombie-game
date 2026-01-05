@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://busds31ha5tx1"]
+[gd_scene load_steps=36 format=3 uid="uid://busds31ha5tx1"]
 
 [ext_resource type="Script" uid="uid://cerxp3umkugm1" path="res://scripts/entities/characters/ZE_Player_IKCC.gd" id="1_g5okp"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_l1ths"]
@@ -16,9 +16,11 @@
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="14_jq748"]
 [ext_resource type="Script" uid="uid://b7x5tu22015cx" path="res://scripts/components/characters/ZC_Faction.gd" id="15_gmhi3"]
 [ext_resource type="Script" uid="uid://b7fgmwfrg0t73" path="res://scripts/components/characters/ZC_Experience.gd" id="16_8ug6l"]
+[ext_resource type="Script" uid="uid://bh0p1d7incrpv" path="res://scripts/components/ZC_Inventory.gd" id="16_e31fi"]
 [ext_resource type="Script" uid="uid://8srnd548by47" path="res://scripts/components/characters/ZC_Stamina.gd" id="17_g5okp"]
 [ext_resource type="PackedScene" uid="uid://d4hn3600t205c" path="res://effects/rain_effect.tscn" id="18_8ug6l"]
 [ext_resource type="PackedScene" uid="uid://cymlq343i4rdm" path="res://effects/thunder_effect.tscn" id="19_g5okp"]
+[ext_resource type="Script" uid="uid://b0eht5em6vv5w" path="res://scripts/nodes/ZN_Inventory.gd" id="21_blta8"]
 
 [sub_resource type="Resource" id="Resource_blta8"]
 script = ExtResource("3_gmhi3")
@@ -86,6 +88,10 @@ metadata/_custom_type_script = "uid://8srnd548by47"
 script = ExtResource("5_a1f57")
 linear_velocity = Vector3(1, 0, 0)
 metadata/_custom_type_script = "uid://cixmecjncarw5"
+
+[sub_resource type="Resource" id="Resource_d3hb7"]
+script = ExtResource("16_e31fi")
+metadata/_custom_type_script = "uid://bh0p1d7incrpv"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_idcse"]
 height = 2.25
@@ -194,8 +200,11 @@ visible = false
 [node name="ThunderEffect" parent="Effects" groups=["weather_thunder"] instance=ExtResource("19_g5okp")]
 visible = false
 
-[node name="Inventory" type="Node3D" parent="."]
+[node name="Inventory" type="Node3D" parent="." node_paths=PackedStringArray("parent_entity")]
 visible = false
+script = ExtResource("21_blta8")
+parent_entity = NodePath("..")
+metadata/_custom_type_script = "uid://b0eht5em6vv5w"
 
 [node name="FootRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
