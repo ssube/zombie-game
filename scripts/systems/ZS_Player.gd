@@ -91,7 +91,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			equip_previous_weapon(entity as ZE_Player)
 
 		# Attack with weapon
-		if input.use_attack:
+		if input.attack_starting:
 			_handle_weapon_attack(entity, body)
 
 		# Holster weapon
