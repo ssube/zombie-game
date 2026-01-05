@@ -8,6 +8,7 @@ class_name ZC_Stamina
 @export var max_stamina: float = 100.0
 
 @export_group("Cost")
+@export var cost_enabled: bool = true
 @export var velocity_multiplier: float = 0.1
 @export var jump_cost: float = 25.0
 @export var sprint_multiplier: float = 2.0
@@ -17,6 +18,7 @@ class_name ZC_Stamina
 @export var sprint_limit: float = 10.0
 
 @export_group("Recharge")
+@export var recharge_enabled: bool = true
 @export var moving_recharge_rate: float = 0.1 # per second
 @export var still_recharge_rate: float = 1.0
 
