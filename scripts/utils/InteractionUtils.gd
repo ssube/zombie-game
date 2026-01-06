@@ -33,6 +33,8 @@ static var interactions: Dictionary[String, Array] = {
 	# weapon needs to be checked before ammo
 	"use_weapon": [EntityUtils.is_weapon, use_weapon],
 	"use_ammo": [has_ammo, use_ammo],
+	# check inventory before picking up items
+	"use_inventory": [has_inventory, use_inventory],
 	"pickup_equipment": [has_equipment, pickup_equipment],
 	"pickup_item": [has_interactive, pickup_item],
 	# using portal should be last, since it will change the level
@@ -74,7 +76,14 @@ static func interact(actor: Entity, target: Entity, menu) -> bool:
 				HandlerStatus.SKIP:
 					continue
 				HandlerStatus.STOP:
-					return true
+					handled = true
+					break
+
+	# play the use sound if the interaction was handled
+	if handled:
+		if interactive.use_sound:
+			var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
+			_add_sound(sound, target)
 
 	return handled
 
@@ -128,10 +137,6 @@ static func use_armor(actor: Entity, target: Entity, menu) -> HandlerStatus:
 
 	var interactive = armor.get_component(ZC_Interactive) as ZC_Interactive
 	menu.push_action("Picked up armor: %s" % interactive.name)
-
-	if interactive.use_sound:
-		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-		_add_sound(sound, actor)
 
 	# TODO: this should already be handled in the equip item helper
 	var entity3d := target.get_node(".") as RigidBody3D
@@ -204,11 +209,6 @@ static func use_door(_actor: Entity, target: Entity, _menu: ZM_Menu) -> HandlerS
 		door.is_open = !door.is_open
 		ZombieLogger.debug("Door is open: {0}", [door.is_open])
 
-		var interactive := target.get_component(ZC_Interactive) as ZC_Interactive
-		if interactive.use_sound:
-			var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-			_add_sound(sound, target)
-
 	return HandlerStatus.CONTINUE
 
 
@@ -227,12 +227,32 @@ static func use_food(actor: Entity, target: Entity, menu: ZM_Menu) -> HandlerSta
 	var interactive = target.get_component(ZC_Interactive) as ZC_Interactive
 	menu.push_action("Used food: %s" % interactive.name)
 
-	if interactive.use_sound:
-		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-		_add_sound(sound, actor)
-
 	EntityUtils.remove(target)
 	return HandlerStatus.STOP
+
+
+static func has_inventory(entity: Entity) -> bool:
+	return entity.has_component(ZC_Inventory)
+
+
+static func use_inventory(actor: Entity, target: Entity, menu) -> HandlerStatus:
+	var target_inventory = EntityUtils.get_inventory_node(target)
+	if target_inventory == null:
+		return HandlerStatus.SKIP
+
+	var inventory_node := EntityUtils.get_inventory_node(actor)
+	assert(inventory_node != null, "Actor using inventory does not have an inventory node.")
+
+	# transfer everything, for now
+	for item in target_inventory.items:
+		target_inventory.remove_item(item)
+		inventory_node.add_item(item)
+		actor.add_relationship(RelationshipUtils.make_holding(item))
+
+		var interactive = item.get_component(ZC_Interactive) as ZC_Interactive
+		menu.push_action("Got item: %s" % interactive.name)
+
+	return HandlerStatus.CONTINUE
 
 
 static func has_key(entity: Entity) -> bool:
@@ -267,11 +287,6 @@ static func complete_objective(_actor: Entity, target: Entity, _menu: ZM_Menu) -
 	objective.is_complete = true
 	ZombieLogger.info("Completed objective: {0}", [objective.key])
 
-	var interactive := target.get_component(ZC_Interactive) as ZC_Interactive
-	if interactive.use_sound:
-		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-		_add_sound(sound, target)
-
 	return HandlerStatus.CONTINUE
 
 
@@ -286,11 +301,6 @@ static func use_portal(_actor: Entity, target: Entity, _menu: ZM_Menu) -> Handle
 
 	portal.is_active = true
 	ZombieLogger.info("Activated portal: {0}", [portal])
-
-	var interactive := target.get_component(ZC_Interactive) as ZC_Interactive
-	if interactive.use_sound:
-		var sound := interactive.use_sound.instantiate() as ZN_AudioSubtitle3D
-		_add_sound(sound, target)
 
 	return HandlerStatus.CONTINUE
 

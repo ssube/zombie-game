@@ -9,6 +9,8 @@ class_name ZC_Inventory
 @export var drop_marker: NodePath = "Inventory/DropMarker"
 
 @export_group("Limits")
+@export var allow_add_items: bool = true
+@export var allow_remove_items: bool = true
 ## The maximum number of item slots in the inventory
 @export var max_slots: int = 20
 #@export var max_weight: float = 50.0

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://5mm8s8tf4i0m"]
+
+[ext_resource type="AudioStream" uid="uid://8qcb8nvs564r" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Doors & Drawers/drawer_2_open.ogg" id="1_mckth"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_p7rrw"]
+
+[node name="CrateWoodOpen" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_mckth")
+bus = &"Effects"
+script = ExtResource("2_p7rrw")
+play_on_ready = true
+subtitle_text = "Crate opening"
+subtitle_radius = 3.0
+metadata/_custom_type_script = "uid://mcuf24u8q14t"

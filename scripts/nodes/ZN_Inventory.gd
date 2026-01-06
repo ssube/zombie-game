@@ -26,9 +26,22 @@ func _index_item(item: Entity) -> void:
 	if interactive != null:
 		_items_by_name[interactive.name] = item
 
+	# TODO: support stacks for each shortcut
 	var shortcut := item.get_component(ZC_ItemShortcut) as ZC_ItemShortcut
 	if shortcut != null:
 		_items_by_shortcut[shortcut.shortcut] = item
+
+
+func _deindex_item(item: Entity) -> void:
+	_items_by_id.erase(item.id)
+
+	var interactive := item.get_component(ZC_Interactive) as ZC_Interactive
+	if interactive != null:
+		_items_by_name.erase(interactive.name)
+
+	var shortcut := item.get_component(ZC_ItemShortcut) as ZC_ItemShortcut
+	if shortcut != null:
+		_items_by_shortcut.erase(shortcut.shortcut)
 
 
 func _cache_items() -> Array[Entity]:
@@ -87,20 +100,34 @@ func size() -> int:
 
 func add_item(item: Entity) -> bool:
 	var component := _get_holder_inventory()
+	if component == null:
+		return false
+
+	if not component.allow_add_items:
+		return false
+
 	if component.max_slots > 0 and _item_cache.size() >= component.max_slots:
 		return false
 
 	add_child(item)
 	_item_cache.append(item)
+	_index_item(item)
 	component.item_ids[item.id] = true
 	return true
 
 
 func remove_item(item: Entity) -> void:
+	var component := _get_holder_inventory()
+	if component == null:
+		return
+
+	if not component.allow_remove_items:
+		return
+
 	if item in _item_cache:
 		self.remove_child(item)
 		_item_cache.erase(item)
-		var component := _get_holder_inventory()
+		_deindex_item(item)
 		component.item_ids.erase(item.id)
 
 

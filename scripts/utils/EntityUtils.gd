@@ -55,13 +55,17 @@ static func drop_item(character: ZE_Character, item: ZE_Base) -> ZE_Weapon:
 	character.remove_relationship(RelationshipUtils.make_holding(item))
 
 	item_body.freeze = false
-	item_body.global_position = item_position
+
+	var drop_transform := get_drop_transform(character)
+	item_body.global_transform = drop_transform
 
 	return item
 
 
 # TODO: to inventory utils
 static func equip_weapon(character: ZE_Character, weapon: ZE_Weapon, _slot: String = "", replace: bool = true) -> bool:
+	# TODO: make sure the character has the right slot
+
 	if replace:
 		var wielding := RelationshipUtils.get_wielding(character)
 		for old_weapon in wielding:
