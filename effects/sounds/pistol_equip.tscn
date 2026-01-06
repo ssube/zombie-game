@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca8l85h1tx3hm"]
+
+[ext_resource type="AudioStream" uid="uid://8dn24uyg7244" path="res://sounds/Sound Effects/Firearms/Racking/pistol_racking_ufx_4.ogg" id="1_vbld2"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_222g5"]
+
+[node name="PistolEquip" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_vbld2")
+bus = &"Effects"
+script = ExtResource("2_222g5")
+play_on_ready = true
+subtitle_text = "Pistol cocking"
+metadata/_custom_type_script = "uid://mcuf24u8q14t"

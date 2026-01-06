@@ -1,0 +1,117 @@
+[gd_scene load_steps=17 format=3 uid="uid://ql530vnfgdgj"]
+
+[ext_resource type="Texture2D" uid="uid://bism3fuwsio0w" path="res://textures/Particle Effect Texture Essentials/Transparent Versions/fx_Smoke3.png" id="1_j6jco"]
+[ext_resource type="Script" uid="uid://bwt5xm6trqgoh" path="res://scripts/nodes/ZN_LightCurve.gd" id="2_2xjr7"]
+[ext_resource type="AudioStream" uid="uid://bhka471cwxarq" path="res://sounds/Sound Effects/Firearms/Fire/old_revolver_fire_ufx_1.ogg" id="3_j6jco"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="4_q71m6"]
+[ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/triggers/ZN_TriggerTimer.gd" id="5_2qdgs"]
+[ext_resource type="Script" uid="uid://b1hfgveu3fvsd" path="res://scripts/nodes/actions/ZN_NodeAction.gd" id="6_yy5tc"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jplj4"]
+particle_flag_align_y = true
+direction = Vector3(0, 0, -1)
+spread = 15.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, -0.5, 0)
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bd4u4"]
+transparency = 1
+shading_mode = 2
+albedo_color = Color(1, 0.79733336, 0.24000001, 0.6431373)
+emission_enabled = true
+emission = Color(0.94, 0.40733334, 0.14099997, 1)
+disable_receive_shadows = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jplj4"]
+material = SubResource("StandardMaterial3D_bd4u4")
+radius = 0.05
+height = 0.25
+
+[sub_resource type="Curve" id="Curve_dxxuk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5014409, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wjpqw"]
+curve = SubResource("Curve_dxxuk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kmwy0"]
+direction = Vector3(0, 0, -1)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+gravity = Vector3(0, 3, -1)
+scale_min = 0.75
+scale_max = 1.25
+alpha_curve = SubResource("CurveTexture_wjpqw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjpqw"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.7764706)
+albedo_texture = ExtResource("1_j6jco")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_m8jg2"]
+material = SubResource("StandardMaterial3D_wjpqw")
+
+[sub_resource type="Curve" id="Curve_ga4vo"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+bake_resolution = 10
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.25, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_xhw3n"]
+colors = PackedColorArray(1, 0.91400003, 0.57, 1, 1, 0.536, 0.13, 1)
+
+[node name="PistolBlast" type="Node3D"]
+
+[node name="Sparks" type="GPUParticles3D" parent="."]
+cast_shadow = 0
+explosiveness = 0.75
+process_material = SubResource("ParticleProcessMaterial_jplj4")
+draw_pass_1 = SubResource("CapsuleMesh_jplj4")
+
+[node name="Smoke" type="GPUParticles3D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_kmwy0")
+draw_pass_1 = SubResource("QuadMesh_m8jg2")
+
+[node name="Flash" type="OmniLight3D" parent="." node_paths=PackedStringArray("lights")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+light_color = Color(1, 0.54022324, 0.13491595, 1)
+light_energy = 0.0
+shadow_enabled = true
+script = ExtResource("2_2xjr7")
+duration = 0.5
+loop = false
+energy_curve = SubResource("Curve_ga4vo")
+color_curve = SubResource("Gradient_xhw3n")
+lights = [NodePath(".")]
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_j6jco")
+max_distance = 10.0
+bus = &"Effects"
+script = ExtResource("4_q71m6")
+play_on_ready = true
+subtitle_text = "Shotgun Blast"
+subtitle_radius = 10.0
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
+[node name="Removal" type="Timer" parent="."]
+one_shot = true
+autostart = true
+script = ExtResource("5_2qdgs")
+metadata/_custom_type_script = "uid://b3w64ibj5uxv4"
+
+[node name="ZN_NodeAction" type="Node" parent="Removal" node_paths=PackedStringArray("node")]
+script = ExtResource("6_yy5tc")
+node = NodePath("../..")
+remove = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5852966)
+visible = false
