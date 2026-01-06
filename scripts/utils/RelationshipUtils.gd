@@ -79,6 +79,15 @@ static func get_equipment(target: Entity) -> Array[Entity]:
 
 	return entities
 
+static func get_wielding(target: Entity) -> Array[Entity]:
+	var relationships := target.get_relationships(RelationshipUtils.any_equipped)
+	var entities: Array[Entity] = []
+	for rel in relationships:
+		if EntityUtils.is_weapon(rel.target):
+			entities.append(rel.target)
+
+	return entities
+
 static func make_damage(actor: Entity, damage_amount: int) -> Relationship:
 	var actor_id := ""
 	if actor:

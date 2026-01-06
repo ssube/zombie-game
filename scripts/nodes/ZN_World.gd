@@ -111,9 +111,6 @@ func clear_world(keep_players: bool = true) -> void:
 		keepers.append_array(players)
 		for player: ZE_Player in players:
 			keepers.append_array(player.get_inventory())
-			var weapon = player.current_weapon
-			if weapon != null:
-				keepers.append(weapon)
 
 	var entity_list := ECS.world.entities.duplicate()
 	for entity in entity_list:

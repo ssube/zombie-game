@@ -92,7 +92,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 		# Attack with weapon
 		if input.attack_starting:
-			_handle_weapon_attack(entity, body)
+			_handle_weapon_attack(entity)
 
 		# Holster weapon
 		if input.use_holster:
@@ -175,13 +175,14 @@ func _process_used_items(entity: Entity) -> void:
 	entity.remove_relationships(used_items)
 
 
-func _handle_weapon_attack(entity: Entity, body: CharacterBody3D) -> void:
-	if entity.current_weapon != null:
+func _handle_weapon_attack(entity: Entity) -> void:
+	var weapons := RelationshipUtils.get_wielding(entity)
+	for weapon in weapons:
 		# Weapons can have both types
-		if EntityUtils.is_melee_weapon(entity.current_weapon):
-			swing_weapon(entity, body)
-		if EntityUtils.is_ranged_weapon(entity.current_weapon):
-			spawn_projectile(entity, body)
+		if EntityUtils.is_melee_weapon(weapon):
+			swing_weapon(entity, weapon)
+		if EntityUtils.is_ranged_weapon(weapon):
+			spawn_projectile(entity, weapon)
 
 
 func _update_equipped_items(entity: Entity) -> void:
@@ -209,12 +210,14 @@ func _handle_interactive(entity: Entity, input: ZC_Input, body: CharacterBody3D,
 					%Menu.set_crosshair_color(interactive.crosshair_color)
 
 					var player = entity as ZE_Player
-					if collider_entity != player.last_shimmer_target and collider_entity != entity.current_weapon:
+					var equipment := RelationshipUtils.get_equipment(player)
+
+					if collider_entity != player.last_shimmer_target and collider_entity not in equipment:
 						%Menu.clear_target_label()
 						%Menu.reset_crosshair_color()
 						_clear_player_shimmer(player)
 
-					if collider_entity and collider_entity != entity.current_weapon:
+					if collider_entity and collider_entity not in equipment:
 						clear_collider = false
 						%Menu.set_target_label(interactive.name)
 
@@ -245,7 +248,16 @@ func _update_ammo_label(player: Entity) -> void:
 		return
 
 	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
-	var player_weapon := player.current_weapon as ZE_Weapon
+	if player_ammo == null:
+		%Menu.set_ammo_label("")
+		return
+
+	var weapons := RelationshipUtils.get_wielding(player)
+	if weapons.size() == 0:
+		%Menu.set_ammo_label("")
+		return
+
+	var player_weapon := weapons[0] as ZE_Weapon
 	if player_weapon == null:
 		%Menu.set_ammo_label("")
 		return
@@ -295,11 +307,7 @@ func _set_damage_areas(entity: Entity, weapon: ZC_Weapon_Melee, enable: bool) ->
 
 
 # TODO: move to weapon utils or system
-func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
-	var weapon = entity.current_weapon as ZE_Weapon
-	if weapon == null:
-		return
-
+func swing_weapon(entity: Entity, weapon: ZE_Weapon) -> void:
 	var c_weapon = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
 	var stamina := entity.get_component(ZC_Stamina) as ZC_Stamina
 	if stamina.current_stamina < c_weapon.swing_stamina:
@@ -325,11 +333,7 @@ func swing_weapon(entity: Entity, _body: CharacterBody3D) -> void:
 
 
 # TODO: move to weapon utils or system
-func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
-	var weapon = entity.current_weapon as ZE_Weapon
-	if weapon == null:
-		return
-
+func spawn_projectile(entity: Entity, weapon: ZE_Weapon) -> void:
 	var weapon_ammo := weapon.get_component(ZC_Ammo) as ZC_Ammo
 	var ranged_weapon = EntityUtils.get_ranged_component(weapon)
 	var current_ammo := weapon_ammo.get_ammo(ranged_weapon.ammo_type)
@@ -346,7 +350,7 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 		return
 
 	var new_projectile = ranged_weapon.projectile_scene.instantiate() as RigidBody3D
-	body.get_parent().add_child(new_projectile)
+	entity.get_parent().add_child(new_projectile)
 
 	if new_projectile is Entity:
 		ECS.world.add_entity(new_projectile)
@@ -374,9 +378,8 @@ func spawn_projectile(entity: Entity, body: CharacterBody3D) -> void:
 	if ranged_weapon is ZC_Weapon_Thrown and weapon_ammo.is_all_empty():
 		EntityUtils.switch_weapon(entity, null, %Menu)
 
-# todo: toggle a light component on all equipped flashlights
+
 func toggle_flashlight(entity: Entity, _body: CharacterBody3D) -> void:
-	# TODO: type this node or use a component
 	var equipped := entity.get_relationships(RelationshipUtils.any_equipped)
 	for rel in equipped:
 		var item = rel.target
@@ -393,17 +396,31 @@ func _clear_player_shimmer(player: ZE_Player) -> void:
 		player.last_shimmer_target = null
 
 
+func _get_next_shortcut(entity: Entity) -> ZC_ItemShortcut.ItemShortcut:
+	var wielding := RelationshipUtils.get_wielding(entity)
+	if wielding.size() == 0:
+		return ZC_ItemShortcut.FIRST_LOOP_SHORTCUT
+
+	var current_weapon := wielding[0]
+	var current_shortcut := current_weapon.get_component(ZC_ItemShortcut) as ZC_ItemShortcut
+	if current_shortcut == null:
+		return ZC_ItemShortcut.FIRST_LOOP_SHORTCUT
+
+	var next_shortcut := ZC_ItemShortcut.next_shortcut(current_shortcut.shortcut)
+	return next_shortcut
+
+
 ## Equip the next weapon
 func equip_next_weapon(entity: ZE_Player) -> void:
 	var weapons := RelationshipUtils.get_weapons(entity)
 	if weapons.size() == 0:
 		return
 
-	var current_index := weapons.find(entity.current_weapon)
-	assert(current_index != -1, "Current weapon not found in player's weapons.")
+	var inventory_node := EntityUtils.get_inventory_node(entity)
+	var next_shortcut := _get_next_shortcut(entity)
 
-	var next_index := (current_index + 1) % weapons.size()
-	var chosen_weapon = weapons[next_index] as ZE_Weapon
+	# TODO: loop until we find a valid weapon, in case the next shortcut is empty
+	var chosen_weapon = inventory_node.get_by_shortcut(next_shortcut) as ZE_Weapon
 
 	# If we could not find the next weapon, default to the first weapon
 	if chosen_weapon == null:
@@ -413,19 +430,34 @@ func equip_next_weapon(entity: ZE_Player) -> void:
 	_update_ammo_label(entity)
 
 
+func _get_previous_shortcut(entity: Entity) -> ZC_ItemShortcut.ItemShortcut:
+	var wielding := RelationshipUtils.get_wielding(entity)
+	if wielding.size() == 0:
+		return ZC_ItemShortcut.LAST_LOOP_SHORTCUT
+
+	var current_weapon := wielding[0]
+	var current_shortcut := current_weapon.get_component(ZC_ItemShortcut) as ZC_ItemShortcut
+	if current_shortcut == null:
+		return ZC_ItemShortcut.LAST_LOOP_SHORTCUT
+
+	var previous_shortcut := ZC_ItemShortcut.previous_shortcut(current_shortcut.shortcut)
+	return previous_shortcut
+
+
 func equip_previous_weapon(entity: ZE_Player) -> void:
 	var weapons := RelationshipUtils.get_weapons(entity)
 	if weapons.size() == 0:
 		return
 
-	var current_index := weapons.find(entity.current_weapon)
-	assert(current_index != -1, "Current weapon not found in player's weapons.")
-	var previous_index := (current_index - 1 + weapons.size()) % weapons.size()
-	var chosen_weapon = weapons[previous_index] as ZE_Weapon
+	var inventory_node := EntityUtils.get_inventory_node(entity)
+	var previous_shortcut := _get_previous_shortcut(entity)
 
-	# If we could not find the current weapon, default to the last weapon
+	# TODO: loop until we find a valid weapon, in case the previous shortcut is empty
+	var chosen_weapon = inventory_node.get_by_shortcut(previous_shortcut) as ZE_Weapon
+
+	# If we could not find the previous weapon, default to the last weapon
 	if chosen_weapon == null:
-		chosen_weapon = weapons[weapons.size() - 1] as ZE_Weapon
+		chosen_weapon = weapons[-1] as ZE_Weapon
 
 	EntityUtils.switch_weapon(entity, chosen_weapon, %Menu)
 	_update_ammo_label(entity)

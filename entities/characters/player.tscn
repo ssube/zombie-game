@@ -127,7 +127,7 @@ weapon_node = NodePath("Head/Hands/RangedEquipMarker")
 weapon_follower = NodePath("Head/Hands/SwingPath/PathFollow3D")
 aim_nodes = [NodePath("Head/Hands/RangedEquipMarker"), NodePath("Head/Hands/FlashlightEquipMarker")]
 prefab_path = "res://entities/characters/player.tscn"
-component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_blta8"), SubResource("Resource_gmhi3"), SubResource("Resource_eiif7"), SubResource("Resource_g5okp"), SubResource("Resource_b4uku"), SubResource("Resource_8ug6l"), SubResource("Resource_p37y2"), SubResource("Resource_dv4ir"), SubResource("Resource_25mxy"), SubResource("Resource_e31fi"), SubResource("Resource_l1ths")])
+component_resources = Array[ExtResource("2_l1ths")]([SubResource("Resource_blta8"), SubResource("Resource_gmhi3"), SubResource("Resource_eiif7"), SubResource("Resource_g5okp"), SubResource("Resource_b4uku"), SubResource("Resource_8ug6l"), SubResource("Resource_p37y2"), SubResource("Resource_dv4ir"), SubResource("Resource_25mxy"), SubResource("Resource_e31fi"), SubResource("Resource_l1ths"), SubResource("Resource_d3hb7")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_idcse")

@@ -1,6 +1,6 @@
 ~ start
 do helpers.look_at_entity(player)
-if player.current_weapon != null:
+if helpers.is_armed(player):
 	{{dialogue.character_name}}: Please put your weapon away before entering the hotel.
 	=> END
 

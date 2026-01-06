@@ -6,8 +6,12 @@ class_name ZN_Inventory
 
 
 var _item_cache: Array[Entity] = []
-# var _items_by_id: Dictionary[String, Entity] = {}
-# var _items_by_name: Dictionary[String, Entity] = {}
+
+#region Indexes
+var _items_by_id: Dictionary[String, Entity] = {}
+var _items_by_name: Dictionary[String, Entity] = {}
+var _items_by_shortcut: Dictionary[ZC_ItemShortcut.ItemShortcut, Entity] = {}
+#endregion
 
 
 var items: Array[Entity]:
@@ -15,12 +19,29 @@ var items: Array[Entity]:
 		return _item_cache.duplicate()
 
 
+func _index_item(item: Entity) -> void:
+	_items_by_id[item.id] = item
+
+	var interactive := item.get_component(ZC_Interactive) as ZC_Interactive
+	if interactive != null:
+		_items_by_name[interactive.name] = item
+
+	var shortcut := item.get_component(ZC_ItemShortcut) as ZC_ItemShortcut
+	if shortcut != null:
+		_items_by_shortcut[shortcut.shortcut] = item
+
+
 func _cache_items() -> Array[Entity]:
 	_item_cache.clear()
+	_items_by_id.clear()
+	_items_by_name.clear()
+	_items_by_shortcut.clear()
+
 	var children := get_children()
 	for child in children:
 		if child is Entity:
 			_item_cache.append(child)
+			_index_item(child as Entity)
 
 	# sync to the component
 	# the ECS world may not be fully initialized yet, so the component may not exist
@@ -61,12 +82,12 @@ func _ready() -> void:
 
 
 func size() -> int:
-	return items.size()
+	return _item_cache.size()
 
 
 func add_item(item: Entity) -> bool:
 	var component := _get_holder_inventory()
-	if component.max_slots > 0 and items.size() >= component.max_slots:
+	if component.max_slots > 0 and _item_cache.size() >= component.max_slots:
 		return false
 
 	add_child(item)
@@ -76,8 +97,20 @@ func add_item(item: Entity) -> bool:
 
 
 func remove_item(item: Entity) -> void:
-	if item in items:
+	if item in _item_cache:
 		self.remove_child(item)
 		_item_cache.erase(item)
 		var component := _get_holder_inventory()
 		component.item_ids.erase(item.id)
+
+
+func get_by_id(id: String) -> Entity:
+	return _items_by_id.get(id, null)
+
+
+func get_by_name(item_name: String) -> Entity:
+	return _items_by_name.get(item_name, null)
+
+
+func get_by_shortcut(shortcut: ZC_ItemShortcut.ItemShortcut) -> Entity:
+	return _items_by_shortcut.get(shortcut, null)

@@ -6,7 +6,6 @@ class_name ZE_Character
 @export var swing_path_follower: PathFollow3D = null
 
 @export_group("Inventory")
-@export var current_weapon: ZE_Weapon = null
 @export var equipment_slots: Dictionary[String, Marker3D] = {}
 @export var inventory_node: Node = null
 @export var weapon_node: Node3D = null
@@ -26,8 +25,7 @@ var max_look: float = deg_to_rad(180)
 func on_ready() -> void:
 	super.on_ready()
 
-	if current_weapon:
-		self.add_relationship(RelationshipUtils.make_equipped(current_weapon))
+	# TODO: add inventory items
 
 
 func _physics_process(delta: float) -> void:

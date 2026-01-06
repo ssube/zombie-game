@@ -1,5 +1,13 @@
 class_name DialogueUtils
 
+static func is_armed(entity: Entity) -> bool:
+	var wielding := RelationshipUtils.get_wielding(entity)
+	return wielding.size() > 0
+
+static func is_clothed(entity: Entity) -> bool:
+	var wearing_relationships := entity.get_relationships(RelationshipUtils.any_wearing) as Array[Relationship]
+	return wearing_relationships.size() > 0
+
 static func look_at_position(entity: Entity, position: Vector3) -> void:
 	var movement := entity.get_component(ZC_Movement) as ZC_Movement
 	movement.set_look_target(position)
@@ -26,6 +34,12 @@ class DialogueHelper:
 	func _init(target_entity: Entity, level_markers: Dictionary[String, Marker3D]) -> void:
 		entity = target_entity
 		markers = level_markers
+
+	func is_armed(other: Entity) -> bool:
+		return DialogueUtils.is_armed(other)
+
+	func is_clothed(other: Entity) -> bool:
+		return DialogueUtils.is_clothed(other)
 
 	func look_at_position(position: Vector3) -> void:
 		DialogueUtils.look_at_position(entity, position)

@@ -23,49 +23,47 @@ static func apply_damage(actor: Entity, target: Node, base_damage: int, multipli
 	return damage
 
 
-# TODO: turn into drop_item
-static func drop_weapon(character: ZE_Character) -> ZE_Weapon:
-	var old_weapon := character.current_weapon
-	if old_weapon == null:
-		return null
-
-	character.current_weapon = null
-
-	var weapon_body = old_weapon.get_node(".") as RigidBody3D
-	var weapon_position := weapon_body.global_position as Vector3
-	var weapon_parent := old_weapon.get_parent()
-	if weapon_parent:
-		weapon_parent.remove_child(old_weapon)
+# TODO: to inventory utils
+static func drop_item(character: ZE_Character, item: ZE_Base) -> ZE_Weapon:
+	var item_body = item.get_node(".") as Node3D
+	var item_position := item_body.global_position as Vector3
+	var parent := item.get_parent()
+	if parent:
+		parent.remove_child(item)
 
 	var entity_parent := character.get_parent()
-	entity_parent.add_child(old_weapon)
+	entity_parent.add_child(item)
 
-	old_weapon.remove_relationship(RelationshipUtils.make_equipped(old_weapon))
-	old_weapon.remove_relationship(RelationshipUtils.make_holding(old_weapon))
+	character.remove_relationship(RelationshipUtils.make_equipped(item))
+	character.remove_relationship(RelationshipUtils.make_holding(item))
 
-	weapon_body.freeze = false
-	weapon_body.global_position = weapon_position
+	item_body.freeze = false
+	item_body.global_position = item_position
 
-	return old_weapon
+	return item
 
 
-static func equip_weapon(character: ZE_Character, weapon: ZE_Weapon) -> ZE_Weapon:
-	var old_weapon := character.current_weapon
-	if old_weapon != null:
-		unequip_item(character, old_weapon)
+# TODO: to inventory utils
+static func equip_weapon(character: ZE_Character, weapon: ZE_Weapon, _slot: String = "", replace: bool = true) -> bool:
+	if replace:
+		var wielding := RelationshipUtils.get_wielding(character)
+		for old_weapon in wielding:
+			# TODO: check if they share the same slot
+			unequip_item(character, old_weapon)
 
 	if weapon != null:
 		if equip_item(character, weapon):
 			ZombieLogger.debug("Equipped weapon: {0}", [weapon.name])
+			return true
 		else:
-			ZombieLogger.error("Unable to equip weapon: {0}", [weapon.name]) # TODO: find a way to return this instead of the old weapon
+			ZombieLogger.error("Unable to equip weapon: {0}", [weapon.name])
 
-	character.current_weapon = weapon
-	return old_weapon
+	return false
 
 
+# TODO: to inventory utils
 ## Equip an item and return true if the item could be equipped in its preferred slot
-static func equip_item(character: ZE_Character, item: ZE_Base, _replace: bool = true) -> bool:
+static func equip_item(character: ZE_Character, item: ZE_Base, _slot: String = "", _replace: bool = true) -> bool:
 	var equipment := item.get_component(ZC_Equipment) as ZC_Equipment
 	if equipment == null:
 		return false
@@ -108,6 +106,7 @@ static func equip_item(character: ZE_Character, item: ZE_Base, _replace: bool = 
 	return true
 
 
+# TODO: to inventory utils
 static func unequip_item(character: ZE_Character, item: ZE_Base) -> bool:
 	var equipment := item.get_component(ZC_Equipment) as ZC_Equipment
 	if equipment == null:
@@ -420,6 +419,7 @@ static func get_ranged_component(weapon: ZE_Weapon) -> ZC_Weapon_Ranged:
 	return thrown
 
 
+# TODO: to inventory utils
 static func switch_weapon(entity: ZE_Character, new_weapon: ZE_Weapon, menu: ZM_Menu) -> void:
 	var old_weapon = EntityUtils.equip_weapon(entity, new_weapon)
 
@@ -449,24 +449,26 @@ static func switch_weapon(entity: ZE_Character, new_weapon: ZE_Weapon, menu: ZM_
 		entity.add_child(sound)
 
 
+# TODO: to inventory utils
 static func reload_weapon(player: ZE_Character) -> void:
-	var current_weapon := player.current_weapon as ZE_Weapon
-	var weapon_ammo := current_weapon.get_component(ZC_Ammo) as ZC_Ammo
-	if weapon_ammo == null:
-		return
+	for weapon in RelationshipUtils.get_wielding(player):
+		var weapon_ammo := weapon.get_component(ZC_Ammo) as ZC_Ammo
+		if weapon_ammo == null:
+			return
 
-	var ranged_weapon := EntityUtils.get_ranged_component(current_weapon)
-	if ranged_weapon == null:
-		return
+		var ranged_weapon := EntityUtils.get_ranged_component(weapon)
+		if ranged_weapon == null:
+			return
 
-	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
-	if player_ammo.get_ammo(ranged_weapon.ammo_type) == 0:
-		return
+		var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
+		if player_ammo.get_ammo(ranged_weapon.ammo_type) == 0:
+			return
 
-	weapon_ammo.transfer(player_ammo)
-	current_weapon.apply_effects(ZR_Weapon_Effect.EffectType.RANGED_RELOAD)
+		weapon_ammo.transfer(player_ammo)
+		weapon.apply_effects(ZR_Weapon_Effect.EffectType.RANGED_RELOAD)
 
 
+# TODO: to inventory utils
 ## This does not get the list of inventory items. You probably want RelationshipUtils.get_inventory()
 static func get_inventory_node(entity: Entity) -> ZN_Inventory:
 	var inventory_component := entity.get_component(ZC_Inventory) as ZC_Inventory

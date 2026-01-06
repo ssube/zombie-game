@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://dirupaj1q5imr"]
+[gd_scene load_steps=31 format=4 uid="uid://dirupaj1q5imr"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_2kns5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_17hxq"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bsryju4igi6gd" path="res://effects/sounds/shotgun_empty.tscn" id="9_bsv6m"]
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="11_sgaoq"]
 [ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="13_bsv6m"]
+[ext_resource type="Script" uid="uid://cv3d8y0ir7na1" path="res://scripts/components/items/ZC_ItemShortcut.gd" id="14_r86bq"]
 
 [sub_resource type="Resource" id="Resource_bsv6m"]
 script = ExtResource("11_sgaoq")
@@ -70,6 +71,11 @@ metadata/_custom_type_script = "uid://dwsqxsqwtloma"
 script = ExtResource("13_bsv6m")
 slot = "weapon_ranged"
 metadata/_custom_type_script = "uid://bdq3y7j08fnad"
+
+[sub_resource type="Resource" id="Resource_ech5p"]
+script = ExtResource("14_r86bq")
+shortcut = 1
+metadata/_custom_type_script = "uid://cv3d8y0ir7na1"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dhvf"]
 resource_name = "Material.002"
@@ -156,7 +162,7 @@ collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_2kns5")
 prefab_path = "res://entities/weapons/shotgun.tscn"
-component_resources = Array[ExtResource("2_17hxq")]([SubResource("Resource_bsv6m"), SubResource("Resource_17hxq"), SubResource("Resource_7rb10"), SubResource("Resource_fppoe")])
+component_resources = Array[ExtResource("2_17hxq")]([SubResource("Resource_bsv6m"), SubResource("Resource_17hxq"), SubResource("Resource_7rb10"), SubResource("Resource_fppoe"), SubResource("Resource_ech5p")])
 
 [node name="Shotgun" type="Node3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.18490055, -0.5303326)

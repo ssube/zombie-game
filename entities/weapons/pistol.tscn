@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://lvteuslo4wik"]
+[gd_scene load_steps=34 format=4 uid="uid://lvteuslo4wik"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_xfwg1"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_ivpki"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dheaie13f5j7r" path="res://entities/weapons/bullet_pistol.tscn" id="11_xfwg1"]
 [ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/weapons/ZC_Weapon_Ranged.gd" id="12_85yjl"]
 [ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="13_j4hrb"]
+[ext_resource type="Script" uid="uid://cv3d8y0ir7na1" path="res://scripts/components/items/ZC_ItemShortcut.gd" id="14_ivpki"]
 [ext_resource type="Texture2D" uid="uid://bklnwmjjldo4d" path="res://assets/PS1PSX Gun Pack FBX/Colt PythonRigged_0.png" id="14_xfwg1"]
 
 [sub_resource type="Resource" id="Resource_bsv6m"]
@@ -71,6 +72,10 @@ metadata/_custom_type_script = "uid://dwsqxsqwtloma"
 script = ExtResource("13_j4hrb")
 slot = "weapon_ranged"
 metadata/_custom_type_script = "uid://bdq3y7j08fnad"
+
+[sub_resource type="Resource" id="Resource_kcyli"]
+script = ExtResource("14_ivpki")
+metadata/_custom_type_script = "uid://cv3d8y0ir7na1"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pjxeh"]
 resource_name = "Material_0"
@@ -220,7 +225,7 @@ collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_xfwg1")
 prefab_path = "res://entities/weapons/shotgun.tscn"
-component_resources = Array[ExtResource("2_ivpki")]([SubResource("Resource_bsv6m"), SubResource("Resource_17hxq"), SubResource("Resource_7rb10"), SubResource("Resource_fppoe")])
+component_resources = Array[ExtResource("2_ivpki")]([SubResource("Resource_bsv6m"), SubResource("Resource_17hxq"), SubResource("Resource_7rb10"), SubResource("Resource_fppoe"), SubResource("Resource_kcyli")])
 
 [node name="Colt PythonRigged" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -0.023279577, -0.13194704)

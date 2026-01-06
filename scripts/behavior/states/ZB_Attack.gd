@@ -28,11 +28,13 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		var target_position: Vector3 = target_entity.global_position
 
 		# try to find a valid weapon if we don't have one
-		if entity.current_weapon == null:
+		var wielding := RelationshipUtils.get_wielding(entity)
+		if wielding.size() == 0:
 				switch_weapon(entity)
 
-		# no more weapons after switching
-		if entity.current_weapon == null:
+		# if there are still no more weapons after switching
+		wielding = RelationshipUtils.get_wielding(entity)
+		if wielding.size() == 0:
 				return TickResult.FORCE_EXIT
 
 		var movement := entity.get_component(ZC_Movement) as ZC_Movement
@@ -40,9 +42,9 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 
 		ZombieLogger.debug("Entity attacks target: {0}", [target_entity.name])
 
-		var weapon = entity.current_weapon as ZE_Weapon
+		var weapon := wielding[0] as ZE_Weapon
 		if EntityUtils.is_broken(weapon):
-				weapon = switch_weapon(entity)
+			weapon = switch_weapon(entity)
 
 		EntityUtils.equip_weapon(entity, weapon)
 
@@ -52,7 +54,7 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		var swing_node = entity.swing_path_follower as PathFollow3D
 		swing_node.progress_ratio = 0.0
 
-		attack_tween = weapon.create_tween()
+		attack_tween = entity.create_tween()
 		attack_tween.tween_property(swing_node, "progress_ratio", 1.0, melee_weapon.swing_time)
 		attack_tween.tween_property(swing_node, "progress_ratio", 0.0, melee_weapon.cooldown_time)
 		attack_tween.play()
