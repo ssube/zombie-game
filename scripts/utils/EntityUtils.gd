@@ -23,10 +23,27 @@ static func apply_damage(actor: Entity, target: Node, base_damage: int, multipli
 	return damage
 
 
+static func get_drop_transform(character: ZE_Character) -> Transform3D:
+	var character3d := character.get_node(".") as Node3D
+	var forward := -character3d.global_transform.basis.z
+	var up := character3d.global_transform.basis.y
+	var drop_offset := forward * 1.0 + up * 0.5
+	var fallback_position := character3d.global_transform.translated(drop_offset)
+
+	var inventory_component := character.get_component(ZC_Inventory) as ZC_Inventory
+	if inventory_component == null:
+		return fallback_position
+
+	var drop_marker_node := character.get_node_or_null(inventory_component.drop_marker) as Node3D
+	if drop_marker_node == null:
+		return fallback_position
+
+	return drop_marker_node.global_transform
+
+
 # TODO: to inventory utils
 static func drop_item(character: ZE_Character, item: ZE_Base) -> ZE_Weapon:
 	var item_body = item.get_node(".") as Node3D
-	var item_position := item_body.global_position as Vector3
 	var parent := item.get_parent()
 	if parent:
 		parent.remove_child(item)

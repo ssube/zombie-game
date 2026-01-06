@@ -22,12 +22,6 @@ var move_tween: Tween
 var max_look: float = deg_to_rad(180)
 
 
-func on_ready() -> void:
-	super.on_ready()
-
-	# TODO: add inventory items
-
-
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
