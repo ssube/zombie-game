@@ -30,7 +30,7 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		# try to find a valid weapon if we don't have one
 		var wielding := RelationshipUtils.get_wielding(entity)
 		if wielding.size() == 0:
-				switch_weapon(entity)
+			switch_weapon(entity)
 
 		# if there are still no more weapons after switching
 		wielding = RelationshipUtils.get_wielding(entity)
@@ -66,12 +66,12 @@ func switch_weapon(entity: Entity) -> ZE_Weapon:
 		if entity is not ZE_Character:
 				return null
 
-		var entity_ammo := entity.get_component(ZC_Ammo) as ZC_Ammo
+		#var entity_ammo := entity.get_component(ZC_Ammo) as ZC_Ammo
 		var inventory := RelationshipUtils.get_weapons(entity)
 		for item in inventory:
-			var loaded := EntityUtils.has_ammo(item, [entity_ammo])
+			#var loaded := EntityUtils.has_ammo(item, [entity_ammo])
 			var broken := EntityUtils.is_broken(item)
-			if loaded and not broken:
+			if not broken:
 				EntityUtils.equip_weapon(entity, item)
 				return item as ZE_Weapon
 

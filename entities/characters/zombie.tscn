@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ds0q1crcrv862"]
+[gd_scene load_steps=46 format=3 uid="uid://ds0q1crcrv862"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_rffgv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_2yl8o"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://b7fgmwfrg0t73" path="res://scripts/components/characters/ZC_Experience.gd" id="18_euqm3"]
 [ext_resource type="Script" uid="uid://db2qobebs40ku" path="res://scripts/components/characters/ZC_Behavior.gd" id="20_4i4kv"]
 [ext_resource type="PackedScene" uid="uid://bf8cjjumln7y5" path="res://behavior/zombie_aggressive.tscn" id="21_3lyvt"]
+[ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="21_8aduj"]
 [ext_resource type="PackedScene" uid="uid://b4406rbr42a1e" path="res://entities/weapons/zombie_melee.tscn" id="27_j7lgi"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="35_0f2mi"]
 [ext_resource type="Script" uid="uid://62vhg4wr8feb" path="res://scripts/nodes/ZN_EntityPhysicsLock.gd" id="35_4i4kv"]
@@ -103,6 +104,10 @@ metadata/_custom_type_script = "uid://b8oatb3tdywrh"
 script = ExtResource("5_tseq0")
 metadata/_custom_type_script = "uid://cixmecjncarw5"
 
+[sub_resource type="Resource" id="Resource_uqboj"]
+script = ExtResource("21_8aduj")
+metadata/_custom_type_script = "uid://bsnlq5t650od"
+
 [sub_resource type="Curve3D" id="Curve3D_j7lgi"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1),
@@ -115,21 +120,16 @@ point_count = 2
 [sub_resource type="SphereShape3D" id="SphereShape3D_uqboj"]
 radius = 0.32
 
-[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("swing_path_follower", "current_weapon", "equipment_slots", "inventory_node", "weapon_node")]
+[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("swing_path_follower", "inventory_node", "weapon_node")]
 collision_layer = 16
 collision_mask = 31
 mass = 20.0
 script = ExtResource("1_rffgv")
 swing_path_follower = NodePath("Body/Path3D/PathFollow3D")
-current_weapon = NodePath("Inventory/ZombieMelee")
-equipment_slots = {
-"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
-}
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
-extra_components = null
 prefab_path = "res://entities/characters/zombie.tscn"
-component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_0ios3"), SubResource("Resource_4i4kv"), SubResource("Resource_u6a8x"), SubResource("Resource_8aduj"), SubResource("Resource_ull4n"), SubResource("Resource_euqm3"), SubResource("Resource_jpnnd"), SubResource("Resource_sn1gh"), SubResource("Resource_4bumh"), SubResource("Resource_kwfyu"), SubResource("Resource_mn8kb"), SubResource("Resource_wwun5"), SubResource("Resource_7tmu0")])
+component_resources = Array[ExtResource("2_2yl8o")]([SubResource("Resource_0ios3"), SubResource("Resource_4i4kv"), SubResource("Resource_u6a8x"), SubResource("Resource_8aduj"), SubResource("Resource_ull4n"), SubResource("Resource_euqm3"), SubResource("Resource_jpnnd"), SubResource("Resource_sn1gh"), SubResource("Resource_4bumh"), SubResource("Resource_kwfyu"), SubResource("Resource_mn8kb"), SubResource("Resource_wwun5"), SubResource("Resource_7tmu0"), SubResource("Resource_uqboj")])
 
 [node name="Body" type="Node3D" parent="."]
 
@@ -171,7 +171,7 @@ visible = false
 [node name="Inventory" type="Node3D" parent="."]
 
 [node name="ZombieMelee" parent="Inventory" instance=ExtResource("27_j7lgi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19761527, -0.6243353)
+transform = Transform3D(1, 0, 0, 0, 0.5176985, 0.8555631, 0, -0.8555631, 0.5176985, 0, -0.10626727, -0.49780533)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 

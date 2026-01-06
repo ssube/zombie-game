@@ -23,6 +23,16 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		if OptionsManager.options.cheats.no_aggro:
 			return TickResult.FORCE_EXIT
 
+		# try to find a valid weapon if we don't have one
+		var wielding := RelationshipUtils.get_wielding(entity)
+		if wielding.size() == 0:
+				switch_weapon(entity)
+
+		# if there are still no more weapons after switching
+		wielding = RelationshipUtils.get_wielding(entity)
+		if wielding.size() == 0:
+				return TickResult.FORCE_EXIT
+
 		# Chase can work with just a position (heard a sound) or with an entity
 		var target_position: Vector3 = attention.target_position
 
@@ -46,3 +56,19 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		navigation_path = NavigationUtils.update_navigation_path(node_3d, target_position)
 		movement.set_move_target(target_position) # TODO: check if this should use the navigation path
 		return TickResult.CONTINUE
+
+
+func switch_weapon(entity: Entity) -> ZE_Weapon:
+		if entity is not ZE_Character:
+				return null
+
+		var entity_ammo := entity.get_component(ZC_Ammo) as ZC_Ammo
+		var inventory := RelationshipUtils.get_weapons(entity)
+		for item in inventory:
+			var loaded := EntityUtils.has_ammo(item, [entity_ammo])
+			var broken := EntityUtils.is_broken(item)
+			if loaded and not broken:
+				EntityUtils.equip_weapon(entity, item)
+				return item as ZE_Weapon
+
+		return null
