@@ -45,13 +45,14 @@ func get_inventory() -> Array[Entity]:
 
 
 func equip_weapon(weapon_name: String) -> bool:
+	assert(false, "Deprecated: Use EntityUtils.equip_weapon() instead.")
 	var entity_inventory = get_inventory()
 	for entity in entity_inventory:
 		if EntityUtils.is_interactive(entity):
 			var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
 			if interactive.name == weapon_name:
-				current_weapon = entity as ZE_Weapon
-				ZombieLogger.debug("Equipped weapon: {0}", [current_weapon])
+				EntityUtils.equip_weapon(self, entity)
+				ZombieLogger.debug("Equipped weapon: {0}", [interactive.name])
 				return true
 
 	return false

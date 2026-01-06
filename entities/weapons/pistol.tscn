@@ -75,6 +75,7 @@ metadata/_custom_type_script = "uid://bdq3y7j08fnad"
 
 [sub_resource type="Resource" id="Resource_kcyli"]
 script = ExtResource("14_ivpki")
+shortcut = 2
 metadata/_custom_type_script = "uid://cv3d8y0ir7na1"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pjxeh"]

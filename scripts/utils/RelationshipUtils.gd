@@ -108,6 +108,11 @@ static func make_effect(effect: ZC_Screen_Effect) -> Relationship:
 
 static func make_equipped(item: Entity) -> Relationship:
 	var equipped_component := ZC_Equipped.new()
+
+	var equipment := item.get_component(ZC_Equipment) as ZC_Equipment
+	if equipment:
+		equipped_component.slot = equipment.slot
+
 	return Relationship.new(equipped_component, item)
 
 static func make_fired(actor: Entity) -> Relationship:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://tna8f01ql67u"]
+[gd_scene load_steps=30 format=4 uid="uid://tna8f01ql67u"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aigh8"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_dy0dc"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="10_fmxn0"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="10_hgjmx"]
 [ext_resource type="Script" uid="uid://u512rl8uacud" path="res://scripts/nodes/actions/ZN_DurabilityAction.gd" id="10_hvjee"]
+[ext_resource type="Script" uid="uid://cv3d8y0ir7na1" path="res://scripts/components/items/ZC_ItemShortcut.gd" id="11_36cak"]
 [ext_resource type="Script" uid="uid://dlb4vkkjdb658" path="res://scripts/nodes/actions/ZN_HealthAction.gd" id="11_hgjmx"]
 [ext_resource type="Script" uid="uid://crylbd231pgne" path="res://scripts/nodes/conditions/ZN_FactionCondition.gd" id="12_nl1ig"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="12_u21t8"]
@@ -60,6 +61,10 @@ metadata/_custom_type_script = "uid://c86wth8kvlbt7"
 script = ExtResource("10_fmxn0")
 slot = "weapon_melee"
 metadata/_custom_type_script = "uid://bdq3y7j08fnad"
+
+[sub_resource type="Resource" id="Resource_o54s1"]
+script = ExtResource("11_36cak")
+metadata/_custom_type_script = "uid://cv3d8y0ir7na1"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1fv1"]
 radius = 0.1
@@ -111,7 +116,7 @@ collision_mask = 23
 max_contacts_reported = 4
 script = ExtResource("1_aigh8")
 prefab_path = "res://entities/weapons/bat.tscn"
-component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_42kvg"), SubResource("Resource_dy0dc"), SubResource("Resource_ee0de"), SubResource("Resource_36cak")])
+component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_42kvg"), SubResource("Resource_dy0dc"), SubResource("Resource_ee0de"), SubResource("Resource_36cak"), SubResource("Resource_o54s1")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475, 0)
