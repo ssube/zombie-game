@@ -49,3 +49,6 @@ class_name ZC_Input
 @export_group("Weapon")
 @export var weapon_next: bool = false
 @export var weapon_previous: bool = false
+
+@export_group("Shortcuts")
+@export var shortcuts: Dictionary[ZC_ItemShortcut.ItemShortcut, bool] = {}

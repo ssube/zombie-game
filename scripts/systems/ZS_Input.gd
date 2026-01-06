@@ -1,6 +1,22 @@
 extends System
 class_name ZS_InputSystem
 
+const SHORTCUT_ACTIONS := {
+	ZC_ItemShortcut.ItemShortcut.SHORTCUT_1: &"shortcut_1",
+	ZC_ItemShortcut.ItemShortcut.SHORTCUT_2: &"shortcut_2",
+	ZC_ItemShortcut.ItemShortcut.SHORTCUT_3: &"shortcut_3",
+	ZC_ItemShortcut.ItemShortcut.SHORTCUT_4: &"shortcut_4",
+	ZC_ItemShortcut.ItemShortcut.SHORTCUT_5: &"shortcut_5",
+	ZC_ItemShortcut.ItemShortcut.SHORTCUT_6: &"shortcut_6",
+	ZC_ItemShortcut.ItemShortcut.SHORTCUT_7: &"shortcut_7",
+	ZC_ItemShortcut.ItemShortcut.SHORTCUT_8: &"shortcut_8",
+	ZC_ItemShortcut.ItemShortcut.SHORTCUT_9: &"shortcut_9",
+	ZC_ItemShortcut.ItemShortcut.SHORTCUT_10: &"shortcut_10",
+	#ZC_ItemShortcut.ItemShortcut.SHORTCUT_11: &"shortcut_11",
+	#ZC_ItemShortcut.ItemShortcut.SHORTCUT_12: &"shortcut_12",
+	ZC_ItemShortcut.ItemShortcut.SHORTCUT_HEALING: &"use_heal",
+}
+
 @export_range(0.0, 1.0) var turn_factor: float = 0.05
 @export_range(0.0, 1.0) var max_lean: float = 0.2
 
@@ -51,6 +67,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		input.weapon_previous = Input.is_action_just_pressed("weapon_previous")
 
 		_update_attack_edges(input, delta)
+		_update_item_shortcuts(input)
 
 
 func _update_attack_edges(input: ZC_Input, delta: float):
@@ -71,3 +88,9 @@ func _update_attack_edges(input: ZC_Input, delta: float):
 			input.attack_ending = false
 
 	input.was_attacking = input.use_attack
+
+
+func _update_item_shortcuts(input: ZC_Input) -> void:
+	for shortcut in SHORTCUT_ACTIONS.keys():
+		var action_name = SHORTCUT_ACTIONS[shortcut]
+		input.shortcuts[shortcut] = Input.is_action_just_pressed(action_name)
