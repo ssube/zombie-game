@@ -98,6 +98,10 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		if input.use_holster:
 			EntityUtils.switch_weapon(entity, null, %Menu)
 
+		# Item shortcuts
+		if input.any_shortcut:
+			_handle_item_shortcuts(entity, input)
+
 		# Reloading weapon
 		if input.use_reload:
 			EntityUtils.reload_weapon(entity)
@@ -183,6 +187,24 @@ func _handle_weapon_attack(entity: Entity) -> void:
 			swing_weapon(entity, weapon)
 		if EntityUtils.is_ranged_weapon(weapon):
 			spawn_projectile(entity, weapon)
+
+
+func _handle_item_shortcuts(entity: Entity, input: ZC_Input) -> void:
+	var pressed_shortcut: ZC_ItemShortcut.ItemShortcut = ZC_ItemShortcut.ItemShortcut.SHORTCUT_1
+	for shortcut in input.shortcuts.keys():
+		if input.shortcuts[shortcut]:
+			pressed_shortcut = shortcut
+			break
+
+	var inventory_node := EntityUtils.get_inventory_node(entity)
+	var chosen_item = inventory_node.get_by_shortcut(pressed_shortcut) as ZE_Weapon
+	if chosen_item == null:
+		return
+
+	if EntityUtils.is_weapon(chosen_item):
+		EntityUtils.switch_weapon(entity, chosen_item, %Menu)
+	else:
+		assert(false, "TODO: handle non-weapon shortcuts")
 
 
 func _update_equipped_items(entity: Entity) -> void:

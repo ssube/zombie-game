@@ -52,3 +52,9 @@ class_name ZC_Input
 
 @export_group("Shortcuts")
 @export var shortcuts: Dictionary[ZC_ItemShortcut.ItemShortcut, bool] = {}
+@export var any_shortcut: bool:
+	get():
+		for pressed in shortcuts.values():
+			if pressed:
+				return true
+		return false
