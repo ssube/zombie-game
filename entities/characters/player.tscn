@@ -74,7 +74,6 @@ metadata/_custom_type_script = "uid://cllu7i7unqk6u"
 
 [sub_resource type="Resource" id="Resource_e31fi"]
 script = ExtResource("17_g5okp")
-current_stamina = 50.0
 velocity_multiplier = 0.2
 jump_cost = 15.0
 sprint_multiplier = 5.0
