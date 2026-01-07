@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://sah33a6m5cm8"]
+[gd_scene load_steps=5 format=3 uid="uid://sah33a6m5cm8"]
 
 [ext_resource type="Script" uid="uid://dh3b7tvyif2rj" path="res://scripts/menus/pause_menu.gd" id="1_s0u37"]
 [ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="2_p1qj3"]
 [ext_resource type="PackedScene" uid="uid://calgaewey8pnp" path="res://menus/menu_audio.tscn" id="3_0wv6w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wv6w"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [node name="PauseMenu" type="AspectRatioContainer"]
 process_mode = 2
@@ -34,16 +45,21 @@ text = "Post Shader"
 [node name="ResumeContainer" type="PanelContainer" parent="MarginContainer/VFlowContainer"]
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VFlowContainer/ResumeContainer"]
-layout_mode = 2
-color = Color(0.2112, 0.33, 0.24090001, 1)
-
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VFlowContainer/ResumeContainer"]
 layout_mode = 2
 
+[node name="Panel" type="PanelContainer" parent="MarginContainer/VFlowContainer/ResumeContainer/MarginContainer"]
+clip_children = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0wv6w")
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VFlowContainer/ResumeContainer/MarginContainer/Panel"]
+layout_mode = 2
+color = Color(0.2112, 0.33, 0.24090001, 1)
+
 [node name="ResumeButton" parent="MarginContainer/VFlowContainer/ResumeContainer/MarginContainer" instance=ExtResource("2_p1qj3")]
 layout_mode = 2
-text = "Resume"
+text = "Keep Playing"
 
 [node name="ControlsButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("2_p1qj3")]
 layout_mode = 2
