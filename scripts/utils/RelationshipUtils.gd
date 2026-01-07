@@ -67,7 +67,9 @@ static func get_inventory(target: Entity) -> Array[Entity]:
 	var relationships := target.get_relationships(RelationshipUtils.any_holding)
 	var entities: Array[Entity] = []
 	for rel in relationships:
-		entities.append(rel.target)
+		var item = rel.target
+		if is_instance_valid(item) and item is Entity:
+			entities.append(item)
 
 	return entities
 
@@ -83,8 +85,9 @@ static func get_wielding(target: Entity) -> Array[Entity]:
 	var relationships := target.get_relationships(RelationshipUtils.any_equipped)
 	var entities: Array[Entity] = []
 	for rel in relationships:
-		if EntityUtils.is_weapon(rel.target):
-			entities.append(rel.target)
+		var item = rel.target
+		if is_instance_valid(item) and EntityUtils.is_weapon(item):
+			entities.append(item)
 
 	return entities
 
