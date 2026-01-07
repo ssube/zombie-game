@@ -27,11 +27,11 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		var wielding := RelationshipUtils.get_wielding(entity)
 		if wielding.size() == 0:
 				switch_weapon(entity)
+				wielding = RelationshipUtils.get_wielding(entity)
 
-		# if there are still no more weapons after switching
-		wielding = RelationshipUtils.get_wielding(entity)
-		if wielding.size() == 0:
-				return TickResult.FORCE_EXIT
+				# if there are still no more weapons after switching
+				if wielding.size() == 0:
+						return TickResult.FORCE_EXIT
 
 		# Chase can work with just a position (heard a sound) or with an entity
 		var target_position: Vector3 = attention.target_position

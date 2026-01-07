@@ -32,10 +32,10 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		if wielding.size() == 0:
 			switch_weapon(entity)
 
-		# if there are still no more weapons after switching
-		wielding = RelationshipUtils.get_wielding(entity)
-		if wielding.size() == 0:
-				return TickResult.FORCE_EXIT
+			# if there are still no more weapons after switching
+			wielding = RelationshipUtils.get_wielding(entity)
+			if wielding.size() == 0:
+					return TickResult.FORCE_EXIT
 
 		var movement := entity.get_component(ZC_Movement) as ZC_Movement
 		movement.set_look_target(target_position)
@@ -45,8 +45,6 @@ func tick(entity: Entity, delta: float, _behavior: ZC_Behavior) -> TickResult:
 		var weapon := wielding[0] as ZE_Weapon
 		if EntityUtils.is_broken(weapon):
 			weapon = switch_weapon(entity)
-
-		EntityUtils.equip_weapon(entity, weapon)
 
 		var melee_weapon = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
 		attack_timer = melee_weapon.cooldown_time
