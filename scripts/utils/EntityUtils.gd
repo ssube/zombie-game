@@ -447,13 +447,17 @@ static func get_ranged_component(weapon: ZE_Weapon) -> ZC_Weapon_Ranged:
 
 # TODO: to inventory utils
 static func switch_weapon(entity: ZE_Character, new_weapon: ZE_Weapon, menu: ZM_Menu) -> void:
-	var old_weapon = EntityUtils.equip_weapon(entity, new_weapon)
+	var previous_weapons := RelationshipUtils.get_wielding(entity)
+	var equipped := EntityUtils.equip_weapon(entity, new_weapon)
+	if not equipped:
+		return
 
 	if new_weapon == null:
 		menu.clear_weapon_label()
 		menu.clear_ammo_label()
 
-		if old_weapon != null:
+		if previous_weapons.size() > 0:
+			var old_weapon := previous_weapons[0]
 			var old_interactive := old_weapon.get_component(ZC_Interactive) as ZC_Interactive
 			menu.push_action("Holstered weapon: %s" % old_interactive.name)
 
