@@ -120,12 +120,15 @@ point_count = 2
 [sub_resource type="SphereShape3D" id="SphereShape3D_uqboj"]
 radius = 0.32
 
-[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("swing_path_follower", "inventory_node", "weapon_node")]
+[node name="Zombie" type="RigidBody3D" node_paths=PackedStringArray("swing_path_follower", "equipment_slots", "inventory_node", "weapon_node")]
 collision_layer = 16
 collision_mask = 31
 mass = 20.0
 script = ExtResource("1_rffgv")
 swing_path_follower = NodePath("Body/Path3D/PathFollow3D")
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
 prefab_path = "res://entities/characters/zombie.tscn"
