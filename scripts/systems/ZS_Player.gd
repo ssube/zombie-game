@@ -266,44 +266,22 @@ func _handle_interactive(entity: Entity, input: ZC_Input, body: CharacterBody3D,
 
 
 func _update_ammo_label(player: Entity) -> void:
-	if player is not ZE_Character:
-		return
-
 	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
 	if player_ammo == null:
-		%Menu.set_ammo_label("")
+		%Menu.set_ammo_label(null, null)
 		return
 
 	var weapons := RelationshipUtils.get_wielding(player)
 	if weapons.size() == 0:
-		%Menu.set_ammo_label("")
+		%Menu.set_ammo_label(null, null)
 		return
 
 	var player_weapon := weapons[0] as ZE_Weapon
 	if player_weapon == null:
-		%Menu.set_ammo_label("")
+		%Menu.set_ammo_label(null, null)
 		return
 
-	var melee_weapon := player_weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
-	if melee_weapon != null:
-		var weapon_durability := player_weapon.get_component(ZC_Durability) as ZC_Durability
-		%Menu.set_ammo_label("Durability: %d/%d" % [
-			weapon_durability.current_durability,
-			weapon_durability.max_durability,
-		])
-
-	var ranged_weapon := EntityUtils.get_ranged_component(player_weapon)
-	if ranged_weapon != null:
-		var weapon_ammo := player_weapon.get_component(ZC_Ammo) as ZC_Ammo
-		var player_count := player_ammo.get_ammo(ranged_weapon.ammo_type)
-		var weapon_count := weapon_ammo.get_ammo(ranged_weapon.ammo_type)
-		var weapon_max := weapon_ammo.get_max_ammo(ranged_weapon.ammo_type)
-		%Menu.set_ammo_label("%s: %d/%d + %d" % [
-			ranged_weapon.ammo_type,
-			weapon_count,
-			weapon_max,
-			player_count,
-		])
+	%Menu.set_ammo_label(player_weapon, player_ammo)
 
 
 func _handle_collisions(body: CharacterBody3D, delta: float) -> void:

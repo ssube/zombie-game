@@ -72,14 +72,19 @@ static func equip_weapon(character: ZE_Character, weapon: ZE_Weapon, _slot: Stri
 			# TODO: check if they share the same slot
 			unequip_item(character, old_weapon)
 
-	if weapon != null:
-		if equip_item(character, weapon):
-			ZombieLogger.debug("Equipped weapon: {0}", [weapon.name])
-			return true
-		else:
-			ZombieLogger.error("Unable to equip weapon: {0}", [weapon.name])
+	if weapon == null:
+		return true
 
-	return false
+	if equip_item(character, weapon):
+		ZombieLogger.debug("Equipped weapon: {0}", [weapon.name])
+		if EntityUtils.is_player(character) and EntityUtils.is_weapon(weapon):
+			var menu := TreeUtils.get_menu(character)
+			var player_ammo := character.get_component(ZC_Ammo) as ZC_Ammo
+			menu.set_ammo_label(weapon, player_ammo)
+		return true
+	else:
+		ZombieLogger.warning("Unable to equip weapon: {0}", [weapon.name])
+		return false
 
 
 # TODO: to inventory utils

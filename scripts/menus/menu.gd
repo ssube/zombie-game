@@ -106,8 +106,39 @@ func clear_weapon_label() -> void:
 func reset_crosshair_color() -> void:
 	$MenuLayer/GameHud.reset_crosshair_color()
 
-func set_ammo_label(text: String) -> void:
+func _get_ammo_text(weapon: ZE_Weapon, player_ammo: ZC_Ammo) -> String:
+	if player_ammo == null:
+		return ""
+
+	var melee_weapon := weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
+	if melee_weapon != null:
+		var weapon_durability := weapon.get_component(ZC_Durability) as ZC_Durability
+		return "Durability: %d/%d" % [
+			weapon_durability.current_durability,
+			weapon_durability.max_durability,
+		]
+
+	var ranged_weapon := EntityUtils.get_ranged_component(weapon)
+	if ranged_weapon != null:
+		var weapon_ammo := weapon.get_component(ZC_Ammo) as ZC_Ammo
+		var player_count := player_ammo.get_ammo(ranged_weapon.ammo_type)
+		var weapon_count := weapon_ammo.get_ammo(ranged_weapon.ammo_type)
+		var weapon_max := weapon_ammo.get_max_ammo(ranged_weapon.ammo_type)
+		var label := "%s: %d/%d + %d" % [
+			ranged_weapon.ammo_type,
+			weapon_count,
+			weapon_max,
+			player_count,
+		]
+		return label
+
+	return ""
+
+
+func set_ammo_label(weapon: ZE_Weapon, player_ammo: ZC_Ammo) -> void:
+	var text := _get_ammo_text(weapon, player_ammo)
 	$MenuLayer/GameHud.set_ammo_label(text)
+
 
 func set_weapon_label(text: String) -> void:
 	$MenuLayer/GameHud.set_weapon_label(text)
