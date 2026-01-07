@@ -79,7 +79,9 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 
 	for entity in entities:
 		var stamina := entity.get_component(ZC_Stamina) as ZC_Stamina
-		if stamina.current_stamina >= stamina.max_stamina:
+		
+		# Don't need to do anything if both options are disabled
+		if not stamina.cost_enabled and not stamina.recharge_enabled:
 			continue
 
 		# Only recharge if they are still
