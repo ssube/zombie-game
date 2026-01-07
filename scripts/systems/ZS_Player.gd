@@ -396,18 +396,17 @@ func _clear_player_shimmer(player: ZE_Player) -> void:
 		player.last_shimmer_target = null
 
 
-func _get_next_shortcut(entity: Entity) -> ZC_ItemShortcut.ItemShortcut:
+func _get_current_index(entity: ZE_Player, weapons: Array, default: int = 0) -> int:
 	var wielding := RelationshipUtils.get_wielding(entity)
 	if wielding.size() == 0:
-		return ZC_ItemShortcut.FIRST_LOOP_SHORTCUT
+		return default
 
-	var current_weapon := wielding[0]
-	var current_shortcut := current_weapon.get_component(ZC_ItemShortcut) as ZC_ItemShortcut
-	if current_shortcut == null:
-		return ZC_ItemShortcut.FIRST_LOOP_SHORTCUT
+	var last_weapon := wielding[0]
+	var last_index := weapons.find(last_weapon)
+	if last_index == -1:
+		return default
 
-	var next_shortcut := ZC_ItemShortcut.next_shortcut(current_shortcut.shortcut)
-	return next_shortcut
+	return last_index
 
 
 ## Equip the next weapon
@@ -416,32 +415,18 @@ func equip_next_weapon(entity: ZE_Player) -> void:
 	if weapons.size() == 0:
 		return
 
-	var inventory_node := EntityUtils.get_inventory_node(entity)
-	var next_shortcut := _get_next_shortcut(entity)
+	var current_index := _get_current_index(entity, weapons)
+	var next_index := current_index + 1
+	if next_index >= weapons.size():
+		next_index = 0
 
-	# TODO: loop until we find a valid weapon, in case the next shortcut is empty
-	var chosen_weapon = inventory_node.get_by_shortcut(next_shortcut) as ZE_Weapon
+	# if you only have one weapon, do nothing
+	if next_index == current_index:
+		return
 
-	# If we could not find the next weapon, default to the first weapon
-	if chosen_weapon == null:
-		chosen_weapon = weapons[0] as ZE_Weapon
-
-	EntityUtils.switch_weapon(entity, chosen_weapon, %Menu)
+	var next_weapon := weapons[next_index] as ZE_Weapon
+	EntityUtils.switch_weapon(entity, next_weapon, %Menu)
 	_update_ammo_label(entity)
-
-
-func _get_previous_shortcut(entity: Entity) -> ZC_ItemShortcut.ItemShortcut:
-	var wielding := RelationshipUtils.get_wielding(entity)
-	if wielding.size() == 0:
-		return ZC_ItemShortcut.LAST_LOOP_SHORTCUT
-
-	var current_weapon := wielding[0]
-	var current_shortcut := current_weapon.get_component(ZC_ItemShortcut) as ZC_ItemShortcut
-	if current_shortcut == null:
-		return ZC_ItemShortcut.LAST_LOOP_SHORTCUT
-
-	var previous_shortcut := ZC_ItemShortcut.previous_shortcut(current_shortcut.shortcut)
-	return previous_shortcut
 
 
 func equip_previous_weapon(entity: ZE_Player) -> void:
@@ -449,15 +434,15 @@ func equip_previous_weapon(entity: ZE_Player) -> void:
 	if weapons.size() == 0:
 		return
 
-	var inventory_node := EntityUtils.get_inventory_node(entity)
-	var previous_shortcut := _get_previous_shortcut(entity)
+	var current_index := _get_current_index(entity, weapons, -1)
+	var previous_index := current_index - 1
+	if previous_index < 0:
+		previous_index = weapons.size() - 1
 
-	# TODO: loop until we find a valid weapon, in case the previous shortcut is empty
-	var chosen_weapon = inventory_node.get_by_shortcut(previous_shortcut) as ZE_Weapon
+	# if you only have one weapon, do nothing
+	if previous_index == current_index:
+		return
 
-	# If we could not find the previous weapon, default to the last weapon
-	if chosen_weapon == null:
-		chosen_weapon = weapons[-1] as ZE_Weapon
-
-	EntityUtils.switch_weapon(entity, chosen_weapon, %Menu)
+	var previous_weapon := weapons[previous_index] as ZE_Weapon
+	EntityUtils.switch_weapon(entity, previous_weapon, %Menu)
 	_update_ammo_label(entity)
