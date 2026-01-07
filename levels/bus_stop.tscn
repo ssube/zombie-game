@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=4 uid="uid://v18fidmgep15"]
+[gd_scene load_steps=136 format=4 uid="uid://v18fidmgep15"]
 
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_b7jq5"]
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_dm6vb"]
@@ -30,10 +30,28 @@
 [ext_resource type="Material" uid="uid://g5xoeqn2qoy6" path="res://textures/Color Maps/metal_panels_pt_2.tres" id="17_y6j6u"]
 [ext_resource type="PackedScene" uid="uid://dq3oixjn7s600" path="res://entities/equipment/cone_hat.tscn" id="19_gbhsh"]
 [ext_resource type="PackedScene" uid="uid://d00dbkjpj0iyk" path="res://entities/items/flashlight.tscn" id="20_i2a6y"]
+[ext_resource type="PackedScene" uid="uid://bfhfig3rnntfv" path="res://entities/statics/mailbox_entity.tscn" id="21_3d12m"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="21_g2fch"]
 [ext_resource type="PackedScene" uid="uid://b6k3o4n33nlld" path="res://entities/statics/dumpster.tscn" id="21_tu73e"]
-[ext_resource type="PackedScene" uid="uid://cqwe8v0wm6dd4" path="res://entities/statics/mailbox.tscn" id="27_h6dut"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="22_qy6wr"]
+[ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/props/ZC_Portal.gd" id="23_87y5u"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="24_byx5j"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="25_tr7l7"]
 [ext_resource type="PackedScene" uid="uid://bvrdhrtkeshuo" path="res://entities/weapons/shotgun_rave.tscn" id="31_f0s1s"]
+
+[sub_resource type="Resource" id="Resource_byx5j"]
+script = ExtResource("23_87y5u")
+next_level = "fishing_pier"
+spawn_point = "Markers/BusStop"
+metadata/_custom_type_script = "uid://cn8mtbap6uudk"
+
+[sub_resource type="Resource" id="Resource_825fl"]
+script = ExtResource("24_byx5j")
+name = "Load the Fishing Pier"
+pickup = false
+shimmer_material = ExtResource("25_tr7l7")
+shimmer_nodes = Array[NodePath]([NodePath("Mailbox")])
+metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_dm6vb"]
 _surfaces = [{
@@ -586,9 +604,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.609315, 0.60785973, 0.765
 [node name="SignStop" parent="Entities" instance=ExtResource("13_k62ce")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.884563, 0.21824193, 1.4301579)
 
-[node name="Mailbox" parent="Entities" instance=ExtResource("27_h6dut")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.096527, 0.25, -0.2670951)
-
 [node name="Flare" parent="Entities" instance=ExtResource("15_morpl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.804863, 0.35000002, -0.22783995)
 
@@ -616,12 +631,20 @@ transform = Transform3D(-0.74588287, 0, 0.66607684, 0, 1, 0, -0.66607684, 0, -0.
 [node name="Zombie4" parent="Entities" instance=ExtResource("21_g2fch")]
 transform = Transform3D(0.9933907, 0, 0.11478108, 0, 1, 0, -0.11478108, 0, 0.9933907, -29.823896, 3.0830746, 37.790928)
 
+[node name="Mailbox2" parent="Entities" instance=ExtResource("21_3d12m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.996475, 0.25000048, -0.39246774)
+extra_components = Array[ExtResource("22_qy6wr")]([SubResource("Resource_byx5j")])
+component_resources = Array[ExtResource("22_qy6wr")]([SubResource("Resource_825fl")])
+
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="Markers" type="Node3D" parent="."]
 
 [node name="Start" type="Marker3D" parent="Markers"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 16.5, 1, 0.25)
+
+[node name="FishingPier" type="Marker3D" parent="Markers"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -35.185337, 0.8486717, 0.8824036)
 
 [node name="Map" type="Node3D" parent="." groups=["level"]]
 script = ExtResource("5_y6j6u")

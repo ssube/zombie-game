@@ -1,4 +1,4 @@
-[gd_scene load_steps=266 format=4 uid="uid://b687g8br5b2mv"]
+[gd_scene load_steps=282 format=4 uid="uid://b687g8br5b2mv"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_vf316"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_24vc2"]
@@ -38,9 +38,16 @@
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="22_fk3c4"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="22_trkbb"]
 [ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="23_24vc2"]
+[ext_resource type="PackedScene" uid="uid://gcoskmsng3v7" path="res://entities/props/clipboard_levels_menu.tscn" id="26_fub7e"]
+[ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door_wood_cw.tscn" id="27_rbmku"]
+[ext_resource type="PackedScene" uid="uid://bfhfig3rnntfv" path="res://entities/statics/mailbox_entity.tscn" id="28_ojp8q"]
 [ext_resource type="PackedScene" uid="uid://rtq8nqsaa7st" path="res://entities/weapons/crowbar.tscn" id="29_7ipmy"]
+[ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/props/ZC_Portal.gd" id="29_pyct7"]
 [ext_resource type="PackedScene" uid="uid://c4gewr3tx3am5" path="res://entities/statics/crate_wood.tscn" id="30_7iyb8"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="30_ifimg"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="31_4maf2"]
 [ext_resource type="PackedScene" uid="uid://femu8fxijdyb" path="res://entities/props/cardboard_box_floating.tscn" id="31_jb54n"]
+[ext_resource type="PackedScene" uid="uid://cv430aqctj4ng" path="res://entities/statics/sign_winding_road_entity.tscn" id="32_4maf2"]
 [ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/grass_cluster_dark.tscn" id="34_kj7f7"]
 [ext_resource type="PackedScene" uid="uid://1mrkahnnofcf" path="res://entities/equipment/fish_hat.tscn" id="39_85wo0"]
 [ext_resource type="AudioStream" uid="uid://cjf5j8cwsl6hf" path="res://sounds/beach_freesound_372021.ogg" id="40_3d2ce"]
@@ -1061,49 +1068,95 @@ extra_components = Array[ExtResource("10_beuf7")]([SubResource("Resource_rbmku")
 [node name="WeaponPistol" parent="Entities" instance=ExtResource("41_y3vix")]
 transform = Transform3D(-0.23910312, 0.36272907, 0.90069824, 0.8349247, 0.5503642, 0, -0.49571207, 0.75201523, -0.43444526, -16.409548, 0.46792176, -0.8161388)
 
-[node name="Zombie" parent="Entities" instance=ExtResource("22_trkbb")]
+[node name="Zombie" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
 transform = Transform3D(0.51986206, 0, 0.8542502, 0, 1, 0, -0.8542502, 0, 0.51986206, -19.059742, -5.850259, -17.352448)
-extra_components = null
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie2" parent="Entities" instance=ExtResource("22_trkbb")]
+[node name="Zombie2" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
 transform = Transform3D(-0.81558245, 0, 0.5786408, 0, 1, 0, -0.5786408, 0, -0.81558245, -20.940372, -5.8502607, 19.650583)
-extra_components = null
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie3" parent="Entities" instance=ExtResource("22_trkbb")]
+[node name="Zombie3" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
 transform = Transform3D(0.5540457, 0, 0.8324863, 0, 1, 0, -0.8324863, 0, 0.5540457, -10.405901, -4.211994, 51.3804)
-extra_components = null
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie5" parent="Entities" instance=ExtResource("22_trkbb")]
+[node name="Zombie5" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
 transform = Transform3D(0.33295098, 0, -0.94294417, 0, 1, 0, 0.94294417, 0, 0.33295098, -4.5773296, -3.591595, 15.599327)
-extra_components = null
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie6" parent="Entities" instance=ExtResource("22_trkbb")]
+[node name="Zombie6" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
 transform = Transform3D(-0.032928646, 0, -0.9994577, 0, 1, 0, 0.9994577, 0, -0.032928646, -4.5773296, -3.591595, 0.65623665)
-extra_components = null
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie7" parent="Entities" instance=ExtResource("22_trkbb")]
+[node name="Zombie7" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
 transform = Transform3D(0.6271208, 0, 0.778922, 0, 1, 0, -0.778922, 0, 0.6271208, -5.3598957, -3.591595, -27.85342)
-extra_components = null
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie8" parent="Entities" instance=ExtResource("22_trkbb")]
+[node name="Zombie8" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
 transform = Transform3D(0.6271208, 0, 0.778922, 0, 1, 0, -0.778922, 0, 0.6271208, 5.906096, 1.0754642, -23.563295)
-extra_components = null
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie9" parent="Entities" instance=ExtResource("22_trkbb")]
+[node name="Zombie9" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
 transform = Transform3D(-0.16205132, 0, 0.9867823, 0, 1, 0, -0.9867823, 0, -0.16205132, 9.420336, 1.0754642, -12.100429)
-extra_components = null
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie10" parent="Entities" instance=ExtResource("22_trkbb")]
+[node name="Zombie10" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
 transform = Transform3D(0.99558336, 0, -0.093882784, 0, 1, 0, 0.093882784, 0, 0.99558336, 1.0335469, 1.2583246, 28.035778)
-extra_components = null
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie11" parent="Entities" instance=ExtResource("22_trkbb")]
+[node name="Zombie11" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
 transform = Transform3D(-0.3239507, 0, -0.9460741, 0, 1, 0, 0.9460741, 0, -0.3239507, 8.760757, 0.88194084, 56.375053)
-extra_components = null
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie4" parent="Entities" instance=ExtResource("22_trkbb")]
+[node name="Zombie4" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
 transform = Transform3D(0.9996284, 0, -0.027258754, 0, 1, 0, 0.027258754, 0, 0.9996284, -4.9874096, -3.714553, 60.986404)
-extra_components = null
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
+
+[node name="CrateWood6" parent="Entities" instance=ExtResource("7_liy6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.302473, -0.51, -10.999511)
+
+[node name="Clipboard" parent="Entities" instance=ExtResource("26_fub7e")]
+transform = Transform3D(-4.371139e-08, 1, 0, 4.371139e-08, 1.9106855e-15, -1, -1, -4.371139e-08, -4.371139e-08, -13.740615, 1.7803634, -1.9398355)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Entities/Clipboard"]
+transform = Transform3D(1, 1.0552807e-07, 4.3452463e-08, 4.3452445e-08, -0.70413876, 0.71006244, 1.0552808e-07, -0.71006244, -0.70413876, 0, 1, -1.0000002)
+light_color = Color(0.56, 1, 1, 1)
+spot_angle = 15.0
+
+[node name="Door" parent="Entities" instance=ExtResource("27_rbmku")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12.740501, 4.25, 6.972278)
+
+[node name="Mailbox" parent="Entities" instance=ExtResource("28_ojp8q")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10.619098, -0.5, -31.892925)
+extra_components = Array[ExtResource("10_beuf7")]([SubResource("Resource_o14kk")])
+component_resources = Array[ExtResource("10_beuf7")]([SubResource("Resource_hhd11")])
+
+[node name="SignWindingRoad" parent="Entities" instance=ExtResource("32_4maf2")]
+transform = Transform3D(-0.9659258, 0, -0.25881913, 0, 1, 0, 0.25881913, 0, -0.9659258, 10.575513, -0.53140855, 45.800053)
+extra_components = Array[ExtResource("10_beuf7")]([SubResource("Resource_4maf2")])
+component_resources = Array[ExtResource("10_beuf7")]([SubResource("Resource_kpxw3")])
 
 [node name="Lights" type="Node" parent="."]
 

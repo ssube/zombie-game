@@ -1,4 +1,4 @@
-[gd_scene load_steps=275 format=4 uid="uid://cpgmxyybvd4x8"]
+[gd_scene load_steps=283 format=4 uid="uid://cpgmxyybvd4x8"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_43fyf"]
 [ext_resource type="Texture2D" uid="uid://c51guvpg20wcf" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast4.png" id="1_qbcix"]
@@ -18,14 +18,20 @@
 [ext_resource type="Material" uid="uid://bu5p82csdpnmw" path="res://textures/Color Maps/wood_3.tres" id="11_lt4xk"]
 [ext_resource type="Material" uid="uid://b6lsikrvoffh2" path="res://textures/Color Maps/carpet_pt_1_2.tres" id="12_2vnsd"]
 [ext_resource type="PackedScene" uid="uid://dc22w3kstrlyu" path="res://entities/characters/zombie_worker.tscn" id="12_13abf"]
+[ext_resource type="PackedScene" uid="uid://8j6ass42i7pa" path="res://entities/props/book_open_save_menu.tscn" id="13_13abf"]
 [ext_resource type="Material" uid="uid://buwrdjgibshvs" path="res://textures/Color Maps/grass_8.tres" id="13_x4l7f"]
 [ext_resource type="Material" uid="uid://bssxeyjyxu12v" path="res://textures/Color Maps/stone_hell_5.tres" id="14_43fyf"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="14_r4c82"]
+[ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/props/ZC_Portal.gd" id="15_877p8"]
 [ext_resource type="PackedScene" uid="uid://ctpldo10k58u7" path="res://entities/characters/spooky_monster.tscn" id="15_a6qr0"]
 [ext_resource type="AudioStream" uid="uid://jf13578h0spg" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/Ambiences/ambience_d4_loop.ogg" id="16_dfgex"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="16_ncpmj"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="17_5hixg"]
 [ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="17_408hf"]
 [ext_resource type="PackedScene" uid="uid://c7li71yotxcsw" path="res://skies/spooky_church.tscn" id="20_43fyf"]
 [ext_resource type="PackedScene" uid="uid://bbh41wb00cqp1" path="res://entities/weapons/rocks_item.tscn" id="21_2vnsd"]
 [ext_resource type="PackedScene" uid="uid://d00dbkjpj0iyk" path="res://entities/items/flashlight.tscn" id="23_g4oj3"]
+[ext_resource type="PackedScene" uid="uid://cv430aqctj4ng" path="res://entities/statics/sign_winding_road_entity.tscn" id="28_nu2qx"]
 
 [sub_resource type="Resource" id="Resource_g4oj3"]
 script = ExtResource("2_2vnsd")
@@ -69,6 +75,20 @@ radius = 3.0
 height = 8.0
 radial_segments = 8
 rings = 6
+
+[sub_resource type="Resource" id="Resource_ncpmj"]
+script = ExtResource("15_877p8")
+next_level = "fishing_pier"
+spawn_point = "Markers/SpookyChurch"
+metadata/_custom_type_script = "uid://cn8mtbap6uudk"
+
+[sub_resource type="Resource" id="Resource_ulg3r"]
+script = ExtResource("16_ncpmj")
+name = "Load the Fishing Pier"
+pickup = false
+shimmer_material = ExtResource("17_5hixg")
+shimmer_nodes = Array[NodePath]([NodePath("Winding Road")])
+metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2vnsd"]
 _surfaces = [{
@@ -965,6 +985,25 @@ transform = Transform3D(-0.37953696, 0, 0.92517656, 0, 1, 0, -0.92517656, 0, -0.
 [node name="ZombieWorker" parent="Entities" instance=ExtResource("12_13abf")]
 transform = Transform3D(0.96697927, 0, -0.2548551, 0, 1, 0, 0.2548551, 0, 0.96697927, 12.8856325, -0.39086944, -6.6080503)
 
+[node name="SignWindingRoad" parent="Entities" instance=ExtResource("28_nu2qx")]
+transform = Transform3D(-0.8996296, 0.067775056, 0.43136215, 0.07075384, 0.9974519, -0.009157287, -0.4308836, 0.02228236, -0.9021324, -25.98246, -1.5613809, 7.394396)
+extra_components = Array[ExtResource("14_r4c82")]([SubResource("Resource_ncpmj")])
+component_resources = Array[ExtResource("14_r4c82")]([SubResource("Resource_ulg3r")])
+
+[node name="BookOpen" parent="Entities" instance=ExtResource("13_13abf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.36554, 1.5001465, -0.46154416)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Entities/BookOpen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337842, 0)
+shadow_enabled = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Entities/BookOpen"]
+transform = Transform3D(1, 0, 0, 0, 0.41513792, 0.90975857, 0, -0.90975857, 0.41513792, 0, 2.1458235, 1)
+light_color = Color(1, 0.32, 0.32, 1)
+shadow_enabled = true
+spot_attenuation = -1.0
+spot_angle = 15.0
+
 [node name="Lights" type="Node" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
@@ -1029,6 +1068,9 @@ omni_range = 10.0
 
 [node name="Start" type="Marker3D" parent="Markers"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -26, -0.964674, -2)
+
+[node name="FishingPier" type="Marker3D" parent="Markers"]
+transform = Transform3D(-0.9659258, 0, 0.25881913, 0, 1, 0, -0.25881913, 0, -0.9659258, -25.465946, 4.7683716e-07, 6.3551702)
 
 [node name="Map" type="Node3D" parent="." groups=["level"]]
 script = ExtResource("4_gxru8")
