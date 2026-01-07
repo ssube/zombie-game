@@ -45,19 +45,16 @@ text = "Post Shader"
 [node name="ResumeContainer" type="PanelContainer" parent="MarginContainer/VFlowContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VFlowContainer/ResumeContainer"]
-layout_mode = 2
-
-[node name="Panel" type="PanelContainer" parent="MarginContainer/VFlowContainer/ResumeContainer/MarginContainer"]
+[node name="Panel" type="PanelContainer" parent="MarginContainer/VFlowContainer/ResumeContainer"]
 clip_children = 1
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0wv6w")
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VFlowContainer/ResumeContainer/MarginContainer/Panel"]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VFlowContainer/ResumeContainer/Panel"]
 layout_mode = 2
 color = Color(0.2112, 0.33, 0.24090001, 1)
 
-[node name="ResumeButton" parent="MarginContainer/VFlowContainer/ResumeContainer/MarginContainer" instance=ExtResource("2_p1qj3")]
+[node name="ResumeButton" parent="MarginContainer/VFlowContainer/ResumeContainer" instance=ExtResource("2_p1qj3")]
 layout_mode = 2
 text = "Keep Playing"
 
@@ -96,7 +93,7 @@ text = "Exit"
 [node name="MenuAudio" parent="." instance=ExtResource("3_0wv6w")]
 
 [connection signal="toggled" from="MarginContainer/VFlowContainer/PostShader" to="." method="_on_post_shader_toggled"]
-[connection signal="pressed" from="MarginContainer/VFlowContainer/ResumeContainer/MarginContainer/ResumeButton" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/ResumeContainer/ResumeButton" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MarginContainer/VFlowContainer/ControlsButton" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="MarginContainer/VFlowContainer/InventoryButton" to="." method="_on_inventory_pressed"]
 [connection signal="pressed" from="MarginContainer/VFlowContainer/ObjectivesButton" to="." method="_on_objectives_pressed"]
