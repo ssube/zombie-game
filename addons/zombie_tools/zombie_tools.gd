@@ -420,6 +420,52 @@ func check_level_structure() -> void:
 	else:
 		print("Environment node found: %s" % environment_node.name)
 
+	var level_entities := _find_child_entities(entities_node)
+
+	# make sure all of the entity children are under the entities node
+	if entities_node:
+		var scene_entities := _find_child_entities(scene_root)
+		var missing_entities := 0
+		for entity in scene_entities:
+			if entity not in level_entities:
+				printerr("Entity %s is not under the entities node!" % entity.get_path())
+				errors = true
+				missing_entities += 1
+
+		if missing_entities == 0:
+			print("All %d entities are under the entities node." % scene_entities.size())
+		else:
+			printerr("Level is missing %d entities under the entities node!" % missing_entities)
+
+	# check for invalid node paths
+	var root_name := scene_root.name
+	var bad_prefix := "../%s/" % root_name
+
+	for entity in level_entities:
+		for component in entity.component_resources:
+			#print("Checking component: %s" % component.get_script().get_global_name())
+			var properties := component.get_property_list()
+			#print("Found %d exported properties." % properties.size())
+			#print(JSON.stringify(properties))
+
+			for property in properties:
+				if property.get("usage", 0) & (PROPERTY_USAGE_STORAGE | PROPERTY_USAGE_EDITOR):
+					var value = component.get(property["name"])
+					if value is NodePath:
+						var path: NodePath = value as NodePath
+						var path_str: String = str(path)
+
+						# TODO: check for empty paths
+						if path_str.begins_with(bad_prefix):
+							printerr("Component %s on entity %s has invalid NodePath: %s" % [
+								component.get_script().get_global_name(),
+								entity.name,
+								path_str,
+							])
+							errors = true
+						else:
+							print("NodePath is valid: %s" % path_str)
+
 	print("Level structure check complete.")
 
 	if errors:
