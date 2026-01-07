@@ -109,7 +109,7 @@ func _set_level_environment(component: ZC_Weather) -> void:
 	if environment == null:
 		var time_name := ZC_Weather.TimeOfDay.keys()[component.time_of_day] as String
 		var weather_name := ZC_Weather.WeatherType.keys()[component.weather_type] as String
-		ZombieLogger.warning("No matching environment for conditions {0} and {1}", [time_name, weather_name])
+		ZombieLogger.debug("No matching environment for conditions {0} and {1}", [time_name, weather_name])
 		return
 
 	var level_environment := level.get_node(level.environment_node)
