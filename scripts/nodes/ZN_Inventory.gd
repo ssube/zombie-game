@@ -67,13 +67,13 @@ func _cache_items() -> Array[Entity]:
 	return _item_cache
 
 
-func _on_direct_add(_item: Entity) -> void:
+func _on_direct_add(_item: Node) -> void:
 	# TODO: drop item if inventory full
 	# TODO: update this item, not the whole cache
 	_cache_items()
 
 
-func _on_direct_remove(_item: Entity) -> void:
+func _on_direct_remove(_item: Node) -> void:
 	# TODO: update this item, not the whole cache
 	_cache_items()
 
