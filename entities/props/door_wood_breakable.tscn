@@ -33,21 +33,21 @@ name = "Door"
 pickup = false
 crosshair_color = Color(0.3764706, 0.7764706, 1, 1)
 shimmer_material = ExtResource("7_whivm")
-shimmer_nodes = Array[NodePath]([NodePath("MovementRoot/HealthyBody3D/CSGBox3D")])
+shimmer_nodes = Array[NodePath]([NodePath("")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_8c2mg"]
 script = ExtResource("8_7gway")
 metadata/_custom_type_script = "uid://b8oatb3tdywrh"
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_7gway"]
-size = Vector3(2, 4, 0.25)
+[sub_resource type="BoxShape3D" id="BoxShape3D_btt3s"]
+size = Vector3(1.5, 2.5, 0.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_nynkh"]
-size = Vector3(2, 2.5, 0.25)
+[sub_resource type="BoxShape3D" id="BoxShape3D_5om0e"]
+size = Vector3(1.5, 1.5, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8c2mg"]
-size = Vector3(0.5, 2.5, 0.25)
+size = Vector3(0.25, 1.5, 0.1)
 
 [node name="Door" type="Node3D"]
 script = ExtResource("1_svhb3")
@@ -65,52 +65,53 @@ gizmo_extents = 1.0
 
 [node name="MovementRoot" type="Node3D" parent="."]
 
-[node name="HealthyBody3D" type="StaticBody3D" parent="MovementRoot" node_paths=PackedStringArray("parent_entity") groups=["skin_healthy"]]
+[node name="Intact" type="StaticBody3D" parent="MovementRoot" node_paths=PackedStringArray("parent_entity") groups=["skin_healthy"]]
 collision_layer = 2
 collision_mask = 24
 script = ExtResource("8_32hrl")
 parent_entity = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementRoot/HealthyBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
-shape = SubResource("BoxShape3D_7gway")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementRoot/Intact"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.25, 0)
+visible = false
+shape = SubResource("BoxShape3D_btt3s")
 metadata/surface_type = &"wood"
 
-[node name="CSGBox3D" type="CSGBox3D" parent="MovementRoot/HealthyBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
-size = Vector3(2, 4, 0.25)
+[node name="CSGBox3D" type="CSGBox3D" parent="MovementRoot/Intact"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.25, 0)
+size = Vector3(1.5, 2.5, 0.1)
 material = ExtResource("9_dlcge")
 
-[node name="DamagedBody3D" type="StaticBody3D" parent="MovementRoot" node_paths=PackedStringArray("parent_entity") groups=["skin_hurt"]]
+[node name="Damaged" type="StaticBody3D" parent="MovementRoot" node_paths=PackedStringArray("parent_entity") groups=["skin_hurt"]]
 visible = false
 collision_layer = 2
 collision_mask = 24
 script = ExtResource("8_32hrl")
 parent_entity = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementRoot/DamagedBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.25, 0)
-shape = SubResource("BoxShape3D_nynkh")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementRoot/Damaged"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.75, 0)
+shape = SubResource("BoxShape3D_5om0e")
 metadata/surface_type = &"wood"
 
-[node name="CSGBox3D" type="CSGBox3D" parent="MovementRoot/DamagedBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.25, 0)
-size = Vector3(2, 2.5, 0.25)
+[node name="CSGBox3D" type="CSGBox3D" parent="MovementRoot/Damaged"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.75, 0)
+size = Vector3(1.5, 1.5, 0.1)
 material = ExtResource("9_dlcge")
 
-[node name="DestroyedBody3D" type="StaticBody3D" parent="MovementRoot" node_paths=PackedStringArray("parent_entity") groups=["skin_dead"]]
+[node name="Destroyed" type="StaticBody3D" parent="MovementRoot" node_paths=PackedStringArray("parent_entity") groups=["skin_dead"]]
 visible = false
 collision_layer = 2
 collision_mask = 24
 script = ExtResource("8_32hrl")
 parent_entity = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementRoot/DestroyedBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.25, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementRoot/Destroyed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.75, 0)
 shape = SubResource("BoxShape3D_8c2mg")
 metadata/surface_type = &"wood"
 
-[node name="CSGBox3D" type="CSGBox3D" parent="MovementRoot/DestroyedBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.25, 0)
-size = Vector3(0.5, 2.5, 0.25)
+[node name="CSGBox3D" type="CSGBox3D" parent="MovementRoot/Destroyed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.75, 0)
+size = Vector3(0.25, 1.5, 0.1)
 material = ExtResource("9_dlcge")

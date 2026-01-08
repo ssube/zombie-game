@@ -29,7 +29,7 @@ name = "Door"
 pickup = false
 crosshair_color = Color(0.3764706, 0.7764706, 1, 1)
 shimmer_material = ExtResource("7_ksctv")
-shimmer_nodes = Array[NodePath]([NodePath("StaticBody3D/CSGBox3D")])
+shimmer_nodes = Array[NodePath]([NodePath("")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_gvmmc"]
@@ -39,11 +39,11 @@ actions = Dictionary[int, NodePath]({
 })
 metadata/_custom_type_script = "uid://barikupijl7r7"
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_nynkh"]
-size = Vector3(2, 4, 0.25)
+[sub_resource type="BoxShape3D" id="BoxShape3D_0vjok"]
+size = Vector3(1.5, 2.5, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gvmmc"]
-size = Vector3(2, 4, 2)
+size = Vector3(1.5, 2.5, 2)
 
 [node name="Door" type="Node3D"]
 script = ExtResource("1_iauw2")
@@ -66,13 +66,13 @@ script = ExtResource("8_xmjbh")
 parent_entity = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
-shape = SubResource("BoxShape3D_nynkh")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.25, 0)
+shape = SubResource("BoxShape3D_0vjok")
 metadata/surface_type = &"wood"
 
 [node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
-size = Vector3(2, 4, 0.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.25, 0)
+size = Vector3(1.5, 2.5, 0.1)
 material = ExtResource("9_i3ife")
 
 [node name="ZN_TriggerArea3D" type="Area3D" parent="."]
@@ -82,7 +82,7 @@ script = ExtResource("12_0vjok")
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ZN_TriggerArea3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.25, 0)
 shape = SubResource("BoxShape3D_gvmmc")
 
 [node name="ZN_DoorAction" type="Node" parent="ZN_TriggerArea3D" node_paths=PackedStringArray("target")]

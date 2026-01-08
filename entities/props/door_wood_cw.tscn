@@ -29,7 +29,7 @@ shimmer_nodes = Array[NodePath]([NodePath("StaticBody3D/CSGBox3D")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nynkh"]
-size = Vector3(2, 4, 0.25)
+size = Vector3(1.5, 2.5, 0.1)
 
 [node name="Door" type="Node3D"]
 script = ExtResource("1_qm17t")
@@ -52,11 +52,11 @@ script = ExtResource("8_5ysdd")
 parent_entity = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.25, 0)
 shape = SubResource("BoxShape3D_nynkh")
 metadata/surface_type = &"wood"
 
 [node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
-size = Vector3(2, 4, 0.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.25, 0)
+size = Vector3(1.5, 2.5, 0.1)
 material = ExtResource("6_1aoj0")
