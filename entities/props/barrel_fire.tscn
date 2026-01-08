@@ -72,33 +72,34 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xsq2f")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bv25f"]
-height = 1.35
+height = 1.2
+radius = 0.45
 
 [node name="Barrel" type="RigidBody3D"]
 collision_layer = 2
 collision_mask = 31
-mass = 5.0
+mass = 100.0
 script = ExtResource("1_udcvv")
 prefab_path = "res://entities/props/barrel.tscn"
 component_resources = Array[ExtResource("2_g3e3n")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl"), SubResource("Resource_0kgpt")])
 
 [node name="Barrel" type="Node3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Barrel" type="MeshInstance3D" parent="Barrel"]
-transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+transform = Transform3D(65, 0, 0, 0, -2.8412403e-06, 65, 0, -65, -2.8412403e-06, 0, 0, 0)
 mesh = SubResource("ArrayMesh_226td")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_bv25f")
+metadata/surface_type = &"metal"
 
 [node name="Effects" type="Node3D" parent="."]
 
 [node name="FireEffect" parent="Effects" instance=ExtResource("9_lfqbm")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.16060305, 0)
 visible = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_bv25f")
-metadata/surface_type = &"metal"
 
 [node name="FireEffect" parent="." instance=ExtResource("9_lfqbm")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.1124915, 0)
