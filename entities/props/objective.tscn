@@ -53,7 +53,7 @@ shader_parameter/scale = 2.0
 shader_parameter/height = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_n8xfw"]
-radius = 0.75
+radius = 0.8
 
 [node name="Objective" type="StaticBody3D"]
 collision_layer = 2
