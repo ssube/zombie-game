@@ -54,6 +54,8 @@ static func get_wearer(item: Entity) -> Entity:
 		RelationshipUtils.make_wearing(item)
 	]).execute() as Array[Entity]
 	assert(relationships.size() <= 1, "Item has more than one entity wearing it, relationships are leaking!")
+	if relationships.size() == 0:
+		return null
 	return relationships.get(0)
 
 static func get_wielder(item: Entity) -> Entity:
@@ -61,6 +63,8 @@ static func get_wielder(item: Entity) -> Entity:
 		RelationshipUtils.make_equipped(item),
 	]).execute() as Array
 	assert(relationships.size() <= 1, "Item has more than one entity wielding it, relationships are leaking!")
+	if relationships.size() == 0:
+		return null
 	return relationships.get(0)
 
 static func get_inventory(target: Entity) -> Array[Entity]:
