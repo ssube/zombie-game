@@ -66,14 +66,14 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		velocity.linear_velocity.x = horizontal_velocity.x
 		velocity.linear_velocity.z = horizontal_velocity.z
 
-		_apply_gravity(velocity, body, delta)
-		_apply_jump(velocity, input, stamina, body)
+		_apply_gravity(velocity, body as Node, delta) # TODO: dirty dirty hack
+		_apply_jump(velocity, input, stamina, body as Node) # TODO: dirty hack
 
 		# TODO: move this into the MovementSystem
 		# Sync to CharacterBody3D (Node assumed attached to entity)
 		var speed_multiplier := EntityUtils.get_speed_multiplier(entity)
 		body.velocity = velocity.linear_velocity * speed_multiplier
-		body.move_and_slide()
+		body.ikcc_move_and_slide()
 		_handle_collisions(body, delta)
 
 		_process_screen_effects(entity, delta)
@@ -129,11 +129,10 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 				player.last_shimmer_target = null
 
 
-func _apply_gravity(velocity: ZC_Velocity, body: CharacterBody3D, delta: float) -> void:
-	var no_clip := OptionsManager.options.cheats.no_clip
-	if no_clip:
+func _apply_gravity(velocity: ZC_Velocity, body: ZE_Player_IKCC, delta: float) -> void:
+	if OptionsManager.options.cheats.no_clip:
 		pass
-	elif body.is_on_floor():
+	elif body.is_on_floor:
 		pass
 	else: # clipping and off the floor
 		velocity.linear_velocity += velocity.gravity * delta
@@ -143,9 +142,9 @@ func _apply_gravity(velocity: ZC_Velocity, body: CharacterBody3D, delta: float) 
 			velocity.linear_velocity.y = max(velocity.gravity.y, velocity.linear_velocity.y)
 
 
-func _apply_jump(velocity: ZC_Velocity, input: ZC_Input, stamina: ZC_Stamina, body: CharacterBody3D) -> void:
+func _apply_jump(velocity: ZC_Velocity, input: ZC_Input, stamina: ZC_Stamina, body: ZE_Player_IKCC) -> void:
 	if input.move_jump and stamina.can_jump():
-		if body.is_on_floor():
+		if body.is_on_floor:
 			stamina.current_stamina -= stamina.jump_cost
 			velocity.linear_velocity.y = input.jump_speed
 
