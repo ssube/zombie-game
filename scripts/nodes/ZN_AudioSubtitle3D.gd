@@ -18,7 +18,7 @@ class_name ZN_AudioSubtitle3D
 
 @export_group("Removal")
 @export var remove_after: float = 0.0
-@export var remove_on_finished: bool = true
+@export var remove_on_finished: bool = false
 
 @onready var radius_squared := subtitle_radius ** 2
 
