@@ -11,7 +11,7 @@ var save_prefab_path = _save_prefab_path
 @export var extra_components: Array[Component] = []
 @export var prefab_path: String = ""
 
-signal action_event(event: Enums.ActionEvent, actor: Node)
+signal action_event(source: Entity, event: Enums.ActionEvent, actor: Node)
 
 
 func _generate_instance_id() -> void:
@@ -76,8 +76,8 @@ func on_ready() -> void:
 	_register_children(self)
 
 
-func _on_action_event(_entity: Entity, event: Enums.ActionEvent, actor: Node) -> void:
-	ActionUtils.run_entity(self, event, actor)
+func _on_action_event(source: Entity, event: Enums.ActionEvent, actor: Node) -> void:
+	ActionUtils.run_entity(source, event, actor)
 
 
 ## Typesafe wrapper for action_event.emit(...)
