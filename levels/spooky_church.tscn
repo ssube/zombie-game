@@ -1,4 +1,4 @@
-[gd_scene load_steps=283 format=4 uid="uid://cpgmxyybvd4x8"]
+[gd_scene load_steps=291 format=4 uid="uid://cpgmxyybvd4x8"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_43fyf"]
 [ext_resource type="Texture2D" uid="uid://c51guvpg20wcf" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast4.png" id="1_qbcix"]
@@ -6,11 +6,16 @@
 [ext_resource type="Script" uid="uid://bbgu5yekfkubs" path="res://scripts/resources/ZR_Weather.gd" id="2_2vnsd"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="4_gxru8"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="5_c71tc"]
+[ext_resource type="Script" uid="uid://ihddv8ci0fkk" path="res://scripts/nodes/triggers/ZN_TriggerRayCast3D.gd" id="5_ulg3r"]
+[ext_resource type="Script" uid="uid://dofl71mlsf7s6" path="res://scripts/nodes/actions/ZN_PhysicsAction.gd" id="6_34ysh"]
 [ext_resource type="Material" uid="uid://dc65t78xmgn1c" path="res://textures/Color Maps/rock_pt_3.tres" id="6_a6qr0"]
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="6_hqmqq"]
+[ext_resource type="Script" uid="uid://b8j7no147cfb4" path="res://scripts/nodes/actions/ZN_ChangeActorAction.gd" id="6_if2s1"]
 [ext_resource type="Material" uid="uid://dmag34gr8mm06" path="res://textures/Color Maps/brick_wall_pt_1.tres" id="7_dfgex"]
+[ext_resource type="Script" uid="uid://b1hfgveu3fvsd" path="res://scripts/nodes/actions/ZN_NodeAction.gd" id="7_if2s1"]
 [ext_resource type="Material" uid="uid://vq88t5vuqjfq" path="res://textures/Color Maps/wood_pt_4.tres" id="8_408hf"]
 [ext_resource type="PackedScene" uid="uid://bay617dekj5is" path="res://entities/equipment/sparkle_crown.tscn" id="8_moy58"]
+[ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="9_8xan3"]
 [ext_resource type="Material" uid="uid://q11wc28gwgth" path="res://textures/Color Maps/wood_5.tres" id="9_lt4xk"]
 [ext_resource type="PackedScene" uid="uid://lvteuslo4wik" path="res://entities/weapons/pistol.tscn" id="10_3hy8g"]
 [ext_resource type="Material" uid="uid://c7t1xu02xsc03" path="res://textures/Color Maps/wood_floor_1.tres" id="10_x4l7f"]
@@ -28,9 +33,12 @@
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="16_ncpmj"]
 [ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="17_5hixg"]
 [ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="17_408hf"]
+[ext_resource type="PackedScene" uid="uid://w70s7gsk27hd" path="res://entities/props/candlestick.tscn" id="18_5hixg"]
 [ext_resource type="PackedScene" uid="uid://c7li71yotxcsw" path="res://skies/spooky_church.tscn" id="20_43fyf"]
 [ext_resource type="PackedScene" uid="uid://bbh41wb00cqp1" path="res://entities/weapons/rocks_item.tscn" id="21_2vnsd"]
 [ext_resource type="PackedScene" uid="uid://d00dbkjpj0iyk" path="res://entities/items/flashlight.tscn" id="23_g4oj3"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="23_prk71"]
+[ext_resource type="AudioStream" uid="uid://bqjftdyf2t4pl" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/IMPACTS and CONTACTS/Short Contact Sounds/sfx_short_contact_sound_17.ogg" id="24_fanoy"]
 [ext_resource type="PackedScene" uid="uid://cv430aqctj4ng" path="res://entities/statics/sign_winding_road_entity.tscn" id="28_nu2qx"]
 
 [sub_resource type="Resource" id="Resource_g4oj3"]
@@ -940,6 +948,37 @@ lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_a6qr0")
 draw_pass_1 = SubResource("SphereMesh_qbcix")
 
+[node name="CandlestickTripwire" type="RayCast3D" parent="Areas"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 2.8424304, 0.89523005, -1.2392526)
+target_position = Vector3(0, -2, 0)
+collision_mask = 8
+script = ExtResource("5_ulg3r")
+metadata/_custom_type_script = "uid://ihddv8ci0fkk"
+
+[node name="ZN_ChangeActorAction" type="Node" parent="Areas/CandlestickTripwire" node_paths=PackedStringArray("set_actor")]
+script = ExtResource("6_if2s1")
+set_actor_to_source = false
+set_actor = NodePath("../../../Entities/Candlestick")
+
+[node name="ZN_PhysicsAction" type="Node" parent="Areas/CandlestickTripwire/ZN_ChangeActorAction"]
+script = ExtResource("6_34ysh")
+impulse = true
+impulse_multiplier = 0.1
+impulse_offset = Vector3(0, -1, -2)
+impulse_origin = 1
+metadata/_custom_type_script = "uid://dofl71mlsf7s6"
+
+[node name="ZN_AudioAction" type="Node" parent="Areas/CandlestickTripwire" node_paths=PackedStringArray("audio_players")]
+script = ExtResource("9_8xan3")
+audio_players = [NodePath("../../../Entities/Candlestick/ZN_AudioSubtitle3D")]
+metadata/_custom_type_script = "uid://dga8v5ocxqirt"
+
+[node name="ZN_NodeAction" type="Node" parent="Areas/CandlestickTripwire" node_paths=PackedStringArray("node")]
+script = ExtResource("7_if2s1")
+node = NodePath("..")
+remove = true
+metadata/_custom_type_script = "uid://b1hfgveu3fvsd"
+
 [node name="Entities" type="Node" parent="."]
 unique_name_in_owner = true
 
@@ -989,6 +1028,18 @@ transform = Transform3D(0.96697927, 0, -0.2548551, 0, 1, 0, 0.2548551, 0, 0.9669
 transform = Transform3D(-0.8996296, 0.067775056, 0.43136215, 0.07075384, 0.9974519, -0.009157287, -0.4308836, 0.02228236, -0.9021324, -25.98246, -1.5613809, 7.394396)
 extra_components = Array[ExtResource("14_r4c82")]([SubResource("Resource_ncpmj")])
 component_resources = Array[ExtResource("14_r4c82")]([SubResource("Resource_ulg3r")])
+
+[node name="Candlestick" parent="Entities" instance=ExtResource("18_5hixg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.714862, 2.5159535, -3.3624985)
+
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="Entities/Candlestick"]
+stream = ExtResource("24_fanoy")
+volume_db = -10.0
+script = ExtResource("23_prk71")
+alerts_enemies = false
+subtitle_text = "Candlestick falling"
+subtitle_radius = 3.0
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="BookOpen" parent="Entities" instance=ExtResource("13_13abf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.36554, 1.5001465, -0.46154416)
@@ -1063,6 +1114,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.21157, 1.000001, 6.573911
 distance_fade_enabled = true
 distance_fade_begin = 20.0
 omni_range = 10.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(0.21996535, 0.14386931, -0.96484035, 0.8874764, 0.38108507, 0.25915217, 0.40497023, -0.91327757, -0.04385511, -16.194908, 5.846957, -2.4620972)
+light_color = Color(0.84, 0.12599997, 0.12599997, 1)
+light_energy = 0.1
+spot_range = 27.31143
+spot_attenuation = -1.0
+spot_angle = 30.0
+spot_angle_attenuation = 2.5
 
 [node name="Markers" type="Node" parent="."]
 
