@@ -56,8 +56,8 @@ component_resources = Array[ExtResource("2_yvdg1")]([SubResource("Resource_24ymc
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-radius = 0.1
-height = 0.5
+radius = 0.075
+height = 0.6
 material = SubResource("StandardMaterial3D_r1chp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
