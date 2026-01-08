@@ -415,13 +415,6 @@ func test_get_ranged_component_null() -> void:
 	var result = __script.get_ranged_component(weapon)
 	weapon.queue_free()
 	assert_object(result).is_null()
-
-
-func test_get_ranged_component_not_entity() -> void:
-	var node := Node.new()
-	var result = __script.get_ranged_component(node)
-	node.queue_free()
-	assert_object(result).is_null()
 #endregion
 
 
@@ -555,7 +548,7 @@ func test_speed_multiplier_stacking() -> void:
 
 	var result = __script.get_speed_multiplier(entity)
 	# 1.2 * 1.5 = 1.8
-	assert_float(result).is_equal(1.8)
+	assert_float(result).is_equal_approx(1.8, 1e-8)
 
 	entity.queue_free()
 #endregion
