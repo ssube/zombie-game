@@ -8,5 +8,5 @@ stream = ExtResource("1_vbld2")
 bus = &"Effects"
 script = ExtResource("2_222g5")
 play_on_ready = true
-subtitle_text = "Pistol cocking"
+subtitle_text = "Pistol Cocking"
 metadata/_custom_type_script = "uid://mcuf24u8q14t"

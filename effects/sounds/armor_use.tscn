@@ -8,6 +8,6 @@ stream = ExtResource("1_64reh")
 bus = &"Effects"
 script = ExtResource("2_mtqxp")
 play_on_ready = true
-subtitle_text = "Equipped armor"
+subtitle_text = "Equipped Armor"
 subtitle_radius = 2.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"

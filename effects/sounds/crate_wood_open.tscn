@@ -8,6 +8,6 @@ stream = ExtResource("1_mckth")
 bus = &"Effects"
 script = ExtResource("2_p7rrw")
 play_on_ready = true
-subtitle_text = "Crate opening"
+subtitle_text = "Crate Opening"
 subtitle_radius = 3.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
