@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dc22w3kstrlyu"]
+[gd_scene load_steps=51 format=3 uid="uid://dc22w3kstrlyu"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_enhv7"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_g3ik4"]
@@ -21,7 +21,12 @@
 [ext_resource type="Script" uid="uid://db2qobebs40ku" path="res://scripts/components/characters/ZC_Behavior.gd" id="19_ufuyc"]
 [ext_resource type="PackedScene" uid="uid://bf8cjjumln7y5" path="res://behavior/zombie_aggressive.tscn" id="20_3i4p6"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="26_sl7ba"]
+[ext_resource type="AudioStream" uid="uid://bbdhwqdsowxt6" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Creatures/Monster/monster_roar_2.ogg" id="27_fkiag"]
 [ext_resource type="PackedScene" uid="uid://b4406rbr42a1e" path="res://entities/weapons/zombie_melee.tscn" id="27_rmkq5"]
+[ext_resource type="Script" uid="uid://bf5mlyrquihqy" path="res://scripts/nodes/ZN_AudioVariable3D.gd" id="28_fkiag"]
+[ext_resource type="AudioStream" uid="uid://dls7tpy68a8o7" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Creatures/Zombie/zombie_roar_7.ogg" id="29_23j0l"]
+[ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="30_ljrwo"]
+[ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="31_ufuyc"]
 [ext_resource type="Script" uid="uid://62vhg4wr8feb" path="res://scripts/nodes/ZN_EntityPhysicsLock.gd" id="32_ufuyc"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="34_b2lq4"]
 [ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="34_x8nhq"]
@@ -119,13 +124,12 @@ points = PackedVector3Array(0, 0, -0.6, -0.3, 0, -0.51965547, 0, 0.3, -0.5196554
 [sub_resource type="SphereShape3D" id="SphereShape3D_uqboj"]
 radius = 0.25
 
-[node name="ZombieWorker" type="RigidBody3D" node_paths=PackedStringArray("swing_path_follower", "current_weapon", "inventory_node", "weapon_node")]
+[node name="ZombieWorker" type="RigidBody3D" node_paths=PackedStringArray("swing_path_follower", "inventory_node", "weapon_node")]
 collision_layer = 16
 collision_mask = 31
 mass = 20.0
 script = ExtResource("1_enhv7")
 swing_path_follower = NodePath("Body/Path3D/PathFollow3D")
-current_weapon = NodePath("Inventory/ZombieMelee")
 inventory_node = NodePath("Inventory")
 weapon_node = NodePath("Body/Path3D/PathFollow3D/Hands/WeaponMarker")
 prefab_path = "res://entities/characters/zombie_worker.tscn"
@@ -160,7 +164,7 @@ curve = SubResource("Curve3D_oqsy8")
 [node name="Hands" type="Node3D" parent="Body/Path3D/PathFollow3D"]
 
 [node name="CSGFlashlight" type="CSGCylinder3D" parent="Body/Path3D/PathFollow3D/Hands"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.5, 0.35, -0.25)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.5140566, 0.07053909, 0.09519935)
 radius = 0.1
 height = 0.5
 material = SubResource("StandardMaterial3D_g3ik4")
@@ -224,5 +228,51 @@ script = ExtResource("32_ufuyc")
 entity_body = NodePath("..")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://62vhg4wr8feb"
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="ZombieRoar" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("27_fkiag")
+script = ExtResource("28_fkiag")
+subtitle_text = "Zombie roaring"
+subtitle_radius = 5.0
+metadata/_custom_type_script = "uid://bf5mlyrquihqy"
+
+[node name="ZombieGroan" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("29_23j0l")
+script = ExtResource("28_fkiag")
+pitch_variation_min = 0.75
+alerts_enemies = false
+subtitle_text = "Zombie groaning"
+subtitle_radius = 3.0
+metadata/_custom_type_script = "uid://bf5mlyrquihqy"
+
+[node name="RoarTimer" type="Timer" parent="Sounds" node_paths=PackedStringArray("parent_entity")]
+wait_time = 60.0
+script = ExtResource("30_ljrwo")
+min_variation = -10.0
+max_variation = 15.0
+repeat = true
+parent_entity = NodePath("../..")
+metadata/_custom_type_script = "uid://h4hsumlormm8"
+
+[node name="ZN_AudioAction" type="Node" parent="Sounds/RoarTimer" node_paths=PackedStringArray("audio_players")]
+script = ExtResource("31_ufuyc")
+audio_players = [NodePath("../../ZombieRoar")]
+metadata/_custom_type_script = "uid://dga8v5ocxqirt"
+
+[node name="GroanTimer" type="Timer" parent="Sounds" node_paths=PackedStringArray("parent_entity")]
+wait_time = 15.0
+script = ExtResource("30_ljrwo")
+min_variation = -10.0
+max_variation = 15.0
+repeat = true
+parent_entity = NodePath("../..")
+metadata/_custom_type_script = "uid://h4hsumlormm8"
+
+[node name="ZN_AudioAction" type="Node" parent="Sounds/GroanTimer" node_paths=PackedStringArray("audio_players")]
+script = ExtResource("31_ufuyc")
+audio_players = [NodePath("../../ZombieGroan")]
+metadata/_custom_type_script = "uid://dga8v5ocxqirt"
 
 [editable path="Behavior"]

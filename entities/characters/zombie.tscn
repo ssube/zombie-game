@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://ds0q1crcrv862"]
+[gd_scene load_steps=51 format=3 uid="uid://ds0q1crcrv862"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_rffgv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_2yl8o"]
@@ -24,6 +24,11 @@
 [ext_resource type="PackedScene" uid="uid://bf8cjjumln7y5" path="res://behavior/zombie_aggressive.tscn" id="21_3lyvt"]
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="21_8aduj"]
 [ext_resource type="PackedScene" uid="uid://b4406rbr42a1e" path="res://entities/weapons/zombie_melee.tscn" id="27_j7lgi"]
+[ext_resource type="AudioStream" uid="uid://bbdhwqdsowxt6" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Creatures/Monster/monster_roar_2.ogg" id="29_rcyyt"]
+[ext_resource type="Script" uid="uid://bf5mlyrquihqy" path="res://scripts/nodes/ZN_AudioVariable3D.gd" id="30_euqm3"]
+[ext_resource type="AudioStream" uid="uid://dls7tpy68a8o7" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Creatures/Zombie/zombie_roar_7.ogg" id="31_euqm3"]
+[ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="31_kwfyu"]
+[ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="32_sn1gh"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="35_0f2mi"]
 [ext_resource type="Script" uid="uid://62vhg4wr8feb" path="res://scripts/nodes/ZN_EntityPhysicsLock.gd" id="35_4i4kv"]
 [ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="35_mn8kb"]
@@ -177,6 +182,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 0.5176985, 0.8555631, 0, -0.8555631, 0.5176985, 0, -0.10626727, -0.49780533)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.975, 0)
 
 [node name="DeathBranch" type="Node" parent="."]
 script = ExtResource("35_mn8kb")
@@ -197,5 +203,53 @@ script = ExtResource("35_4i4kv")
 entity_body = NodePath("..")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://62vhg4wr8feb"
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="ZombieRoar" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("29_rcyyt")
+script = ExtResource("30_euqm3")
+subtitle_text = "Zombie roaring"
+subtitle_radius = 5.0
+metadata/_custom_type_script = "uid://bf5mlyrquihqy"
+
+[node name="ZombieGroan" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("31_euqm3")
+script = ExtResource("30_euqm3")
+pitch_variation_min = 0.75
+volume_variation_min = 0.8
+volume_variation_max = 1.2
+alerts_enemies = false
+subtitle_text = "Zombie groaning"
+subtitle_radius = 3.0
+metadata/_custom_type_script = "uid://bf5mlyrquihqy"
+
+[node name="RoarTimer" type="Timer" parent="Sounds" node_paths=PackedStringArray("parent_entity")]
+wait_time = 60.0
+script = ExtResource("31_kwfyu")
+min_variation = -10.0
+max_variation = 15.0
+repeat = true
+parent_entity = NodePath("../..")
+metadata/_custom_type_script = "uid://h4hsumlormm8"
+
+[node name="ZN_AudioAction" type="Node" parent="Sounds/RoarTimer" node_paths=PackedStringArray("audio_players")]
+script = ExtResource("32_sn1gh")
+audio_players = [NodePath("../../ZombieRoar")]
+metadata/_custom_type_script = "uid://dga8v5ocxqirt"
+
+[node name="GroanTimer" type="Timer" parent="Sounds" node_paths=PackedStringArray("parent_entity")]
+wait_time = 15.0
+script = ExtResource("31_kwfyu")
+min_variation = -10.0
+max_variation = 15.0
+repeat = true
+parent_entity = NodePath("../..")
+metadata/_custom_type_script = "uid://h4hsumlormm8"
+
+[node name="ZN_AudioAction" type="Node" parent="Sounds/GroanTimer" node_paths=PackedStringArray("audio_players")]
+script = ExtResource("32_sn1gh")
+audio_players = [NodePath("../../ZombieGroan")]
+metadata/_custom_type_script = "uid://dga8v5ocxqirt"
 
 [editable path="Behavior"]
