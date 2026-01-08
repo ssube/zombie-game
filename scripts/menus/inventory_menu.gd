@@ -128,9 +128,8 @@ func _on_drop_button_pressed() -> void:
 		if item == null:
 			return
 
-		var _player = _item_players.get(item) as Entity
-		assert(false, "TODO: drop item")
-		# EntityUtils.drop_item(player, item)
+		var player = _item_players.get(item) as Entity
+		EntityUtils.drop_item(player, item)
 
 
 func _activate_selected_items() -> void:
