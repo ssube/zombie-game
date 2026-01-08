@@ -79,7 +79,7 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 
 	for entity in entities:
 		var stamina := entity.get_component(ZC_Stamina) as ZC_Stamina
-		
+
 		# Don't need to do anything if both options are disabled
 		if not stamina.cost_enabled and not stamina.recharge_enabled:
 			continue
@@ -102,6 +102,14 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 			var input := entity.get_component(ZC_Input) as ZC_Input
 			if input and input.move_sprint:
 				cost *= stamina.sprint_multiplier
+
+			# apply a penalty when moving uphill or up stairs
+			var up_dot := velocity.normalized().dot(Vector3.UP)
+			if up_dot > 0.1:
+				var hill_multiplier := lerpf(1.0, stamina.hill_multiplier, clampf(up_dot, 0.0, 1.0))
+				if hill_multiplier > 1.0:
+					ZombieLogger.debug("Hill stamina cost multiplier: {0}", ["%0.2f" % hill_multiplier])
+					cost *= hill_multiplier
 
 		var change := (recharge - cost) * delta
 		stamina.current_stamina += change
