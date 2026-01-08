@@ -9,14 +9,23 @@ material = ExtResource("1_hss43")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 cast_shadow = 2
+visibility_range_end = 10.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
 mesh = SubResource("QuadMesh_ersfw")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.70710677, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710677, 0, 0, 0)
 cast_shadow = 2
+visibility_range_end = 10.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
 mesh = SubResource("QuadMesh_ersfw")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.5, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.5, 0, 0, 0)
 cast_shadow = 2
+visibility_range_end = 10.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
 mesh = SubResource("QuadMesh_ersfw")
