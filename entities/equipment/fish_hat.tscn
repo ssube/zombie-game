@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://1mrkahnnofcf"]
+[gd_scene load_steps=23 format=4 uid="uid://1mrkahnnofcf"]
 
 [ext_resource type="Script" uid="uid://bx51blxd4jc27" path="res://scripts/entities/items/ZE_Armor.gd" id="1_dnwgl"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_jbw33"]
@@ -8,8 +8,11 @@
 [ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="5_gc6r5"]
 [ext_resource type="Texture2D" uid="uid://df0shx4oblcdj" path="res://assets/PSX Mega Pack II/Models/GLB/Props/fish_mx_1_fish_mx_1.png" id="6_fjv7d"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="6_mxdth"]
+[ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="7_ek1nr"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="7_fjv7d"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="8_gc6r5"]
+[ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="12_5xuhg"]
+[ext_resource type="Script" uid="uid://b7fl0650sjefs" path="res://scripts/nodes/actions/ZN_AreaAction.gd" id="13_jh8lc"]
 
 [sub_resource type="Resource" id="Resource_0qpab"]
 script = ExtResource("3_mxdth")
@@ -25,6 +28,14 @@ metadata/_custom_type_script = "uid://0dld8iow0suh"
 script = ExtResource("5_gc6r5")
 slot = "head"
 metadata/_custom_type_script = "uid://bdq3y7j08fnad"
+
+[sub_resource type="Resource" id="Resource_e7qmx"]
+script = ExtResource("7_ek1nr")
+actions = Dictionary[int, NodePath]({
+90: NodePath("EquipBranch"),
+91: NodePath("UnequipBranch")
+})
+metadata/_custom_type_script = "uid://barikupijl7r7"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p64xh"]
 resource_name = "fish_mx_1"
@@ -67,9 +78,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0rpsf")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fjv7d"]
-points = PackedVector3Array(-0.014779078, -0.08632956, -0.03909042, 0.074153855, 0.09216601, -0.023592724, 0.18485895, 0.06744838, -0.013915617, -0.31656104, -0.09087137, -0.013915617, 0.07048646, 0.0586448, -0.0666992, -0.32538012, 0.014668239, -0.013915617, 0.088124625, -0.05569839, 0.003688097, 0.22008017, 0.014668239, -0.049095485, -0.31656104, -0.09087137, -0.03150555, 0.096888594, -0.03809123, -0.0666992, 0.11447164, 0.0586448, 0.003688097, -0.32538012, 0.014668239, -0.03150555, -0.04481529, 0.09204639, -0.03150555, 0.22889924, 0.023451153, -0.013915617, 0.08268935, -0.07457095, -0.023555052, 0.20249712, 0.0586448, -0.049095485, -0.015671125, 0.08593887, -0.016698932, -0.016854176, -0.088932596, -0.024347514, 0.0669101, 0.09272606, -0.03947747, 0.13205469, 0.023451153, -0.0666992, 0.14969286, -0.011701164, 0.003688097, -0.03743763, 0.088696696, -0.039141625, 0.11763714, -0.059675857, -0.03150555, 0.07048646, -0.05569839, 0.003688097, -0.3341992, 0.005864662, -0.013915617, 0.22889924, 0.04105831, -0.013915617, 0.08032138, -0.073317274, -0.039329197, -0.015854342, -0.09133512, -0.03150555, 0.13205469, 0.06744838, -0.057900786, 0.14969286, 0.04105831, 0.003688097, 0.056003872, 0.09022664, -0.015984442, -0.0030057477, 0.07516937, -0.010203241)
-
 [sub_resource type="Resource" id="Resource_a7pxr"]
 script = ExtResource("8_gc6r5")
 effect = 3
@@ -79,32 +87,57 @@ metadata/_custom_type_script = "uid://ewo3m4f384i0"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxdth"]
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fjv7d"]
+points = PackedVector3Array(-0.014779078, -0.08632956, -0.03909042, 0.074153855, 0.09216601, -0.023592724, 0.18485895, 0.06744838, -0.013915617, -0.31656104, -0.09087137, -0.013915617, 0.07048646, 0.0586448, -0.0666992, -0.32538012, 0.014668239, -0.013915617, 0.088124625, -0.05569839, 0.003688097, 0.22008017, 0.014668239, -0.049095485, -0.31656104, -0.09087137, -0.03150555, 0.096888594, -0.03809123, -0.0666992, 0.11447164, 0.0586448, 0.003688097, -0.32538012, 0.014668239, -0.03150555, -0.04481529, 0.09204639, -0.03150555, 0.22889924, 0.023451153, -0.013915617, 0.08268935, -0.07457095, -0.023555052, 0.20249712, 0.0586448, -0.049095485, -0.015671125, 0.08593887, -0.016698932, -0.016854176, -0.088932596, -0.024347514, 0.0669101, 0.09272606, -0.03947747, 0.13205469, 0.023451153, -0.0666992, 0.14969286, -0.011701164, 0.003688097, -0.03743763, 0.088696696, -0.039141625, 0.11763714, -0.059675857, -0.03150555, 0.07048646, -0.05569839, 0.003688097, -0.3341992, 0.005864662, -0.013915617, 0.22889924, 0.04105831, -0.013915617, 0.08032138, -0.073317274, -0.039329197, -0.015854342, -0.09133512, -0.03150555, 0.13205469, 0.06744838, -0.057900786, 0.14969286, 0.04105831, 0.003688097, 0.056003872, 0.09022664, -0.015984442, -0.0030057477, 0.07516937, -0.010203241)
+
 [node name="FishHat" type="RigidBody3D"]
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_dnwgl")
-component_resources = Array[ExtResource("2_jbw33")]([SubResource("Resource_0qpab"), SubResource("Resource_j7mfm")])
+component_resources = Array[ExtResource("2_jbw33")]([SubResource("Resource_0qpab"), SubResource("Resource_j7mfm"), SubResource("Resource_e7qmx")])
 
 [node name="fish_mx_1" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, -8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0, 0)
+transform = Transform3D(-8.7422784e-08, -2.0000002, 8.742278e-08, 0, -8.7422784e-08, -2, 2.0000002, -8.7422784e-08, 3.821371e-15, 0.05409406, 0, -0.09783608)
 mesh = SubResource("ArrayMesh_fdxf0")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, -8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_fjv7d")
-
-[node name="ZN_TriggerArea3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+[node name="ZN_TriggerArea3D" type="Area3D" parent="fish_mx_1"]
+transform = Transform3D(0.5, 2.8232095e-23, -1.7763568e-15, 1.7763568e-15, -2.1855692e-08, 0.5, 0, -0.5, -2.1855692e-08, 0.079404615, 3.7252903e-09, 0.125)
 collision_layer = 4
 collision_mask = 8
 script = ExtResource("6_mxdth")
+active = false
+trigger_on_exit = true
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
-[node name="ZN_ScreenEffectAction" type="Node" parent="ZN_TriggerArea3D"]
+[node name="ZN_ScreenEffectAction" type="Node" parent="fish_mx_1/ZN_TriggerArea3D"]
 script = ExtResource("7_fjv7d")
 effect = SubResource("Resource_a7pxr")
 metadata/_custom_type_script = "uid://dmonxsvpyoytj"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ZN_TriggerArea3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fish_mx_1/ZN_TriggerArea3D"]
 shape = SubResource("BoxShape3D_mxdth")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-8.7422784e-08, -2.0000002, 8.742278e-08, 0, -8.7422784e-08, -2, 2.0000002, -8.7422784e-08, 3.821371e-15, 0.05409406, 0, -0.09783608)
+shape = SubResource("ConvexPolygonShape3D_fjv7d")
+
+[node name="EquipBranch" type="Node" parent="."]
+script = ExtResource("12_5xuhg")
+metadata/_custom_type_script = "uid://dbj456ofx8mw1"
+
+[node name="ZN_AreaAction" type="Node" parent="EquipBranch" node_paths=PackedStringArray("area")]
+script = ExtResource("13_jh8lc")
+area = NodePath("../../fish_mx_1/ZN_TriggerArea3D")
+active = 1
+metadata/_custom_type_script = "uid://b7fl0650sjefs"
+
+[node name="UnequipBranch" type="Node" parent="."]
+script = ExtResource("12_5xuhg")
+metadata/_custom_type_script = "uid://dbj456ofx8mw1"
+
+[node name="ZN_AreaAction" type="Node" parent="UnequipBranch" node_paths=PackedStringArray("area")]
+script = ExtResource("13_jh8lc")
+area = NodePath("../../fish_mx_1/ZN_TriggerArea3D")
+active = 0
+metadata/_custom_type_script = "uid://b7fl0650sjefs"

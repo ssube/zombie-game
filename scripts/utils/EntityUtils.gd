@@ -129,6 +129,8 @@ static func equip_item(character: ZE_Character, item: ZE_Base, _slot: String = "
 		item.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
 		item.freeze = true
 
+	item.emit_action(Enums.ActionEvent.ITEM_EQUIP, character)
+
 	return true
 
 
@@ -157,6 +159,7 @@ static func unequip_item(character: ZE_Character, item: ZE_Base) -> bool:
 		parent.remove_child(item)
 
 	inventory_node.add_item(item)
+	item.emit_action(Enums.ActionEvent.ITEM_UNEQUIP, character)
 
 	return true
 
