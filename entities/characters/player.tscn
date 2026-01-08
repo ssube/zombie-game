@@ -152,7 +152,7 @@ current = true
 
 [node name="TouchRay" type="RayCast3D" parent="Head"]
 target_position = Vector3(0, 0, -10)
-collision_mask = 30
+collision_mask = 31
 
 [node name="Hands" type="Node3D" parent="Head"]
 
