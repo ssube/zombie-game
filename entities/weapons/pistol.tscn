@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://lvteuslo4wik"]
+[gd_scene load_steps=34 format=4 uid="uid://lvteuslo4wik"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_xfwg1"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_ivpki"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bbtud7vqwa7qs" path="res://effects/sounds/weapon_pickup.tscn" id="4_nbh20"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="5_0ywhd"]
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="6_yxwx0"]
-[ext_resource type="PackedScene" uid="uid://bjwcu1vgbspmb" path="res://effects/sounds/shotgun_equip.tscn" id="7_dtfgj"]
 [ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="8_21478"]
 [ext_resource type="PackedScene" uid="uid://ql530vnfgdgj" path="res://effects/weapons/pistol_blast.tscn" id="9_ivpki"]
 [ext_resource type="PackedScene" uid="uid://ca8l85h1tx3hm" path="res://effects/sounds/pistol_equip.tscn" id="10_kcyli"]
@@ -34,7 +33,7 @@ crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
 shimmer_material = ExtResource("6_yxwx0")
 shimmer_nodes = Array[NodePath]([NodePath("Colt PythonRigged/Armature/Skeleton3D/Body2/Body2"), NodePath("Colt PythonRigged/Armature/Skeleton3D/Cylinder2/Cylinder2")])
 pickup_sound = ExtResource("4_nbh20")
-use_sound = ExtResource("7_dtfgj")
+use_sound = ExtResource("10_kcyli")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_l5ox4"]
