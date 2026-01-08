@@ -1,20 +1,19 @@
-[gd_scene load_steps=16 format=4 uid="uid://d00dbkjpj0iyk"]
+[gd_scene load_steps=18 format=4 uid="uid://d00dbkjpj0iyk"]
 
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_2c5um"]
 [ext_resource type="Texture2D" uid="uid://b0cf1kt4vur5d" path="res://assets/PSX Mega Pack/Models/GLB (recommended)/Items & Weapons/flashlight_mp_1_flashlight_1.png" id="1_tsofw"]
 [ext_resource type="Texture2D" uid="uid://8mk84jbtcai2" path="res://assets/PSX Mega Pack/Models/GLB (recommended)/Items & Weapons/flashlight_mp_1_flashlight_1_emission.png" id="2_2c5um"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_b86fd"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_llh01"]
-[ext_resource type="Material" uid="uid://duorhhvkpiuvo" path="res://materials/effects/shimmer_food.tres" id="4_llh01"]
 [ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="5_mtibp"]
+[ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_plot.tres" id="6_aenru"]
 [ext_resource type="Script" uid="uid://nfmu7eckxjq8" path="res://scripts/components/props/ZC_Light.gd" id="6_mtibp"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="7_epa81"]
 
 [sub_resource type="Resource" id="Resource_aenru"]
 script = ExtResource("3_llh01")
 name = "Flashlight"
 crosshair_color = Color(1, 0.92941177, 0, 1)
-shimmer_material = ExtResource("4_llh01")
-shimmer_nodes = Array[NodePath]([NodePath("flashlight")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_epa81"]
@@ -26,6 +25,12 @@ metadata/_custom_type_script = "uid://bdq3y7j08fnad"
 script = ExtResource("6_mtibp")
 node_paths = Array[NodePath]([NodePath("flashlight/Flashlight")])
 metadata/_custom_type_script = "uid://nfmu7eckxjq8"
+
+[sub_resource type="Resource" id="Resource_4bdar"]
+script = ExtResource("7_epa81")
+material = ExtResource("6_aenru")
+nodes = Array[NodePath]([NodePath("flashlight")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbpuc"]
 resource_name = "flashlight_1"
@@ -76,7 +81,7 @@ points = PackedVector3Array(0.09758132, 0.003601859, 0.0043487996, 0.09020081, -
 collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_2c5um")
-component_resources = Array[ExtResource("2_b86fd")]([SubResource("Resource_aenru"), SubResource("Resource_epa81"), SubResource("Resource_umpgb")])
+component_resources = Array[ExtResource("2_b86fd")]([SubResource("Resource_aenru"), SubResource("Resource_epa81"), SubResource("Resource_umpgb"), SubResource("Resource_4bdar")])
 
 [node name="flashlight" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.371139e-08, 1, 0, -0.09214467, -4.0277714e-09, -0.99574566, -0.99574566, -4.3525425e-08, 0.09214467, 0, -0.03072985, 0)

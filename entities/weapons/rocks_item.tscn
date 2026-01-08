@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bbh41wb00cqp1"]
+[gd_scene load_steps=21 format=4 uid="uid://bbh41wb00cqp1"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_oilnw"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_fhxpo"]
@@ -10,6 +10,7 @@
 [ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="8_toxme"]
 [ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="9_2tbt0"]
 [ext_resource type="Texture2D" uid="uid://323h3ecotcr3" path="res://assets/PSX Nature/Models/GLB/stone_5_stone_1.png" id="9_fhxpo"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="10_nyasi"]
 
 [sub_resource type="Resource" id="Resource_24ymc"]
 script = ExtResource("6_pf4lt")
@@ -25,8 +26,6 @@ metadata/_custom_type_script = "uid://bsnlq5t650od"
 script = ExtResource("7_nmrrv")
 name = "Rocks"
 crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
-shimmer_material = ExtResource("8_toxme")
-shimmer_nodes = Array[NodePath]([NodePath("stone_5")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_2tbt0"]
@@ -40,6 +39,12 @@ projectile_scene = ExtResource("4_oilnw")
 script = ExtResource("9_2tbt0")
 slot = "weapon_ranged"
 metadata/_custom_type_script = "uid://bdq3y7j08fnad"
+
+[sub_resource type="Resource" id="Resource_gpgmu"]
+script = ExtResource("10_nyasi")
+material = ExtResource("8_toxme")
+nodes = Array[NodePath]([NodePath("stone_5")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jok7e"]
 resource_name = "stone_1"
@@ -89,7 +94,7 @@ collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_oilnw")
 prefab_path = "res://entities/weapons/flare.tscn"
-component_resources = Array[ExtResource("2_fhxpo")]([SubResource("Resource_24ymc"), SubResource("Resource_doyw5"), SubResource("Resource_2tbt0"), SubResource("Resource_nyasi")])
+component_resources = Array[ExtResource("2_fhxpo")]([SubResource("Resource_24ymc"), SubResource("Resource_doyw5"), SubResource("Resource_2tbt0"), SubResource("Resource_nyasi"), SubResource("Resource_gpgmu")])
 
 [node name="stone_5" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)

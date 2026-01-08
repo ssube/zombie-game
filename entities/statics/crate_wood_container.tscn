@@ -1,14 +1,15 @@
-[gd_scene load_steps=16 format=4 uid="uid://carcwljkjgx0u"]
+[gd_scene load_steps=18 format=4 uid="uid://carcwljkjgx0u"]
 
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_n02nd"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_3gqnf"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_3gqnf"]
 [ext_resource type="Script" uid="uid://bh0p1d7incrpv" path="res://scripts/components/ZC_Inventory.gd" id="4_3q07g"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="4_ppt46"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_world.tres" id="4_ppt46"]
 [ext_resource type="PackedScene" uid="uid://5mm8s8tf4i0m" path="res://effects/sounds/crate_wood_open.tscn" id="5_upujx"]
 [ext_resource type="Material" uid="uid://c6iy3iby2kitf" path="res://materials/crate_wood.tres" id="5_xb5yl"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="6_upujx"]
 [ext_resource type="Script" uid="uid://b0eht5em6vv5w" path="res://scripts/nodes/ZN_Inventory.gd" id="7_3gqnf"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="7_upujx"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="8_3q07g"]
 
 [sub_resource type="Resource" id="Resource_ppt46"]
@@ -16,9 +17,6 @@ script = ExtResource("3_3gqnf")
 name = "Wooden Crate"
 pickup = false
 crosshair_color = Color(0.3764706, 0.7764706, 1, 1)
-shimmer_range = 3.0
-shimmer_material = ExtResource("4_ppt46")
-shimmer_nodes = Array[NodePath]([NodePath("../CrateWood/wooden_crate_11")])
 use_sound = ExtResource("5_upujx")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
@@ -27,6 +25,12 @@ script = ExtResource("4_3q07g")
 node_path = NodePath("ZN_Inventory")
 drop_marker = NodePath("ZN_Inventory/Marker3D")
 metadata/_custom_type_script = "uid://bh0p1d7incrpv"
+
+[sub_resource type="Resource" id="Resource_m4urx"]
+script = ExtResource("7_upujx")
+material = ExtResource("4_ppt46")
+nodes = Array[NodePath]([NodePath("wooden_crate_11")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_023j0"]
 _surfaces = [{
@@ -68,7 +72,7 @@ collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_n02nd")
 prefab_path = "res://entities/props/crate_wood.tscn"
-component_resources = Array[ExtResource("2_3gqnf")]([SubResource("Resource_ppt46"), SubResource("Resource_xb5yl")])
+component_resources = Array[ExtResource("2_3gqnf")]([SubResource("Resource_ppt46"), SubResource("Resource_xb5yl"), SubResource("Resource_m4urx")])
 
 [node name="wooden_crate_11" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, -1.6292068e-07, 0, 1.6292068e-07, 1, 0, 0, 0)

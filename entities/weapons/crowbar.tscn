@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://rtq8nqsaa7st"]
+[gd_scene load_steps=37 format=4 uid="uid://rtq8nqsaa7st"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aebpe"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_hqwjb"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="11_gdwfw"]
 [ext_resource type="Script" uid="uid://cv3d8y0ir7na1" path="res://scripts/components/items/ZC_ItemShortcut.gd" id="11_hqwjb"]
 [ext_resource type="AudioStream" uid="uid://broij1fd8uktr" path="res://sounds/Sound Effects/Melee/Hit/blunt_hit_metal_ufx_1.ogg" id="12_aebpe"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="12_fjom8"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="13_rq4st"]
 [ext_resource type="Script" uid="uid://u512rl8uacud" path="res://scripts/nodes/actions/ZN_DurabilityAction.gd" id="14_n63nw"]
 [ext_resource type="Script" uid="uid://dlb4vkkjdb658" path="res://scripts/nodes/actions/ZN_HealthAction.gd" id="15_yxms2"]
@@ -35,8 +36,6 @@ metadata/_custom_type_script = "uid://dnmn2xmqdrr00"
 script = ExtResource("4_6f1u0")
 name = "Crowbar"
 crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
-shimmer_material = ExtResource("5_d7yd0")
-shimmer_nodes = Array[NodePath]([NodePath("Node3D/rusty_crowbar_mx_1")])
 use_sound = ExtResource("6_3hang")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
@@ -65,6 +64,12 @@ metadata/_custom_type_script = "uid://bdq3y7j08fnad"
 script = ExtResource("11_hqwjb")
 shortcut = 1
 metadata/_custom_type_script = "uid://cv3d8y0ir7na1"
+
+[sub_resource type="Resource" id="Resource_6f1u0"]
+script = ExtResource("12_fjom8")
+material = ExtResource("5_d7yd0")
+nodes = Array[NodePath]([NodePath("Node3D/rusty_crowbar_mx_1")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_aebpe"]
 points = PackedVector3Array(-0.38677025, 0.07427229, 0.019447148, -0.38677025, 0.07427229, -0.019553442, -0.29242247, 0.0041236132, 0.014240608, 0.50153214, -0.18724914, 0.02245126, 0.4994704, -0.18425374, 0.02245126, 0.5266654, 0.008962333, 0.017447341, 0.5266654, 0.019279823, 0.007448321, -0.29242247, 0.0041236132, -0.014342497, 0.5266654, 0.019279823, -0.0075502107, 0.5266654, 0.008962333, -0.017549232, 0.4994704, -0.18425374, -0.022548743, 0.50153214, -0.18724914, -0.022548743, -0.284372, -0.0017135739, 0.0034443084, -0.25629348, -0.009726912, 0.00444421, -0.22831312, -0.016716167, 0.0054485165, 0.55582386, -0.16971198, 0.01644744, 0.5690777, -0.15901046, 0.017077334, 0.5888112, -0.13192385, 0.017447341, 0.6061885, -0.09761757, 0.017447341, 0.60442126, -0.060239077, 0.017447341, 0.5924437, -0.029004991, 0.017447341, 0.5660342, -0.0025072247, 0.017447341, 0.57261205, 0.0053012967, 0.007448321, -0.22831312, -0.016716167, -0.005550407, -0.25629348, -0.009726912, -0.0045505036, -0.284372, -0.0017135739, -0.0035506021, 0.57261205, 0.0053012967, -0.0075502107, 0.5660342, -0.0025072247, -0.017549232, 0.5924437, -0.029004991, -0.017549232, 0.60442126, -0.060239077, -0.017549232, 0.6061885, -0.09761757, -0.017549232, 0.5888112, -0.13192385, -0.017549232, 0.5690777, -0.15901046, -0.017179225, 0.55582386, -0.16971198, -0.016553735, 0.59578174, -0.13906673, 0.007448321, 0.6162025, -0.09933288, 0.007448321, 0.6145334, -0.057986125, 0.007448321, 0.6010833, -0.02344942, 0.007448321, 0.6010833, -0.02344942, -0.0075502107, 0.6145334, -0.057986125, -0.0075502107, 0.6162025, -0.09933288, -0.0075502107, 0.59578174, -0.13906673, -0.0075502107)
@@ -142,7 +147,7 @@ collision_mask = 23
 max_contacts_reported = 4
 script = ExtResource("1_aebpe")
 prefab_path = "res://entities/weapons/bat.tscn"
-component_resources = Array[ExtResource("2_hqwjb")]([SubResource("Resource_42kvg"), SubResource("Resource_dy0dc"), SubResource("Resource_ee0de"), SubResource("Resource_hqwjb"), SubResource("Resource_fjom8")])
+component_resources = Array[ExtResource("2_hqwjb")]([SubResource("Resource_42kvg"), SubResource("Resource_dy0dc"), SubResource("Resource_ee0de"), SubResource("Resource_hqwjb"), SubResource("Resource_fjom8"), SubResource("Resource_6f1u0")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.7681382e-08, 4.3711392e-08, 1, 1, -4.371139e-08, 4.7681386e-08, 4.3711392e-08, 1, -4.371139e-08, 0, 0.12184494, 0)

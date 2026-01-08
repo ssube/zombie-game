@@ -1,19 +1,18 @@
-[gd_scene load_steps=16 format=4 uid="uid://cxiu5f14bex35"]
+[gd_scene load_steps=18 format=4 uid="uid://cxiu5f14bex35"]
 
 [ext_resource type="Script" uid="uid://bx51blxd4jc27" path="res://scripts/entities/items/ZE_Armor.gd" id="1_vd85s"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_sn2tb"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_oqkq5"]
-[ext_resource type="Material" uid="uid://duorhhvkpiuvo" path="res://materials/effects/shimmer_food.tres" id="4_58w03"]
 [ext_resource type="PackedScene" uid="uid://diyfuvos7geoj" path="res://effects/sounds/armor_use.tscn" id="5_siy5l"]
+[ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="6_sn2tb"]
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="6_vd85s"]
 [ext_resource type="Texture2D" uid="uid://rcykfahp8r6f" path="res://assets/Misc_Items/MISC_2025_Toolbox_256x256.png" id="7_4s63i"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="7_oqkq5"]
 
 [sub_resource type="Resource" id="Resource_yjsqk"]
 script = ExtResource("3_oqkq5")
 name = "12 Gauge Ammo"
 crosshair_color = Color(0, 1, 0, 1)
-shimmer_material = ExtResource("4_58w03")
-shimmer_nodes = Array[NodePath]([NodePath("Toolbox")])
 use_sound = ExtResource("5_siy5l")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
@@ -23,6 +22,12 @@ ammo_count = Dictionary[String, int]({
 "12 Gauge": 25
 })
 metadata/_custom_type_script = "uid://bsnlq5t650od"
+
+[sub_resource type="Resource" id="Resource_58w03"]
+script = ExtResource("7_oqkq5")
+material = ExtResource("6_sn2tb")
+nodes = Array[NodePath]([NodePath("Toolbox")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4fhfx"]
 
@@ -80,7 +85,7 @@ collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_vd85s")
 prefab_path = "res://entities/items/ammo.tscn"
-component_resources = Array[ExtResource("2_sn2tb")]([SubResource("Resource_yjsqk"), SubResource("Resource_sn2tb")])
+component_resources = Array[ExtResource("2_sn2tb")]([SubResource("Resource_yjsqk"), SubResource("Resource_sn2tb"), SubResource("Resource_58w03")])
 
 [node name="Toolbox" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

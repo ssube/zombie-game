@@ -1,13 +1,14 @@
-[gd_scene load_steps=16 format=4 uid="uid://bbt0pagry5h5w"]
+[gd_scene load_steps=18 format=4 uid="uid://bbt0pagry5h5w"]
 
 [ext_resource type="Script" uid="uid://diqnbh8glii7x" path="res://scripts/entities/items/ZE_Food.gd" id="1_u378d"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_hvtkh"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_402fv"]
 [ext_resource type="PackedScene" uid="uid://be8hsn7xg2ebr" path="res://effects/sounds/food_pickup.tscn" id="3_upnup"]
-[ext_resource type="Material" uid="uid://duorhhvkpiuvo" path="res://materials/effects/shimmer_food.tres" id="4_u378d"]
+[ext_resource type="Material" uid="uid://duorhhvkpiuvo" path="res://materials/effects/shimmer_heal.tres" id="4_u378d"]
 [ext_resource type="PackedScene" uid="uid://y8lluykhb0lp" path="res://effects/sounds/food_use.tscn" id="5_fvwgj"]
 [ext_resource type="Script" uid="uid://c4bbaiyswechl" path="res://scripts/components/props/ZC_Food.gd" id="5_hvtkh"]
 [ext_resource type="Texture2D" uid="uid://5ydgfpdxio6o" path="res://assets/ZombieApocalypsePack/FirstAidKit/first_aid_kit_texture.png" id="6_kd0dt"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="8_qcm1k"]
 
 [sub_resource type="Resource" id="Resource_402fv"]
 script = ExtResource("5_hvtkh")
@@ -19,11 +20,15 @@ metadata/_custom_type_script = "uid://c4bbaiyswechl"
 script = ExtResource("3_402fv")
 name = "Medkit"
 crosshair_color = Color(0, 1, 0, 1)
-shimmer_material = ExtResource("4_u378d")
-shimmer_nodes = Array[NodePath]([NodePath("first_aid_kit/Cube")])
 pickup_sound = ExtResource("3_upnup")
 use_sound = ExtResource("5_fvwgj")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_vfxq6"]
+script = ExtResource("8_qcm1k")
+material = ExtResource("4_u378d")
+nodes = Array[NodePath]([NodePath("first_aid_kit/Cube")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_miylq"]
 albedo_color = Color(0.14999998, 0.6883334, 1, 1)
@@ -78,7 +83,7 @@ collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_u378d")
 prefab_path = "res://entities/items/medkit.tscn"
-component_resources = Array[ExtResource("2_hvtkh")]([SubResource("Resource_402fv"), SubResource("Resource_hvtkh")])
+component_resources = Array[ExtResource("2_hvtkh")]([SubResource("Resource_402fv"), SubResource("Resource_hvtkh"), SubResource("Resource_vfxq6")])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 visible = false

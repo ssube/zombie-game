@@ -1,18 +1,23 @@
-[gd_scene load_steps=11 format=4 uid="uid://cv430aqctj4ng"]
+[gd_scene load_steps=13 format=4 uid="uid://cv430aqctj4ng"]
 
 [ext_resource type="Texture2D" uid="uid://cgknehuvb8mk8" path="res://assets/Street Signs/Winding Road_Signs_AO.png" id="1_18lya"]
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_kiw6e"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_psljn"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_fff30"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="4_psljn"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_world.tres" id="4_psljn"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="5_fff30"]
 
 [sub_resource type="Resource" id="Resource_dw42y"]
 script = ExtResource("3_fff30")
 name = "Winding Road Sign"
 pickup = false
-shimmer_material = ExtResource("4_psljn")
-shimmer_nodes = Array[NodePath]([NodePath("Winding Road")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_uex7b"]
+script = ExtResource("5_fff30")
+material = ExtResource("4_psljn")
+nodes = Array[NodePath]([NodePath("Winding Road")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_necij"]
 resource_name = "Signs"
@@ -61,7 +66,7 @@ data = PackedVector3Array(0.021, 2.0246, 0.0187, 0.5062, 2.0036, 0.0187, 0.021, 
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_kiw6e")
-component_resources = Array[ExtResource("2_psljn")]([SubResource("Resource_dw42y")])
+component_resources = Array[ExtResource("2_psljn")]([SubResource("Resource_dw42y"), SubResource("Resource_uex7b")])
 
 [node name="Winding Road" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_2ffxe")

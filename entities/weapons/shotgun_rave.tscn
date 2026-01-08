@@ -1,11 +1,11 @@
-[gd_scene load_steps=29 format=4 uid="uid://bvrdhrtkeshuo"]
+[gd_scene load_steps=31 format=4 uid="uid://bvrdhrtkeshuo"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_3jif5"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_06k2p"]
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="3_fqgnn"]
 [ext_resource type="PackedScene" uid="uid://bbtud7vqwa7qs" path="res://effects/sounds/weapon_pickup.tscn" id="4_aq6qf"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="5_6rt4r"]
-[ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_sparkle.tres" id="6_3jif5"]
+[ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_special.tres" id="6_3jif5"]
 [ext_resource type="PackedScene" uid="uid://bjwcu1vgbspmb" path="res://effects/sounds/shotgun_equip.tscn" id="7_ou20r"]
 [ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="8_fsqdt"]
 [ext_resource type="PackedScene" uid="uid://dmqhqdls8p84q" path="res://effects/weapons/shotgun_blast_rave.tscn" id="9_lgn6d"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/weapons/ZC_Weapon_Ranged.gd" id="12_hoqxi"]
 [ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="13_3jif5"]
 [ext_resource type="Texture2D" uid="uid://dm8xysr4gal26" path="res://assets/PSX-Shotgun/Shotgun_Textures/Shotgun_Texture_2.png" id="13_sdtmi"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="14_06k2p"]
 
 [sub_resource type="Resource" id="Resource_bsv6m"]
 script = ExtResource("3_fqgnn")
@@ -29,8 +30,6 @@ metadata/_custom_type_script = "uid://bsnlq5t650od"
 script = ExtResource("5_6rt4r")
 name = "Rave Shotgun"
 crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
-shimmer_material = ExtResource("6_3jif5")
-shimmer_nodes = Array[NodePath]([NodePath("Shotgun/Shotgun"), NodePath("Shotgun/Shotgun-Detach")])
 pickup_sound = ExtResource("4_aq6qf")
 use_sound = ExtResource("7_ou20r")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
@@ -70,6 +69,12 @@ metadata/_custom_type_script = "uid://dwsqxsqwtloma"
 script = ExtResource("13_3jif5")
 slot = "weapon_ranged"
 metadata/_custom_type_script = "uid://bdq3y7j08fnad"
+
+[sub_resource type="Resource" id="Resource_fqgnn"]
+script = ExtResource("14_06k2p")
+material = ExtResource("6_3jif5")
+nodes = Array[NodePath]([NodePath("Shotgun/Shotgun"), NodePath("Shotgun/Shotgun-Detach")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dhvf"]
 resource_name = "Material.002"
@@ -156,7 +161,7 @@ collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_3jif5")
 prefab_path = "res://entities/weapons/shotgun.tscn"
-component_resources = Array[ExtResource("2_06k2p")]([SubResource("Resource_bsv6m"), SubResource("Resource_17hxq"), SubResource("Resource_7rb10"), SubResource("Resource_06k2p")])
+component_resources = Array[ExtResource("2_06k2p")]([SubResource("Resource_bsv6m"), SubResource("Resource_17hxq"), SubResource("Resource_7rb10"), SubResource("Resource_06k2p"), SubResource("Resource_fqgnn")])
 
 [node name="Shotgun" type="Node3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.18490055, -0.5303326)

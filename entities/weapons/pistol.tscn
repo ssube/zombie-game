@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://lvteuslo4wik"]
+[gd_scene load_steps=36 format=4 uid="uid://lvteuslo4wik"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_xfwg1"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_ivpki"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="13_j4hrb"]
 [ext_resource type="Script" uid="uid://cv3d8y0ir7na1" path="res://scripts/components/items/ZC_ItemShortcut.gd" id="14_ivpki"]
 [ext_resource type="Texture2D" uid="uid://bklnwmjjldo4d" path="res://assets/PS1PSX Gun Pack FBX/Colt PythonRigged_0.png" id="14_xfwg1"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="15_kcyli"]
 
 [sub_resource type="Resource" id="Resource_bsv6m"]
 script = ExtResource("3_kcyli")
@@ -30,8 +31,6 @@ metadata/_custom_type_script = "uid://bsnlq5t650od"
 script = ExtResource("5_0ywhd")
 name = "Magnum Pistol"
 crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
-shimmer_material = ExtResource("6_yxwx0")
-shimmer_nodes = Array[NodePath]([NodePath("Colt PythonRigged/Armature/Skeleton3D/Body2/Body2"), NodePath("Colt PythonRigged/Armature/Skeleton3D/Cylinder2/Cylinder2")])
 pickup_sound = ExtResource("4_nbh20")
 use_sound = ExtResource("10_kcyli")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
@@ -77,6 +76,12 @@ metadata/_custom_type_script = "uid://bdq3y7j08fnad"
 script = ExtResource("14_ivpki")
 shortcut = 2
 metadata/_custom_type_script = "uid://cv3d8y0ir7na1"
+
+[sub_resource type="Resource" id="Resource_nbh20"]
+script = ExtResource("15_kcyli")
+material = ExtResource("6_yxwx0")
+nodes = Array[NodePath]([NodePath("Colt PythonRigged/Armature/Skeleton3D/Body2/Body2"), NodePath("Colt PythonRigged/Armature/Skeleton3D/Cylinder2/Cylinder2")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pjxeh"]
 resource_name = "Material_0"
@@ -226,7 +231,7 @@ collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_xfwg1")
 prefab_path = "res://entities/weapons/shotgun.tscn"
-component_resources = Array[ExtResource("2_ivpki")]([SubResource("Resource_bsv6m"), SubResource("Resource_17hxq"), SubResource("Resource_7rb10"), SubResource("Resource_fppoe"), SubResource("Resource_kcyli")])
+component_resources = Array[ExtResource("2_ivpki")]([SubResource("Resource_bsv6m"), SubResource("Resource_17hxq"), SubResource("Resource_7rb10"), SubResource("Resource_fppoe"), SubResource("Resource_kcyli"), SubResource("Resource_nbh20")])
 
 [node name="Colt PythonRigged" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -0.023279577, -0.13194704)

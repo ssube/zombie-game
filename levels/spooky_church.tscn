@@ -1,4 +1,4 @@
-[gd_scene load_steps=292 format=4 uid="uid://cpgmxyybvd4x8"]
+[gd_scene load_steps=291 format=4 uid="uid://cpgmxyybvd4x8"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_43fyf"]
 [ext_resource type="Texture2D" uid="uid://c51guvpg20wcf" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast4.png" id="1_qbcix"]
@@ -31,7 +31,6 @@
 [ext_resource type="PackedScene" uid="uid://ctpldo10k58u7" path="res://entities/characters/spooky_monster.tscn" id="15_a6qr0"]
 [ext_resource type="AudioStream" uid="uid://jf13578h0spg" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/Ambiences/ambience_d4_loop.ogg" id="16_dfgex"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="16_ncpmj"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="17_5hixg"]
 [ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="17_408hf"]
 [ext_resource type="PackedScene" uid="uid://w70s7gsk27hd" path="res://entities/props/candlestick.tscn" id="18_5hixg"]
 [ext_resource type="PackedScene" uid="uid://c7li71yotxcsw" path="res://skies/spooky_church.tscn" id="20_43fyf"]
@@ -91,12 +90,10 @@ next_level = "fishing_pier"
 spawn_point = "Markers/SpookyChurch"
 metadata/_custom_type_script = "uid://cn8mtbap6uudk"
 
-[sub_resource type="Resource" id="Resource_ulg3r"]
+[sub_resource type="Resource" id="Resource_fanoy"]
 script = ExtResource("16_ncpmj")
 name = "Load the Fishing Pier"
 pickup = false
-shimmer_material = ExtResource("17_5hixg")
-shimmer_nodes = Array[NodePath]([NodePath("Winding Road")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2vnsd"]
@@ -1016,19 +1013,24 @@ transform = Transform3D(0.6288998, 0, -0.7774863, 0, 1, 0, 0.7774863, 0, 0.62889
 [node name="WeaponPistol" parent="Entities" instance=ExtResource("10_3hy8g")]
 transform = Transform3D(-3.7855173e-08, -0.8660254, 0.5, 1, -4.371139e-08, 0, 2.1855694e-08, 0.5, 0.8660254, 5.9046283, 2.05025, -3.797617)
 
-[node name="Zombie" parent="Entities" instance=ExtResource("11_3cnis")]
+[node name="Zombie" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("11_3cnis")]
 transform = Transform3D(0.8618771, 0, 0.5071173, 0, 1, 0, -0.5071173, 0, 0.8618771, 13.169974, -0.42007518, -1.3055172)
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie2" parent="Entities" instance=ExtResource("11_3cnis")]
+[node name="Zombie2" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("11_3cnis")]
 transform = Transform3D(-0.37953696, 0, 0.92517656, 0, 1, 0, -0.92517656, 0, -0.37953696, 10.439371, -0.39793468, 7.94569)
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
 [node name="ZombieWorker" parent="Entities" instance=ExtResource("12_13abf")]
 transform = Transform3D(0.96697927, 0, -0.2548551, 0, 1, 0, 0.2548551, 0, 0.96697927, 12.8856325, -0.39086944, -6.6080503)
 
 [node name="SignWindingRoad" parent="Entities" instance=ExtResource("28_nu2qx")]
 transform = Transform3D(-0.8996296, 0.067775056, 0.43136215, 0.07075384, 0.9974519, -0.009157287, -0.4308836, 0.02228236, -0.9021324, -25.98246, -1.5613809, 7.394396)
-extra_components = Array[ExtResource("14_r4c82")]([SubResource("Resource_ncpmj")])
-component_resources = Array[ExtResource("14_r4c82")]([SubResource("Resource_ulg3r")])
+extra_components = Array[ExtResource("14_r4c82")]([SubResource("Resource_ncpmj"), SubResource("Resource_fanoy")])
 
 [node name="Candlestick" parent="Entities" instance=ExtResource("18_5hixg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.714862, 2.5159535, -3.3624985)

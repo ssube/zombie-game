@@ -1,20 +1,18 @@
-[gd_scene load_steps=14 format=4 uid="uid://8j6ass42i7pa"]
+[gd_scene load_steps=16 format=4 uid="uid://8j6ass42i7pa"]
 
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_mrpw1"]
 [ext_resource type="Texture2D" uid="uid://p50mikyhn88q" path="res://assets/PSX Mega Pack/Models/GLB (recommended)/Small Props/open_book_mp_1_books_mp_1.png" id="1_vixe6"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_ge5ho"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_p6xk5"]
 [ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="4_khke1"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="4_p6xk5"]
+[ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_special.tres" id="5_mcgca"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="6_tx4jm"]
 [ext_resource type="Script" uid="uid://boyqweqtyv0x1" path="res://scripts/nodes/actions/ZN_MenuAction.gd" id="7_khke1"]
 
 [sub_resource type="Resource" id="Resource_dx537"]
 script = ExtResource("3_p6xk5")
 name = "Save Game"
 pickup = false
-shimmer_range = 3.0
-shimmer_material = ExtResource("4_p6xk5")
-shimmer_nodes = Array[NodePath]([NodePath("open_book_mp_1")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_i4h2g"]
@@ -23,6 +21,12 @@ actions = Dictionary[int, NodePath]({
 31: NodePath("ZN_MenuAction")
 })
 metadata/_custom_type_script = "uid://barikupijl7r7"
+
+[sub_resource type="Resource" id="Resource_fs214"]
+script = ExtResource("6_tx4jm")
+material = ExtResource("5_mcgca")
+nodes = Array[NodePath]([NodePath("open_book_mp_1")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1h3mc"]
 resource_name = "books_mp_1"
@@ -71,7 +75,7 @@ size = Vector3(0.45, 0.050146483, 0.3)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_mrpw1")
-component_resources = Array[ExtResource("2_ge5ho")]([SubResource("Resource_dx537"), SubResource("Resource_i4h2g")])
+component_resources = Array[ExtResource("2_ge5ho")]([SubResource("Resource_dx537"), SubResource("Resource_i4h2g"), SubResource("Resource_fs214")])
 
 [node name="open_book_mp_1" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)

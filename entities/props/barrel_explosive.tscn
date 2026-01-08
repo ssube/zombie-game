@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://cq0idhwb5f2oq"]
+[gd_scene load_steps=26 format=4 uid="uid://cq0idhwb5f2oq"]
 
 [ext_resource type="Script" uid="uid://dhsuals8autq1" path="res://scripts/entities/props/ZE_Barrel.gd" id="1_o8a62"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wrl38"]
@@ -9,8 +9,9 @@
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="6_k4gqj"]
 [ext_resource type="Material" uid="uid://d4bmgb0pkgmpm" path="res://materials/effects/shimmer_danger.tres" id="7_bv25f"]
 [ext_resource type="Texture2D" uid="uid://duo2qqruxq60g" path="res://assets/Barrels/Textures/Red.png" id="8_bv25f"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="8_n4v3m"]
 [ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="9_mtpvy"]
-[ext_resource type="Script" path="res://scripts/nodes/actions/ZN_ChangeActorAction.gd" id="11_mtpvy"]
+[ext_resource type="Script" uid="uid://b8j7no147cfb4" path="res://scripts/nodes/actions/ZN_ChangeActorAction.gd" id="11_mtpvy"]
 [ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="11_rox5l"]
 [ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="12_r7jr2"]
 [ext_resource type="Script" uid="uid://c1xgtwmj2vomk" path="res://scripts/nodes/actions/ZN_SpawnAction.gd" id="13_w3336"]
@@ -32,8 +33,6 @@ script = ExtResource("6_k4gqj")
 name = "Explosive Barrel"
 pickup = false
 crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
-shimmer_material = ExtResource("7_bv25f")
-shimmer_nodes = Array[NodePath]([NodePath("Barrel/Barrel")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_20vof"]
@@ -43,6 +42,12 @@ actions = Dictionary[int, NodePath]({
 35: NodePath("DamageBranch")
 })
 metadata/_custom_type_script = "uid://barikupijl7r7"
+
+[sub_resource type="Resource" id="Resource_fgxaa"]
+script = ExtResource("8_n4v3m")
+material = ExtResource("7_bv25f")
+nodes = Array[NodePath]([NodePath("Barrel/Barrel")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dkbv7"]
 resource_name = "BarrelRed"
@@ -96,7 +101,7 @@ collision_mask = 31
 mass = 100.0
 script = ExtResource("1_o8a62")
 prefab_path = "res://entities/props/barrel.tscn"
-component_resources = Array[ExtResource("2_wrl38")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl"), SubResource("Resource_0kgpt"), SubResource("Resource_20vof")])
+component_resources = Array[ExtResource("2_wrl38")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl"), SubResource("Resource_0kgpt"), SubResource("Resource_20vof"), SubResource("Resource_fgxaa")])
 
 [node name="Barrel" type="Node3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

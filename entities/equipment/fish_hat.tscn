@@ -1,15 +1,16 @@
-[gd_scene load_steps=23 format=4 uid="uid://1mrkahnnofcf"]
+[gd_scene load_steps=25 format=4 uid="uid://1mrkahnnofcf"]
 
 [ext_resource type="Script" uid="uid://bx51blxd4jc27" path="res://scripts/entities/items/ZE_Armor.gd" id="1_dnwgl"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_jbw33"]
 [ext_resource type="PackedScene" uid="uid://dtg1xmuw8iq70" path="res://effects/sounds/water_splash.tscn" id="3_gc6r5"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_mxdth"]
-[ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_sparkle.tres" id="4_fjv7d"]
+[ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_special.tres" id="4_fjv7d"]
 [ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="5_gc6r5"]
 [ext_resource type="Texture2D" uid="uid://df0shx4oblcdj" path="res://assets/PSX Mega Pack II/Models/GLB/Props/fish_mx_1_fish_mx_1.png" id="6_fjv7d"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="6_mxdth"]
 [ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="7_ek1nr"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="7_fjv7d"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="8_5xuhg"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="8_gc6r5"]
 [ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="12_5xuhg"]
 [ext_resource type="Script" uid="uid://b7fl0650sjefs" path="res://scripts/nodes/actions/ZN_AreaAction.gd" id="13_jh8lc"]
@@ -18,9 +19,6 @@
 script = ExtResource("3_mxdth")
 name = "Fishing Hat"
 crosshair_color = Color(0.78431374, 0, 0.92156863, 1)
-shimmer_on_proximity = true
-shimmer_material = ExtResource("4_fjv7d")
-shimmer_nodes = Array[NodePath]([NodePath("fish_mx_1")])
 pickup_sound = ExtResource("3_gc6r5")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
@@ -36,6 +34,12 @@ actions = Dictionary[int, NodePath]({
 91: NodePath("UnequipBranch")
 })
 metadata/_custom_type_script = "uid://barikupijl7r7"
+
+[sub_resource type="Resource" id="Resource_jh8lc"]
+script = ExtResource("8_5xuhg")
+material = ExtResource("4_fjv7d")
+nodes = Array[NodePath]([NodePath("fish_mx_1")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p64xh"]
 resource_name = "fish_mx_1"
@@ -94,7 +98,7 @@ points = PackedVector3Array(-0.014779078, -0.08632956, -0.03909042, 0.074153855,
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_dnwgl")
-component_resources = Array[ExtResource("2_jbw33")]([SubResource("Resource_0qpab"), SubResource("Resource_j7mfm"), SubResource("Resource_e7qmx")])
+component_resources = Array[ExtResource("2_jbw33")]([SubResource("Resource_0qpab"), SubResource("Resource_j7mfm"), SubResource("Resource_e7qmx"), SubResource("Resource_jh8lc")])
 
 [node name="fish_mx_1" type="MeshInstance3D" parent="."]
 transform = Transform3D(-8.7422784e-08, -2.0000002, 8.742278e-08, 0, -8.7422784e-08, -2, 2.0000002, -8.7422784e-08, 3.821371e-15, 0.05409406, 0, -0.09783608)

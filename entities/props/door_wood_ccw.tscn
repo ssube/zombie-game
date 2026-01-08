@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dr14d3op0qqa7"]
+[gd_scene load_steps=15 format=3 uid="uid://dr14d3op0qqa7"]
 
 [ext_resource type="Script" uid="uid://m5nxypqqfkd" path="res://scripts/entities/props/ZE_Door.gd" id="1_lpu0g"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_qgws2"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://ct1mncqede373" path="res://effects/sounds/door_open.tscn" id="4_skdy8"]
 [ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/props/ZC_Door.gd" id="5_5o5bq"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="6_op7jg"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="7_beik1"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_world.tres" id="7_beik1"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="8_qgws2"]
 [ext_resource type="Script" uid="uid://dxh5mkb32cr8f" path="res://scripts/nodes/ZN_EntityBody.gd" id="8_yl86q"]
 [ext_resource type="Material" uid="uid://q11wc28gwgth" path="res://textures/Color Maps/wood_5.tres" id="9_fc7y7"]
 
@@ -24,9 +25,13 @@ script = ExtResource("6_op7jg")
 name = "Door"
 pickup = false
 crosshair_color = Color(0.3764706, 0.7764706, 1, 1)
-shimmer_material = ExtResource("7_beik1")
-shimmer_nodes = Array[NodePath]([NodePath("")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_5ti4c"]
+script = ExtResource("8_qgws2")
+material = ExtResource("7_beik1")
+nodes = Array[NodePath]([NodePath("StaticBody3D/CSGBox3D")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lpu0g"]
 size = Vector3(1.5, 2.5, 0.1)
@@ -34,7 +39,7 @@ size = Vector3(1.5, 2.5, 0.1)
 [node name="Door" type="Node3D"]
 script = ExtResource("1_lpu0g")
 prefab_path = "res://entities/props/door_wood_ccw.tscn"
-component_resources = Array[ExtResource("2_qgws2")]([SubResource("Resource_q8gv4"), SubResource("Resource_auxoi")])
+component_resources = Array[ExtResource("2_qgws2")]([SubResource("Resource_q8gv4"), SubResource("Resource_auxoi"), SubResource("Resource_5ti4c")])
 
 [node name="Markers" type="Node3D" parent="."]
 

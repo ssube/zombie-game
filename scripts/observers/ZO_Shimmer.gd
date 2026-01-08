@@ -1,11 +1,12 @@
 extends Observer
 class_name ZO_ShimmerObserver
 
+
 func watch() -> Resource:
 	return ZC_Shimmer
 
 
-func on_component_added(entity: Entity, component: Resource) -> void:
+func _add_shimmer(entity: Entity, component: Resource) -> void:
 	var shimmer = component as ZC_Shimmer
 	for node_path in shimmer.nodes:
 		var node = entity.get_node(node_path)
@@ -13,7 +14,7 @@ func on_component_added(entity: Entity, component: Resource) -> void:
 			node.material_overlay = shimmer.material
 
 
-func on_component_removed(entity: Entity, component: Resource):
+func _remove_shimmer(entity: Entity, component: Resource):
 	var shimmer = component as ZC_Shimmer
 	for node_path in shimmer.nodes:
 		var node = entity.get_node(node_path)
@@ -21,10 +22,10 @@ func on_component_removed(entity: Entity, component: Resource):
 			node.material_overlay = null
 
 
-func on_component_changed(_entity: Entity, _component: Resource, property: String, new_value: Variant, old_value: Variant):
+func on_component_changed(entity: Entity, component: Resource, property: String, new_value: Variant, old_value: Variant):
 	if property == 'enabled':
 		if new_value and not old_value:
-			assert(false, "TODO: add shimmer")
+			_add_shimmer(entity, component)
 
 		if old_value and not new_value:
-			assert(false, "TODO: remove shimmer")
+			_remove_shimmer(entity, component)

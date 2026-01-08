@@ -5,8 +5,8 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_g4lqn")
-shader_parameter/shine_color = Color(0.4592, 0.12599997, 0.84, 1)
-shader_parameter/shine_speed = 2.50000011875
+shader_parameter/shine_color = Color(0.78431374, 0, 0.92156863, 1)
+shader_parameter/shine_speed = 1.5000000712500001
 shader_parameter/shine_width = 1.0
 shader_parameter/cycle_interval = 1.0
 shader_parameter/angle_fade = 1.0

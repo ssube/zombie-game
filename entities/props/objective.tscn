@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://nk5gadv88ni7"]
+[gd_scene load_steps=16 format=3 uid="uid://nk5gadv88ni7"]
 
 [ext_resource type="Script" uid="uid://dkpj2gjyqwbtk" path="res://scripts/entities/props/ZE_Objective.gd" id="1_gq75p"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_ko3gf"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_x6vs8"]
-[ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_key.tres" id="4_3q266"]
+[ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_special.tres" id="5_66axx"]
 [ext_resource type="Script" uid="uid://bdl3b6gan30l0" path="res://scripts/components/status/ZC_Objective.gd" id="5_wyyki"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="6_8i38u"]
 [ext_resource type="Shader" uid="uid://biktyyh3i4ns7" path="res://shaders/wobble_normal.gdshader" id="6_012gx"]
 
 [sub_resource type="Resource" id="Resource_6y5fu"]
@@ -12,12 +13,17 @@ script = ExtResource("3_x6vs8")
 name = "Objective"
 pickup = false
 crosshair_color = Color(1, 0.92941177, 0, 1)
-shimmer_material = ExtResource("4_3q266")
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_lfpnt"]
 script = ExtResource("5_wyyki")
 metadata/_custom_type_script = "uid://bdl3b6gan30l0"
+
+[sub_resource type="Resource" id="Resource_7oko4"]
+script = ExtResource("6_8i38u")
+material = ExtResource("5_66axx")
+nodes = Array[NodePath]([NodePath("CSGCylinder3D")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqlhk"]
 albedo_color = Color(1, 0.27999997, 0.27999997, 1)
@@ -60,7 +66,7 @@ collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_gq75p")
 prefab_path = "res://entities/props/objective.tscn"
-component_resources = Array[ExtResource("2_ko3gf")]([SubResource("Resource_6y5fu"), SubResource("Resource_lfpnt")])
+component_resources = Array[ExtResource("2_ko3gf")]([SubResource("Resource_6y5fu"), SubResource("Resource_lfpnt"), SubResource("Resource_7oko4")])
 
 [node name="CSGCylinder3D" type="CSGSphere3D" parent="."]
 material = SubResource("StandardMaterial3D_cqlhk")

@@ -1,18 +1,23 @@
-[gd_scene load_steps=11 format=4 uid="uid://bfhfig3rnntfv"]
+[gd_scene load_steps=13 format=4 uid="uid://bfhfig3rnntfv"]
 
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_8utnp"]
 [ext_resource type="Texture2D" uid="uid://tchn3xfjdy61" path="res://assets/Mailbox/Mailbox_Mailbox_AO.png" id="1_kedje"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_318o6"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_psrig"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="4_psrig"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_world.tres" id="4_psrig"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="5_1axn7"]
 
 [sub_resource type="Resource" id="Resource_1axn7"]
 script = ExtResource("3_psrig")
 name = "Mailbox"
 pickup = false
-shimmer_material = ExtResource("4_psrig")
-shimmer_nodes = Array[NodePath]([NodePath("Mailbox")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_vlfmo"]
+script = ExtResource("5_1axn7")
+material = ExtResource("4_psrig")
+nodes = Array[NodePath]([NodePath("Mailbox")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v85df"]
 resource_name = "Mailbox"
@@ -61,7 +66,7 @@ points = PackedVector3Array(-0.3802737, 0.018819094, -0.36661905, 0.3529511, 0.0
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_8utnp")
-component_resources = Array[ExtResource("2_318o6")]([SubResource("Resource_1axn7")])
+component_resources = Array[ExtResource("2_318o6")]([SubResource("Resource_1axn7"), SubResource("Resource_vlfmo")])
 
 [node name="Mailbox" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)

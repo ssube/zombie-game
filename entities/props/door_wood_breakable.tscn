@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://do56uq0uysdn6"]
+[gd_scene load_steps=21 format=3 uid="uid://do56uq0uysdn6"]
 
 [ext_resource type="Script" uid="uid://m5nxypqqfkd" path="res://scripts/entities/props/ZE_Door.gd" id="1_svhb3"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_7gway"]
@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://ct1mncqede373" path="res://effects/sounds/door_open.tscn" id="4_btt3s"]
 [ext_resource type="Script" uid="uid://qjr7o31fiedq" path="res://scripts/components/props/ZC_Door.gd" id="5_5om0e"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="6_xwmlh"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="7_whivm"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_world.tres" id="7_whivm"]
 [ext_resource type="Script" uid="uid://b8oatb3tdywrh" path="res://scripts/components/characters/ZC_Skin.gd" id="8_7gway"]
 [ext_resource type="Script" uid="uid://dxh5mkb32cr8f" path="res://scripts/nodes/ZN_EntityBody.gd" id="8_32hrl"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="9_8c2mg"]
 [ext_resource type="Material" uid="uid://q11wc28gwgth" path="res://textures/Color Maps/wood_5.tres" id="9_dlcge"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="10_btt3s"]
 
 [sub_resource type="Resource" id="Resource_q8gv4"]
 script = ExtResource("5_5om0e")
@@ -32,13 +33,17 @@ script = ExtResource("6_xwmlh")
 name = "Door"
 pickup = false
 crosshair_color = Color(0.3764706, 0.7764706, 1, 1)
-shimmer_material = ExtResource("7_whivm")
-shimmer_nodes = Array[NodePath]([NodePath("")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_8c2mg"]
 script = ExtResource("8_7gway")
 metadata/_custom_type_script = "uid://b8oatb3tdywrh"
+
+[sub_resource type="Resource" id="Resource_5om0e"]
+script = ExtResource("10_btt3s")
+material = ExtResource("7_whivm")
+nodes = Array[NodePath]([NodePath("MovementRoot/Intact/CSGBox3D"), NodePath("MovementRoot/Damaged/CSGBox3D"), NodePath("MovementRoot/Destroyed/CSGBox3D")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_btt3s"]
 size = Vector3(1.5, 2.5, 0.1)
@@ -52,7 +57,7 @@ size = Vector3(0.25, 1.5, 0.1)
 [node name="Door" type="Node3D"]
 script = ExtResource("1_svhb3")
 prefab_path = "res://entities/props/door_wood_breakable.tscn"
-component_resources = Array[ExtResource("2_7gway")]([SubResource("Resource_q8gv4"), SubResource("Resource_btt3s"), SubResource("Resource_auxoi"), SubResource("Resource_8c2mg")])
+component_resources = Array[ExtResource("2_7gway")]([SubResource("Resource_q8gv4"), SubResource("Resource_btt3s"), SubResource("Resource_auxoi"), SubResource("Resource_8c2mg"), SubResource("Resource_5om0e")])
 
 [node name="Markers" type="Node3D" parent="."]
 

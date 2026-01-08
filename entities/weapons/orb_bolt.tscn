@@ -1,11 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://dt8yw8yr6nbaa"]
+[gd_scene load_steps=15 format=3 uid="uid://dt8yw8yr6nbaa"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_jpbld"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_xdngu"]
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="3_kpqkb"]
-[ext_resource type="PackedScene" uid="uid://bbtud7vqwa7qs" path="res://effects/sounds/weapon_pickup.tscn" id="4_2owvg"]
-[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="5_rsjvs"]
-[ext_resource type="Material" uid="uid://cq3gsqhdw64tx" path="res://materials/effects/shimmer_weapon.tres" id="6_yq15t"]
 [ext_resource type="PackedScene" uid="uid://bjwcu1vgbspmb" path="res://effects/sounds/shotgun_equip.tscn" id="7_pgtae"]
 [ext_resource type="Script" uid="uid://d3sex4y0oww04" path="res://scripts/resources/ZR_Weapon_Effect.gd" id="8_0slpr"]
 [ext_resource type="PackedScene" uid="uid://dktd2ekufselm" path="res://effects/weapons/shotgun_blast.tscn" id="9_dwwr5"]
@@ -22,16 +19,6 @@ max_ammo_count = Dictionary[String, int]({
 "12 Gauge": 10
 })
 metadata/_custom_type_script = "uid://bsnlq5t650od"
-
-[sub_resource type="Resource" id="Resource_17hxq"]
-script = ExtResource("5_rsjvs")
-name = "Orb Weapon"
-crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
-shimmer_material = ExtResource("6_yq15t")
-shimmer_nodes = Array[NodePath]([NodePath(""), NodePath("")])
-pickup_sound = ExtResource("4_2owvg")
-use_sound = ExtResource("7_pgtae")
-metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_l5ox4"]
 script = ExtResource("8_0slpr")
@@ -67,7 +54,7 @@ metadata/_custom_type_script = "uid://dwsqxsqwtloma"
 [node name="WeaponOrb" type="Node3D"]
 script = ExtResource("1_jpbld")
 prefab_path = "res://entities/weapons/shotgun.tscn"
-component_resources = Array[ExtResource("2_xdngu")]([SubResource("Resource_bsv6m"), SubResource("Resource_17hxq"), SubResource("Resource_7rb10")])
+component_resources = Array[ExtResource("2_xdngu")]([SubResource("Resource_bsv6m"), SubResource("Resource_7rb10")])
 
 [node name="Markers" type="Node3D" parent="."]
 

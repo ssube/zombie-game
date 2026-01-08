@@ -1,12 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://xj6pi1xr3mu8"]
+[gd_scene load_steps=22 format=3 uid="uid://xj6pi1xr3mu8"]
 
 [ext_resource type="Script" uid="uid://svxqn3t4whnt" path="res://scripts/entities/props/ZE_Button.gd" id="1_p86pc"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_f2tyo"]
 [ext_resource type="Script" uid="uid://c8jci3yicdcmm" path="res://scripts/components/props/ZC_Button.gd" id="3_c1g8g"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_3n38l"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_nqh2g"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_world.tres" id="5_nqh2g"]
 [ext_resource type="Script" uid="uid://djt2jgsv2ihkt" path="res://scripts/nodes/actions/ZN_AnimationAction.gd" id="6_ie4yn"]
 [ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="6_nqh2g"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="7_4agwl"]
 [ext_resource type="AudioStream" uid="uid://dw7ll0m2fn4xh" path="res://sounds/1000 Retro Sound Effects/General Sounds/Buttons/sfx_button_small2.ogg" id="7_ie4yn"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="7_nqh2g"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="9_ie4yn"]
@@ -29,9 +30,13 @@ script = ExtResource("4_3n38l")
 name = "Red Button"
 pickup = false
 crosshair_color = Color(1, 0.92941177, 0, 1)
-shimmer_material = ExtResource("5_nqh2g")
-shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_lwbp7"]
+script = ExtResource("7_4agwl")
+material = ExtResource("5_nqh2g")
+nodes = Array[NodePath]([NodePath("CSGBox3D")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p86pc"]
 albedo_color = Color(1, 0.18, 0.19366646, 1)
@@ -95,7 +100,7 @@ collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_p86pc")
 prefab_path = "res://entities/props/button_toggle.tscn"
-component_resources = Array[ExtResource("2_f2tyo")]([SubResource("Resource_ie4yn"), SubResource("Resource_0h2if"), SubResource("Resource_qcbqw")])
+component_resources = Array[ExtResource("2_f2tyo")]([SubResource("Resource_ie4yn"), SubResource("Resource_0h2if"), SubResource("Resource_qcbqw"), SubResource("Resource_lwbp7")])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 size = Vector3(0.3, 0.3, 0.3)
@@ -109,7 +114,6 @@ stream = ExtResource("7_ie4yn")
 volume_db = -15.0
 script = ExtResource("7_nqh2g")
 subtitle_text = "Button Toggled"
-remove_on_finished = false
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

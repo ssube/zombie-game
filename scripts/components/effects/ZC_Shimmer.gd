@@ -1,12 +1,18 @@
 extends Component
 class_name ZC_Shimmer
 
-@export var enabled: bool = false
+@export var enabled: bool = false:
+	set(value):
+		var old_value := enabled
+		enabled = value
+		if old_value != enabled:
+			property_changed.emit(self, "enabled", old_value, value)
+
+@export var distance: float = 3.0
+
+@export_group("Shimmer Settings")
 @export var material: Material = null
 @export var nodes: Array[NodePath] = []
 
-static func from_interactive(other: ZC_Interactive) -> ZC_Shimmer:
-  var shimmer = ZC_Shimmer.new()
-  shimmer.material = other.shimmer_material
-  shimmer.nodes = other.shimmer_nodes
-  return shimmer
+@export_group("Triggers")
+@export var on_target: bool = true

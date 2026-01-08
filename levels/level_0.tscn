@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=141 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_q6gno"]
@@ -46,7 +46,6 @@
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="35_lf4l6"]
 [ext_resource type="Script" uid="uid://dx3tgietk0dly" path="res://addons/QuakeLamp/FlickerComponent.gd" id="35_o4imw"]
 [ext_resource type="Script" uid="uid://bn1fw86ypw3a6" path="res://scripts/nodes/actions/ZN_PortalAction.gd" id="35_q6gno"]
-[ext_resource type="Shader" uid="uid://7jsdh7grpbqu" path="res://shaders/highlight.gdshader" id="36_gdkf1"]
 [ext_resource type="PackedScene" uid="uid://bypbk1livtqai" path="res://entities/props/puddle_water.tscn" id="37_v4yv6"]
 [ext_resource type="Script" uid="uid://cpxac3i6p71x0" path="res://scripts/nodes/objectives/ZN_CountObjective.gd" id="38_2fv0q"]
 [ext_resource type="PackedScene" uid="uid://c8tswr23gn5mg" path="res://entities/items/armor.tscn" id="38_g1jay"]
@@ -101,24 +100,10 @@ actions = Dictionary[int, NodePath]({
 })
 metadata/_custom_type_script = "uid://x2so3fh4lo1n"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2u3tw"]
-render_priority = 0
-shader = ExtResource("36_gdkf1")
-shader_parameter/shine_color = Color(0.4592, 0.12599997, 0.84, 1)
-shader_parameter/shine_speed = 2.50000011875
-shader_parameter/shine_width = 1.0
-shader_parameter/cycle_interval = 1.0
-shader_parameter/angle_fade = 1.0
-shader_parameter/x_direction = 0.5000000712500001
-shader_parameter/y_direction = 0.0
-shader_parameter/z_direction = 1.0
-
-[sub_resource type="Resource" id="Resource_y835w"]
+[sub_resource type="Resource" id="Resource_gdkf1"]
 script = ExtResource("35_hxseb")
 name = "Buttons, Puddles, Breakable Door & Glass"
 pickup = false
-shimmer_material = SubResource("ShaderMaterial_2u3tw")
-shimmer_nodes = Array[NodePath]([NodePath("Books/Scroll_Open1"), NodePath("CSGCylinder3D")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_2fv0q"]
@@ -153,6 +138,12 @@ metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 script = ExtResource("27_2fv0q")
 key_name = "door"
 metadata/_custom_type_script = "uid://dd4hkf7y5v13t"
+
+[sub_resource type="Resource" id="Resource_y835w"]
+script = ExtResource("35_hxseb")
+name = "Buttons, Puddles, Breakable Door & Glass"
+pickup = false
+metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_v4yv6"]
 _surfaces = [{
@@ -716,7 +707,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.361192, 0.008121654, -2.88
 
 [node name="SignScroll2" parent="Entities/Room1" instance=ExtResource("34_v4yv6")]
 transform = Transform3D(0.8660253, 0, -0.4999999, 0, 1, 0, 0.4999998, 0, 0.8660254, 1.3376628, -2.3841858e-07, -2.8898587)
-component_resources = Array[ExtResource("9_ggct0")]([SubResource("Resource_y835w")])
+extra_components = Array[ExtResource("9_ggct0")]([SubResource("Resource_gdkf1")])
 
 [node name="Flashlight" parent="Entities/Room1" instance=ExtResource("28_y835w")]
 transform = Transform3D(-0.96969736, 0, 0.24430884, 0, 1, 0, -0.24430884, 0, -0.96969736, -1.5966971, 0.25323725, -0.9671129)

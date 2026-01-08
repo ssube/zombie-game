@@ -1,30 +1,23 @@
-[gd_scene load_steps=14 format=4 uid="uid://q4k6tuoyi23v"]
+[gd_scene load_steps=15 format=4 uid="uid://q4k6tuoyi23v"]
 
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_dwgf4"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_kqn8w"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_8g2ii"]
-[ext_resource type="Shader" uid="uid://7jsdh7grpbqu" path="res://shaders/highlight.gdshader" id="4_8g2ii"]
+[ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_special.tres" id="4_2u3tw"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="5_3excd"]
 [ext_resource type="Texture2D" uid="uid://do1t2f81rbbkg" path="res://assets/Books and Scrolls/Books_Scroll.png" id="5_kqn8w"]
 [ext_resource type="Material" uid="uid://vq88t5vuqjfq" path="res://textures/Color Maps/wood_pt_4.tres" id="6_8g2ii"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2u3tw"]
-render_priority = 0
-shader = ExtResource("4_8g2ii")
-shader_parameter/shine_color = Color(0.4592, 0.12599997, 0.84, 1)
-shader_parameter/shine_speed = 2.50000011875
-shader_parameter/shine_width = 1.0
-shader_parameter/cycle_interval = 1.0
-shader_parameter/angle_fade = 1.0
-shader_parameter/x_direction = 0.5000000712500001
-shader_parameter/y_direction = 0.0
-shader_parameter/z_direction = 1.0
 
 [sub_resource type="Resource" id="Resource_3excd"]
 script = ExtResource("3_8g2ii")
 pickup = false
-shimmer_material = SubResource("ShaderMaterial_2u3tw")
-shimmer_nodes = Array[NodePath]([NodePath("Books/Scroll_Open1"), NodePath("CSGCylinder3D")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_i1yu5"]
+script = ExtResource("5_3excd")
+material = ExtResource("4_2u3tw")
+nodes = Array[NodePath]([NodePath("Books/Scroll_Open1"), NodePath("CSGCylinder3D")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5x6on"]
 resource_name = "Scroll"
@@ -80,7 +73,7 @@ height = 1.0
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_dwgf4")
-component_resources = Array[ExtResource("2_kqn8w")]([SubResource("Resource_3excd")])
+component_resources = Array[ExtResource("2_kqn8w")]([SubResource("Resource_3excd"), SubResource("Resource_i1yu5")])
 
 [node name="Books" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.32, 0)

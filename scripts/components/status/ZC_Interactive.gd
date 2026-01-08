@@ -7,7 +7,10 @@ enum CrosshairType {
 }
 
 @export var name: String = "Interactive Object"
+@export var distance: float = 3.0
 @export var pickup: bool = true
+# TODO: implement use time
+# @export var use_time: float = 0.0
 
 @export_group("Crosshair")
 @export var show_crosshair: bool = true
@@ -28,15 +31,14 @@ enum CrosshairType {
 # TODO: custom crosshair icon
 # @export var crosshair_icon: Texture2D
 
-@export_group("Shimmer")
-@export_subgroup("Shimmer Flags")
-@export var shimmer_on_proximity: bool = false
-@export var shimmer_on_target: bool = true
+#@export_group("Shimmer")
+#@export_subgroup("Shimmer Flags")
+#@export var shimmer_on_target: bool = true
 
-@export_subgroup("Shimmer Parameters")
-@export var shimmer_range: float = 5.0
-@export var shimmer_material: Material = null
-@export var shimmer_nodes: Array[NodePath] = []
+#@export_subgroup("Shimmer Parameters")
+#@export var shimmer_range: float = 5.0
+#@export var shimmer_material: Material = null
+#@export var shimmer_nodes: Array[NodePath] = []
 
 @export_group("Sounds")
 @export var pickup_sound: PackedScene

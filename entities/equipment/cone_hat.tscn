@@ -1,25 +1,29 @@
-[gd_scene load_steps=11 format=3 uid="uid://dq3oixjn7s600"]
+[gd_scene load_steps=13 format=3 uid="uid://dq3oixjn7s600"]
 
 [ext_resource type="Script" uid="uid://bx51blxd4jc27" path="res://scripts/entities/items/ZE_Armor.gd" id="1_4s1hm"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_50imr"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_m8o52"]
-[ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_sparkle.tres" id="4_k5rx5"]
+[ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_special.tres" id="4_k5rx5"]
 [ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="5_jbstq"]
 [ext_resource type="ArrayMesh" uid="uid://fpld4rxc612u" path="res://entities/equipment/cone_hat_mesh.tres" id="6_4s1hm"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="6_50imr"]
 
 [sub_resource type="Resource" id="Resource_0qpab"]
 script = ExtResource("3_m8o52")
 name = "Traffic Cone Hat"
 crosshair_color = Color(0.78431374, 0, 0.92156863, 1)
-shimmer_on_proximity = true
-shimmer_material = ExtResource("4_k5rx5")
-shimmer_nodes = Array[NodePath]([NodePath("TrafficCone")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_j7mfm"]
 script = ExtResource("5_jbstq")
 slot = "head"
 metadata/_custom_type_script = "uid://bdq3y7j08fnad"
+
+[sub_resource type="Resource" id="Resource_m8o52"]
+script = ExtResource("6_50imr")
+material = ExtResource("4_k5rx5")
+nodes = Array[NodePath]([NodePath("TrafficCone")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4s1hm"]
 points = PackedVector3Array(0.2199904, -0.31016886, 0.2692542, -0.22004303, -0.31016886, 0.2692542, 0.2199904, -0.3578602, 0.2692542, 0.2688947, -0.31016886, 0.22033724, 0.03816536, 0.3523655, 0.03816369, -5.26309e-05, 0.3523655, 0.05397734, -0.03821799, 0.3523655, 0.03816369, -0.2688947, -0.31016886, 0.22033724, -0.22004303, -0.3578602, 0.2692542, 0.2688947, -0.3578602, 0.22033724, 0.05395794, 0.3523655, -5.272031e-05, 0.2688947, -0.31016886, -0.22038995, -0.054010555, 0.3523655, -5.272031e-05, -0.2688947, -0.31016886, -0.22038995, -0.2688947, -0.3578602, 0.22033724, 0.2688947, -0.3578602, -0.22038995, 0.03816536, 0.3523655, -0.038216382, 0.2199904, -0.31016886, -0.2692542, -0.03821799, 0.3523655, -0.038216382, -0.22004303, -0.31016886, -0.2692542, -0.2688947, -0.3578602, -0.22038995, 0.2199904, -0.3578602, -0.2692542, -5.26309e-05, 0.3523655, -0.05403006, -0.22004303, -0.3578602, -0.2692542)
@@ -36,7 +40,7 @@ scale_max = 0.5
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_4s1hm")
-component_resources = Array[ExtResource("2_50imr")]([SubResource("Resource_0qpab"), SubResource("Resource_j7mfm")])
+component_resources = Array[ExtResource("2_50imr")]([SubResource("Resource_0qpab"), SubResource("Resource_j7mfm"), SubResource("Resource_m8o52")])
 
 [node name="TrafficCone" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)

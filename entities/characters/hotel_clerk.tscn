@@ -1,15 +1,16 @@
-[gd_scene load_steps=27 format=4 uid="uid://bq6a52tvj60bq"]
+[gd_scene load_steps=29 format=4 uid="uid://bq6a52tvj60bq"]
 
 [ext_resource type="Script" uid="uid://d2ww1flmd4yo4" path="res://scripts/entities/characters/ZE_Survivor.gd" id="1_61xi3"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_ig744"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="3_ci84u"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_0wy0w"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_eirhj"]
 [ext_resource type="Resource" uid="uid://bjknld1sg8tq0" path="res://dialogue/hotel_clerk.dialogue" id="6_jkcq6"]
 [ext_resource type="Script" uid="uid://b0eipv08nprbd" path="res://scripts/components/characters/ZC_Dialogue.gd" id="7_04tpt"]
 [ext_resource type="Script" uid="uid://c7dv7vmk2ynqt" path="res://scripts/components/characters/ZC_Movement.gd" id="8_eirhj"]
 [ext_resource type="Script" uid="uid://cixmecjncarw5" path="res://scripts/components/ZC_Velocity.gd" id="9_jkcq6"]
 [ext_resource type="Script" uid="uid://b7x5tu22015cx" path="res://scripts/components/characters/ZC_Faction.gd" id="10_04tpt"]
+[ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_plot.tres" id="10_wfgdr"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="11_80wbs"]
 [ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="11_w7go0"]
 [ext_resource type="Script" uid="uid://c0cxv8olxfknv" path="res://scripts/nodes/actions/ZN_RandomBranch.gd" id="12_nvvd0"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="13_wfgdr"]
@@ -24,8 +25,6 @@ script = ExtResource("4_0wy0w")
 name = "Hotel Clerk"
 pickup = false
 crosshair_color = Color(0.3764706, 0.7764706, 1, 1)
-shimmer_material = ExtResource("5_eirhj")
-shimmer_nodes = Array[NodePath]([NodePath("CSGBakedMeshInstance3D"), NodePath("CSGSphere3D")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_4sttm"]
@@ -46,6 +45,12 @@ metadata/_custom_type_script = "uid://cixmecjncarw5"
 script = ExtResource("10_04tpt")
 faction_name = "friendly_survivors"
 metadata/_custom_type_script = "uid://b7x5tu22015cx"
+
+[sub_resource type="Resource" id="Resource_ym5d7"]
+script = ExtResource("11_80wbs")
+material = ExtResource("10_wfgdr")
+nodes = Array[NodePath]([NodePath("CSGBakedMeshInstance3D"), NodePath("CSGSphere3D")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2n0ki"]
 _surfaces = [{
@@ -90,7 +95,7 @@ collision_layer = 8
 collision_mask = 31
 script = ExtResource("1_61xi3")
 prefab_path = "res://entities/characters/hotel_clerk.tscn"
-component_resources = Array[ExtResource("2_ig744")]([SubResource("Resource_0qnp1"), SubResource("Resource_w7go0"), SubResource("Resource_4sttm"), SubResource("Resource_jkcq6"), SubResource("Resource_04tpt"), SubResource("Resource_y41co")])
+component_resources = Array[ExtResource("2_ig744")]([SubResource("Resource_0qnp1"), SubResource("Resource_w7go0"), SubResource("Resource_4sttm"), SubResource("Resource_jkcq6"), SubResource("Resource_04tpt"), SubResource("Resource_y41co"), SubResource("Resource_ym5d7")])
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

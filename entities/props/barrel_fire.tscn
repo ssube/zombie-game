@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://8f7bugrofvmc"]
+[gd_scene load_steps=18 format=4 uid="uid://8f7bugrofvmc"]
 
 [ext_resource type="Script" uid="uid://dhsuals8autq1" path="res://scripts/entities/props/ZE_Barrel.gd" id="1_udcvv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_g3e3n"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="4_t2uel"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="5_gvsd5"]
 [ext_resource type="Material" uid="uid://d4bmgb0pkgmpm" path="res://materials/effects/shimmer_danger.tres" id="6_4r6aw"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="7_136ls"]
 [ext_resource type="Texture2D" uid="uid://duo2qqruxq60g" path="res://assets/Barrels/Textures/Red.png" id="8_n2mlh"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="9_lfqbm"]
 
@@ -25,9 +26,13 @@ script = ExtResource("5_gvsd5")
 name = "Burning Barrel"
 pickup = false
 crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
-shimmer_material = ExtResource("6_4r6aw")
-shimmer_nodes = Array[NodePath]([NodePath("Barrel/Barrel")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_3qfk1"]
+script = ExtResource("7_136ls")
+material = ExtResource("6_4r6aw")
+nodes = Array[NodePath]([NodePath("Barrel/Barrel")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dkbv7"]
 resource_name = "BarrelRed"
@@ -81,7 +86,7 @@ collision_mask = 31
 mass = 100.0
 script = ExtResource("1_udcvv")
 prefab_path = "res://entities/props/barrel.tscn"
-component_resources = Array[ExtResource("2_g3e3n")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl"), SubResource("Resource_0kgpt")])
+component_resources = Array[ExtResource("2_g3e3n")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl"), SubResource("Resource_0kgpt"), SubResource("Resource_3qfk1")])
 
 [node name="Barrel" type="Node3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

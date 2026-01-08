@@ -1,20 +1,18 @@
-[gd_scene load_steps=14 format=4 uid="uid://gcoskmsng3v7"]
+[gd_scene load_steps=16 format=4 uid="uid://gcoskmsng3v7"]
 
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_luwti"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_p081r"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_klovt"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="4_r0265"]
+[ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_special.tres" id="5_3u0pr"]
 [ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="5_co65g"]
 [ext_resource type="Texture2D" uid="uid://vs7fsgur8v5a" path="res://assets/PSX Gifts & Misc/Models/other-formats/GLB/clipboard_mx_1_clipboard_mx_1.png" id="6_0c361"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="6_p1t5e"]
 [ext_resource type="Script" uid="uid://boyqweqtyv0x1" path="res://scripts/nodes/actions/ZN_MenuAction.gd" id="7_8ongl"]
 
 [sub_resource type="Resource" id="Resource_dx537"]
 script = ExtResource("3_klovt")
 name = "Level Select"
 pickup = false
-shimmer_range = 3.0
-shimmer_material = ExtResource("4_r0265")
-shimmer_nodes = Array[NodePath]([NodePath("clipboard_mx_1")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_i4h2g"]
@@ -23,6 +21,12 @@ actions = Dictionary[int, NodePath]({
 31: NodePath("ZN_MenuAction")
 })
 metadata/_custom_type_script = "uid://barikupijl7r7"
+
+[sub_resource type="Resource" id="Resource_bhmt2"]
+script = ExtResource("6_p1t5e")
+material = ExtResource("5_3u0pr")
+nodes = Array[NodePath]([NodePath("clipboard_mx_1")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drm0m"]
 resource_name = "clipboard_mx_1"
@@ -70,7 +74,7 @@ size = Vector3(0.2284668, 0.015795898, 0.3468445)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_luwti")
-component_resources = Array[ExtResource("2_p081r")]([SubResource("Resource_dx537"), SubResource("Resource_i4h2g")])
+component_resources = Array[ExtResource("2_p081r")]([SubResource("Resource_dx537"), SubResource("Resource_i4h2g"), SubResource("Resource_bhmt2")])
 
 [node name="clipboard_mx_1" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)

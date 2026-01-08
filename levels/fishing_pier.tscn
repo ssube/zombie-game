@@ -1,4 +1,4 @@
-[gd_scene load_steps=290 format=4 uid="uid://b687g8br5b2mv"]
+[gd_scene load_steps=288 format=4 uid="uid://b687g8br5b2mv"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_vf316"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_24vc2"]
@@ -45,11 +45,9 @@
 [ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/props/ZC_Portal.gd" id="29_pyct7"]
 [ext_resource type="PackedScene" uid="uid://c4gewr3tx3am5" path="res://entities/statics/crate_wood.tscn" id="30_7iyb8"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="30_ifimg"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="31_4maf2"]
 [ext_resource type="PackedScene" uid="uid://femu8fxijdyb" path="res://entities/props/cardboard_box_floating.tscn" id="31_jb54n"]
 [ext_resource type="PackedScene" uid="uid://cv430aqctj4ng" path="res://entities/statics/sign_winding_road_entity.tscn" id="32_4maf2"]
 [ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/grass_cluster_dark.tscn" id="34_kj7f7"]
-[ext_resource type="Material" uid="uid://duorhhvkpiuvo" path="res://materials/effects/shimmer_food.tres" id="35_cyxph"]
 [ext_resource type="PackedScene" uid="uid://1mrkahnnofcf" path="res://entities/equipment/fish_hat.tscn" id="39_85wo0"]
 [ext_resource type="AudioStream" uid="uid://cjf5j8cwsl6hf" path="res://sounds/beach_freesound_372021.ogg" id="40_3d2ce"]
 [ext_resource type="PackedScene" uid="uid://lvteuslo4wik" path="res://entities/weapons/pistol.tscn" id="41_y3vix"]
@@ -121,8 +119,6 @@ metadata/_custom_type_script = "uid://cn8mtbap6uudk"
 script = ExtResource("30_ifimg")
 name = "Load the Bus Stop"
 pickup = false
-shimmer_material = ExtResource("31_4maf2")
-shimmer_nodes = Array[NodePath]([NodePath("Mailbox")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_4maf2"]
@@ -135,8 +131,6 @@ metadata/_custom_type_script = "uid://cn8mtbap6uudk"
 script = ExtResource("30_ifimg")
 name = "Load the Spooky Church"
 pickup = false
-shimmer_material = ExtResource("31_4maf2")
-shimmer_nodes = Array[NodePath]([NodePath("Winding Road")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_cyxph"]
@@ -147,8 +141,6 @@ metadata/_custom_type_script = "uid://bsnlq5t650od"
 script = ExtResource("30_ifimg")
 name = "Magnum Ammo"
 crosshair_color = Color(0, 1, 0, 1)
-shimmer_material = ExtResource("35_cyxph")
-shimmer_nodes = Array[NodePath]([NodePath("Toolbox")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_sn2tb"]
@@ -169,8 +161,6 @@ metadata/_custom_type_script = "uid://bsnlq5t650od"
 script = ExtResource("30_ifimg")
 name = "Magnum Ammo"
 crosshair_color = Color(0, 1, 0, 1)
-shimmer_material = ExtResource("35_cyxph")
-shimmer_nodes = Array[NodePath]([NodePath("Toolbox")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_4maf2"]
@@ -1185,7 +1175,7 @@ transform = Transform3D(-0.034165334, 0, -0.9994162, 0, 1, 0, 0.9994162, 0, -0.0
 extra_components = Array[ExtResource("10_beuf7")]([SubResource("Resource_rbmku")])
 
 [node name="WeaponPistol" parent="Entities" instance=ExtResource("41_y3vix")]
-transform = Transform3D(-0.23910312, 0.36272907, 0.90069824, 0.8349247, 0.5503642, 0, -0.49571207, 0.75201523, -0.43444526, -16.409548, 0.46792176, -0.8161388)
+transform = Transform3D(-0.23910312, 0.36272907, 0.90069824, 0.8349247, 0.5503642, 0, -0.49571207, 0.75201523, -0.43444526, -16.861393, 0.46792176, -1.8904237)
 
 [node name="Zombie" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
 transform = Transform3D(0.51986206, 0, 0.8542502, 0, 1, 0, -0.8542502, 0, 0.51986206, -19.059742, -5.850259, -17.352448)
@@ -1272,13 +1262,11 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -13.
 
 [node name="Mailbox" parent="Entities" instance=ExtResource("28_ojp8q")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10.619098, -0.5, -31.892925)
-extra_components = Array[ExtResource("10_beuf7")]([SubResource("Resource_o14kk")])
-component_resources = Array[ExtResource("10_beuf7")]([SubResource("Resource_hhd11")])
+extra_components = Array[ExtResource("10_beuf7")]([SubResource("Resource_o14kk"), SubResource("Resource_hhd11")])
 
 [node name="SignWindingRoad" parent="Entities" instance=ExtResource("32_4maf2")]
 transform = Transform3D(-0.9205151, 0.027995631, -0.38970277, 0.030398952, 0.9995378, -9.313226e-10, 0.3895226, -0.011846554, -0.92094064, 10.573909, -0.5886784, 45.80073)
-extra_components = Array[ExtResource("10_beuf7")]([SubResource("Resource_4maf2")])
-component_resources = Array[ExtResource("10_beuf7")]([SubResource("Resource_kpxw3")])
+extra_components = Array[ExtResource("10_beuf7")]([SubResource("Resource_4maf2"), SubResource("Resource_kpxw3")])
 
 [node name="Ammo" parent="Entities" instance=ExtResource("53_kpxw3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7268734, -4.462368, -2.019585)

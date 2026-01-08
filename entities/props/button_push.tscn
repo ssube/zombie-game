@@ -1,10 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://drdesj6rooo11"]
+[gd_scene load_steps=26 format=3 uid="uid://drdesj6rooo11"]
 
 [ext_resource type="Script" uid="uid://svxqn3t4whnt" path="res://scripts/entities/props/ZE_Button.gd" id="1_l113m"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_txy2n"]
 [ext_resource type="Script" uid="uid://c8jci3yicdcmm" path="res://scripts/components/props/ZC_Button.gd" id="3_klvmx"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="4_c6nwv"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="5_b5ffr"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_world.tres" id="5_b5ffr"]
 [ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="6_b5ffr"]
 [ext_resource type="Script" uid="uid://djt2jgsv2ihkt" path="res://scripts/nodes/actions/ZN_AnimationAction.gd" id="6_wlayu"]
 [ext_resource type="Script" uid="uid://b8oatb3tdywrh" path="res://scripts/components/characters/ZC_Skin.gd" id="7_b41lu"]
@@ -13,6 +13,7 @@
 [ext_resource type="Material" uid="uid://c4ihe7nrnnjeg" path="res://materials/button_green_enabled.tres" id="7_ysgk6"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="9_wlayu"]
 [ext_resource type="AudioStream" uid="uid://bwlk2khji1e0a" path="res://sounds/1000 Retro Sound Effects/General Sounds/Buttons/sfx_sounds_button3.ogg" id="10_iasvb"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="10_qf5gr"]
 [ext_resource type="Script" uid="uid://w4f2ylmprmmj" path="res://scripts/nodes/actions/ZN_SkinAction.gd" id="11_wlayu"]
 
 [sub_resource type="Resource" id="Resource_0h2if"]
@@ -25,8 +26,6 @@ script = ExtResource("4_c6nwv")
 name = "Green Button"
 pickup = false
 crosshair_color = Color(1, 0.92941177, 0, 1)
-shimmer_material = ExtResource("5_b5ffr")
-shimmer_nodes = Array[NodePath]([NodePath("CSGBox3D")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
 
 [sub_resource type="Resource" id="Resource_wlayu"]
@@ -44,6 +43,12 @@ material_enabled = ExtResource("7_ysgk6")
 skin_shapes = Array[NodePath]([NodePath("CSGBox3D")])
 current_skin = 3
 metadata/_custom_type_script = "uid://b8oatb3tdywrh"
+
+[sub_resource type="Resource" id="Resource_ypjb3"]
+script = ExtResource("10_qf5gr")
+material = ExtResource("5_b5ffr")
+nodes = Array[NodePath]([NodePath("CSGBox3D")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0h2if"]
 size = Vector3(0.3, 0.3, 0.3)
@@ -104,7 +109,7 @@ collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_l113m")
 prefab_path = "res://entities/props/button_push.tscn"
-component_resources = Array[ExtResource("2_txy2n")]([SubResource("Resource_0h2if"), SubResource("Resource_qcbqw"), SubResource("Resource_wlayu"), SubResource("Resource_ysgk6")])
+component_resources = Array[ExtResource("2_txy2n")]([SubResource("Resource_0h2if"), SubResource("Resource_qcbqw"), SubResource("Resource_wlayu"), SubResource("Resource_ysgk6"), SubResource("Resource_ypjb3")])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 size = Vector3(0.3, 0.3, 0.3)
@@ -118,7 +123,6 @@ stream = ExtResource("10_iasvb")
 volume_db = -24.0
 script = ExtResource("9_wlayu")
 subtitle_text = "Button Pressed"
-remove_on_finished = false
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

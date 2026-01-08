@@ -1,19 +1,23 @@
-[gd_scene load_steps=11 format=4 uid="uid://w70s7gsk27hd"]
+[gd_scene load_steps=13 format=4 uid="uid://w70s7gsk27hd"]
 
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_nprn3"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_uikgm"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_nkaj0"]
-[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_door.tres" id="4_nmvfn"]
+[ext_resource type="Material" uid="uid://bvab0lnhkpasr" path="res://materials/effects/shimmer_world.tres" id="4_nmvfn"]
 [ext_resource type="Texture2D" uid="uid://f0iujk4l6mpw" path="res://assets/PSX Dungeon Loot Pack/Treasure_glb_treasure_1.png" id="5_br2ia"]
+[ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="5_uikgm"]
 
 [sub_resource type="Resource" id="Resource_frkun"]
 script = ExtResource("3_nkaj0")
 name = "Candlestick"
 crosshair_color = Color(0.3764706, 0.7764706, 1, 1)
-shimmer_range = 2.0
-shimmer_material = ExtResource("4_nmvfn")
-shimmer_nodes = Array[NodePath]([NodePath("Treasure_glb/Candle_Stick_1")])
 metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_nkaj0"]
+script = ExtResource("5_uikgm")
+material = ExtResource("4_nmvfn")
+nodes = Array[NodePath]([NodePath("Treasure_glb/Candle_Stick_1")])
+metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gss62"]
 resource_name = "treasure_1"
@@ -64,7 +68,7 @@ radius = 0.07
 collision_layer = 2
 collision_mask = 27
 script = ExtResource("1_nprn3")
-component_resources = Array[ExtResource("2_uikgm")]([SubResource("Resource_frkun")])
+component_resources = Array[ExtResource("2_uikgm")]([SubResource("Resource_frkun"), SubResource("Resource_nkaj0")])
 
 [node name="Treasure_glb" type="Node3D" parent="."]
 
