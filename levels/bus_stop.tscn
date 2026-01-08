@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=4 uid="uid://v18fidmgep15"]
+[gd_scene load_steps=138 format=4 uid="uid://v18fidmgep15"]
 
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_b7jq5"]
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_dm6vb"]
@@ -29,6 +29,7 @@
 [ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="16_fbayg"]
 [ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="17_tr8cq"]
 [ext_resource type="Material" uid="uid://g5xoeqn2qoy6" path="res://textures/Color Maps/metal_panels_pt_2.tres" id="17_y6j6u"]
+[ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/grass_cluster_dark.tscn" id="19_825fl"]
 [ext_resource type="PackedScene" uid="uid://dq3oixjn7s600" path="res://entities/equipment/cone_hat.tscn" id="19_gbhsh"]
 [ext_resource type="PackedScene" uid="uid://d00dbkjpj0iyk" path="res://entities/items/flashlight.tscn" id="20_i2a6y"]
 [ext_resource type="PackedScene" uid="uid://bfhfig3rnntfv" path="res://entities/statics/mailbox_entity.tscn" id="21_3d12m"]
@@ -454,76 +455,6 @@ id = "TestTown_ZE_Armor_1766272352_34834"
 transform = Transform3D(-3.804258e-08, 0.87031275, 0.4924995, -1, -4.371139e-08, 0, 2.1527837e-08, -0.4924995, 0.87031275, 0.058327436, 0.5552297, 6.1914063)
 id = "TestTown_ZE_Weapon_1766272350_80923"
 
-[node name="Car5Red" parent="Entities" groups=["level"] instance=ExtResource("3_tu73e")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.575405, -0.037427396, -6.8905115)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Entities/Car5Red"]
-transform = Transform3D(1, 3.4344467e-15, -8.742278e-08, -1.7763568e-15, -1, -5.9604645e-08, -8.742278e-08, 5.9604645e-08, -1, 0.95120955, 0.98103154, 3.527712)
-shadow_enabled = true
-spot_range = 10.0
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="Entities/Car5Red"]
-transform = Transform3D(1, 3.4344467e-15, -8.742278e-08, -1.7763568e-15, -1, -5.9604645e-08, -8.742278e-08, 5.9604645e-08, -1, -0.93104935, 0.98103154, 3.5277116)
-shadow_enabled = true
-spot_range = 10.0
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Entities/Car5Red"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.64980507, 1.1214526, -3.7560372)
-light_color = Color(1, 0, 0, 1)
-light_energy = 0.5
-omni_range = 3.0
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="Entities/Car5Red"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6582346, 1.1214526, -3.7560372)
-light_color = Color(1, 0, 0, 1)
-light_energy = 0.5
-omni_range = 3.0
-
-[node name="CarEngine" type="AudioStreamPlayer3D" parent="Entities/Car5Red"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.536743e-07, 1.683947, 2.565721)
-stream = ExtResource("5_tjpkw")
-volume_db = -18.0
-script = ExtResource("6_f0s1s")
-play_on_ready = true
-play_on_loop = true
-subtitle_text = "Engine noise"
-remove_on_finished = false
-metadata/_custom_type_script = "uid://mcuf24u8q14t"
-
-[node name="CarRadio" type="AudioStreamPlayer3D" parent="Entities/Car5Red"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.321796, 1.683947, -0.2524829)
-stream = ExtResource("7_tr7l7")
-volume_db = -6.0
-unit_size = 5.0
-script = ExtResource("6_f0s1s")
-play_on_ready = true
-play_on_loop = true
-subtitle_text = "Radio static"
-remove_on_finished = false
-metadata/_custom_type_script = "uid://mcuf24u8q14t"
-
-[node name="Car5Police" parent="Entities" groups=["level"] instance=ExtResource("4_ccg5v")]
-transform = Transform3D(0.96471816, 0.044020407, -0.25957853, -0.03263053, 0.9983132, 0.048027422, 0.26125482, -0.03786274, 0.96452713, -27.382696, -0.028509647, 15.755138)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Entities/Car5Police"]
-transform = Transform3D(-0.4614711, 0.01743785, 0.886984, -0.0014992729, 0.9997896, -0.02043558, -0.8871538, -0.01076027, -0.461348, -1.1115475, 1.8133864, 0.94540215)
-light_energy = 5.0
-shadow_enabled = true
-spot_range = 12.4607115
-spot_angle = 40.0
-spot_angle_attenuation = 0.7320427
-
-[node name="ZN_AudioSubtitle3D2" type="AudioStreamPlayer3D" parent="Entities/Car5Police"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.536743e-07, 1.683947, 2.565721)
-stream = ExtResource("5_tjpkw")
-volume_db = -18.0
-script = ExtResource("6_f0s1s")
-play_on_ready = true
-play_on_loop = true
-subtitle_text = "Engine Noise"
-remove_on_finished = false
-metadata/_custom_type_script = "uid://mcuf24u8q14t"
-
 [node name="TrafficCone" parent="Entities" instance=ExtResource("5_tr8cq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.955515, 0.3578602, -1.7691089)
 
@@ -551,9 +482,6 @@ transform = Transform3D(0.86271673, 0, -0.5056875, 0, 1, 0, 0.5056875, 0, 0.8627
 [node name="TrafficCone7" parent="Entities" instance=ExtResource("7_7khm6")]
 transform = Transform3D(0.97372216, 0, 0.22773911, 0, 1, 0, -0.22773911, 0, 0.97372216, 23.085796, 0.60289145, 0.77081585)
 
-[node name="Dumpster" parent="Entities" instance=ExtResource("21_tu73e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.697096, 0.25062275, 34.145134)
-
 [node name="Trash1" parent="Entities" instance=ExtResource("9_y6j6u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.684347, -0.010999858, 2.6494122)
 
@@ -577,18 +505,6 @@ transform = Transform3D(0.6857802, 0, -0.72780865, 0, 1, 0, 0.72780865, 0, 0.685
 
 [node name="Trash8" parent="Entities" instance=ExtResource("10_dm6vb")]
 transform = Transform3D(0.93781626, 0, 0.3471321, 0, 1, 0, -0.3471321, 0, 0.93781626, 21.350798, -2.3841858e-07, -1.4928637)
-
-[node name="StreetLight" parent="Entities" instance=ExtResource("5_dtwg0")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 23.472279, -1.0947828, -9.439066)
-
-[node name="StreetLight2" parent="Entities" instance=ExtResource("5_dtwg0")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15.527721, -1.0947828, -9.439066)
-
-[node name="StreetLight4" parent="Entities" instance=ExtResource("5_dtwg0")]
-transform = Transform3D(1, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, 1, -29.081528, -1.094779, 34.88362)
-
-[node name="StreetLight3" parent="Entities" instance=ExtResource("5_dtwg0")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -53.52772, -1.0947828, -9.439066)
 
 [node name="Trash9" parent="Entities" instance=ExtResource("10_dm6vb")]
 transform = Transform3D(0.85157144, 0, -0.5242386, 0, 1, 0, 0.5242386, 0, 0.85157144, -44.254353, 0, -3.1324222)
@@ -614,9 +530,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.546272, 0.6078602, 1.1212
 [node name="TrafficCone13" parent="Entities" instance=ExtResource("5_tr8cq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.609315, 0.60785973, 0.7654824)
 
-[node name="SignStop" parent="Entities" instance=ExtResource("13_k62ce")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.884563, 0.21824193, 1.4301579)
-
 [node name="Flare" parent="Entities" instance=ExtResource("15_morpl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.804863, 0.35000002, -0.22783995)
 
@@ -629,25 +542,193 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7304, 0.25000024, -0.31530
 [node name="Flashlight" parent="Entities" instance=ExtResource("20_i2a6y")]
 transform = Transform3D(-0.96024495, 0, -0.2791587, 0.07169611, 0.96645683, -0.24661894, 0.26979485, -0.2568292, -0.9280353, 12.397218, 0.4006424, -0.62662554)
 
-[node name="Zombie" parent="Entities" instance=ExtResource("21_g2fch")]
+[node name="Zombie" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("21_g2fch")]
 transform = Transform3D(0.90169674, 0, 0.43236905, 0, 1, 0, -0.43236905, 0, 0.90169674, -2.5394058, 1.1159406, -7.9311886)
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie2" parent="Entities" instance=ExtResource("21_g2fch")]
+[node name="Zombie2" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("21_g2fch")]
 transform = Transform3D(-0.6428945, 0, -0.7659546, 0, 1, 0, 0.7659546, 0, -0.6428945, -23.15719, 1.147541, 8.470541)
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie5" parent="Entities" instance=ExtResource("21_g2fch")]
+[node name="Zombie5" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("21_g2fch")]
 transform = Transform3D(0.40520534, 0, -0.9142255, 0, 1, 0, 0.9142255, 0, 0.40520534, -42.035553, 1.1475391, -5.3892593)
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie3" parent="Entities" instance=ExtResource("21_g2fch")]
+[node name="Zombie3" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("21_g2fch")]
 transform = Transform3D(-0.74588287, 0, 0.66607684, 0, 1, 0, -0.66607684, 0, -0.74588287, -18.546234, 3.0830746, 27.888268)
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
-[node name="Zombie4" parent="Entities" instance=ExtResource("21_g2fch")]
+[node name="Zombie4" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("21_g2fch")]
 transform = Transform3D(0.9933907, 0, 0.11478108, 0, 1, 0, -0.11478108, 0, 0.9933907, -29.823896, 3.0830746, 37.790928)
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
 
 [node name="Mailbox2" parent="Entities" instance=ExtResource("21_3d12m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.996475, 0.25000048, -0.39246774)
 extra_components = Array[ExtResource("22_qy6wr")]([SubResource("Resource_byx5j")])
 component_resources = Array[ExtResource("22_qy6wr")]([SubResource("Resource_825fl")])
+
+[node name="Statics" type="Node3D" parent="."]
+
+[node name="GrassClusterDark8" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(0.6485015, -0.1476865, 0.74674916, 0.25967348, 0.9650747, -0.034643643, -0.71555245, 0.21637742, 0.66420287, -16.115551, 0.6393045, 3.3657255)
+
+[node name="GrassClusterDark9" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(0.6485015, -0.1476865, 0.74674916, 0.25967348, 0.9650747, -0.034643643, -0.71555245, 0.21637742, 0.66420287, -12.770656, 0.6393045, 4.1611204)
+
+[node name="GrassClusterDark10" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(0.3715471, -0.26347417, 0.89024377, 0.33578756, 0.9321084, 0.13572195, -0.8655629, 0.2485057, 0.43479365, -16.12331, 0.6689658, -9.336611)
+
+[node name="GrassClusterDark11" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(0.37154704, -0.26347414, 0.8902437, -0.013540655, 0.95724666, 0.28895548, -0.9283151, -0.119415075, 0.3520947, -35.854073, 0.6689658, 3.4564943)
+
+[node name="GrassClusterDark12" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(0.912353, 0.17957884, 0.36791682, -0.26565844, 0.94345725, 0.19827712, -0.31150752, -0.278639, 0.908473, -35.117416, 0.6689658, 3.4564943)
+
+[node name="GrassClusterDark13" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(0.9637796, 0.25488195, 0.07850689, -0.26565847, 0.94345737, 0.19827712, -0.023530751, -0.2119515, 0.97699684, -34.613438, 0.6689658, -0.8496392)
+
+[node name="GrassClusterDark14" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(0.96888965, 0.21546564, -0.12176604, -0.23608394, 0.9522834, -0.1934452, 0.074274786, 0.21617413, 0.9735255, 22.708323, 0.6689658, -0.018968165)
+
+[node name="GrassClusterDark15" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(0.91903853, 0.39636862, 0.8296143, -0.30690914, 1.2379677, -0.2514787, -0.8667034, -0.018075107, 0.9687612, 22.782198, 0.6689658, 0.4483973)
+
+[node name="GrassClusterDark16" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(-1.067378, -0.24242723, 0.109237805, -0.25969234, 1.0475113, -0.21278971, -0.057128906, -0.23226854, -1.0736794, 24.950687, 0.7530023, 3.321882)
+
+[node name="GrassClusterDark17" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(-1.0179207, -0.17553207, 0.37818748, -0.25969234, 1.0475112, -0.21278968, -0.3261857, -0.28619596, -1.0107892, 25.901186, 0.7530023, 3.342944)
+
+[node name="GrassClusterDark18" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(-1.0179209, -0.1755321, 0.3781875, -0.1624685, 1.0858885, 0.06670827, -0.3839808, 0.0058726966, -1.0307883, -12.130166, 0.7530023, 35.666103)
+
+[node name="GrassClusterDark19" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(-0.805367, -0.1653902, 0.7307737, -0.16246848, 1.0858884, 0.06670826, -0.7314288, -0.059093885, -0.81946325, -12.435296, 0.7530025, 32.723824)
+
+[node name="GrassClusterDark20" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(-1.0564977, -0.14137976, -0.27170655, -0.16246848, 1.0858884, 0.06670826, 0.25964713, 0.10420062, -1.0638261, -12.79443, 0.7530025, 36.959366)
+
+[node name="GrassClusterDark21" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(-1.0168784, -0.12759548, -0.39959678, -0.088119425, 1.0894716, -0.12363645, 0.41011357, -0.08228286, -1.0173675, -13.750627, 0.7530025, 37.788795)
+
+[node name="GrassClusterDark22" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(-1.0754957, -0.15014254, -0.1754009, -0.16247518, 1.0858859, 0.066726156, 0.16404286, 0.09114706, -1.0838734, -28.9848, 0.7530025, 35.419044)
+
+[node name="GrassClusterDark23" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(-1.0876906, 0.009408905, -0.16382922, 0.02849581, 1.0923351, -0.12645313, 0.16160621, -0.12928233, -1.0803556, -32.84956, 0.7530025, 43.429104)
+
+[node name="GrassClusterDark24" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(-1.269147, -0.035185523, -0.58993894, 0.036267407, 1.3902456, -0.1609407, 0.58987343, -0.1611807, -1.2593927, -33.178783, 0.7530024, 43.965683)
+
+[node name="GrassClusterDark25" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(-1.269147, -0.035185523, -0.58993894, 0.036267407, 1.3902456, -0.1609407, 0.58987343, -0.1611807, -1.2593927, -33.223167, 0.7530024, 44.915756)
+
+[node name="GrassClusterDark26" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(0.15962136, -0.16405316, -1.3811617, 0.036267404, 1.3902457, -0.1609407, 1.3903978, -0.017429728, 0.16275907, -33.164276, 0.7530024, 45.4498)
+
+[node name="GrassClusterDark27" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(-0.63147384, -0.1274196, -1.2429824, 0.036267404, 1.3902457, -0.1609407, 1.2489699, -0.10479259, -0.6237731, -33.13987, 0.7530024, 46.027702)
+
+[node name="GrassClusterDark28" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(0.98582816, -0.13965197, -0.98419523, 0.03626742, 1.3902457, -0.1609407, 0.9933921, 0.0878326, 0.98257715, -33.21453, 0.7530024, 46.97347)
+
+[node name="GrassClusterDark29" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(1.3029877, -0.092300475, -0.5036905, 0.03626742, 1.3902457, -0.1609407, 0.51079184, 0.13674015, 1.2963003, -33.23069, 0.7530024, 47.979683)
+
+[node name="StreetLight" parent="Statics" instance=ExtResource("5_dtwg0")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 23.472279, -1.0947828, -9.439066)
+
+[node name="StreetLight2" parent="Statics" instance=ExtResource("5_dtwg0")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15.527721, -1.0947828, -9.439066)
+
+[node name="StreetLight4" parent="Statics" instance=ExtResource("5_dtwg0")]
+transform = Transform3D(1, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, 1, -29.081528, -1.094779, 34.88362)
+
+[node name="StreetLight3" parent="Statics" instance=ExtResource("5_dtwg0")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -53.52772, -1.0947828, -9.439066)
+
+[node name="SignStop" parent="Statics" instance=ExtResource("13_k62ce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.884563, 0.21824193, 1.4301579)
+
+[node name="Car5Red" parent="Statics" groups=["level"] instance=ExtResource("3_tu73e")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.575405, -0.037427396, -6.8905115)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Statics/Car5Red"]
+transform = Transform3D(1, 3.4344467e-15, -8.742278e-08, -1.7763568e-15, -1, -5.9604645e-08, -8.742278e-08, 5.9604645e-08, -1, 0.95120955, 0.98103154, 3.527712)
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Statics/Car5Red"]
+transform = Transform3D(1, 3.4344467e-15, -8.742278e-08, -1.7763568e-15, -1, -5.9604645e-08, -8.742278e-08, 5.9604645e-08, -1, -0.93104935, 0.98103154, 3.5277116)
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Statics/Car5Red"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.64980507, 1.1214526, -3.7560372)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.5
+omni_range = 3.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Statics/Car5Red"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6582346, 1.1214526, -3.7560372)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.5
+omni_range = 3.0
+
+[node name="CarEngine" type="AudioStreamPlayer3D" parent="Statics/Car5Red"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.536743e-07, 1.683947, 2.565721)
+stream = ExtResource("5_tjpkw")
+volume_db = -18.0
+script = ExtResource("6_f0s1s")
+play_on_ready = true
+play_on_loop = true
+subtitle_text = "Engine noise"
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
+[node name="CarRadio" type="AudioStreamPlayer3D" parent="Statics/Car5Red"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.321796, 1.683947, -0.2524829)
+stream = ExtResource("7_tr7l7")
+volume_db = -6.0
+unit_size = 5.0
+script = ExtResource("6_f0s1s")
+play_on_ready = true
+play_on_loop = true
+subtitle_text = "Radio static"
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
+[node name="Car5Police" parent="Statics" groups=["level"] instance=ExtResource("4_ccg5v")]
+transform = Transform3D(0.96471816, 0.044020407, -0.25957853, -0.03263053, 0.9983132, 0.048027422, 0.26125482, -0.03786274, 0.96452713, -27.382696, -0.028509647, 15.755138)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Statics/Car5Police"]
+transform = Transform3D(-0.4614711, 0.01743785, 0.886984, -0.0014992729, 0.9997896, -0.02043558, -0.8871538, -0.01076027, -0.461348, -1.1115475, 1.8133864, 0.94540215)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 12.4607115
+spot_angle = 40.0
+spot_angle_attenuation = 0.7320427
+
+[node name="ZN_AudioSubtitle3D2" type="AudioStreamPlayer3D" parent="Statics/Car5Police"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.536743e-07, 1.683947, 2.565721)
+stream = ExtResource("5_tjpkw")
+volume_db = -18.0
+script = ExtResource("6_f0s1s")
+play_on_ready = true
+play_on_loop = true
+subtitle_text = "Engine Noise"
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
+
+[node name="Dumpster" parent="Statics" instance=ExtResource("21_tu73e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.697096, 0.25062275, 34.145134)
 
 [node name="Lights" type="Node3D" parent="."]
 
