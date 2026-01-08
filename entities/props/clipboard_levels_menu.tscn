@@ -68,7 +68,7 @@ size = Vector3(0.2284668, 0.015795898, 0.3468445)
 
 [node name="Clipboard" type="StaticBody3D"]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("1_luwti")
 component_resources = Array[ExtResource("2_p081r")]([SubResource("Resource_dx537"), SubResource("Resource_i4h2g")])
 
