@@ -50,7 +50,8 @@ static func interact(actor: Entity, target: Entity, menu) -> bool:
 	var interactive = target.get_component(ZC_Interactive) as ZC_Interactive
 	if EntityUtils.is_locked(target):
 		var locked := target.get_component(ZC_Locked) as ZC_Locked
-		if actor.has_key(locked.key_name):
+		var player := actor.get_component(ZC_Player) as ZC_Player
+		if player != null and player.has_key(locked.key_name):
 			locked.is_locked = false
 			menu.push_action("Used %s key to unlock %s" % [locked.key_name, interactive.name])
 		else:
