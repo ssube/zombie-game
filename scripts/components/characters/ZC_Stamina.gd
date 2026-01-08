@@ -12,6 +12,7 @@ class_name ZC_Stamina
 @export var velocity_multiplier: float = 0.1
 @export var jump_cost: float = 25.0
 @export var sprint_multiplier: float = 2.0
+@export var hill_multiplier: float = 3.0
 
 @export_group("Limits")
 @export var jump_limit: float = 25.0
