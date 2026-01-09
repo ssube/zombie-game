@@ -125,6 +125,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 	for entity in entities:
 		var player = entity as ZE_Player
 		if player.last_shimmer_target:
+			# TODO: SHIMMER - needs to check if the shimmer component is enabled, not whether it exists
 			if not is_instance_valid(player.last_shimmer_target) or not player.last_shimmer_target.has_component(ZC_Shimmer):
 				player.last_shimmer_target = null
 
@@ -215,53 +216,59 @@ func _update_equipped_items(entity: Entity) -> void:
 			item.global_transform = parent.global_transform
 
 
+func _clear_collider(entity: Entity) -> void:
+	%Menu.clear_target_label()
+	%Menu.reset_crosshair_color()
+	_clear_player_shimmer(entity as ZE_Player)
+
+
 func _handle_interactive(entity: Entity, input: ZC_Input, body: CharacterBody3D, ray: RayCast3D) -> void:
-	var clear_collider := true
-	if ray.is_colliding():
-		var collider = ray.get_collider()
-		var collider_entity := CollisionUtils.get_collider_entity(collider)
+	if not ray.is_colliding():
+		_clear_collider(entity)
+		return
 
-		# Use interactive items
-		if EntityUtils.is_interactive(collider_entity):
-			var interactive = collider_entity.get_component(ZC_Interactive) as ZC_Interactive
-			# Check the interactive distance
-			if interactive.shimmer_on_target and interactive.shimmer_range > 0.0:
-				var distance := body.global_position.distance_to(ray.get_collision_point())
-				if distance <= interactive.shimmer_range:
-					%Menu.set_crosshair_color(interactive.crosshair_color)
+	var collider = ray.get_collider()
+	var collider_entity := CollisionUtils.get_collider_entity(collider)
+	if collider_entity == null:
+		_clear_collider(entity)
+		return
 
-					var player = entity as ZE_Player
-					var equipment := RelationshipUtils.get_equipment(player)
+	var player = entity as ZE_Player
+	var equipment := RelationshipUtils.get_equipment(player)
+	if collider_entity in equipment:
+		_clear_collider(entity)
+		return
 
-					if collider_entity != player.last_shimmer_target and collider_entity not in equipment:
-						%Menu.clear_target_label()
-						%Menu.reset_crosshair_color()
-						_clear_player_shimmer(player)
+	var distance := body.global_position.distance_to(ray.get_collision_point())
 
-					if collider_entity and collider_entity not in equipment:
-						clear_collider = false
-						%Menu.set_target_label(interactive.name)
+	# Enable shimmering items
+	var shimmer := collider_entity.get_component(ZC_Shimmer) as ZC_Shimmer
+	if shimmer != null:
+		if shimmer.on_target and distance <= shimmer.distance:
+			if collider_entity != player.last_shimmer_target:
+				_clear_collider(player)
 
-						if not EntityUtils.has_shimmer(collider_entity):
-							var shimmer = ZC_Shimmer.from_interactive(interactive)
-							collider_entity.add_component(shimmer)
-							player.last_shimmer_target = collider_entity
+			if not shimmer.enabled:
+				shimmer.enabled = true
+				player.last_shimmer_target = collider_entity
 
-							var shimmer_start := (Time.get_ticks_msec() / 1000.0) + shimmer_offset
-							RenderingServer.global_shader_parameter_set("shimmer_time", shimmer_start)
+				var shimmer_start := (Time.get_ticks_msec() / 1000.0) + shimmer_offset
+				RenderingServer.global_shader_parameter_set("shimmer_time", shimmer_start)
 
-						if input.use_pickup:
-							InteractionUtils.pickup(entity, collider_entity, %Menu)
-							_update_ammo_label(entity)
+	# Use interactive items
+	var interactive := collider_entity.get_component(ZC_Interactive) as ZC_Interactive
+	if interactive != null:
+		if distance <= interactive.distance:
+			%Menu.set_crosshair_color(interactive.crosshair_color)
+			%Menu.set_target_label(interactive.name)
 
-						if input.use_interact:
-							InteractionUtils.interact(entity, collider_entity, %Menu)
-							_update_ammo_label(entity)
+			if input.use_pickup:
+				InteractionUtils.pickup(entity, collider_entity, %Menu)
+				_update_ammo_label(entity)
 
-	if clear_collider:
-		%Menu.clear_target_label()
-		%Menu.reset_crosshair_color()
-		_clear_player_shimmer(entity as ZE_Player)
+			if input.use_interact:
+				InteractionUtils.interact(entity, collider_entity, %Menu)
+				_update_ammo_label(entity)
 
 
 func _update_ammo_label(player: Entity) -> void:
@@ -391,7 +398,8 @@ func toggle_flashlight(entity: Entity, _body: CharacterBody3D) -> void:
 func _clear_player_shimmer(player: ZE_Player) -> void:
 	if player.last_shimmer_target:
 		if is_instance_valid(player.last_shimmer_target):
-			player.last_shimmer_target.remove_component(ZC_Shimmer)
+			var shimmer := player.last_shimmer_target.get_component(ZC_Shimmer) as ZC_Shimmer
+			shimmer.enabled = false
 		player.last_shimmer_target = null
 
 
