@@ -5,7 +5,7 @@ if helpers.is_armed(player):
 	=> END
 
 {{dialogue.character_name}}: [[Hi|Hello|Howdy]], welcome to the hotel.
-{{dialogue.character_name}}: Here are some choices.
+{{dialogue.character_name}}: Here are some [named_color name=_world]choices[/named_color].
 - First one
 	{{dialogue.character_name}}: You picked the first one.
 - Second one

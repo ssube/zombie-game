@@ -1,13 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://bc12xlkdaphu3"]
+[gd_scene load_steps=13 format=3 uid="uid://bc12xlkdaphu3"]
 
 [ext_resource type="Script" uid="uid://hyr2u8jujttn" path="res://scripts/menus/dialogue_menu.gd" id="1_36de5"]
 [ext_resource type="Theme" uid="uid://bdnxpcwbllbem" path="res://menus/theme_dialogue.tres" id="2_5r6f2"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Script" uid="uid://csjpbspjdioyt" path="res://scripts/menus/dialogue_responses_menu.gd" id="4_fklyg"]
+[ext_resource type="Script" uid="uid://m1ebukbi2ngu" path="res://scripts/utils/bbcode/NamedColor.gd" id="4_r10vy"]
 [ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="5_kx1nf"]
 [ext_resource type="PackedScene" uid="uid://6oyauuvbuys2" path="res://effects/sounds/menu_click.tscn" id="6_kx1nf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5r6f2"]
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_w4imk"]
+script = ExtResource("4_r10vy")
+metadata/_custom_type_script = "uid://m1ebukbi2ngu"
 
 [sub_resource type="Animation" id="Animation_nlsx6"]
 length = 0.001
@@ -100,6 +105,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 text = "Dialogue..."
+custom_effects = [SubResource("RichTextEffect_w4imk")]
 
 [node name="Control" type="Control" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 10)
