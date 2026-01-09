@@ -606,6 +606,11 @@ static func solve_dynamic_constraints(
 	return new_velocity
 
 
+func _physics_process(_delta: float) -> void:
+	if not is_zero_approx(velocity.length_squared()):
+		ikcc_move_and_slide()
+
+
 ## Call this in '_physics_process' to simulate body movement.
 ## Returns true if collision happened.
 func ikcc_move_and_slide() -> bool:
@@ -615,6 +620,9 @@ func ikcc_move_and_slide() -> bool:
 			get_physics_process_delta_time() if Engine.is_in_physics_frame()
 			else get_process_delta_time()
 	)
+
+	assert(Engine.is_in_physics_frame(), "IKCC: 'ikcc_move_and_slide' should be called from '_physics_process'!")
+
 	previous_position = body.global_position
 
 	# Take axis lock into account
