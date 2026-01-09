@@ -1,10 +1,10 @@
-[gd_scene load_steps=288 format=4 uid="uid://b687g8br5b2mv"]
+[gd_scene load_steps=289 format=4 uid="uid://b687g8br5b2mv"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_vf316"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="2_24vc2"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_tpjaq"]
 [ext_resource type="Script" uid="uid://dmonxsvpyoytj" path="res://scripts/nodes/actions/ZN_ScreenEffectAction.gd" id="3_0007p"]
-[ext_resource type="PackedScene" uid="uid://dsjfc00ufve4t" path="res://entities/statics/pine_tree_1_1.tscn" id="3_qv3ha"]
+[ext_resource type="PackedScene" uid="uid://dsjfc00ufve4t" path="res://entities/statics/foliage/tree_pine_1_1.tscn" id="3_qv3ha"]
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="3_xtxad"]
 [ext_resource type="Script" uid="uid://ewo3m4f384i0" path="res://scripts/components/effects/ZC_Screen_Effect.gd" id="4_4nd5y"]
 [ext_resource type="Script" uid="uid://hu6tpnmjxa07" path="res://scripts/nodes/actions/ZN_SpeedModifierAction.gd" id="4_sg4l5"]
@@ -12,7 +12,7 @@
 [ext_resource type="Material" uid="uid://vq88t5vuqjfq" path="res://textures/Color Maps/wood_pt_4.tres" id="5_edr2s"]
 [ext_resource type="Script" uid="uid://gqp4emt0ehby" path="res://scripts/nodes/actions/ZN_BuoyancyAction.gd" id="6_r8vtg"]
 [ext_resource type="Material" uid="uid://cc7i2gt3t4y1j" path="res://textures/Color Maps/concrete_pt_4.tres" id="6_xtxad"]
-[ext_resource type="PackedScene" uid="uid://carcwljkjgx0u" path="res://entities/statics/crate_wood_container.tscn" id="7_liy6b"]
+[ext_resource type="PackedScene" uid="uid://carcwljkjgx0u" path="res://entities/props/crate_wood_container.tscn" id="7_liy6b"]
 [ext_resource type="Material" uid="uid://ckpyphvyl0dvb" path="res://textures/Color Maps/dirt_1.tres" id="7_qv3ha"]
 [ext_resource type="PackedScene" uid="uid://cpt5gdai6smui" path="res://entities/props/car_5_red_scripted.tscn" id="8_4nd5y"]
 [ext_resource type="Material" uid="uid://b27ka6d2ig478" path="res://textures/Color Maps/water_3.tres" id="8_edr2s"]
@@ -22,7 +22,7 @@
 [ext_resource type="Material" uid="uid://b6b7t3qv6dnry" path="res://textures/Color Maps/grass_1.tres" id="11_sg4l5"]
 [ext_resource type="Material" uid="uid://c1aamlmiyxnnc" path="res://textures/Color Maps/asphalt_old_pt_1_2.tres" id="12_4nd5y"]
 [ext_resource type="Material" uid="uid://x2tvc6oato7" path="res://textures/Color Maps/metal_roof_tx_1.tres" id="13_fk3c4"]
-[ext_resource type="PackedScene" uid="uid://c2iu0e6hys73u" path="res://entities/statics/grass_cluster_green.tscn" id="13_mk2pv"]
+[ext_resource type="PackedScene" uid="uid://c2iu0e6hys73u" path="res://entities/statics/foliage/grass_cluster_green.tscn" id="13_mk2pv"]
 [ext_resource type="Material" uid="uid://drg6dytwr6qt2" path="res://textures/Color Maps/building_pt_1_top_wall_1.tres" id="14_24vc2"]
 [ext_resource type="Material" uid="uid://d2oaplvcftcrx" path="res://textures/Color Maps/brick_wall_pt_2.tres" id="15_jb54n"]
 [ext_resource type="PackedScene" uid="uid://co2strl7y2n7h" path="res://entities/statics/crate_metal.tscn" id="15_l4rb4"]
@@ -46,13 +46,14 @@
 [ext_resource type="PackedScene" uid="uid://c4gewr3tx3am5" path="res://entities/statics/crate_wood.tscn" id="30_7iyb8"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="30_ifimg"]
 [ext_resource type="PackedScene" uid="uid://femu8fxijdyb" path="res://entities/props/cardboard_box_floating.tscn" id="31_jb54n"]
-[ext_resource type="PackedScene" uid="uid://cv430aqctj4ng" path="res://entities/statics/sign_winding_road_entity.tscn" id="32_4maf2"]
-[ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/grass_cluster_dark.tscn" id="34_kj7f7"]
+[ext_resource type="PackedScene" uid="uid://cv430aqctj4ng" path="res://entities/props/sign_winding_road_entity.tscn" id="32_4maf2"]
+[ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/foliage/grass_cluster_dark_1.tscn" id="34_kj7f7"]
 [ext_resource type="PackedScene" uid="uid://1mrkahnnofcf" path="res://entities/equipment/fish_hat.tscn" id="39_85wo0"]
 [ext_resource type="AudioStream" uid="uid://cjf5j8cwsl6hf" path="res://sounds/beach_freesound_372021.ogg" id="40_3d2ce"]
 [ext_resource type="PackedScene" uid="uid://lvteuslo4wik" path="res://entities/weapons/pistol.tscn" id="41_y3vix"]
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="53_kpxw3"]
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="54_g1yrs"]
+[ext_resource type="PackedScene" uid="uid://dc6ruk3dyi6tf" path="res://entities/statics/foliage/grass_cluster_dark_2.tscn" id="54_kpxw3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fnrws"]
 size = Vector3(17.603027, 1.7054443, 100)
@@ -2065,3 +2066,9 @@ curve = SubResource("Curve3D_cwllu")
 [node name="CarPath" type="Path3D" parent="Paths"]
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 5.469, -0.5, 59.403)
 curve = SubResource("Curve3D_7ipmy")
+
+[node name="GrassClusterDark" parent="." instance=ExtResource("54_kpxw3")]
+transform = Transform3D(0.4377266, -0.05481657, 0.89743555, 0.12425959, 0.9922497, 0, -0.89048016, 0.11151497, 0.4411456, -0.7107225, -3.8495066, 41.76987)
+
+[node name="GrassClusterDark2" parent="." instance=ExtResource("54_kpxw3")]
+transform = Transform3D(0.98533297, -0.053600945, 0.16200618, 0.056158595, 0.9983585, -0.011246185, -0.16113749, 0.020179268, 0.98672557, -1.137804, -3.9110065, 42.393)

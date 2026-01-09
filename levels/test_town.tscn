@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dkql5djyx2s23" path="res://levels/std_map_settings.tres" id="2_ltd73"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="2_og1ph"]
 [ext_resource type="Texture2D" uid="uid://dwtub4bxfxr25" path="res://textures/Color Maps/brick_wall_tx_1.png" id="3_bxjvt"]
-[ext_resource type="PackedScene" uid="uid://bsbjr3bmewqll" path="res://entities/props/car_5_police.tscn" id="4_5t576"]
+[ext_resource type="PackedScene" uid="uid://bsbjr3bmewqll" path="res://entities/statics/car_5_police.tscn" id="4_5t576"]
 [ext_resource type="Texture2D" uid="uid://d3gxye56hxhy1" path="res://textures/Normal Maps/brick_wall_tx_1_normal.png" id="4_ltd73"]
 [ext_resource type="Texture2D" uid="uid://biafh0sg3jrx2" path="res://textures/Color Maps/concrete_tx_2.png" id="4_wl7ja"]
 [ext_resource type="Material" uid="uid://3akbo2rr6u1v" path="res://textures/Color Maps/asphalt_old_pt_1.tres" id="5_8r6s4"]
@@ -18,7 +18,7 @@
 [ext_resource type="Material" uid="uid://bc3b71ottph3s" path="res://textures/Color Maps/concrete_5.tres" id="10_5t576"]
 [ext_resource type="Texture2D" uid="uid://oe4k61h6cmkx" path="res://textures/Normal Maps/grass_2_normal.png" id="12_s4x2d"]
 [ext_resource type="Texture2D" uid="uid://4gwlka5ysr5i" path="res://textures/Normal Maps/glass_block_windows_pt_1_1_normal.png" id="14_5axou"]
-[ext_resource type="PackedScene" uid="uid://djk8f60j3oei0" path="res://entities/props/car_5_red.tscn" id="18_og1ph"]
+[ext_resource type="PackedScene" uid="uid://djk8f60j3oei0" path="res://entities/statics/car_5_red.tscn" id="18_og1ph"]
 
 [sub_resource type="Gradient" id="Gradient_o8f3c"]
 colors = PackedColorArray(0, 0, 0, 0, 0.48299998, 0.69, 0.68655, 0.58431375)

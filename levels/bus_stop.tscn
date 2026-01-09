@@ -29,7 +29,7 @@
 [ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="16_fbayg"]
 [ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="17_tr8cq"]
 [ext_resource type="Material" uid="uid://g5xoeqn2qoy6" path="res://textures/Color Maps/metal_panels_pt_2.tres" id="17_y6j6u"]
-[ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/grass_cluster_dark.tscn" id="19_825fl"]
+[ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/foliage/grass_cluster_dark_1.tscn" id="19_825fl"]
 [ext_resource type="PackedScene" uid="uid://dq3oixjn7s600" path="res://entities/equipment/cone_hat.tscn" id="19_gbhsh"]
 [ext_resource type="PackedScene" uid="uid://d00dbkjpj0iyk" path="res://entities/items/flashlight.tscn" id="20_i2a6y"]
 [ext_resource type="PackedScene" uid="uid://bfhfig3rnntfv" path="res://entities/statics/mailbox_entity.tscn" id="21_3d12m"]
