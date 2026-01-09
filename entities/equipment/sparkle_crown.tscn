@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bay617dekj5is"]
+[gd_scene load_steps=19 format=3 uid="uid://bay617dekj5is"]
 
 [ext_resource type="Script" uid="uid://bx51blxd4jc27" path="res://scripts/entities/items/ZE_Armor.gd" id="1_osno1"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_wk08h"]
@@ -7,6 +7,8 @@
 [ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_special.tres" id="4_tjbtv"]
 [ext_resource type="Texture2D" uid="uid://df4aal5af40v7" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Flare6.png" id="5_wk08h"]
 [ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="6_rtk1g"]
+[ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="7_1pbru"]
+[ext_resource type="Script" uid="uid://pc2kccompvhn" path="res://scripts/nodes/actions/ZN_ParticleAction.gd" id="9_ir57l"]
 
 [sub_resource type="Resource" id="Resource_0qpab"]
 script = ExtResource("3_tjbtv")
@@ -24,6 +26,14 @@ script = ExtResource("6_rtk1g")
 material = ExtResource("4_tjbtv")
 nodes = Array[NodePath]([NodePath("CSGTorus3D")])
 metadata/_custom_type_script = "uid://be84y2dw7fp0e"
+
+[sub_resource type="Resource" id="Resource_sb36m"]
+script = ExtResource("7_1pbru")
+actions = Dictionary[int, NodePath]({
+90: NodePath("EquipAction"),
+91: NodePath("UnequipAction")
+})
+metadata/_custom_type_script = "uid://barikupijl7r7"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w54ts"]
 albedo_color = Color(1, 0.14999998, 0.77333355, 1)
@@ -59,7 +69,7 @@ size = Vector2(0.2, 0.2)
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_osno1")
-component_resources = Array[ExtResource("2_wk08h")]([SubResource("Resource_0qpab"), SubResource("Resource_j7mfm"), SubResource("Resource_tk3rv")])
+component_resources = Array[ExtResource("2_wk08h")]([SubResource("Resource_0qpab"), SubResource("Resource_j7mfm"), SubResource("Resource_tk3rv"), SubResource("Resource_sb36m")])
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="."]
 inner_radius = 0.25
@@ -72,7 +82,20 @@ shape = SubResource("ConvexPolygonShape3D_5yu42")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10119957, 0)
+emitting = false
 amount = 32
 lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_tjbtv")
 draw_pass_1 = SubResource("QuadMesh_0qpab")
+
+[node name="EquipAction" type="Node" parent="." node_paths=PackedStringArray("particle_system")]
+script = ExtResource("9_ir57l")
+particle_system = NodePath("../GPUParticles3D")
+emitting = 1
+metadata/_custom_type_script = "uid://pc2kccompvhn"
+
+[node name="UnequipAction" type="Node" parent="." node_paths=PackedStringArray("particle_system")]
+script = ExtResource("9_ir57l")
+particle_system = NodePath("../GPUParticles3D")
+emitting = 0
+metadata/_custom_type_script = "uid://pc2kccompvhn"
