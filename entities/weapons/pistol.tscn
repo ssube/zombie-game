@@ -30,6 +30,7 @@ metadata/_custom_type_script = "uid://bsnlq5t650od"
 [sub_resource type="Resource" id="Resource_17hxq"]
 script = ExtResource("5_0ywhd")
 name = "Magnum Pistol"
+distance = 2.0
 crosshair_color = Color(0.9372549, 0.30980393, 0.52156866, 1)
 pickup_sound = ExtResource("4_nbh20")
 use_sound = ExtResource("10_kcyli")
