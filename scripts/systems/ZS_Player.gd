@@ -146,7 +146,7 @@ func _apply_gravity(velocity: ZC_Velocity, body: ZE_Player_IKCC, delta: float) -
 func _apply_jump(velocity: ZC_Velocity, input: ZC_Input, stamina: ZC_Stamina, body: ZE_Player_IKCC) -> void:
 	if input.move_jump and stamina.can_jump():
 		# Allow jumping if on floor or within coyote time window
-		if body.is_on_floor or body.time_since_on_floor <= coyote_time:
+		if body.is_on_floor or body.time_since_on_floor <= input.coyote_time:
 			stamina.current_stamina -= stamina.jump_cost
 			velocity.linear_velocity.y = input.jump_speed
 

@@ -1,6 +1,16 @@
 extends Component
 class_name ZC_Input
 
+
+@export_group("Configuration")
+@export var walk_speed := 5.0
+@export var sprint_multiplier := 1.5
+@export var crouch_multiplier := 0.5
+@export var jump_speed := 5.0
+
+## The amount of time (in seconds) after leaving a surface during which the character can still jump.
+@export var coyote_time: float = 0.1
+
 @export_group("Movement")
 @export var move_direction: Vector2 = Vector2.ZERO
 @export var turn_direction: Vector3 = Vector3.ZERO
@@ -30,21 +40,19 @@ class_name ZC_Input
 		)
 
 @export_group("Attacks")
+## Whether use_attack was true in the previous frame.
 @export var was_attacking: bool = false
+## Whether an attack is starting this frame.
 @export var attack_starting: bool = false
+## Whether an attack is ending this frame.
 @export var attack_ending: bool = false
+## How long (in seconds) the attack button has been held down.
 @export var attack_held_duration: float = 0.0
 
 @export_group("Menus")
 @export var menu_pause: bool = false
 @export var menu_inventory: bool = false
 @export var menu_objectives: bool = false
-
-@export_group("Speed")
-@export var walk_speed := 5.0
-@export var sprint_multiplier := 1.5
-@export var crouch_multiplier := 0.5
-@export var jump_speed := 5.0
 
 @export_group("Weapon")
 @export var weapon_next: bool = false
