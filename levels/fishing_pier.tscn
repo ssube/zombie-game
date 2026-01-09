@@ -1244,6 +1244,12 @@ equipment_slots = {
 "weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
 }
 
+[node name="Zombie12" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("22_trkbb")]
+transform = Transform3D(-0.33891857, 0, -0.9408157, 0, 1, 0, 0.9408157, 0, -0.33891857, -16.210882, 1.1043059, -1.0930327)
+equipment_slots = {
+"weapon_melee": NodePath("Body/Path3D/PathFollow3D/WeaponMarker")
+}
+
 [node name="CrateWood6" parent="Entities" instance=ExtResource("7_liy6b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.302473, -0.51, -10.999511)
 
