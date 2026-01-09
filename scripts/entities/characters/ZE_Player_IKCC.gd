@@ -192,6 +192,10 @@ var wall_min_slide_angle_degrees: float = 15.0:
 ## [code]true[/code] if the body is touching a floor. [br]
 ## Set during [method move_and_slide].
 var is_on_floor: bool
+## The time in seconds since the body left the floor. [br]
+## Remains at 0 while on floor, accumulates delta time when off floor. [br]
+## Set during [method move_and_slide].
+var time_since_on_floor: float = 0.0
 ## [code]true[/code] if the body is touching a wall. [br]
 ## Set during [method move_and_slide].
 var is_on_wall: bool
@@ -686,6 +690,12 @@ func ikcc_move_and_slide() -> bool:
 
 	# Handle contacts at final position
 	_handle_contacts_at_final_position()
+
+	# Update coyote time tracking
+	if is_on_floor:
+		time_since_on_floor = 0.0
+	else:
+		time_since_on_floor += delta_t
 
 	if collision_states.is_empty() and not touch_collision_state and not snap_collision_state:
 		return false

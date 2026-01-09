@@ -2,6 +2,8 @@ class_name ZS_PlayerSystem
 extends System
 
 @export var shimmer_offset: float = 4.0
+## The amount of time (in seconds) after leaving a surface during which the player can still jump.
+@export var coyote_time: float = 0.1
 
 
 # TODO: move to ray utils
@@ -143,7 +145,8 @@ func _apply_gravity(velocity: ZC_Velocity, body: ZE_Player_IKCC, delta: float) -
 
 func _apply_jump(velocity: ZC_Velocity, input: ZC_Input, stamina: ZC_Stamina, body: ZE_Player_IKCC) -> void:
 	if input.move_jump and stamina.can_jump():
-		if body.is_on_floor:
+		# Allow jumping if on floor or within coyote time window
+		if body.is_on_floor or body.time_since_on_floor <= coyote_time:
 			stamina.current_stamina -= stamina.jump_cost
 			velocity.linear_velocity.y = input.jump_speed
 
