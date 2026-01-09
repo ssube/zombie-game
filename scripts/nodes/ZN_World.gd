@@ -29,6 +29,7 @@ var deleted_entities: Array[String] = []
 func _ready():
 	if OS.is_debug_build():
 		ZombieLogger.level = DEBUG_LEVEL
+		OptionsManager.options.cheats.enabled = true
 	else:
 		ZombieLogger.level = RELEASE_LEVEL
 
