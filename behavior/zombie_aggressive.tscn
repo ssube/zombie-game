@@ -208,7 +208,7 @@ metadata/_custom_type_script = "uid://d1xf73mn6pulk"
 
 [node name="AttackArea3D" type="Area3D" parent="."]
 collision_layer = 16
-collision_mask = 24
+collision_mask = 8
 script = ExtResource("2_ojlir")
 track_colliders = true
 trigger_on_empty = true
