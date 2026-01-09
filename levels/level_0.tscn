@@ -1,4 +1,4 @@
-[gd_scene load_steps=141 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=145 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_q6gno"]
@@ -37,8 +37,11 @@
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="23_8mki0"]
 [ext_resource type="Script" uid="uid://c6dan22mbgmgs" path="res://scripts/nodes/ZN_MapGeometry.gd" id="25_jwc5o"]
 [ext_resource type="Script" uid="uid://dd4hkf7y5v13t" path="res://scripts/components/status/ZC_Locked.gd" id="27_2fv0q"]
+[ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="27_78k6h"]
 [ext_resource type="PackedScene" uid="uid://dr14d3op0qqa7" path="res://entities/props/door_wood_ccw.tscn" id="27_m8bfh"]
+[ext_resource type="Script" uid="uid://boyqweqtyv0x1" path="res://scripts/nodes/actions/ZN_MenuAction.gd" id="28_bxlou"]
 [ext_resource type="PackedScene" uid="uid://d00dbkjpj0iyk" path="res://entities/items/flashlight.tscn" id="28_y835w"]
+[ext_resource type="PackedScene" uid="uid://cnv2iub8tg4ry" path="res://menus/sign_scroll.tscn" id="29_bxlou"]
 [ext_resource type="PackedScene" uid="uid://dc22w3kstrlyu" path="res://entities/characters/zombie_worker.tscn" id="30_2fv0q"]
 [ext_resource type="Script" uid="uid://0uftjan8jqx7" path="res://addons/QuakeLamp/LampComponent.gd" id="34_1wgrf"]
 [ext_resource type="PackedScene" uid="uid://q4k6tuoyi23v" path="res://entities/props/sign_scroll.tscn" id="34_v4yv6"]
@@ -105,6 +108,13 @@ script = ExtResource("35_hxseb")
 name = "Buttons, Puddles, Breakable Door & Glass"
 pickup = false
 metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="Resource" id="Resource_xnic3"]
+script = ExtResource("27_78k6h")
+actions = Dictionary[int, NodePath]({
+31: NodePath("ZN_MenuAction")
+})
+metadata/_custom_type_script = "uid://barikupijl7r7"
 
 [sub_resource type="Resource" id="Resource_2fv0q"]
 script = ExtResource("17_x1db4")
@@ -707,7 +717,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.361192, 0.008121654, -2.88
 
 [node name="SignScroll2" parent="Entities/Room1" instance=ExtResource("34_v4yv6")]
 transform = Transform3D(0.8660253, 0, -0.4999999, 0, 1, 0, 0.4999998, 0, 0.8660254, 1.3376628, -2.3841858e-07, -2.8898587)
-extra_components = Array[ExtResource("9_ggct0")]([SubResource("Resource_gdkf1")])
+extra_components = Array[ExtResource("9_ggct0")]([SubResource("Resource_gdkf1"), SubResource("Resource_xnic3")])
+
+[node name="ZN_MenuAction" type="Node" parent="Entities/Room1/SignScroll2"]
+script = ExtResource("28_bxlou")
+menu_to_show = 17
+custom_menu = ExtResource("29_bxlou")
+metadata/_custom_type_script = "uid://boyqweqtyv0x1"
 
 [node name="Flashlight" parent="Entities/Room1" instance=ExtResource("28_y835w")]
 transform = Transform3D(-0.96969736, 0, 0.24430884, 0, 1, 0, -0.24430884, 0, -0.96969736, -1.5966971, 0.25323725, -0.9671129)

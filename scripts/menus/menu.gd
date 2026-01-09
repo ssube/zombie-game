@@ -187,6 +187,20 @@ func toggle_pause() -> void:
 		show_menu(Menus.NONE)
 
 
+var _custom_menu: ZM_BaseMenu = null
+
+
+func show_custom_menu(scene: PackedScene, pause: bool = true) -> void:
+	show_menu(Menus.CUSTOM_MENU)
+	_custom_menu = scene.instantiate() as ZM_BaseMenu
+	assert(_custom_menu != null, "Custom menu is null in show_custom_menu")
+	$MenuLayer.add_child(_custom_menu)
+	_custom_menu.menu_changed.connect(_on_menu_changed)
+	_custom_menu.back_pressed.connect(_on_back_pressed)
+	set_pause(pause)
+	_custom_menu.on_show()
+
+
 func show_menu(menu: Menus, tab_index: int = -1) -> void:
 	if menu != visible_menu:
 		var menu_name := Menus.keys()[menu] as String
@@ -197,6 +211,11 @@ func show_menu(menu: Menus, tab_index: int = -1) -> void:
 			# TODO: prompt to save before unloading
 			var game := TreeUtils.get_game(self)
 			game.clear_world()
+
+		if _custom_menu != null and menu != Menus.CUSTOM_MENU:
+			_custom_menu.on_hide()
+			_custom_menu.queue_free()
+			_custom_menu = null
 
 		var menu_pause := pause_menus.get(menu, true) as bool
 		set_pause(menu_pause)
