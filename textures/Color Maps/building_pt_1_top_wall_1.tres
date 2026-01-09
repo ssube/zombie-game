@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://drg6dytwr6qt2"]
+
+[ext_resource type="Texture2D" uid="uid://c4f5067upmc7l" path="res://textures/Color Maps/building_pt_1_top_wall_1.png" id="1_7ijw1"]
+
+[resource]
+albedo_texture = ExtResource("1_7ijw1")
+metallic_specular = 0.0
+texture_filter = 2

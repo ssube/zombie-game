@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://q11wc28gwgth"]
+
+[ext_resource type="Texture2D" uid="uid://dnc4yuwjidkge" path="res://textures/Color Maps/wood_5.png" id="1_agynj"]
+[ext_resource type="Texture2D" uid="uid://bvxbjeg565pxq" path="res://textures/Normal Maps/wood_5_normal.png" id="2_w12ce"]
+
+[resource]
+albedo_texture = ExtResource("1_agynj")
+metallic = 0.1
+normal_enabled = true
+normal_texture = ExtResource("2_w12ce")
+texture_filter = 2

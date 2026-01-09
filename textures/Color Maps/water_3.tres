@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b27ka6d2ig478"]
+
+[ext_resource type="Texture2D" uid="uid://bks8id24jeodq" path="res://textures/Color Maps/water_3.png" id="1_e2jy5"]
+
+[resource]
+albedo_texture = ExtResource("1_e2jy5")
+metallic_specular = 0.0
+texture_filter = 2

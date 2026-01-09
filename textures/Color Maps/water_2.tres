@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b1y3n6j10vsip"]
+
+[ext_resource type="Texture2D" uid="uid://cawebn41i4srr" path="res://textures/Color Maps/water_2.png" id="1_govku"]
+[ext_resource type="Texture2D" uid="uid://ddw75w4edwhp2" path="res://textures/Normal Maps/water_2_normal.png" id="2_qif82"]
+
+[resource]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.6901961)
+albedo_texture = ExtResource("1_govku")
+metallic = 0.75
+metallic_specular = 1.0
+roughness = 0.5
+normal_enabled = true
+normal_texture = ExtResource("2_qif82")
+refraction_enabled = true
+texture_filter = 2

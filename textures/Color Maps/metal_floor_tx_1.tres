@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b230jrvugibiu"]
+
+[ext_resource type="Texture2D" uid="uid://dcddjvbphggkf" path="res://textures/Color Maps/metal_floor_tx_1.png" id="1_qcqku"]
+
+[resource]
+albedo_texture = ExtResource("1_qcqku")
+metallic_specular = 0.0
+texture_filter = 2

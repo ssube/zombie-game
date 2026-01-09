@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bbhgf535ntuoa"]
+
+[ext_resource type="Texture2D" uid="uid://b3kdwbl0el602" path="res://textures/Color Maps/glass_block_windows_pt_1_1.png" id="1_318u1"]
+
+[resource]
+albedo_texture = ExtResource("1_318u1")
+metallic_specular = 0.0
+texture_filter = 2

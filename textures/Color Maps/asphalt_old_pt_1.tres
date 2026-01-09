@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://3akbo2rr6u1v"]
+
+[ext_resource type="Texture2D" uid="uid://o8a7bxvtirmo" path="res://textures/Color Maps/asphalt_old_pt_1.png" id="1_sxjlb"]
+[ext_resource type="Texture2D" uid="uid://cw2vnu51dfm68" path="res://textures/Normal Maps/asphalt_old_pt_1_1_normal.png" id="2_bxt41"]
+
+[resource]
+albedo_texture = ExtResource("1_sxjlb")
+metallic_specular = 0.0
+normal_enabled = true
+normal_texture = ExtResource("2_bxt41")
+texture_filter = 2

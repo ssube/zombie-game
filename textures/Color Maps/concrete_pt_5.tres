@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://sxupdes0el06"]
+
+[ext_resource type="Texture2D" uid="uid://bfw7sk0mhn0bv" path="res://textures/Color Maps/concrete_pt_5.png" id="1_ogykp"]
+
+[resource]
+albedo_texture = ExtResource("1_ogykp")
+metallic_specular = 0.0
+texture_filter = 2

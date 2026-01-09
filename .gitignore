@@ -12,7 +12,9 @@ examples_*/
 exports/
 reports/
 /sounds/
-textures/
+
+textures/**/*.png
+textures/**/*.png.import
 
 # Working notes
 docs/notes.md

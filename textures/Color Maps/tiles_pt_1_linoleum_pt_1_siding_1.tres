@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ck4u26c1joo16"]
+
+[ext_resource type="Texture2D" uid="uid://dhwgdv4ukvv76" path="res://textures/Color Maps/tiles_pt_1_linoleum_pt_1_siding_1.png" id="1_1nmeq"]
+
+[resource]
+albedo_texture = ExtResource("1_1nmeq")
+metallic_specular = 0.0
+texture_filter = 2

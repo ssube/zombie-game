@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dc65t78xmgn1c"]
+
+[ext_resource type="Texture2D" uid="uid://cq5ug1fieds0c" path="res://textures/Color Maps/rock_pt_3.png" id="1_7uamt"]
+
+[resource]
+albedo_texture = ExtResource("1_7uamt")
+metallic_specular = 0.0
+texture_filter = 2

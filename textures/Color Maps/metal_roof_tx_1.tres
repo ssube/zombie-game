@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://x2tvc6oato7"]
+
+[ext_resource type="Texture2D" uid="uid://c7ylp6bbvj0fy" path="res://textures/Color Maps/metal_roof_tx_1.png" id="1_vngat"]
+
+[resource]
+albedo_texture = ExtResource("1_vngat")
+metallic_specular = 0.0
+texture_filter = 2

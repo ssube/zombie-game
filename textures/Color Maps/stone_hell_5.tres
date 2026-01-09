@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bssxeyjyxu12v"]
+
+[ext_resource type="Texture2D" uid="uid://b5ebera6edb5w" path="res://textures/Color Maps/stone_hell_5.png" id="1_w6yxv"]
+
+[resource]
+albedo_texture = ExtResource("1_w6yxv")
+metallic_specular = 0.0
+texture_filter = 2
