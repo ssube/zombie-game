@@ -83,13 +83,17 @@ func _check_transitions(delta: float, behavior: ZC_Behavior, force_exit: bool = 
 
 func set_state(new_name: String):
 		var behavior := entity.get_component(ZC_Behavior) as ZC_Behavior
-		var old_state = current_state
+		var old_state := current_state
 
 		if current_state:
 				current_state.exit(entity)
+				if entity is ZE_Base:
+					(entity as ZE_Base).emit_action(Enums.ActionEvent.STATE_EXIT, entity)
 
 		current_state = states[new_name]
 		current_state.enter(entity)
+		if entity is ZE_Base:
+			(entity as ZE_Base).emit_action(Enums.ActionEvent.STATE_ENTER, entity)
 
 		behavior.current_state = new_name
 		state_changed.emit(old_state, current_state)
