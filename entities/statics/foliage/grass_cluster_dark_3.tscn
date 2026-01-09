@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://cga786ycgkw16"]
+
+[ext_resource type="Texture2D" uid="uid://gj7qluvk31bb" path="res://textures/Foliage Sprites/PNG/Shaded/sprite_0054.png" id="1_3jjft"]
+[ext_resource type="Texture2D" uid="uid://cv366ht0q4udd" path="res://textures/Color Maps/grass_2.png" id="2_1pgst"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onk7n"]
+transparency = 1
+cull_mode = 2
+shading_mode = 2
+albedo_color = Color(0.98, 0.98, 0.98, 1)
+albedo_texture = ExtResource("1_3jjft")
+metallic_specular = 0.0
+roughness = 0.5
+detail_enabled = true
+detail_blend_mode = 3
+detail_albedo = ExtResource("2_1pgst")
+uv1_offset = Vector3(0.5, 0.475, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_7nv7k"]
+material = SubResource("StandardMaterial3D_onk7n")
+
+[sub_resource type="QuadMesh" id="QuadMesh_v40f0"]
+material = SubResource("StandardMaterial3D_onk7n")
+
+[sub_resource type="QuadMesh" id="QuadMesh_gyutb"]
+material = SubResource("StandardMaterial3D_onk7n")
+
+[node name="GrassClusterDark" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 2
+visibility_range_end = 10.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
+mesh = SubResource("QuadMesh_7nv7k")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.70710677, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710677, 0, 0, 0)
+cast_shadow = 2
+visibility_range_end = 10.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
+mesh = SubResource("QuadMesh_v40f0")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.5, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.5, 0, 0, 0)
+cast_shadow = 2
+visibility_range_end = 10.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
+mesh = SubResource("QuadMesh_gyutb")
