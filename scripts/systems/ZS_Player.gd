@@ -341,12 +341,14 @@ func swing_weapon(entity: Entity, weapon: ZE_Weapon) -> void:
 
 	stamina.current_stamina -= c_weapon.swing_stamina
 
+	var swing_node = entity.swing_path_follower as PathFollow3D
+	swing_node.progress_ratio = 0.0
+
 	var broken := EntityUtils.is_broken(weapon)
 	if broken:
 		weapon.apply_effects(ZR_Weapon_Effect.EffectType.MELEE_BREAK)
-
-	var swing_node = entity.swing_path_follower as PathFollow3D
-	swing_node.progress_ratio = 0.0
+	else:
+		weapon.apply_effects(ZR_Weapon_Effect.EffectType.MELEE_SWING)
 
 	var tween = weapon.create_tween()
 	if not broken:
