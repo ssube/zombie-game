@@ -29,3 +29,8 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 
 		if old_value and not new_value:
 			_remove_shimmer(entity, component)
+
+
+func on_component_removed(entity: Entity, component: Resource) -> void:
+	assert(false, "Someone removed a shimmer component instead of disabling it.")
+	_remove_shimmer(entity, component)

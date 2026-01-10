@@ -282,10 +282,12 @@ func _handle_interactive(entity: Entity, input: ZC_Input, body: CharacterBody3D,
 
 			if input.use_pickup:
 				InteractionUtils.pickup(entity, collider_entity, %Menu)
+				_clear_player_shimmer(entity as ZE_Player)
 				_update_ammo_label(entity)
 
 			if input.use_interact:
 				InteractionUtils.interact(entity, collider_entity, %Menu)
+				_clear_player_shimmer(entity as ZE_Player)
 				_update_ammo_label(entity)
 
 
@@ -414,11 +416,18 @@ func toggle_flashlight(entity: Entity, _body: CharacterBody3D) -> void:
 
 
 func _clear_player_shimmer(player: ZE_Player) -> void:
-	if player.last_shimmer_target:
-		if is_instance_valid(player.last_shimmer_target):
-			var shimmer := player.last_shimmer_target.get_component(ZC_Shimmer) as ZC_Shimmer
-			shimmer.enabled = false
-		player.last_shimmer_target = null
+	if not player.last_shimmer_target:
+		return
+
+	if not is_instance_valid(player.last_shimmer_target):
+		return
+
+	var shimmer := player.last_shimmer_target.get_component(ZC_Shimmer) as ZC_Shimmer
+	if shimmer == null:
+		return
+
+	shimmer.enabled = false
+	player.last_shimmer_target = null
 
 
 func _get_current_index(entity: ZE_Player, weapons: Array, default: int = 0) -> int:

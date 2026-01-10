@@ -128,8 +128,6 @@ static func use_armor(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	if armor == null:
 		return HandlerStatus.SKIP
 
-	target.remove_component(ZC_Shimmer)
-
 	var modifier := armor.get_component(ZC_Effect_Armor) as ZC_Effect_Armor
 	var player = actor as ZE_Player
 	player.add_relationship(RelationshipUtils.make_modifier_damage(modifier.multiplier))
@@ -311,8 +309,6 @@ static func use_weapon(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	if weapon == null:
 		return HandlerStatus.SKIP
 
-	weapon.remove_component(ZC_Shimmer)
-
 	# reparent weapon to player
 	var weapon_body = weapon.get_node(".") as RigidBody3D
 	weapon_body.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
@@ -339,8 +335,6 @@ static func pickup_item(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	var interactive = target.get_component(ZC_Interactive) as ZC_Interactive
 	if not interactive.pickup:
 		return HandlerStatus.SKIP
-
-	target.remove_component(ZC_Shimmer)
 
 	target.get_parent().remove_child(target)
 	# target.visible = false
