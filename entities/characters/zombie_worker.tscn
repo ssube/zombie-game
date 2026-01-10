@@ -63,7 +63,10 @@ metadata/_custom_type_script = "uid://jokkv7skgimj"
 script = ExtResource("13_g3ik4")
 raycast = NodePath("RayCast3D")
 sounds = Dictionary[String, PackedScene]({
-"unknown": ExtResource("13_xbif0")
+"brick": ExtResource("13_xbif0"),
+"concrete": ExtResource("13_xbif0"),
+"unknown": ExtResource("13_xbif0"),
+"wood": ExtResource("13_xbif0")
 })
 metadata/_custom_type_script = "uid://dpu6n5g8bpa3g"
 
