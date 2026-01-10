@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1w26olpbe4hd"]
+
+[ext_resource type="Script" uid="uid://cefta2blv4fjk" path="res://scripts/menus/props/book.gd" id="1_d31k2"]
+[ext_resource type="Script" uid="uid://m1ebukbi2ngu" path="res://scripts/utils/bbcode/NamedColor.gd" id="2_ppnkd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5yj3r"]
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_apgei"]
+script = ExtResource("2_ppnkd")
+metadata/_custom_type_script = "uid://m1ebukbi2ngu"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_apgei"]
+
+[node name="BookDialog" type="CenterContainer" node_paths=PackedStringArray("book_title", "book_text", "page_label")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d31k2")
+book_title = NodePath("PanelContainer/MarginContainer/VBoxContainer/TitleLabel")
+book_text = NodePath("PanelContainer/MarginContainer/VBoxContainer/MarginContainer/RichTextLabel")
+page_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/PageLabel")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "The Word Book"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_5yj3r")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 2
+bbcode_enabled = true
+text = "This is a [named_color name=_special]very important[/named_color] book!"
+custom_effects = [SubResource("RichTextEffect_apgei")]
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_apgei")
+
+[node name="PageLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Page %d of %d"
+horizontal_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_apgei")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="PreviousButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "< Previous Page"
+
+[node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Close"
+
+[node name="NextButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Next Page >"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
