@@ -6,7 +6,7 @@ extends ZM_BaseMenu
 		return $MarginContainer/VBoxContainer/TabContainer.current_tab
 	set(value):
 		$MarginContainer/VBoxContainer/TabContainer.current_tab = value
-@export var cheats_tab := 4
+@export var cheats_tab := 5
 
 
 @onready var debounced_main_preview = TimeUtils.debounce(self, 0.2, _play_main_preview)
