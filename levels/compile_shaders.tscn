@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://o1127i2lqfjv"]
+
+[ext_resource type="Script" uid="uid://diido88gnad5t" path="res://scripts/nodes/ZN_CompileShaders.gd" id="1_tmcey"]
+[ext_resource type="PackedScene" uid="uid://cuf1daja6ucof" path="res://entities/weapons/flare_projectile.tscn" id="2_if1mj"]
+[ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="3_7fmds"]
+[ext_resource type="PackedScene" uid="uid://bvrdhrtkeshuo" path="res://entities/weapons/shotgun_rave.tscn" id="4_xnx0i"]
+[ext_resource type="PackedScene" uid="uid://lvteuslo4wik" path="res://entities/weapons/pistol.tscn" id="5_a8g28"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tmcey"]
+
+[node name="CompileShaders" type="Node3D"]
+script = ExtResource("1_tmcey")
+
+[node name="Weapons" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Flare" parent="Weapons" instance=ExtResource("2_if1mj")]
+visible = false
+
+[node name="WeaponShotgun" parent="Weapons" instance=ExtResource("3_7fmds")]
+visible = false
+
+[node name="WeaponRaveShotgun" parent="Weapons" instance=ExtResource("4_xnx0i")]
+visible = false
+
+[node name="WeaponPistol" parent="Weapons" instance=ExtResource("5_a8g28")]
+visible = false
+
+[node name="Overlay" type="Node" parent="."]
+
+[node name="Container" type="Control" parent="Overlay"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Overlay/Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="Overlay/Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Overlay/Container/CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Overlay/Container/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Overlay/Container/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Overlay/Container/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Compiling Shaders..."
+
+[node name="HSeparator" type="HSeparator" parent="Overlay/Container/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+theme_override_styles/separator = SubResource("StyleBoxEmpty_tmcey")
+
+[node name="ProgressBar" type="ProgressBar" parent="Overlay/Container/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2

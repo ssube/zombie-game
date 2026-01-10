@@ -11,6 +11,9 @@ static func broadcast(
 	faction: StringName = &"object",
 	source_entity: Entity = null
 ) -> void:
+	if OptionsManager.options.audio.audio_enabled == false:
+		return  # Audio is disabled
+
 	var radius_squared := radius * radius
 
 	# Broadcast to players (subtitles)

@@ -1,6 +1,7 @@
 extends Resource
 class_name ZR_AudioOptions
 
+@export var audio_enabled: bool = true
 @export var subtitles: bool = true
 
 @export_group("Volume")
