@@ -271,7 +271,7 @@ metadata/_custom_type_script = "uid://d1xf73mn6pulk"
 [node name="ZombieRoar" type="AudioStreamPlayer3D" parent="AttackArea3D"]
 stream = ExtResource("24_kw5dq")
 script = ExtResource("25_ldd0b")
-subtitle_text = "Zombie roaring"
+subtitle_text = "Zombie Roaring"
 subtitle_radius = 5.0
 metadata/_custom_type_script = "uid://bf5mlyrquihqy"
 
