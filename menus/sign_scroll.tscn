@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnv2iub8tg4ry"]
+[gd_scene load_steps=2 format=3 uid="uid://54vn187dqm3p"]
 
-[ext_resource type="Script" uid="uid://k57ety1jslqo" path="res://scripts/menus/sign.gd" id="1_5yj3r"]
+[ext_resource type="Script" path="res://scripts/menus/sign.gd" id="1_5yj3r"]
 
 [node name="SignScroll" type="CenterContainer"]
 anchors_preset = 15
@@ -27,7 +27,7 @@ horizontal_alignment = 1
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(400, 300)
 layout_mode = 2
-text = "ajsdklfjsladfljasfd"
+text = "This is a very important sign!"
 
 [node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
