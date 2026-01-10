@@ -95,3 +95,15 @@ static func freeze_body_kinematic(body: RigidBody3D) -> void:
 
 static func unfreeze_body(body: RigidBody3D) -> void:
 	body.freeze = false
+
+
+static func disable_shapes(body: PhysicsBody3D) -> void:
+	for child in body.get_children():
+		if child is CollisionShape3D:
+			(child as CollisionShape3D).disabled = true
+
+
+static func enable_shapes(body: PhysicsBody3D) -> void:
+	for child in body.get_children():
+		if child is CollisionShape3D:
+			(child as CollisionShape3D).disabled = false
