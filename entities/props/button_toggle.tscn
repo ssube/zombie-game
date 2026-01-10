@@ -112,6 +112,7 @@ shape = SubResource("BoxShape3D_0h2if")
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_ie4yn")
 volume_db = -15.0
+bus = &"Effects"
 script = ExtResource("7_nqh2g")
 subtitle_text = "Button Toggled"
 metadata/_custom_type_script = "uid://mcuf24u8q14t"

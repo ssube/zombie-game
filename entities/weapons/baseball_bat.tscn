@@ -153,9 +153,10 @@ metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 transform = Transform3D(0.9999856, 2.9802322e-07, -2.9802322e-08, -6.2584877e-07, 0.9999917, -1.0430813e-07, 1.0430813e-07, -7.003546e-07, 0.9999913, 0, 0.03, 0)
 shape = SubResource("CapsuleShape3D_r1fv1")
 
-[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="Node3D/Area3D"]
+[node name="HitAudio" type="AudioStreamPlayer3D" parent="Node3D/Area3D"]
 transform = Transform3D(1.0000193, 8.940697e-08, 2.9802322e-08, 0, 1, 4.4703484e-08, 1.4901161e-08, -1.4901161e-08, 1.0000004, 0, 0, 0)
 stream = ExtResource("12_v7hob")
+bus = &"Effects"
 script = ExtResource("12_u21t8")
 alerts_enemies = false
 subtitle_text = "Bat Thumping"
@@ -183,5 +184,5 @@ metadata/_custom_type_script = "uid://crylbd231pgne"
 
 [node name="ZN_AudioAction" type="Node" parent="Node3D/Area3D" node_paths=PackedStringArray("audio_players")]
 script = ExtResource("16_v7hob")
-audio_players = [NodePath("../ZN_AudioSubtitle3D")]
+audio_players = [NodePath("../HitAudio")]
 metadata/_custom_type_script = "uid://dga8v5ocxqirt"

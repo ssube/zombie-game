@@ -150,16 +150,19 @@ metadata/_custom_type_script = "uid://dga8v5ocxqirt"
 [node name="Sounds" type="Node3D" parent="."]
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="Sounds"]
+bus = &"Voices"
 script = ExtResource("14_80wbs")
 subtitle_text = "Grumbling"
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="ZN_AudioSubtitle3D2" type="AudioStreamPlayer3D" parent="Sounds"]
+bus = &"Voices"
 script = ExtResource("14_80wbs")
 subtitle_text = "Coughing"
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="ZN_AudioSubtitle3D3" type="AudioStreamPlayer3D" parent="Sounds"]
+bus = &"Voices"
 script = ExtResource("14_80wbs")
 subtitle_text = "Incoherent Screaming"
 metadata/_custom_type_script = "uid://mcuf24u8q14t"

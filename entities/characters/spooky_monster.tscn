@@ -64,9 +64,9 @@ radius = 1.5
 
 [node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_bvsi7")
+bus = &"Effects"
 script = ExtResource("3_l4mt0")
 play_on_ready = true
 play_on_loop = true
 subtitle_text = "Harsh Noise from Orb"
-remove_on_finished = false
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
