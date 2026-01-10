@@ -196,6 +196,9 @@ var is_on_floor: bool
 ## Remains at 0 while on floor, accumulates delta time when off floor. [br]
 ## Set during [method move_and_slide].
 var time_since_on_floor: float = 0.0
+## [code]true[/code] if the body is on a ladder. [br]
+## Set externally to enable vertical movement and disable gravity.
+var is_on_ladder: bool = false
 ## [code]true[/code] if the body is touching a wall. [br]
 ## Set during [method move_and_slide].
 var is_on_wall: bool

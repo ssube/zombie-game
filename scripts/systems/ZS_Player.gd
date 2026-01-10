@@ -50,10 +50,21 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		var forward = -body.global_transform.basis.z.normalized()
 		var right = body.global_transform.basis.x.normalized()
 
-		var direction = (
-				(right * input.move_direction.x) +
-				(forward * input.move_direction.y)
-		).normalized()
+		# Disable ladder movement when at the bottom (on floor) and trying to move down
+		var use_ladder_movement: bool = body.is_on_ladder and not (body.is_on_floor and input.move_direction.y < 0)
+
+		var direction: Vector3
+		if use_ladder_movement:
+			# On ladder: forward/back input moves vertically, strafe still works horizontally
+			direction = (
+					(right * input.move_direction.x) +
+					(Vector3.UP * input.move_direction.y)
+			).normalized()
+		else:
+			direction = (
+					(right * input.move_direction.x) +
+					(forward * input.move_direction.y)
+			).normalized()
 		var speed = input.walk_speed
 
 		if input.move_sprint and stamina.can_sprint():
@@ -62,11 +73,15 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 			speed *= input.crouch_multiplier
 			# TODO: move camera down
 
-		var horizontal_velocity = direction * speed
+		var movement_velocity = direction * speed
 
-		# Apply horizontal velocity, retain vertical velocity
-		velocity.linear_velocity.x = horizontal_velocity.x
-		velocity.linear_velocity.z = horizontal_velocity.z
+		if use_ladder_movement:
+			# On ladder: apply full 3D velocity
+			velocity.linear_velocity = movement_velocity
+		else:
+			# Apply horizontal velocity, retain vertical velocity
+			velocity.linear_velocity.x = movement_velocity.x
+			velocity.linear_velocity.z = movement_velocity.z
 
 		_apply_gravity(velocity, body as Node, delta) # TODO: dirty dirty hack
 		_apply_jump(velocity, input, stamina, body as Node) # TODO: dirty hack
@@ -134,6 +149,8 @@ func _apply_gravity(velocity: ZC_Velocity, body: ZE_Player_IKCC, delta: float) -
 	if OptionsManager.options.cheats.no_clip:
 		pass
 	elif body.is_on_floor:
+		pass
+	elif body.is_on_ladder:
 		pass
 	else: # clipping and off the floor
 		velocity.linear_velocity += velocity.gravity * delta
