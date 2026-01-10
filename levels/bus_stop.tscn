@@ -726,7 +726,7 @@ volume_db = -18.0
 script = ExtResource("6_f0s1s")
 play_on_ready = true
 play_on_loop = true
-subtitle_text = "Engine noise"
+subtitle_text = "Engine Noise"
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="CarRadio" type="AudioStreamPlayer3D" parent="Statics/Car5Red"]
