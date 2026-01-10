@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://7wq8jy2v0e4b"]
+[gd_scene load_steps=6 format=3 uid="uid://7wq8jy2v0e4b"]
 
 [ext_resource type="Script" uid="uid://3d6sihtk0g3g" path="res://scripts/menus/main_menu.gd" id="1_3kg5v"]
 [ext_resource type="Texture2D" uid="uid://xvvykos6jpvb" path="res://textures/level_placeholder.tres" id="2_1t8nw"]
 [ext_resource type="PackedScene" uid="uid://bnvthjaufhn5x" path="res://menus/audio_button.tscn" id="3_w3tic"]
 [ext_resource type="PackedScene" uid="uid://calgaewey8pnp" path="res://menus/menu_audio.tscn" id="4_hys1b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rqbgu"]
+font_size = 12
 
 [node name="StartMenu" type="AspectRatioContainer" node_paths=PackedStringArray("title_image_rect")]
 process_mode = 2
@@ -49,6 +52,12 @@ theme_override_constants/margin_bottom = 4
 [node name="TitleLabel" type="Label" parent="MarginContainer/VFlowContainer/TitleContainer/MarginContainer"]
 layout_mode = 2
 text = "Zombie Game"
+
+[node name="Label" type="Label" parent="MarginContainer/VFlowContainer"]
+layout_mode = 2
+text = "Tech Demo"
+label_settings = SubResource("LabelSettings_rqbgu")
+horizontal_alignment = 1
 
 [node name="NewGameButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("3_w3tic")]
 layout_mode = 2
