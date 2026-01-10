@@ -77,3 +77,21 @@ static func get_surface_type(raycast: RayCast3D) -> StringName:
 		return surface_type
 
 	return unknown_surface
+
+
+static func freeze_body_static(body: RigidBody3D) -> void:
+	body.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
+	body.freeze = true
+	body.linear_velocity = Vector3.ZERO
+	body.angular_velocity = Vector3.ZERO
+
+
+static func freeze_body_kinematic(body: RigidBody3D) -> void:
+	body.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+	body.freeze = true
+	body.linear_velocity = Vector3.ZERO
+	body.angular_velocity = Vector3.ZERO
+
+
+static func unfreeze_body(body: RigidBody3D) -> void:
+	body.freeze = false

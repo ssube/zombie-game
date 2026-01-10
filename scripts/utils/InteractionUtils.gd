@@ -139,8 +139,7 @@ static func use_armor(actor: Entity, target: Entity, menu) -> HandlerStatus:
 
 	# TODO: this should already be handled in the equip item helper
 	var entity3d := target.get_node(".") as RigidBody3D
-	entity3d.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
-	entity3d.freeze = true
+	CollisionUtils.freeze_body_static(entity3d)
 	entity3d.visible = false
 
 	for child in entity3d.get_children():
@@ -311,10 +310,7 @@ static func use_weapon(actor: Entity, target: Entity, menu) -> HandlerStatus:
 
 	# reparent weapon to player
 	var weapon_body = weapon.get_node(".") as RigidBody3D
-	weapon_body.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
-	weapon_body.freeze = true
-	weapon_body.linear_velocity = Vector3.ZERO
-	weapon_body.angular_velocity = Vector3.ZERO
+	CollisionUtils.freeze_body_kinematic(weapon_body)
 	weapon_body.transform = Transform3D.IDENTITY
 
 	var player = actor as ZE_Player
@@ -346,8 +342,7 @@ static func pickup_item(actor: Entity, target: Entity, menu) -> HandlerStatus:
 
 	if target.get_node(".") is RigidBody3D:
 		var body := target.get_node(".") as RigidBody3D
-		body.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
-		body.freeze = true
+		CollisionUtils.freeze_body_static(body)
 
 	actor.add_relationship(RelationshipUtils.make_holding(target))
 

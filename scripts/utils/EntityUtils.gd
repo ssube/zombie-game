@@ -125,9 +125,9 @@ static func equip_item(character: ZE_Character, item: ZE_Base, _slot: String = "
 	item.visible = parent.visible
 	item.transform = Transform3D.IDENTITY
 
-	if item.get_node(".") is RigidBody3D:
-		item.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
-		item.freeze = true
+	var item_body = item.get_node(".") as Node3D
+	if item_body is RigidBody3D:
+		CollisionUtils.freeze_body_kinematic(item_body)
 
 	item.emit_action(Enums.ActionEvent.ITEM_EQUIP, character)
 
@@ -159,12 +159,11 @@ static func unequip_item(character: ZE_Character, item: ZE_Base) -> bool:
 		parent.remove_child(item)
 
 	inventory_node.add_item(item)
-	item.position = Vector3.ZERO
-	item.rotation = Vector3.ZERO
+	item.transform = Transform3D.IDENTITY
 
-	if item.get_node(".") is RigidBody3D:
-		item.freeze = true
-		item.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
+	var item_body = item.get_node(".") as Node3D
+	if item_body is RigidBody3D:
+		CollisionUtils.freeze_body_static(item_body)
 
 	item.emit_action(Enums.ActionEvent.ITEM_UNEQUIP, character)
 
