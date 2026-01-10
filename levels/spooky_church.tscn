@@ -1058,7 +1058,7 @@ stream = ExtResource("24_fanoy")
 volume_db = -10.0
 script = ExtResource("23_prk71")
 alerts_enemies = false
-subtitle_text = "Candlestick falling"
+subtitle_text = "Candlestick Falling"
 subtitle_radius = 3.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 

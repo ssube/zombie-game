@@ -737,7 +737,7 @@ unit_size = 5.0
 script = ExtResource("6_f0s1s")
 play_on_ready = true
 play_on_loop = true
-subtitle_text = "Radio static"
+subtitle_text = "Radio Static"
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="Car5Police" parent="Statics" groups=["level"] instance=ExtResource("4_ccg5v")]

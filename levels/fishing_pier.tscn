@@ -2451,7 +2451,7 @@ unit_size = 25.0
 script = ExtResource("22_fk3c4")
 play_on_ready = true
 play_on_loop = true
-subtitle_text = "Waves lapping"
+subtitle_text = "Waves Lapping"
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="ZN_AudioSubtitle3D2" type="AudioStreamPlayer3D" parent="Sounds"]
@@ -2462,7 +2462,7 @@ unit_size = 25.0
 script = ExtResource("22_fk3c4")
 play_on_ready = true
 play_on_loop = true
-subtitle_text = "Waves lapping"
+subtitle_text = "Waves Lapping"
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="ZN_AudioLoopPlayer" type="AudioStreamPlayer3D" parent="Sounds"]
