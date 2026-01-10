@@ -37,7 +37,7 @@ func log_level(message_level: Level, message: String, args: Array = []):
 			level_str = "UNKNOWN"
 
 	var formatted_message = message.format(args)
-	var timestamp := Time.get_date_string_from_system()
+	var timestamp := Time.get_datetime_string_from_system()
 	var output := "%s - %s - %s" % [timestamp, level_str, formatted_message]
 
 	if message_level >= Level.ERROR:
