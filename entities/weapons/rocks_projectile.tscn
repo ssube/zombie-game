@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cvfrt5j7ppr85"]
+[gd_scene load_steps=17 format=4 uid="uid://cvfrt5j7ppr85"]
 
 [ext_resource type="Script" uid="uid://dp6acnrca27yq" path="res://scripts/entities/weapons/ZE_Bullet.gd" id="1_y2pho"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_j26kx"]
@@ -6,7 +6,9 @@
 [ext_resource type="Script" uid="uid://dwsqxsqwtloma" path="res://scripts/components/weapons/ZC_Weapon_Ranged.gd" id="4_5e66d"]
 [ext_resource type="Script" uid="uid://bsnlq5t650od" path="res://scripts/components/weapons/ZC_Ammo.gd" id="5_2b4it"]
 [ext_resource type="Texture2D" uid="uid://323h3ecotcr3" path="res://assets/PSX Nature/Models/GLB/stone_5_stone_1.png" id="6_yiqf2"]
+[ext_resource type="AudioStream" uid="uid://ci2vuh771sqpk" path="res://sounds/Sound Effects/Melee/Throw/throw_heavy_ufx_1.ogg" id="9_cgvby"]
 [ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="10_sowup"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="10_y2pho"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="11_7kqat"]
 
 [sub_resource type="Resource" id="Resource_4s6ep"]
@@ -93,3 +95,12 @@ script = ExtResource("11_7kqat")
 entity = NodePath("../..")
 remove = true
 metadata/_custom_type_script = "uid://dlpeis5tgmelp"
+
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("9_cgvby")
+bus = &"Effects"
+script = ExtResource("10_y2pho")
+play_on_ready = true
+alerts_enemies = false
+remove_on_finished = true
+metadata/_custom_type_script = "uid://mcuf24u8q14t"

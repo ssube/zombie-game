@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cuf1daja6ucof"]
+[gd_scene load_steps=25 format=3 uid="uid://cuf1daja6ucof"]
 
 [ext_resource type="Script" uid="uid://dp6acnrca27yq" path="res://scripts/entities/weapons/ZE_Bullet.gd" id="1_hbaku"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_mlme4"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="8_lkehq"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="9_ns7lc"]
 [ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="9_s5cgd"]
+[ext_resource type="AudioStream" uid="uid://ci2vuh771sqpk" path="res://sounds/Sound Effects/Melee/Throw/throw_heavy_ufx_1.ogg" id="12_xqhaq"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="13_v1gcj"]
 
 [sub_resource type="Resource" id="Resource_4s6ep"]
 script = ExtResource("4_lkehq")
@@ -142,3 +144,12 @@ script = ExtResource("9_ns7lc")
 entity = NodePath("../..")
 remove = true
 metadata/_custom_type_script = "uid://dlpeis5tgmelp"
+
+[node name="ZN_AudioSubtitle3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("12_xqhaq")
+bus = &"Effects"
+script = ExtResource("13_v1gcj")
+play_on_ready = true
+alerts_enemies = false
+remove_on_finished = true
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
