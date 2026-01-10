@@ -238,7 +238,7 @@ metadata/_custom_type_script = "uid://62vhg4wr8feb"
 stream = ExtResource("27_fkiag")
 bus = &"Effects"
 script = ExtResource("28_fkiag")
-subtitle_text = "Zombie roaring"
+subtitle_text = "Zombie Roaring"
 subtitle_radius = 5.0
 metadata/_custom_type_script = "uid://bf5mlyrquihqy"
 
@@ -248,7 +248,7 @@ bus = &"Effects"
 script = ExtResource("28_fkiag")
 pitch_variation_min = 0.75
 alerts_enemies = false
-subtitle_text = "Zombie groaning"
+subtitle_text = "Zombie Groaning"
 subtitle_radius = 3.0
 metadata/_custom_type_script = "uid://bf5mlyrquihqy"
 

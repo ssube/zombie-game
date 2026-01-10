@@ -58,7 +58,7 @@ bus = &"Effects"
 script = ExtResource("6_ks67f")
 play_on_ready = true
 play_on_loop = true
-subtitle_text = "Engine noise"
+subtitle_text = "Engine Noise"
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
 [node name="ZN_AudioSubtitle3D2" type="AudioStreamPlayer3D" parent="."]
