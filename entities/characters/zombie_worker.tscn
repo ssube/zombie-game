@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dc22w3kstrlyu"]
+[gd_scene load_steps=52 format=3 uid="uid://dc22w3kstrlyu"]
 
 [ext_resource type="Script" uid="uid://bmxb5i8hj4w5u" path="res://scripts/entities/characters/ZE_Zombie.gd" id="1_enhv7"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_g3ik4"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://db2qobebs40ku" path="res://scripts/components/characters/ZC_Behavior.gd" id="19_ufuyc"]
 [ext_resource type="PackedScene" uid="uid://bf8cjjumln7y5" path="res://behavior/zombie_aggressive.tscn" id="20_3i4p6"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="26_sl7ba"]
+[ext_resource type="Script" uid="uid://n6ylsi7eoelr" path="res://scripts/nodes/actions/ZN_TimerAction.gd" id="26_y05cp"]
 [ext_resource type="AudioStream" uid="uid://bbdhwqdsowxt6" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Creatures/Monster/monster_roar_2.ogg" id="27_fkiag"]
 [ext_resource type="PackedScene" uid="uid://b4406rbr42a1e" path="res://entities/weapons/zombie_melee.tscn" id="27_rmkq5"]
 [ext_resource type="Script" uid="uid://bf5mlyrquihqy" path="res://scripts/nodes/ZN_AudioVariable3D.gd" id="28_fkiag"]
@@ -225,6 +226,20 @@ script = ExtResource("34_b2lq4")
 entity = NodePath("../../Inventory/ZombieMelee")
 remove = true
 metadata/_custom_type_script = "uid://dlpeis5tgmelp"
+
+[node name="ZN_TimerAction" type="Node" parent="DeathBranch" node_paths=PackedStringArray("timer")]
+script = ExtResource("26_y05cp")
+start = false
+stop = true
+timer = NodePath("../../Sounds/RoarTimer")
+metadata/_custom_type_script = "uid://n6ylsi7eoelr"
+
+[node name="ZN_TimerAction2" type="Node" parent="DeathBranch" node_paths=PackedStringArray("timer")]
+script = ExtResource("26_y05cp")
+start = false
+stop = true
+timer = NodePath("../../Sounds/GroanTimer")
+metadata/_custom_type_script = "uid://n6ylsi7eoelr"
 
 [node name="ZB_ZombiePhysics" type="Node" parent="." node_paths=PackedStringArray("entity_body", "entity")]
 script = ExtResource("32_ufuyc")
