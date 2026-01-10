@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=4 uid="uid://v18fidmgep15"]
+[gd_scene load_steps=144 format=4 uid="uid://v18fidmgep15"]
 
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_b7jq5"]
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_dm6vb"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://kpg80vqdxnck" path="res://entities/statics/sign_stop.tscn" id="13_k62ce"]
 [ext_resource type="Material" uid="uid://b230jrvugibiu" path="res://textures/Color Maps/metal_floor_tx_1.tres" id="13_tu73e"]
 [ext_resource type="Material" uid="uid://cjpixhnnwb4gp" path="res://textures/Color Maps/glass_block_windows_pt_1.tres" id="14_ccg5v"]
+[ext_resource type="Script" uid="uid://bdl3b6gan30l0" path="res://scripts/components/status/ZC_Objective.gd" id="14_w46ga"]
 [ext_resource type="PackedScene" uid="uid://d4se7f101eb7" path="res://skies/sky_night.tscn" id="15_2vafd"]
 [ext_resource type="PackedScene" uid="uid://bkkaq33vt04ge" path="res://entities/weapons/flare_item.tscn" id="15_morpl"]
 [ext_resource type="AudioStream" uid="uid://dry63mshld4o8" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Machines/machine_11_loop.ogg" id="16_fbayg"]
@@ -31,6 +32,7 @@
 [ext_resource type="Material" uid="uid://g5xoeqn2qoy6" path="res://textures/Color Maps/metal_panels_pt_2.tres" id="17_y6j6u"]
 [ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/foliage/grass_cluster_dark_1.tscn" id="19_825fl"]
 [ext_resource type="PackedScene" uid="uid://dq3oixjn7s600" path="res://entities/equipment/cone_hat.tscn" id="19_gbhsh"]
+[ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/items/medkit.tscn" id="19_jkntv"]
 [ext_resource type="PackedScene" uid="uid://d00dbkjpj0iyk" path="res://entities/items/flashlight.tscn" id="20_i2a6y"]
 [ext_resource type="PackedScene" uid="uid://bfhfig3rnntfv" path="res://entities/statics/mailbox_entity.tscn" id="21_3d12m"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="21_g2fch"]
@@ -39,6 +41,35 @@
 [ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/props/ZC_Portal.gd" id="23_87y5u"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="24_byx5j"]
 [ext_resource type="PackedScene" uid="uid://bvrdhrtkeshuo" path="res://entities/weapons/shotgun_rave.tscn" id="31_f0s1s"]
+[ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="37_825fl"]
+
+[sub_resource type="Resource" id="Resource_er34s"]
+script = ExtResource("14_w46ga")
+key = "explode_barrel"
+is_complete = true
+complete_on_interaction = false
+complete_on_death = true
+metadata/_custom_type_script = "uid://bdl3b6gan30l0"
+
+[sub_resource type="Resource" id="Resource_xn5ck"]
+script = ExtResource("14_w46ga")
+key = "explode_barrel"
+is_complete = true
+complete_on_interaction = false
+complete_on_death = true
+metadata/_custom_type_script = "uid://bdl3b6gan30l0"
+
+[sub_resource type="Resource" id="Resource_w46ga"]
+script = ExtResource("14_w46ga")
+key = "find_flare"
+is_complete = true
+metadata/_custom_type_script = "uid://bdl3b6gan30l0"
+
+[sub_resource type="Resource" id="Resource_jkntv"]
+script = ExtResource("14_w46ga")
+key = "find_flashlight"
+is_complete = true
+metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 
 [sub_resource type="Resource" id="Resource_byx5j"]
 script = ExtResource("23_87y5u")
@@ -472,9 +503,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.22623, 0.3578602, -1.5642
 
 [node name="Barrel" parent="Entities" instance=ExtResource("6_b7jq5")]
 transform = Transform3D(0.9775889, 0, 0.21052295, 0, 1, 0, -0.21052295, 0, 0.9775889, -18.136297, 1.1499999, -0.1173166)
+extra_components = Array[ExtResource("22_qy6wr")]([SubResource("Resource_er34s")])
 
 [node name="Barrel2" parent="Entities" instance=ExtResource("6_b7jq5")]
 transform = Transform3D(0.86271673, 0, -0.5056875, 0, 1, 0, 0.5056875, 0, 0.86271673, -16.159756, 1.1499999, -0.1173166)
+extra_components = Array[ExtResource("22_qy6wr")]([SubResource("Resource_xn5ck")])
 
 [node name="TrafficCone7" parent="Entities" instance=ExtResource("7_7khm6")]
 transform = Transform3D(0.97372216, 0, 0.22773911, 0, 1, 0, -0.22773911, 0, 0.97372216, 23.085796, 0.60289145, 0.77081585)
@@ -529,6 +562,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.609315, 0.60785973, 0.765
 
 [node name="Flare" parent="Entities" instance=ExtResource("15_morpl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.804863, 0.35000002, -0.22783995)
+extra_components = Array[ExtResource("22_qy6wr")]([SubResource("Resource_w46ga")])
 
 [node name="WeaponShotgun2" parent="Entities" instance=ExtResource("31_f0s1s")]
 transform = Transform3D(-4.2454538e-08, 0.9712466, -0.2380758, -1, -4.371139e-08, 0, -1.0406623e-08, 0.2380758, 0.9712466, -19.861263, 0.38946128, 33.4655)
@@ -538,6 +572,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7304, 0.25000024, -0.31530
 
 [node name="Flashlight" parent="Entities" instance=ExtResource("20_i2a6y")]
 transform = Transform3D(-0.96024495, 0, -0.2791587, 0.07169611, 0.96645683, -0.24661894, 0.26979485, -0.2568292, -0.9280353, 12.397218, 0.4006424, -0.62662554)
+extra_components = Array[ExtResource("22_qy6wr")]([SubResource("Resource_jkntv")])
 
 [node name="Zombie" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("21_g2fch")]
 transform = Transform3D(0.90169674, 0, 0.43236905, 0, 1, 0, -0.43236905, 0, 0.90169674, -2.5394058, 1.1159406, -7.9311886)
@@ -572,6 +607,9 @@ equipment_slots = {
 [node name="Mailbox2" parent="Entities" instance=ExtResource("21_3d12m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.996475, 0.25000048, -0.39246774)
 extra_components = Array[ExtResource("22_qy6wr")]([SubResource("Resource_byx5j"), SubResource("Resource_825fl")])
+
+[node name="Medkit" parent="Entities" instance=ExtResource("19_jkntv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.254346, 0.26001626, 35.95041)
 
 [node name="Statics" type="Node3D" parent="."]
 
@@ -1028,6 +1066,24 @@ shape = SubResource("ConvexPolygonShape3D_20d84")
 shape = SubResource("ConvexPolygonShape3D_qe71q")
 
 [node name="Objectives" type="Node" parent="."]
+
+[node name="FlashlightObjective" type="Node" parent="Objectives"]
+script = ExtResource("37_825fl")
+key = "find_flashlight"
+title = "Find your flashlight"
+metadata/_custom_type_script = "uid://b560n5psxwkuk"
+
+[node name="FlareObjective" type="Node" parent="Objectives/FlashlightObjective"]
+script = ExtResource("37_825fl")
+key = "find_flare"
+title = "Find the flares that you left by the mailbox"
+metadata/_custom_type_script = "uid://b560n5psxwkuk"
+
+[node name="BarrelObjective" type="Node" parent="Objectives/FlashlightObjective/FlareObjective"]
+script = ExtResource("37_825fl")
+key = "explode_barrel"
+title = "Blow up the explosive barrels"
+metadata/_custom_type_script = "uid://b560n5psxwkuk"
 
 [node name="Sky" type="Node3D" parent="."]
 
