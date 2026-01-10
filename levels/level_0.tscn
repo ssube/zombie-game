@@ -1,4 +1,4 @@
-[gd_scene load_steps=180 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=182 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_q6gno"]
@@ -47,6 +47,7 @@
 [ext_resource type="PackedScene" uid="uid://dc22w3kstrlyu" path="res://entities/characters/zombie_worker.tscn" id="30_2fv0q"]
 [ext_resource type="PackedScene" uid="uid://c3dspyskb67hl" path="res://entities/props/book_open_readable.tscn" id="33_wlr4g"]
 [ext_resource type="Script" uid="uid://0uftjan8jqx7" path="res://addons/QuakeLamp/LampComponent.gd" id="34_1wgrf"]
+[ext_resource type="Script" uid="uid://dyyorpv0icvpi" path="res://scripts/components/props/ZC_Book.gd" id="34_c146n"]
 [ext_resource type="PackedScene" uid="uid://q4k6tuoyi23v" path="res://entities/props/sign_scroll.tscn" id="34_v4yv6"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="35_hxseb"]
 [ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="35_lf4l6"]
@@ -122,6 +123,10 @@ metadata/_custom_type_script = "uid://barikupijl7r7"
 [sub_resource type="Resource" id="Resource_wlr4g"]
 script = ExtResource("29_2hcje")
 metadata/_custom_type_script = "uid://djj4ii1pr0pmj"
+
+[sub_resource type="Resource" id="Resource_m8f8t"]
+script = ExtResource("34_c146n")
+metadata/_custom_type_script = "uid://dyyorpv0icvpi"
 
 [sub_resource type="Resource" id="Resource_2fv0q"]
 script = ExtResource("17_x1db4")
@@ -864,6 +869,7 @@ transform = Transform3D(-0.96969736, 0, 0.24430884, 0, 1, 0, -0.24430884, 0, -0.
 
 [node name="BookOpen" parent="Entities/Room1" instance=ExtResource("33_wlr4g")]
 transform = Transform3D(-2.170675e-07, 0.9999999, 2.9802326e-08, 1.1313356e-08, 1.4901157e-08, -1.0000001, -1, -2.1706751e-07, -1.1313351e-08, -3.528, 1.6, -0.891)
+extra_components = Array[ExtResource("9_ggct0")]([SubResource("Resource_m8f8t")])
 
 [node name="Room2" type="Node3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.187503, 0, 3.7471385)
