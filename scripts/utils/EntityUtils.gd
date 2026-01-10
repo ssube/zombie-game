@@ -159,6 +159,13 @@ static func unequip_item(character: ZE_Character, item: ZE_Base) -> bool:
 		parent.remove_child(item)
 
 	inventory_node.add_item(item)
+	item.position = Vector3.ZERO
+	item.rotation = Vector3.ZERO
+
+	if item.get_node(".") is RigidBody3D:
+		item.freeze = true
+		item.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
+
 	item.emit_action(Enums.ActionEvent.ITEM_UNEQUIP, character)
 
 	return true

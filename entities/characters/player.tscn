@@ -196,6 +196,7 @@ visible = false
 visible = false
 
 [node name="Inventory" type="Node3D" parent="." node_paths=PackedStringArray("parent_entity")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 visible = false
 script = ExtResource("21_blta8")
 parent_entity = NodePath("..")

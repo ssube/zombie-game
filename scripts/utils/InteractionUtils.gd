@@ -344,6 +344,11 @@ static func pickup_item(actor: Entity, target: Entity, menu) -> HandlerStatus:
 	assert(inventory_node != null, "Player does not have an inventory node to pick up items into.")
 	inventory_node.add_item(target)
 
+	if target.get_node(".") is RigidBody3D:
+		var body := target.get_node(".") as RigidBody3D
+		body.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
+		body.freeze = true
+
 	actor.add_relationship(RelationshipUtils.make_holding(target))
 
 	menu.push_action("Picked up item: %s" % interactive.name)
