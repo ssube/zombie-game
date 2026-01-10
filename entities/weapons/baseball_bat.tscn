@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://tna8f01ql67u"]
+[gd_scene load_steps=34 format=4 uid="uid://tna8f01ql67u"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aigh8"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_dy0dc"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dpc8jknfhigal" path="res://assets/ZombieApocalypsePack/Bat/bat_texture.png" id="6_jaqrl"]
 [ext_resource type="PackedScene" uid="uid://cgo4rx8hcv6un" path="res://effects/sounds/bat_break.tscn" id="7_nl1ig"]
 [ext_resource type="Script" uid="uid://dnmn2xmqdrr00" path="res://scripts/components/weapons/ZC_Durability.gd" id="8_3gqkk"]
+[ext_resource type="PackedScene" uid="uid://dnenibrqlui60" path="res://effects/sounds/bat_swing.tscn" id="8_62uoh"]
 [ext_resource type="Script" uid="uid://bdq3y7j08fnad" path="res://scripts/components/characters/ZC_Equipment.gd" id="10_fmxn0"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="10_hgjmx"]
 [ext_resource type="Script" uid="uid://u512rl8uacud" path="res://scripts/nodes/actions/ZN_DurabilityAction.gd" id="10_hvjee"]
@@ -47,13 +48,20 @@ marker = NodePath("Node3D/SoundMarker3D")
 effect_scene = ExtResource("7_nl1ig")
 metadata/_custom_type_script = "uid://d3sex4y0oww04"
 
+[sub_resource type="Resource" id="Resource_lmqmf"]
+script = ExtResource("5_xpimh")
+effect_type = 1
+marker = NodePath("Node3D/SoundMarker3D")
+effect_scene = ExtResource("8_62uoh")
+metadata/_custom_type_script = "uid://d3sex4y0oww04"
+
 [sub_resource type="Resource" id="Resource_ee0de"]
 script = ExtResource("3_ee0de")
 swing_time = 0.5
 cooldown_time = 0.3
 damage_areas = Array[NodePath]([NodePath("Node3D/Area3D")])
 damage = 10
-effects = Array[ExtResource("5_xpimh")]([SubResource("Resource_dwhqy")])
+effects = Array[ExtResource("5_xpimh")]([SubResource("Resource_dwhqy"), SubResource("Resource_lmqmf")])
 metadata/_custom_type_script = "uid://c86wth8kvlbt7"
 
 [sub_resource type="Resource" id="Resource_36cak"]
@@ -124,7 +132,7 @@ prefab_path = "res://entities/weapons/bat.tscn"
 component_resources = Array[ExtResource("2_dy0dc")]([SubResource("Resource_42kvg"), SubResource("Resource_dy0dc"), SubResource("Resource_ee0de"), SubResource("Resource_36cak"), SubResource("Resource_o54s1"), SubResource("Resource_62uoh")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_r1fv1")
 
 [node name="Node3D" type="Node3D" parent="."]
@@ -150,7 +158,7 @@ trigger_on_body_interval = false
 metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Area3D"]
-transform = Transform3D(0.9999856, 2.9802322e-07, -2.9802322e-08, -6.2584877e-07, 0.9999917, -1.0430813e-07, 1.0430813e-07, -7.003546e-07, 0.9999913, 0, 0.03, 0)
+transform = Transform3D(0.9999856, 2.9802322e-07, -2.9802322e-08, -6.2584877e-07, 0.9999917, -1.0430813e-07, 1.0430813e-07, -7.003546e-07, 0.9999913, 0, 0.025, 0)
 shape = SubResource("CapsuleShape3D_r1fv1")
 
 [node name="HitAudio" type="AudioStreamPlayer3D" parent="Node3D/Area3D"]

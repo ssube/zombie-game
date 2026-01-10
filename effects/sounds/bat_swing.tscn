@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnenibrqlui60"]
+
+[ext_resource type="AudioStream" uid="uid://bifug0oofbysk" path="res://sounds/Sound Effects/Melee/Swing/universal_swing_miss_light_ufx_2.ogg" id="1_3gvme"]
+[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_qnlwe"]
+
+[node name="SwingAudio" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_3gvme")
+bus = &"Effects"
+script = ExtResource("2_qnlwe")
+play_on_ready = true
+subtitle_text = "Bat Swinging"
+remove_on_finished = true
+metadata/_custom_type_script = "uid://mcuf24u8q14t"
