@@ -1,12 +1,12 @@
 extends RefCounted
 class_name ActionContext
 ## Encapsulates the context for an action execution, including the action event type,
-## source and target actors, the menu state, and arbitrary action data.
+## trigger and subject actors, the menu state, and arbitrary action data.
 
 
-## Represents an actor involved in an action (either source or target).
+## Represents an actor involved in an action (either trigger or subject).
 ## Contains references to the underlying entity, physics body, node hierarchy, and collision shape.
-class ActionActor extends RefCounted:
+class ActionRef extends RefCounted:
 	## The Entity component representing this actor (if applicable).
 	var entity: Entity
 
@@ -17,11 +17,12 @@ class ActionActor extends RefCounted:
 	var node: Node
 
 	## The CollisionShape3D node associated with this actor (if applicable).
+	## This will only be populated if the action was triggered by a raycast hit, otherwise the shape is not known.
 	var shape: CollisionShape3D
 
 
-	static func from_node(source: Node) -> ActionActor:
-		var actor := ActionActor.new()
+	static func from_node(source: Node) -> ActionRef:
+		var actor := ActionRef.new()
 		actor.node = source
 		if source is Entity:
 			actor.entity = source
@@ -43,10 +44,10 @@ class ActionMenu extends RefCounted:
 var event: Enums.ActionEvent
 
 ## The actor initiating the action.
-var source: ActionActor = null
+var trigger: ActionRef = null
 
 ## The actor targeted by the action.
-var target: ActionActor = null
+var subject: ActionRef = null
 
 ## The menu context associated with this action (if applicable).
 var menu: ActionMenu = null
