@@ -593,7 +593,7 @@ static func solve_dynamic_constraints(
 
 		new_velocity -= impulse * p_inverse_mass
 
-		# Save the originhal state of the body
+		# Save the original state of the body
 		if (
 				p_io
 				and not BodySaveState.array_contains_rid(
@@ -613,9 +613,9 @@ static func solve_dynamic_constraints(
 	return new_velocity
 
 
-func _physics_process(_delta: float) -> void:
-	if not is_zero_approx(velocity.length_squared()):
-		ikcc_move_and_slide()
+#func _physics_process(_delta: float) -> void:
+#	if not is_zero_approx(velocity.length_squared()):
+#	ikcc_move_and_slide()
 
 
 ## Call this in '_physics_process' to simulate body movement.
@@ -628,7 +628,9 @@ func ikcc_move_and_slide() -> bool:
 			else get_process_delta_time()
 	)
 
-	assert(Engine.is_in_physics_frame(), "IKCC: 'ikcc_move_and_slide' should be called from '_physics_process'!")
+	# Contrary to the above comment, we really should not be called from physics frame,
+	# because that breaks melee weapons and throwing weapons for some strange reason.
+	assert(not Engine.is_in_physics_frame(), "IKCC: 'ikcc_move_and_slide' should not be called from '_physics_process'!")
 
 	previous_position = body.global_position
 

@@ -90,6 +90,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		# Sync to CharacterBody3D (Node assumed attached to entity)
 		var speed_multiplier := EntityUtils.get_speed_multiplier(entity)
 		body.velocity = velocity.linear_velocity * speed_multiplier
+		body.ikcc_move_and_slide()
 
 		_process_screen_effects(entity, delta)
 		_process_heard_noises(entity)
