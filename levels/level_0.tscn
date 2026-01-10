@@ -1,4 +1,4 @@
-[gd_scene load_steps=177 format=4 uid="uid://yvupurpwmap4"]
+[gd_scene load_steps=179 format=4 uid="uid://yvupurpwmap4"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_66alr"]
 [ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_q6gno"]
@@ -42,7 +42,8 @@
 [ext_resource type="PackedScene" uid="uid://dr14d3op0qqa7" path="res://entities/props/door_wood_ccw.tscn" id="27_m8bfh"]
 [ext_resource type="Script" uid="uid://boyqweqtyv0x1" path="res://scripts/nodes/actions/ZN_MenuAction.gd" id="28_bxlou"]
 [ext_resource type="PackedScene" uid="uid://d00dbkjpj0iyk" path="res://entities/items/flashlight.tscn" id="28_y835w"]
-[ext_resource type="PackedScene" uid="uid://cnv2iub8tg4ry" path="res://menus/sign_scroll.tscn" id="29_bxlou"]
+[ext_resource type="Script" uid="uid://djj4ii1pr0pmj" path="res://scripts/components/props/ZC_Sign.gd" id="29_2hcje"]
+[ext_resource type="PackedScene" uid="uid://54vn187dqm3p" path="res://menus/sign_scroll.tscn" id="29_bxlou"]
 [ext_resource type="PackedScene" uid="uid://dc22w3kstrlyu" path="res://entities/characters/zombie_worker.tscn" id="30_2fv0q"]
 [ext_resource type="Script" uid="uid://0uftjan8jqx7" path="res://addons/QuakeLamp/LampComponent.gd" id="34_1wgrf"]
 [ext_resource type="PackedScene" uid="uid://q4k6tuoyi23v" path="res://entities/props/sign_scroll.tscn" id="34_v4yv6"]
@@ -116,6 +117,10 @@ actions = Dictionary[int, NodePath]({
 31: NodePath("ZN_MenuAction")
 })
 metadata/_custom_type_script = "uid://barikupijl7r7"
+
+[sub_resource type="Resource" id="Resource_wlr4g"]
+script = ExtResource("29_2hcje")
+metadata/_custom_type_script = "uid://djj4ii1pr0pmj"
 
 [sub_resource type="Resource" id="Resource_2fv0q"]
 script = ExtResource("17_x1db4")
@@ -845,7 +850,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.361192, 0.008121654, -2.88
 
 [node name="SignScroll2" parent="Entities/Room1" instance=ExtResource("34_v4yv6")]
 transform = Transform3D(0.8660253, 0, -0.4999999, 0, 1, 0, 0.4999998, 0, 0.8660254, 1.3376628, -2.3841858e-07, -2.8898587)
-extra_components = Array[ExtResource("9_ggct0")]([SubResource("Resource_gdkf1"), SubResource("Resource_xnic3")])
+extra_components = Array[ExtResource("9_ggct0")]([SubResource("Resource_gdkf1"), SubResource("Resource_xnic3"), SubResource("Resource_wlr4g")])
 
 [node name="ZN_MenuAction" type="Node" parent="Entities/Room1/SignScroll2"]
 script = ExtResource("28_bxlou")

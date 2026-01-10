@@ -4,6 +4,9 @@ class_name ZM_Menu
 @export var visible_menu: Menus = Menus.NONE
 var previous_menu: Menus = Menus.MAIN_MENU
 
+var _custom_menu: ZM_BaseMenu = null
+
+
 const pause_menus: Dictionary[Menus, bool] = {
 	Menus.NONE: false,
 	Menus.DIALOGUE_BALLOON: false,
@@ -187,13 +190,13 @@ func toggle_pause() -> void:
 		show_menu(Menus.NONE)
 
 
-var _custom_menu: ZM_BaseMenu = null
-
-
-func show_custom_menu(scene: PackedScene, pause: bool = true) -> void:
+func show_custom_menu(scene: PackedScene, pause: bool = true, data: Dictionary = {}) -> void:
 	show_menu(Menus.CUSTOM_MENU)
 	_custom_menu = scene.instantiate() as ZM_BaseMenu
 	assert(_custom_menu != null, "Custom menu is null in show_custom_menu")
+	if 'set_data' in _custom_menu:
+		_custom_menu.set_data(data)
+
 	$MenuLayer.add_child(_custom_menu)
 	_custom_menu.menu_changed.connect(_on_menu_changed)
 	_custom_menu.back_pressed.connect(_on_back_pressed)
