@@ -1,4 +1,4 @@
-[gd_scene load_steps=295 format=4 uid="uid://cpgmxyybvd4x8"]
+[gd_scene load_steps=301 format=4 uid="uid://cpgmxyybvd4x8"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_43fyf"]
 [ext_resource type="Texture2D" uid="uid://c51guvpg20wcf" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast4.png" id="1_qbcix"]
@@ -18,9 +18,11 @@
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="9_8xan3"]
 [ext_resource type="Material" uid="uid://q11wc28gwgth" path="res://textures/Color Maps/wood_5.tres" id="9_lt4xk"]
 [ext_resource type="PackedScene" uid="uid://lvteuslo4wik" path="res://entities/weapons/pistol.tscn" id="10_3hy8g"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="10_5s5q0"]
 [ext_resource type="Material" uid="uid://c7t1xu02xsc03" path="res://textures/Color Maps/wood_floor_1.tres" id="10_x4l7f"]
 [ext_resource type="PackedScene" uid="uid://ds0q1crcrv862" path="res://entities/characters/zombie.tscn" id="11_3cnis"]
 [ext_resource type="Material" uid="uid://bu5p82csdpnmw" path="res://textures/Color Maps/wood_3.tres" id="11_lt4xk"]
+[ext_resource type="Script" uid="uid://bn1k8s7o107vv" path="res://scripts/nodes/actions/ZN_ObjectiveAction.gd" id="11_xux7f"]
 [ext_resource type="Material" uid="uid://b6lsikrvoffh2" path="res://textures/Color Maps/carpet_pt_1_2.tres" id="12_2vnsd"]
 [ext_resource type="PackedScene" uid="uid://dc22w3kstrlyu" path="res://entities/characters/zombie_worker.tscn" id="12_13abf"]
 [ext_resource type="PackedScene" uid="uid://8j6ass42i7pa" path="res://entities/props/book_open_save_menu.tscn" id="13_13abf"]
@@ -29,6 +31,7 @@
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="14_r4c82"]
 [ext_resource type="Script" uid="uid://cn8mtbap6uudk" path="res://scripts/components/props/ZC_Portal.gd" id="15_877p8"]
 [ext_resource type="PackedScene" uid="uid://ctpldo10k58u7" path="res://entities/characters/spooky_monster.tscn" id="15_a6qr0"]
+[ext_resource type="Script" uid="uid://bdl3b6gan30l0" path="res://scripts/components/status/ZC_Objective.gd" id="16_8x5r7"]
 [ext_resource type="AudioStream" uid="uid://jf13578h0spg" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/Ambiences/ambience_d4_loop.ogg" id="16_dfgex"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="16_ncpmj"]
 [ext_resource type="Script" uid="uid://by081awsnotnk" path="res://scripts/nodes/ZN_AudioLoopPlayer.gd" id="17_408hf"]
@@ -39,6 +42,7 @@
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="23_prk71"]
 [ext_resource type="AudioStream" uid="uid://bqjftdyf2t4pl" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/IMPACTS and CONTACTS/Short Contact Sounds/sfx_short_contact_sound_17.ogg" id="24_fanoy"]
 [ext_resource type="PackedScene" uid="uid://cv430aqctj4ng" path="res://entities/props/sign_winding_road_entity.tscn" id="28_nu2qx"]
+[ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/items/medkit.tscn" id="28_y5cew"]
 [ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/foliage/grass_cluster_dark_1.tscn" id="41_0qwai"]
 [ext_resource type="PackedScene" uid="uid://b3s1t4avu7yr3" path="res://entities/statics/foliage/tree_log_1.tscn" id="41_e1qn8"]
 [ext_resource type="PackedScene" uid="uid://0n3afbhv6xps" path="res://entities/statics/foliage/tree_stump_1.tscn" id="42_e1qn8"]
@@ -87,6 +91,15 @@ radius = 3.0
 height = 8.0
 radial_segments = 8
 rings = 6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xux7f"]
+size = Vector3(1, 1, 2.5)
+
+[sub_resource type="Resource" id="Resource_5s5q0"]
+script = ExtResource("16_8x5r7")
+key = "find_pistol"
+is_complete = true
+metadata/_custom_type_script = "uid://bdl3b6gan30l0"
 
 [sub_resource type="Resource" id="Resource_ncpmj"]
 script = ExtResource("15_877p8")
@@ -981,6 +994,21 @@ node = NodePath("..")
 remove = true
 metadata/_custom_type_script = "uid://b1hfgveu3fvsd"
 
+[node name="ChurchObjectiveArea" type="Area3D" parent="Areas"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("10_5s5q0")
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/ChurchObjectiveArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -2.25)
+shape = SubResource("BoxShape3D_xux7f")
+
+[node name="ZN_ObjectiveAction" type="Node" parent="Areas/ChurchObjectiveArea"]
+script = ExtResource("11_xux7f")
+objective_key = "explore_church"
+amount = 0
+
 [node name="Entities" type="Node" parent="."]
 unique_name_in_owner = true
 
@@ -1001,6 +1029,7 @@ transform = Transform3D(0.6288998, 0, -0.7774863, 0, 1, 0, 0.7774863, 0, 0.62889
 
 [node name="WeaponPistol" parent="Entities" instance=ExtResource("10_3hy8g")]
 transform = Transform3D(-3.7855173e-08, -0.8660254, 0.5, 1, -4.371139e-08, 0, 2.1855694e-08, 0.5, 0.8660254, 5.9046283, 2.05025, -3.797617)
+extra_components = Array[ExtResource("14_r4c82")]([SubResource("Resource_5s5q0")])
 
 [node name="Zombie" parent="Entities" node_paths=PackedStringArray("equipment_slots") instance=ExtResource("11_3cnis")]
 transform = Transform3D(0.8618771, 0, 0.5071173, 0, 1, 0, -0.5071173, 0, 0.8618771, 13.169974, -0.42007518, -1.3055172)
@@ -1046,6 +1075,9 @@ light_color = Color(1, 0.32, 0.32, 1)
 shadow_enabled = true
 spot_attenuation = -1.0
 spot_angle = 15.0
+
+[node name="Medkit" parent="Entities" instance=ExtResource("28_y5cew")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.735582, 0.017794058, -7.048258)
 
 [node name="Lights" type="Node" parent="."]
 
@@ -1868,11 +1900,17 @@ navigation_mesh = SubResource("NavigationMesh_iss0w")
 
 [node name="Objectives" type="Node" parent="."]
 
-[node name="FirstObjective" type="Node" parent="Objectives"]
+[node name="ChurchObjective" type="Node" parent="Objectives"]
 script = ExtResource("6_hqmqq")
 active = true
-key = "find_key"
-title = "Find the oddly cone-shaped key"
+key = "explore_church"
+title = "Explore the spooky church"
+metadata/_custom_type_script = "uid://b560n5psxwkuk"
+
+[node name="PistolObjective" type="Node" parent="Objectives/ChurchObjective"]
+script = ExtResource("6_hqmqq")
+key = "find_pistol"
+title = "Find the magnum pistol"
 metadata/_custom_type_script = "uid://b560n5psxwkuk"
 
 [node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
