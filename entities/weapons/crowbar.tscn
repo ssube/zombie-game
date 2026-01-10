@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://rtq8nqsaa7st"]
+[gd_scene load_steps=39 format=4 uid="uid://rtq8nqsaa7st"]
 
 [ext_resource type="Script" uid="uid://b5t1ema7rumub" path="res://scripts/entities/weapons/ZE_Weapon.gd" id="1_aebpe"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_hqwjb"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://dlb4vkkjdb658" path="res://scripts/nodes/actions/ZN_HealthAction.gd" id="15_yxms2"]
 [ext_resource type="Script" uid="uid://crylbd231pgne" path="res://scripts/nodes/conditions/ZN_FactionCondition.gd" id="16_jumh0"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="17_qss8v"]
+[ext_resource type="PackedScene" uid="uid://bhyc84ubi2edx" path="res://effects/sounds/crowbar_swing.tscn" id="21_d7yd0"]
 
 [sub_resource type="Resource" id="Resource_42kvg"]
 script = ExtResource("3_fjom8")
@@ -46,13 +47,20 @@ marker = NodePath("Node3D/SoundMarker3D")
 effect_scene = ExtResource("8_opkuh")
 metadata/_custom_type_script = "uid://d3sex4y0oww04"
 
+[sub_resource type="Resource" id="Resource_d7yd0"]
+script = ExtResource("7_icymm")
+effect_type = 1
+marker = NodePath("Node3D/SoundMarker3D")
+effect_scene = ExtResource("21_d7yd0")
+metadata/_custom_type_script = "uid://d3sex4y0oww04"
+
 [sub_resource type="Resource" id="Resource_ee0de"]
 script = ExtResource("9_fkmtx")
 swing_time = 0.5
 cooldown_time = 0.3
 damage_areas = Array[NodePath]([NodePath("Node3D/Area3D")])
 damage = 10
-effects = Array[ExtResource("7_icymm")]([SubResource("Resource_dwhqy")])
+effects = Array[ExtResource("7_icymm")]([SubResource("Resource_dwhqy"), SubResource("Resource_d7yd0")])
 metadata/_custom_type_script = "uid://c86wth8kvlbt7"
 
 [sub_resource type="Resource" id="Resource_hqwjb"]
