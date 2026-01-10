@@ -1,0 +1,131 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr7kkacmjn7xs"]
+
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="1_d07om"]
+[ext_resource type="Script" uid="uid://cgc1gd3c3hrxy" path="res://scripts/nodes/actions/ZN_LadderAction.gd" id="2_tprmb"]
+[ext_resource type="Material" uid="uid://g5xoeqn2qoy6" path="res://textures/Color Maps/metal_panels_pt_2.tres" id="3_tprmb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d07om"]
+size = Vector3(1, 4.249756, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tprmb"]
+size = Vector3(1, 4, 0.125)
+
+[node name="LadderBasic" type="StaticBody3D"]
+
+[node name="LadderArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0.4)
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_d07om")
+trigger_on_exit = true
+trigger_on_body_interval = false
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LadderArea"]
+shape = SubResource("BoxShape3D_d07om")
+
+[node name="ZN_LadderAction" type="Node" parent="LadderArea"]
+script = ExtResource("2_tprmb")
+metadata/_custom_type_script = "uid://cgc1gd3c3hrxy"
+
+[node name="Node3D2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0)
+
+[node name="Node3D" type="Node3D" parent="Node3D2"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D2/Node3D"]
+radius = 0.05
+height = 1.0
+material = ExtResource("3_tprmb")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Node3D2/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+radius = 0.05
+height = 1.0
+material = ExtResource("3_tprmb")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D2/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.45, 0)
+size = Vector3(1, 0.05, 0.1)
+material = ExtResource("3_tprmb")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D2/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.05, 0)
+size = Vector3(1, 0.05, 0.1)
+material = ExtResource("3_tprmb")
+
+[node name="Node3D2" type="Node3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D2/Node3D2"]
+radius = 0.05
+height = 1.0
+material = ExtResource("3_tprmb")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Node3D2/Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+radius = 0.05
+height = 1.0
+material = ExtResource("3_tprmb")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D2/Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.45000005, 0)
+size = Vector3(1, 0.05, 0.1)
+material = ExtResource("3_tprmb")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D2/Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.05, 0)
+size = Vector3(1, 0.05, 0.1)
+material = ExtResource("3_tprmb")
+
+[node name="Node3D3" type="Node3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D2/Node3D3"]
+radius = 0.05
+height = 1.0
+material = ExtResource("3_tprmb")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Node3D2/Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+radius = 0.05
+height = 1.0
+material = ExtResource("3_tprmb")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D2/Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.45000005, 0)
+size = Vector3(1, 0.05, 0.1)
+material = ExtResource("3_tprmb")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D2/Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.05, 0)
+size = Vector3(1, 0.05, 0.1)
+material = ExtResource("3_tprmb")
+
+[node name="Node3D4" type="Node3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D2/Node3D4"]
+radius = 0.05
+height = 1.0
+material = ExtResource("3_tprmb")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Node3D2/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+radius = 0.05
+height = 1.0
+material = ExtResource("3_tprmb")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D2/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.45000005, 0)
+size = Vector3(1, 0.05, 0.1)
+material = ExtResource("3_tprmb")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D2/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.05, 0)
+size = Vector3(1, 0.05, 0.1)
+material = ExtResource("3_tprmb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_tprmb")

@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cq0idhwb5f2oq" path="res://entities/props/barrel_explosive.tscn" id="7_uuq13"]
 [ext_resource type="PackedScene" uid="uid://qwwlyenuba3g" path="res://entities/props/door_wood_cw.tscn" id="8_58gyl"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="9_ggct0"]
+[ext_resource type="PackedScene" uid="uid://cr7kkacmjn7xs" path="res://entities/props/ladder_basic.tscn" id="10_xnic3"]
 [ext_resource type="PackedScene" uid="uid://bq6a52tvj60bq" path="res://entities/characters/hotel_clerk.tscn" id="11_ggct0"]
 [ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/items/medkit.tscn" id="13_vfwqd"]
 [ext_resource type="PackedScene" uid="uid://kod7e8o8xpep" path="res://entities/items/key.tscn" id="14_juy1h"]
@@ -634,6 +635,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8404713, 1, -11.1610985)
 
 [node name="ZombieSpawn" parent="Areas" instance=ExtResource("5_lf4l6")]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 11.213181, 1.5592396, -7.5)
+
+[node name="LadderBasic" parent="Areas" instance=ExtResource("10_xnic3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5.516819, -0.1920006, 9.974005)
 
 [node name="Cameras" type="Node" parent="."]
 
