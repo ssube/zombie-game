@@ -21,7 +21,7 @@ billboard_mode = 2
 material = SubResource("StandardMaterial3D_xvqyc")
 size = Vector2(0.25, 0.25)
 
-[node name="ThunderEffect" type="Node3D"]
+[node name="RainEffect" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)

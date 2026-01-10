@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://o1127i2lqfjv"]
+[gd_scene load_steps=9 format=3 uid="uid://o1127i2lqfjv"]
 
 [ext_resource type="Script" uid="uid://diido88gnad5t" path="res://scripts/nodes/ZN_CompileShaders.gd" id="1_tmcey"]
 [ext_resource type="PackedScene" uid="uid://cuf1daja6ucof" path="res://entities/weapons/flare_projectile.tscn" id="2_if1mj"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="3_7fmds"]
 [ext_resource type="PackedScene" uid="uid://bvrdhrtkeshuo" path="res://entities/weapons/shotgun_rave.tscn" id="4_xnx0i"]
 [ext_resource type="PackedScene" uid="uid://lvteuslo4wik" path="res://entities/weapons/pistol.tscn" id="5_a8g28"]
+[ext_resource type="PackedScene" uid="uid://d4hn3600t205c" path="res://effects/rain_effect.tscn" id="6_7fmds"]
+[ext_resource type="PackedScene" uid="uid://cymlq343i4rdm" path="res://effects/thunder_effect.tscn" id="7_xnx0i"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tmcey"]
 
@@ -24,6 +26,14 @@ visible = false
 visible = false
 
 [node name="WeaponPistol" parent="Weapons" instance=ExtResource("5_a8g28")]
+visible = false
+
+[node name="Weather" type="Node3D" parent="."]
+
+[node name="RainEffect" parent="Weather" instance=ExtResource("6_7fmds")]
+visible = false
+
+[node name="ThunderEffect" parent="Weather" instance=ExtResource("7_xnx0i")]
 visible = false
 
 [node name="Overlay" type="Node" parent="."]
