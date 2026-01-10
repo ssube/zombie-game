@@ -311,18 +311,6 @@ func _update_ammo_label(player: Entity) -> void:
 	%Menu.set_ammo_label(player_weapon, player_ammo)
 
 
-func _handle_collisions(body: CharacterBody3D, delta: float) -> void:
-	for collision_index in body.get_slide_collision_count():
-		var collision: KinematicCollision3D = body.get_slide_collision(collision_index)
-		var collider: Node3D = collision.get_collider()
-		var position: Vector3 = collision.get_position()
-
-		if collider is RigidBody3D:
-			var push_direction := -collision.get_normal()
-			var push_position = position - collider.global_position
-			collider.apply_impulse(push_direction * 50 * delta, push_position) # TODO: magic number
-
-
 func _set_damage_areas(entity: Entity, weapon: ZC_Weapon_Melee, enable: bool) -> void:
 	ZombieLogger.debug("Setting damage areas to {0} for entity: {1}", [enable, entity.get_path()])
 	for area_path in weapon.damage_areas:

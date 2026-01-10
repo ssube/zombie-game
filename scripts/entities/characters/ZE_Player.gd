@@ -2,10 +2,10 @@
 extends ZE_Character
 class_name ZE_Player
 
-@export var hands_node: Node3D = null
 
 ## Tracks the last entity this player looked at for shimmer effect management
 var last_shimmer_target: Entity = null
+
 
 func on_ready():
 	super.on_ready()
@@ -37,33 +37,3 @@ func sync_stamina():
 		return
 
 	%Menu.set_stamina(c_stamina.current_stamina, true)
-
-
-func get_inventory() -> Array[Entity]:
-	assert(false, "Deprecated: Use RelationshipUtils.get_inventory() instead.")
-	return RelationshipUtils.get_inventory(self)
-
-
-func equip_weapon(weapon_name: String) -> bool:
-	assert(false, "Deprecated: Use EntityUtils.equip_weapon() instead.")
-	var entity_inventory = get_inventory()
-	for entity in entity_inventory:
-		if EntityUtils.is_interactive(entity):
-			var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
-			if interactive.name == weapon_name:
-				EntityUtils.equip_weapon(self, entity)
-				ZombieLogger.debug("Equipped weapon: {0}", [interactive.name])
-				return true
-
-	return false
-
-
-func has_weapon(weapon_name: String) -> bool:
-	var entity_inventory = get_inventory()
-	for entity in entity_inventory:
-		if EntityUtils.is_interactive(entity):
-			var interactive = entity.get_component(ZC_Interactive) as ZC_Interactive
-			if interactive.name == weapon_name:
-				return true
-
-	return false
