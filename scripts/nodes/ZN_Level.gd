@@ -22,74 +22,10 @@ class_name ZN_Level
 
 @export_group("Screenshots")
 @export var screenshot_camera: Camera3D
-@export_tool_button("Take Level Screenshot")
-var take_screenshot_button = _take_level_screenshot
 
 
 var _marker_cache: Dictionary[String, Marker3D] = {}
 
-
-func _take_level_screenshot() -> void:
-	if not Engine.is_editor_hint():
-		ZombieLogger.error("Screenshot function should only be used in the editor.")
-		return
-
-	if screenshot_camera == null:
-		ZombieLogger.error("No screenshot camera assigned.")
-		return
-
-	# Get the scene file path to derive the screenshot name
-	var scene_path := self.scene_file_path
-	if scene_path.is_empty():
-		ZombieLogger.error("Scene has not been saved yet. Save the scene first.")
-		return
-
-	# Create a SubViewport to render from the screenshot camera
-	var viewport := SubViewport.new()
-	viewport.size = Vector2i(1920, 1080)  # Adjust resolution as needed
-	viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
-	viewport.transparent_bg = false
-
-	# Clone the camera for the viewport
-	var camera_copy := screenshot_camera.duplicate() as Camera3D
-	camera_copy.current = true
-
-	viewport.add_child(camera_copy)
-	add_child(viewport)
-	camera_copy.global_transform = screenshot_camera.global_transform
-	ZombieLogger.info("Camera copy position: {0}", [camera_copy.global_position])
-
-	# Force render update
-	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-	RenderingServer.force_draw()
-
-	# Wait for rendering to complete (in editor, we use call_deferred)
-	await get_tree().process_frame
-	await get_tree().process_frame
-	await RenderingServer.frame_post_draw
-
-	# Capture the image
-	var image := viewport.get_texture().get_image()
-
-	# Clean up viewport
-	viewport.queue_free()
-
-	# Derive output path from scene path
-	var scene_name := scene_path.get_file().get_basename()
-	var output_dir := scene_path.get_base_dir()
-	var output_path := output_dir.path_join(scene_name + ".png")
-
-	# Save the image
-	var error := image.save_png(output_path)
-	if error != OK:
-		ZombieLogger.error("Failed to save screenshot: {0}", [error])
-		return
-
-	ZombieLogger.info("Screenshot saved to: {0}", [output_path])
-
-	# Refresh the filesystem so the image appears in the editor
-	#if Engine.is_editor_hint():
-	#	EditorInterface.get_resource_filesystem().scan()
 
 func on_load() -> void:
 	if screenshot_camera:

@@ -21,6 +21,7 @@ var sort_components_button: Button
 var convert_ranged_to_thrown_button: Button
 var generate_diagram_button: Button
 var set_prefab_path_button: Button
+var take_level_screenshot_button: Button
 
 
 func _enter_tree():
@@ -69,6 +70,11 @@ func _enter_tree():
 	set_prefab_path_button.pressed.connect(set_prefab_path)
 	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, set_prefab_path_button)
 
+	take_level_screenshot_button = Button.new()
+	take_level_screenshot_button.text = "Take Level Screenshot"
+	take_level_screenshot_button.pressed.connect(take_level_screenshot)
+	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, take_level_screenshot_button)
+
 
 func _exit_tree():
 	remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_scale_button)
@@ -80,6 +86,7 @@ func _exit_tree():
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, check_level_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, generate_diagram_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, set_prefab_path_button)
+	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, take_level_screenshot_button)
 	fix_mesh_scale_button.queue_free()
 	fix_mesh_rotation_button.queue_free()
 	sort_components_button.queue_free()
@@ -89,6 +96,7 @@ func _exit_tree():
 	check_level_button.queue_free()
 	generate_diagram_button.queue_free()
 	set_prefab_path_button.queue_free()
+	take_level_screenshot_button.queue_free()
 
 
 func fix_collision_mesh_scale() -> void:
@@ -624,3 +632,63 @@ func set_prefab_path() -> void:
 	var scene_path = scene_root.scene_file_path
 	scene_root.prefab_path = scene_path
 	ZombieLogger.info("Saved prefab path: {0}", [scene_root.prefab_path])
+
+
+func take_level_screenshot() -> void:
+	var editor_interface := get_editor_interface()
+	var scene_root := editor_interface.get_edited_scene_root() as ZN_Level
+	if not scene_root:
+		printerr("Current scene is not a ZN_Level!")
+		return
+
+	if scene_root.screenshot_camera == null:
+		printerr("No screenshot camera assigned to the level.")
+		return
+
+	var scene_path := scene_root.scene_file_path
+	if scene_path.is_empty():
+		printerr("Scene has not been saved yet. Save the scene first.")
+		return
+
+	# Create a SubViewport to render from the screenshot camera
+	var viewport := SubViewport.new()
+	viewport.size = Vector2i(1920, 1080)
+	viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+	viewport.transparent_bg = false
+
+	# Clone the camera for the viewport
+	var camera_copy := scene_root.screenshot_camera.duplicate() as Camera3D
+	camera_copy.current = true
+
+	viewport.add_child(camera_copy)
+	scene_root.add_child(viewport)
+	camera_copy.global_transform = scene_root.screenshot_camera.global_transform
+	print("Camera copy position: %v" % camera_copy.global_position)
+
+	# Force render update
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	RenderingServer.force_draw()
+
+	# Wait for rendering to complete
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await RenderingServer.frame_post_draw
+
+	# Capture the image
+	var image := viewport.get_texture().get_image()
+
+	# Clean up viewport
+	viewport.queue_free()
+
+	# Derive output path from scene path
+	var scene_name := scene_path.get_file().get_basename()
+	var output_dir := scene_path.get_base_dir()
+	var output_path := output_dir.path_join(scene_name + ".png")
+
+	# Save the image
+	var error := image.save_png(output_path)
+	if error != OK:
+		printerr("Failed to save screenshot: %d" % error)
+		return
+
+	print("Screenshot saved to: %s" % output_path)
