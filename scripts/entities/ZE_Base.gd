@@ -5,9 +5,6 @@ class_name ZE_Base
 @export_tool_button("Generate Instance ID")
 var generate_instance_id = _generate_instance_id
 
-@export_tool_button("Save Prefab Path")
-var save_prefab_path = _save_prefab_path
-
 @export var extra_components: Array[Component] = []
 @export var prefab_path: String = ""
 
@@ -34,18 +31,6 @@ func _generate_instance_id() -> void:
 	]
 	self.id = "_".join(parts)
 	ZombieLogger.info("Generated new entity ID: {0}", [self.id])
-
-
-func _save_prefab_path() -> void:
-	# var current_scene_root = get_tree().current_scene
-	var current_scene_root = EditorInterface.get_edited_scene_root()
-	if current_scene_root == null:
-		push_error("No current scene, cannot save prefab path.")
-		return
-
-	var scene_path = current_scene_root.scene_file_path
-	self.prefab_path = scene_path
-	print("Saved prefab path: ", self.prefab_path)
 
 
 func _ready() -> void:

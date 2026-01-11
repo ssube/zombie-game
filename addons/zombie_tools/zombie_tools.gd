@@ -20,6 +20,8 @@ var fix_mesh_rotation_button: Button
 var sort_components_button: Button
 var convert_ranged_to_thrown_button: Button
 var generate_diagram_button: Button
+var set_prefab_path_button: Button
+
 
 func _enter_tree():
 	fix_mesh_scale_button = Button.new()
@@ -62,6 +64,11 @@ func _enter_tree():
 	generate_diagram_button.pressed.connect(generate_ui_diagram)
 	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, generate_diagram_button)
 
+	set_prefab_path_button = Button.new()
+	set_prefab_path_button.text = "Set Prefab Path"
+	set_prefab_path_button.pressed.connect(set_prefab_path)
+	add_control_to_container(CONTAINER_INSPECTOR_BOTTOM, set_prefab_path_button)
+
 
 func _exit_tree():
 	remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_scale_button)
@@ -72,6 +79,7 @@ func _exit_tree():
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, convert_ranged_to_thrown_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, check_level_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, generate_diagram_button)
+	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, set_prefab_path_button)
 	fix_mesh_scale_button.queue_free()
 	fix_mesh_rotation_button.queue_free()
 	sort_components_button.queue_free()
@@ -80,6 +88,7 @@ func _exit_tree():
 	convert_ranged_to_thrown_button.queue_free()
 	check_level_button.queue_free()
 	generate_diagram_button.queue_free()
+	set_prefab_path_button.queue_free()
 
 
 func fix_collision_mesh_scale() -> void:
@@ -596,3 +605,22 @@ func generate_ui_diagram() -> void:
 		printerr("Failed to save diagram to: %s (error: %d)" % [output_path, err])
 	else:
 		print("Diagram saved to: %s" % output_path)
+
+
+func set_prefab_path() -> void:
+	var editor_interface := get_editor_interface()
+	var scene_root := editor_interface.get_edited_scene_root() as Node3D
+	if not scene_root:
+		return
+
+	if scene_root == null:
+		ZombieLogger.error("No current scene, cannot save prefab path.")
+		return
+
+	if scene_root.get_node(".") is not ZE_Base:
+		ZombieLogger.error("Current scene root is not a ZE_Base entity, cannot set prefab path.")
+		return
+
+	var scene_path = scene_root.scene_file_path
+	scene_root.prefab_path = scene_path
+	ZombieLogger.info("Saved prefab path: {0}", [scene_root.prefab_path])
