@@ -86,15 +86,19 @@ func set_state(new_name: String):
 		var old_state := current_state
 
 		if current_state:
+				ZombieLogger.debug("Entity {0} exiting state {1}", [entity.name, current_state.name])
 				current_state.exit(entity)
 				if entity is ZE_Base:
 					(entity as ZE_Base).emit_action(Enums.ActionEvent.STATE_EXIT, entity)
 
 		current_state = states[new_name]
+
+		ZombieLogger.debug("Entity {0} entering state {1}", [entity.name, current_state.name])
 		current_state.enter(entity)
 		if entity is ZE_Base:
 			(entity as ZE_Base).emit_action(Enums.ActionEvent.STATE_ENTER, entity)
 
+		ZombieLogger.debug("Entity {0} switched from state {1} to state {2}", [entity.name, old_state.name if old_state else &"none", current_state.name])
 		behavior.current_state = new_name
 		state_changed.emit(old_state, current_state)
 
@@ -114,7 +118,7 @@ func tick(delta: float):
 
 	if debug:
 		var result_name: String = ZB_State.TickResult.keys()[result]
-		ZombieLogger.debug("Entity {0} ticked state {1} with result: {2}", [entity.name, current_state.name, result_name])
+		ZombieLogger.trace("Entity {0} ticked state {1} with result: {2}", [entity.name, current_state.name, result_name])
 
 	match result:
 			ZB_State.TickResult.CONTINUE:
