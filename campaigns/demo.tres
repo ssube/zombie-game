@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="ZR_Campaign" load_steps=18 format=3 uid="uid://co3r3cmvc6wyg"]
 
 [ext_resource type="Script" uid="uid://6e7chkl4nt6l" path="res://scripts/resources/ZR_CampaignLevel.gd" id="1_jaugy"]
-[ext_resource type="Texture2D" uid="uid://d16fipqw30tyn" path="res://levels/bus_stop.png" id="2_grl8t"]
+[ext_resource type="Texture2D" uid="uid://c4dnxxat0sekt" path="res://levels/fishing_pier_0.png" id="2_eupoo"]
 [ext_resource type="PackedScene" uid="uid://v18fidmgep15" path="res://levels/bus_stop.tscn" id="3_jcc15"]
-[ext_resource type="Texture2D" uid="uid://bm13kd1j6krp3" path="res://levels/spooky_church.png" id="4_nbnqx"]
+[ext_resource type="Texture2D" uid="uid://jqcyi1em5lj8" path="res://levels/bus_stop_0.png" id="4_eupoo"]
 [ext_resource type="PackedScene" uid="uid://cpgmxyybvd4x8" path="res://levels/spooky_church.tscn" id="5_gefcm"]
-[ext_resource type="Texture2D" uid="uid://d377jpd1i4ors" path="res://levels/fishing_pier.png" id="6_cmnru"]
+[ext_resource type="Texture2D" uid="uid://cr5jvopweiow8" path="res://levels/spooky_church_0.png" id="6_2gewr"]
 [ext_resource type="PackedScene" uid="uid://b687g8br5b2mv" path="res://levels/fishing_pier.tscn" id="7_cvp7w"]
-[ext_resource type="Texture2D" uid="uid://v52hykyhqcdd" path="res://levels/level_0.png" id="8_ijyp1"]
+[ext_resource type="Texture2D" uid="uid://luf3hj3ma0my" path="res://levels/level_0_0.png" id="8_hgvqa"]
 [ext_resource type="PackedScene" uid="uid://yvupurpwmap4" path="res://levels/level_0.tscn" id="9_t8rcy"]
-[ext_resource type="Texture2D" uid="uid://cx0gfbr17xphm" path="res://levels/level_1.png" id="10_edbmx"]
+[ext_resource type="Texture2D" uid="uid://dcjr225v2r8vf" path="res://levels/level_1_0.png" id="10_jaugy"]
 [ext_resource type="PackedScene" uid="uid://bse6riebwmfln" path="res://levels/level_1.tscn" id="11_x2vpa"]
 [ext_resource type="Script" uid="uid://b2epsdmony1gs" path="res://scripts/resources/ZR_Campaign.gd" id="15_fe0ao"]
 
@@ -19,7 +19,7 @@ key = "fishing_pier"
 title = "Fishing Pier"
 scene = ExtResource("7_cvp7w")
 loading_hints = Array[String](["Fish are food, if you're a zombie."])
-loading_image = ExtResource("6_cmnru")
+loading_image = ExtResource("2_eupoo")
 min_load_time = 1.5
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
@@ -28,7 +28,7 @@ script = ExtResource("1_jaugy")
 key = "bus_stop"
 title = "Bus Stop"
 scene = ExtResource("3_jcc15")
-loading_image = ExtResource("2_grl8t")
+loading_image = ExtResource("4_eupoo")
 min_load_time = 1.5
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
@@ -37,7 +37,7 @@ script = ExtResource("1_jaugy")
 key = "spooky_church"
 title = "Spooky Church"
 scene = ExtResource("5_gefcm")
-loading_image = ExtResource("4_nbnqx")
+loading_image = ExtResource("6_2gewr")
 min_load_time = 1.5
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
@@ -48,7 +48,7 @@ title = "Debug"
 scene = ExtResource("9_t8rcy")
 next_level = "zone_1"
 loading_hints = Array[String](["Zombies are not made of cheese."])
-loading_image = ExtResource("8_ijyp1")
+loading_image = ExtResource("8_hgvqa")
 min_load_time = 1.5
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
@@ -57,7 +57,7 @@ script = ExtResource("1_jaugy")
 key = "debug_red"
 title = "Debug Red"
 scene = ExtResource("11_x2vpa")
-loading_image = ExtResource("10_edbmx")
+loading_image = ExtResource("10_jaugy")
 min_load_time = 1.5
 metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 

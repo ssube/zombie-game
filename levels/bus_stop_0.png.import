@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d16fipqw30tyn"
-path="res://.godot/imported/bus_stop.png-3c82c2bbcebc01661e01d70908be3e8e.ctex"
+uid="uid://jqcyi1em5lj8"
+path="res://.godot/imported/bus_stop_0.png-352b54c91ecd99ca41ea340b8def00b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/bus_stop.png"
-dest_files=["res://.godot/imported/bus_stop.png-3c82c2bbcebc01661e01d70908be3e8e.ctex"]
+source_file="res://levels/bus_stop_0.png"
+dest_files=["res://.godot/imported/bus_stop_0.png-352b54c91ecd99ca41ea340b8def00b3.ctex"]
 
 [params]
 

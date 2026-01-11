@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d377jpd1i4ors"
-path="res://.godot/imported/fishing_pier.png-8632fc26cf72ba64a3672ebb64d00d9f.ctex"
+uid="uid://cr5jvopweiow8"
+path="res://.godot/imported/spooky_church_0.png-ba1da0bbcf72b31f5df23e9b26e659dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/fishing_pier.png"
-dest_files=["res://.godot/imported/fishing_pier.png-8632fc26cf72ba64a3672ebb64d00d9f.ctex"]
+source_file="res://levels/spooky_church_0.png"
+dest_files=["res://.godot/imported/spooky_church_0.png-ba1da0bbcf72b31f5df23e9b26e659dd.ctex"]
 
 [params]
 
