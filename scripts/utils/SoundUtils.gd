@@ -14,6 +14,9 @@ static func broadcast(
 	if OptionsManager.options.audio.audio_enabled == false:
 		return  # Audio is disabled
 
+	if OptionsManager.options.cheats.show_sounds:
+		DebugDraw3D.draw_sphere(position, radius, Color.GREEN, OptionsManager.options.cheats.debug_duration)
+
 	var radius_squared := radius * radius
 
 	# Broadcast to players (subtitles)
@@ -46,6 +49,9 @@ static func broadcast(
 		var intensity := _calculate_intensity(dist_sq, radius_squared, volume)
 		var stimulus := ZC_Stimulus.heard_sound(position, intensity, faction, source_entity)
 		entity.add_relationship(RelationshipUtils.make_detected(stimulus))
+
+		if OptionsManager.options.cheats.show_perception:
+			DebugDraw3D.draw_line(entity3d.global_position, position, Color.YELLOW, OptionsManager.options.cheats.debug_duration)
 
 
 ## Calculate intensity falloff based on distance

@@ -234,3 +234,23 @@ func _on_voices_volume_slider_value_changed(value: float) -> void:
 	if _play_audio:
 		OptionsManager.apply_volume()
 		debounced_voices_preview.start()
+
+
+func _on_nav_mesh_box_toggled(toggled_on: bool) -> void:
+	_dirty = true
+	_current_options.cheats.show_nav_mesh = toggled_on
+
+
+func _on_nav_paths_box_toggled(toggled_on: bool) -> void:
+	_dirty = true
+	_current_options.cheats.show_nav_paths = toggled_on
+
+
+func _on_sounds_box_toggled(toggled_on: bool) -> void:
+	_dirty = true
+	_current_options.cheats.show_sounds = toggled_on
+
+
+func _on_perception_box_toggled(toggled_on: bool) -> void:
+	_dirty = true
+	_current_options.cheats.show_perception = toggled_on

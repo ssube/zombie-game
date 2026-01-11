@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dyv5b48xquqot"]
+[gd_scene load_steps=16 format=3 uid="uid://dyv5b48xquqot"]
 
 [ext_resource type="Script" uid="uid://dr0t3qprbbuke" path="res://scripts/menus/options_menu.gd" id="1_p3s2b"]
 [ext_resource type="Script" uid="uid://dhxffhuroih4k" path="res://menus/tab_container.gd" id="2_l4xqj"]
@@ -32,6 +32,8 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2k4wj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_labby"]
 
@@ -564,17 +566,46 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Player Cheats"
+
 [node name="NoAggroBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "No aggro"
+text = "No Aggro"
 
 [node name="NoClipBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "No clip"
+text = "No Clip"
 
 [node name="GodModeBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
 layout_mode = 2
-text = "God mode"
+text = "God Mode"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_2k4wj")
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Debug Options"
+
+[node name="NavMeshBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Show Nav Mesh"
+
+[node name="NavPathsBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Show Nav Paths"
+
+[node name="SoundsBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Show Sounds"
+
+[node name="PerceptionBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+layout_mode = 2
+text = "Show Perception"
 
 [node name="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("5_eeh4p")]
 
@@ -611,5 +642,9 @@ text = "Apply"
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoAggroBox" to="." method="_on_no_aggro_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoClipBox" to="." method="_on_no_clip_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/GodModeBox" to="." method="_on_god_mode_box_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NavMeshBox" to="." method="_on_nav_mesh_box_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NavPathsBox" to="." method="_on_nav_paths_box_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/SoundsBox" to="." method="_on_sounds_box_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/PerceptionBox" to="." method="_on_perception_box_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
