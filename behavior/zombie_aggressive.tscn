@@ -22,10 +22,10 @@
 [ext_resource type="Script" uid="uid://dyb15yih6xr3a" path="res://scripts/behavior/conditions/ZB_IsPlayerVisible.gd" id="17_npmva"]
 [ext_resource type="Script" uid="uid://dicdllgowu6ov" path="res://scripts/behavior/conditions/utils/ZB_Throttle.gd" id="18_gh7l7"]
 [ext_resource type="Script" uid="uid://ccjqwf2jo717o" path="res://scripts/behavior/conditions/utils/ZB_Random.gd" id="19_kp5j3"]
-[ext_resource type="Script" uid="uid://co7jr4vvj7gdc" path="res://scripts/nodes/actions/ZN_DebounceAction.gd" id="23_kw5dq"]
+[ext_resource type="Script" path="res://scripts/nodes/actions/ZN_DebounceAction.gd" id="23_kw5dq"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="23_nrfdj"]
 [ext_resource type="AudioStream" uid="uid://bbdhwqdsowxt6" path="res://sounds/Echoes - Audio Super Kit/OGG (recommended)/SFX/Creatures/Monster/monster_roar_2.ogg" id="24_kw5dq"]
-[ext_resource type="Script" uid="uid://os5levmlyfew" path="res://scripts/nodes/actions/ZN_ThrottleAction.gd" id="24_ldd0b"]
+[ext_resource type="Script" path="res://scripts/nodes/actions/ZN_ThrottleAction.gd" id="24_ldd0b"]
 [ext_resource type="Script" uid="uid://bf5mlyrquihqy" path="res://scripts/nodes/ZN_AudioVariable3D.gd" id="25_ldd0b"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_b6w5m"]

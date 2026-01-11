@@ -123,6 +123,15 @@ func on_update() -> void:
 
 	%AdaptiveAimSlider.value = _current_options.gameplay.adaptive_aim
 
+	%NoAggroBox.button_pressed = _current_options.cheats.no_aggro
+	%NoClipBox.button_pressed = _current_options.cheats.no_clip
+	%GodModeBox.button_pressed = _current_options.cheats.god_mode
+
+	%FSMStatesBox.button_pressed = _current_options.cheats.show_fsm_states
+	%NavMeshBox.button_pressed = _current_options.cheats.show_nav_mesh
+	%NavPathsBox.button_pressed = _current_options.cheats.show_nav_paths
+	%SoundsBox.button_pressed = _current_options.cheats.show_sounds
+	%PerceptionBox.button_pressed = _current_options.cheats.show_perception
 
 func _on_physical_shells_box_toggled(toggled_on: bool) -> void:
 	_dirty = true
@@ -254,3 +263,8 @@ func _on_sounds_box_toggled(toggled_on: bool) -> void:
 func _on_perception_box_toggled(toggled_on: bool) -> void:
 	_dirty = true
 	_current_options.cheats.show_perception = toggled_on
+
+
+func _on_fsm_states_box_toggled(toggled_on: bool) -> void:
+	_dirty = true
+	_current_options.cheats.show_fsm_states = toggled_on

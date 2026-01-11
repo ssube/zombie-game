@@ -571,14 +571,17 @@ layout_mode = 2
 text = "Player Cheats"
 
 [node name="NoAggroBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "No Aggro"
 
 [node name="NoClipBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "No Clip"
 
 [node name="GodModeBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "God Mode"
 
@@ -591,19 +594,28 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_2k4wj")
 layout_mode = 2
 text = "Debug Options"
 
+[node name="FSMStatesBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show FSM States"
+
 [node name="NavMeshBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Show Nav Mesh"
 
 [node name="NavPathsBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Show Nav Paths"
 
 [node name="SoundsBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Show Sounds"
 
 [node name="PerceptionBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Show Perception"
 
@@ -642,6 +654,7 @@ text = "Apply"
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoAggroBox" to="." method="_on_no_aggro_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NoClipBox" to="." method="_on_no_clip_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/GodModeBox" to="." method="_on_god_mode_box_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/FSMStatesBox" to="." method="_on_fsm_states_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NavMeshBox" to="." method="_on_nav_mesh_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/NavPathsBox" to="." method="_on_nav_paths_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/TabContainer/Cheats/CenterContainer/GridContainer3/SoundsBox" to="." method="_on_sounds_box_toggled"]
