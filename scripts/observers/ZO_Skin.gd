@@ -73,26 +73,8 @@ func show_skin_group(entity: Node, show_group: String, hide_groups: Array = []) 
 	var all_children := entity.find_children("*", "", true, false)
 	for child in all_children:
 		if child.is_in_group(show_group):
-			_toggle_node(child, true)
+			TreeUtils.toggle_node(child, TreeUtils.ALL_FLAGS, TreeUtils.ALL_FLAGS)
 
 		for hide_group: String in hide_groups:
 			if child.is_in_group(hide_group):
-				_toggle_node(child, false)
-
-
-# TODO: this needs to be extracted and used consistently
-func _toggle_node(node: Node, value: bool) -> void:
-	if "active" in node:
-		node.active = value
-
-	if "visible" in node:
-		node.visible = value
-
-	if "disabled" in node:
-		node.disabled = not node
-
-	if "process_mode" in node:
-		if value:
-			node.process_mode = Node.PROCESS_MODE_INHERIT
-		else:
-			node.process_mode = Node.PROCESS_MODE_DISABLED
+				TreeUtils.toggle_node(child, TreeUtils.NodeState.NONE, TreeUtils.ALL_FLAGS)

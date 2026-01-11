@@ -38,23 +38,21 @@ enum NodeState {
 	PROCESSING = 8,
 }
 
+const ALL_FLAGS: NodeState = NodeState.ACTIVE | NodeState.VISIBLE | NodeState.ENABLED | NodeState.PROCESSING
 
-static func toggle_node(node: Node, state: NodeState = NodeState.NONE) -> void:
-	if "active" in node:
-		var active := (state & NodeState.ACTIVE) != 0
-		node.active = active
 
-	if "visible" in node:
-		var visible := (state & NodeState.VISIBLE) != 0
-		node.visible = visible
+static func toggle_node(node: Node, state: NodeState = NodeState.NONE, mask: NodeState = NodeState.NONE) -> void:
+	if (mask & NodeState.ACTIVE) and "active" in node:
+		node.active = (state & NodeState.ACTIVE) != 0
 
-	if "disabled" in node:
-		var disabled := not (state & NodeState.ENABLED)
-		node.disabled = disabled
+	if (mask & NodeState.VISIBLE) and "visible" in node:
+		node.visible = (state & NodeState.VISIBLE) != 0
 
-	if "process_mode" in node:
-		var processing := (state & NodeState.PROCESSING) != 0
-		if processing:
+	if (mask & NodeState.ENABLED) and "disabled" in node:
+		node.disabled = (state & NodeState.ENABLED) == 0
+
+	if (mask & NodeState.PROCESSING) and "process_mode" in node:
+		if (state & NodeState.PROCESSING):
 			node.process_mode = Node.PROCESS_MODE_INHERIT
 		else:
 			node.process_mode = Node.PROCESS_MODE_DISABLED

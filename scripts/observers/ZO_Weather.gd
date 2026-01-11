@@ -50,13 +50,13 @@ func _time_of_day_changed(_entity: Entity, component: ZC_Weather, new_value: Var
 	var group_nodes := get_tree().get_nodes_in_group(time_group)
 	ZombieLogger.debug("Time group {0} has {1} nodes", [time_name, group_nodes.size()])
 	for node in group_nodes:
-		_toggle_node(node, true)
+		TreeUtils.toggle_node(node, TreeUtils.ALL_FLAGS, TreeUtils.ALL_FLAGS)
 
 	var hidden_group_names := _hidden_groups[time_group]
 	for hidden_name in hidden_group_names:
 		group_nodes = get_tree().get_nodes_in_group(hidden_name)
 		for node in group_nodes:
-			_toggle_node(node, false)
+			TreeUtils.toggle_node(node, TreeUtils.NodeState.NONE, TreeUtils.ALL_FLAGS)
 
 	_set_level_environment(component)
 	_call_level_hook(component)
@@ -68,13 +68,13 @@ func _weather_type_changed(_entity: Entity, component: ZC_Weather, new_value: Va
 	var group_nodes := get_tree().get_nodes_in_group(weather_group)
 	ZombieLogger.debug("Weather group {0} has {1} nodes", [weather_group, group_nodes.size()])
 	for node in group_nodes:
-		_toggle_node(node, true)
+		TreeUtils.toggle_node(node, TreeUtils.ALL_FLAGS, TreeUtils.ALL_FLAGS)
 
 	var other_group_names := _hidden_groups[weather_group]
 	for other_name in other_group_names:
 		group_nodes = get_tree().get_nodes_in_group(other_name)
 		for node in group_nodes:
-			_toggle_node(node, false)
+			TreeUtils.toggle_node(node, TreeUtils.NodeState.NONE, TreeUtils.ALL_FLAGS)
 
 
 	if rain_system:
@@ -85,14 +85,6 @@ func _weather_type_changed(_entity: Entity, component: ZC_Weather, new_value: Va
 
 	_set_level_environment(component)
 	_call_level_hook(component)
-
-
-func _toggle_node(node: Node, enabled: bool) -> void:
-	if "active" in node:
-		node.active = enabled
-
-	if "visible" in node:
-		node.visible = enabled
 
 
 func _set_level_environment(component: ZC_Weather) -> void:
