@@ -25,6 +25,9 @@ var take_level_screenshot_button: Button
 
 
 func _enter_tree():
+	if not Engine.is_editor_hint():
+		return
+
 	fix_mesh_scale_button = Button.new()
 	fix_mesh_scale_button.text = "Fix Collision Mesh Scale"
 	fix_mesh_scale_button.pressed.connect(fix_collision_mesh_scale)
