@@ -70,9 +70,27 @@ func _on_death(entity: ZE_Base, c_health: ZC_Health) -> void:
 			objective.is_complete = true
 
 	if EntityUtils.is_player(entity) and killer != null:
-		var killer_name := killer.name
-		var interactive := killer.get_component(ZC_Interactive) as ZC_Interactive
-		if interactive:
-			killer_name = interactive.name
+		var death_message := _get_death_message(entity, killer)
+		%Menu.set_killer(death_message)
 
-		%Menu.set_killer(killer_name)
+
+func _get_killer_name(killer: Entity) -> String:
+	var killer_name := killer.name
+	var interactive := killer.get_component(ZC_Interactive) as ZC_Interactive
+	if interactive:
+		killer_name = interactive.name
+	return killer_name
+
+
+func _get_death_message(victim: Entity, killer: Entity) -> String:
+	var killed_rel := RelationshipUtils.get_killed(victim, killer)
+	var killed := killed_rel.relation as ZC_Killed if killed_rel else null
+	var killer_name := _get_killer_name(killer)
+
+	if killed and killed.cause_of_death != "":
+		if killer_name == "":
+			return killed.cause_of_death
+
+		return "%s by %s" % [killed.cause_of_death, killer_name]
+
+	return killer_name

@@ -45,6 +45,14 @@ static func get_killer(item: Entity) -> Entity:
 
 	return relationships.get(0)
 
+
+static func get_killed(victim: Entity, killer: Entity) -> Relationship:
+	var relationships := killer.get_relationships(any_killed) as Array[Relationship]
+	for rel in relationships:
+		if rel.target == victim:
+			return rel
+	return null
+
 static func get_user(target: Entity) -> Entity:
 	var relationships := target.get_relationships(any_used) as Array[Relationship]
 	assert(relationships.size() <= 1, "Item has more than one entity using it, relationships are leaking!")
@@ -96,13 +104,13 @@ static func get_wielding(target: Entity) -> Array[Entity]:
 
 	return entities
 
-static func make_damage(actor: Entity, damage_amount: int) -> Relationship:
+static func make_damage(actor: Entity, damage_amount: int, cause_of_death: String = "") -> Relationship:
 	var actor_id := ""
 	if actor:
 		actor_id = actor.id
 
 	var damage_component := ZC_Damage.new(damage_amount, actor_id)
-	var damage_link := ZC_Damaged.new(actor_id)
+	var damage_link := ZC_Damaged.new(actor_id, cause_of_death)
 	damage_link.damaged_by = actor_id
 	return Relationship.new(damage_link, damage_component)
 

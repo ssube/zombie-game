@@ -14,6 +14,7 @@ enum HealthMode {
 
 @export var health_mode: HealthMode = HealthMode.HEAL
 @export var health_amount: int = 10
+@export var cause_of_death: String = ""
 
 
 func run_entity(source: Node, _event: Enums.ActionEvent, actor: Entity) -> void:
@@ -31,7 +32,7 @@ func run_entity(source: Node, _event: Enums.ActionEvent, actor: Entity) -> void:
 
 	match health_mode:
 		HealthMode.DAMAGE:
-			actor.add_relationship(RelationshipUtils.make_damage(source_entity, health_amount))
+			actor.add_relationship(RelationshipUtils.make_damage(source_entity, health_amount, cause_of_death))
 		HealthMode.HEAL:
 			actor.add_relationship(RelationshipUtils.make_damage(source_entity, -health_amount))
 		HealthMode.MAX:

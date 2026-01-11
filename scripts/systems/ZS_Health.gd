@@ -72,6 +72,51 @@ func _calculate_most_damage_source(damages: Array[Relationship]) -> String:
 	return max_source
 
 
+func _calculate_cause_of_death(damages: Array[Relationship]) -> String:
+	match mode:
+		HealthMode.LAST_DAMAGE:
+			return _calculate_last_cause_of_death(damages)
+		HealthMode.MOST_DAMAGE:
+			return _calculate_most_cause_of_death(damages)
+
+	return ""
+
+
+func _calculate_last_cause_of_death(damages: Array[Relationship]) -> String:
+	var last_cause := ""
+	var max_timestamp := 0.0
+
+	for damage in damages:
+		var relation := damage.relation as ZC_Damaged
+		if relation.damaged_at > max_timestamp and relation.cause_of_death != "":
+			last_cause = relation.cause_of_death
+			max_timestamp = relation.damaged_at
+
+	return last_cause
+
+
+func _calculate_most_cause_of_death(damages: Array[Relationship]) -> String:
+	var damage_by_source: Dictionary[String, int] = {}
+	var cause_by_source: Dictionary[String, String] = {}
+
+	for damage in damages:
+		var relation := damage.relation as ZC_Damaged
+		damage_by_source[relation.damaged_by] = damage_by_source.get(relation.damaged_by, 0) + damage.target.amount
+		if relation.cause_of_death != "":
+			cause_by_source[relation.damaged_by] = relation.cause_of_death
+
+	var max_source := ""
+	var max_damage := 0
+
+	for source in damage_by_source.keys():
+		var amount := damage_by_source[source]
+		if amount > max_damage:
+			max_source = source
+			max_damage = amount
+
+	return cause_by_source.get(max_source, "")
+
+
 func _apply_damage(entity: Entity, health: ZC_Health, damages: Array[Relationship]) -> void:
 	if EntityUtils.is_player(entity) and OptionsManager.options.cheats.god_mode:
 		return
@@ -100,7 +145,8 @@ func _apply_damage(entity: Entity, health: ZC_Health, damages: Array[Relationshi
 		# TODO: find a better way to only add this once per entity
 		# the observer already has both of these values, for example
 		if adjusted_health <= 0 and previous_health > 0:
-			var killed := Relationship.new(ZC_Killed.new(damage_source), entity)
+			var cause := _calculate_cause_of_death(damages)
+			var killed := Relationship.new(ZC_Killed.new(damage_source, cause), entity)
 			hit_by.add_relationship(killed)
 
 	if EntityUtils.is_player(entity):
