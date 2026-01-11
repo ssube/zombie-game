@@ -80,6 +80,8 @@ weather_snow=""
 weather_custom=""
 level_markers=""
 skin_material=""
+shadow_high=""
+shadow_low=""
 
 [input]
 

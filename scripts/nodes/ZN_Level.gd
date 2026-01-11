@@ -95,8 +95,33 @@ func on_load() -> void:
 	if screenshot_camera:
 		screenshot_camera.queue_free()
 
+	apply_shadow_settings()
+
 	if level_actions:
 		ActionUtils.run_component(level_actions, self, Enums.ActionEvent.LEVEL_LOAD, null)
+
+
+func apply_shadow_settings() -> void:
+	var shadow_count := OptionsManager.options.graphics.shadow_count
+
+	# Get nodes from shadow groups
+	var shadow_low_nodes := get_tree().get_nodes_in_group("shadow_low")
+	var shadow_high_nodes := get_tree().get_nodes_in_group("shadow_high")
+
+	# Determine which shadows should be enabled based on shadow_count setting
+	# NONE (0): all shadows disabled
+	# LOW (1): shadow_low enabled, shadow_high disabled
+	# HIGH (3): both enabled
+	var enable_low := shadow_count >= ZR_GraphicsOptions.ShadowCount.LOW
+	var enable_high := shadow_count >= ZR_GraphicsOptions.ShadowCount.HIGH
+
+	for node in shadow_low_nodes:
+		if node is Light3D:
+			node.shadow_enabled = enable_low
+
+	for node in shadow_high_nodes:
+		if node is Light3D:
+			node.shadow_enabled = enable_high
 
 
 func cache_markers() -> void:

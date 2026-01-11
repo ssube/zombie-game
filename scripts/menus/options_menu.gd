@@ -114,6 +114,14 @@ func on_update() -> void:
 
 		i += 1
 
+	match _current_options.graphics.shadow_count:
+		ZR_GraphicsOptions.ShadowCount.NONE:
+			%ShadowCountMenu.select(0)
+		ZR_GraphicsOptions.ShadowCount.LOW:
+			%ShadowCountMenu.select(1)
+		ZR_GraphicsOptions.ShadowCount.HIGH:
+			%ShadowCountMenu.select(2)
+
 	%MainVolumeSlider.value = _current_options.audio.main_volume
 	%MusicVolumeSlider.value = _current_options.audio.music_volume
 	%EffectsVolumeSlider.value = _current_options.audio.effects_volume
@@ -269,3 +277,14 @@ func _on_perception_box_toggled(toggled_on: bool) -> void:
 func _on_fsm_states_box_toggled(toggled_on: bool) -> void:
 	_dirty = true
 	_current_options.cheats.show_fsm_states = toggled_on
+
+
+func _on_shadow_count_menu_item_selected(index: int) -> void:
+	_dirty = true
+	match index:
+		0:
+			_current_options.graphics.shadow_count = ZR_GraphicsOptions.ShadowCount.NONE
+		1:
+			_current_options.graphics.shadow_count = ZR_GraphicsOptions.ShadowCount.LOW
+		2:
+			_current_options.graphics.shadow_count = ZR_GraphicsOptions.ShadowCount.HIGH
