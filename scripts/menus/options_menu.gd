@@ -133,6 +133,7 @@ func on_update() -> void:
 	%SoundsBox.button_pressed = _current_options.cheats.show_sounds
 	%PerceptionBox.button_pressed = _current_options.cheats.show_perception
 
+
 func _on_physical_shells_box_toggled(toggled_on: bool) -> void:
 	_dirty = true
 	_current_options.gameplay.physical_casings = toggled_on

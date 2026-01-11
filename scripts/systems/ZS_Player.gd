@@ -31,6 +31,20 @@ func _apply_adaptive_aim(raycast: RayCast3D, entity: Entity, delta: float) -> vo
 			node.global_transform.basis = Basis(slerped_quaternion)
 
 
+func _draw_debug_ray(raycast: RayCast3D) -> void:
+	if OptionsManager.options.cheats.show_ray_casts == false:
+		return
+
+	var from := raycast.global_transform.origin
+	var to := get_raycast_end_point(raycast)
+	var hit := raycast.is_colliding()
+	var hit_point := Vector3.ZERO
+	if hit:
+		hit_point = raycast.get_collision_point()
+
+	DebugDraw3D.draw_line_hit(from, to, hit_point, hit, 0.25, Color.RED, Color.GREEN, OptionsManager.options.cheats.debug_duration / 100.0)
+
+
 func query():
 	return q.with_all([ZC_Velocity, ZC_Player, ZC_Input])
 
@@ -129,6 +143,8 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 		# Adjust the aim based on the ray's collision point or end point if there is no collision
 		var ray = entity.get_node(player.view_ray) as RayCast3D
+		_draw_debug_ray(ray)
+
 		_apply_adaptive_aim(ray, entity, delta)
 
 		# Handle interactions
