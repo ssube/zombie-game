@@ -2,6 +2,10 @@
 extends Node
 class_name ZB_State
 
+
+@export var debug_color: Color = Color(1, 1, 1, 1)
+
+
 enum TickResult { CONTINUE, CHECK, FORCE_EXIT }
 
 ## Called when entering the state

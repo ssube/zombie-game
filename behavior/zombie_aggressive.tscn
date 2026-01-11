@@ -50,22 +50,27 @@ metadata/_custom_type_script = "uid://di74g8tmachs3"
 
 [node name="ZB_State_Attack" type="Node" parent="FSM/States"]
 script = ExtResource("10_t3yky")
+debug_color = Color(1, 0, 0, 1)
 metadata/_custom_type_script = "uid://df075dj3mhif5"
 
 [node name="ZB_State_Chase" type="Node" parent="FSM/States"]
 script = ExtResource("11_4bq8y")
+debug_color = Color(1, 0.56666666, 0, 1)
 metadata/_custom_type_script = "uid://cyplr8cytq8s7"
 
 [node name="ZB_State_Idle" type="Node" parent="FSM/States"]
 script = ExtResource("13_4qama")
+debug_color = Color(0.36550003, 1, 0.19, 1)
 metadata/_custom_type_script = "uid://4mkf4oytommo"
 
 [node name="ZB_State_Wander" type="Node" parent="FSM/States"]
 script = ExtResource("14_2byos")
+debug_color = Color(0.13999999, 0.55566645, 1, 1)
 metadata/_custom_type_script = "uid://spbk6hwrc5ow"
 
 [node name="ZB_State_Halt" type="Node" parent="FSM/States"]
 script = ExtResource("7_jabh2")
+debug_color = Color(0, 0, 0, 1)
 metadata/_custom_type_script = "uid://fxmkxi8mm1oi"
 
 [node name="Transitions" type="Node" parent="FSM"]

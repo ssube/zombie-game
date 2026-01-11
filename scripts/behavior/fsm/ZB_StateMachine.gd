@@ -9,6 +9,7 @@ var transitions: Array[ZB_Transition] = []
 var transitions_by_source: Dictionary[ZB_State, Array] = {}
 var global_transitions: Array[ZB_Transition] = []
 var current_state: ZB_State
+var debug_delta: float = 0.0
 
 @export var active: bool = true
 @export var debug: bool = false
@@ -81,19 +82,32 @@ func _check_transitions(delta: float, behavior: ZC_Behavior, force_exit: bool = 
 						set_state(default_state.name)
 
 
+func _show_debug_state():
+		if not current_state:
+			return
+
+		if not OptionsManager.options.cheats.show_fsm_states:
+			return
+
+		var fsm_marker: Transform3D = entity.global_transform.translated(Vector3.UP * 1.5)
+		var fsm_label: Vector3 = fsm_marker.origin + (Vector3.UP * 0.5)
+		DebugDraw3D.draw_position(fsm_marker, current_state.debug_color, OptionsManager.options.cheats.debug_duration)
+		DebugDraw3D.draw_text(fsm_label, current_state.name, 32, current_state.debug_color, OptionsManager.options.cheats.debug_duration)
+
+
 func set_state(new_name: String):
 		var behavior := entity.get_component(ZC_Behavior) as ZC_Behavior
 		var old_state := current_state
 
 		if current_state:
-				ZombieLogger.debug("Entity {0} exiting state {1}", [entity.name, current_state.name])
+				ZombieLogger.trace("Entity {0} exiting state {1}", [entity.name, current_state.name])
 				current_state.exit(entity)
 				if entity is ZE_Base:
 					(entity as ZE_Base).emit_action(Enums.ActionEvent.STATE_EXIT, entity)
 
 		current_state = states[new_name]
 
-		ZombieLogger.debug("Entity {0} entering state {1}", [entity.name, current_state.name])
+		ZombieLogger.trace("Entity {0} entering state {1}", [entity.name, current_state.name])
 		current_state.enter(entity)
 		if entity is ZE_Base:
 			(entity as ZE_Base).emit_action(Enums.ActionEvent.STATE_ENTER, entity)
@@ -101,6 +115,9 @@ func set_state(new_name: String):
 		ZombieLogger.debug("Entity {0} switched from state {1} to state {2}", [entity.name, old_state.name if old_state else &"none", current_state.name])
 		behavior.current_state = new_name
 		state_changed.emit(old_state, current_state)
+
+		debug_delta = 0.0
+		_show_debug_state()
 
 
 func tick(delta: float):
@@ -112,6 +129,11 @@ func tick(delta: float):
 
 	if not current_state:
 			return
+
+	debug_delta += delta
+	if debug_delta >= OptionsManager.options.cheats.debug_duration:
+		debug_delta = 0.0
+		_show_debug_state()
 
 	var behavior := entity.get_component(ZC_Behavior) as ZC_Behavior
 	var result := current_state.tick(entity, delta, behavior)
