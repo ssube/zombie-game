@@ -80,6 +80,7 @@ func show_skin_group(entity: Node, show_group: String, hide_groups: Array = []) 
 				_toggle_node(child, false)
 
 
+# TODO: this needs to be extracted and used consistently
 func _toggle_node(node: Node, value: bool) -> void:
 	if "active" in node:
 		node.active = value
