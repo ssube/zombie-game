@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://carcwljkjgx0u"]
+[gd_scene load_steps=24 format=4 uid="uid://dgn7xheqs3djo"]
 
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_n02nd"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_3gqnf"]
@@ -11,6 +11,11 @@
 [ext_resource type="Script" uid="uid://b0eht5em6vv5w" path="res://scripts/nodes/ZN_Inventory.gd" id="7_3gqnf"]
 [ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="7_upujx"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="8_3q07g"]
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="12_pf66d"]
+[ext_resource type="Script" uid="uid://dbj456ofx8mw1" path="res://scripts/nodes/actions/ZN_BranchAction.gd" id="13_517u1"]
+[ext_resource type="Script" uid="uid://cysycp75pdgdy" path="res://scripts/nodes/actions/ZN_ShimmerAction.gd" id="13_wkkcv"]
+[ext_resource type="Script" uid="uid://daa5v82rpm7ih" path="res://scripts/nodes/conditions/ZN_EventCondition.gd" id="14_3wp82"]
+[ext_resource type="Script" uid="uid://crylbd231pgne" path="res://scripts/nodes/conditions/ZN_FactionCondition.gd" id="15_3wp82"]
 
 [sub_resource type="Resource" id="Resource_ppt46"]
 script = ExtResource("3_3gqnf")
@@ -67,6 +72,9 @@ shadow_mesh = SubResource("ArrayMesh_023j0")
 [sub_resource type="BoxShape3D" id="BoxShape3D_l5l63"]
 size = Vector3(1.1, 1.1, 1.1)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_wkkcv"]
+radius = 10.0
+
 [node name="CrateWood" type="StaticBody3D"]
 collision_layer = 2
 collision_mask = 3
@@ -97,3 +105,48 @@ metadata/_custom_type_script = "uid://b0eht5em6vv5w"
 [node name="Marker3D" type="Marker3D" parent="ZN_Inventory"]
 
 [node name="WeaponShotgun" parent="ZN_Inventory" instance=ExtResource("8_3q07g")]
+
+[node name="ZN_TriggerArea3D" type="Area3D" parent="." node_paths=PackedStringArray("parent_entity")]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("12_pf66d")
+track_colliders = true
+parent_entity = NodePath("..")
+trigger_on_empty = true
+trigger_on_body_interval = false
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZN_TriggerArea3D"]
+shape = SubResource("SphereShape3D_wkkcv")
+
+[node name="EnterBranch" type="Node" parent="ZN_TriggerArea3D"]
+script = ExtResource("13_517u1")
+metadata/_custom_type_script = "uid://dbj456ofx8mw1"
+
+[node name="IfEnter" type="Node" parent="ZN_TriggerArea3D/EnterBranch"]
+script = ExtResource("14_3wp82")
+allow_events = Array[int]([10])
+metadata/_custom_type_script = "uid://daa5v82rpm7ih"
+
+[node name="IfPlayer" type="Node" parent="ZN_TriggerArea3D/EnterBranch"]
+script = ExtResource("15_3wp82")
+apply_to_factions = Array[String](["friendly_players"])
+metadata/_custom_type_script = "uid://crylbd231pgne"
+
+[node name="EnableShimmer" type="Node" parent="ZN_TriggerArea3D/EnterBranch"]
+script = ExtResource("13_wkkcv")
+target = 1
+
+[node name="EmptyBranch" type="Node" parent="ZN_TriggerArea3D"]
+script = ExtResource("13_517u1")
+metadata/_custom_type_script = "uid://dbj456ofx8mw1"
+
+[node name="IfEmpty" type="Node" parent="ZN_TriggerArea3D/EmptyBranch"]
+script = ExtResource("14_3wp82")
+allow_events = Array[int]([1])
+metadata/_custom_type_script = "uid://daa5v82rpm7ih"
+
+[node name="DisableShimmer" type="Node" parent="ZN_TriggerArea3D/EmptyBranch"]
+script = ExtResource("13_wkkcv")
+enable_shimmer = 0
+target = 1

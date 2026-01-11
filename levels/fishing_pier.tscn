@@ -12,7 +12,7 @@
 [ext_resource type="Material" uid="uid://vq88t5vuqjfq" path="res://textures/Color Maps/wood_pt_4.tres" id="5_edr2s"]
 [ext_resource type="Script" uid="uid://gqp4emt0ehby" path="res://scripts/nodes/actions/ZN_BuoyancyAction.gd" id="6_r8vtg"]
 [ext_resource type="Material" path="res://textures/Color Maps/concrete_pt_4.tres" id="6_xtxad"]
-[ext_resource type="PackedScene" path="res://entities/props/crate_wood_container.tscn" id="7_liy6b"]
+[ext_resource type="PackedScene" uid="uid://dgn7xheqs3djo" path="res://entities/props/crate_wood_container.tscn" id="7_liy6b"]
 [ext_resource type="Material" path="res://textures/Color Maps/dirt_1.tres" id="7_qv3ha"]
 [ext_resource type="PackedScene" uid="uid://cpt5gdai6smui" path="res://entities/props/car_5_red_scripted.tscn" id="8_4nd5y"]
 [ext_resource type="Material" path="res://textures/Color Maps/water_3.tres" id="8_edr2s"]
