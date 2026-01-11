@@ -458,9 +458,9 @@ geometry_source_group_name = &"level"
 region_merge_size = 5.0
 filter_ledge_spans = true
 
-[node name="Level1" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("screenshot_cameras")]
 script = ExtResource("1_betor")
-screenshot_camera = NodePath("Cameras/Screenshot")
+screenshot_cameras = [NodePath("Cameras/Screenshot")]
 metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
 [node name="Entities" type="Node" parent="."]

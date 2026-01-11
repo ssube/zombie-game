@@ -717,11 +717,11 @@ geometry_source_group_name = &"level"
 region_merge_size = 5.0
 filter_ledge_spans = true
 
-[node name="Level0" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
+[node name="Level0" type="Node3D" node_paths=PackedStringArray("screenshot_cameras")]
 script = ExtResource("1_66alr")
 environment_node = NodePath("Sky")
 environment_scenes = Array[ExtResource("2_20cl6")]([ExtResource("3_dfwmi"), ExtResource("4_v4yv6")])
-screenshot_camera = NodePath("Cameras/Screenshot")
+screenshot_cameras = [NodePath("Cameras/Screenshot")]
 metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
 [node name="Areas" type="Node" parent="."]

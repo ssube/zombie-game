@@ -1189,9 +1189,9 @@ _data = {
 }
 point_count = 17
 
-[node name="FishingPier" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
+[node name="FishingPier" type="Node3D" node_paths=PackedStringArray("screenshot_cameras")]
 script = ExtResource("1_vf316")
-screenshot_camera = NodePath("Screenshot")
+screenshot_cameras = [NodePath("Screenshot")]
 metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
 [node name="Areas" type="Node" parent="."]

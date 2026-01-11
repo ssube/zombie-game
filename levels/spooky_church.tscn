@@ -947,11 +947,11 @@ geometry_source_group_name = &"level"
 region_merge_size = 5.0
 filter_ledge_spans = true
 
-[node name="SpookyChurch" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
+[node name="SpookyChurch" type="Node3D" node_paths=PackedStringArray("screenshot_cameras")]
 script = ExtResource("1_43fyf")
 environment_node = NodePath("Sky")
 environment_scenes = Array[ExtResource("2_2vnsd")]([SubResource("Resource_g4oj3")])
-screenshot_camera = NodePath("Camera3D")
+screenshot_cameras = [NodePath("Screenshot")]
 metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
 [node name="Areas" type="Node" parent="."]
@@ -1921,7 +1921,7 @@ script = ExtResource("17_408hf")
 
 [node name="SpookyChurch" parent="Sky" instance=ExtResource("20_43fyf")]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Screenshot" type="Camera3D" parent="."]
 transform = Transform3D(-0.25881898, 0.25000003, -0.9330127, -6.942069e-08, 0.9659258, 0.25881907, 0.9659259, 0.06698736, -0.24999993, -32.677486, 5.8957253, -10.997641)
 
 [node name="Statics" type="Node3D" parent="."]

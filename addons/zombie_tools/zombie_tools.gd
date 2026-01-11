@@ -641,8 +641,8 @@ func take_level_screenshot() -> void:
 		printerr("Current scene is not a ZN_Level!")
 		return
 
-	if scene_root.screenshot_camera == null:
-		printerr("No screenshot camera assigned to the level.")
+	if scene_root.screenshot_cameras.is_empty():
+		printerr("No screenshot cameras assigned to the level.")
 		return
 
 	var scene_path := scene_root.scene_file_path
@@ -650,45 +650,70 @@ func take_level_screenshot() -> void:
 		printerr("Scene has not been saved yet. Save the scene first.")
 		return
 
-	# Create a SubViewport to render from the screenshot camera
-	var viewport := SubViewport.new()
-	viewport.size = Vector2i(1920, 1080)
-	viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
-	viewport.transparent_bg = false
-
-	# Clone the camera for the viewport
-	var camera_copy := scene_root.screenshot_camera.duplicate() as Camera3D
-	camera_copy.current = true
-
-	viewport.add_child(camera_copy)
-	scene_root.add_child(viewport)
-	camera_copy.global_transform = scene_root.screenshot_camera.global_transform
-	print("Camera copy position: %v" % camera_copy.global_position)
-
-	# Force render update
-	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-	RenderingServer.force_draw()
-
-	# Wait for rendering to complete
-	await get_tree().process_frame
-	await get_tree().process_frame
-	await RenderingServer.frame_post_draw
-
-	# Capture the image
-	var image := viewport.get_texture().get_image()
-
-	# Clean up viewport
-	viewport.queue_free()
-
-	# Derive output path from scene path
 	var scene_name := scene_path.get_file().get_basename()
 	var output_dir := scene_path.get_base_dir()
-	var output_path := output_dir.path_join(scene_name + ".png")
 
-	# Save the image
-	var error := image.save_png(output_path)
-	if error != OK:
-		printerr("Failed to save screenshot: %d" % error)
-		return
+	for i in range(scene_root.screenshot_cameras.size()):
+		var screenshot_camera := scene_root.screenshot_cameras[i]
+		if screenshot_camera == null:
+			printerr("Screenshot camera at index %d is null, skipping." % i)
+			continue
 
-	print("Screenshot saved to: %s" % output_path)
+		# Get screenshot size from camera metadata, or use default
+		var screenshot_size := Vector2i(1920, 1080)
+		if screenshot_camera.has_meta("screenshot_size"):
+			var meta_size = screenshot_camera.get_meta("screenshot_size")
+			if meta_size is Vector2i:
+				screenshot_size = meta_size
+			elif meta_size is Vector2:
+				screenshot_size = Vector2i(meta_size)
+
+		# Get delay frames from camera metadata, or use default
+		var delay_frames := 2
+		if screenshot_camera.has_meta("screenshot_delay_frames"):
+			var meta_delay = screenshot_camera.get_meta("screenshot_delay_frames")
+			if meta_delay is int:
+				delay_frames = maxi(0, meta_delay)
+
+		# Create a SubViewport to render from the screenshot camera
+		var viewport := SubViewport.new()
+		viewport.size = screenshot_size
+		viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+		viewport.transparent_bg = false
+
+		# Clone the camera for the viewport
+		var camera_copy := screenshot_camera.duplicate() as Camera3D
+		camera_copy.current = true
+
+		viewport.add_child(camera_copy)
+		scene_root.add_child(viewport)
+		camera_copy.global_transform = screenshot_camera.global_transform
+		print("Camera %d position: %v, size: %v, delay: %d frames" % [i, camera_copy.global_position, screenshot_size, delay_frames])
+
+		# Force render update
+		viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+		RenderingServer.force_draw()
+
+		# Wait for rendering to complete
+		for _frame in range(delay_frames):
+			await get_tree().process_frame
+		await RenderingServer.frame_post_draw
+
+		# Capture the image
+		var image := viewport.get_texture().get_image()
+
+		# Clean up viewport
+		viewport.queue_free()
+
+		# Derive output path with sequential index
+		var output_path := output_dir.path_join("%s_%d.png" % [scene_name, i])
+
+		# Save the image
+		var error := image.save_png(output_path)
+		if error != OK:
+			printerr("Failed to save screenshot %d: %d" % [i, error])
+			continue
+
+		print("Screenshot saved to: %s" % output_path)
+
+	print("Finished taking %d screenshots." % scene_root.screenshot_cameras.size())

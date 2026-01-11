@@ -468,9 +468,9 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 4, 3), PackedInt32Arr
 geometry_source_geometry_mode = 1
 geometry_source_group_name = &"level"
 
-[node name="BusStop" type="Node3D" node_paths=PackedStringArray("screenshot_camera")]
+[node name="BusStop" type="Node3D" node_paths=PackedStringArray("screenshot_cameras")]
 script = ExtResource("1_dm6vb")
-screenshot_camera = NodePath("Screenshot")
+screenshot_cameras = [NodePath("Screenshot")]
 metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
 [node name="Entities" type="Node3D" parent="."]

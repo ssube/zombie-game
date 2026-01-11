@@ -21,15 +21,16 @@ class_name ZN_Level
 # TODO: extra systems
 
 @export_group("Screenshots")
-@export var screenshot_camera: Camera3D
+@export var screenshot_cameras: Array[Camera3D] = []
 
 
 var _marker_cache: Dictionary[String, Marker3D] = {}
 
 
 func on_load() -> void:
-	if screenshot_camera:
-		screenshot_camera.queue_free()
+	for camera in screenshot_cameras:
+		if camera:
+			camera.queue_free()
 
 	apply_shadow_settings()
 
