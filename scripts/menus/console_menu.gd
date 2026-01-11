@@ -64,6 +64,8 @@ func _run_command(text: String) -> void:
 
 	var keyword = words[0]
 	match keyword:
+		"clear":
+			_history.clear()
 		"give":
 			var target_id := words[1]
 			var item_path := words[2]
