@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://8f7bugrofvmc"]
+[gd_scene load_steps=15 format=3 uid="uid://8f7bugrofvmc"]
 
 [ext_resource type="Script" uid="uid://dhsuals8autq1" path="res://scripts/entities/props/ZE_Barrel.gd" id="1_udcvv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_g3e3n"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="5_gvsd5"]
 [ext_resource type="Material" uid="uid://d4bmgb0pkgmpm" path="res://materials/effects/shimmer_danger.tres" id="6_4r6aw"]
 [ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="7_136ls"]
-[ext_resource type="Texture2D" uid="uid://duo2qqruxq60g" path="res://assets/Barrels/Textures/Red.png" id="8_n2mlh"]
+[ext_resource type="ArrayMesh" uid="uid://dnn3nnc05inha" path="res://entities/props/barrel_red.mesh" id="8_136ls"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="9_lfqbm"]
 
 [sub_resource type="Resource" id="Resource_kpq4c"]
@@ -34,48 +34,6 @@ material = ExtResource("6_4r6aw")
 nodes = Array[NodePath]([NodePath("Barrel/Barrel")])
 metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dkbv7"]
-resource_name = "BarrelRed"
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("8_n2mlh")
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 0.0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_xsq2f"]
-_surfaces = [{
-"aabb": AABB(-0.0032307217, -0.0032307217, -0.004469635, 0.0064614434, 0.0064614434, 0.008950677),
-"format": 34359742465,
-"index_count": 312,
-"index_data": PackedByteArray("AAAiAAQAAAAEACMAIgAAACQAJAAAACMAIgAlAAQAIwAEAAkABAAlAAkAIgAmACUAJwAmACIAJwAiACQAJgACACUAJgAnAAIAJQACAAYAJwAoAAIAAgAoAAYAJAApACcAJwABACgAKQABACcAJAAqACkAAQAFACgAAQApAAUAKQAqACsAKQArAAUAKgAkAAMAKgADACsAJAAjAAMAKAAFAAcABQArAAcAKwADAAgAAwAjAAgAKwAsAAcALAArAAgALQAoAAcAKAAtAAYALAAMAAcAIwAuAAgALwAMACwACAAvACwADAANAAcABwANAC0ADQAMAC8ALgAjAAkADQAwAC0ALwAwAA0ALQAwAAYALwALADAAMAALAAYAMQAvAAgALgAxAAgACwAvADEACgAxAC4ACwAxAAoACQAKAC4ACgAyAAsAMgAKAAkABgALADMACwAyADMAMwAyAAkAMwAlAAYAJQAzAAkADgAPABAADwA0ABAADwASADQADgAQADUAEQAOADUAEAA0ADYAEgA2ADQANgA1ABAAEgAVADYAEQA1ADcANgA3ADUAEwARADcAFQAUADYAFQAWABQAEwA3ABcAGAATABcANgA4ADcANgAUADgAOAAXADcAFgA4ABQAGAAXADgAFgAYADgAGQAaABsAGgA5ABsAGgAcADkAGQAbADoAHQAZADoAGwA5ADsAHAA7ADkAOwA6ABsAHAAeADsAHQA6ADwAOwA8ADoAIQAdADwAHgA9ADsAHgAfAD0AIQA8AD4AIAAhAD4AOwA/ADwAOwA9AD8APwA+ADwAHwA/AD0AIAA+AD8AHwAgAD8A"),
-"lods": [0.0072493097, PackedByteArray("AAABAAIAAQAAAAMAAAACAAQAAAAEAAMAAQAFAAIAAQADAAUAAgAFAAYABQADAAcABQAHAAYAAwAEAAgAAwAIAAcABAACAAkACQACAAYABAAJAAgACQAKAAgABgALAAkACwAKAAkABwALAAYACgAMAAgACAAMAAcACwAMAAoADAANAAcADQALAAcADAALAA0ADgAPABAAEQAOABAADwASABAAEwARABAAEgAUABAAEgAVABQAFQAWABQAFAAXABAAEwAQABcAFgAXABQAGAATABcAFgAYABcAGQAaABsAGgAcABsAHQAZABsAHAAeABsAHgAfABsAHwAgABsAIQAdABsAIAAhABsAIQAbABsA")],
-"name": "BarrelRed",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 64,
-"vertex_data": PackedByteArray("mukYK4S6UzsEdpK7mukYK4S6U7sEdpK7hLpTO4VT0Suz1ZI7hLpTu4VT0Suz1ZI7mukYK4S6Uzuz1ZI7mukYK4S6U7uz1ZI7Tm05Ox/7xquz1ZI7UvAtKU5tObuz1ZI7Tm05ux/7xquz1ZI7UvAtKU5tOTuz1ZI73ciiLE5tOTsrHIk7Tm05Ox/7xqsrHIk73R0Du90dA7srHIk73ciiLE5tObsrHIk79H4urhhD7brN9Yg7/GZhOcXu+LrN9Yg79H4urhhD7bq6Fow7AGdhucXu+LrN9Yg7LGKfOdKNCrvN9Yg7MGKfudKNCrvN9Yg7/GZhOUOkGLu6Fow7/GZhOUOkGLvN9Yg79H4urhh6HrvN9Yg7AGdhuUOkGLu6Fow7AGdhuUOkGLvN9Yg7KTwvrlPkEDuoTIg73Kd8Od5ZCjuoTIg7KTwvrlPkEDsb1I07kaeyOcEe9TqoTIg74Kd8ud5ZCjuoTIg73Kd8OcWJ1TqoTIg7KTwvrtx0yDqoTIg74Kd8ucWJ1TqoTIg7lqeyucEe9TqoTIg79rYVO/a2FTsEdpK79rYVu/a2FTuz1ZI79rYVu/a2FTsEdpK79rYVO/a2FTuz1ZI7hLpTO4VT0SsEdpK79rYVO/a2FbsEdpK79rYVO/a2Fbuz1ZI79rYVu/a2FbsEdpK7hLpTu4VT0SsEdpK79rYVu/a2Fbuz1ZI73R0Du90dA7uz1ZI73R0DO90dA7uz1ZI73R0Du90dAzuz1ZI7Tm05ux/7xqsrHIk73R0DO90dA7srHIk73R0Du90dAzsrHIk73R0DO90dAzsrHIk73R0DO90dAzuz1ZI7/GZhOcXu+Lq6Fow7AGdhucXu+Lq6Fow7LGKfOdKNCru6Fow7MGKfudKNCru6Fow79H4urhh6Hru6Fow73Kd8Od5ZCjsb1I074Kd8ud5ZCjsb1I07kaeyOcEe9Tob1I07lqeyucEe9Tob1I073Kd8OcWJ1Tob1I074Kd8ucWJ1Tob1I07KTwvrtx0yDob1I07")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_226td"]
-resource_name = "Barrel"
-_surfaces = [{
-"aabb": AABB(-0.0032307217, -0.0032307217, -0.004469635, 0.0064614434, 0.0064614434, 0.008950677),
-"attribute_data": PackedByteArray("TVXkO1Q3fj8bVuQ7AAAAP+cB6D6sGz8/5QHoPlY3fj/oAeg+AgAAP+oB6D6uyIE+ClfkOwBV5DvsAeg+gFbkO0FRRz/QrQ8/wxpLP5PyRj9AUUc/kvJGPz9RRz9VN34/whpLP1U3fj/EGks/0K0PP8QaSz/eFug+QVFHPxzSsD7FGks/NJEEPkJRRz8wkQQ+6L9DP1Q18T4EcC0/ZHguP6EEPz/IIPU+SXorPx29KT/o1w8/GgzOPpYk7z6AKBg/LuINP46VxD4km/g+xjIWPxmsTj8XnXI/GaxOP/6kbz8C5E8/F51yPxmsTj/lrGw/AuRPP8y0aT8ZrE4/zLRpPxmsTj+0vGY/AuRPP5vEYz8ZrE4/m8RjPxmsTj+CzGA/AuRPP1HcWj8ZrE4/adRdPxqsTj9R3Fo/GaxOP4MxVT+RxVA/8x9QPyLXVT+DMVU/PlFHP7CX7D0+UUc/qPfRPXl4ST+wl+w9PlFHP6hXtz0+UUc/qLecPT5RRz+oF4I9PlFHP2DvTj0+UUc/YK8ZPXl4ST+AvTw8PlFHP8DeyDw+UUc/gL08PFpJOj/gMj4+ohwLP+RyvT6hHAs/EBPgPQO/Jj/icr0+eFXkO36pXj/mAeg+galeP8RV5DuqGz8/8FXkO9SNHz/nAeg+1o0fP2dW5DtS5MA+6QHoPljkwD6TVuQ7qsiBPt9W5Dv8WQU+6wHoPghaBT5BUUc/MlArP8MaSz8yUCs/P1FHP/OUYj/DGks/85RiP0FRRz/eFug+xBpLPxzSsD7FGks/tBpzPkFRRz+0GnM+LuINP1U3fj+UJO8+nVlIPwJwLT+4CTI/LeINP7gJMj+UJO8+cudnP+i/Qz9x52c/A3AtP1U3fj/ov0M/nFlIP+i/Qz9/KBg/A3AtP46VxD6hBD8/xDIWP0l6Kz8cDM4+L+INP2R4Lj+WJO8+VjXxPunXDz8dvSk/JJv4Psog9T6WJO8+Nl6WPlpJOj80XpY+liTvPuQyPj4CvyY/EBPgPQLkTz/+pG8/AuRPP+WsbD8C5E8/tLxmPwLkTz+CzGA/AuRPP2nUXT+RxVA//EpXPxmsTj9qOVI/qr1TP/IfUD8i11U/azlSP6m9Uz/8Slc/eXhJP6j30T15eEk/qFe3PXl4ST+ot5w9eXhJP6gXgj15eEk/YO9OPXl4ST9grxk9eXhJP8DeyDwZrE4/4dx7P44GUT9tLnY/ArVWP+GIeD+NWlQ/bS52PxmsTj/hiHg/ArVWP+Hcez+OWlQ/Vjd+P44GUT9WN34/"),
-"format": 34359742487,
-"index_count": 312,
-"index_data": PackedByteArray("AAA5AAMAOQA6AAMAOQA7ADoAOwACADoAOwA8AAIAPAA9AAIAPAABAD0AAQAEAD0AAQA+AAQAPgA/AAQAPgBAAD8AQAAFAD8AQABBAAUAQQBCAAUAQQAGAEIABgAHAEIAQwBEAAoARAAJAAoADQBEAEMACgAJAEUACAANAEMACQBGAEUARQBGAAsARgAMAAsADgANAAgARwAOAAgASAAOAEcADwBIAEcASQBIAA8ASgBJAA8AEABJAEoAEQAQAEoASwBMAE0ATABOAE0ASwBPAEwATQBQAEsAUABRAEsATQBSAFAAEgBTABQAVAASABQAUwBVABQAVgBUABQAVQBTABUAVABWABYAUwATABUAGABUABYAEwBXABUAWAAYABYAVwBZABUAWgBYABYAWQBXABkAWABaABkAVwAXABkAFwBYABkAWwA1AFwAWwBcADgAOAA2AFsANQBbAF0ANQBdADcANwBeADUAGgAbABwAGwBfABwAGwAdAF8AHQBgAF8AHQAfAGAAHwAeAGAAHwAgAB4AIABhAB4AIAAiAGEAIgAhAGEAIgAjACEAIwBiACEAIwAlAGIAJQBjAGIAJQAmAGMAJgAkAGMAZABlAGYAZQAoAGYAZAAnAGUAZABmAGcAZABnACkAKQBoAGQAKgArACwAKwBpACwAKwAtAGkALQBqAGkALQAuAGoALgBrAGoALgAvAGsALwBsAGsALwAwAGwAMABtAGwAMAAxAG0AMQBuAG0AMQAzAG4AMwBvAG4AMwA0AG8ANAAyAG8AcABxAHIAcQBzAHIAcAB0AHEAcAByAHUAcAB1AHYAdgB3AHAA"),
-"lods": [0.0072493097, PackedByteArray("AAABAAIAAAACAAMAAQAEAAIAAQAFAAQAAQAGAAUABgAHAAUACAAJAAoACgAJAAsACQAMAAsADQAJAAgADgANAAgADwAOAAgAEAAOAA8AEQAQAA8AEgATABQAFAATABUAEgAUABYAEwAXABUAGAASABYAFwAZABUAGAAWABkAFwAYABkAGgAbABwAGwAdABwAHQAeABwAHQAfAB4AHwAgAB4AIAAhAB4AIAAiACEAIgAjACEAIwAkACEAIwAlACQAJQAmACQAJwAoACkAKgArACwAKwAtACwALQAuACwALgAvACwALwAwACwAMAAxACwAMQAyACwAMQAzADIAMwA0ADIANQA2ADcANgA1ADgA")],
-"material": SubResource("StandardMaterial3D_dkbv7"),
-"name": "BarrelRed",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 120,
-"vertex_data": PackedByteArray("mukYK4S6UzsEdpK7mukYK4S6U7sEdpK7hLpTO4VT0Suz1ZI7mukYK4S6Uzuz1ZI7mukYK4S6U7uz1ZI7hLpTu4VT0Suz1ZI7mukYK4S6UzsEdpK7mukYK4S6Uzuz1ZI7UvAtKU5tObuz1ZI7Tm05Ox/7xqsrHIk7Tm05Ox/7xquz1ZI7UvAtKU5tOTuz1ZI73ciiLE5tOTsrHIk73ciiLE5tObsrHIk73R0Du90dA7srHIk7Tm05ux/7xquz1ZI73ciiLE5tOTsrHIk7UvAtKU5tOTuz1ZI7mukYK4S6Uzuz1ZI7hLpTO4VT0Suz1ZI7UvAtKU5tOTuz1ZI7Tm05Ox/7xquz1ZI7Tm05ux/7xquz1ZI7mukYK4S6U7uz1ZI7hLpTu4VT0Suz1ZI7UvAtKU5tObuz1ZI79H4urhhD7brN9Yg7/GZhOcXu+LrN9Yg79H4urhhD7bq6Fow7LGKfOdKNCrvN9Yg7/GZhOUOkGLu6Fow7/GZhOUOkGLvN9Yg79H4urhh6HrvN9Yg7AGdhuUOkGLu6Fow7AGdhuUOkGLvN9Yg7MGKfudKNCrvN9Yg79H4urhhD7bq6Fow7AGdhucXu+LrN9Yg79H4urhhD7brN9Yg7/GZhOUOkGLu6Fow7AGdhuUOkGLu6Fow79H4urhhD7bq6Fow7KTwvrlPkEDuoTIg73Kd8Od5ZCjuoTIg7KTwvrlPkEDsb1I07kaeyOcEe9TqoTIg73Kd8OcWJ1TqoTIg7KTwvrtx0yDqoTIg74Kd8ucWJ1TqoTIg7lqeyucEe9TqoTIg7KTwvrlPkEDsb1I074Kd8ud5ZCjuoTIg7KTwvrlPkEDuoTIg7Tm05Ox/7xqsrHIk73R0Du90dA7srHIk73ciiLE5tOTsrHIk73ciiLE5tObsrHIk79rYVO/a2FTsEdpK79rYVO/a2FTuz1ZI7hLpTO4VT0SsEdpK79rYVO/a2FbsEdpK79rYVO/a2Fbuz1ZI79rYVu/a2FbsEdpK79rYVu/a2Fbuz1ZI7hLpTu4VT0SsEdpK79rYVu/a2FTsEdpK79rYVu/a2FTuz1ZI73R0DO90dA7uz1ZI73R0DO90dA7srHIk73R0DO90dAzuz1ZI73R0DO90dAzsrHIk73R0Du90dA7uz1ZI7Tm05ux/7xqsrHIk73R0Du90dAzsrHIk73R0Du90dAzuz1ZI79rYVu/a2FTsEdpK79rYVu/a2FbsEdpK79rYVO/a2FbsEdpK7mukYK4S6U7sEdpK7hLpTu4VT0SsEdpK79rYVO/a2FTsEdpK7mukYK4S6UzsEdpK7hLpTO4VT0SsEdpK79rYVO/a2FTuz1ZI79rYVu/a2FTuz1ZI73R0DO90dAzuz1ZI73R0Du90dAzuz1ZI79rYVO/a2Fbuz1ZI79rYVu/a2Fbuz1ZI73R0DO90dA7uz1ZI73R0Du90dA7uz1ZI7Tm05ux/7xqsrHIk73R0DO90dA7srHIk73R0Du90dAzsrHIk73R0DO90dAzsrHIk7/GZhOcXu+Lq6Fow7LGKfOdKNCru6Fow79H4urhh6Hru6Fow7MGKfudKNCru6Fow7AGdhucXu+Lq6Fow7LGKfOdKNCru6Fow79H4urhh6Hru6Fow7MGKfudKNCru6Fow7AGdhucXu+Lq6Fow7/GZhOcXu+Lq6Fow73Kd8Od5ZCjsb1I07kaeyOcEe9Tob1I073Kd8OcWJ1Tob1I07KTwvrtx0yDob1I074Kd8ucWJ1Tob1I07lqeyucEe9Tob1I074Kd8ud5ZCjsb1I07kaeyOcEe9Tob1I07KTwvrtx0yDob1I07lqeyucEe9Tob1I074Kd8ucWJ1Tob1I073Kd8OcWJ1Tob1I074Kd8ud5ZCjsb1I07KTwvrlPkEDsb1I073Kd8Od5ZCjsb1I07/3////9//7//fwAA/3//v/7//3//f/+//3////9//7//fwAA/3//vwAA/3//f/+//3////9//7//f////3//v/9//v///wCAAAD/f/7/AIAAAP9/AAAAgP9/AAAAAACA/38AAAAAAID/f/7///8AgP+//7//////////f///////fwAA//8AgP9/AAD//wCA/3//f3ylQO3/f/9/fKVA7f9//398pUDt/3//f3ylQO3/f/9/fKVA7f9//398pUDt/3//f3ylQO3/f/9/fKVA7f9//v//f/+//7//v/9//7//f/7//3//v/7//3//f/+//7//P/9//7//v/8//3//v/9/AAD/f/+//z//P/9//7//P/8//3//vwAA/3//f/+//3/+//9//7//P/+//3//v/9//v//f/+//3//f4JaQO3/f/9/glpA7f9//3+CWkDt/3////9//7//v/+//3//v/9/////f/+//v//f/9//7//v/8//3//v/9/AAD/f/+//z//P/9//78AAP9//3//v/9/////f/+//z//v/9//7//f////3//v/9//3+B2kCt/3//f4HaQK3/f/9/gdpArf9//3+B2kCt/7//v/9//7//v/+//3//v/7//3//f/+//7//P/9//7//v/8//3//v/8//z//f/+//z//P/9//78AAP9//3//v/8//7//f/+//z//v/9//7//P/+///8AgP8//78AAACA/z//P/7/AID/P/8///////+//7//////////f///////v/8///////+//z/+/////////4HavdL/////gdq90v////+B2r3S/////4HavdL/////gdq90v////+B2r3S/////4HavdL/////gdq90v9//398pUDt/3//f3ylQO3/f/9/fKVA7f9//398pUDt/3//f3ylQO3/f/9/fKVA7f9//398pUDt/3//f3ylQO3/f/9/gdpArf9//3+B2kCt/3//f4HaQK3/f/9/gdpArf+//7//f/+//v//f/9//7//fwAA/3//vwAA/3//f/+//z//v/9//7//f/9/glpA7f9//3+CWkDt/3//f4JaQO3/f/9/glpA7f9//3+CWkDt/7//v/9//7/+//9//3//v/+//z//f/+//38AAP9//7//P/8//3//vwAA/3//f/+//z//v/9//7//f/9/fSW90v9//399Jb3S/3//f30lvdL/f/9/fSW90v9//399Jb3S/3//f30lvdL/f/9/fSW90v9//399Jb3S")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_xsq2f")
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bv25f"]
 height = 1.2
 radius = 0.45
@@ -93,7 +51,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Barrel" type="MeshInstance3D" parent="Barrel"]
 transform = Transform3D(65, 0, 0, 0, -2.8412403e-06, 65, 0, -65, -2.8412403e-06, 0, 0, 0)
-mesh = SubResource("ArrayMesh_226td")
+mesh = ExtResource("8_136ls")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

@@ -18,3 +18,5 @@ textures/**/*.png.import
 
 # Working notes
 docs/notes.md
+
+*.mesh

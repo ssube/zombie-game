@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://bq6a52tvj60bq"]
+[gd_scene load_steps=29 format=3 uid="uid://bq6a52tvj60bq"]
 
 [ext_resource type="Script" uid="uid://d2ww1flmd4yo4" path="res://scripts/entities/characters/ZE_Survivor.gd" id="1_61xi3"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_ig744"]
@@ -12,6 +12,7 @@
 [ext_resource type="Material" uid="uid://btw66b8ou4adn" path="res://materials/effects/shimmer_plot.tres" id="10_wfgdr"]
 [ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="11_80wbs"]
 [ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="11_w7go0"]
+[ext_resource type="ArrayMesh" uid="uid://b7jgqahx65vmq" path="res://entities/characters/hotel_clerk.mesh" id="12_80wbs"]
 [ext_resource type="Script" uid="uid://c0cxv8olxfknv" path="res://scripts/nodes/actions/ZN_RandomBranch.gd" id="12_nvvd0"]
 [ext_resource type="Script" uid="uid://dga8v5ocxqirt" path="res://scripts/nodes/actions/ZN_AudioAction.gd" id="13_wfgdr"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="14_80wbs"]
@@ -51,17 +52,6 @@ script = ExtResource("11_80wbs")
 material = ExtResource("10_wfgdr")
 nodes = Array[NodePath]([NodePath("CSGBakedMeshInstance3D"), NodePath("CSGSphere3D")])
 metadata/_custom_type_script = "uid://be84y2dw7fp0e"
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_2n0ki"]
-_surfaces = [{
-"aabb": AABB(-0.5, -1, -0.5, 1, 2, 1),
-"attribute_data": PackedByteArray("GPYVPgAAAAAAAAAAAAAAAAAAAD8AAAA/AAAAPwAAAAAAACA/AAAAAAAAID8AAIA/AAAAPwAAAAAY9hU+AAAAAAAAAD8AAAA/AAAgPwAAAAAAAEA/AAAAAAAAQD8AAIA/AAAAAAAAAAAa9hU+AAAAAAAAAD8AAAA/AADAPgAAAAAAAAA/AAAAAAAAAD8AAIA/GvYVPgAAAAD///8+AAAAAAAAAD8AAAA/AACAPgAAAAAAAMA+AAAAAAAAwD4AAIA/AAAgPwAAgD8AAAA/AACAPwAAAD8AAAAAGPYVPgAAAAAAAAAAAAAAAAAAAD8AAAA/AABAPwAAgD8AACA/AACAPwAAID8AAAAAAAAAPwAAAAAY9hU+AAAAAAAAAD8AAAA/AAAAPwAAgD8AAMA+AACAPwAAwD4AAAAAAAAAAAAAAAAa9hU+AAAAAAAAAD8AAAA/AADAPgAAgD8AAIA+AACAPwAAgD4AAAAAGvYVPgAAAAD///8+AAAAAAAAAD8AAAA/eIJaPwAAAAAAAAA/AAAAAAAAAD8AAAA/AABAPwAAAAAAAGA/AAAAAAAAYD8AAIA/AACAPwAAAAB4glo/AAAAAAAAAD8AAAA/AABgPwAAAAAAAAAAAAAAAAAAAAAAAIA/////PgAAAAB6glo/AAAAAAAAAD8AAAA/AAAAPgAAAAAAAIA+AAAAAAAAgD4AAIA/eoJaPwAAAAAAAIA/AAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA+AAAAAAAAAD4AAIA/AABgPwAAgD8AAEA/AACAPwAAQD8AAAAAeIJaPwAAAAAAAAA/AAAAAAAAAD8AAAA/AAAAAAAAgD8AAGA/AACAPwAAYD8AAAAAAACAPwAAAAB4glo/AAAAAAAAAD8AAAA/AACAPgAAgD8AAAA+AACAPwAAAD4AAAAA////PgAAAAB6glo/AAAAAAAAAD8AAAA/AAAAPgAAgD8AAAAAAACAPwAAAAAAAAAAeoJaPwAAAAAAAIA/AAAAAAAAAD8AAAA/"),
-"format": 34359738391,
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 96,
-"vertex_data": PackedByteArray("9AS1vgAAgL/yBLW+AAAAvwAAgL8uvTuzAAAAAAAAgL8AAAAAAAAAvwAAgL8uvTuz9AS1vgAAgL/yBLW+9AS1vgAAgD/yBLW+Lt7MMQAAgL8AAAC/9AS1vgAAgL/yBLW+AAAAAAAAgL8AAAAA9AS1vgAAgL/yBLW+Lt7MMQAAgL8AAAC/Lt7MMQAAgD8AAAC/AAAAvwAAgL8uvTuz8wS1vgAAgL/zBLU+AAAAAAAAgL8AAAAA8wS1vgAAgL/zBLU+AAAAvwAAgL8uvTuzAAAAvwAAgD8uvTuz8wS1vgAAgL/zBLU+Lr27sgAAgL8AAAA/AAAAAAAAgL8AAAAALr27sgAAgL8AAAA/8wS1vgAAgL/zBLU+8wS1vgAAgD/zBLU+9AS1vgAAgD/yBLW+AAAAvwAAgD8uvTuzAAAAvwAAgL8uvTuzAAAAvwAAgD8uvTuz9AS1vgAAgD/yBLW+AAAAAAAAgD8AAAAALt7MMQAAgD8AAAC/9AS1vgAAgD/yBLW+9AS1vgAAgL/yBLW+9AS1vgAAgD/yBLW+Lt7MMQAAgD8AAAC/AAAAAAAAgD8AAAAAAAAAvwAAgD8uvTuz8wS1vgAAgD/zBLU+8wS1vgAAgL/zBLU+8wS1vgAAgD/zBLU+AAAAvwAAgD8uvTuzAAAAAAAAgD8AAAAA8wS1vgAAgD/zBLU+Lr27sgAAgD8AAAA/Lr27sgAAgL8AAAA/Lr27sgAAgD8AAAA/8wS1vgAAgD/zBLU+AAAAAAAAgD8AAAAA8QS1PgAAgL/1BLW+Lt7MMQAAgL8AAAC/AAAAAAAAgL8AAAAALt7MMQAAgL8AAAC/8QS1PgAAgL/1BLW+8QS1PgAAgD/1BLW+AAAAPwAAgL8AAAAA8QS1PgAAgL/1BLW+AAAAAAAAgL8AAAAA8QS1PgAAgL/1BLW+AAAAPwAAgL8AAAAAAAAAPwAAgD8AAAAALr27sgAAgL8AAAA/8wS1PgAAgL/zBLU+AAAAAAAAgL8AAAAA8wS1PgAAgL/zBLU+Lr27sgAAgL8AAAA/Lr27sgAAgD8AAAA/8wS1PgAAgL/zBLU+AAAAPwAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAPwAAgL8AAAAA8wS1PgAAgL/zBLU+8wS1PgAAgD/zBLU+8QS1PgAAgD/1BLW+Lt7MMQAAgD8AAAC/Lt7MMQAAgL8AAAC/Lt7MMQAAgD8AAAC/8QS1PgAAgD/1BLW+AAAAAAAAgD8AAAAAAAAAPwAAgD8AAAAA8QS1PgAAgD/1BLW+8QS1PgAAgL/1BLW+8QS1PgAAgD/1BLW+AAAAPwAAgD8AAAAAAAAAAAAAgD8AAAAALr27sgAAgD8AAAA/8wS1PgAAgD/zBLU+8wS1PgAAgL/zBLU+8wS1PgAAgD/zBLU+Lr27sgAAgD8AAAA/AAAAAAAAgD8AAAAA8wS1PgAAgD/zBLU+AAAAPwAAgD8AAAAAAAAAPwAAgL8AAAAAAAAAPwAAgD8AAAAA8wS1PgAAgD/zBLU+AAAAAAAAgD8AAAAA/38AAP///x//fwAA//++Ev9/AAD///8/AACGj///O/gAANXI//+U2wAAKbf//2rk/38AAP///z//fwAA////H/9/AAD///8/AADVyP//lNv//3fwd/D/vwAAd/D//8LH/38AAHyl/7//fwAA/7//v/9/AAD///+/KTf/fwAAauQAAIaP//87+IcP/38AADv4/38AAP+//7//fwAA////v/9/AAD///+/eHD/fwAAwscpN/9/AABq5NVI/38AAJTbAAApt///auSHD/9/AAA7+AAAho///zv4/3///4Ja/z//f///glr/P/9///+CWv8/AAB38P//wscAACm3//9q5AAA1cj//5Tb/3///30l/z//f///fSX/P/9///99Jf8/hw//fwAAO/jVSP9/AACU2yk3/38AAGrk/3///wAAQO3/f///AABA7f9///8AAEDt1Uj/fwAAlNuGj/9/hw//v3hw/38AAMLH/3///wAAvdL/f///AAC90v9///8AAL3S/38AAP+//z//fwAA////P/9/AAD///8///938Hfw/7///ym3Kbf/v///1cjVyP+//38AAHyl/z//fwAA/7//P/9/AAD///8///8ptwAAlBt38P9////DB///ho8AAMMH/38AAP///7//fwAA////3/9/AAD///+/Kbf/fyk3/794cP9/AADCx4aP/3+HD/+//38AAP///9//fwAA//9A7f9/AAD///+/d/D/f3hw/78pt/9/KTf/v9XI/3/VSP+////VyNXI/78AAHfw///Cx///d/B38P+//3///wAAQS3/f///AABBLf9///8AAEEt//+GjwAAwwf//9XIAABqJP//KbcAAJQb/3///wAAvhL/f///AAC+Ev9///8AAL4Sho//f4cP/7/VyP9/1Uj/vym3/38pN/+//3///30l/7//f///fSX/v/9///99Jf+/1cj/f9VI/7///4aPho//v3fw/394cP+//3///4Ja/7//f///glr/v/9///+CWv+/")
-}]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qtjoq"]
 points = PackedVector3Array(-0.5, -1, -9.787083e-05, -0.35356304, -1, -0.35356304, -0.35356304, -1, 0.35346514, -0.5, 1, -9.787083e-05, -0.35356304, 1, -0.35356304, 0, -1, -0.5, -9.787083e-05, -1, 0.5, -0.35356304, 1, 0.35346514, 0, 1, -0.5, 0.35346514, -1, -0.35356304, 0.35346514, -1, 0.35346514, -9.787083e-05, 1, 0.5, 0.35346514, 1, -0.35356304, 0.5, -1, 0, 0.35346514, 1, 0.35346514, 0.5, 1, 0)
@@ -103,7 +93,7 @@ visible = false
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("ArrayMesh_2n0ki")
+mesh = ExtResource("12_80wbs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

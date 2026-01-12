@@ -1,52 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://cjhb1cm6oemur"]
+[gd_scene load_steps=3 format=3 uid="uid://cjhb1cm6oemur"]
 
-[ext_resource type="Texture2D" uid="uid://c5c8ei6lkkgld" path="res://assets/PSX Nature/Models/GLB/fern_3_fern_3.png" id="1_2xxk8"]
+[ext_resource type="ArrayMesh" uid="uid://dimfgj7jlc3fw" path="res://entities/statics/foliage/bush_3.mesh" id="1_2xxk8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_omlag"]
 radius = 0.2
 height = 0.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37yaw"]
-resource_name = "fern_3"
-transparency = 2
-alpha_scissor_threshold = 0.5
-alpha_antialiasing_mode = 0
-cull_mode = 2
-albedo_texture = ExtResource("1_2xxk8")
-texture_filter = 2
-texture_repeat = false
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_i800j"]
-_surfaces = [{
-"aabb": AABB(-0.88708085, -1.2740991, -2.1889877, 2.0052326, 2.1764677, 2.618729),
-"format": 34896613377,
-"index_count": 18,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkA"),
-"name": "fern_3",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 12,
-"vertex_data": PackedByteArray("vkYAACfnAAAogErZdTsAACiAStkn5wAAvkYAAHU7AAD//1jhw+YAAE0yknQBPwAATTKSdMPmAAD//1jhAT8AAOTZRATBvAAAAAD//z1DAAARQf/O//8AANOYQzUAAAAA")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_nuv73"]
-resource_name = "fern_3_fern_3"
-_surfaces = [{
-"aabb": AABB(-0.88708085, -1.2740991, -2.1889877, 2.0052326, 2.1764677, 2.618729),
-"attribute_data": PackedByteArray("AAD/////AAD/////AAAAAAAA/////wAA/////wAAAAAAAP////8AAP////8AAAAA"),
-"format": 34896613399,
-"index_count": 18,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkA"),
-"material": SubResource("StandardMaterial3D_37yaw"),
-"name": "fern_3",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 12,
-"vertex_data": PackedByteArray("vkYAACfn9M8ogErZdTv0zyiAStkn5/TPvkYAAHU79M///1jhw+YS8U0yknQBPxLxTTKSdMPmEvH//1jhAT8S8eTZRATBvJjbAAD//z1DmNsRQf/O//+Y29OYQzUAAJjb4tg4zuLYOM7i2DjO4tg4zg2PhkcNj4ZHDY+GRw2Phkf2xsnt9sbJ7fbGye32xsnt")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_i800j")
 
 [node name="Bush" type="StaticBody3D"]
 
@@ -56,5 +14,5 @@ shape = SubResource("CapsuleShape3D_omlag")
 
 [node name="fern_3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
-mesh = SubResource("ArrayMesh_nuv73")
+mesh = ExtResource("1_2xxk8")
 skeleton = NodePath("")

@@ -1,54 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://rco5rs1kt8u5"]
+[gd_scene load_steps=2 format=3 uid="uid://rco5rs1kt8u5"]
 
-[ext_resource type="Texture2D" uid="uid://c07oygxhmuor1" path="res://assets/PSX Bunkers/Models/other-formats/GLB/trash_2_trash_2.png" id="1_87qna"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0yl8m"]
-resource_name = "trash_2"
-transparency = 2
-alpha_scissor_threshold = 0.5
-alpha_antialiasing_mode = 0
-cull_mode = 2
-albedo_texture = ExtResource("1_87qna")
-texture_filter = 2
-texture_repeat = false
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_4xk4a"]
-_surfaces = [{
-"aabb": AABB(-0.5, -0.5, -0.0256877, 1, 1, 0.014687722),
-"format": 34896613377,
-"index_count": 150,
-"index_data": PackedByteArray("HQABAAIAHQAAAAEAHgAdAAIAHgACAAQAHwAAAB0AHwADAAAAGAAdAB4AGAAfAB0AFAAeAAQAFAAEAAUAFgAYAB4AFgAeABQAHAADAB8AHAARAAMAGgAfABgAGgAcAB8AGQAYABYAGQAaABgAIAARABwAIAASABEAEAASACAAEAATABIADwAQACAAGwAgABwADwAgABsAGwAcABoADgAPABsAFwAbABoADgAbABcAFwAaABkADQAOABcADQAXACEAIQAXABkADAANACEADAAhAAsAIQAZACIACwAhACIAIgAZABYACwAiAAoAIgAWABUACgAiABUAFQAWABQACgAVAAkAFQAUACMACQAVACMAIwAUAAUACQAjAAcAIwAFAAYABwAjAAYABwAGAAgA"),
-"lods": [0.007785276, PackedByteArray("AAABAAIAFAAAAAIAFAACAAQAFAAEAAUABgAUAAUABwAGAAgACQAGAAcACQAVAAYAFQAUAAYACgAVAAkACwAVAAoAFQAWABQACwAXABUADAAXAAsADAANABcADQAOABcAFgAYABQAFQAZABYAFwAZABUAGQAYABYAGAAAABQAFwAaABkAGQAaABgADgAbABcAFwAbABoADgAPABsAGAAcAAAAGgAcABgAGwAcABoAHAADAAAADwAQABsAGwAQABwAHAARAAMAEAARABwAEAASABEAEAATABIA"), 0.09729639, PackedByteArray("AAABAAIAAwAAAAIAAwACAAQAAwAEAAUABgADAAUABwAGAAgACQAGAAcACQAKAAYACgADAAYACwADAAoADAADAAsADAANAAMADQAOAAMADgAPAAMADwAQAAMAEAARAAMAEAASABEAEAATABIA")],
-"name": "trash_2",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 36,
-"vertex_data": PackedByteArray("///MzP7/AAD//////v8AAMvM///+/wAA//+Zmf7/AACZmf///v8AAGVm///+/wAAMjP///7/AAAAAMvM/v8AAAAA///+/wAAAACZmf7/AAAAAGVm/v8AAAAAMjP+/wAAAAAAAP//AAAzMwAA//8AAGZmAAD//wAAmZkAAP//AADMzAAA//8AAP//Zmb+/wAA//8zM/7/AAD//wAA//8AAGVmy8z+/wAAMjOYmf7/AABlZpmZAAAAAGZmMzP+/wAAmZmZmQAAAABmZmZmAAAAAJmZZmYAAAAAmZkzM/7/AADLzGZm/v8AAMvMzMz+/wAAmZnLzP7/AADLzJmZ/v8AAMzMMzP+/wAAMjMyM/7/AAAyM2Vm/v8AADIzy8z+/wAA")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_7k7k0"]
-resource_name = "trash_2_trash_2"
-_surfaces = [{
-"aabb": AABB(-0.5, -0.5, -0.0256877, 1, 1, 0.014687722),
-"attribute_data": PackedByteArray("zMwAAP//AAD//zMzmZkAAP//ZWb//5iZ///LzMzM////////mZn//2Zm//8zM///AAD//wAAzMwAAJmZAABlZgAAMjNlZgAAMjMAAAAAAADMzJiZmZnMzJmZmJkzM5mZmZllZmZmmZlmZmVmMzNlZmZmMjPMzDIzzMxlZpmZMjMzMzIzMzPMzGZmzMzMzMvM"),
-"format": 34896613399,
-"index_count": 150,
-"index_data": PackedByteArray("HQABAAIAHQAAAAEAHgAdAAIAHgACAAQAHwAAAB0AHwADAAAAGAAdAB4AGAAfAB0AFAAeAAQAFAAEAAUAFgAYAB4AFgAeABQAHAADAB8AHAARAAMAGgAfABgAGgAcAB8AGQAYABYAGQAaABgAIAARABwAIAASABEAEAASACAAEAATABIADwAQACAAGwAgABwADwAgABsAGwAcABoADgAPABsAFwAbABoADgAbABcAFwAaABkADQAOABcADQAXACEAIQAXABkADAANACEADAAhAAsAIQAZACIACwAhACIAIgAZABYACwAiAAoAIgAWABUACgAiABUAFQAWABQACgAVAAkAFQAUACMACQAVACMAIwAUAAUACQAjAAcAIwAFAAYABwAjAAYABwAGAAgA"),
-"lods": [0.007785276, PackedByteArray("AAABAAIAFAAAAAIAFAACAAQAFAAEAAUABgAUAAUABwAGAAgACQAGAAcACQAVAAYAFQAUAAYACgAVAAkACwAVAAoAFQAWABQACwAXABUADAAXAAsADAANABcADQAOABcAFgAYABQAFQAZABYAFwAZABUAGQAYABYAGAAAABQAFwAaABkAGQAaABgADgAbABcAFwAbABoADgAPABsAGAAcAAAAGgAcABgAGwAcABoAHAADAAAADwAQABsAGwAQABwAHAARAAMAEAARABwAEAASABEAEAATABIA"), 0.09729639, PackedByteArray("AAABAAIAAwAAAAIAAwACAAQAAwAEAAUABgADAAUABwAGAAgACQAGAAcACQAKAAYACgADAAYACwADAAoADAADAAsADAANAAMADQAOAAMADgAPAAMADwAQAAMAEAARAAMAEAASABEAEAATABIA")],
-"material": SubResource("StandardMaterial3D_0yl8m"),
-"name": "trash_2",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 36,
-"vertex_data": PackedByteArray("///MzP7//////////v///8vM///+//////+Zmf7///+Zmf///v///2Vm///+////MjP///7///8AAMvM/v///wAA///+////AACZmf7///8AAGVm/v///wAAMjP+////AAAAAP////8zMwAA/////2ZmAAD/////mZkAAP/////MzAAA////////Zmb+//////8zM/7//////wAA/////2Vmy8z+//D+MjOYmf7/8P5lZpmZAABp/mZmMzP+/3f/mZmZmQAA//9mZmZmAAD//5mZZmYAAGn+mZkzM/7/8P7LzGZm/v/w/svMzMz+////mZnLzP7/d//LzJmZ/v93/8zMMzP+/3f/MjMyM/7///8yM2Vm/v93/zIzy8z+/3f//7//v/+//7//v/+//7//v/+//7//v/+//7//v/+//7//v/+//7//v/+//7//v/+//7//v/+//7//v/+//7//v/+//7//v/+//7//v/+//7+zv7W/SMBKwPq/BMCSQJZAFr8Wv+NA6UAEQPo/S0BJQLY/tD+0v7S/bL9ov2s/aT//PwBASsBJwJPAlcD/v/6/")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_4xk4a")
+[ext_resource type="ArrayMesh" uid="uid://8y46aciaytd8" path="res://entities/statics/trash_2.mesh" id="1_srt6r"]
 
 [node name="Trash2" type="Node3D"]
 
 [node name="trash_2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
-mesh = SubResource("ArrayMesh_7k7k0")
+mesh = ExtResource("1_srt6r")
 skeleton = NodePath("")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://c3dspyskb67hl"]
+[gd_scene load_steps=14 format=3 uid="uid://c3dspyskb67hl"]
 
 [ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_ary0e"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_jmhjw"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://barikupijl7r7" path="res://scripts/components/ZC_Action.gd" id="4_rh4fk"]
 [ext_resource type="Material" uid="uid://f50gm8nuhvby" path="res://materials/effects/shimmer_special.tres" id="5_ycvg6"]
 [ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="6_sqrxd"]
-[ext_resource type="Texture2D" uid="uid://p50mikyhn88q" path="res://assets/PSX Mega Pack/Models/GLB (recommended)/Small Props/open_book_mp_1_books_mp_1.png" id="7_0no6s"]
+[ext_resource type="ArrayMesh" uid="uid://7qb6yd0s43xp" path="res://entities/props/book_open.mesh" id="7_jmhjw"]
 [ext_resource type="Script" uid="uid://boyqweqtyv0x1" path="res://scripts/nodes/actions/ZN_MenuAction.gd" id="8_onpyr"]
 [ext_resource type="PackedScene" uid="uid://c1w26olpbe4hd" path="res://menus/props/book_basic.tscn" id="9_jmhjw"]
 
@@ -29,46 +29,6 @@ material = ExtResource("5_ycvg6")
 nodes = Array[NodePath]([NodePath("open_book_mp_1")])
 metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1h3mc"]
-resource_name = "books_mp_1"
-cull_mode = 2
-albedo_texture = ExtResource("7_0no6s")
-texture_filter = 2
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_gejk0"]
-_surfaces = [{
-"aabb": AABB(-0.2100079, -0.13500103, -0.04522673, 0.42001635, 0.27, 0.045817845),
-"format": 34896613377,
-"index_count": 234,
-"index_data": PackedByteArray("AAABAAIAAwACAAEABAACAAMABAAAAAIAAwABAAUABAADAAUABgAFAAEABAAFAAYABgABAAcAAAAHAAEACAAEAAYACQAAAAQACQAEAAgACgAHAAAACgAAAAkACwAGAAcACwAHAAoACAAGAAsADAAJAAgACwAKAA0ACQANAAoADAAOAAkACQAOAA0ACAAPAAwACAALAA8ADgAMAA8ACwANAA8ADgAPAA0AEAARABIAEgARABQAEgAUABUAFQAUAB4AEQAeABQAFQAeABYAEQAfAB4AEAAfABEAHwAgAB4AFgAeACAAHwAhACAAIQAfABAAIgAWACAAIgAgACEAIgAhACMAIQAQACMAJAAWACIAJAAiACMAGAAWACQAJAAjACUAIwAQACUAGAAkACUAJQAQABMAGAAlABMAGQAWABgAEwAQABcAJgAYABMAJgAZABgAJgATACcAEwAXACcAKAAmACcAKAAZACYAJwAXACkAKAAnACkAKgAZACgAKgAoACkAKgApACsAKQAXACsAKgAsABkAKwAsACoAFwAtACsAKwAtACwAHQAtABcAGQAsABoALQAaACwAGQAaABsAHQAcAC0ALQAcABoAHAAdABsAHAAbABoA"),
-"lods": [0.16130447, PackedByteArray("AAABAAIAAwACAAEABAACAAMABAAAAAIAAwABAAUABAADAAUABgAFAAEABAAFAAYABgABAAcAAAAHAAEACAAEAAYACQAAAAQACQAEAAgACgAHAAAACgAAAAkACwAGAAcACwAHAAoACAAGAAsADAAJAAgACwAKAA0ACQANAAoADAAOAAkACQAOAA0ACAAPAAwACAALAA8ADgAMAA8ACwANAA8ADgAPAA0AEAARABIAEQAQABMAEgARABQAFAARABMAEgAUABUAFQAUABYAEwAQABcAGAAWABQAGAAUABMAGQAWABgAGgAZABgAGgAYABMAGQAaABsAFwAcABMAEwAcABoAHAAbABoAHQAcABcAHAAdABsA")],
-"name": "books_mp_1",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 46,
-"vertex_data": PackedByteArray("wJQAAGHjAAD+/wAArPwAAP//AAAL5gAA///+/wvmAADAlP//YeMAAP7//v+s/AAAwJT///H5AADAlAAA8fkAAD9r//9h4wAAP2sAAGHjAAA/awAA/vkAAD9r///++QAAAAD+/17pAAACAAAA/v8AAAAAAABe6QAAAgD+////AAA/a9gCg+MAAAUO2AI4XgAA1AHYAl7pAAAAgNgCdsYAAAUOJv04XgAA1AEm/V7pAAA/ayb9g+MAAMCU2AJh4wAAAIAm/XbGAADAlCb9YeMAAPrxJv3lWgAAKv4m/QvmAAD68dgC5VoAACr+2AIL5gAA/y0m/fUfAAD/LdgC9B8AAPpNJv0DAQAA+k3YAgMBAAC8ZSX90hIAALpl1wLSEgAACngl/Z1pAAABeNYCnWkAAP+HKP13aQAA9ofZAnhpAABHmif9YRIAAEOa2QJiEgAAB7Im/QAAAAAHstgCAAAAAAHSJv3JHQAAANLYAskdAAA=")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_yli2w"]
-resource_name = "open_book_mp_1_open_book_mp_1"
-_surfaces = [{
-"aabb": AABB(-0.2100079, -0.13500103, -0.04522673, 0.42001635, 0.27, 0.045817845),
-"attribute_data": PackedByteArray("BND/0iau/9Mmrv/SBND/0yDe/9L////T////0iDe/9Mg3v//9dD/xSDe/8X////F//////XQ//8mrv/FJq7//yDe/9L////TIN7/0////9LE1qi7e7RPtv+v5Ltl3n66BND//jDd//8E0P//MN3//gTQ/9Imrv/TBND/0yau/9IE0P/FJq7//yau/8UE0P//BND/xTDd//8E0P//MN3/xZ22//+Ot//Fjrf//522/8UXr//FJq7//yau/8UXr///Jq7/xQTQ//8E0P/FJq7//zDd//8E0P/+MN3//gTQ////rf+t/63/c//W/3P/1v+t////rf///3PI2qe7f7gttgS0wrtq4n66yNqnu3+4LbZq4n66BLTCuwfqp7vE2qi7ZeJ+umXefrrE1qi7e7RPtv+v5Lv/6f+w/6//t/+v/7D/6f+3ZeJ+usTaqLsH6qe7/+n/r/+v/7b/r/+v/+n/tsTWqLt7tE+2xNaouz3A0LPlzP+t/8T/c+XM/3P/xP+teNP/rZe5/3N20/9zl7n/rYfa/62F2v9zGeH/rRjh/3P+6P+t/uj/c2b0/61m9P9zyNqnu3+4LbbI2qe7QsS5s8jap7tCxLmzBNCIssTWqLs9wNCzAMySssjap7t838O2fN/Dtsjap7vB2ESzwdhEswTQiLIE0IiyyNqnu8DYRLPA2ESzyNqnu3nfw7Z538O2AMySsrzUSbO81EmzxNaou3XbxLZ128S2xNaou3jbxLZ428S2xNaou73USbO91EmzxNaouwDMkrIAzJKyPcDQs8TWqLsEtMK7QsS5s8jap7tCxLmzBNCIskLEubPI2qe7/6/kuz3A0LPE1qi7PcDQsw=="),
-"format": 34896613399,
-"index_count": 234,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAAKAAsACAALAAwACAANAAkADQAOAAkADQAPAA4AEAARABIAEAATABEAWABZABYAWgBbABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAXABdAF4AXABfAF0AYABcAF4AYQBdAF8AYABeAGIAYQBfAGMAOQBhAGMAOQBjADgAOwBgAGIAOwBiADoAZAA7ADoAZAA6AGUAZgBkAGUAZgBlAGcAaABmAGcAaABnAGkAaQBqAGgAaQBrAGoAawA8AGoAawA9ADwAbABtAEAAbgBvAD8AcABxAHIAcwB0AHUARgBHAEgARAB2AHcAeAB5AHoAewBCAHwAfQB+AH8AgACBAIIAgwA+AEEAhAAUAIUAhgCHAIgAiQCKABcASQBKAIsAjACNAI4AjwCQAJEATQBOAE8ATQBQAE4AUQBSAFMAkgCTAJQAlQCWAJcARQBDAJgAmQCaAJsAnACdAJ4ATABLAJ8AVABVAFYAVABXAFUA"),
-"lods": [0.16130447, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAAKAAsACAALAAwACAANAAkADQAOAAkADQAPAA4AEAARABIAEAATABEAFAAVABYAFQAUABcAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOwA4ADoAPAA7ADoAOgA9ADwAPgA/AEAAPwA+AEEAQgBDAEQARQBDAEIARgBHAEgASQBKAEsATABLAEoATQBOAE8ATQBQAE4AUQBSAFMAVABVAFYAVABXAFUA")],
-"material": SubResource("StandardMaterial3D_1h3mc"),
-"name": "books_mp_1",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 160,
-"vertex_data": PackedByteArray("wJQAAGHj6v/+/wAArPzq////AAAL5uv/wJQAAPH56v8/a///YeMsAAIA/v///ywAAAD+/17pLAA/a////vksAD9r///++f//wJQAAPH5//8/awAA/vn//wIAAAD+////AgD+///////AlP//8fn///7/AACs/P///v/+/6z8//8/awAAYePS/wIAAAD+/9L/P2sAAP750v8AAAAAXunS/z9r2AKD4wFABQ7YAjhe/z/UAdgCXun/PwCA2AJ2xgJAP2v//2Hj/7/AlP//8fn/vz9r///++f+/wJT//2Hj/7/AlP//YeMUAP7//v+s/BQAwJT///H5FAD///7/C+YTAMCU//9h4/H///8AAAvm4v////7/C+bi/8CUAABh4/H/P2sAAGHj///AlP//YeP//z9r//9h4///wJQAAGHj//8AAAAAXundvwIA/v///92/AgAAAP7/3b8AAP7/Xundv////v8L5vC//v8AAKz88L/+//7/rPzwv///AAAL5vC/AAD+/17pAAA/awAAYeMAAD9r//9h4wAAAAAAAF7pAAA/awAA/vn//8CUAABh4///P2sAAGHj///AlAAA8fn//wUOJv04Xv//BQ7YAjhe//8AgNgCdsYV6wCAJv12xg7r+vEm/eVa///68dgC5Vr//8CUJv1h4wAA+vEm/eVaAAAq/ib9C+YAAACAJv12xgAAwJTYAmHj///68dgC5Vr//wCA2AJ2xv//Kv7YAgvm///AlCb9YeP/vz9rJv2D4/+/AIAm/XbG/78AgCb9dsYCwD9rJv2D4wLABQ4m/The/7/UASb9Xun/v/rx2ALlWq3mKv4m/Qvmreb68Sb95Vqt5ir+2AIL5q3mAIDYAnbG/z8/a9gCg+P/P8CU2AJh4/8/1AHYAl7pruYFDib9OF6u5tQBJv1e6a7mBQ7YAjheruY/a9gCg+P/PwUO2AI4Xv8/P2vYAoPj/z//LdgC9B//P7xlJf3SEv//+k3YAgMB//+6ZdcC0hL///pNJv0DAf//Cngl/Z1p////LdgC9B///wF41gKdaf///y0m/fUf////hyj9d2n///aH2QJ4af//R5on/WES//9DmtkCYhL//weyJv0AAP//B7LYAgAA//8B0ib9yR3//wDS2ALJHf//wJQm/WHjAAD68Sb95VoAAMCUJv1h4wAAAdIm/ckdAADAlNgCYeP//wDS2ALJHf//B7LYAgAA//8/ayb9g+P/v/8tJv31H/+/+k0m/QMB/7/AlNgCYeP///aH2QJ4af//9ofZAnhp///AlNgCYeP//0Oa2QJiEv//Q5rZAmIS//8HstgCAAD//weyJv0AAAAAwJQm/WHjAABHmif9YRIAAEeaJ/1hEgAAwJQm/WHjAAD/hyj9d2kAAP+HKP13aQAA+k3YAgMBAUC6ZdcC0hIBQLpl1wLSEgFAP2vYAoPjAUABeNYCnWkBQAF41gKdaQJAP2vYAoPjAkAKeCX9nWkCwAp4Jf2daQDAP2sm/YPjAMC8ZSX90hIAwLxlJf3SEgDAP2sm/YPjAMD6TSb9AwEAwPpN2AIDAf8//y3YAvQf/z8/a9gCg+P/Pyr+2AIL5v//ANLYAskd///AlNgCYeP//wDS2ALJHf//B7Im/QAAAAAB0ib9yR0AAMCUJv1h4wAA1AEm/V7p/7//LSb99R//vz9rJv2D4/+//y0m/fUf/7/ofwtA6X8KQOl/CkDofwtAMYDmvzGA5r8xgOa/MYDmvzKA/3/pf/9/MoD/f2OA/39jgP9/6X//f9J//3/Sf/9/5j/N/+Y/zf/mP83/5j/N/wMAAYAAAP9/AAD/fwAA/n/8//t//v//f/z/+n////9/CsAWAArAFgAKwBYACsAVAP9/AAD/fwAA/38AAP9/AAD//zGA6P//f///MYDo//9//3////9/////f////3////9/AAD/fwAA/38AAP9/AAD//2KA//8xgP//MYD//5x//3//P/+/////f/8//7//////1XP//9VzuAI7gHsEnIIH9P9/B/T/f/9//b//f/+//3//v/9//b/+v////3//P/9//T//f/8//v//f/7//3/+//9//v8AgP7/AID+//9//v//f56zYEyes2BMnrNgTJ6zYEwAAP9/AAD/fwAA/39fTJ+zX0yfs19Mn7NfTJ+zAAD/fwAA/38AAP9/AAD/fwwAKnD+/z9/AADKj/7/P38AANyh//+mdgAA3KH//6Z2///lof//5qHy/+6P///jj3P//39z//9/3Pb/f9z2/3//f/+//3//v/9//7//f/+//3//P/9//z//f/8//v//f/7//3/+//9//3/9P/9//T/+v////r////6////+v////r///wDAAAAAwAAAAMAAAADAAAAAwAAAAMAAAP9//b8DAAGAAwABgAMAAYADAAGAAwABgAAA/n8AAP5//v8AgPv//X/7//1/+//9f/v//X/7//1/+//9fwAA/38AAP9/AAD/f/9//z//f/8//3//P/9//z//f/+//3//v/9//7/+//9//v//f/7//3/+//9/")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_gejk0")
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_mrpw1"]
 size = Vector3(0.45, 0.050146483, 0.3)
 
@@ -80,7 +40,7 @@ component_resources = Array[ExtResource("2_jmhjw")]([SubResource("Resource_dx537
 
 [node name="open_book_mp_1" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
-mesh = SubResource("ArrayMesh_yli2w")
+mesh = ExtResource("7_jmhjw")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
