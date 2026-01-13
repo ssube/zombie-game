@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtnmjtnuv7o4t"]
+
+[ext_resource type="Script" uid="uid://dl23t3qt7q1mj" path="res://scripts/menus/credits_menu.gd" id="1_vbcsv"]
+
+[node name="CreditsMenu" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vbcsv")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "1
+2
+3
+4
+5
+1
+2
+3
+4
+5
+1
+2
+3
+4
+5
+1
+2
+3
+4
+5"
+
+[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[connection signal="meta_clicked" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/RichTextLabel" to="." method="_on_url_clicked"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

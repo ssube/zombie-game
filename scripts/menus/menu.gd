@@ -38,6 +38,8 @@ const tabbed_menus: Array[Menus] = [
 	Menus.CONSOLE_MENU: $MenuLayer/ConsoleMenu,
 	Menus.LEVEL_END_MENU: $MenuLayer/LevelEndMenu,
 	Menus.LEVEL_SELECT_MENU: $MenuLayer/LevelSelectMenu,
+	Menus.CONTACT_MENU: $MenuLayer/ContactMenu,
+	Menus.CREDITS_MENU: $MenuLayer/CreditsMenu,
 }
 
 
@@ -198,8 +200,9 @@ func show_custom_menu(scene: PackedScene, pause: bool = true, data: Dictionary =
 		_custom_menu.set_data(data)
 
 	$MenuLayer.add_child(_custom_menu)
-	_custom_menu.menu_changed.connect(_on_menu_changed)
 	_custom_menu.back_pressed.connect(_on_back_pressed)
+	_custom_menu.menu_changed.connect(_on_menu_changed)
+	_custom_menu.menu_quit_requested.connect(_on_quit_requested)
 	set_pause(pause)
 	_custom_menu.on_show()
 

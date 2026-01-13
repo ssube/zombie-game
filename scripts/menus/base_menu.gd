@@ -20,6 +20,8 @@ enum Menus {
 	CAMPAIGN_SELECT_MENU,
 	MOD_SELECT_MENU,
 	CUSTOM_MENU,
+	CONTACT_MENU,
+	CREDITS_MENU,
 }
 
 enum Effects {

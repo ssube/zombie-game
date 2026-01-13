@@ -35,3 +35,11 @@ func _on_controls_button_pressed() -> void:
 
 func _on_options_button_pressed() -> void:
 	menu_changed.emit(Menus.OPTIONS_MENU, 2)
+
+
+func _on_contact_button_pressed() -> void:
+	menu_changed.emit(Menus.CONTACT_MENU)
+
+
+func _on_credits_button_pressed() -> void:
+	menu_changed.emit(Menus.CREDITS_MENU)
