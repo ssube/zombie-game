@@ -15,8 +15,8 @@ func _get_target(other: Node) -> Entity:
 
 
 func _toggle_node(target: Node) -> void:
-	var state: TreeUtils.NodeState = TreeUtils.NodeState.NONE
-	var mask: TreeUtils.NodeState = TreeUtils.NodeState.NONE
+	var state: int = TreeUtils.NodeState.NONE
+	var mask: int = TreeUtils.NodeState.NONE
 
 	if disabled != Enums.Tristate.UNSET:
 		mask |= TreeUtils.NodeState.ENABLED
@@ -28,7 +28,11 @@ func _toggle_node(target: Node) -> void:
 		if visible == Enums.Tristate.TRUE:
 			state |= TreeUtils.NodeState.VISIBLE
 
-	TreeUtils.toggle_node(target, state, mask)
+	TreeUtils.toggle_node(
+		target, 
+		state as TreeUtils.NodeState, 
+		mask as TreeUtils.NodeState
+	)
 
 
 func _remove_node(target: Node) -> void:
