@@ -70,6 +70,7 @@ metadata/_custom_type_script = "uid://dwsqxsqwtloma"
 [sub_resource type="Resource" id="Resource_fppoe"]
 script = ExtResource("13_bsv6m")
 slot = "weapon_ranged"
+physics_mode = 0
 metadata/_custom_type_script = "uid://bdq3y7j08fnad"
 
 [sub_resource type="Resource" id="Resource_ech5p"]

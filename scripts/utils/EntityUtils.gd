@@ -126,8 +126,27 @@ static func equip_item(character: ZE_Character, item: ZE_Base, _slot: String = "
 	item.transform = Transform3D.IDENTITY
 
 	var item_body = item.get_node(".") as Node3D
-	if item_body is RigidBody3D:
-		CollisionUtils.freeze_body_kinematic(item_body)
+	var physics_mode := equipment.physics_mode
+
+	# fall back to enabled when the body is not a RigidBody3D
+	if item_body is not RigidBody3D:
+		match physics_mode:
+			ZC_Equipment.EquipmentPhysicsMode.STATIC:
+				physics_mode = ZC_Equipment.EquipmentPhysicsMode.ENABLED
+			ZC_Equipment.EquipmentPhysicsMode.KINEMATIC:
+				physics_mode = ZC_Equipment.EquipmentPhysicsMode.ENABLED
+
+	match physics_mode:
+		ZC_Equipment.EquipmentPhysicsMode.DISABLED:
+			TreeUtils.toggle_node(item_body, TreeUtils.NodeState.NONE, TreeUtils.NodeState.ENABLED)
+		ZC_Equipment.EquipmentPhysicsMode.STATIC:
+			CollisionUtils.freeze_body_static(item_body)
+		ZC_Equipment.EquipmentPhysicsMode.KINEMATIC:
+			CollisionUtils.freeze_body_kinematic(item_body)
+		ZC_Equipment.EquipmentPhysicsMode.ENABLED:
+			TreeUtils.toggle_node(item_body, TreeUtils.NodeState.ENABLED, TreeUtils.NodeState.ENABLED)
+			if item_body is RigidBody3D:
+				CollisionUtils.unfreeze_body(item_body)
 
 	item.emit_action(Enums.ActionEvent.ITEM_EQUIP, character)
 
