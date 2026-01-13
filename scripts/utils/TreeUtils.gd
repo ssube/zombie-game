@@ -36,12 +36,15 @@ enum NodeState {
 	VISIBLE = 2,
 	ENABLED = 4,
 	PROCESSING = 8,
+	ALL = ACTIVE | VISIBLE | ENABLED | PROCESSING,
 }
 
-const ALL_FLAGS: NodeState = NodeState.ACTIVE | NodeState.VISIBLE | NodeState.ENABLED | NodeState.PROCESSING
+## DEPRECATED: use NodeState.ALL
+const ALL_FLAGS := (NodeState.ACTIVE | NodeState.VISIBLE | NodeState.ENABLED | NodeState.PROCESSING) as NodeState
 
 
-static func toggle_node(node: Node, state: NodeState = NodeState.NONE, mask: NodeState = NodeState.NONE) -> void:
+# TODO: disable child collision shapes
+static func toggle_node(node: Node, state: NodeState = NodeState.NONE, mask: NodeState = NodeState.NONE, child_shapes: bool = true) -> void:
 	if (mask & NodeState.ACTIVE) and "active" in node:
 		node.active = (state & NodeState.ACTIVE) != 0
 
@@ -49,7 +52,12 @@ static func toggle_node(node: Node, state: NodeState = NodeState.NONE, mask: Nod
 		node.visible = (state & NodeState.VISIBLE) != 0
 
 	if (mask & NodeState.ENABLED) and "disabled" in node:
-		node.disabled = (state & NodeState.ENABLED) == 0
+		var disabled := (state & NodeState.ENABLED) == 0
+		node.disabled = disabled
+		if child_shapes:
+			for child in node.get_children():
+				if child is CollisionShape3D:
+					(child as CollisionShape3D).disabled = disabled
 
 	if (mask & NodeState.PROCESSING) and "process_mode" in node:
 		if (state & NodeState.PROCESSING):
