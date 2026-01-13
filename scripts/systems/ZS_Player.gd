@@ -11,13 +11,20 @@ func get_raycast_end_point(raycast: RayCast3D) -> Vector3:
 	return raycast.global_transform * raycast.target_position
 
 
-func _apply_adaptive_aim(raycast: RayCast3D, entity: Entity, delta: float) -> void:
+func _apply_adaptive_aim(raycast: RayCast3D, entity: Entity, delta: float, min_ratio: float = 0.25) -> void:
 	var aim_point: Vector3 = Vector3.ZERO
+	var end_point := get_raycast_end_point(raycast)
+
 	if raycast.is_colliding():
 		# adjust the weapon marker to face the point of the collision
 		aim_point = raycast.get_collision_point()
 	else:
-		aim_point = get_raycast_end_point(raycast)
+		aim_point = end_point
+
+	# make sure the aim point is not too close to the player to avoid weird aiming issues
+	var min_point := raycast.global_transform.origin.lerp(end_point, min_ratio)
+	if aim_point.distance_squared_to(raycast.global_transform.origin) < min_point.distance_squared_to(raycast.global_transform.origin):
+		aim_point = min_point
 
 	for node: Node3D in entity.aim_nodes:
 		if OptionsManager.options.gameplay.adaptive_aim == 1.0:
