@@ -84,7 +84,7 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VFlowContainer" type="VFlowContainer" parent="SaveNameContainer/PanelContainer/MarginContainer"]
+[node name="VFlowContainer" type="VBoxContainer" parent="SaveNameContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -104,7 +104,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_vaepa")
 
-[node name="HFlowContainer" type="HFlowContainer" parent="SaveNameContainer/PanelContainer/MarginContainer/VFlowContainer"]
+[node name="HFlowContainer" type="HBoxContainer" parent="SaveNameContainer/PanelContainer/MarginContainer/VFlowContainer"]
 layout_mode = 2
 alignment = 1
 
