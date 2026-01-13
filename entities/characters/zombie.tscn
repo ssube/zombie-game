@@ -87,6 +87,8 @@ metadata/_custom_type_script = "uid://dpu6n5g8bpa3g"
 
 [sub_resource type="Resource" id="Resource_4bumh"]
 script = ExtResource("6_nswy3")
+max_health = 75
+current_health = 75
 hurt_sound = ExtResource("6_8aduj")
 metadata/_custom_type_script = "uid://0ndifcnh0nsp"
 
