@@ -26,11 +26,11 @@
 script = ExtResource("3_fjom8")
 current_durability = 80
 surface_damage = Dictionary[String, int]({
-"brick": 5,
-"metal": 5,
-"stone": 5,
-"wood": 5,
-"zombie": 2
+"brick": 1,
+"metal": 1,
+"stone": 1,
+"wood": 0,
+"zombie": 0
 })
 metadata/_custom_type_script = "uid://dnmn2xmqdrr00"
 
@@ -137,15 +137,18 @@ metadata/_custom_type_script = "uid://mcuf24u8q14t"
 script = ExtResource("14_n63nw")
 default_amount = 5
 surface_amounts = Dictionary[String, int]({
-"metal": 10,
-"stone": 25,
-"wood": 5
+"brick": 1,
+"concrete": 1,
+"metal": 1,
+"stone": 1,
+"wood": 0
 })
 entity = NodePath("../../..")
 
 [node name="ZN_HealthAction" type="Node" parent="Node3D/Area3D"]
 script = ExtResource("15_yxms2")
 health_mode = 0
+health_amount = 20
 metadata/_custom_type_script = "uid://dlb4vkkjdb658"
 
 [node name="ZN_FactionCondition" type="Node" parent="Node3D/Area3D/ZN_HealthAction"]
