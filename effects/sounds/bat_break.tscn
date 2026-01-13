@@ -8,6 +8,7 @@ stream = ExtResource("1_yixvk")
 bus = &"Effects"
 script = ExtResource("1_e7lok")
 play_on_ready = true
+alerts_enemies = false
 subtitle_text = "Bat Broken"
 subtitle_radius = 3.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
