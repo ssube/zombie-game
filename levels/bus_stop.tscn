@@ -697,12 +697,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.884563, 0.21824193, 1.430
 [node name="Car5Red" parent="Statics" groups=["level"] instance=ExtResource("3_tu73e")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.575405, -0.037427396, -6.8905115)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Statics/Car5Red"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Statics/Car5Red" groups=["shadow_low"]]
 transform = Transform3D(1, 3.4344467e-15, -8.742278e-08, -1.7763568e-15, -1, -5.9604645e-08, -8.742278e-08, 5.9604645e-08, -1, 0.95120955, 0.98103154, 3.527712)
 shadow_enabled = true
 spot_range = 10.0
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="Statics/Car5Red"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="Statics/Car5Red" groups=["shadow_low"]]
 transform = Transform3D(1, 3.4344467e-15, -8.742278e-08, -1.7763568e-15, -1, -5.9604645e-08, -8.742278e-08, 5.9604645e-08, -1, -0.93104935, 0.98103154, 3.5277116)
 shadow_enabled = true
 spot_range = 10.0
@@ -743,7 +743,7 @@ metadata/_custom_type_script = "uid://mcuf24u8q14t"
 [node name="Car5Police" parent="Statics" groups=["level"] instance=ExtResource("4_ccg5v")]
 transform = Transform3D(0.96471816, 0.044020407, -0.25957853, -0.03263053, 0.9983132, 0.048027422, 0.26125482, -0.03786274, 0.96452713, -27.382696, -0.028509647, 15.755138)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Statics/Car5Police"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Statics/Car5Police" groups=["shadow_low"]]
 transform = Transform3D(-0.4614711, 0.01743785, 0.886984, -0.0014992729, 0.9997896, -0.02043558, -0.8871538, -0.01076027, -0.461348, -1.1115475, 1.8133864, 0.94540215)
 light_energy = 5.0
 shadow_enabled = true

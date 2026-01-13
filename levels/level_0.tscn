@@ -958,14 +958,14 @@ id = "Level0_ZE_Door_1766177710_5219"
 
 [node name="Lights" type="Node" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights" groups=["shadow_low"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4413621, 3.1510324, 1.7576027)
 light_color = Color(0.62, 0.65800005, 1, 1)
 light_energy = 2.5
 shadow_enabled = true
 omni_range = 24.0
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights" groups=["shadow_low"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4411507, 3.151033, -5.149195)
 light_energy = 1.04
 light_indirect_energy = 1.04
@@ -983,7 +983,7 @@ script = ExtResource("35_o4imw")
 AnimationTable = 1
 metadata/_custom_type_script = "uid://dx3tgietk0dly"
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights" groups=["shadow_high"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48538828, 3.151033, -9.204548)
 light_color = Color(0.56, 1, 0.67, 1)
 light_energy = 1.12
@@ -1003,7 +1003,7 @@ AnimationTable = 5
 AnimationTimeOffset = 5.0
 metadata/_custom_type_script = "uid://dx3tgietk0dly"
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights" groups=["shadow_high"]]
 transform = Transform3D(-0.50000006, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.50000006, 7, 3, -3)
 shadow_enabled = true
 shadow_bias = 1.0
@@ -1011,7 +1011,7 @@ spot_range = 19.0
 spot_attenuation = 0.0
 spot_angle = 15.646295
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights" groups=["shadow_low"]]
 transform = Transform3D(0.5, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.5, 7, 3, 5)
 shadow_enabled = true
 shadow_bias = 1.0
@@ -1019,7 +1019,7 @@ spot_range = 18.0
 spot_attenuation = 0.0
 spot_angle = 15.646295
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights" groups=["shadow_high"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 9)
 omni_range = 9.0
 

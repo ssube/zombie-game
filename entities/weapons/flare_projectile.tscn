@@ -103,7 +103,7 @@ cast_shadow = 0
 process_material = SubResource("ParticleProcessMaterial_hbaku")
 draw_pass_1 = SubResource("QuadMesh_mlme4")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Node3D"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D" groups=["shadow_low"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16886926)
 light_color = Color(1, 0.100000024, 0.100000024, 1)
 shadow_enabled = true

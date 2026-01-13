@@ -173,7 +173,7 @@ radius = 0.1
 height = 0.5
 material = SubResource("StandardMaterial3D_g3ik4")
 
-[node name="Flashlight" type="SpotLight3D" parent="Body/Path3D/PathFollow3D/Hands/CSGFlashlight"]
+[node name="Flashlight" type="SpotLight3D" parent="Body/Path3D/PathFollow3D/Hands/CSGFlashlight" groups=["shadow_high"]]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.3, 0)
 light_energy = 1.5
 shadow_enabled = true

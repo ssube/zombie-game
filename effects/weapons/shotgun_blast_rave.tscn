@@ -84,7 +84,7 @@ draw_pass_1 = SubResource("CapsuleMesh_jplj4")
 process_material = SubResource("ParticleProcessMaterial_8gxve")
 draw_pass_1 = SubResource("QuadMesh_c6t7j")
 
-[node name="Flash" type="OmniLight3D" parent="." node_paths=PackedStringArray("lights")]
+[node name="Flash" type="OmniLight3D" parent="." node_paths=PackedStringArray("lights") groups=["shadow_low"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
 light_color = Color(1, 0.53761494, 0.13187978, 1)
 light_energy = 0.0

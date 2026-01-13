@@ -476,14 +476,14 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.37
 
 [node name="Lights" type="Node" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights" groups=["shadow_low"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44136214, 2.316163, 2.8647728)
 light_color = Color(0.23000002, 0.3070001, 1, 1)
 light_energy = 2.5
 shadow_enabled = true
 omni_range = 24.0
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights" groups=["shadow_low"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.484031, 2.209381, 3.081406)
 light_color = Color(1, 0.32999998, 0.32999998, 1)
 light_energy = 2.5
