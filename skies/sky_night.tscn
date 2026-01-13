@@ -23,7 +23,7 @@ fog_depth_curve = 2.0
 [node name="EnvironmentNight" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_t2j0q")
 
-[node name="Moon" type="DirectionalLight3D" parent="."]
+[node name="Moon" type="DirectionalLight3D" parent="." groups=["shadow_low"]]
 transform = Transform3D(1, 0, 0, 0, -0.5000001, 0.8660254, 0, -0.8660254, -0.5000001, 0, 3.4615583, -2.556841)
 light_color = Color(0.24940002, 0.3308133, 0.86, 1)
 shadow_enabled = true
