@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://54vn187dqm3p"]
 
-[ext_resource type="Script" uid="uid://k57ety1jslqo" path="res://scripts/menus/sign.gd" id="1_5yj3r"]
+[ext_resource type="Script" uid="uid://k57ety1jslqo" path="res://scripts/menus/props/sign.gd" id="1_5yj3r"]
 [ext_resource type="Script" uid="uid://m1ebukbi2ngu" path="res://scripts/utils/bbcode/NamedColor.gd" id="2_apgei"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5yj3r"]

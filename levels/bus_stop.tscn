@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_dm6vb"]
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="2_7khm6"]
 [ext_resource type="PackedScene" path="res://entities/statics/car_5_red.tscn" id="3_tu73e"]
-[ext_resource type="PackedScene" path="res://entities/statics/car_5_police.tscn" id="4_ccg5v"]
+[ext_resource type="PackedScene" uid="uid://ihqifrlv38ih" path="res://entities/statics/car_5_police.tscn" id="4_ccg5v"]
 [ext_resource type="PackedScene" uid="uid://tvmpfdtpvbem" path="res://entities/statics/street_light.tscn" id="5_dtwg0"]
 [ext_resource type="AudioStream" uid="uid://bskendl4eecji" path="res://assets/PSX Cars/Sound effects/Car_Engine_Loop.ogg" id="5_tjpkw"]
 [ext_resource type="PackedScene" uid="uid://dldnu5jwuvjpo" path="res://entities/props/traffic_cone_double_stripe.tscn" id="5_tr8cq"]

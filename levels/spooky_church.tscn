@@ -41,7 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://d00dbkjpj0iyk" path="res://entities/items/flashlight.tscn" id="23_g4oj3"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="23_prk71"]
 [ext_resource type="AudioStream" uid="uid://bqjftdyf2t4pl" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/IMPACTS and CONTACTS/Short Contact Sounds/sfx_short_contact_sound_17.ogg" id="24_fanoy"]
-[ext_resource type="PackedScene" path="res://entities/props/sign_winding_road_entity.tscn" id="28_nu2qx"]
+[ext_resource type="PackedScene" uid="uid://c4yar0r4ei7rp" path="res://entities/props/sign_winding_road_entity.tscn" id="28_nu2qx"]
 [ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/items/medkit.tscn" id="28_y5cew"]
 [ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/foliage/grass_cluster_dark_1.tscn" id="41_0qwai"]
 [ext_resource type="PackedScene" uid="uid://b3s1t4avu7yr3" path="res://entities/statics/foliage/tree_log_1.tscn" id="41_e1qn8"]

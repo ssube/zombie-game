@@ -47,7 +47,7 @@
 [ext_resource type="PackedScene" uid="uid://c4gewr3tx3am5" path="res://entities/statics/crate_wood.tscn" id="30_7iyb8"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="30_ifimg"]
 [ext_resource type="PackedScene" uid="uid://femu8fxijdyb" path="res://entities/props/cardboard_box_floating.tscn" id="31_jb54n"]
-[ext_resource type="PackedScene" path="res://entities/props/sign_winding_road_entity.tscn" id="32_4maf2"]
+[ext_resource type="PackedScene" uid="uid://c4yar0r4ei7rp" path="res://entities/props/sign_winding_road_entity.tscn" id="32_4maf2"]
 [ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/foliage/grass_cluster_dark_1.tscn" id="34_kj7f7"]
 [ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/items/medkit.tscn" id="37_xf74t"]
 [ext_resource type="PackedScene" uid="uid://1mrkahnnofcf" path="res://entities/equipment/fish_hat.tscn" id="39_85wo0"]
