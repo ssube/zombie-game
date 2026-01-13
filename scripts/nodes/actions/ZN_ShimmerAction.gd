@@ -28,12 +28,12 @@ func _get_entity(source: Node, actor: Entity) -> Entity:
 	return null
 
 
-func run_entity(source: Node, event: Enums.ActionEvent, actor: Entity) -> void:
-	var entity := _get_entity(source, actor)
-	if entity == null:
+func run_entity(source: Node, _event: Enums.ActionEvent, actor: Entity) -> void:
+	var target_entity := _get_entity(source, actor)
+	if target_entity == null:
 		return
 
-	var shimmer_component := entity.get_component(ZC_Shimmer) as ZC_Shimmer
+	var shimmer_component := target_entity.get_component(ZC_Shimmer) as ZC_Shimmer
 	if shimmer_component == null:
 		return
 
