@@ -8,7 +8,7 @@ points = PackedVector3Array(-0.35608488, -0.3523971, -0.3546359, 0.3598497, 0.35
 
 [node name="CardboardBoxFloating" type="RigidBody3D"]
 collision_layer = 2
-collision_mask = 27
+collision_mask = 31
 script = ExtResource("1_mj612")
 
 [node name="cardboard_box_1" type="MeshInstance3D" parent="."]
