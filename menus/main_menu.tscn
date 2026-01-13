@@ -75,6 +75,14 @@ text = "Controls"
 layout_mode = 2
 text = "Options"
 
+[node name="ContactButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("3_w3tic")]
+layout_mode = 2
+text = "Contact"
+
+[node name="CreditsButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("3_w3tic")]
+layout_mode = 2
+text = "Credits"
+
 [node name="ExitButton" parent="MarginContainer/VFlowContainer" instance=ExtResource("3_w3tic")]
 layout_mode = 2
 text = "Exit"
@@ -85,4 +93,6 @@ text = "Exit"
 [connection signal="pressed" from="MarginContainer/VFlowContainer/LoadGameButton" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="MarginContainer/VFlowContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VFlowContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/ContactButton" to="." method="_on_contact_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VFlowContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VFlowContainer/ExitButton" to="." method="_on_exit_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://vcyq2fbg0dts"]
+[gd_scene load_steps=33 format=3 uid="uid://vcyq2fbg0dts"]
 
 [ext_resource type="Script" uid="uid://d32jo3c2mqyam" path="res://scripts/menus/menu.gd" id="1_2d4ws"]
 [ext_resource type="Shader" uid="uid://brw8j2w8g6y35" path="res://shaders/scroll.gdshader" id="2_4vei7"]
@@ -24,6 +24,8 @@
 [ext_resource type="PackedScene" uid="uid://dtdv8vsvlfilr" path="res://menus/console_menu.tscn" id="22_2usqi"]
 [ext_resource type="PackedScene" uid="uid://dialawbgdnoap" path="res://menus/level_end_menu.tscn" id="23_l3jua"]
 [ext_resource type="PackedScene" uid="uid://cr5jfpxi4hksb" path="res://menus/level_select_menu.tscn" id="24_4qscn"]
+[ext_resource type="PackedScene" uid="uid://d18bkfde0pwj7" path="res://menus/contact_menu.tscn" id="25_bvnjf"]
+[ext_resource type="PackedScene" uid="uid://dtnmjtnuv7o4t" path="res://menus/credits_menu.tscn" id="26_w7blf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ph6eu"]
 shader = ExtResource("2_4vei7")
@@ -215,6 +217,12 @@ visible = false
 [node name="LevelSelectMenu" parent="MenuLayer" instance=ExtResource("24_4qscn")]
 visible = false
 
+[node name="ContactMenu" parent="MenuLayer" instance=ExtResource("25_bvnjf")]
+visible = false
+
+[node name="CreditsMenu" parent="MenuLayer" instance=ExtResource("26_w7blf")]
+visible = false
+
 [connection signal="back_pressed" from="MenuLayer/GameHud" to="." method="_on_back_pressed"]
 [connection signal="menu_changed" from="MenuLayer/GameHud" to="." method="_on_menu_changed"]
 [connection signal="menu_quit_requested" from="MenuLayer/GameHud" to="." method="_on_quit_requested"]
@@ -273,3 +281,9 @@ visible = false
 [connection signal="back_pressed" from="MenuLayer/LevelSelectMenu" to="." method="_on_back_pressed"]
 [connection signal="menu_changed" from="MenuLayer/LevelSelectMenu" to="." method="_on_menu_changed"]
 [connection signal="menu_quit_requested" from="MenuLayer/LevelSelectMenu" to="." method="_on_quit_requested"]
+[connection signal="back_pressed" from="MenuLayer/ContactMenu" to="." method="_on_back_pressed"]
+[connection signal="menu_changed" from="MenuLayer/ContactMenu" to="." method="_on_menu_changed"]
+[connection signal="menu_quit_requested" from="MenuLayer/ContactMenu" to="." method="_on_quit_requested"]
+[connection signal="back_pressed" from="MenuLayer/CreditsMenu" to="." method="_on_back_pressed"]
+[connection signal="menu_changed" from="MenuLayer/CreditsMenu" to="." method="_on_menu_changed"]
+[connection signal="menu_quit_requested" from="MenuLayer/CreditsMenu" to="." method="_on_quit_requested"]
