@@ -5,6 +5,7 @@
 
 [node name="CrateWoodOpen" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_mckth")
+volume_db = 6.0
 bus = &"Effects"
 script = ExtResource("2_p7rrw")
 play_on_ready = true
