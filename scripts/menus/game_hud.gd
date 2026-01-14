@@ -14,9 +14,6 @@ extends ZM_BaseMenu
 
 @export_group("Messages")
 @export var message_history: Control = null
-#@export var action_label: Label = null
-#@export var action_limit: int = 5
-#@export var action_timeout: float = 5.0
 
 @onready var crosshair_default_color: Color = crosshair.modulate
 
@@ -32,30 +29,11 @@ func _ready() -> void:
 	clear_ammo_label()
 	reset_crosshair_color()
 
-#func _process(delta: float) -> void:
-#	if not self.visible:
-#		return
-#
-#	#if action_queue.size() > 0:
-#	#	action_timer += delta
-#	#	#if action_timer >= action_timeout:
-#	#	#	action_timer = 0.0
-#	#	#	action_queue.pop_front()
-#	#		#update_action_queue.call_deferred()
-
 func set_crosshair_color(color: Color) -> void:
 	crosshair.modulate = color
 
 func reset_crosshair_color() -> void:
 	crosshair.modulate = crosshair_default_color # Color.WHITE
-
-#func push_action(action: String) -> void:
-#	action_queue.append(action)
-#	if action_queue.size() > action_limit:
-#		action_queue.pop_front()
-#
-#	action_timer = 0.0
-#	update_action_queue()
 
 func append_message(message: ZC_Message) -> void:
 	message_history.append_message(message)
@@ -118,12 +96,6 @@ func health_callback(value: int) -> void:
 	if value <= 0:
 		menu_changed.emit(Menus.GAME_OVER_MENU)
 
-
-#func update_action_queue() -> void:
-#	if action_queue.size() > 0:
-#		action_label.text = "\n".join(action_queue)
-#	else:
-#		action_label.text = ""
 
 func on_update() -> void:
 	pass
