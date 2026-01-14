@@ -26,6 +26,7 @@ size = Vector3(2.3370972, 1, 1)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 script = ExtResource("2_ow245")
 component_resources = Array[ExtResource("3_leshq")]([SubResource("Resource_helhp")])
+metadata/surface_type = &"metal"
 
 [node name="Car5" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_a066y")

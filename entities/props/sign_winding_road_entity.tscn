@@ -27,6 +27,7 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_kiw6e")
 component_resources = Array[ExtResource("2_psljn")]([SubResource("Resource_dw42y"), SubResource("Resource_uex7b")])
+metadata/surface_type = &"metal"
 
 [node name="Winding Road" type="MeshInstance3D" parent="."]
 mesh = ExtResource("6_s4igr")

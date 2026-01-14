@@ -23,6 +23,7 @@ size = Vector3(1.1, 1.1, 1.1)
 script = ExtResource("1_nt7rs")
 prefab_path = "res://entities/props/crate_wood.tscn"
 component_resources = Array[ExtResource("2_j4mia")]([SubResource("Resource_drja3"), SubResource("Resource_op0x7")])
+metadata/surface_type = &"wood"
 
 [node name="wooden_crate_10" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.15, 0, 0, 0, 1.15, -1.8735878e-07, 0, 1.8735878e-07, 1.15, 0, 0, 0)

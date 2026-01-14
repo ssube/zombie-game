@@ -65,8 +65,12 @@ func apply_decal(ray: RayCast3D, collider: Node3D) -> void:
 	var collision_point = ray.get_collision_point()
 	var collision_normal = ray.get_collision_normal()
 
-	# Spawn the decal via the manager singleton.
+	# Only proceed if we have a known surface type
 	var surface_type := CollisionUtils.get_surface_type(ray)
+	if surface_type == CollisionUtils.unknown_surface:
+		return
+
+	# Spawn the decal via the manager singleton.
 	DecalManager.spawn_decal(surface_type, collider, collision_point, collision_normal)
 
 
@@ -74,8 +78,10 @@ func apply_sound(ray: RayCast3D, collider: Node3D) -> void:
 	# Obtain collision info
 	var collision_point = ray.get_collision_point()
 	var surface_type := CollisionUtils.get_surface_type(ray)
-	var impact_sound := impact_sounds.get(surface_type, default_sound) as PackedScene
+	if surface_type == CollisionUtils.unknown_surface:
+		return
 
+	var impact_sound := impact_sounds.get(surface_type, default_sound) as PackedScene
 	var sound_node = impact_sound.instantiate() as ZN_AudioSubtitle3D
 	collider.add_child(sound_node)
 	sound_node.global_position = collision_point

@@ -27,6 +27,7 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_8utnp")
 component_resources = Array[ExtResource("2_318o6")]([SubResource("Resource_1axn7"), SubResource("Resource_vlfmo")])
+metadata/surface_type = &"metal"
 
 [node name="Mailbox" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
