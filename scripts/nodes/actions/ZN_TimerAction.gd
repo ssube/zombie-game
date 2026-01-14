@@ -10,4 +10,7 @@ func run_node(_source: Node, _event: Enums.ActionEvent, _actor: Node) -> void:
 		timer.start()
 
 	if stop:
+		if timer is ZN_TriggerTimer:
+			timer.repeat = false
+
 		timer.stop()
