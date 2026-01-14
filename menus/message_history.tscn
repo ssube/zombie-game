@@ -1,0 +1,96 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw0fr06qpml0a"]
+
+[ext_resource type="PackedScene" uid="uid://cwqorvlcjdvc0" path="res://menus/message_history_item_plain.tscn" id="1_0avqx"]
+[ext_resource type="Script" uid="uid://do5gw8aae6bc6" path="res://scripts/menus/message_history.gd" id="1_6xqwk"]
+[ext_resource type="PackedScene" uid="uid://dv02lv0fuo7aq" path="res://menus/message_history_item_bbcode.tscn" id="2_fak7s"]
+
+[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("message_container", "scroll_container")]
+custom_minimum_size = Vector2(300, 200)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6xqwk")
+max_messages = 10
+message_container = NodePath("VBoxContainer/ScrollContainer/MessageHistory")
+scroll_container = NodePath("VBoxContainer/ScrollContainer")
+scroll_duration = 0.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Recent Messages"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MessageHistory" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="MessageHistoryItemPlain" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain2" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemBBCode" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("2_fak7s")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain3" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain4" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemBBCode2" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("2_fak7s")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain5" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain6" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain7" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain8" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain9" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain10" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain11" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain12" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain13" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain14" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain15" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain16" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain17" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemPlain18" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2

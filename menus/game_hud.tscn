@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://vs3qkjinyhbb"]
+[gd_scene load_steps=7 format=3 uid="uid://vs3qkjinyhbb"]
 
 [ext_resource type="Script" uid="uid://3t4uubeiqa7r" path="res://scripts/menus/game_hud.gd" id="1_gjtvi"]
 [ext_resource type="Texture2D" uid="uid://dwp1uqi51ytw3" path="res://textures/crosshair.png" id="1_n7chs"]
+[ext_resource type="PackedScene" uid="uid://bw0fr06qpml0a" path="res://menus/message_history.tscn" id="3_ryqxq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jew8s"]
 
@@ -29,13 +30,17 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 6
 
-[node name="GameHud" type="AspectRatioContainer" node_paths=PackedStringArray("crosshair", "health_bar", "stamina_bar", "objective_label", "target_label", "weapon_label", "ammo_label", "action_label")]
+[node name="GameHud" type="Control" node_paths=PackedStringArray("crosshair", "health_bar", "stamina_bar", "objective_label", "target_label", "weapon_label", "ammo_label", "message_history")]
 process_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
 script = ExtResource("1_gjtvi")
 crosshair = NodePath("CenterContainer/Crosshair")
 health_bar = NodePath("BottomContainer/HBoxContainer2/HealthBar")
@@ -44,10 +49,15 @@ objective_label = NodePath("TopContainer/ObjectiveLabel")
 target_label = NodePath("BottomContainer/TargetLabel")
 weapon_label = NodePath("BottomContainer/HBoxContainer/WeaponLabel")
 ammo_label = NodePath("BottomContainer/HBoxContainer/AmmoLabel")
-action_label = NodePath("TopContainer/ActionLabel")
+message_history = NodePath("SideContainer/VBoxContainer/MessageHistory")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
@@ -56,11 +66,19 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("1_n7chs")
 stretch_mode = 3
 
 [node name="BottomContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 2
 
 [node name="TargetLabel" type="Label" parent="BottomContainer"]
@@ -72,6 +90,7 @@ metadata/diagram_outline = Color(0.6392157, 0.6392157, 0.6392157, 1)
 
 [node name="HSeparator" type="HSeparator" parent="BottomContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
 
@@ -98,6 +117,7 @@ metadata/diagram_label = "Ammo Count"
 
 [node name="HSeparator2" type="HSeparator" parent="BottomContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
 
@@ -109,6 +129,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
+mouse_filter = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_jew8s")
 value = 25.0
 show_percentage = false
@@ -131,6 +152,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
+mouse_filter = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_pua1y")
 value = 25.0
 show_percentage = false
@@ -149,10 +171,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TopContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="HSeparator4" type="HSeparator" parent="TopContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
 
@@ -163,14 +193,21 @@ horizontal_alignment = 1
 metadata/diagram_label = "Current Objective"
 metadata/diagram_outline = Color(0.6392157, 0.6392157, 0.6392157, 1)
 
-[node name="HSeparator3" type="HSeparator" parent="TopContainer"]
-layout_mode = 2
-theme_override_constants/separation = 8
-theme_override_styles/separator = SubResource("StyleBoxEmpty_jew8s")
+[node name="SideContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
 
-[node name="ActionLabel" type="Label" parent="TopContainer"]
+[node name="VBoxContainer" type="MarginContainer" parent="SideContainer"]
 layout_mode = 2
-text = "Recent Actions"
-horizontal_alignment = 1
-metadata/diagram_outline = Color(0.6392157, 0.6392157, 0.6392157, 1)
-metadata/diagram_label = "Recent Actions"
+size_flags_vertical = 4
+theme_override_constants/margin_top = 480
+
+[node name="MessageHistory" parent="SideContainer/VBoxContainer" instance=ExtResource("3_ryqxq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4

@@ -209,7 +209,8 @@ func _process_heard_noises(entity: Entity) -> void:
 			continue
 
 		if OptionsManager.options.audio.subtitles:
-			%Menu.push_action(noise.subtitle_tag)
+			# %Menu.push_action(noise.subtitle_tag)
+			%Menu.append_message(ZC_Message.make_subtitle(noise.subtitle_tag))
 
 	entity.remove_relationships(heard_noises)
 

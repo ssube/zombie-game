@@ -1,7 +1,7 @@
 extends Component
 class_name ZC_Message
 
-enum MessageType {
+enum MessageGroup {
 	## Messages from the system, such as notifications or alerts.
 	SYSTEM,
 	## Subtitles for audio in the game.
@@ -21,7 +21,9 @@ enum MessageFormat {
 	# MARKDOWN,
 }
 
-@export var message_type: MessageType = MessageType.CHAT
+@export var message_format: MessageFormat = MessageFormat.PLAIN
+@export var message_group: MessageGroup = MessageGroup.CHAT
+
 @export var message: String = ""
 @export var icon: Texture2D = null
 @export var author: String = ""
@@ -32,3 +34,32 @@ enum MessageFormat {
 @export_group("Timestamps")
 @export var sent_at: float = 0.0
 @export var read_at: float = 0.0
+
+
+#region Utility Methods
+static func make_interaction(message: String, icon: Texture2D = null) -> ZC_Message:
+	var result := ZC_Message.new()
+	result.message_format = MessageFormat.PLAIN
+	result.message_group = MessageGroup.INTERACTION
+	result.message = message
+	result.icon = icon
+	return result
+
+static func make_subtitle(text: String, duration: float = 3.0) -> ZC_Message:
+	var result := ZC_Message.new()
+	result.message_format = MessageFormat.BBCODE
+	result.message_group = MessageGroup.SUBTITLE
+	# TODO: move this formatting to the subtitle template
+	result.message = "[color=gray][i]%s[/i][/color]" % text
+	result.duration = duration
+	return result
+
+static func make_system(message: String, icon: Texture2D = null) -> ZC_Message:
+	var result := ZC_Message.new()
+	result.message_format = MessageFormat.PLAIN
+	result.message_group = MessageGroup.SYSTEM
+	result.message = message
+	result.icon = icon
+	return result
+
+#endregion

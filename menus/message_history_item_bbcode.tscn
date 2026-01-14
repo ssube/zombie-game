@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://dv02lv0fuo7aq"]
+
+[ext_resource type="Script" uid="uid://bn2gmcplrlbxt" path="res://scripts/menus/message_history_item_bbcode.gd" id="1_pf3d2"]
+[ext_resource type="Script" uid="uid://m1ebukbi2ngu" path="res://scripts/utils/bbcode/NamedColor.gd" id="2_pf3d2"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rakte"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wua0j"]
+width = 24
+height = 24
+noise = SubResource("FastNoiseLite_rakte")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_vpl61"]
+script = ExtResource("2_pf3d2")
+metadata/_custom_type_script = "uid://m1ebukbi2ngu"
+
+[node name="MessageHistoryItemBBCode" type="PanelContainer" node_paths=PackedStringArray("message_label", "message_icon")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pf3d2")
+message_label = NodePath("MarginContainer/HBoxContainer/MessageLabel")
+message_icon = NodePath("MarginContainer/HBoxContainer/CenterContainer/TextureRect")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_wua0j")
+stretch_mode = 2
+
+[node name="MessageLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "Message [i][named_color name=_special]Goes[/named_color][/i] Here"
+fit_content = true
+vertical_alignment = 1
+custom_effects = [SubResource("RichTextEffect_vpl61")]

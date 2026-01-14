@@ -1,6 +1,8 @@
 extends ZM_BaseMenu
 
 @export var crosshair: TextureRect = null
+
+@export_group("Bars")
 @export var health_bar: ProgressBar = null
 @export var stamina_bar: ProgressBar = null
 
@@ -10,10 +12,11 @@ extends ZM_BaseMenu
 @export var weapon_label: Label = null
 @export var ammo_label: Label = null
 
-@export_group("Actions")
-@export var action_label: Label = null
-@export var action_limit: int = 5
-@export var action_timeout: float = 5.0
+@export_group("Messages")
+@export var message_history: Control = null
+#@export var action_label: Label = null
+#@export var action_limit: int = 5
+#@export var action_timeout: float = 5.0
 
 @onready var crosshair_default_color: Color = crosshair.modulate
 
@@ -29,16 +32,16 @@ func _ready() -> void:
 	clear_ammo_label()
 	reset_crosshair_color()
 
-func _process(delta: float) -> void:
-	if not self.visible:
-		return
-
-	if action_queue.size() > 0:
-		action_timer += delta
-		if action_timer >= action_timeout:
-			action_timer = 0.0
-			action_queue.pop_front()
-			update_action_queue.call_deferred()
+#func _process(delta: float) -> void:
+#	if not self.visible:
+#		return
+#
+#	#if action_queue.size() > 0:
+#	#	action_timer += delta
+#	#	#if action_timer >= action_timeout:
+#	#	#	action_timer = 0.0
+#	#	#	action_queue.pop_front()
+#	#		#update_action_queue.call_deferred()
 
 func set_crosshair_color(color: Color) -> void:
 	crosshair.modulate = color
@@ -46,13 +49,16 @@ func set_crosshair_color(color: Color) -> void:
 func reset_crosshair_color() -> void:
 	crosshair.modulate = crosshair_default_color # Color.WHITE
 
-func push_action(action: String) -> void:
-	action_queue.append(action)
-	if action_queue.size() > action_limit:
-		action_queue.pop_front()
+#func push_action(action: String) -> void:
+#	action_queue.append(action)
+#	if action_queue.size() > action_limit:
+#		action_queue.pop_front()
+#
+#	action_timer = 0.0
+#	update_action_queue()
 
-	action_timer = 0.0
-	update_action_queue()
+func append_message(message: ZC_Message) -> void:
+	message_history.append_message(message)
 
 func clear_objective_label() -> void:
 	objective_label.text = ""
@@ -113,11 +119,11 @@ func health_callback(value: int) -> void:
 		menu_changed.emit(Menus.GAME_OVER_MENU)
 
 
-func update_action_queue() -> void:
-	if action_queue.size() > 0:
-		action_label.text = "\n".join(action_queue)
-	else:
-		action_label.text = ""
+#func update_action_queue() -> void:
+#	if action_queue.size() > 0:
+#		action_label.text = "\n".join(action_queue)
+#	else:
+#		action_label.text = ""
 
 func on_update() -> void:
 	pass
