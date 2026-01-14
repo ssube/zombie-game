@@ -27,10 +27,12 @@ func append_message(message: ZC_Message) -> void:
 		return
 
 	# Avoid duplicate consecutive messages within the configured time window
-	if _last_message != null:
-		if message.message == _last_message.message and message.author == _last_message.author:
-			if message.sent_at - _last_message.sent_at < duplicate_duration:
-				return
+	# This only applies to subtitles
+	if message.message_group == ZC_Message.MessageGroup.SUBTITLE:
+		if _last_message != null:
+			if message.message == _last_message.message and message.author == _last_message.author:
+				if message.sent_at - _last_message.sent_at < duplicate_duration:
+					return
 
 	var format := message.message_format
 	var message_scene := message_formats.get(format, null) as PackedScene
