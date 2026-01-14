@@ -185,11 +185,17 @@ func _apply_gravity(velocity: ZC_Velocity, body: ZE_Player_IKCC, delta: float) -
 
 
 func _apply_jump(velocity: ZC_Velocity, input: ZC_Input, stamina: ZC_Stamina, body: ZE_Player_IKCC) -> void:
-	if input.move_jump and stamina.can_jump():
-		# Allow jumping if on floor or within coyote time window
-		if body.is_on_floor or body.time_since_on_floor <= input.coyote_time:
-			stamina.current_stamina -= stamina.jump_cost
-			velocity.linear_velocity.y = input.jump_speed
+	if not input.move_jump:
+		return
+
+	if not stamina.can_jump():
+		_play_exhaustion_sound(body as Entity)
+		return
+
+	# Allow jumping if on floor or within coyote time window
+	if body.is_on_floor or body.time_since_on_floor <= input.coyote_time:
+		stamina.current_stamina -= stamina.jump_cost
+		velocity.linear_velocity.y = input.jump_speed
 
 
 func _process_screen_effects(entity: Entity, delta: float) -> void:
@@ -316,6 +322,25 @@ func _handle_interactive(entity: Entity, input: ZC_Input, body: CharacterBody3D,
 				_update_ammo_label(entity)
 
 
+func _play_exhaustion_sound(entity: Entity) -> void:
+	var stamina := entity.get_component(ZC_Stamina) as ZC_Stamina
+	if stamina.exhausted_sound == null:
+		return
+
+	var sound_node := entity.get_node(stamina.exhausted_sound) as AudioStreamPlayer3D
+	if sound_node == null:
+		return
+
+	if sound_node.playing:
+		return
+
+	if sound_node is ZN_AudioSubtitle3D:
+		var subtitle_player := sound_node as ZN_AudioSubtitle3D
+		subtitle_player.play_subtitle()
+	else:
+		sound_node.play()
+
+
 func _update_ammo_label(player: Entity) -> void:
 	var player_ammo := player.get_component(ZC_Ammo) as ZC_Ammo
 	if player_ammo == null:
@@ -350,6 +375,7 @@ func swing_weapon(entity: Entity, weapon: ZE_Weapon) -> void:
 	var c_weapon = weapon.get_component(ZC_Weapon_Melee) as ZC_Weapon_Melee
 	var stamina := entity.get_component(ZC_Stamina) as ZC_Stamina
 	if stamina.current_stamina < c_weapon.swing_stamina:
+		_play_exhaustion_sound(entity)
 		return
 
 	stamina.current_stamina -= c_weapon.swing_stamina

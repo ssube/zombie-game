@@ -23,6 +23,10 @@ class_name ZC_Stamina
 @export var moving_recharge_rate: float = 0.1 # per second
 @export var still_recharge_rate: float = 1.0
 
+@export_group("Sounds")
+@export var exhausted_sound: NodePath
+
+
 func can_jump() -> bool:
 	return current_stamina > jump_limit
 
