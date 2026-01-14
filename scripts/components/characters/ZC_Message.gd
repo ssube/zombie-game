@@ -37,6 +37,7 @@ enum MessageFormat {
 
 
 #region Utility Methods
+@warning_ignore("shadowed_variable")
 static func make_interaction(message: String, icon: Texture2D = null) -> ZC_Message:
 	var result := ZC_Message.new()
 	result.message_format = MessageFormat.PLAIN
@@ -46,6 +47,7 @@ static func make_interaction(message: String, icon: Texture2D = null) -> ZC_Mess
 	result.sent_at = Time.get_ticks_msec() / 1000.0
 	return result
 
+@warning_ignore("shadowed_variable")
 static func make_subtitle(text: String, duration: float = 3.0) -> ZC_Message:
 	var result := ZC_Message.new()
 	result.message_format = MessageFormat.BBCODE
@@ -56,6 +58,7 @@ static func make_subtitle(text: String, duration: float = 3.0) -> ZC_Message:
 	result.sent_at = Time.get_ticks_msec() / 1000.0
 	return result
 
+@warning_ignore("shadowed_variable")
 static func make_system(message: String, icon: Texture2D = null) -> ZC_Message:
 	var result := ZC_Message.new()
 	result.message_format = MessageFormat.PLAIN
