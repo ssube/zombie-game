@@ -2,6 +2,7 @@ extends Control
 
 
 @export var max_messages: int = 100
+@export var duplicate_duration: float = 2.5 # seconds
 @export var message_container: Container
 @export var message_formats: Dictionary[ZC_Message.MessageFormat, PackedScene] = {
 	ZC_Message.MessageFormat.PLAIN: preload("res://menus/message_history_item_plain.tscn"),
@@ -25,11 +26,11 @@ func append_message(message: ZC_Message) -> void:
 	if _message_cache.has(message):
 		return
 
-	# Avoid duplicate consecutive messages
-	# TODO: add a timestamp check for duplicates within a short time frame
+	# Avoid duplicate consecutive messages within the configured time window
 	if _last_message != null:
 		if message.message == _last_message.message and message.author == _last_message.author:
-			return
+			if message.sent_at - _last_message.sent_at < duplicate_duration:
+				return
 
 	var format := message.message_format
 	var message_scene := message_formats.get(format, null) as PackedScene

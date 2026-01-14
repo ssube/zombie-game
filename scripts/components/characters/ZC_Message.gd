@@ -43,6 +43,7 @@ static func make_interaction(message: String, icon: Texture2D = null) -> ZC_Mess
 	result.message_group = MessageGroup.INTERACTION
 	result.message = message
 	result.icon = icon
+	result.sent_at = Time.get_ticks_msec() / 1000.0
 	return result
 
 static func make_subtitle(text: String, duration: float = 3.0) -> ZC_Message:
@@ -52,6 +53,7 @@ static func make_subtitle(text: String, duration: float = 3.0) -> ZC_Message:
 	# TODO: move this formatting to the subtitle template
 	result.message = "[color=gray][i]%s[/i][/color]" % text
 	result.duration = duration
+	result.sent_at = Time.get_ticks_msec() / 1000.0
 	return result
 
 static func make_system(message: String, icon: Texture2D = null) -> ZC_Message:
@@ -60,6 +62,7 @@ static func make_system(message: String, icon: Texture2D = null) -> ZC_Message:
 	result.message_group = MessageGroup.SYSTEM
 	result.message = message
 	result.icon = icon
+	result.sent_at = Time.get_ticks_msec() / 1000.0
 	return result
 
 #endregion
