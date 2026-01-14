@@ -1,19 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://8f7bugrofvmc"]
+[gd_scene load_steps=16 format=3 uid="uid://8f7bugrofvmc"]
 
 [ext_resource type="Script" uid="uid://dhsuals8autq1" path="res://scripts/entities/props/ZE_Barrel.gd" id="1_udcvv"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_g3e3n"]
-[ext_resource type="Script" uid="uid://jokkv7skgimj" path="res://scripts/components/status/ZC_Flammable.gd" id="3_vhpm6"]
 [ext_resource type="Script" uid="uid://0ndifcnh0nsp" path="res://scripts/components/ZC_Health.gd" id="4_t2uel"]
 [ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="5_gvsd5"]
 [ext_resource type="Material" uid="uid://d4bmgb0pkgmpm" path="res://materials/effects/shimmer_danger.tres" id="6_4r6aw"]
 [ext_resource type="Script" uid="uid://be84y2dw7fp0e" path="res://scripts/components/effects/ZC_Shimmer.gd" id="7_136ls"]
 [ext_resource type="ArrayMesh" uid="uid://dnn3nnc05inha" path="res://entities/props/barrel_red.mesh" id="8_136ls"]
 [ext_resource type="PackedScene" uid="uid://b13thfox1hd38" path="res://effects/fire_effect.tscn" id="9_lfqbm"]
-
-[sub_resource type="Resource" id="Resource_kpq4c"]
-script = ExtResource("3_vhpm6")
-effect_path = NodePath("Effects/FireEffect")
-metadata/_custom_type_script = "uid://jokkv7skgimj"
+[ext_resource type="Script" uid="uid://bg4w2cfxcm0m7" path="res://scripts/nodes/triggers/ZN_TriggerArea3D.gd" id="10_3qfk1"]
+[ext_resource type="Script" uid="uid://do7trwtn8xc7t" path="res://scripts/nodes/actions/ZN_FireAction.gd" id="11_26qta"]
 
 [sub_resource type="Resource" id="Resource_506tl"]
 script = ExtResource("4_t2uel")
@@ -38,13 +34,16 @@ metadata/_custom_type_script = "uid://be84y2dw7fp0e"
 height = 1.2
 radius = 0.45
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_26qta"]
+radius = 0.35
+
 [node name="Barrel" type="RigidBody3D"]
 collision_layer = 2
 collision_mask = 31
 mass = 100.0
 script = ExtResource("1_udcvv")
 prefab_path = "res://entities/props/barrel.tscn"
-component_resources = Array[ExtResource("2_g3e3n")]([SubResource("Resource_kpq4c"), SubResource("Resource_506tl"), SubResource("Resource_0kgpt"), SubResource("Resource_3qfk1")])
+component_resources = Array[ExtResource("2_g3e3n")]([SubResource("Resource_506tl"), SubResource("Resource_0kgpt"), SubResource("Resource_3qfk1")])
 
 [node name="Barrel" type="Node3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -58,11 +57,22 @@ skeleton = NodePath("")
 shape = SubResource("CylinderShape3D_bv25f")
 metadata/surface_type = &"metal"
 
-[node name="Effects" type="Node3D" parent="."]
-
-[node name="FireEffect" parent="Effects" instance=ExtResource("9_lfqbm")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.16060305, 0)
-visible = false
-
 [node name="FireEffect" parent="." instance=ExtResource("9_lfqbm")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.1124915, 0)
+
+[node name="ZN_TriggerArea3D" type="Area3D" parent="." node_paths=PackedStringArray("parent_entity")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5960101, 0)
+collision_layer = 2
+collision_mask = 30
+script = ExtResource("10_3qfk1")
+parent_entity = NodePath("..")
+metadata/_custom_type_script = "uid://bg4w2cfxcm0m7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZN_TriggerArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08097494, 0)
+shape = SubResource("SphereShape3D_26qta")
+
+[node name="ZN_FireAction" type="Node" parent="ZN_TriggerArea3D"]
+script = ExtResource("11_26qta")
+fire_duration = 3.0
+metadata/_custom_type_script = "uid://do7trwtn8xc7t"
