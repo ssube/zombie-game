@@ -98,6 +98,13 @@ func _show_debug_state():
 func set_state(new_name: String):
 		var behavior := entity.get_component(ZC_Behavior) as ZC_Behavior
 		var old_state := current_state
+		var new_state := states.get(new_name, null) as ZB_State
+		if new_state == null:
+				ZombieLogger.error("No state found with name: %s" % str(new_name))
+				return
+
+		if old_state == new_state:
+				return
 
 		if current_state:
 				ZombieLogger.trace("Entity {0} exiting state {1}", [entity.name, current_state.name])
@@ -105,7 +112,7 @@ func set_state(new_name: String):
 				if entity is ZE_Base:
 					(entity as ZE_Base).emit_action(Enums.ActionEvent.STATE_EXIT, entity)
 
-		current_state = states[new_name]
+		current_state = new_state
 
 		ZombieLogger.trace("Entity {0} entering state {1}", [entity.name, current_state.name])
 		current_state.enter(entity)
