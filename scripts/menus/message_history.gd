@@ -10,6 +10,7 @@ extends Control
 @export var scroll_container: ScrollContainer
 @export var scroll_duration: float = 0.2
 
+var _last_message: ZC_Message = null
 var _message_cache: Dictionary[ZC_Message, Control] = {}
 var _message_order: Array[ZC_Message] = []
 var _scroll_tween: Tween = null
@@ -24,6 +25,12 @@ func append_message(message: ZC_Message) -> void:
 	if _message_cache.has(message):
 		return
 
+	# Avoid duplicate consecutive messages
+	# TODO: add a timestamp check for duplicates within a short time frame
+	if _last_message != null:
+		if message.message == _last_message.message and message.author == _last_message.author:
+			return
+
 	var format := message.message_format
 	var message_scene := message_formats.get(format, null) as PackedScene
 	if message_scene == null:
@@ -36,6 +43,7 @@ func append_message(message: ZC_Message) -> void:
 		message_container.add_child(message_item)
 		_message_cache[message] = message_item
 		_message_order.append(message)
+		_last_message = message
 
 	# Remove oldest messages if limit exceeded
 	while _message_order.size() > max_messages:
