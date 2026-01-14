@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://vs3qkjinyhbb"]
+[gd_scene load_steps=8 format=3 uid="uid://vs3qkjinyhbb"]
 
 [ext_resource type="Script" uid="uid://3t4uubeiqa7r" path="res://scripts/menus/game_hud.gd" id="1_gjtvi"]
 [ext_resource type="Texture2D" uid="uid://dwp1uqi51ytw3" path="res://textures/crosshair.png" id="1_n7chs"]
@@ -29,6 +29,8 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryqxq"]
 
 [node name="GameHud" type="Control" node_paths=PackedStringArray("crosshair", "health_bar", "stamina_bar", "objective_label", "target_label", "weapon_label", "ammo_label", "message_history")]
 process_mode = 1
@@ -200,12 +202,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 2
 
-[node name="VBoxContainer" type="MarginContainer" parent="SideContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SideContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/margin_top = 480
+
+[node name="PanelContainer" type="PanelContainer" parent="SideContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ryqxq")
 
 [node name="MessageHistory" parent="SideContainer/VBoxContainer" instance=ExtResource("3_ryqxq")]
 layout_mode = 2
