@@ -40,6 +40,12 @@ func _run_command_debug(target_id: String):
 		_history.append(" - %s" % [component])
 
 
+func _run_command_entities():
+	_history.append("Listing all entities in the ECS world:")
+	for entity in ECS.world.entities:
+		_history.append(" - ID: %s, Path: %s" % [entity.id, str(entity.get_path())])
+
+
 func _run_command_give(target_id: String, item_path: String, quantity: int = 1):
 		_history.append("Giving %d of %s to %s..." % [quantity, item_path, target_id])
 
@@ -74,6 +80,7 @@ func _run_command_help():
 	_history.append("Available commands:")
 	_history.append(" clear")
 	_history.append(" debug <target_id>")
+	_history.append(" entities")
 	_history.append(" give <target_id> <item_path> [quantity]")
 	_history.append(" help")
 	_history.append(" load <level_name> [spawn_point]")
@@ -94,7 +101,7 @@ func _run_command_menu(menu_index: int):
 
 
 func _run_command_spawn(_entity_path: String):
-	assert(false, "TODO: Implement spawn command using player's current position.")
+	assert(false, "TODO: spawn the entity path at the current player's drop marker.")
 
 
 func _run_command(text: String) -> void:
@@ -109,6 +116,8 @@ func _run_command(text: String) -> void:
 		"debug":
 			var target_id := words[1]
 			_run_command_debug(target_id)
+		"entities":
+			_run_command_entities()
 		"give":
 			var target_id := words[1]
 			var item_path := words[2]
@@ -132,6 +141,8 @@ func _run_command(text: String) -> void:
 		"spawn":
 			var entity_path := words[1]
 			_run_command_spawn(entity_path)
+		_:
+			_history.append("Unknown command: %s" % [keyword])
 
 
 func _on_console_input_text_submitted(text: String) -> void:
