@@ -113,6 +113,8 @@ collision_mask = 27
 script = ExtResource("1_g5okp")
 body = NodePath(".")
 collider = NodePath("CollisionShape3D")
+max_step_height = 0.33
+min_step_forward_distance = 0.005
 swing_path_follower = NodePath("Head/Hands/SwingPath/PathFollow3D")
 equipment_slots = {
 "flashlight": NodePath("Head/Hands/FlashlightEquipMarker"),
