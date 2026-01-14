@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dc6ruk3dyi6tf"]
 
-[ext_resource type="Material" uid="uid://dmc1mx6dblo1c" path="res://materials/grass_dark_2.tres" id="1_eap33"]
+[ext_resource type="Material" path="res://materials/grass_dark_2.tres" id="1_eap33"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_4il3n"]
 material = ExtResource("1_eap33")
@@ -15,23 +15,23 @@ material = ExtResource("1_eap33")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 cast_shadow = 2
-visibility_range_end = 10.0
-visibility_range_end_margin = 1.0
+visibility_range_end = 25.0
+visibility_range_end_margin = 2.5
 visibility_range_fade_mode = 1
 mesh = SubResource("QuadMesh_4il3n")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.70710677, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710677, 0, 0, 0)
 cast_shadow = 2
-visibility_range_end = 10.0
-visibility_range_end_margin = 1.0
+visibility_range_end = 25.0
+visibility_range_end_margin = 2.5
 visibility_range_fade_mode = 1
 mesh = SubResource("QuadMesh_clpux")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.5, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.5, 0, 0, 0)
 cast_shadow = 2
-visibility_range_end = 10.0
-visibility_range_end_margin = 1.0
+visibility_range_end = 25.0
+visibility_range_end_margin = 2.5
 visibility_range_fade_mode = 1
 mesh = SubResource("QuadMesh_2h0hu")
