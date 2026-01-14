@@ -2,7 +2,7 @@ extends Control
 
 
 @export var max_messages: int = 100
-@export var duplicate_duration: float = 2.5 # seconds
+@export var duplicate_duration: float = 10.0 # seconds
 @export var message_container: Container
 @export var message_formats: Dictionary[ZC_Message.MessageFormat, PackedScene] = {
 	ZC_Message.MessageFormat.PLAIN: preload("res://menus/message_history_item_plain.tscn"),
