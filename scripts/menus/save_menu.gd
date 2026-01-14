@@ -17,6 +17,7 @@ extends ZM_BaseMenu
 
 @export var save_list: ItemList
 var selected_name: String
+var existing_saves: Array[String] = []
 
 
 signal game_saved(name: String)
@@ -42,15 +43,21 @@ func on_show() -> void:
 
 
 func on_update() -> void:
-	var saves := SaveManager.list_saves()
+	existing_saves.assign(SaveManager.list_saves())
 	save_list.clear()
-	for save in saves:
+	for save in existing_saves:
 		save_list.add_item(save)
 
 
 func _on_dialog_save_button_pressed() -> void:
 	var save_name = %SaveName.text
 	if save_name == "":
+		return
+
+	if save_name in existing_saves:
+		selected_name = save_name
+		show_name_dialog = false
+		show_replace_dialog = true
 		return
 
 	SaveManager.save_game(save_name, self)
@@ -68,6 +75,6 @@ func _on_dialog_back_button_pressed() -> void:
 func _on_dialog_replace_button_pressed() -> void:
 	SaveManager.save_game(selected_name, self)
 	game_saved.emit(selected_name)
-	
+
 	on_update()
 	show_replace_dialog = false
