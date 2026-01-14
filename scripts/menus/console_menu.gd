@@ -29,6 +29,16 @@ func _run_command_debug(target_id: String):
 		_history.append("Rotation: %s" % [str(target_3d.global_rotation)])
 		_history.append("Scale: %s" % [str(target_3d.global_scale)])
 
+		# Draw a box around the entity for debugging
+		var aabb := AABB(target_3d.global_position, Vector3.ONE * 3.0)
+		for child in target_3d.get_children():
+			if child is MeshInstance3D:
+				var mesh_instance := child as MeshInstance3D
+				var mesh_aabb := mesh_instance.get_aabb()
+				aabb = aabb.merge(mesh_aabb)
+
+		DebugDraw3D.draw_aabb(aabb, Color.GREEN, OptionsManager.options.cheats.debug_duration)
+
 	if target_node is RigidBody3D:
 		var target_rigid := target_node as RigidBody3D
 		_history.append("Linear Velocity: %s" % [str(target_rigid.linear_velocity)])
@@ -38,6 +48,7 @@ func _run_command_debug(target_id: String):
 	_history.append("Components:")
 	for component in target.components:
 		_history.append(" - %s" % [component])
+
 
 
 func _run_command_entities():
