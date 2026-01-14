@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dv02lv0fuo7aq" path="res://menus/message_history_item_bbcode.tscn" id="2_fak7s"]
 
 [node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("message_container", "scroll_container")]
-custom_minimum_size = Vector2(300, 200)
+custom_minimum_size = Vector2(360, 200)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
