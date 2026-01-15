@@ -25,8 +25,8 @@ disable_receive_shadows = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jplj4"]
 material = SubResource("StandardMaterial3D_bd4u4")
-radius = 0.05
-height = 0.25
+radius = 0.01
+height = 0.2
 
 [sub_resource type="Curve" id="Curve_5mrwb"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5014409, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -61,6 +61,7 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_c6t7j"]
 material = SubResource("StandardMaterial3D_h1ulg")
+size = Vector2(0.5, 0.5)
 
 [sub_resource type="Curve" id="Curve_ga4vo"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -76,18 +77,19 @@ colors = PackedColorArray(0.57, 1, 0.92116666, 1, 0.37996003, 0.84, 0.31919998, 
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
 cast_shadow = 0
-explosiveness = 0.75
+explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_jplj4")
 draw_pass_1 = SubResource("CapsuleMesh_jplj4")
 
 [node name="Smoke" type="GPUParticles3D" parent="."]
+explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_8gxve")
 draw_pass_1 = SubResource("QuadMesh_c6t7j")
 
 [node name="Flash" type="OmniLight3D" parent="." node_paths=PackedStringArray("lights") groups=["shadow_low"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
-light_color = Color(1, 0.53761494, 0.13187978, 1)
-light_energy = 0.0
+light_color = Color(0.82717925, 0.13, 0.99410456, 1)
+light_energy = 0.00068435416
 shadow_enabled = true
 script = ExtResource("2_8gxve")
 duration = 2.0

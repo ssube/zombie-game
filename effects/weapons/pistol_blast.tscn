@@ -1,22 +1,21 @@
 [gd_scene load_steps=17 format=3 uid="uid://ql530vnfgdgj"]
 
-[ext_resource type="Texture2D" uid="uid://bism3fuwsio0w" path="res://textures/Particle Effect Texture Essentials/Transparent Versions/fx_Smoke3.png" id="1_j6jco"]
 [ext_resource type="Script" uid="uid://bwt5xm6trqgoh" path="res://scripts/nodes/ZN_LightCurve.gd" id="2_2xjr7"]
 [ext_resource type="AudioStream" uid="uid://bhka471cwxarq" path="res://sounds/Sound Effects/Firearms/Fire/old_revolver_fire_ufx_1.ogg" id="3_j6jco"]
 [ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="4_q71m6"]
 [ext_resource type="Script" uid="uid://b3w64ibj5uxv4" path="res://scripts/nodes/triggers/ZN_TriggerTimer.gd" id="5_2qdgs"]
 [ext_resource type="Script" uid="uid://b1hfgveu3fvsd" path="res://scripts/nodes/actions/ZN_NodeAction.gd" id="6_yy5tc"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jplj4"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yp3uj"]
 particle_flag_align_y = true
 direction = Vector3(0, 0, -1)
 spread = 15.0
-initial_velocity_min = 4.0
-initial_velocity_max = 6.0
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
 gravity = Vector3(0, -0.5, 0)
 collision_mode = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bd4u4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j6jco"]
 transparency = 1
 shading_mode = 2
 albedo_color = Color(1, 0.79733336, 0.24000001, 0.6431373)
@@ -24,39 +23,43 @@ emission_enabled = true
 emission = Color(0.94, 0.40733334, 0.14099997, 1)
 disable_receive_shadows = true
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_jplj4"]
-material = SubResource("StandardMaterial3D_bd4u4")
-radius = 0.05
-height = 0.25
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2xjr7"]
+material = SubResource("StandardMaterial3D_j6jco")
+radius = 0.01
+height = 0.1
 
-[sub_resource type="Curve" id="Curve_dxxuk"]
+[sub_resource type="Curve" id="Curve_ag3ot"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5014409, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_wjpqw"]
-curve = SubResource("Curve_dxxuk")
+[sub_resource type="CurveTexture" id="CurveTexture_q71m6"]
+curve = SubResource("Curve_ag3ot")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kmwy0"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2qdgs"]
 direction = Vector3(0, 0, -1)
 initial_velocity_min = 0.5
 initial_velocity_max = 1.0
 gravity = Vector3(0, 3, -1)
 scale_min = 0.75
 scale_max = 1.25
-alpha_curve = SubResource("CurveTexture_wjpqw")
+alpha_curve = SubResource("CurveTexture_q71m6")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjpqw"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yy5tc"]
+load_path = "res://.godot/imported/fx_Smoke3.png-1121d58e57d84f3618db7adbf1a6fc95.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k5fer"]
 transparency = 1
 vertex_color_use_as_albedo = true
 albedo_color = Color(1, 1, 1, 0.7764706)
-albedo_texture = ExtResource("1_j6jco")
+albedo_texture = SubResource("CompressedTexture2D_yy5tc")
 billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="QuadMesh" id="QuadMesh_m8jg2"]
-material = SubResource("StandardMaterial3D_wjpqw")
+[sub_resource type="QuadMesh" id="QuadMesh_qgdpk"]
+material = SubResource("StandardMaterial3D_k5fer")
+size = Vector2(0.25, 0.25)
 
 [sub_resource type="Curve" id="Curve_ga4vo"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -71,17 +74,19 @@ colors = PackedColorArray(1, 0.91400003, 0.57, 1, 1, 0.536, 0.13, 1)
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
 cast_shadow = 0
-explosiveness = 0.75
-process_material = SubResource("ParticleProcessMaterial_jplj4")
-draw_pass_1 = SubResource("CapsuleMesh_jplj4")
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_yp3uj")
+draw_pass_1 = SubResource("CapsuleMesh_2xjr7")
 
 [node name="Smoke" type="GPUParticles3D" parent="."]
-process_material = SubResource("ParticleProcessMaterial_kmwy0")
-draw_pass_1 = SubResource("QuadMesh_m8jg2")
+amount = 6
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_2qdgs")
+draw_pass_1 = SubResource("QuadMesh_qgdpk")
 
 [node name="Flash" type="OmniLight3D" parent="." node_paths=PackedStringArray("lights") groups=["shadow_low"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
-light_color = Color(1, 0.54022324, 0.13491595, 1)
+light_color = Color(1, 0.5395192, 0.13409638, 1)
 light_energy = 0.0
 shadow_enabled = true
 script = ExtResource("2_2xjr7")
