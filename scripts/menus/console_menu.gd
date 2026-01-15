@@ -46,9 +46,10 @@ func _run_command_debug(target_id: String):
 
 	# ECS data
 	_history.append("Components:")
-	for component in target.components:
+	var components := target.components.keys()
+	components.sort()
+	for component in components:
 		_history.append(" - %s" % [component])
-
 
 
 func _run_command_entities():
