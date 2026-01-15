@@ -11,6 +11,8 @@ class_name ZC_Input
 @export var crouch_multiplier := 0.5
 ## Initial vertical velocity applied when jumping.
 @export var jump_speed := 5.0
+## Multiplier applied to movement input when airborne (0.0 = no air control, 1.0 = full control).
+@export_range(0.0, 1.0) var air_control_multiplier := 0.2
 
 ## The amount of time (in seconds) after leaving a surface during which the character can still jump.
 @export var coyote_time: float = 0.1

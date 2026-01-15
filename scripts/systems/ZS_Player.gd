@@ -96,6 +96,16 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 
 		var movement_velocity = direction * speed
 
+		# Apply air control: lerp between current momentum and desired input velocity
+		var is_airborne : bool = not body.is_on_floor and not body.is_on_ladder
+		if is_airborne:
+			# Preserve momentum by blending current horizontal velocity with input
+			var current_horizontal := Vector3(velocity.linear_velocity.x, 0, velocity.linear_velocity.z)
+			var desired_horizontal := Vector3(movement_velocity.x, 0, movement_velocity.z)
+			var blended_horizontal := current_horizontal.lerp(desired_horizontal, input.air_control_multiplier)
+			movement_velocity.x = blended_horizontal.x
+			movement_velocity.z = blended_horizontal.z
+
 		if use_ladder_movement:
 			# On ladder: apply full 3D velocity
 			velocity.linear_velocity = movement_velocity
