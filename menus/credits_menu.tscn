@@ -39,31 +39,343 @@ theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
-custom_minimum_size = Vector2(300, 250)
+custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "1
-2
-3
-4
-5
-1
-2
-3
-4
-5
-1
-2
-3
-4
-5
-1
-2
-3
-4
-5"
+text = "Zombie Game is an open-source game project. The source code is available under the GPL license at Github ([url]https://github.com/ssube/zombie-game[/url]).
+
+Made with the Godot engine ([url]https://godotengine.org/[/url]), using open-source addons and paid assets to help support the community.
+
+[font_size=24][b][center]Assets[/center][/b][/font_size]
+
+[font_size=20][b][center]Asset Packs[/center][/b][/font_size]
+
+60 Game Cursors
+
+[ul][li][url]https://cruizrf.itch.io/60-game-cursors[/url][/li]
+[/ul]
+
+PSX Barrels Pack
+
+[ul][li][url]https://ddv23.itch.io/psx-barrel-pack[/url][/li]
+[/ul]
+
+Books and Scrolls Pack
+
+[ul][li][url]https://mcsteeg.itch.io/books-and-scrolls-pack[/url][/li]
+[/ul]
+
+Common Birds Set
+
+[ul][li][url]https://vertexcat.itch.io/common-birds-set[/url][/li]
+[/ul]
+
+PSX Home Furniture Kit 1
+
+[ul][li]what did I use from this?[/li]
+[li][url]https://sourpickle35.itch.io/psx-assets-home-furniture-kit[/url][/li]
+[/ul]
+
+PSX Mailbox
+
+[ul][li][url]https://pomarf.itch.io/psx-mailbox[/url][/li]
+[/ul]
+
+PSX Misc Items
+
+[ul][li][url]https://wildenza.itch.io/psx-misc-items[/url][/li]
+[/ul]
+
+Modular Retro FPS Kit
+
+[ul][li][url]https://pizzadoggy.itch.io/modular-retro-fps-kit[/url][/li]
+[/ul]
+
+PS1PSX Gun Pack
+
+[ul][li][url]https://morvillo-games.itch.io/police-gun-pack[/url][/li]
+[/ul]
+
+PSX Bunkers
+
+[ul][li][url]https://pizzadoggy.itch.io/psx-bunkers[/url][/li]
+[/ul]
+
+PSX Cars
+
+[ul][li][url]https://ggbot.itch.io/psx-style-cars[/url][/li]
+[/ul]
+
+PSX Dungeon Loot Pack
+
+[ul][li][url]https://mcsteeg.itch.io/psx-dungeon-treasure-props-pack[/url][/li]
+[/ul]
+
+PSX Fishing
+
+[ul][li][url]https://dysfunctional-games.itch.io/psx-fishingpack[/url][/li]
+[/ul]
+
+PSX Gifts & Misc
+
+[ul][li]???[/li]
+[/ul]
+
+PSX Mega Pack
+
+[ul][li][url]https://pizzadoggy.itch.io/psx-mega-pack[/url][/li]
+[/ul]
+
+PSX Mega Pack II
+
+[ul][li][url]https://pizzadoggy.itch.io/psx-mega-pack-2[/url][/li]
+[/ul]
+
+PSX Nature
+
+[ul][li][url]https://pizzadoggy.itch.io/psx-nature[/url][/li]
+[/ul]
+
+PSX Pickups
+
+[ul][li]what did I use from this?[/li]
+[li][url]https://dysfunctional-games.itch.io/psx-pickups[/url][/li]
+[/ul]
+
+PSX-Shotgun
+
+[ul][li][url]https://wildenza.itch.io/psx-shogun[/url][/li]
+[/ul]
+
+PSX_UrbanTrash
+
+[ul][li][url]https://acchihaven.itch.io/psx-style-urban-trash-pack[/url][/li]
+[/ul]
+
+PSX Street Signs
+
+[ul][li][url]https://pomarf.itch.io/psx-street-signs[/url][/li]
+[/ul]
+
+PSX Post-Apo Ultimate Prop Pack
+
+[ul][li][url]https://puszke.itch.io/psx-post-apo-ultimate-prop-pack[/url][/li]
+[/ul]
+
+Traffic Cone
+
+[ul][li][url]https://ddv23.itch.io/psx-traffic-cones[/url][/li]
+[/ul]
+
+ZombieApocalypsePack
+
+[ul][li]what did I use from this?[/li]
+[li][url]https://egorzuyev.itch.io/psx-zombie-apocalypse[/url][/li]
+[/ul]
+
+[font_size=20][b][center]Textures[/center][/b][/font_size]
+
+PSX Textures
+
+[ul][li][url]https://pizzadoggy.itch.io/psx-textures[/url][/li]
+[/ul]
+
+PSX Textures 2
+
+[ul][li][url]https://pizzadoggy.itch.io/psx-textures-2[/url][/li]
+[/ul]
+
+Foliage Sprites
+
+[ul][li][url]https://kenney-assets.itch.io/foliage-sprites[/url][/li]
+[/ul]
+
+Particle Effect Texture Essentials
+
+[ul][li][url]https://reactorcore.itch.io/particle-effect-texture-essentials[/url][/li]
+[/ul]
+
+600 clean and minimal game Icon ultimate pack
+
+[ul][li][url]https://sungraphica.itch.io/minimal-game-icon-ultimate-pack[/url][/li]
+[/ul]
+
+[font_size=20][b][center]Sound Effects[/center][/b][/font_size]
+
+Freesound 372021
+
+[ul][li][url]https://freesound.org/people/kijjaz/sounds/372021/[/url][/li]
+[li]CC0 license[/li]
+[/ul]
+
+Freesound 430675
+
+[ul][li][url]https://freesound.org/people/juanj105/sounds/430675/[/url][/li]
+[li]CC0 license[/li]
+[b][/b]
+[ol][li]Exhalaciones.wav by juanj105 -- [url]https://freesound.org/s/430675/[/url] -- License: Creative Commons 0[/li]
+[/ol]
+
+[/ul]
+
+Freesound 588264
+
+[ul][li][url]https://freesound.org/people/GrimmReaperSounds/sounds/588264/[/url][/li]
+[li]CC-BY 4.0[/li]
+[li]Radio static.mp3 by GrimmReaperSounds -- [url]https://freesound.org/s/588264/[/url] -- License: Attribution 4.0[/li]
+[/ul]
+
+Freesound 699979
+
+[ul][li][url]https://freesound.org/people/henner1964/sounds/699979/[/url][/li]
+[li]CC0 license[/li]
+[li]Seagull by henner1964 -- [url]https://freesound.org/s/699979/[/url] -- License: Creative Commons 0[/li]
+[/ul]
+
+Freesound 353686
+
+[ul][li][url]https://freesound.org/people/tec_studio/sounds/353686/[/url][/li]
+[li]CC0 license[/li]
+[/ul]
+
+Freesound 270429
+
+[ul][li][url]https://freesound.org/people/LittleRobotSoundFactory/sounds/270429/[/url][/li]
+[li]CC-BY 4.0[/li]
+[li]Footstep_Water_03.wav by LittleRobotSoundFactory -- [url]https://freesound.org/s/270429/[/url] -- License: Attribution 4.0[/li]
+[/ul]
+
+6000 Retro Sound Effects
+
+[ul][li][url]https://subspaceaudio.itch.io/6000-retro-sound-effects[/url][/li]
+[/ul]
+
+1000 Retro Sound Effects
+
+[ul][li][url]https://subspaceaudio.itch.io/1000-retro-sound-effects[/url][/li]
+[/ul]
+
+Echoes Audio Super Kit
+
+[ul][li][url]https://pizzadoggy.itch.io/echoes-audio-super-kit[/url][/li]
+[/ul]
+
+Sound Effects
+
+[ul][li]???[/li]
+[/ul]
+
+[font_size=24][b][center]Shaders[/center][/b][/font_size]
+
+3D Item Highlighter
+
+[ul][li][url]https://godotshaders.com/shader/3d-item-highlighter-easier-to-adjust-supports-all-directions/[/url][/li]
+[li]MIT license[/li]
+[/ul]
+
+PSX/CRT Retro Shader for Godot
+
+[ul][li][url]https://godotshaders.com/shader/psx-crt-retro-shader-for-godot/[/url][/li]
+[li]CC0 license[/li]
+[/ul]
+
+[font_size=24][b][center]Software[/center][/b][/font_size]
+
+Godot engine
+
+[ul][li][url]https://godotengine.org/[/url][/li]
+[li]MIT license[/li]
+[/ul]
+
+[font_size=20][b][center]Libraries[/center][/b][/font_size]
+
+DebugDraw3D
+
+[ul][li][url]https://github.com/DmitriySalnikov/godot_debug_draw_3d[/url][/li]
+[li]MIT license[/li]
+[/ul]
+
+Dialogue Manager
+
+[ul][li][url]https://github.com/nathanhoad/godot_dialogue_manager[/url][/li]
+[li]MIT license[/li]
+[/ul]
+
+Func Godot
+
+[ul][li][url]https://github.com/func-godot/func_godot_plugin[/url][/li]
+[li]MIT license[/li]
+[/ul]
+
+GECS
+
+[ul][li][url]https://github.com/csprance/gecs/[/url][/li]
+[li]CC0-1.0 license[/li]
+[/ul]
+
+Improved Kinematic Character Controller
+
+[ul][li][url]https://github.com/DinkeyKing/Improved-KCC[/url][/li]
+[li]MIT license[/li]
+[/ul]
+
+QuakeLamp
+
+[ul][li][url]https://github.com/ioannis-koukourakis/quake-style-light-animations-for-the-godot-engine[/url][/li]
+[li]MIT license[/li]
+[/ul]
+
+Vision Cone 3D
+
+[ul][li][url]https://github.com/Tattomoosa/VisionCone3D[/url][/li]
+[li]MIT license[/li]
+[/ul]
+
+[font_size=24][b][center]License Text[/center][/b][/font_size]
+
+[font_size=20][b][center]MIT License[/center][/b][/font_size]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+[font_size=20][b][center]CC0[/center][/b][/font_size]
+
+[url]https://creativecommons.org/publicdomain/zero/1.0/legalcode[/url]
+
+[ol][li]The person who associated a work with this deed has [b]dedicated[/b] the work to the public domain by waiving all of his or her rights to the work worldwide under copyright law, including all related and neighboring rights, to the extent allowed by law.[/li]
+[li]You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission. See [b]Other Information[/b] below.[/li]
+[/ol]
+
+[font_size=18][b][center]Other Information[/center][/b][/font_size]
+
+[ol][li]In no way are the patent or trademark rights of any person affected by CC0, nor are the rights that other persons may have in the work or in how the work is used, such as [url=https://creativecommons.org/publicdomain/zero/1.0/#ref-publicity-rights]publicity or privacy[/url] rights.[/li]
+[li]Unless expressly stated otherwise, the person who associated a work with this deed makes no warranties about the work, and disclaims liability for all uses of the work, to the fullest extent permitted by applicable law.[/li]
+[li]When using or citing the work, you should not imply [url=https://creativecommons.org/publicdomain/zero/1.0/#ref-endorsement]endorsement[/url] by the author or the affirmer.[/li]
+[/ol]
+
+The above text is from [url]https://creativecommons.org/publicdomain/zero/1.0/[/url].
+
+[font_size=20][b][center]CC BY[/center][/b][/font_size]
+
+[url]https://creativecommons.org/licenses/by/4.0/[/url]
+
+You are free to:
+
+[ol][li][b]Share[/b] — copy and redistribute the material in any medium or format for any purpose, even commercially.[/li]
+[li][b]Adapt[/b] — remix, transform, and build upon the material for any purpose, even commercially.[/li]
+[li]The licensor cannot revoke these freedoms as long as you follow the license terms.[/li]
+[/ol]
+
+Under the following terms:
+
+[ol][li][b]Attribution[/b] — You must give [url=https://creativecommons.org/licenses/by/4.0/#ref-appropriate-credit]appropriate credit[/url], provide a link to the license, and [url=https://creativecommons.org/licenses/by/4.0/#ref-indicate-changes]indicate if changes were made[/url]. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.[/li]
+[li][b]No additional restrictions[/b] — You may not apply legal terms or [url=https://creativecommons.org/licenses/by/4.0/#ref-technological-measures]technological measures[/url] that legally restrict others from doing anything the license permits.[/li]
+[/ol]"
 
 [node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
