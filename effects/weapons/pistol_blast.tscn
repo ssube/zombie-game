@@ -102,7 +102,7 @@ max_distance = 10.0
 bus = &"Effects"
 script = ExtResource("4_q71m6")
 play_on_ready = true
-subtitle_text = "Shotgun Blast"
+subtitle_text = "Pistol Shot"
 subtitle_radius = 10.0
 metadata/_custom_type_script = "uid://mcuf24u8q14t"
 
