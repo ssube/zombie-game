@@ -1,8 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtdv8vsvlfilr"]
+[gd_scene load_steps=5 format=3 uid="uid://dtdv8vsvlfilr"]
 
 [ext_resource type="Script" uid="uid://dq1lutuq46aw0" path="res://scripts/menus/console_menu.gd" id="1_ia81e"]
+[ext_resource type="Script" uid="uid://m1ebukbi2ngu" path="res://scripts/utils/bbcode/NamedColor.gd" id="2_y4n8c"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p3dnq"]
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_2j0lv"]
+script = ExtResource("2_y4n8c")
+metadata/_custom_type_script = "uid://m1ebukbi2ngu"
 
 [node name="ConsoleMenu" type="AspectRatioContainer" node_paths=PackedStringArray("command_input", "command_history")]
 anchors_preset = 15
@@ -12,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ia81e")
 command_input = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ConsoleInput")
-command_history = NodePath("MarginContainer/VBoxContainer/ConsoleHistory")
+command_history = NodePath("MarginContainer/VBoxContainer/PanelContainer/ConsoleHistory")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2
@@ -37,12 +42,19 @@ layout_mode = 2
 theme_override_constants/separation = 16
 theme_override_styles/separator = SubResource("StyleBoxEmpty_p3dnq")
 
-[node name="ConsoleHistory" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ConsoleHistory" type="RichTextLabel" parent="MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
 text = "Console
 Command
 History"
+custom_effects = [SubResource("RichTextEffect_2j0lv")]
+selection_enabled = true
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -52,6 +64,10 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_p3dnq")
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = ">"
+
 [node name="ConsoleInput" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -60,7 +76,7 @@ clear_button_enabled = true
 
 [node name="RunButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "> Run"
+text = "Run"
 
 [connection signal="text_submitted" from="MarginContainer/VBoxContainer/HBoxContainer/ConsoleInput" to="." method="_on_console_input_text_submitted"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RunButton" to="." method="_on_run_button_pressed"]
