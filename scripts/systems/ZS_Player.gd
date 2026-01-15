@@ -113,6 +113,7 @@ func process(entities: Array[Entity], _components: Array, delta: float):
 		body.velocity = velocity.linear_velocity * speed_multiplier
 		body.ikcc_move_and_slide()
 
+		_process_shortcuts(entity, input)
 		_process_screen_effects(entity, delta)
 		_process_heard_noises(entity)
 		_process_used_items(entity)
@@ -196,6 +197,17 @@ func _apply_jump(velocity: ZC_Velocity, input: ZC_Input, stamina: ZC_Stamina, bo
 	if body.is_on_floor or body.time_since_on_floor <= input.coyote_time:
 		stamina.current_stamina -= stamina.jump_cost
 		velocity.linear_velocity.y = input.jump_speed
+
+
+func _process_shortcuts(entity: Entity, input: ZC_Input) -> void:
+	# Process quick keys
+	if input.quick_save:
+		SaveManager.save_game("quicksave", entity.get_tree().root)
+		return
+
+	if input.quick_load:
+		SaveManager.load_game("quicksave", entity.get_tree().root)
+		return
 
 
 func _process_screen_effects(entity: Entity, delta: float) -> void:

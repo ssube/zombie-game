@@ -81,6 +81,10 @@ class_name ZC_Input
 @export var weapon_previous: bool = false
 
 @export_group("Shortcuts")
+## Whether the quick save input is pressed this frame.
+@export var quick_save: bool = false
+## Whether the quick load input is pressed this frame.
+@export var quick_load: bool = false
 ## Maps item shortcut slots to their pressed state this frame.
 @export var shortcuts: Dictionary[ZC_ItemShortcut.ItemShortcut, bool] = {}
 ## Returns true if any item shortcut input is pressed this frame.
