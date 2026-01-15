@@ -27,10 +27,10 @@ func _run_command_debug(target_id: String):
 		var target_3d := target_node as Node3D
 		_history.append("Position: %s" % [str(target_3d.global_position)])
 		_history.append("Rotation: %s" % [str(target_3d.global_rotation)])
-		_history.append("Scale: %s" % [str(target_3d.global_scale)])
+		_history.append("Scale: %s" % [str(target_3d.scale)])
 
 		# Draw a box around the entity for debugging
-		var aabb := AABB(target_3d.global_position, Vector3.ONE * 3.0)
+		var aabb := AABB(target_3d.global_position, Vector3.ONE)
 		for child in target_3d.get_children():
 			if child is MeshInstance3D:
 				var mesh_instance := child as MeshInstance3D
