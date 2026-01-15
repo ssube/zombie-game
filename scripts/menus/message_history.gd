@@ -48,14 +48,6 @@ func append_message(message: ZC_Message) -> void:
 		_message_order.append(message)
 		_last_message = message
 
-	# Remove oldest messages if limit exceeded
-	while _message_order.size() > max_messages:
-		var oldest_message := _message_order.pop_front() as ZC_Message
-		var oldest_item := _message_cache.get(oldest_message, null) as Control
-		if oldest_item:
-			oldest_item.queue_free.call_deferred()
-			_message_cache.erase(oldest_message)
-
 	# Stop any existing scroll tween
 	if _scroll_tween and _scroll_tween.is_running():
 		_scroll_tween.kill()
@@ -64,6 +56,7 @@ func append_message(message: ZC_Message) -> void:
 	var bottom := scroll_container.get_v_scroll_bar().max_value
 	_scroll_tween = scroll_container.create_tween()
 	_scroll_tween.tween_property(scroll_container, "scroll_vertical", bottom, scroll_duration)
+	_scroll_tween.tween_callback(trim_messages)
 
 
 func clear_messages() -> void:
@@ -86,3 +79,13 @@ func show_messages(messages: Array[ZC_Message]) -> void:
 
 		append_message(message)
 		displayed_count += 1
+
+
+func trim_messages() -> void:
+	# Remove oldest messages if limit exceeded
+	while _message_order.size() > max_messages:
+		var oldest_message := _message_order.pop_front() as ZC_Message
+		var oldest_item := _message_cache.get(oldest_message, null) as Control
+		if oldest_item:
+			oldest_item.queue_free.call_deferred()
+			_message_cache.erase(oldest_message)
