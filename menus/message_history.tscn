@@ -65,6 +65,9 @@ layout_mode = 2
 [node name="MessageHistoryItemPlain8" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
 layout_mode = 2
 
+[node name="MessageHistoryItemBBCode3" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("2_fak7s")]
+layout_mode = 2
+
 [node name="MessageHistoryItemPlain9" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
 layout_mode = 2
 
@@ -77,6 +80,9 @@ layout_mode = 2
 [node name="MessageHistoryItemPlain12" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
 layout_mode = 2
 
+[node name="MessageHistoryItemBBCode4" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("2_fak7s")]
+layout_mode = 2
+
 [node name="MessageHistoryItemPlain13" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
 layout_mode = 2
 
@@ -87,6 +93,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="MessageHistoryItemPlain16" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]
+layout_mode = 2
+
+[node name="MessageHistoryItemBBCode5" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("2_fak7s")]
 layout_mode = 2
 
 [node name="MessageHistoryItemPlain17" parent="VBoxContainer/ScrollContainer/MessageHistory" instance=ExtResource("1_0avqx")]

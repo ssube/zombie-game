@@ -6,8 +6,8 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_rakte"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wua0j"]
-width = 24
-height = 24
+width = 256
+height = 256
 noise = SubResource("FastNoiseLite_rakte")
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_vpl61"]
@@ -38,9 +38,10 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 texture = SubResource("NoiseTexture2D_wua0j")
-stretch_mode = 2
+expand_mode = 1
 
 [node name="MessageLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)

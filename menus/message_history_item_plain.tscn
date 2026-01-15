@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://b6k8c0h3daco8" path="res://scripts/menus/message_history_item_plain.gd" id="1_wua0j"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rakte"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wua0j"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wua0j"]
-width = 24
-height = 24
-noise = SubResource("FastNoiseLite_rakte")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j7vo1"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_wua0j")
 
 [node name="MessageHistoryItemPlain" type="PanelContainer" node_paths=PackedStringArray("message_label", "message_icon")]
 anchors_preset = 15
@@ -33,9 +33,10 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-texture = SubResource("NoiseTexture2D_wua0j")
-stretch_mode = 2
+texture = SubResource("NoiseTexture2D_j7vo1")
+expand_mode = 1
 
 [node name="MessageLabel" type="Label" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
