@@ -109,8 +109,8 @@ func fix_collision_mesh_scale() -> void:
 	for selection in selected:
 		if selection is CollisionShape3D:
 			var shape = selection.shape
-			if shape is ConvexPolygonShape3D: #  or shape is ConcavePolygonShape3D:
-				var scale = selection.scale
+			var scale = selection.scale
+			if shape is ConvexPolygonShape3D:
 				print("Fixing: ", shape, " with scale: ", scale)
 
 				var points = shape.points.duplicate()
@@ -121,11 +121,25 @@ func fix_collision_mesh_scale() -> void:
 					points.set(i, point)
 					i += 1
 
-				print("Fixed %d points in shape" % i)
+				print("Scaled %d points in shape" % i)
 				shape.points = points
 				selection.scale = Vector3.ONE
+			elif shape is ConcavePolygonShape3D:
+				print("Fixing: ", shape, " with scale: ", scale)
+
+				var faces = shape.get_faces()
+				var i = 0
+				while i < faces.size():
+					var face = faces.get(i)
+					face *= scale
+					faces.set(i, face)
+					i += 1
+
+				print("Scaled %d faces in shape" % i)
+				shape.set_faces(faces)
+				selection.scale = Vector3.ONE
 			else:
-				print("Cannot fix shape type: ", shape)
+				print("Cannot scale shape type: ", shape)
 
 
 func fix_collision_mesh_rotation() -> void:
