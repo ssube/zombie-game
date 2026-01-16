@@ -200,7 +200,7 @@ albedo_color = Color(0.13, 0.13, 0.13, 1)
 
 [sub_resource type="Curve3D" id="Curve3D_h5edt"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.24849606, 10.530179, -28.578882, 0, 0, 0, 0, 0, 0, 1.6594667, 10.511227, -7.034533, 0, 0, 0, 0, 0, 0, 0.27635002, 10.426847, 33.55183, 0, 0, 0, 0, 0, 0, -1.3417854, 10.327972, 60.894108),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.24849606, 10.530179, -28.578882, 0, 0, 0, 0, 0, 0, 1.6594667, 10.511227, -7.034533, 0, 0, 0, 0, 0, 0, 0.3506508, 10.426847, 33.55183, 0, 0, 0, 0, 0, 0, -1.3417854, 10.327972, 60.894108),
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
@@ -1572,12 +1572,6 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_000"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_000"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
 [node name="PhoneLine_001" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0410408, -0.09085551, -0.015654858, 1.9466757e-08, 0.17746323, -1.0299381, 0.092194356, -1.0259229, -0.1767714, 9.887787, 9.244367, -27.04)
 visibility_range_end = 50.0
@@ -1586,12 +1580,6 @@ radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_001"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_001"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_002" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0378993, -0.090854526, -0.013924305, 1.387677e-07, 0.15784574, -1.029936, 0.091915354, -1.0259209, -0.15723036, 9.978642, 9.076712, -26.014078)
@@ -1602,12 +1590,6 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_002"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_002"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
 [node name="PhoneLine_003" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.035119, -0.09085551, -0.012193579, -6.7746053e-09, 0.13822623, -1.0299361, 0.09167009, -1.0259209, -0.13768736, 10.069498, 8.928677, -24.988157)
 visibility_range_end = 50.0
@@ -1616,12 +1598,6 @@ radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_003"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_003"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_004" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0327015, -0.09085549, -0.010463159, -4.827705e-09, 0.11861021, -1.0299361, 0.09145599, -1.0259207, -0.11814781, 10.160353, 8.800258, -23.962236)
@@ -1632,12 +1608,6 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_004"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_004"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
 [node name="PhoneLine_005" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0306506, -0.0908555, -0.008732475, 1.1563478e-08, 0.098991215, -1.029938, 0.091274194, -1.0259228, -0.0986053, 10.251209, 8.691457, -22.936314)
 visibility_range_end = 50.0
@@ -1646,12 +1616,6 @@ radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_005"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_005"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_006" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.028963, -0.09085461, -0.007001658, -1.0534314e-07, 0.079372615, -1.0299361, 0.091124006, -1.0259209, -0.0790632, 10.342064, 8.602274, -21.910393)
@@ -1662,12 +1626,6 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_006"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_006"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
 [node name="PhoneLine_007" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0276481, -0.090855606, -0.005271414, 2.930497e-08, 0.059756342, -1.029938, 0.09100841, -1.0259229, -0.05952338, 10.432919, 8.532709, -20.884472)
 visibility_range_end = 50.0
@@ -1676,12 +1634,6 @@ radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_007"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_007"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_008" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0266995, -0.09085551, -0.003540647, -2.1597626e-09, 0.04013672, -1.0299361, 0.09092447, -1.0259209, -0.03998025, 10.523775, 8.482762, -19.85855)
@@ -1692,12 +1644,6 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_008"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_008"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
 [node name="PhoneLine_009" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0261245, -0.0908555, -0.0018102054, -9.594049e-10, 0.020520462, -1.0299361, 0.09087353, -1.0259209, -0.020440461, 10.61463, 8.452433, -18.832628)
 visibility_range_end = 50.0
@@ -1706,12 +1652,6 @@ radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_009"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_009"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_010" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0259212, -0.090854764, -7.68386e-05, -1.4889088e-09, 0.0008710647, -1.0299361, 0.090854794, -1.0259209, -0.000867669, 10.705485, 8.441721, -17.806707)
@@ -1722,12 +1662,6 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_010"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_010"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
 [node name="PhoneLine_011" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0260901, -0.09085569, 0.0016506001, 2.8253069e-09, -0.018711163, -1.0299361, 0.09087068, -1.0259209, 0.018638216, 10.796341, 8.450628, -16.780787)
 visibility_range_end = 50.0
@@ -1736,12 +1670,6 @@ radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_011"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_011"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_012" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0266331, -0.090855576, 0.0033815168, -5.788089e-09, -0.03833278, -1.029938, 0.09091848, -1.0259228, 0.03818334, 10.887196, 8.479153, -15.754865)
@@ -1752,12 +1680,6 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_012"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_012"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
 [node name="PhoneLine_013" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0275434, -0.0908556, 0.005112061, -8.750215e-09, -0.057950057, -1.0299361, 0.0909993, -1.0259207, 0.057724133, 10.978052, 8.527294, -14.728943)
 visibility_range_end = 50.0
@@ -1766,12 +1688,6 @@ radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_013"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_013"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_014" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0288273, -0.09085477, 0.0068425047, 1.041812e-07, -0.07756837, -1.029937, 0.09111206, -1.0259218, 0.07726598, 11.068907, 8.595055, -13.703022)
@@ -1782,12 +1698,6 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_014"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_014"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
 [node name="PhoneLine_015" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0304792, -0.09085572, 0.008573283, 8.496316e-09, -0.09718652, -1.0299371, 0.091259316, -1.0259218, 0.09680764, 11.159761, 8.682432, -12.677099)
 visibility_range_end = 50.0
@@ -1796,12 +1706,6 @@ radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_015"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_015"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_016" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0324973, -0.09085569, 0.01030383, 1.7636907e-08, -0.11680395, -1.0299361, 0.0914381, -1.0259209, 0.116348594, 11.250618, 8.789428, -11.651178)
@@ -1812,12 +1716,6 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_016"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_016"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
 [node name="PhoneLine_017" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0348816, -0.09085572, 0.012034448, 2.0599176e-08, -0.13642217, -1.0299361, 0.09164927, -1.0259209, 0.13589033, 11.341473, 8.91604, -10.6252575)
 visibility_range_end = 50.0
@@ -1826,12 +1724,6 @@ radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_017"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_017"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_018" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0376287, -0.09085571, 0.013765125, 2.3561551e-08, -0.15604109, -1.0299362, 0.09189254, -1.025921, 0.15543276, 11.432329, 9.062273, -9.599337)
@@ -1842,12 +1734,6 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_018"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_018"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
 [node name="PhoneLine_019" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.0407368, -0.090854555, 0.015495551, -1.9404322e-07, -0.17565715, -1.029938, 0.09216649, -1.0259229, 0.17497236, 11.523184, 9.228122, -8.573415)
 visibility_range_end = 50.0
@@ -1856,12 +1742,6 @@ radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_019"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_019"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_020" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("41_ewwac")]
 transform = Transform3D(-1.044198, -0.09085558, 0.017226143, 7.604324e-08, -0.19527592, -1.0299362, 0.09247419, -1.0259209, 0.19451462, 11.614038, 9.413589, -7.547493)
@@ -1872,1020 +1752,612 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_020"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_000/PhoneLine_020"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
 [node name="Span_001" type="Node3D" parent="Entities/Phone/ZN_ChainPath3D/Baked"]
 
 [node name="PhoneLine_000" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0341762, 0.03457839, 0.006814527, 9.251614e-08, 0.2000826, -1.0152485, -0.03524348, -1.0146595, -0.19996652, 11.642178, 9.411185, -6.5272036)
+transform = Transform3D(-1.0341763, 0.032720637, 0.006448521, -4.818256e-10, 0.2000711, -1.0151869, -0.033350013, -1.0146595, -0.19996715, 11.643106, 9.411191, -6.5272036)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_000"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_000"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_001" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.032262, 0.03457741, 0.0064687654, -8.89781e-08, 0.18993062, -1.015248, -0.035177298, -1.014659, -0.18982042, 11.607599, 9.216179, -5.512544)
+transform = Transform3D(-1.0322618, 0.03272061, 0.0061212895, -1.9237363e-09, 0.18991847, -1.0151864, -0.033288263, -1.014659, -0.18981978, 11.610386, 9.216196, -5.512544)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_001"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_001"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_002" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0304444, 0.03457837, 0.0061229398, 8.113953e-08, 0.17977677, -1.0152483, -0.035116293, -1.0146593, -0.17967248, 11.573022, 9.031324, -4.497885)
+transform = Transform3D(-1.0304446, 0.032719646, 0.0057939016, 4.0327354e-08, 0.17976761, -1.0151865, -0.03322867, -1.0146592, -0.17967421, 11.577665, 9.031353, -4.497885)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_002"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_002"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_003" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.028724, 0.03457744, 0.005777418, -2.7560554e-07, 0.16962591, -1.0152482, -0.035056785, -1.0146592, -0.1695275, 11.5384445, 8.856623, -3.4832258)
+transform = Transform3D(-1.0287237, 0.032720625, 0.0054668696, -4.7928506e-10, 0.16961451, -1.0151867, -0.033174176, -1.0146592, -0.16952637, 11.544946, 8.856662, -3.4832258)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_003"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_003"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_004" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0271003, 0.03457839, 0.005431412, 7.656946e-08, 0.15947267, -1.0152481, -0.03500236, -1.014659, -0.15938017, 11.503866, 8.692074, -2.468567)
+transform = Transform3D(-1.0271003, 0.032720633, 0.005139699, 1.9141164e-09, 0.15946375, -1.0151864, -0.03312184, -1.014659, -0.15938088, 11.512225, 8.692122, -2.468567)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_004"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_004"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_005" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0255752, 0.03457741, 0.0050856355, -7.215487e-08, 0.14932029, -1.0152484, -0.03494941, -1.0146594, -0.14923367, 11.469288, 8.537677, -1.4539077)
+transform = Transform3D(-1.0255752, 0.03272062, 0.00481246, -2.3890914e-09, 0.14931087, -1.0151869, -0.033072628, -1.0146594, -0.14923328, 11.479505, 8.537735, -1.4539077)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_005"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_005"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_006" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0241475, 0.034578368, 0.0047398526, 6.394244e-08, 0.1391677, -1.0152481, -0.034901716, -1.014659, -0.13908696, 11.4347105, 8.393433, -0.43924856)
+transform = Transform3D(-1.0241475, 0.03272062, 0.004485278, 0, 0.13915975, -1.0151864, -0.033026606, -1.0146589, -0.13908745, 11.446784, 8.393499, -0.43924856)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_006"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_006"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_007" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0228195, 0.03457839, 0.0043940893, 6.004692e-08, 0.12901567, -1.0152485, -0.034856465, -1.0146595, -0.12894082, 11.400132, 8.25934, 0.5754106)
+transform = Transform3D(-1.0228193, 0.03272063, 0.0041580545, -4.76535e-10, 0.12900735, -1.0151868, -0.03298377, -1.0146594, -0.12894031, 11.414063, 8.259416, 0.5754106)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_007"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_007"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_008" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0215894, 0.03457743, 0.0040483107, -5.3786994e-08, 0.118863195, -1.015248, -0.03481361, -1.0146589, -0.11879425, 11.365555, 8.135401, 1.5900698)
+transform = Transform3D(-1.0215895, 0.032719664, 0.0038307386, 2.9509655e-08, 0.11885648, -1.0151864, -0.032943144, -1.0146589, -0.11879474, 11.381344, 8.135484, 1.5900698)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_008"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_008"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_009" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0204593, 0.03457835, 0.0037025146, 4.8021853e-08, 0.108710214, -1.0152481, -0.03477601, -1.014659, -0.10864715, 11.3309765, 8.021614, 2.6047287)
+transform = Transform3D(-1.0204593, 0.032720592, 0.0035036579, -3.0903304e-09, 0.108704105, -1.0151864, -0.03290764, -1.014659, -0.10864763, 11.348623, 8.021704, 2.6047287)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_009"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_009"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_010" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0194288, 0.03457745, 0.0033568502, -1.5983242e-07, 0.09855765, -1.015248, -0.034740016, -1.014659, -0.09850047, 11.296398, 7.9179807, 3.6193876)
+transform = Transform3D(-1.0194288, 0.03272064, 0.0031764137, 1.8998172e-09, 0.098551065, -1.0151864, -0.032874458, -1.014659, -0.098499864, 11.315903, 7.9180756, 3.6193876)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_010"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_010"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_011" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0184996, 0.034578383, 0.0030109575, 3.9387594e-08, 0.08840528, -1.015249, -0.034709226, -1.01466, -0.08835399, 11.261821, 7.824499, 4.634047)
+transform = Transform3D(-1.0184995, 0.032720637, 0.0028492305, -1.4235597e-09, 0.08839992, -1.0151874, -0.032844454, -1.0146599, -0.088353984, 11.283182, 7.8246, 4.634047)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_011"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_011"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_012" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0176675, 0.03457735, 0.002665169, -3.9118344e-08, 0.07825252, -1.015247, -0.034679912, -1.014658, -0.07820712, 11.227243, 7.74117, 5.648706)
+transform = Transform3D(-1.0176675, 0.032720555, 0.002522039, -2.6077414e-09, 0.07824851, -1.0151855, -0.032817606, -1.014658, -0.07820786, 11.250462, 7.741276, 5.648706)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_012"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_012"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_013" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0169401, 0.034578387, 0.002319411, 3.0798468e-08, 0.06810065, -1.015249, -0.034656093, -1.01466, -0.06806115, 11.192665, 7.667993, 6.663365)
+transform = Transform3D(-1.01694, 0.032720633, 0.0021948288, -1.1844873e-09, 0.06809652, -1.0151874, -0.032794163, -1.0146599, -0.06806114, 11.217741, 7.668103, 6.663365)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_013"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_013"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_014" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0163109, 0.034578368, 0.0019736157, 2.5925656e-08, 0.0579477, -1.0152485, -0.034634646, -1.0146595, -0.057914082, 11.158087, 7.6049685, 7.6780243)
+transform = Transform3D(-1.0163109, 0.032719642, 0.0018675382, 1.2310942e-08, 0.05794418, -1.0151868, -0.032772895, -1.0146594, -0.057914075, 11.18502, 7.6050825, 7.6780243)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_014"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_014"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_015" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0157838, 0.034577433, 0.001627852, -2.3190948e-08, 0.04779566, -1.015249, -0.034615733, -1.01466, -0.047767933, 11.123508, 7.5520964, 8.692684)
+transform = Transform3D(-1.0157837, 0.032720633, 0.0015404155, -8.2819723e-10, 0.047792763, -1.0151874, -0.032756872, -1.01466, -0.04776793, 11.152301, 7.5522137, 8.692684)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_015"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_015"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_016" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0153552, 0.03457839, 0.0012820459, 1.9632775e-08, 0.037642386, -1.015247, -0.03460215, -1.0146581, -0.03762055, 11.088931, 7.5093775, 9.707343)
+transform = Transform3D(-1.0153551, 0.032720637, 0.0012131836, 1.7739205e-09, 0.037640102, -1.0151855, -0.03274312, -1.014658, -0.037620544, 11.11958, 7.5094967, 9.707343)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_016"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_016"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_017" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0150318, 0.034577355, 0.000936278, -1.548815e-08, 0.027490234, -1.0152489, -0.034590032, -1.01466, -0.027474286, 11.054354, 7.4768105, 10.722002)
+transform = Transform3D(-1.0150318, 0.03272056, 0.00088598795, -2.4827038e-09, 0.027488565, -1.0151874, -0.032732554, -1.0146599, -0.027474284, 11.08686, 7.4769316, 10.722002)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_017"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_017"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_018" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.014806, 0.034578387, 0.0005905121, 8.983699e-09, 0.017338136, -1.015247, -0.03458343, -1.014658, -0.017328078, 11.019775, 7.4543953, 11.736661)
+transform = Transform3D(-1.0148059, 0.03272063, 0.0005586809, 7.090488e-10, 0.017333573, -1.0151855, -0.0327254, -1.014658, -0.017324567, 11.054139, 7.4545183, 11.736661)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_018"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_018"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_019" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0146853, 0.03457743, 0.0002446727, -3.5007128e-09, 0.0071838805, -1.0152489, -0.034578297, -1.0146599, -0.0071797133, 10.985197, 7.442134, 12.75132)
+transform = Transform3D(-1.0146853, 0.032720618, 0.0002315221, 8.34457e-09, 0.0071834456, -1.0151874, -0.03272144, -1.0146599, -0.007179714, 11.021419, 7.442257, 12.75132)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_019"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_019"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_020" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0146623, 0.03457843, -0.00010059606, -1.854383e-09, -0.0029536248, -1.015247, -0.03457858, -1.014658, 0.0029519114, 10.95062, 7.4400244, 13.765979)
+transform = Transform3D(-1.0146621, 0.03271964, -9.5192736e-05, 2.5584266e-09, -0.0029534455, -1.0151854, -0.03271978, -1.0146579, 0.002951911, 10.988699, 7.4401474, 13.765979)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_020"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_020"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_021" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0147446, 0.034578416, -0.0004467278, -8.234979e-09, -0.013116513, -1.0152489, -0.0345813, -1.01466, 0.0131089045, 10.916041, 7.4480667, 14.780638)
+transform = Transform3D(-1.0147446, 0.03272066, -0.00042273273, -1.9804183e-09, -0.013115719, -1.0151874, -0.03272339, -1.01466, 0.0131089045, 10.955978, 7.4481897, 14.780638)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_021"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_021"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_022" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0149263, 0.034577318, -0.0007926149, 1.4610987e-08, -0.023272093, -1.0152489, -0.0345864, -1.0146599, 0.023258593, 10.881464, 7.466263, 15.795298)
+transform = Transform3D(-1.0149264, 0.0327205, -0.0007499551, 3.5133738e-09, -0.023268024, -1.0151874, -0.032729097, -1.01466, 0.023255933, 10.923258, 7.466384, 15.795298)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_022"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_022"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_023" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0152097, 0.034578416, -0.0011383268, -2.0983911e-08, -0.033422764, -1.0152489, -0.034597147, -1.0146599, 0.033403374, 10.846886, 7.494611, 16.809958)
+transform = Transform3D(-1.0152096, 0.03272065, -0.0010771836, -5.046391e-09, -0.033420738, -1.0151874, -0.032738376, -1.0146599, 0.033403374, 10.890537, 7.49473, 16.809958)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_023"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_023"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_024" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0155922, 0.03457741, -0.0014841016, 1.6968754e-08, -0.04357506, -1.015247, -0.034609243, -1.014658, 0.04354978, 10.812307, 7.5331106, 17.824615)
+transform = Transform3D(-1.0155921, 0.032720674, -0.0014044287, -6.5794525e-09, -0.043573745, -1.0151854, -0.032750797, -1.0146579, 0.043551106, 10.857817, 7.533228, 17.824615)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_024"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_024"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_025" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0160779, 0.034578435, -0.001829924, -3.3732732e-08, -0.053728838, -1.015247, -0.034626823, -1.0146581, 0.053697668, 10.77773, 7.5817637, 18.839275)
+transform = Transform3D(-1.0160779, 0.032719724, -0.0017315353, -2.0921087e-08, -0.053724486, -1.0151854, -0.03276551, -1.014658, 0.053696577, 10.825096, 7.5818777, 18.839275)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_025"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_025"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_026" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0166667, 0.034578413, -0.0021757134, -4.01071e-08, -0.0638818, -1.0152489, -0.034646794, -1.0146599, 0.06384474, 10.743152, 7.640569, 19.853933)
+transform = Transform3D(-1.0166665, 0.03272066, -0.0020588182, -9.645153e-09, -0.063876964, -1.0151874, -0.032785363, -1.0146599, 0.06384378, 10.7923765, 7.6406794, 19.853933)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_026"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_026"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_027" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.017354, 0.03457731, -0.0025214867, 4.6480846e-08, -0.07403378, -1.0152488, -0.034669127, -1.0146598, 0.07399082, 10.708574, 7.709527, 20.868593)
+transform = Transform3D(-1.0173541, 0.0327205, -0.0023860494, 1.11781135e-08, -0.0740293, -1.0151874, -0.032807384, -1.0146599, 0.07399083, 10.759656, 7.709633, 20.868593)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_027"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_027"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_028" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0181423, 0.034578424, -0.0028672398, -5.285468e-08, -0.0841859, -1.015249, -0.0346971, -1.01466, 0.08413705, 10.673996, 7.788637, 21.883253)
+transform = Transform3D(-1.0181423, 0.03272066, -0.0027132311, -1.2710947e-08, -0.084180795, -1.0151874, -0.032832958, -1.01466, 0.08413705, 10.726935, 7.7887383, 21.883253)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_028"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_028"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_029" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0190293, 0.034577403, -0.0032130894, 3.6737465e-08, -0.09434029, -1.015247, -0.034726366, -1.014658, 0.09428556, 10.639418, 7.8779006, 22.897911)
+transform = Transform3D(-1.0190291, 0.03272067, -0.0030404844, -1.4244032e-08, -0.094333954, -1.0151855, -0.032861628, -1.014658, 0.094284944, 10.694215, 7.8779955, 22.897911)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_029"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_029"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_030" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0200179, 0.034578435, -0.0035587896, -6.560256e-08, -0.104490474, -1.015247, -0.03476109, -1.014658, 0.104429856, 10.60484, 7.9773164, 23.91257)
+transform = Transform3D(-1.020018, 0.032720678, -0.0033676561, -1.577676e-08, -0.10448475, -1.0151855, -0.03289352, -1.0146581, 0.10443047, 10.661494, 7.9774055, 23.91257)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_030"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_030"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_031" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0211104, 0.03457745, -0.0039045787, 4.4643837e-08, -0.11464353, -1.0152508, -0.034797207, -1.0146618, 0.114577025, 10.570263, 8.086884, 24.92723)
+transform = Transform3D(-1.0211104, 0.032719683, -0.003694872, 9.930465e-08, -0.114637196, -1.0151893, -0.032927644, -1.0146618, 0.114577636, 10.628775, 8.0869665, 24.92723)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_031"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_031"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_032" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0222931, 0.034578294, -0.004250375, -7.8351405e-08, -0.12479658, -1.0152451, -0.034838546, -1.0146562, 0.12472418, 10.535685, 8.206604, 25.941889)
+transform = Transform3D(-1.022293, 0.032720536, -0.0040220427, -1.8842469e-08, -0.12478803, -1.0151836, -0.032966804, -1.0146561, 0.124723196, 10.596054, 8.206679, 25.941889)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_032"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_032"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_033" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0235844, 0.034578416, -0.00459614, -8.4725244e-08, -0.1349487, -1.015249, -0.03488254, -1.01466, 0.13487041, 10.501106, 8.336477, 26.956547)
+transform = Transform3D(-1.0235842, 0.03272066, -0.0043492797, -2.0375508e-08, -0.13494089, -1.0151874, -0.03300845, -1.0146599, 0.13487078, 10.5633335, 8.336544, 26.956547)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_033"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_033"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_034" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0249707, 0.034577303, -0.0049419603, 9.109964e-08, -0.14510173, -1.0152489, -0.03492868, -1.0146599, 0.14501753, 10.466528, 8.476502, 27.971207)
+transform = Transform3D(-1.0249704, 0.032720495, -0.004676484, 2.1908294e-08, -0.14509207, -1.0151873, -0.033052996, -1.0146599, 0.14501669, 10.530613, 8.476561, 27.971207)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_034"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_034"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_035" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0264552, 0.034578342, -0.005287701, -6.045778e-08, -0.15525308, -1.0152489, -0.034980305, -1.0146599, 0.155163, 10.431951, 8.62668, 28.985867)
+transform = Transform3D(-1.0264554, 0.032720506, -0.005003711, 2.3441274e-08, -0.15524454, -1.0151874, -0.033100888, -1.01466, 0.15516387, 10.497892, 8.626729, 28.985867)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_035"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_035"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_036" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0280381, 0.03457735, -0.0056336937, 2.6159222e-07, -0.1654069, -1.0152489, -0.035033293, -1.01466, 0.16531092, 10.397373, 8.78701, 30.000526)
+transform = Transform3D(-1.0280379, 0.032719612, -0.0053308653, 1.432742e-07, -0.16539562, -1.0151873, -0.033151034, -1.0146599, 0.16530968, 10.465172, 8.787049, 30.000526)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_036"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_036"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_037" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0297145, 0.034578297, -0.005979221, -1.1022093e-07, -0.17555775, -1.0152452, -0.035091452, -1.0146562, 0.1754559, 10.362795, 8.957493, 31.015184)
+transform = Transform3D(-1.0297146, 0.03272057, -0.0056578843, -2.3577665e-07, -0.17554809, -1.0151836, -0.033206135, -1.0146561, 0.17545688, 10.432452, 8.957521, 31.015184)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_037"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_037"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_038" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0314939, 0.034577403, -0.006325069, 7.231886e-08, -0.18571183, -1.015247, -0.035151146, -1.014658, 0.18560411, 10.328217, 9.138128, 32.029842)
+transform = Transform3D(-1.0314937, 0.032720674, -0.0059852847, -2.8039802e-08, -0.18569921, -1.0151855, -0.033263586, -1.014658, 0.18560272, 10.399732, 9.138145, 32.029842)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_038"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_038"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_039" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0333697, 0.03457835, -0.006670845, -7.627217e-08, -0.1958638, -1.0152489, -0.035215944, -1.0146599, 0.19575015, 10.293639, 9.328916, 33.044502)
+transform = Transform3D(-1.0333697, 0.0327205, -0.006312533, 2.9572817e-08, -0.19585192, -1.0151874, -0.033323854, -1.0146599, 0.19575016, 10.367011, 9.328921, 33.044502)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_039"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_001/PhoneLine_039"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="Span_002" type="Node3D" parent="Entities/Phone/ZN_ChainPath3D/Baked"]
 
 [node name="PhoneLine_000" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.031984, 0.059930727, 0.011758253, 2.9557646e-07, 0.19903718, -1.014448, -0.0610733, -1.0126764, -0.19868958, 10.246385, 9.327329, 34.058167)
+transform = Transform3D(-1.0319836, 0.06268307, 0.012298381, 1.107389e-07, 0.19906858, -1.0146145, -0.06387815, -1.0126762, -0.1986883, 10.319309, 9.327312, 34.058167)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_000"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_000"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_001" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0292008, 0.05993072, 0.010870798, -1.152231e-07, 0.18400817, -1.0144482, -0.060908668, -1.0126764, -0.18368678, 10.186454, 9.135805, 35.070847)
+transform = Transform3D(-1.0292007, 0.06268216, 0.011369905, -1.4597366e-07, 0.18403831, -1.0146143, -0.063705005, -1.0126762, -0.18368676, 10.256626, 9.135759, 35.070847)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_001"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_001"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_002" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.026633, 0.059930734, 0.0099829445, -1.407965e-07, 0.16897963, -1.0144519, -0.0607565, -1.01268, -0.16868448, 10.126523, 8.9593115, 36.083523)
+transform = Transform3D(-1.026633, 0.06268311, 0.010441267, -1.6285224e-08, 0.16900696, -1.0146183, -0.06354678, -1.0126802, -0.16868411, 10.193944, 8.959236, 36.083523)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_002"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_002"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_003" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0242711, 0.059931673, 0.009095051, 4.586851e-08, 0.15395041, -1.0144482, -0.06061786, -1.0126764, -0.15368152, 10.066591, 8.797846, 37.0962)
+transform = Transform3D(-1.024271, 0.062683105, 0.009512629, 2.0070816e-08, 0.15397562, -1.0146143, -0.063400805, -1.0126762, -0.15368149, 10.131261, 8.797745, 37.0962)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_003"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_003"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_004" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0221276, 0.059930895, 0.008207138, -3.0515007e-08, 0.13892141, -1.014448, -0.060490243, -1.0126762, -0.13867876, 10.00666, 8.65141, 38.10888)
+transform = Transform3D(-1.0221275, 0.062682115, 0.008583866, -5.1502496e-08, 0.13894331, -1.0146143, -0.063267134, -1.0126762, -0.13867791, 10.068579, 8.651285, 38.10888)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_004"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_004"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_005" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0202006, 0.059930906, 0.0073193344, -2.665033e-08, 0.12389363, -1.0144482, -0.060376205, -1.0126764, -0.123677246, 9.94673, 8.520002, 39.12155)
+transform = Transform3D(-1.0202005, 0.06268306, 0.0076552955, 6.949274e-08, 0.12391296, -1.0146143, -0.0631488, -1.0126762, -0.123676255, 10.005896, 8.519857, 39.12155)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_005"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_005"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_006" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0184904, 0.059930794, 0.0064311814, 1.1925015e-07, 0.108862594, -1.014448, -0.06027487, -1.0126762, -0.10867246, 9.886799, 8.403624, 40.13423)
+transform = Transform3D(-1.0184906, 0.06268311, 0.0067266827, 1.4255387e-08, 0.10888106, -1.0146145, -0.063043006, -1.0126764, -0.10867307, 9.9432125, 8.4034605, 40.13423)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_006"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_006"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_007" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0169992, 0.059930723, 0.005543544, -5.882616e-08, 0.09383463, -1.014448, -0.060186565, -1.0126762, -0.09367074, 9.826868, 8.302275, 41.146904)
+transform = Transform3D(-1.0169992, 0.06268311, 0.0057980637, 1.23365576e-08, 0.093850024, -1.0146145, -0.0629507, -1.0126764, -0.093670756, 9.880529, 8.302095, 41.146904)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_007"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_007"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_008" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0157311, 0.05993072, 0.004655698, -6.728105e-08, 0.078806214, -1.0144519, -0.060111288, -1.0126802, -0.07866857, 9.766937, 8.215954, 42.159584)
+transform = Transform3D(-1.015731, 0.06268217, 0.004869401, -8.1035445e-08, 0.07881828, -1.0146182, -0.06287102, -1.01268, -0.078667715, 9.817846, 8.215761, 42.159584)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_008"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_008"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_009" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0146756, 0.059930723, 0.0037678776, -3.999589e-08, 0.06377823, -1.014448, -0.06004905, -1.0126762, -0.063666835, 9.707006, 8.144662, 43.172264)
+transform = Transform3D(-1.0146756, 0.06268311, 0.0039407522, 8.284399e-09, 0.06378675, -1.0146145, -0.06280687, -1.0126764, -0.063664906, 9.755164, 8.144458, 43.172264)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_009"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_009"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_010" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0138448, 0.05993168, 0.0028798368, 1.489697e-08, 0.04874651, -1.0144482, -0.06000083, -1.0126764, -0.048661374, 9.647076, 8.088399, 44.184937)
+transform = Transform3D(-1.0138448, 0.06268311, 0.0030121405, 6.3855596e-09, 0.048755836, -1.0146145, -0.06275544, -1.0126764, -0.048662703, 9.692481, 8.088186, 44.184937)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_010"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_010"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_011" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0132356, 0.05993072, 0.0019920252, -2.150472e-08, 0.03371867, -1.0144482, -0.059963815, -1.0126764, -0.03365978, 9.587144, 8.047165, 45.197617)
+transform = Transform3D(-1.0132354, 0.06268216, 0.002083484, -2.7181356e-08, 0.033724196, -1.0146143, -0.062716775, -1.0126762, -0.03365978, 9.629799, 8.046946, 45.197617)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_011"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_011"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_012" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.012848, 0.059930798, 0.0011041971, 2.0788676e-08, 0.018691085, -1.014448, -0.059940968, -1.0126762, -0.018658442, 9.527213, 8.02096, 46.21029)
+transform = Transform3D(-1.012848, 0.06268311, 0.0011547246, 2.4805942e-09, 0.018690882, -1.0146143, -0.062693745, -1.0126762, -0.018655179, 9.567116, 8.020737, 46.21029)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_012"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_012"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_013" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0126867, 0.059930805, 0.00021603181, 3.257775e-09, 0.0036568372, -1.014452, -0.059931196, -1.01268, -0.0036504504, 9.467282, 8.009783, 47.22297)
+transform = Transform3D(-1.0126867, 0.06268318, 0.00022595072, 5.9720877e-09, 0.0036574367, -1.0146183, -0.06268358, -1.01268, -0.0036504506, 9.504433, 8.009559, 47.22297)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_013"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_013"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_014" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0127398, 0.059930883, -0.0006711715, 1.7154437e-09, -0.01136087, -1.014448, -0.05993464, -1.0126762, 0.011341027, 9.4073515, 8.013636, 48.23565)
+transform = Transform3D(-1.0127397, 0.06268316, -0.00070232194, -7.137314e-09, -0.011368174, -1.0146143, -0.0626871, -1.0126761, 0.011346458, 9.44175, 8.013412, 48.23565)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_014"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_014"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_015" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.013019, 0.059930813, -0.0015593397, 1.6571427e-08, -0.026394643, -1.014448, -0.059951093, -1.0126762, 0.026348542, 9.347421, 8.0325165, 49.24832)
+transform = Transform3D(-1.0130191, 0.06268209, -0.0016309308, 2.286815e-08, -0.026398972, -1.0146145, -0.062703304, -1.0126764, 0.026348544, 9.379066, 8.032297, 49.24832)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_015"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_015"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_016" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0135202, 0.05993081, -0.0024471649, 2.6006532e-08, -0.041422695, -1.0144482, -0.05998075, -1.0126764, 0.041350346, 9.28749, 8.066426, 50.261)
+transform = Transform3D(-1.0135202, 0.06268313, -0.0025597042, -6.256135e-09, -0.04143251, -1.0146145, -0.06273537, -1.0126762, 0.041353364, 9.316384, 8.066214, 50.261)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_016"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_016"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_017" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.014243, 0.059931666, -0.0033350517, -3.5442536e-08, -0.056452174, -1.0144482, -0.06002439, -1.0126762, 0.056353576, 9.227558, 8.115365, 51.273674)
+transform = Transform3D(-1.014243, 0.06268318, -0.0034882359, -3.5449027e-08, -0.056462515, -1.0146143, -0.062780164, -1.0126762, 0.05635466, 9.253701, 8.115161, 51.273674)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_017"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_017"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_018" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0151911, 0.05993079, -0.0042230547, 6.192212e-08, -0.071482845, -1.0144519, -0.060079396, -1.01268, 0.07135799, 9.167627, 8.179333, 52.286354)
+transform = Transform3D(-1.0151911, 0.06268208, -0.004416887, 7.897696e-08, -0.07149371, -1.0146183, -0.062837504, -1.0126802, 0.07135714, 9.191019, 8.17914, 52.286354)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_018"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_018"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_019" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0163481, 0.05993082, -0.0051108543, 3.3688412e-08, -0.08651045, -1.0144444, -0.06014835, -1.0126724, 0.08635935, 9.107697, 8.258329, 53.29903)
+transform = Transform3D(-1.0163482, 0.06268313, -0.0053455452, -3.3694224e-08, -0.08652537, -1.0146106, -0.062910646, -1.0126725, 0.08636009, 9.128336, 8.25815, 53.29903)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_019"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_019"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_020" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0177404, 0.059930783, -0.0059988196, 8.7959926e-08, -0.10154087, -1.0144519, -0.060230263, -1.01268, 0.10136352, 9.047766, 8.352356, 54.311707)
+transform = Transform3D(-1.0177406, 0.06268307, -0.0062743095, 1.5334944e-08, -0.101558745, -1.0146183, -0.0629963, -1.01268, 0.10136475, 9.065653, 8.352192, 54.311707)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_020"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_020"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_021" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0193402, 0.0599308, -0.0068866643, 7.318602e-08, -0.11656926, -1.014448, -0.06032518, -1.0126764, 0.11636566, 8.987835, 8.4614105, 55.324387)
+transform = Transform3D(-1.0193402, 0.06268313, -0.007202841, -1.7604355e-08, -0.11658838, -1.0146145, -0.06309561, -1.0126764, 0.11636567, 9.00297, 8.461266, 55.324387)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_021"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_021"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_022" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0211614, 0.059931844, -0.00777449, -5.124588e-08, -0.13159731, -1.0144482, -0.060434002, -1.0126762, 0.13136746, 8.927904, 8.585494, 56.33706)
+transform = Transform3D(-1.0211614, 0.06268208, -0.008131455, 1.1401547e-07, -0.13161935, -1.0146143, -0.0632073, -1.0126762, 0.13136794, 8.940287, 8.58537, 56.33706)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_022"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_022"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_023" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0232035, 0.059930794, -0.008662369, 1.2701521e-07, -0.14662625, -1.014452, -0.060553584, -1.0126802, 0.14637016, 8.867972, 8.724606, 57.34974)
+transform = Transform3D(-1.0232036, 0.06268306, -0.009060122, 2.2143709e-08, -0.14665116, -1.0146183, -0.06333444, -1.0126802, 0.14637102, 8.8776045, 8.724504, 57.34974)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_023"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_023"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_024" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0254494, 0.059930813, -0.009550235, 6.295078e-08, -0.16165502, -1.0144442, -0.06068698, -1.0126724, 0.16137268, 8.808042, 8.878747, 58.362415)
+transform = Transform3D(-1.0254498, 0.06268314, -0.009988778, -6.29616e-08, -0.16168277, -1.0146106, -0.06347403, -1.0126724, 0.16137393, 8.814921, 8.878672, 58.362415)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_024"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_024"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_025" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0279249, 0.05993079, -0.010438126, 1.530529e-07, -0.17668414, -1.014452, -0.060833, -1.0126802, 0.17637554, 8.748111, 9.047916, 59.37509)
+transform = Transform3D(-1.0279249, 0.06268206, -0.010917395, 1.9521048e-07, -0.17671382, -1.0146182, -0.0636257, -1.01268, 0.17637627, 8.752239, 9.047871, 59.37509)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_025"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_025"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PhoneLine_026" type="CSGCylinder3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("41_ewwac")]
-transform = Transform3D(-1.0306013, 0.05993082, -0.011325667, -2.1177966e-07, -0.19171304, -1.0144482, -0.06099159, -1.0126764, 0.1913782, 8.68818, 9.232116, 60.38777)
+transform = Transform3D(-1.0306013, 0.06268313, -0.011846015, -2.8952666e-08, -0.19174485, -1.0146143, -0.06379266, -1.0126762, 0.19137856, 8.689556, 9.2321, 60.38777)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
 height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
-
-[node name="RopeStart" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_026"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="RopeEnd" type="Marker3D" parent="Entities/Phone/ZN_ChainPath3D/Baked/Span_002/PhoneLine_026"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="Path3D" type="Path3D" parent="Entities/Phone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -1, 0)

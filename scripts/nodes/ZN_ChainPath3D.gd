@@ -503,6 +503,10 @@ func _create_segment(info: Dictionary, rope_start_world: Vector3, rope_end_world
 	var segment := original.duplicate() as Node3D
 	segment.name = "%s_%03d" % [original.name, segment_index]
 
+	# Remove the start and end markers
+	segment.get_node(ROPE_START_NAME).queue_free()
+	segment.get_node(ROPE_END_NAME).queue_free()
+
 	# Calculate the local rope direction and length
 	var local_rope_dir := (rope_end_local - rope_start_local).normalized()
 	var local_rope_length := rope_start_local.distance_to(rope_end_local)
