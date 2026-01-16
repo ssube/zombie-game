@@ -213,10 +213,12 @@ func _process_shortcuts(entity: Entity, input: ZC_Input) -> void:
 	# Process quick keys
 	if input.quick_save:
 		SaveManager.save_game("quicksave", entity.get_tree().root)
+		%Menu.append_message(ZC_Message.make_system("Game saved to quicksave", Icons.concept_save))
 		return
 
 	if input.quick_load:
 		SaveManager.load_game("quicksave", entity.get_tree().root)
+		%Menu.append_message(ZC_Message.make_system("Game loaded from quicksave", Icons.concept_save))
 		return
 
 

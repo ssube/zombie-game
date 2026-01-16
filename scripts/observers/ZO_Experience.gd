@@ -35,7 +35,12 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 		if EntityUtils.is_player(entity):
 			ZombieLogger.debug("Experience changed for player: {0} from {1} to {2} (level: {3})", [entity.get_path(), old_value, new_value, new_level])
 			if show_experience_messages:
-				%Menu.append_message(ZC_Message.make_system("Gained %d Experience (Level %d)" % [new_value - old_value, new_level]))
+				var message_text := "Gained %d Experience" % (new_value - old_value)
+				if new_level > old_level:
+					message_text += " (Level %d)" % new_level
+
+				var message := ZC_Message.make_system(message_text, Icons.concept_experience)
+				%Menu.append_message(message)
 
 			%Menu.set_score(new_value)
 

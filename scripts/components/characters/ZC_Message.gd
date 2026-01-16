@@ -55,6 +55,7 @@ static func make_subtitle(text: String, duration: float = 3.0) -> ZC_Message:
 	# TODO: move this formatting to the subtitle template
 	result.message = "[color=gray][i]%s[/i][/color]" % text
 	result.duration = duration
+	result.icon = Icons.message_subtitle
 	result.sent_at = Time.get_ticks_msec() / 1000.0
 	return result
 
@@ -65,6 +66,8 @@ static func make_system(message: String, icon: Texture2D = null) -> ZC_Message:
 	result.message_group = MessageGroup.SYSTEM
 	result.message = message
 	result.icon = icon
+	if icon == null:
+		result.icon = Icons.message_system
 	result.sent_at = Time.get_ticks_msec() / 1000.0
 	return result
 

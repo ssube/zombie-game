@@ -487,7 +487,9 @@ static func switch_weapon(entity: ZE_Character, new_weapon: ZE_Weapon, menu: ZM_
 		if previous_weapons.size() > 0:
 			var old_weapon := previous_weapons[0]
 			var old_interactive := old_weapon.get_component(ZC_Interactive) as ZC_Interactive
-			menu.push_action("Holstered weapon: %s" % old_interactive.name)
+			var message_text := "Holstered weapon: %s" % old_interactive.name
+			var message_icon := Icons.get_weapon_icon(old_weapon)
+			menu.append_message(ZC_Message.make_interaction(message_text, message_icon))
 
 		# set remote transform to a known state
 		entity.weapon_follower.progress_ratio = 0.0
@@ -499,8 +501,10 @@ static func switch_weapon(entity: ZE_Character, new_weapon: ZE_Weapon, menu: ZM_
 	new_weapon.emit_action(Enums.ActionEvent.ENTITY_EQUIP, entity)
 
 	var c_interactive = new_weapon.get_component(ZC_Interactive) as ZC_Interactive
+	var message_text := "Switched to weapon: %s" % c_interactive.name
+	var message_icon := Icons.get_weapon_icon(new_weapon)
+	menu.append_message(ZC_Message.make_interaction(message_text, message_icon))
 	menu.set_weapon_label(c_interactive.name)
-	menu.push_action("Switched to weapon: %s" % c_interactive.name)
 
 	if c_interactive.use_sound:
 		var sound := c_interactive.use_sound.instantiate() as ZN_AudioSubtitle3D

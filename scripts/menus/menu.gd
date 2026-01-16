@@ -96,9 +96,6 @@ func set_stamina(value: int, immediate: bool = false) -> void:
 func set_objective_label(title: String) -> void:
 	$MenuLayer/GameHud.set_objective_label(title)
 
-func push_action(action: String) -> void:
-	$MenuLayer/GameHud.append_message(ZC_Message.make_interaction(action))
-
 func append_message(message: ZC_Message) -> void:
 	$MenuLayer/GameHud.append_message(message)
 
