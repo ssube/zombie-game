@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu5vih6rsg5c3"]
+
+[ext_resource type="Texture2D" uid="uid://dkk8xux1uk3eu" path="res://textures/caution-tape.png" id="1_q6er3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w48n0"]
+albedo_texture = ExtResource("1_q6er3")
+metallic = 0.65
+roughness = 0.4
+
+[node name="CSGBox3D" type="CSGBox3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = SubResource("StandardMaterial3D_w48n0")
+
+[node name="RopeStart" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

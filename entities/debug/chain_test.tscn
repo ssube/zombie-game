@@ -1,0 +1,166 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1xpw60pt1ego"]
+
+[ext_resource type="Script" uid="uid://cv3m86tnjsecl" path="res://scripts/nodes/ZN_ChainPath3D.gd" id="1_4u7tr"]
+[ext_resource type="PackedScene" uid="uid://bsdo2y5nbtkmq" path="res://entities/debug/chain_flag.tscn" id="2_et4nn"]
+
+[sub_resource type="Curve3D" id="Curve3D_8glh4"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="ChainTest" type="Node3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+radius = 0.25
+height = 10.0
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, 0)
+radius = 0.25
+height = 10.0
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+curve = SubResource("Curve3D_8glh4")
+
+[node name="ZN_ChainPath3D" type="Node3D" parent="." node_paths=PackedStringArray("path")]
+script = ExtResource("1_4u7tr")
+path = NodePath("../Path3D")
+
+[node name="Pattern" type="Node3D" parent="ZN_ChainPath3D"]
+visible = false
+
+[node name="ChainFlag" parent="ZN_ChainPath3D/Pattern" instance=ExtResource("2_et4nn")]
+
+[node name="Baked" type="Node3D" parent="ZN_ChainPath3D"]
+
+[node name="@CSGCylinder3D@133539" type="CSGCylinder3D" parent="ZN_ChainPath3D/Baked" instance=ExtResource("2_et4nn")]
+transform = Transform3D(-0.4169397, -0.95300496, -9.0938904e-08, -0.95300496, 0.4169397, 0, 3.6450025e-08, 8.331434e-08, -1.0402198, 0.4765025, 9.791531, 0)
+radius = 0.1
+height = 1.0
+sides = 4
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133539"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.5, 2.1855694e-08, 0)
+size = Vector3(0.5, 1, 0.05)
+
+[node name="RopeStart" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133539"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133539"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@CSGCylinder3D@133540" type="CSGCylinder3D" parent="ZN_ChainPath3D/Baked" instance=ExtResource("2_et4nn")]
+transform = Transform3D(-0.3102716, -0.99286896, -9.0938904e-08, -0.99286896, 0.3102716, 0, 2.7124802e-08, 8.679936e-08, -1.0402198, 1.4964345, 9.407364, 0)
+radius = 0.1
+height = 1.0
+sides = 4
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133540"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.5, 2.1855694e-08, 0)
+size = Vector3(0.5, 1, 0.05)
+
+[node name="RopeStart" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133540"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133540"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@CSGCylinder3D@133541" type="CSGCylinder3D" parent="ZN_ChainPath3D/Baked" instance=ExtResource("2_et4nn")]
+transform = Transform3D(-0.19170062, -1.0224031, -9.0938904e-08, -1.0224031, 0.19170062, 0, 1.6759e-08, 8.938132e-08, -1.0402198, 2.5112016, 9.15415, 0)
+radius = 0.1
+height = 1.0
+sides = 4
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133541"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.5, 2.1855694e-08, 0)
+size = Vector3(0.5, 1, 0.05)
+
+[node name="RopeStart" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133541"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133541"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@CSGCylinder3D@133542" type="CSGCylinder3D" parent="ZN_ChainPath3D/Baked" instance=ExtResource("2_et4nn")]
+transform = Transform3D(-0.06488709, -1.0381941, -9.0938904e-08, -1.0381941, 0.06488709, 0, 5.6726095e-09, 9.076181e-08, -1.0402198, 3.519097, 9.030056, 0)
+radius = 0.1
+height = 1.0
+sides = 4
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133542"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.5, 2.1855694e-08, 0)
+size = Vector3(0.5, 1, 0.05)
+
+[node name="RopeStart" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133542"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133542"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@CSGCylinder3D@133543" type="CSGCylinder3D" parent="ZN_ChainPath3D/Baked" instance=ExtResource("2_et4nn")]
+transform = Transform3D(0.06488706, -1.0381941, 9.0938904e-08, -1.0381941, -0.06488706, 0, 5.672607e-09, -9.076181e-08, -1.0402198, 4.519097, 9.032444, 0)
+radius = 0.1
+height = 1.0
+sides = 4
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133543"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.5, 2.1855694e-08, 0)
+size = Vector3(0.5, 1, 0.05)
+
+[node name="RopeStart" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133543"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133543"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@CSGCylinder3D@133544" type="CSGCylinder3D" parent="ZN_ChainPath3D/Baked" instance=ExtResource("2_et4nn")]
+transform = Transform3D(0.1917006, -1.0224031, 9.0938904e-08, -1.0224031, -0.1917006, 0, 1.6758998e-08, -8.938132e-08, -1.0402198, 5.5112014, 9.15835, 0)
+radius = 0.1
+height = 1.0
+sides = 4
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133544"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.5, 2.1855694e-08, 0)
+size = Vector3(0.5, 1, 0.05)
+
+[node name="RopeStart" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133544"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133544"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@CSGCylinder3D@133545" type="CSGCylinder3D" parent="ZN_ChainPath3D/Baked" instance=ExtResource("2_et4nn")]
+transform = Transform3D(0.31027156, -0.99286896, 9.0938904e-08, -0.99286896, -0.31027156, 0, 2.71248e-08, -8.679936e-08, -1.0402198, 6.4964347, 9.405136, 0)
+radius = 0.1
+height = 1.0
+sides = 4
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133545"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.5, 2.1855694e-08, 0)
+size = Vector3(0.5, 1, 0.05)
+
+[node name="RopeStart" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133545"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133545"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@CSGCylinder3D@133546" type="CSGCylinder3D" parent="ZN_ChainPath3D/Baked" instance=ExtResource("2_et4nn")]
+transform = Transform3D(0.41693968, -0.953005, 9.0938904e-08, -0.953005, -0.41693968, 0, 3.6450025e-08, -8.331435e-08, -1.0402198, 7.4765024, 9.770969, 0)
+radius = 0.1
+height = 1.0
+sides = 4
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133546"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.5, 2.1855694e-08, 0)
+size = Vector3(0.5, 1, 0.05)
+
+[node name="RopeStart" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133546"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="ZN_ChainPath3D/Baked/@CSGCylinder3D@133546"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.5, 0)
