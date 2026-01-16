@@ -21,3 +21,5 @@ textures/**/*.png.import
 docs/notes.md
 
 *.mesh
+
+venv/
