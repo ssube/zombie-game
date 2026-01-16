@@ -1,184 +1,254 @@
+Zombie Game is an open-source game project. The source code is available under the GPL license at Github ([https://github.com/ssube/zombie-game](https://github.com/ssube/zombie-game)).
 
-Zombie Game is an open-source game project. The source code is available under the GPL license at Github (https://github.com/ssube/zombie-game).
-
-Made with the Godot engine (https://godotengine.org/), using open-source addons and paid assets to help support the community.
+Made with the Godot engine ([https://godotengine.org/](https://godotengine.org/)), using open-source addons and paid assets to help support the community.
 
 ### Assets
+
 #### Asset Packs
 
-60 Game Cursors
-- https://cruizrf.itch.io/60-game-cursors
+PSX Barrels Pack:
 
-PSX Barrels Pack
-- https://ddv23.itch.io/psx-barrel-pack
+- [https://ddv23.itch.io/psx-barrel-pack](https://ddv23.itch.io/psx-barrel-pack)
 
-Books and Scrolls Pack
-- https://mcsteeg.itch.io/books-and-scrolls-pack
+Books and Scrolls Pack:
 
-Common Birds Set
-- https://vertexcat.itch.io/common-birds-set
+- [https://mcsteeg.itch.io/books-and-scrolls-pack](https://mcsteeg.itch.io/books-and-scrolls-pack)
 
-PSX Home Furniture Kit 1
+Common Birds Set:
+
+- [https://vertexcat.itch.io/common-birds-set](https://vertexcat.itch.io/common-birds-set)
+
+PSX Home Furniture Kit 1:
+
 - what did I use from this?
-- https://sourpickle35.itch.io/psx-assets-home-furniture-kit
+- [https://sourpickle35.itch.io/psx-assets-home-furniture-kit](https://sourpickle35.itch.io/psx-assets-home-furniture-kit)
 
-PSX Mailbox
-- https://pomarf.itch.io/psx-mailbox
+PSX Mailbox:
 
-PSX Misc Items
-- https://wildenza.itch.io/psx-misc-items
+- [https://pomarf.itch.io/psx-mailbox](https://pomarf.itch.io/psx-mailbox)
 
-Modular Retro FPS Kit
-- https://pizzadoggy.itch.io/modular-retro-fps-kit
+PSX Misc Items:
 
-PS1PSX Gun Pack
-- https://morvillo-games.itch.io/police-gun-pack
+- [https://wildenza.itch.io/psx-misc-items](https://wildenza.itch.io/psx-misc-items)
 
-PSX Bunkers
-- https://pizzadoggy.itch.io/psx-bunkers
+Modular Retro FPS Kit:
 
-PSX Cars
-- https://ggbot.itch.io/psx-style-cars
+- [https://pizzadoggy.itch.io/modular-retro-fps-kit](https://pizzadoggy.itch.io/modular-retro-fps-kit)
 
-PSX Dungeon Loot Pack
-- https://mcsteeg.itch.io/psx-dungeon-treasure-props-pack
+PS1PSX Gun Pack:
 
-PSX Fishing
-- https://dysfunctional-games.itch.io/psx-fishingpack
+- [https://morvillo-games.itch.io/police-gun-pack](https://morvillo-games.itch.io/police-gun-pack)
 
-PSX Gifts & Misc
+PSX Bunkers:
+
+- [https://pizzadoggy.itch.io/psx-bunkers](https://pizzadoggy.itch.io/psx-bunkers)
+
+PSX Cars:
+
+- [https://ggbot.itch.io/psx-style-cars](https://ggbot.itch.io/psx-style-cars)
+
+PSX Dungeon Loot Pack:
+
+- [https://mcsteeg.itch.io/psx-dungeon-treasure-props-pack](https://mcsteeg.itch.io/psx-dungeon-treasure-props-pack)
+
+PSX Fishing:
+
+- [https://dysfunctional-games.itch.io/psx-fishingpack](https://dysfunctional-games.itch.io/psx-fishingpack)
+
+PSX Gifts & Misc:
+
 - ???
 
-PSX Mega Pack
-- https://pizzadoggy.itch.io/psx-mega-pack
+PSX Mega Pack:
 
-PSX Mega Pack II
-- https://pizzadoggy.itch.io/psx-mega-pack-2
+- [https://pizzadoggy.itch.io/psx-mega-pack](https://pizzadoggy.itch.io/psx-mega-pack)
 
-PSX Nature
-- https://pizzadoggy.itch.io/psx-nature
+PSX Mega Pack II:
 
-PSX Pickups
+- [https://pizzadoggy.itch.io/psx-mega-pack-2](https://pizzadoggy.itch.io/psx-mega-pack-2)
+
+PSX Nature:
+
+- [https://pizzadoggy.itch.io/psx-nature](https://pizzadoggy.itch.io/psx-nature)
+
+PSX Pickups:
+
 - what did I use from this?
-- https://dysfunctional-games.itch.io/psx-pickups
+- [https://dysfunctional-games.itch.io/psx-pickups](https://dysfunctional-games.itch.io/psx-pickups)
 
-PSX-Shotgun
-- https://wildenza.itch.io/psx-shogun
+PSX-Shotgun:
 
-PSX_UrbanTrash
-- https://acchihaven.itch.io/psx-style-urban-trash-pack
+- [https://wildenza.itch.io/psx-shogun](https://wildenza.itch.io/psx-shogun)
 
-PSX Street Signs
-- https://pomarf.itch.io/psx-street-signs
+PSX Style Barriers:
 
-PSX Post-Apo Ultimate Prop Pack
-- https://puszke.itch.io/psx-post-apo-ultimate-prop-pack
+- [https://valsekamerplant.itch.io/psx-style-barriers](https://valsekamerplant.itch.io/psx-style-barriers)
 
-Traffic Cone
-- https://ddv23.itch.io/psx-traffic-cones
+PSX Style Bus Stop:
 
-ZombieApocalypsePack
+- [https://pomarf.itch.io/psx-bus-stop](https://pomarf.itch.io/psx-bus-stop)
+
+PSX Style Oil Drums:
+
+- [https://pomarf.itch.io/psx-style-oil-drums](https://pomarf.itch.io/psx-style-oil-drums)
+
+PSX Style Phone Poles:
+
+- [https://pomarf.itch.io/psx-style-phone-poles](https://pomarf.itch.io/psx-style-phone-poles)
+
+PSX Style Urban Trash Pack:
+
+- [https://acchihaven.itch.io/psx-style-urban-trash-pack](https://acchihaven.itch.io/psx-style-urban-trash-pack)
+
+PSX Street Signs:
+
+- [https://pomarf.itch.io/psx-street-signs](https://pomarf.itch.io/psx-street-signs)
+
+PSX Post-Apo Ultimate Prop Pack:
+
+- [https://puszke.itch.io/psx-post-apo-ultimate-prop-pack](https://puszke.itch.io/psx-post-apo-ultimate-prop-pack)
+
+Traffic Cone:
+
+- [https://ddv23.itch.io/psx-traffic-cones](https://ddv23.itch.io/psx-traffic-cones)
+
+ZombieApocalypsePack:
+
 - what did I use from this?
-- https://egorzuyev.itch.io/psx-zombie-apocalypse
+- [https://egorzuyev.itch.io/psx-zombie-apocalypse](https://egorzuyev.itch.io/psx-zombie-apocalypse)
+
 #### Textures
 
-PSX Textures
-- https://pizzadoggy.itch.io/psx-textures
+PSX Textures:
 
-PSX Textures 2
-- https://pizzadoggy.itch.io/psx-textures-2
+- [https://pizzadoggy.itch.io/psx-textures](https://pizzadoggy.itch.io/psx-textures)
 
-Foliage Sprites
-- https://kenney-assets.itch.io/foliage-sprites
+PSX Textures 2:
 
-Particle Effect Texture Essentials
-- https://reactorcore.itch.io/particle-effect-texture-essentials
+- [https://pizzadoggy.itch.io/psx-textures-2](https://pizzadoggy.itch.io/psx-textures-2)
 
-600 clean and minimal game Icon ultimate pack
-- https://sungraphica.itch.io/minimal-game-icon-ultimate-pack
+Foliage Sprites:
+
+- [https://kenney-assets.itch.io/foliage-sprites](https://kenney-assets.itch.io/foliage-sprites)
+
+Particle Effect Texture Essentials:
+
+- [https://reactorcore.itch.io/particle-effect-texture-essentials](https://reactorcore.itch.io/particle-effect-texture-essentials)
+
+600 clean and minimal game Icon ultimate pack:
+
+- [https://sungraphica.itch.io/minimal-game-icon-ultimate-pack](https://sungraphica.itch.io/minimal-game-icon-ultimate-pack)
+
+60 Game Cursors:
+
+- [https://cruizrf.itch.io/60-game-cursors](https://cruizrf.itch.io/60-game-cursors)
+
 #### Sound Effects
 
-Freesound 372021
-- https://freesound.org/people/kijjaz/sounds/372021/
+Freesound 372021:
+
+- [https://freesound.org/people/kijjaz/sounds/372021/](https://freesound.org/people/kijjaz/sounds/372021/)
 - CC0 license
 
-Freesound 430675
-- https://freesound.org/people/juanj105/sounds/430675/
-- CC0 license
-- 46. Exhalaciones.wav by juanj105 -- https://freesound.org/s/430675/ -- License: Creative Commons 0
+Freesound 430675:
 
-Freesound 588264
-- https://freesound.org/people/GrimmReaperSounds/sounds/588264/
+- [https://freesound.org/people/juanj105/sounds/430675/](https://freesound.org/people/juanj105/sounds/430675/)
+- CC0 license
+- `46. Exhalaciones.wav` by juanj105 -- [https://freesound.org/s/430675/](https://freesound.org/s/430675/) -- License: Creative Commons 0
+
+Freesound 588264:
+
+- [https://freesound.org/people/GrimmReaperSounds/sounds/588264/](https://freesound.org/people/GrimmReaperSounds/sounds/588264/)
 - CC-BY 4.0
-- Radio static.mp3 by GrimmReaperSounds -- https://freesound.org/s/588264/ -- License: Attribution 4.0
+- `Radio static.mp3` by GrimmReaperSounds -- [https://freesound.org/s/588264/](https://freesound.org/s/588264/) -- License: Attribution 4.0
 
-Freesound 699979
-- https://freesound.org/people/henner1964/sounds/699979/
+Freesound 699979:
+
+- [https://freesound.org/people/henner1964/sounds/699979/](https://freesound.org/people/henner1964/sounds/699979/)
 - CC0 license
-- Seagull by henner1964 -- https://freesound.org/s/699979/ -- License: Creative Commons 0
+- Seagull by henner1964 -- [https://freesound.org/s/699979/](https://freesound.org/s/699979/) -- License: Creative Commons 0
 
-Freesound 353686
-- https://freesound.org/people/tec_studio/sounds/353686/
+Freesound 353686:
+
+- [https://freesound.org/people/tec](https://freesound.org/people/tec)_studio/sounds/353686/
 - CC0 license
 
-Freesound 270429
-- https://freesound.org/people/LittleRobotSoundFactory/sounds/270429/
+Freesound 270429:
+
+- [https://freesound.org/people/LittleRobotSoundFactory/sounds/270429/](https://freesound.org/people/LittleRobotSoundFactory/sounds/270429/)
 - CC-BY 4.0
-- Footstep_Water_03.wav by LittleRobotSoundFactory -- https://freesound.org/s/270429/ -- License: Attribution 4.0
+- `Footstep_Water_03.wav` by LittleRobotSoundFactory -- [https://freesound.org/s/270429/](https://freesound.org/s/270429/) -- License: Attribution 4.0
 
-6000 Retro Sound Effects
-- https://subspaceaudio.itch.io/6000-retro-sound-effects
+6000 Retro Sound Effects:
 
-1000 Retro Sound Effects
-- https://subspaceaudio.itch.io/1000-retro-sound-effects
+- [https://subspaceaudio.itch.io/6000-retro-sound-effects](https://subspaceaudio.itch.io/6000-retro-sound-effects)
 
-Echoes Audio Super Kit
-- https://pizzadoggy.itch.io/echoes-audio-super-kit
+1000 Retro Sound Effects:
 
-Sound Effects
+- [https://subspaceaudio.itch.io/1000-retro-sound-effects](https://subspaceaudio.itch.io/1000-retro-sound-effects)
+
+Echoes Audio Super Kit:
+
+- [https://pizzadoggy.itch.io/echoes-audio-super-kit](https://pizzadoggy.itch.io/echoes-audio-super-kit)
+
+Sound Effects:
+
 - ???
+
 ### Shaders
 
-3D Item Highlighter
-- https://godotshaders.com/shader/3d-item-highlighter-easier-to-adjust-supports-all-directions/
+3D Item Highlighter:
+
+- [https://godotshaders.com/shader/3d-item-highlighter-easier-to-adjust-supports-all-directions/](https://godotshaders.com/shader/3d-item-highlighter-easier-to-adjust-supports-all-directions/)
 - MIT license
 
-PSX/CRT Retro Shader for Godot
-- https://godotshaders.com/shader/psx-crt-retro-shader-for-godot/
+PSX/CRT Retro Shader for Godot:
+
+- [https://godotshaders.com/shader/psx-crt-retro-shader-for-godot/](https://godotshaders.com/shader/psx-crt-retro-shader-for-godot/)
 - CC0 license
-### Software 
 
-Godot engine
-- https://godotengine.org/
+### Software
+
+Godot engine:
+
+- [https://godotengine.org/](https://godotengine.org/)
 - MIT license
+
 #### Libraries
 
-DebugDraw3D
-- https://github.com/DmitriySalnikov/godot_debug_draw_3d
+DebugDraw3D:
+
+- [https://github.com/DmitriySalnikov/godot](https://github.com/DmitriySalnikov/godot)_debug_draw_3d
 - MIT license
 
-Dialogue Manager
-- https://github.com/nathanhoad/godot_dialogue_manager
+Dialogue Manager:
+
+- [https://github.com/nathanhoad/godot](https://github.com/nathanhoad/godot)_dialogue_manager
 - MIT license
 
-Func Godot
-- https://github.com/func-godot/func_godot_plugin
+Func Godot:
+
+- [https://github.com/func-godot/func](https://github.com/func-godot/func)_godot_plugin
 - MIT license
 
-GECS
-- https://github.com/csprance/gecs/
+GECS:
+
+- [https://github.com/csprance/gecs/](https://github.com/csprance/gecs/)
 - CC0-1.0 license
 
-Improved Kinematic Character Controller
-- https://github.com/DinkeyKing/Improved-KCC
+Improved Kinematic Character Controller:
+
+- [https://github.com/DinkeyKing/Improved-KCC](https://github.com/DinkeyKing/Improved-KCC)
 - MIT license
 
-QuakeLamp
-- https://github.com/ioannis-koukourakis/quake-style-light-animations-for-the-godot-engine
+QuakeLamp:
+
+- [https://github.com/ioannis-koukourakis/quake-style-light-animations-for-the-godot-engine](https://github.com/ioannis-koukourakis/quake-style-light-animations-for-the-godot-engine)
 - MIT license
 
-Vision Cone 3D
-- https://github.com/Tattomoosa/VisionCone3D
+Vision Cone 3D:
+
+- [https://github.com/Tattomoosa/VisionCone3D](https://github.com/Tattomoosa/VisionCone3D)
 - MIT license
 
 ### License Text
@@ -193,7 +263,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 #### CC0
 
-https://creativecommons.org/publicdomain/zero/1.0/legalcode
+[https://creativecommons.org/publicdomain/zero/1.0/legalcode](https://creativecommons.org/publicdomain/zero/1.0/legalcode)
 
 1. The person who associated a work with this deed has **dedicated** the work to the public domain by waiving all of his or her rights to the work worldwide under copyright law, including all related and neighboring rights, to the extent allowed by law.
 2. You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission. See **Other Information** below.
@@ -204,11 +274,11 @@ https://creativecommons.org/publicdomain/zero/1.0/legalcode
 2. Unless expressly stated otherwise, the person who associated a work with this deed makes no warranties about the work, and disclaims liability for all uses of the work, to the fullest extent permitted by applicable law.
 3. When using or citing the work, you should not imply [endorsement](https://creativecommons.org/publicdomain/zero/1.0/#ref-endorsement) by the author or the affirmer.
 
-The above text is from https://creativecommons.org/publicdomain/zero/1.0/.
+The above text is from [https://creativecommons.org/publicdomain/zero/1.0/.](https://creativecommons.org/publicdomain/zero/1.0/.)
 
 #### CC BY
 
-https://creativecommons.org/licenses/by/4.0/
+[https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)
 
 You are free to:
 
