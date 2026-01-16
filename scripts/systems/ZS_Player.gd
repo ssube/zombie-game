@@ -209,11 +209,20 @@ func _apply_jump(velocity: ZC_Velocity, input: ZC_Input, stamina: ZC_Stamina, bo
 		velocity.linear_velocity.y = input.jump_speed
 
 
+var quicksave_sound: AudioStream = preload("res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/Positive Sounds/sfx_positive_simple7.wav")
+
+
 func _process_shortcuts(entity: Entity, input: ZC_Input) -> void:
 	# Process quick keys
 	if input.quick_save:
 		SaveManager.save_game("quicksave", entity.get_tree().root)
 		%Menu.append_message(ZC_Message.make_system("Game saved to quicksave", Icons.concept_save))
+
+		var sound_node := AudioStreamPlayer.new()
+		sound_node.bus = &"Menus"
+		sound_node.stream = quicksave_sound
+		entity.add_child(sound_node)
+		sound_node.play()
 		return
 
 	if input.quick_load:
