@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=4 uid="uid://v18fidmgep15"]
+[gd_scene load_steps=139 format=4 uid="uid://v18fidmgep15"]
 
 [ext_resource type="PackedScene" uid="uid://cxiu5f14bex35" path="res://entities/items/ammo.tscn" id="1_b7jq5"]
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_dm6vb"]
@@ -44,7 +44,7 @@
 [ext_resource type="PackedScene" uid="uid://shteltw34ojq" path="res://entities/statics/cone_large_rubber.tscn" id="33_xnjsi"]
 [ext_resource type="Script" uid="uid://cv3m86tnjsecl" path="res://scripts/nodes/ZN_ChainPath3D.gd" id="34_ww45u"]
 [ext_resource type="PackedScene" uid="uid://cu5vih6rsg5c3" path="res://entities/props/chains/caution_tape.tscn" id="35_bpdcn"]
-[ext_resource type="Texture2D" uid="uid://dkk8xux1uk3eu" path="res://textures/caution-tape.png" id="36_08bxa"]
+[ext_resource type="Material" uid="uid://cnleaw3xj2l51" path="res://materials/caution_tape.tres" id="37_0rvxh"]
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="37_825fl"]
 [ext_resource type="PackedScene" uid="uid://bgehdc11cuaa3" path="res://entities/statics/jersey_barrier_0.tscn" id="42_jkntv"]
 [ext_resource type="PackedScene" uid="uid://bx5lh5ad3xbmn" path="res://entities/statics/jersey_barrier_broken_edge_0.tscn" id="43_er34s"]
@@ -95,12 +95,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w48n0"]
-albedo_texture = ExtResource("36_08bxa")
-metallic = 0.65
-roughness = 0.4
-uv1_scale = Vector3(2.5, 1, 1)
 
 [sub_resource type="Curve3D" id="Curve3D_xnjsi"]
 _data = {
@@ -843,77 +837,121 @@ metadata/_custom_type_script = "uid://cv3m86tnjsecl"
 visible = false
 
 [node name="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Pattern" instance=ExtResource("35_bpdcn")]
-material = SubResource("StandardMaterial3D_w48n0")
 
 [node name="Baked" type="Node3D" parent="Statics/Node3D/ZN_ChainPath3D"]
 
 [node name="Span_000" type="Node3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(1.1003404, 0.1487579, 0.023848312, -2.3735436e-06, -0.17578632, 1.0966065, 0.15065742, -1.0864699, -0.17416109, -46.164772, 0.99023825, 2.3716125)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_001" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_001" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(1.0904154, 0.148758, 0.012686437, 2.7126587e-06, -0.0935411, 1.0966065, 0.14929798, -1.0864699, -0.09267681, -46.016014, 0.85557413, 1.2851425)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_002" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_002" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(1.0865275, 0.14876185, 0.0015311178, 3.7045533e-07, -0.0112894345, 1.0966071, 0.14876972, -1.0864699, -0.011185124, -45.867256, 0.80315554, 0.19867265)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_003" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_003" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(1.0887414, 0.14875796, -0.009625375, 9.722456e-07, 0.07094876, 1.0966065, 0.14906903, -1.0864699, 0.0702928, -45.718494, 0.8329825, -0.88779724)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Span_001" type="Node3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.99773747, -0.35691446, -0.038636293, -1.8047933e-07, -0.11411855, 1.0542, -0.35899958, -0.99194247, -0.107379146, -45.82257, 0.811398, -1.9270031)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_001" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_001" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.9924908, -0.35691825, -0.011867701, -1.8915436e-07, -0.035053223, 1.0542016, -0.3571155, -0.99194264, -0.032983117, -46.17949, 0.7368119, -2.9189458)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_002" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_002" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.9928065, -0.35691836, 0.014900202, 2.39761e-07, 0.044010203, 1.0542014, -0.35722926, -0.99194247, 0.041411135, -46.536407, 0.7412909, -3.9108882)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_003" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_003" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.9986798, -0.35691446, 0.041669138, 1.3443163e-07, 0.12307638, 1.0542, -0.35933864, -0.99194247, 0.115807936, -46.893326, 0.82483494, -4.9028306)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Span_002" type="Node3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(1.0257113, -0.32465374, -0.036035683, -2.283153e-06, -0.11876277, 1.0698961, -0.32664758, -1.0194497, -0.11316372, -47.234108, 0.82699156, -5.9085264)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_001" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_001" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(1.0195115, -0.32464984, -0.0035717466, 4.78801e-07, -0.011769313, 1.069895, -0.32466948, -1.0194498, -0.011214248, -47.55876, 0.76172316, -6.9279766)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_002" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_002" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(1.0234785, -0.32465363, 0.028890861, 1.8486528e-06, 0.09521563, 1.0698957, -0.3259366, -1.0194492, 0.090726696, -47.88341, 0.8034443, -7.947426)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Span_003" type="Node3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.891194, 0.35308078, 0.01502993, 1.1824968e-06, -0.040776253, 0.95783925, 0.35340053, -0.89038754, -0.037905194, -47.869198, 0.83066356, -8.902344)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_001" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_001" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.89085555, 0.35308078, -0.0114480285, -9.022902e-07, 0.031058542, 0.95783925, 0.35326633, -0.8903876, 0.028871713, -47.516117, 0.82580495, -9.792732)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_002" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_002" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.89551073, 0.35308075, -0.03792756, -2.9714738e-06, 0.10289762, 0.9578393, 0.355112, -0.8903876, 0.0956526, -47.163036, 0.89278436, -10.683119)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_003" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_003" type="CSGBox3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.9050826, 0.35308072, -0.06440695, -4.9981686e-06, 0.17473632, 0.9578392, 0.358907, -0.89038754, 0.16243315, -46.809956, 1.0316017, -11.573507)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Node3D2" type="Node3D" parent="Statics"]
 
@@ -932,99 +970,158 @@ metadata/_custom_type_script = "uid://cv3m86tnjsecl"
 visible = false
 
 [node name="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Pattern" instance=ExtResource("35_bpdcn")]
-material = SubResource("StandardMaterial3D_w48n0")
 
 [node name="Baked" type="Node3D" parent="Statics/Node3D2/ZN_ChainPath3D"]
 
 [node name="Span_000" type="Node3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.99961615, -0.4291602, 0.031172354, 3.2758096e-06, 0.07883366, 1.0854344, -0.43029085, 0.9969902, -0.07240878, -13.263975, 1.1175485, 41.445313)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Span_001" type="Node3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.106897004, -0.929327, -0.09471097, -1.2189884e-06, -0.095328934, 0.9353921, -0.93414074, 0.10634628, 0.010836888, -13.943219, 1.1093004, 41.996983)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_001" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_001" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.10638479, -0.929327, -0.025011592, 9.521444e-07, -0.02517493, 0.935392, -0.92966354, 0.106346264, 0.0028631256, -14.872546, 1.0490482, 42.10333)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_002" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_002" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.10647294, -0.92932713, 0.044687282, -1.5205975e-06, 0.044979118, 0.9353925, -0.93040085, 0.10634999, -0.005115439, -15.801873, 1.0589504, 42.20968)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_003" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_003" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.10714851, -0.9293271, 0.11438696, 1.4552623e-06, 0.11513331, 0.9353921, -0.9363403, 0.10634614, -0.0130882235, -16.731201, 1.1390071, 42.316025)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Span_002" type="Node3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.056398436, -1.0697175, -0.18682846, 1.1745516e-07, -0.18708028, 1.0711592, -1.08591, 0.055557437, 0.009703346, -17.730722, 1.1030337, 42.396976)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_001" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_001" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.056041576, -1.0697156, -0.14098349, -3.2424214e-07, -0.14117351, 1.0711576, -1.078966, 0.05556115, 0.007322371, -18.800438, 0.93890643, 42.452538)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_002" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_002" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.055776615, -1.0697175, -0.09513807, 5.981132e-08, -0.0952663, 1.0711592, -1.0739398, 0.055557318, 0.004941193, -19.870155, 0.82068604, 42.508095)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_003" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_003" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.05561992, -1.0697174, -0.049292944, -1.01598616e-07, -0.049359385, 1.0711594, -1.0708525, 0.05556097, 0.0025601666, -20.939873, 0.7483724, 42.563652)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_004" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_004" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.055557635, -1.0697156, -0.0034251532, 2.1533224e-09, -0.0034297695, 1.0711573, -1.0697211, 0.05555735, 0.00017789283, -22.00959, 0.72196555, 42.619213)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_005" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_005" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.05560464, -1.0697156, 0.042395897, 9.484494e-08, 0.04245304, 1.0711576, -1.0705553, 0.05556103, -0.0022019478, -23.079304, 0.7414655, 42.674774)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_006" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_006" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.05574592, -1.0697174, 0.08824067, -1.2462175e-07, 0.0883596, 1.0711592, -1.0733507, 0.055557206, -0.0045830226, -24.149021, 0.80687225, 42.73033)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Span_003" type="Node3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.18551858, -1.0050583, -0.09157869, 1.2572508e-06, -0.09311288, 1.0218983, -1.0092219, -0.18475331, -0.01683303, -25.186409, 0.80449575, 42.665733)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_001" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_001" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.18496475, -1.0050602, -0.04850371, -9.363269e-07, -0.049316537, 1.0218995, -1.00623, -0.18474971, -0.008916882, -26.191467, 0.73328054, 42.48098)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_002" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_002" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.18475601, -1.0050583, -0.005431686, -7.061987e-08, -0.0055227084, 1.0218983, -1.005073, -0.18475331, -0.0009985433, -27.196527, 0.705861, 42.29623)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_003" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_003" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.18488295, -1.0050602, 0.0376433, -4.123832e-07, 0.03827394, 1.0219002, -1.005765, -0.18475343, 0.0069192937, -28.201588, 0.72223705, 42.111477)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_004" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_004" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.18534838, -1.0050583, 0.08071632, 1.037839e-06, 0.08206893, 1.0218983, -1.0082942, -0.18475345, 0.014838624, -29.206646, 0.78240883, 41.926723)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_005" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_005" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.18614599, -1.0050583, 0.12379103, 2.0405594e-06, 0.12586547, 1.0218976, -1.0126531, -0.18474966, 0.02275734, -30.211704, 0.88637626, 41.741974)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_006" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_006" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(0.18728209, -1.0050602, 0.16686516, -2.2111938e-06, 0.16966058, 1.0219002, -1.0188179, -0.18475346, 0.03067142, -31.216763, 1.0341394, 41.55722)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Span_004" type="Node3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_004" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_004" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(1.0946348, -0.38808262, -0.00457378, 1.1953888e-07, -0.013686512, 1.1613212, -0.3881096, -1.0945587, -0.012899657, -31.913334, 1.1121254, 40.917564)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Node3D3" type="Node3D" parent="Statics"]
 
@@ -1043,73 +1140,114 @@ metadata/_custom_type_script = "uid://cv3m86tnjsecl"
 visible = false
 
 [node name="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Pattern" instance=ExtResource("35_bpdcn")]
-material = SubResource("StandardMaterial3D_w48n0")
 
 [node name="Baked" type="Node3D" parent="Statics/Node3D3/ZN_ChainPath3D"]
 
 [node name="Span_000" type="Node3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.94433564, 0.279335, 0.0121795, 1.1826282e-06, -0.042896826, 0.98392385, 0.27960038, 0.9434395, 0.041131463, 30.152397, 1.0566757, -11.873352)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_001" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_001" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.94493985, 0.27933493, -0.015756471, -1.5464983e-06, 0.055495106, 0.98392475, 0.279779, 0.9434405, -0.053211275, 30.431732, 1.0629749, -10.929913)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_002" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_002" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-0.95490855, 0.27933496, -0.04369259, -4.1996677e-06, 0.15388754, 0.98392385, 0.28273144, 0.9434395, -0.1475545, 30.711067, 1.1676664, -9.986472)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Span_001" type="Node3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-1.1347398, -0.14951503, -0.02651509, 3.638263e-07, -0.19991271, 1.1272653, -0.15184793, 1.1173059, 0.1981465, 30.775978, 1.1446539, -8.9560995)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_001" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_001" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-1.1231415, -0.14951524, -0.015301538, 3.1998414e-07, -0.1153678, 1.1272647, -0.1502962, 1.1173053, 0.11434856, 30.626461, 0.98701346, -7.8387938)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_002" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_002" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-1.1177229, -0.14951332, -0.0040880563, 3.4048583e-08, -0.030822398, 1.1272645, -0.14956918, 1.1173053, 0.030550089, 30.476948, 0.9139179, -6.721489)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_003" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_003" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-1.1185738, -0.14951512, 0.007125196, -1.04577204e-07, 0.053721003, 1.1272652, -0.1496848, 1.1173058, -0.053246386, 30.327435, 0.9253671, -5.604183)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Span_002" type="Node3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-1.1024467, 0.37939847, 0.048997108, 7.352451e-07, -0.14945929, 1.157322, 0.38254923, 1.0933669, 0.14119972, 30.442375, 0.877498, -4.498847)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_001" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_001" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-1.0938311, 0.37939644, 0.011056943, 2.2220853e-07, -0.03372776, 1.1573213, 0.37955752, 1.0933667, 0.031863865, 30.821774, 0.7859041, -3.40548)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_002" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_002" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-1.0961078, 0.3793983, -0.02688304, -3.1335364e-07, 0.08200349, 1.1573218, 0.38034952, 1.0933666, -0.07747176, 31.20117, 0.81004244, -2.3121133)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Span_003" type="Node3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked"]
 
-[node name="CSGBox3D_000" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_000" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-1.1049731, -0.08775701, -0.0045630275, -2.5568892e-07, -0.057554796, 1.1069666, -0.087875545, 1.1034826, 0.057373628, 31.34699, 0.8222675, -1.2136889)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_001" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_001" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-1.1037747, -0.08775719, 0.002019028, 1.1394228e-07, 0.025466528, 1.1069667, -0.08778042, 1.1034827, -0.025386367, 31.259233, 0.80622435, -0.11020619)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_002" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_002" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-1.1087694, -0.08775896, 0.008601231, 2.8434795e-07, 0.10848989, 1.1069667, -0.088179454, 1.1034825, -0.1081484, 31.171474, 0.8732037, 0.99327636)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
-[node name="CSGBox3D_003" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
+[node name="CSGBox3D_003" type="CSGBox3D" parent="Statics/Node3D3/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("35_bpdcn")]
 transform = Transform3D(-1.1198756, -0.087757066, 0.015183453, 8.6943925e-07, 0.19151287, 1.106967, -0.08906087, 1.103483, -0.19091003, 31.083717, 1.0232055, 2.096759)
-material = SubResource("StandardMaterial3D_w48n0")
+visibility_range_end = 35.0
+visibility_range_end_margin = 2.0
+size = Vector3(0.01, 1, 0.1)
+material = ExtResource("37_0rvxh")
 
 [node name="Lights" type="Node3D" parent="."]
 
