@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cnleaw3xj2l51"]
+
+[ext_resource type="Texture2D" uid="uid://dkk8xux1uk3eu" path="res://textures/caution-tape.png" id="1_88tia"]
+
+[resource]
+albedo_texture = ExtResource("1_88tia")
+metallic = 0.65
+roughness = 0.4
+uv1_scale = Vector3(0.5, 1, 1)
