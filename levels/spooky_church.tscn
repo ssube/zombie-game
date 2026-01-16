@@ -1,4 +1,4 @@
-[gd_scene load_steps=301 format=4 uid="uid://cpgmxyybvd4x8"]
+[gd_scene load_steps=306 format=4 uid="uid://cpgmxyybvd4x8"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_43fyf"]
 [ext_resource type="Texture2D" uid="uid://c51guvpg20wcf" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Blast4.png" id="1_qbcix"]
@@ -43,11 +43,14 @@
 [ext_resource type="AudioStream" uid="uid://bqjftdyf2t4pl" path="res://sounds/6000 Retro Sound Effects/GENERAL SOUNDS/IMPACTS and CONTACTS/Short Contact Sounds/sfx_short_contact_sound_17.ogg" id="24_fanoy"]
 [ext_resource type="PackedScene" uid="uid://c4yar0r4ei7rp" path="res://entities/props/sign_winding_road_entity.tscn" id="28_nu2qx"]
 [ext_resource type="PackedScene" uid="uid://bbt0pagry5h5w" path="res://entities/items/medkit.tscn" id="28_y5cew"]
+[ext_resource type="PackedScene" uid="uid://c1rgvous8xf6h" path="res://entities/statics/phone_pole_1.tscn" id="29_7lm8g"]
 [ext_resource type="PackedScene" uid="uid://dc6fb6duw8ut8" path="res://entities/statics/foliage/grass_cluster_dark_1.tscn" id="41_0qwai"]
 [ext_resource type="PackedScene" uid="uid://b3s1t4avu7yr3" path="res://entities/statics/foliage/tree_log_1.tscn" id="41_e1qn8"]
 [ext_resource type="PackedScene" uid="uid://0n3afbhv6xps" path="res://entities/statics/foliage/tree_stump_1.tscn" id="42_e1qn8"]
 [ext_resource type="PackedScene" uid="uid://cjhb1cm6oemur" path="res://entities/statics/foliage/bush_3.tscn" id="43_pyjsb"]
 [ext_resource type="PackedScene" uid="uid://be6lkvok7wy4d" path="res://entities/statics/foliage/tree_dead_8.tscn" id="44_sd0f4"]
+[ext_resource type="Script" uid="uid://cv3m86tnjsecl" path="res://scripts/nodes/ZN_ChainPath3D.gd" id="50_rt75x"]
+[ext_resource type="PackedScene" uid="uid://c6kok1yhygqei" path="res://entities/props/chains/phone_line.tscn" id="51_scop4"]
 
 [sub_resource type="Resource" id="Resource_g4oj3"]
 script = ExtResource("2_2vnsd")
@@ -947,6 +950,16 @@ geometry_source_group_name = &"level"
 region_merge_size = 5.0
 filter_ledge_spans = true
 
+[sub_resource type="Curve3D" id="Curve3D_ooxa4"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 9.189215, 5.6577787, -8.069048, 0, 0, 0, 0, 0, 0, 12.782217, 6.4350705, -14.293031),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_der85"]
+albedo_color = Color(0.13, 0.13, 0.13, 1)
+
 [node name="SpookyChurch" type="Node3D" node_paths=PackedStringArray("screenshot_cameras")]
 script = ExtResource("1_43fyf")
 environment_node = NodePath("Sky")
@@ -1078,6 +1091,9 @@ spot_angle = 15.0
 
 [node name="Medkit" parent="Entities" instance=ExtResource("28_y5cew")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.735582, 0.017794058, -7.048258)
+
+[node name="PhonePole" parent="Entities" instance=ExtResource("29_7lm8g")]
+transform = Transform3D(-0.20740864, -0.03549953, -0.7718299, 0.0027955454, 0.7991155, -0.037505727, 0.7726409, -0.012420871, -0.20705524, 11.613006, -1.8449872, -14.857692)
 
 [node name="Lights" type="Node" parent="."]
 
@@ -2078,3 +2094,125 @@ transform = Transform3D(1.1714327, 0, 0.2602796, 0, 1.2, 0, -0.2602796, 0, 1.171
 
 [node name="DeadTree3" parent="Statics" instance=ExtResource("44_sd0f4")]
 transform = Transform3D(0.8785745, 0, 0.19520967, 0, 0.9, 0, -0.19520967, 0, 0.8785745, 12.363729, -1.5626698, 2.8049357)
+
+[node name="Path3D" type="Path3D" parent="Statics"]
+curve = SubResource("Curve3D_ooxa4")
+
+[node name="ZN_ChainPath3D" type="Node3D" parent="Statics" node_paths=PackedStringArray("path")]
+script = ExtResource("50_rt75x")
+path = NodePath("../Path3D")
+metadata/_custom_type_script = "uid://cv3m86tnjsecl"
+
+[node name="Pattern" type="Node3D" parent="Statics/ZN_ChainPath3D"]
+visible = false
+
+[node name="CSGCylinder3D" parent="Statics/ZN_ChainPath3D/Pattern" instance=ExtResource("51_scop4")]
+
+[node name="Baked" type="Node3D" parent="Statics/ZN_ChainPath3D"]
+
+[node name="Span_000" type="Node3D" parent="Statics/ZN_ChainPath3D/Baked"]
+
+[node name="CSGCylinder3D_000" type="CSGCylinder3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("51_scop4")]
+transform = Transform3D(0.933667, -0.5132857, -0.16446358, 8.032277e-08, 0.32895598, -1.0266608, 0.5389902, 0.88914025, 0.28489256, 9.445858, 5.4933004, -8.513618)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="RopeStart" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_000"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_000"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CSGCylinder3D_001" type="CSGCylinder3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("51_scop4")]
+transform = Transform3D(0.9030479, -0.5132866, -0.091136426, 5.360518e-07, 0.18228957, -1.026662, 0.5213146, 0.8891411, 0.15787224, 9.959144, 5.2376776, -9.402759)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="RopeStart" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_001"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_001"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CSGCylinder3D_002" type="CSGCylinder3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("51_scop4")]
+transform = Transform3D(0.8896753, -0.51328564, -0.017809637, 8.610042e-09, 0.0356224, -1.0266608, 0.51359457, 0.88914025, 0.030850803, 10.472429, 5.1287208, -10.291899)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="RopeStart" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_002"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_002"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CSGCylinder3D_003" type="CSGCylinder3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("51_scop4")]
+transform = Transform3D(0.89432573, -0.51328653, 0.05551525, -7.5804786e-07, -0.11104136, -1.0266613, 0.51627994, 0.88914025, -0.09616777, 10.985716, 5.1664295, -11.18104)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="RopeStart" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_003"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_003"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CSGCylinder3D_004" type="CSGCylinder3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("51_scop4")]
+transform = Transform3D(0.91672397, -0.5132857, 0.12884317, 7.7621957e-07, -0.2577074, -1.0266608, 0.52920955, 0.8891401, -0.22318722, 11.499002, 5.350804, -12.070179)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="RopeStart" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_004"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_004"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CSGCylinder3D_005" type="CSGCylinder3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("51_scop4")]
+transform = Transform3D(0.9556243, -0.51328576, 0.20216826, -8.3234016e-07, -0.4043736, -1.0266616, 0.551665, 0.8891411, -0.3502085, 12.012287, 5.6818447, -12.95932)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="RopeStart" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_005"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_005"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CSGCylinder3D_006" type="CSGCylinder3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("51_scop4")]
+transform = Transform3D(1.0091163, -0.51328653, 0.27549714, 1.1342288e-06, -0.55103934, -1.0266612, 0.5825476, 0.88913995, -0.47722706, 12.525574, 6.1595507, -13.848461)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="RopeStart" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_006"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="Statics/ZN_ChainPath3D/Baked/Span_000/CSGCylinder3D_006"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
