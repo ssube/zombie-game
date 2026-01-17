@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://b66j8kby8r4us"]
+[gd_scene load_steps=78 format=4 uid="uid://b66j8kby8r4us"]
 
 [ext_resource type="Script" uid="uid://btaxq2wx10f5v" path="res://scripts/nodes/ZN_Level.gd" id="1_0ettg"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_nwbki"]
@@ -6,8 +6,12 @@
 [ext_resource type="Material" path="res://textures/Color Maps/asphalt_old_pt_1.tres" id="4_6flho"]
 [ext_resource type="Material" path="res://textures/Color Maps/grass_1.tres" id="5_ofye2"]
 [ext_resource type="Material" path="res://textures/Color Maps/grass_8.tres" id="6_7ty7c"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="6_obb40"]
+[ext_resource type="Script" uid="uid://d8maekxorj4x" path="res://scripts/components/props/ZC_PathFollow.gd" id="7_eigma"]
 [ext_resource type="PackedScene" uid="uid://c1rgvous8xf6h" path="res://entities/statics/phone_pole_1.tscn" id="7_pppj1"]
 [ext_resource type="PackedScene" path="res://entities/statics/car_5_red.tscn" id="8_6flho"]
+[ext_resource type="PackedScene" uid="uid://cc31c1eoi7c35" path="res://entities/props/bird_duck_dark_scripted.tscn" id="8_bixl6"]
+[ext_resource type="PackedScene" uid="uid://d4hn3600t205c" path="res://effects/rain_effect.tscn" id="9_e52gq"]
 [ext_resource type="Script" uid="uid://bwt5xm6trqgoh" path="res://scripts/nodes/ZN_LightCurve.gd" id="9_ofye2"]
 [ext_resource type="PackedScene" uid="uid://dsjfc00ufve4t" path="res://entities/statics/foliage/tree_pine_1_1.tscn" id="10_b8wrl"]
 [ext_resource type="Script" uid="uid://cv3m86tnjsecl" path="res://scripts/nodes/ZN_ChainPath3D.gd" id="10_xxm8u"]
@@ -21,7 +25,51 @@
 [ext_resource type="PackedScene" uid="uid://cjhb1cm6oemur" path="res://entities/statics/foliage/bush_3.tscn" id="19_vi54o"]
 [ext_resource type="PackedScene" uid="uid://dldnu5jwuvjpo" path="res://entities/props/traffic_cone_double_stripe.tscn" id="20_447q3"]
 [ext_resource type="PackedScene" uid="uid://bypbk1livtqai" path="res://entities/props/puddle_water.tscn" id="21_4d7sb"]
-[ext_resource type="PackedScene" uid="uid://d4se7f101eb7" path="res://skies/sky_night.tscn" id="22_rev5j"]
+[ext_resource type="PackedScene" uid="uid://wpqd3o6kxfqj" path="res://effects/props/electric_sparks.tscn" id="23_lqvjn"]
+[ext_resource type="PackedScene" uid="uid://daugn2cls50mg" path="res://entities/props/chains/tire_tracks.tscn" id="25_447q3"]
+[ext_resource type="PackedScene" uid="uid://cs083ac7ripq8" path="res://entities/props/flare_prop.tscn" id="25_qwxix"]
+[ext_resource type="PackedScene" uid="uid://grif60udnme2" path="res://skies/sky_night_fog.tscn" id="25_vi54o"]
+[ext_resource type="PackedScene" uid="uid://di1uha2y4jgoq" path="res://entities/statics/street_lamp.tscn" id="29_eigma"]
+
+[sub_resource type="Curve3D" id="Curve3D_eigma"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -10, 15, 5, 0, 0, 0, 0, 0, 0, -10, 15, -5, 0, 0, 0, 0, 0, 0, 0, 15, -20, 0, 0, 0, 0, 0, 0, 20, 15, -20, 0, 0, 0, 0, 0, 0, 35, 15, -10, 0, 0, 0, 0, 0, 0, 35, 15, 10, 0, 0, 0, 0, 0, 0, 20, 15, 20, 0, 0, 0, 0, 0, 0, 0, 15, 20),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
+
+[sub_resource type="Resource" id="Resource_bixl6"]
+script = ExtResource("7_eigma")
+path = NodePath("../Path3D")
+active = true
+loop = true
+duration = 60.0
+look_ahead = true
+look_ahead_distance = 3.0
+metadata/_custom_type_script = "uid://d8maekxorj4x"
+
+[sub_resource type="Resource" id="Resource_obb40"]
+script = ExtResource("7_eigma")
+path = NodePath("../Path3D")
+active = true
+loop = true
+duration = 59.0
+offset = 0.25
+look_ahead = true
+look_ahead_distance = 3.0
+metadata/_custom_type_script = "uid://d8maekxorj4x"
+
+[sub_resource type="Resource" id="Resource_eigma"]
+script = ExtResource("7_eigma")
+path = NodePath("../Path3D")
+active = true
+loop = true
+duration = 55.0
+offset = 0.6
+look_ahead = true
+look_ahead_distance = 2.0
+metadata/_custom_type_script = "uid://d8maekxorj4x"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_rev5j"]
 _surfaces = [{
@@ -167,17 +215,50 @@ point_count = 6
 offsets = PackedFloat32Array(0.3044693, 0.43575418, 0.83519554, 0.96648043)
 colors = PackedColorArray(0.88, 0.56672007, 0.096800014, 1, 0.92156863, 0.75686276, 0.101960786, 1, 0.92, 0.75624007, 0.101200014, 1, 0.8784314, 0.5686275, 0.09803922, 1)
 
+[sub_resource type="Curve" id="Curve_e52gq"]
+_data = [Vector2(0.033854164, 1), 0.0, 0.0, 0, 0, Vector2(0.1328125, 0.93440974), 0.0, 0.0, 0, 0, Vector2(0.24479166, 0.9212917), -0.10074739, -0.10074739, 0, 0, Vector2(0.26822916, 0.3506559), 0.0, 0.0, 0, 0, Vector2(0.28385416, 0.9212917), 0.0, 0.0, 0, 0, Vector2(0.46093753, 1), 0.0, 0.0, 0, 0, Vector2(0.5651042, 1), 0.0, 0.0, 0, 0, Vector2(0.67968756, 0.73763883), 0.0, 0.0, 0, 0, Vector2(0.7760417, 0.3244198), 0.0, 0.0, 0, 0, Vector2(0.8541667, 0.82946527), 0.0, 0.0, 0, 0, Vector2(0.95052093, 1), 0.0, 0.0, 0, 0]
+point_count = 11
+
+[sub_resource type="Gradient" id="Gradient_e52gq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_der85"]
 albedo_color = Color(0.13, 0.13, 0.13, 1)
 
+[sub_resource type="Curve3D" id="Curve3D_lqvjn"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 63.770847, 9.382632, -3.7586842, 0, 0, 0, 0, 0, 0, 39.743584, 9.394626, 2.0653157, 0, 0, 0, 0, 0, 0, 38.8371, 9.382576, 2.015177, 0, 0, 0, 0, 0, 0, 19.191198, 9.509436, 4.4038925, 0, 0, 0, 0, 0, 0, 16.892715, 0.39838886, 1.3987857),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
 [sub_resource type="Curve3D" id="Curve3D_obb40"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 15.5581, 0.12595224, 2.4305277, 0, 0, 0, 0, 0, 0, 19.28415, 9.54945, 4.4173293, 0, 0, 0, 0, 0, 0, 38.994217, 9.393707, 2.0418477, 0, 0, 0, 0, 0, 0, 63.84583, 9.3552475, -3.7891445),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 11.851601, 0.6944537, 5.05532, 0, 0, 0, 0, 0, 0, -1.9133517, 9.394626, 3.4946458, 0, 0, 0, 0, 0, 0, -2.7880425, 9.382576, 3.5535102, 0, 0, 0, 0, 0, 0, -32.779392, 8.924081, 9.5060425, 0, 0, 0, 0, 0, 0, -33.66636, 8.816544, 9.609761),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="Curve3D" id="Curve3D_4d7sb"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 38.88735, 0.25665855, -0.055252418, 0, 0, 0, 0, 0, 0, 36.328114, 0.3035295, 0.78199816, 0, 0, 0, 0, 0, 0, 33.712364, 0.33532745, 1.0907704, 0, 0, 0, 0, 0, 0, 29.643953, 0.3696139, 0.6975614),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80n2p"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.8627451)
+
+[sub_resource type="Curve3D" id="Curve3D_vi54o"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 38.82433, 0.25581753, 1.7405571, 0, 0, 0, 0, 0, 0, 37.052948, 0.30352974, 2.4074945, 0, 0, 0, 0, 0, 0, 33.770164, 0.33532745, 2.958974, 0, 0, 0, 0, 0, 0, 30.6249, 0.3884542, 2.8431711),
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
 
 [node name="MainMenu" type="Node3D"]
+process_mode = 3
 script = ExtResource("1_0ettg")
 metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 
@@ -186,10 +267,36 @@ metadata/_custom_type_script = "uid://btaxq2wx10f5v"
 [node name="Entities" type="Node3D" parent="."]
 
 [node name="TrafficCone" parent="Entities" instance=ExtResource("20_447q3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.528305, 0.76599896, 1.074645)
+transform = Transform3D(0.89511335, 0, 0.4458385, 0, 1, 0, -0.4458385, 0, 0.89511335, 27.471603, 0.76055443, 1.3328698)
+
+[node name="TrafficCone2" parent="Entities" instance=ExtResource("20_447q3")]
+transform = Transform3D(0.8629461, 0, -0.5052959, 0, 1, 0, 0.5052959, 0, 0.8629461, 29.130304, 0.73373884, 2.1762397)
 
 [node name="PuddleWater" parent="Entities" instance=ExtResource("21_4d7sb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.789734, 0.3811169, 1.9955473)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.789734, 0.3811169, 2.112945)
+
+[node name="PuddleWater2" parent="Entities" instance=ExtResource("21_4d7sb")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 29.092386, 0.3334085, 2.7423239)
+
+[node name="PuddleWater3" parent="Entities" instance=ExtResource("21_4d7sb")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 39.805943, 0.2298666, 2.2705672)
+
+[node name="Flare" parent="Entities" instance=ExtResource("25_qwxix")]
+transform = Transform3D(0.8865187, -0.075378515, -0.45651138, 3.588427e-09, 0.9866405, -0.16291268, 0.46269268, 0.14442515, 0.8746753, 30.74596, 0.52377677, 0.9867594)
+
+[node name="Birds" type="Node3D" parent="Entities"]
+
+[node name="Path3D" type="Path3D" parent="Entities/Birds"]
+curve = SubResource("Curve3D_eigma")
+
+[node name="DuckDark" parent="Entities/Birds" instance=ExtResource("8_bixl6")]
+extra_components = Array[ExtResource("6_obb40")]([SubResource("Resource_bixl6")])
+
+[node name="DuckDark2" parent="Entities/Birds" instance=ExtResource("8_bixl6")]
+extra_components = Array[ExtResource("6_obb40")]([SubResource("Resource_obb40")])
+
+[node name="DuckDark3" parent="Entities/Birds" instance=ExtResource("8_bixl6")]
+extra_components = Array[ExtResource("6_obb40")]([SubResource("Resource_eigma")])
 
 [node name="Lights" type="Node3D" parent="."]
 
@@ -305,8 +412,11 @@ shape = SubResource("ConvexPolygonShape3D_lan8a")
 
 [node name="Objectives" type="Node3D" parent="."]
 
+[node name="RainEffect" parent="." instance=ExtResource("9_e52gq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.094807, 7.2518244, 9.536349)
+
 [node name="Screenshot" type="Camera3D" parent="."]
-transform = Transform3D(0.3211915, -0.24510536, 0.91474557, -1.5426815e-08, 0.9659258, 0.25881907, -0.9470143, -0.0831305, 0.31024715, 47.448696, 7.7859445, 10.512572)
+transform = Transform3D(0.2656335, -0.2535917, 0.9301237, -0.06856639, 0.9573719, 0.2806025, -0.9616327, -0.13831265, 0.23692216, 49.174442, 7.7859445, 9.640217)
 current = true
 
 [node name="Statics" type="Node3D" parent="."]
@@ -315,24 +425,42 @@ current = true
 transform = Transform3D(0.9950191, 0, 0.099684455, 0, 1, 0, -0.099684455, 0, 0.9950191, 64.306274, -0.8862257, -1.7330589)
 
 [node name="PhonePole2" parent="Statics" instance=ExtResource("7_pppj1")]
-transform = Transform3D(0.99874145, 0, -0.050157152, 0, 1, 0, 0.050157152, 0, 0.99874145, 39.19546, -0.8862257, 4.0998945)
+transform = Transform3D(0.99874145, 0, -0.050157152, 0, 1, 0, 0.050157152, 0, 0.99874145, 39.185616, -0.8862252, 4.104965)
+
+[node name="PhonePole4" parent="Statics" instance=ExtResource("7_pppj1")]
+transform = Transform3D(0.99876493, 0, 0.049686525, 0, 1, 0, -0.049686525, 0, 0.99876493, -2.2543182, -0.8862252, 5.611807)
+
+[node name="PhonePole5" parent="Statics" instance=ExtResource("7_pppj1")]
+transform = Transform3D(0.9930624, 0, 0.11758942, 0, 1, 0, -0.11758942, 0, 0.9930624, -32.973923, -1.3860345, 11.610193)
 
 [node name="PhonePole3" parent="Statics" instance=ExtResource("7_pppj1")]
 transform = Transform3D(0.9733522, -0.09222257, 0.209954, 0.1366249, 0.9685486, -0.20796002, -0.18417203, 0.23110329, 0.95533884, 20.302101, -0.8862257, 4.0998945)
 
 [node name="Car5Red" parent="Statics" instance=ExtResource("8_6flho")]
-transform = Transform3D(0.29770884, -0.0044065295, -0.9546465, 0.014799851, 0.99989045, 0, 0.9545419, -0.014128627, 0.29774144, 23.441845, 0.37756985, 3.540134)
+transform = Transform3D(0.2604318, -0.0030055216, -0.96548766, 0.014774107, 0.99989045, 0.0008725686, 0.96537924, -0.014491461, 0.26044756, 23.389523, 0.37756985, 3.1083817)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Statics/Car5Red" groups=["shadow_high"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.936863, 1.0051291, -3.6361854)
-light_color = Color(0.9137353, 0.72796524, 0.100723654, 1)
-light_energy = 0.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.96991277, 1.0051291, -3.6041892)
+light_color = Color(0.8969577, 0.6442877, 0.098905325, 1)
+light_energy = 0.0018663941
 shadow_enabled = true
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Statics/Car5Red" groups=["shadow_high"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8235401, 1.0051291, -3.673459)
-light_color = Color(0.9137353, 0.72796524, 0.100723654, 1)
-light_energy = 0.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.993639, 1.0051293, -3.6583061)
+light_color = Color(0.8969577, 0.6442877, 0.098905325, 1)
+light_energy = 0.0018663941
+shadow_enabled = true
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Statics/Car5Red" groups=["shadow_high"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2293171, 1.0530761, 3.5374088)
+light_color = Color(0.8969577, 0.6442877, 0.098905325, 1)
+light_energy = 0.0018663941
+shadow_enabled = true
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Statics/Car5Red" groups=["shadow_high"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2116932, 1.0949806, 3.511563)
+light_color = Color(0.8969577, 0.6442877, 0.098905325, 1)
+light_energy = 0.0018663941
 shadow_enabled = true
 
 [node name="ZN_LightCurve" type="Node3D" parent="Statics/Car5Red" node_paths=PackedStringArray("lights")]
@@ -340,12 +468,23 @@ script = ExtResource("9_ofye2")
 duration = 5.0
 energy_curve = SubResource("Curve_7ty7c")
 color_curve = SubResource("Gradient_lppu5")
-lights = [NodePath("../OmniLight3D"), NodePath("../OmniLight3D2")]
+lights = [NodePath("../OmniLight3D"), NodePath("../OmniLight3D2"), NodePath("../OmniLight3D3"), NodePath("../OmniLight3D4")]
 metadata/_custom_type_script = "uid://bwt5xm6trqgoh"
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Statics/Car5Red" groups=["shadow_low"]]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.5932171e-07, 2.196086, -2.4829195)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.7994331, 1.0596249, 3.5544105)
 shadow_enabled = true
+spot_range = 15.0
+spot_attenuation = 0.0
+spot_angle = 25.0
+
+[node name="ZN_LightCurve2" type="Node3D" parent="Statics/Car5Red" node_paths=PackedStringArray("lights")]
+script = ExtResource("9_ofye2")
+duration = 30.0
+energy_curve = SubResource("Curve_e52gq")
+color_curve = SubResource("Gradient_e52gq")
+lights = [NodePath("../SpotLight3D")]
+metadata/_custom_type_script = "uid://bwt5xm6trqgoh"
 
 [node name="Node3D" type="Node3D" parent="Statics"]
 
@@ -353,19 +492,21 @@ shadow_enabled = true
 script = ExtResource("10_xxm8u")
 path = NodePath("../Path3D")
 tension = 0.8
+min_segments = 1
 metadata/_custom_type_script = "uid://cv3m86tnjsecl"
 
 [node name="Pattern" type="Node3D" parent="Statics/Node3D/ZN_ChainPath3D"]
 visible = false
 
 [node name="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Pattern" instance=ExtResource("11_rev5j")]
+material = SubResource("StandardMaterial3D_der85")
 
 [node name="Baked" type="Node3D" parent="Statics/Node3D/ZN_ChainPath3D"]
 
 [node name="Span_000" type="Node3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked"]
 
 [node name="CSGCylinder3D_000" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
-transform = Transform3D(-0.45346412, -0.37260526, 0.76445585, -7.5738036e-08, -0.8663421, -0.42226592, 0.8504278, -0.1986802, 0.40762222, 15.744402, 0.5591233, 2.5298676)
+transform = Transform3D(-0.24706171, 1.0011368, 0.1913989, -3.907024e-09, 0.19694133, -1.0301272, -1.0192686, -0.24266674, -0.046393406, 63.27028, 9.284162, -3.6373508)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -374,7 +515,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_001" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
-transform = Transform3D(-0.4606172, -0.37260538, 0.7793622, -2.028576e-06, -0.88323265, -0.42226598, 0.86385196, -0.19868016, 0.4155652, 16.117008, 1.4339107, 2.728548)
+transform = Transform3D(-0.24633427, 1.0011369, 0.17471308, 8.570145e-08, 0.17977233, -1.0301272, -1.0162675, -0.24266672, -0.042348996, 62.269142, 9.095804, -3.394684)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -383,7 +524,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_002" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
-transform = Transform3D(-0.4677997, -0.3726043, 0.79426634, -2.4965818e-06, -0.9001232, -0.42226508, 0.87732154, -0.1986802, 0.42351237, 16.489613, 2.3255887, 2.927228)
+transform = Transform3D(-0.24567094, 1.001133, 0.15802734, -3.2634182e-07, 0.16260335, -1.0301235, -1.0135283, -0.24266645, -0.03830419, 61.268005, 8.924617, -3.1520176)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -392,7 +533,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_003" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
-transform = Transform3D(-0.4750142, -0.3726044, 0.8091661, 1.6688972e-06, -0.9170138, -0.4222651, 0.89083314, -0.19868013, 0.4314681, 16.862217, 3.234157, 3.1259084)
+transform = Transform3D(-0.24507317, 1.0011368, 0.1413425, -7.751164e-09, 0.14543542, -1.0301272, -1.011065, -0.24266663, -0.034260157, 60.266872, 8.770597, -2.9093509)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -401,7 +542,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_004" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
-transform = Transform3D(-0.48223624, -0.3726044, 0.82407457, -2.3676166e-06, -0.9339041, -0.42226508, 0.9043965, -0.19868007, 0.43940645, 17.234821, 4.1596165, 3.3245883)
+transform = Transform3D(-0.24454035, 1.0011368, 0.12465514, 2.9003548e-08, 0.12826484, -1.0301272, -1.0088676, -0.24266648, -0.030215306, 59.265736, 8.633747, -2.6666842)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -410,7 +551,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_005" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
-transform = Transform3D(-0.48949713, -0.37260628, 0.83897483, 2.4104397e-06, -0.95079565, -0.4222668, 0.9179947, -0.19868024, 0.44736293, 17.607426, 5.101966, 3.5232687)
+transform = Transform3D(-0.24407378, 1.0011368, 0.10797028, -1.929879e-09, 0.11109682, -1.0301272, -1.0069422, -0.2426666, -0.026171029, 58.2646, 8.514066, -2.4240177)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -419,7 +560,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_006" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
-transform = Transform3D(-0.4967702, -0.37260446, 0.85387796, 1.7611151e-06, -0.9676851, -0.4222651, 0.93163395, -0.19868006, 0.45530966, 17.980032, 6.061207, 3.7219486)
+transform = Transform3D(-0.24367331, 1.0011369, 0.091284834, -1.2523664e-07, 0.09392817, -1.0301272, -1.0052899, -0.24266663, -0.0221265, 57.263462, 8.411552, -2.181351)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -428,7 +569,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_007" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
-transform = Transform3D(-0.50406474, -0.37260434, 0.868783, 1.5571151e-06, -0.98457664, -0.4222651, 0.94531363, -0.19868025, 0.46325737, 18.352636, 7.037338, 3.920629)
+transform = Transform3D(-0.24333954, 1.0011369, 0.07460002, -1.92408e-09, 0.07676025, -1.0301273, -1.0039124, -0.24266675, -0.018082386, 56.262325, 8.326208, -1.9386842)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -437,7 +578,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_008" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
-transform = Transform3D(-0.51137066, -0.3726064, 0.8836897, -3.899852e-07, -1.0014658, -0.42226672, 0.95903236, -0.1986798, 0.47119668, 18.72524, 8.030359, 4.119309)
+transform = Transform3D(-0.24307242, 1.0011331, 0.057914235, -5.1892975e-08, 0.059591282, -1.0301235, -1.0028068, -0.24266672, -0.014037899, 55.261192, 8.258033, -1.6960175)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -446,7 +587,133 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_009" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
-transform = Transform3D(-0.51870847, -0.3726043, 0.89859277, 3.9656334e-07, -1.0183582, -0.4222652, 0.972781, -0.19868049, 0.4791498, 19.097847, 9.040271, 4.3179893)
+transform = Transform3D(-0.24287216, 1.0011369, 0.04122643, 2.976524e-08, 0.04242025, -1.0301272, -1.0019854, -0.2426665, -0.009992943, 54.260056, 8.2070265, -1.4533509)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_010" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.2427396, 1.0011368, 0.02454252, 4.798147e-10, 0.025253208, -1.0301272, -1.0014375, -0.2426667, -0.00594889, 53.25892, 8.173189, -1.2106843)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_011" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.2426742, 1.001133, 0.007852022, -3.3558885e-09, 0.0080793975, -1.0301235, -1.0011638, -0.24266675, -0.0019032648, 52.257782, 8.156519, -0.9680176)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_012" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.2426761, 1.0011368, -0.008826449, -7.939772e-10, -0.009082041, -1.0301272, -1.0011756, -0.24266666, 0.0021394538, 51.25665, 8.157019, -0.72535086)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_013" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.2427454, 1.0011368, -0.025514832, -3.964195e-09, -0.026253678, -1.0301272, -1.0014619, -0.24266659, 0.006184571, 50.255512, 8.174688, -0.48268425)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_014" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.24288213, 1.0011368, -0.042198505, -3.7959382e-09, -0.04342047, -1.0301272, -1.0020257, -0.24266665, 0.010228548, 49.254375, 8.209525, -0.24001765)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_015" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.24308614, 1.0011368, -0.058885112, -1.1026985e-07, -0.0605903, -1.0301272, -1.002867, -0.24266672, 0.0142733455, 48.25324, 8.261531, 0.0026490688)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_016" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.24335703, 1.0011367, -0.07557095, 3.0280585e-08, -0.07775929, -1.0301272, -1.0039849, -0.24266665, 0.018317696, 47.2521, 8.330706, 0.24531579)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_017" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.24369492, 1.001133, -0.09225615, 8.223123e-08, -0.09492766, -1.0301235, -1.0053748, -0.24266674, 0.02236208, 46.25097, 8.417049, 0.4879825)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_018" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.24409921, 1.0011368, -0.10894228, -9.799829e-09, -0.11209698, -1.0301272, -1.0070468, -0.24266666, 0.026406651, 45.249832, 8.520562, 0.73064923)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_019" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.24456933, 1.0011328, -0.12562703, 5.0337594e-08, -0.12926486, -1.0301234, -1.0089842, -0.24266624, 0.030450886, 44.248695, 8.641243, 0.9733157)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_020" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.2451062, 1.0011368, -0.14231327, -1.2801695e-08, -0.1464343, -1.0301273, -1.0112013, -0.24266666, 0.034495488, 43.247562, 8.779093, 1.2159822)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_021" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.24570803, 1.0011368, -0.1589986, -1.43026115e-08, -0.1636028, -1.0301273, -1.0136842, -0.24266668, 0.038539864, 42.246426, 8.934112, 1.4586489)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_022" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.24637479, 1.0011368, -0.17568417, -1.580355e-08, -0.18077154, -1.0301272, -1.0164349, -0.24266666, 0.0425843, 41.24529, 9.106298, 1.7013156)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_023" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.24710605, 1.0011368, -0.19236997, -3.6023724e-07, -0.1979406, -1.0301272, -1.0194514, -0.24266669, 0.046629157, 40.244152, 9.295655, 1.9439824)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -457,169 +724,7 @@ material = SubResource("StandardMaterial3D_der85")
 [node name="Span_001" type="Node3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked"]
 
 [node name="CSGCylinder3D_000" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12743594, -1.0373727, -0.20469211, 5.3561532e-08, 0.20617338, -1.0448796, 1.0573746, 0.12502527, 0.024669772, 19.802835, 9.446363, 4.3548164)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_001" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12695266, -1.0373707, -0.18285298, 7.904947e-09, 0.1841762, -1.0448776, 1.0533628, 0.12502527, 0.02203769, 20.840206, 9.251187, 4.2297916)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_002" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12652233, -1.0373725, -0.16101366, 3.9390834e-08, 0.16217884, -1.0448794, 1.0497938, 0.1250253, 0.019405587, 21.877579, 9.078011, 4.104766)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_003" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12614566, -1.0373727, -0.13917507, -1.590575e-07, 0.1401822, -1.0448797, 1.046667, 0.12502553, 0.016773403, 22.914951, 8.926829, 3.9797406)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_004" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12582274, -1.0373707, -0.11733485, -9.303558e-08, 0.11818394, -1.0448776, 1.0439852, 0.12502553, 0.014141286, 23.952324, 8.797646, 3.8547153)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_005" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12555392, -1.0373725, -0.09549502, 2.3453484e-08, 0.09618608, -1.0448794, 1.0417587, 0.1250253, 0.01150919, 24.989695, 8.69046, 3.7296898)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_006" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12534003, -1.0373727, -0.07365634, 1.951144e-08, 0.07418936, -1.0448796, 1.0399842, 0.12502527, 0.008877163, 26.027067, 8.605272, 3.6046646)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_007" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12518115, -1.0373726, -0.05181609, 1.3153326e-08, 0.05219106, -1.0448796, 1.0386659, 0.12502529, 0.006244946, 27.06444, 8.542082, 3.4796393)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_008" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12507771, -1.0373726, -0.029976029, -1.6792583e-08, 0.030192947, -1.0448796, 1.0378057, 0.12502553, 0.0036127337, 28.101812, 8.500889, 3.3546138)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_009" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12502936, -1.0373707, -0.008136239, -6.201801e-09, 0.008195117, -1.0448776, 1.0374026, 0.12502551, 0.0009805858, 29.139183, 8.481693, 3.2295885)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_010" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12503624, -1.0373707, 0.013700645, 8.663963e-09, -0.013799789, -1.0448776, 1.0374612, 0.12502533, -0.0016512118, 30.176556, 8.484495, 3.104563)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_011" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12509872, -1.0373726, 0.035539553, -5.4051568e-09, -0.035796735, -1.0448796, 1.0379812, 0.12502538, -0.0042832745, 31.213926, 8.5092945, 2.9795377)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_012" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12521636, -1.0373727, 0.057378568, -5.006396e-08, -0.05779379, -1.0448796, 1.0389583, 0.12502526, -0.006915376, 32.251297, 8.556091, 2.8545125)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_013" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12538934, -1.0373726, 0.079218775, 3.1072165e-08, -0.07979204, -1.0448796, 1.040393, 0.12502532, -0.009547505, 33.288673, 8.624886, 2.7294872)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_014" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12561747, -1.0373726, 0.101058856, 8.898779e-09, -0.10179017, -1.0448796, 1.0422834, 0.12502562, -0.012179748, 34.326042, 8.715677, 2.6044617)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_015" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.1258995, -1.0373726, 0.1228974, 1.0723045e-07, -0.12378673, -1.0448796, 1.0446271, 0.1250252, -0.01481161, 35.36342, 8.828465, 2.4794364)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_016" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12623636, -1.0373689, 0.14473718, -5.6770613e-08, -0.14578459, -1.0448759, 1.0474173, 0.12502529, -0.017444007, 36.400787, 8.963251, 2.3544111)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_017" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12662698, -1.0373764, 0.16657688, 1.0533925e-07, -0.16778229, -1.0448834, 1.0506654, 0.1250254, -0.020075867, 37.43816, 9.120035, 2.2293859)
-visibility_range_end = 50.0
-visibility_range_end_margin = 2.5
-radius = 0.025
-height = 1.0
-sides = 4
-material = SubResource("StandardMaterial3D_der85")
-
-[node name="CSGCylinder3D_018" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.12707074, -1.0373689, 0.18841644, 2.865597e-08, -0.18977991, -1.0448757, 1.054341, 0.12502523, -0.0227082, 38.475533, 9.298817, 2.1043603)
+transform = Transform3D(0.0501431, 0.9064827, 0.012029074, 2.0739611e-07, 0.012047448, -0.90786827, -0.9065625, 0.050138686, 0.00066513533, 39.290344, 9.388601, 2.0402465)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -630,7 +735,7 @@ material = SubResource("StandardMaterial3D_der85")
 [node name="Span_002" type="Node3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked"]
 
 [node name="CSGCylinder3D_000" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23756638, -0.99406445, -0.19235803, 3.874303e-09, 0.19758198, -1.0210606, 1.0125047, 0.23323971, 0.045133427, 39.49125, 9.294916, 1.9252279)
+transform = Transform3D(-0.12781122, 1.0339967, 0.1892873, 5.3254634e-08, 0.19068137, -1.0416117, -1.0511796, -0.12572196, -0.02301519, 38.320103, 9.287235, 2.078038)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -639,7 +744,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_001" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23688576, -0.9940644, -0.17645277, -3.8632058e-09, 0.18124478, -1.0210606, 1.0096036, 0.23323974, 0.04140154, 40.485313, 9.105503, 1.6919882)
+transform = Transform3D(-0.12736097, 1.0339928, 0.16751789, 1.179265e-08, 0.16875163, -1.0416079, -1.0474747, -0.12572172, -0.020368274, 37.28611, 9.107519, 2.2037597)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -648,7 +753,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_002" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23626219, -0.9940644, -0.16054721, -1.926516e-08, 0.16490726, -1.0210606, 1.0069456, 0.23323984, 0.03766958, 41.479378, 8.932426, 1.4587486)
+transform = Transform3D(-0.12696481, 1.0339966, 0.14575003, 4.1145867e-08, 0.14682344, -1.0416117, -1.0442184, -0.12572196, -0.017721549, 36.252113, 8.949731, 2.3294816)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -657,7 +762,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_003" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23569588, -0.99406433, -0.14464259, -3.843795e-09, 0.1485707, -1.0210606, 1.0045325, 0.23323973, 0.033937838, 42.473442, 8.775687, 1.2255088)
+transform = Transform3D(-0.12662238, 1.0339929, 0.12398052, -2.0517367e-08, 0.124893606, -1.041608, -1.0413992, -0.12572184, -0.01507461, 35.218117, 8.813871, 2.4552035)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -666,7 +771,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_004" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.2351877, -0.99406445, -0.12873884, -1.5341998e-08, 0.13223504, -1.0210606, 1.0023661, 0.23323984, 0.0302063, 43.467506, 8.635284, 0.9922691)
+transform = Transform3D(-0.12633468, 1.0339966, 0.10221316, -8.96817e-08, 0.10296593, -1.0416117, -1.0390363, -0.12572192, -0.012427838, 34.184124, 8.699942, 2.5809255)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -675,7 +780,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_005" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23473741, -0.99406445, -0.112832636, 2.8711215e-08, 0.11589688, -1.0210606, 1.0004475, 0.23323973, 0.02647422, 44.46157, 8.511217, 0.7590294)
+transform = Transform3D(-0.12610152, 1.0339929, 0.08044501, 4.8649613e-09, 0.08103746, -1.041608, -1.0371175, -0.1257216, -0.009781189, 33.15013, 8.607939, 2.7066474)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -684,7 +789,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_006" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23434584, -0.9940644, -0.09692669, 2.4841409e-08, 0.09955898, -1.0210606, 0.99877864, 0.23323971, 0.022742169, 45.455635, 8.403489, 0.52578974)
+transform = Transform3D(-0.12592423, 1.0339966, 0.058675, 5.052376e-08, 0.05910713, -1.0416117, -1.03566, -0.12572198, -0.0071342494, 32.116135, 8.537866, 2.832369)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -693,7 +798,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_007" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23401317, -0.9940643, -0.08102277, 1.9081757e-08, 0.08322315, -1.0210605, 0.99736077, 0.23323971, 0.01901059, 46.4497, 8.312098, 0.2925501)
+transform = Transform3D(-0.1258019, 1.0339947, 0.03690848, 1.9413537e-09, 0.037180305, -1.0416098, -1.0346532, -0.12572184, -0.004487648, 31.082138, 8.489721, 2.958091)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -702,7 +807,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_008" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.2337398, -0.9940643, -0.06511768, 9.8156676e-08, 0.06688613, -1.0210605, 0.9961948, 0.2332399, 0.015278832, 47.443764, 8.237043, 0.059310317)
+transform = Transform3D(-0.12573509, 1.0339948, 0.015139184, 4.2441326e-09, 0.015250681, -1.0416098, -1.0341055, -0.1257216, -0.0018407512, 30.048145, 8.463505, 3.0838127)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -711,7 +816,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_009" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23352534, -0.99406433, -0.049212843, 8.568887e-08, 0.050549354, -1.0210606, 0.99528176, 0.2332397, 0.011547014, 48.437828, 8.178326, -0.17392945)
+transform = Transform3D(-0.12572448, 1.0339948, -0.0066215447, -1.007189e-09, -0.0066703106, -1.0416099, -1.0340159, -0.1257219, 0.0008051049, 29.014149, 8.459217, 3.2095346)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -720,7 +825,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_010" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23337059, -0.9940644, -0.03330606, 0, 0.034210566, -1.0210606, 0.9946222, 0.23323971, 0.007814681, 49.431892, 8.135944, -0.4071691)
+transform = Transform3D(-0.12576929, 1.0339946, -0.028396, -4.3192547e-09, -0.02860513, -1.0416098, -1.0343845, -0.12572189, 0.003452632, 27.980156, 8.476858, 3.3352566)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -729,7 +834,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_011" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23327535, -0.9940643, -0.017401464, -3.043348e-08, 0.017874036, -1.0210606, 0.9942166, 0.23323962, 0.0040829144, 50.425957, 8.109901, -0.64040875)
+transform = Transform3D(-0.12586977, 1.0339946, -0.050164886, -7.630473e-09, -0.05053434, -1.0416098, -1.0352108, -0.12572189, 0.0060994825, 26.94616, 8.516428, 3.4609785)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -738,7 +843,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_012" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23323995, -0.9940643, -0.0014960418, -7.120171e-10, 0.0015366703, -1.0210605, 0.99406534, 0.23323968, 0.00035101915, 51.42002, 8.100194, -0.8736484)
+transform = Transform3D(-0.12602562, 1.0339947, -0.071932405, -1.0941483e-08, -0.07246217, -1.0416098, -1.0364937, -0.12572177, 0.008746157, 25.912167, 8.577927, 3.5867004)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -747,7 +852,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_013" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.2332642, -0.99406445, 0.014399874, 1.9865533e-08, -0.014790933, -1.0210606, 0.9941687, 0.23323973, -0.0033786567, 52.414085, 8.106823, -1.106888)
+transform = Transform3D(-0.12623686, 1.0339966, -0.09370159, 5.9262206e-08, -0.094391674, -1.0416117, -1.0382335, -0.1257217, 0.011392941, 24.87817, 8.661354, 3.7124224)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -756,7 +861,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_014" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23334831, -0.99406815, 0.030311177, -4.701155e-09, -0.031134345, -1.0210643, 0.9945302, 0.23323992, -0.0071119675, 53.40815, 8.12979, -1.3401278)
+transform = Transform3D(-0.12650384, 1.0339947, -0.11546941, 1.00762215e-07, -0.116319805, -1.0416099, -1.0404221, -0.12572233, 0.014039704, 23.844173, 8.766709, 3.8381443)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -765,7 +870,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_015" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23349138, -0.9940605, 0.046217542, 2.9804916e-08, -0.04747269, -1.0210567, 0.9951343, 0.23323943, -0.010844131, 54.402214, 8.169094, -1.5733675)
+transform = Transform3D(-0.12682413, 1.0339947, -0.13723847, 2.0875047e-08, -0.13824919, -1.0416098, -1.0430626, -0.12572159, 0.016686562, 22.81018, 8.893993, 3.963866)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -774,7 +879,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_016" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23369488, -0.9940644, 0.062121134, -9.6347685e-09, -0.06380819, -1.0210607, 0.9960035, 0.23323989, -0.014575653, 55.39628, 8.224735, -1.8066071)
+transform = Transform3D(-0.12719992, 1.0339947, -0.15900612, 1.005645e-07, -0.16017716, -1.0416098, -1.0461491, -0.1257221, 0.019333249, 21.776184, 9.043207, 4.0895877)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -783,7 +888,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_017" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23395734, -0.9940682, 0.0780275, -1.2101787e-08, -0.080146514, -1.0210643, 0.9971258, 0.23323992, -0.01830774, 56.390343, 8.296714, -2.039847)
+transform = Transform3D(-0.12762868, 1.0339947, -0.18077359, -2.7497082e-08, -0.18210495, -1.0416098, -1.0496781, -0.12572177, 0.02198, 20.742191, 9.214348, 4.2153096)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -792,7 +897,7 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="CSGCylinder3D_018" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.2342781, -0.9940606, 0.093931474, -1.4568441e-08, -0.09648242, -1.0210568, 0.99848866, 0.23323914, -0.022039412, 57.384407, 8.385029, -2.2730865)
+transform = Transform3D(-0.12811118, 1.0339947, -0.20254304, -3.0808387e-08, -0.20403473, -1.0416098, -1.0536454, -0.12572187, 0.02462694, 19.708195, 9.407418, 4.3410316)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -800,8 +905,10 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="CSGCylinder3D_019" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.2346595, -0.994068, 0.10983775, -9.7731075e-08, -0.11282067, -1.0210643, 1.0001178, 0.23324001, -0.025771534, 58.37847, 8.489681, -2.5063262)
+[node name="Span_003" type="Node3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked"]
+
+[node name="CSGCylinder3D_000" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.92576265, 0.25538638, 0.66043764, 6.217601e-06, 1.0870715, -0.4203713, -0.7080961, 0.33390096, 0.8634504, 19.063505, 8.9659, 4.2369423)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -809,8 +916,8 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="CSGCylinder3D_020" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23509757, -0.99406064, 0.12574159, -1.9502076e-08, -0.12915643, -1.0210568, 1.0019817, 0.23323901, -0.029503096, 59.372536, 8.61067, -2.7395658)
+[node name="CSGCylinder3D_001" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.91194904, 0.25538826, 0.64906967, -3.1308066e-06, 1.068388, -0.42037228, -0.69750595, 0.3339007, 0.8486232, 18.808117, 7.8881702, 3.9030414)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -818,8 +925,8 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="CSGCylinder3D_021" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.2355962, -0.9940681, 0.14164746, 2.1969017e-08, -0.14549422, -1.0210643, 1.0041093, 0.23324023, -0.03323501, 60.3666, 8.747995, -2.9728055)
+[node name="CSGCylinder3D_002" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.89815724, 0.25538635, 0.6377177, -2.4937212e-06, 1.049705, -0.4203711, -0.6869542, 0.33390072, 0.8337846, 18.55273, 6.8291235, 3.5691404)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -827,8 +934,8 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="CSGCylinder3D_022" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23615097, -0.9940643, 0.15755206, -6.3019236e-08, -0.1618308, -1.0210605, 1.0064722, 0.23323964, -0.036966875, 61.36067, 8.901658, -3.2060454)
+[node name="CSGCylinder3D_003" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.8843861, 0.25538638, 0.62638354, 5.441959e-06, 1.0310215, -0.4203713, -0.67644554, 0.33390093, 0.81893164, 18.297344, 5.78876, 3.2352397)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -836,8 +943,8 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="CSGCylinder3D_023" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23676378, -0.99406445, 0.17345725, 6.938113e-08, -0.17816788, -1.0210606, 1.0090845, 0.2332396, -0.0406986, 62.354733, 9.071657, -3.439285)
+[node name="CSGCylinder3D_004" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.87067306, 0.25538826, 0.61501837, -3.136107e-06, 1.0123386, -0.42037228, -0.665936, 0.33390072, 0.8041032, 18.041958, 4.7670803, 2.901339)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -845,8 +952,35 @@ height = 1.0
 sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
-[node name="CSGCylinder3D_024" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
-transform = Transform3D(0.23743375, -0.99406433, 0.18936308, 7.57433e-08, -0.19450565, -1.0210605, 1.0119399, 0.23323958, -0.04443061, 63.348797, 9.257995, -3.6725247)
+[node name="CSGCylinder3D_005" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.85697514, 0.25538638, 0.6036836, 6.028919e-06, 0.99365515, -0.4203711, -0.6554816, 0.3339007, 0.78925073, 17.78657, 3.7640834, 2.5674381)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_006" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.84332925, 0.25538638, 0.5923317, 5.394994e-06, 0.9749724, -0.4203713, -0.6450419, 0.3339009, 0.7744123, 17.531183, 2.7797694, 2.2335374)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_007" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.8297319, 0.2553883, 0.58096665, -3.1287323e-06, 0.9562884, -0.42037228, -0.63462234, 0.3339007, 0.7595823, 17.275795, 1.8141391, 1.8996366)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_008" type="CSGCylinder3D" parent="Statics/Node3D/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.8161698, 0.25538638, 0.5696152, -2.4498208e-06, 0.937606, -0.42037112, -0.6242465, 0.33390075, 0.74474394, 17.020409, 0.86719185, 1.5657359)
 visibility_range_end = 50.0
 visibility_range_end_margin = 2.5
 radius = 0.025
@@ -855,152 +989,1285 @@ sides = 4
 material = SubResource("StandardMaterial3D_der85")
 
 [node name="Path3D" type="Path3D" parent="Statics/Node3D"]
+curve = SubResource("Curve3D_lqvjn")
+
+[node name="Node3D2" type="Node3D" parent="Statics"]
+
+[node name="ZN_ChainPath3D" type="Node3D" parent="Statics/Node3D2" node_paths=PackedStringArray("path")]
+script = ExtResource("10_xxm8u")
+path = NodePath("../Path3D")
+tension = 0.8
+min_segments = 1
+metadata/_custom_type_script = "uid://cv3m86tnjsecl"
+
+[node name="Pattern" type="Node3D" parent="Statics/Node3D2/ZN_ChainPath3D"]
+visible = false
+
+[node name="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Pattern" instance=ExtResource("11_rev5j")]
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="Baked" type="Node3D" parent="Statics/Node3D2/ZN_ChainPath3D"]
+
+[node name="Span_000" type="Node3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked"]
+
+[node name="CSGCylinder3D_000" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.106587596, 0.86030966, -0.378991, -3.3040493e-07, -0.38141918, -0.86582166, -0.9400888, 0.09754235, -0.042969834, 11.421446, 0.8851633, 5.006549)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_001" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.107593514, 0.8603097, -0.40049866, 5.413516e-07, -0.4030647, -0.86582166, -0.94896364, 0.0975417, -0.045409035, 10.561136, 1.2774053, 4.9090066)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_002" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.10864548, 0.8603096, -0.4220065, -3.679059e-07, -0.42471024, -0.86582166, -0.95823914, 0.09754237, -0.047846906, 9.700827, 1.6912929, 4.8114643)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_003" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.10974125, 0.86030966, -0.44351432, -3.8665647e-07, -0.4463559, -0.8658217, -0.9679038, 0.097542375, -0.05028546, 8.840517, 2.126826, 4.7139225)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_004" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.110879734, 0.8603092, -0.46502182, 6.285672e-07, -0.46800128, -0.8658212, -0.9779453, 0.09754181, -0.052724864, 7.9802074, 2.5840046, 4.61638)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_005" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.11205982, 0.86030966, -0.48652974, -3.0741646e-07, -0.4896469, -0.86582166, -0.98835415, 0.097542256, -0.055162583, 7.1198983, 3.0628288, 4.518838)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_006" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.113280185, 0.8603096, -0.5080375, -4.4290783e-07, -0.51129246, -0.86582166, -0.999117, 0.0975424, -0.057601064, 6.2595887, 3.5632985, 4.421296)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_007" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.11453941, 0.86030966, -0.5295453, 5.8872087e-07, -0.5329382, -0.86582166, -1.0102233, 0.09754186, -0.060040507, 5.399279, 4.085414, 4.323754)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_008" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.11583604, 0.86030966, -0.5510525, -3.4818552e-07, -0.5545831, -0.86582166, -1.0216612, 0.097542174, -0.062478084, 4.5389695, 4.629174, 4.2262115)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_009" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.11716968, 0.8603092, -0.5725606, 7.7392673e-07, -0.57622904, -0.8658212, -1.0334203, 0.09754183, -0.06491783, 3.6786602, 5.1945806, 4.1286697)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_010" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.11853777, 0.8603097, -0.5940684, -3.7536532e-07, -0.5978745, -0.8658217, -1.0454903, 0.0975422, -0.06735521, 2.8183508, 5.7816324, 4.031128)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_011" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.119940184, 0.8603096, -0.61557627, -3.8895516e-07, -0.6195202, -0.86582166, -1.0578595, 0.0975422, -0.06979375, 1.9580412, 6.39033, 3.9335854)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_012" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.12137561, 0.8603096, -0.63708395, 9.681334e-08, -0.64116573, -0.8658216, -1.0705179, 0.097542085, -0.07223283, 1.0977316, 7.020673, 3.8360431)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_013" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.12284243, 0.86030954, -0.65859103, 1.0008163e-07, -0.6628107, -0.8658216, -1.083455, 0.09754208, -0.07467132, 0.23742199, 7.672661, 3.738501)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_014" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.12433975, 0.86030966, -0.6801014, -4.2972573e-07, -0.68445873, -0.86582166, -1.0966634, 0.09754222, -0.07710959, -0.6228876, 8.346296, 3.640959)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_015" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("11_rev5j")]
+transform = Transform3D(0.12586659, 0.8603096, -0.7016061, 1.0661834e-07, -0.7061013, -0.8658216, -1.1101278, 0.09754208, -0.07954838, -1.4831972, 9.041576, 3.5434167)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="Span_001" type="Node3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked"]
+
+[node name="CSGCylinder3D_000" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.058869906, 0.87469095, 0.012020391, -1.429204e-07, 0.012047571, -0.87666935, -0.8747735, -0.05886435, -0.0008087969, -2.350697, 9.388601, 3.524078)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="Span_002" type="Node3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked"]
+
+[node name="CSGCylinder3D_000" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.20267765, 0.9997118, 0.20826845, 5.041895e-08, 0.21233094, -1.019212, -1.0211755, -0.19841762, -0.0413361, -3.2878985, 9.276411, 3.652719)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_001" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.20215493, 0.9997118, 0.19493836, 1.5473475e-08, 0.19874081, -1.0192121, -1.0185405, -0.19841792, -0.038690425, -4.28761, 9.070875, 3.8511367)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_002" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.20166525, 0.9997116, 0.18160918, -9.261582e-08, 0.18515162, -1.0192119, -1.0160733, -0.19841787, -0.036044806, -5.287322, 8.878928, 4.049555)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_003" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.20120898, 0.999712, 0.16827956, -3.0802173e-08, 0.17156197, -1.0192122, -1.0137762, -0.1984176, -0.033399213, -6.2870336, 8.700571, 4.2479725)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_004" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.20078689, 0.99971163, 0.15495048, -1.7289846e-08, 0.15797293, -1.0192119, -1.0116487, -0.1984177, -0.03075377, -7.286745, 8.535803, 4.44639)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_005" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.20039873, 0.99971104, 0.14162004, 5.3686737e-08, 0.14438248, -1.0192114, -1.0096922, -0.19841771, -0.028108101, -8.286457, 8.384625, 4.644808)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_006" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.20004483, 0.999712, 0.128292, 5.7419932e-08, 0.13079445, -1.0192122, -1.0079101, -0.19841771, -0.025462793, -9.286168, 8.247037, 4.8432255)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_007" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19972531, 0.99971193, 0.114962146, 5.15954e-08, 0.1172046, -1.0192122, -1.0063002, -0.1984177, -0.022817148, -10.28588, 8.123037, 5.041643)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_008" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19944072, 0.99971193, 0.101631984, -4.9613636e-08, 0.10361441, -1.0192124, -1.0048647, -0.19841805, -0.02017138, -11.285592, 8.012628, 5.240061)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_009" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.1991902, 0.99971205, 0.088303246, -1.905817e-09, 0.09002567, -1.0192122, -1.0036043, -0.1984177, -0.017525971, -12.285304, 7.9158077, 5.438479)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_010" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19897488, 0.999712, 0.074972965, -1.9037574e-09, 0.07643538, -1.0192122, -1.0025194, -0.1984177, -0.0148802465, -13.285016, 7.8325768, 5.6368966)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_011" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19879448, 0.9997101, 0.061643586, -7.322748e-08, 0.06284599, -1.0192105, -1.0016088, -0.19841765, -0.012234647, -14.284727, 7.7629356, 5.8353143)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_012" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19864917, 0.99971205, 0.048313864, -1.9006445e-09, 0.04925627, -1.0192122, -1.0008788, -0.1984176, -0.00958908, -15.284438, 7.7068844, 6.033732)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_013" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19853953, 0.99971193, 0.034983743, -3.9414598e-08, 0.035666127, -1.0192124, -1.0003239, -0.19841808, -0.0069433665, -16.28415, 7.664422, 6.23215)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_014" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19846423, 0.999712, 0.021656003, -4.747171e-10, 0.022078421, -1.0192122, -0.99994653, -0.1984177, -0.004298171, -17.283863, 7.635549, 6.4305677)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_015" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.1984246, 0.9997121, 0.008320111, -2.3716393e-10, 0.008482401, -1.0192124, -0.99974674, -0.19841772, -0.0016513325, -18.283573, 7.620266, 6.6289854)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_016" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19842012, 0.99971, -0.0050019985, -1.985845e-09, -0.005099568, -1.0192103, -0.9997225, -0.19841763, 0.0009927747, -19.283285, 7.618572, 6.827403)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_017" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.1984511, 0.99971205, -0.018331954, 2.8220413e-09, -0.018689536, -1.0192124, -0.99988014, -0.19841774, 0.00363843, -20.282997, 7.6304684, 7.0258207)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_018" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19851716, 0.999712, -0.03166018, -4.335188e-08, -0.032277748, -1.0192124, -1.0002131, -0.19841768, 0.0062837927, -21.282707, 7.6559534, 7.2242384)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_019" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19861852, 0.99971205, -0.04499215, -6.9261414e-09, -0.045869764, -1.0192124, -1.000724, -0.19841768, 0.008929816, -22.282421, 7.6950283, 7.422656)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_020" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19875497, 0.99971014, -0.058320623, 2.3153884e-08, -0.059458215, -1.0192105, -1.0014099, -0.1984176, 0.01157517, -23.282131, 7.747693, 7.6210737)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_021" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19892713, 0.9997139, -0.07165072, -4.5862162e-08, -0.07304835, -1.0192143, -1.0022783, -0.19841819, 0.014220921, -24.281843, 7.8139467, 7.8194914)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_022" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19913378, 0.99971, -0.084980145, 7.505009e-08, -0.08663776, -1.0192105, -1.0033154, -0.19841821, 0.016866423, -25.281555, 7.8937902, 8.01791)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_023" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19937474, 0.999712, -0.09830889, -1.513378e-08, -0.1002265, -1.0192122, -1.004534, -0.19841768, 0.019511856, -26.281265, 7.9872227, 8.216328)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_024" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.19965108, 0.999712, -0.1116388, 9.8593624e-08, -0.113816395, -1.0192124, -1.0059261, -0.19841774, 0.022157397, -27.28098, 8.094245, 8.414745)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_025" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.1999619, 0.999712, -0.12496803, -1.9237717e-08, -0.12740564, -1.0192124, -1.0074924, -0.19841768, 0.024803028, -28.28069, 8.214857, 8.613163)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_026" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.20030722, 0.9997101, -0.13829881, 1.5575455e-07, -0.14099644, -1.0192105, -1.0092307, -0.19841762, 0.02744872, -29.280401, 8.349058, 8.811581)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_027" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.20068695, 0.99971205, -0.1516267, 1.3390888e-07, -0.1545843, -1.0192124, -1.0111454, -0.19841775, 0.030093957, -30.280113, 8.496849, 9.009998)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_028" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.2011006, 0.99971205, -0.16495773, 2.5393778e-08, -0.16817538, -1.0192122, -1.0132301, -0.1984176, 0.032739922, -31.279823, 8.65823, 9.208416)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="CSGCylinder3D_029" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.20154817, 0.9997121, -0.17828596, 2.4412455e-07, -0.18176353, -1.0192124, -1.0154852, -0.19841765, 0.035385016, -32.279537, 8.833199, 9.406834)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="Span_003" type="Node3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked"]
+
+[node name="CSGCylinder3D_000" type="CSGCylinder3D" parent="Statics/Node3D2/ZN_ChainPath3D/Baked/Span_003" instance=ExtResource("11_rev5j")]
+transform = Transform3D(-0.10446776, 0.8869667, 0.10680941, -2.7509611e-06, 0.10753687, -0.8930104, -0.8933746, -0.10371877, -0.012487127, -33.222878, 8.870312, 9.557901)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+radius = 0.025
+height = 1.0
+sides = 4
+material = SubResource("StandardMaterial3D_der85")
+
+[node name="Path3D" type="Path3D" parent="Statics/Node3D2"]
 curve = SubResource("Curve3D_obb40")
 
 [node name="PineTree_1_1" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.27824, -0.19513261, -11.090345)
+transform = Transform3D(-0.115180336, 0, -0.9933446, 0, 1, 0, 0.9933446, 0, -0.115180336, 28.27824, -0.19513261, -11.090345)
 
 [node name="PineTree_1_28" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.306393, -0.19513166, -11.953179)
+transform = Transform3D(0.39245132, 0, 0.9197727, 0, 1, 0, -0.9197727, 0, 0.39245132, 22.306393, -0.19513166, -11.953179)
 
 [node name="PineTree_1_29" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79714775, -0.1951307, -14.840983)
+transform = Transform3D(-0.17070717, 0, 0.98532176, 0, 1, 0, -0.98532176, 0, -0.17070717, 0.79714775, -0.1951307, -14.840983)
+
+[node name="PineTree_1_60" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.832672, 0, -0.7187887, 0, 1.1, 0, 0.7187887, 0, -0.832672, 1.3065591, -0.46196496, -19.091702)
+
+[node name="PineTree_1_61" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.6849211, 0, 0.86074555, 0, 1.1, 0, -0.86074555, 0, 0.6849211, -6.601833, -0.46196496, -17.603155)
+
+[node name="PineTree_1_62" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.28310946, 0, 1.0629435, 0, 1.1, 0, -1.0629435, 0, -0.28310946, -12.9204235, -0.46196496, -19.000402)
+
+[node name="PineTree_1_105" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.8243596, 0, 0.72830695, 0, 1.1, 0, -0.72830695, 0, 0.8243596, -7.5257053, -0.46196687, -21.34955)
+
+[node name="PineTree_1_131" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.0951918, 0, 0.102735035, 0, 1.1, 0, -0.102735035, 0, 1.0951918, -2.0419521, -0.46196687, -20.524443)
+
+[node name="PineTree_1_132" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.62031585, 0, -0.9084096, 0, 1.1, 0, 0.9084096, 0, 0.62031585, 4.1788225, -0.46196496, -21.05759)
+
+[node name="PineTree_1_133" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.21753566, 0, 1.0782754, 0, 1.1, 0, -1.0782754, 0, 0.21753566, 15.158201, 1.3269831, -21.05759)
+
+[node name="PineTree_1_134" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.9692744, 0, 0.5201028, 0, 1.1, 0, -0.5201028, 0, 0.9692744, 20.4507, 1.3269831, -21.120234)
+
+[node name="PineTree_1_135" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.510048, 0, 0.9746029, 0, 1.1, 0, -0.9746029, 0, 0.510048, 27.204748, 1.3269831, -20.15908)
+
+[node name="PineTree_1_136" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.7347416, 0, -0.8186296, 0, 1.1, 0, 0.8186296, 0, 0.7347416, 32.302452, 1.3269831, -22.18974)
+
+[node name="PineTree_1_137" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.95314795, 0, 0.5490981, 0, 1.1, 0, -0.5490981, 0, -0.95314795, 38.347576, 1.3269831, -19.283026)
+
+[node name="PineTree_1_138" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.195672, 0, -1.0824566, 0, 1.1, 0, 1.0824566, 0, -0.195672, 45.737236, 1.3269831, -13.76193)
+
+[node name="PineTree_1_139" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.0994592, 0, -0.03448822, 0, 1.1, 0, 0.03448822, 0, 1.0994592, 48.40821, 1.3269831, -19.959145)
+
+[node name="PineTree_1_106" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.78831667, 0, -0.7671745, 0, 1.1, 0, 0.7671745, 0, -0.78831667, -11.919453, -0.46196878, -16.229277)
+
+[node name="PineTree_1_107" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.024075633, 0, 1.0997365, 0, 1.1, 0, -1.0997365, 0, 0.024075633, -16.828197, -0.46196878, -21.22835)
+
+[node name="PineTree_1_108" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.70245093, 0, -0.8465001, 0, 1.1, 0, 0.8465001, 0, -0.70245093, -19.45802, -0.46196687, -17.119184)
+
+[node name="PineTree_1_109" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.92633235, 0, -0.59321845, 0, 1.1, 0, 0.59321845, 0, 0.92633235, -23.126074, -0.46196496, -21.046896)
+
+[node name="PineTree_1_120" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.0395472, 0, -0.35964048, 0, 1.1, 0, 0.35964048, 0, 1.0395472, -27.413515, -0.46196496, -21.029728)
+
+[node name="PineTree_1_166" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.0395472, 0, -0.35964048, 0, 1.1, 0, 0.35964048, 0, 1.0395472, -31.970568, -0.46196496, -18.98406)
+
+[node name="PineTree_1_167" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.0395472, 0, -0.35964048, 0, 1.1, 0, 0.35964048, 0, 1.0395472, -34.394604, -0.46196496, -16.534328)
+
+[node name="PineTree_1_172" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.0395472, 0, -0.35964048, 0, 1.1, 0, 0.35964048, 0, 1.0395472, -35.858753, -0.46196496, -20.910515)
+
+[node name="PineTree_1_168" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.0395472, 0, -0.35964048, 0, 1.1, 0, 0.35964048, 0, 1.0395472, -33.801517, -0.461964, -12.5092)
+
+[node name="PineTree_1_169" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.0395472, 0, -0.35964048, 0, 1.1, 0, 0.35964048, 0, 1.0395472, -34.650543, -0.46196115, -9.566264)
+
+[node name="PineTree_1_170" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.0395472, 0, -0.35964048, 0, 1.1, 0, 0.35964048, 0, 1.0395472, -35.289665, -0.46196115, -6.0978365)
+
+[node name="PineTree_1_171" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.0395472, 0, -0.35964048, 0, 1.1, 0, 0.35964048, 0, 1.0395472, -35.879974, -0.46196115, -2.078699)
+
+[node name="PineTree_1_110" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.31609175, 0, 1.0536062, 0, 1.1, 0, -1.0536062, 0, -0.31609175, -20.531538, -0.46196496, -12.994194)
+
+[node name="PineTree_1_111" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.6201023, 0, -0.90855545, 0, 1.1, 0, 0.90855545, 0, -0.6201023, -24.615149, -0.46196496, -15.43808)
+
+[node name="PineTree_1_112" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.0463054, 0, 0.3394773, 0, 1.1, 0, -0.3394773, 0, 1.0463054, -28.423716, -0.46196496, -17.33979)
+
+[node name="PineTree_1_92" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.83938056, 0, 0.71094304, 0, 1.1, 0, -0.71094304, 0, -0.83938056, -11.0152855, -0.46196496, 18.418737)
+
+[node name="PineTree_1_93" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-1.083617, 0, -0.18914025, 0, 1.1, 0, 0.18914025, 0, -1.083617, -17.976322, -0.46196496, 19.273745)
+
+[node name="PineTree_1_94" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.7916323, 0, 0.76375264, 0, 1.1, 0, -0.76375264, 0, 0.7916323, 3.9631276, -0.46196496, 17.57471)
+
+[node name="PineTree_1_96" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.41619328, 0, 1.0182254, 0, 1.1, 0, -1.0182254, 0, 0.41619328, 10.831224, -0.46196496, 20.401758)
+
+[node name="PineTree_1_97" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.42132795, 0, -1.0161115, 0, 1.1, 0, 1.0161115, 0, 0.42132795, 24.328129, -0.46196496, 21.201128)
+
+[node name="PineTree_1_123" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.75353444, 0, 0.8013649, 0, 1.1, 0, -0.8013649, 0, 0.75353444, 20.315672, -0.46196496, 21.211239)
+
+[node name="PineTree_1_124" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.7735709, 0, -0.78204083, 0, 1.1, 0, 0.78204083, 0, 0.7735709, 15.363472, -0.46196496, 20.7678)
+
+[node name="PineTree_1_125" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.9982201, 0, 0.46212167, 0, 1.1, 0, -0.46212167, 0, 0.9982201, 4.8035564, -0.46196496, 19.913635)
+
+[node name="PineTree_1_126" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.0760723, 0, -0.22818418, 0, 1.1, 0, 0.22818418, 0, 1.0760723, -1.6369858, -0.46196496, 18.982386)
+
+[node name="PineTree_1_127" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-1.0009291, 0, 0.45622444, 0, 1.1, 0, -0.45622444, 0, -1.0009291, 1.3261216, -0.46196496, 21.038069)
+
+[node name="PineTree_1_128" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.8967569, 0, -0.6370455, 0, 1.1, 0, 0.6370455, 0, -0.8967569, -7.3188977, -0.46196496, 19.192078)
+
+[node name="PineTree_1_129" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.19428083, 0, -1.0827072, 0, 1.1, 0, 1.0827072, 0, 0.19428083, -14.835348, -0.46196496, 20.540674)
+
+[node name="PineTree_1_130" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-1.0494009, 0, 0.32978383, 0, 1.1, 0, -0.32978383, 0, -1.0494009, -22.380732, -0.46196496, 20.349798)
+
+[node name="PineTree_1_98" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.7527096, 0, -0.8021397, 0, 1.1, 0, 0.8021397, 0, -0.7527096, 34.699997, -0.46196496, 18.460745)
+
+[node name="PineTree_1_121" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.023618, 0, -0.40274826, 0, 1.1, 0, 0.40274826, 0, 1.023618, 38.7497, -0.46196496, 17.924599)
+
+[node name="PineTree_1_122" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-1.0049531, 0, -0.44729057, 0, 1.1, 0, 0.44729057, 0, -1.0049531, 35.00374, -0.46196496, 21.454737)
+
+[node name="PineTree_1_99" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.39118573, 0, 1.0280921, 0, 1.1, 0, -1.0280921, 0, 0.39118573, 28.099588, -0.46196496, 21.651295)
+
+[node name="PineTree_1_95" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-1.041023, 0, -0.35534602, 0, 1.1, 0, 0.35534602, 0, -1.041023, 18.011856, -0.46196496, 19.78241)
+
+[node name="PineTree_1_63" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.20723057, 0, 1.0803033, 0, 1.1, 0, -1.0803033, 0, 0.20723057, 7.4014072, -0.46196496, -20.023123)
+
+[node name="PineTree_1_64" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(1.097355, 0, -0.07623545, 0, 1.1, 0, 0.07623545, 0, 1.097355, 11.971155, -0.46196496, -18.720133)
+
+[node name="PineTree_1_65" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.65896034, 0, 0.8807787, 0, 1.1, 0, -0.8807787, 0, 0.65896034, 18.102398, -0.46196496, -20.357542)
+
+[node name="PineTree_1_66" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-1.0646985, 0, 0.27643618, 0, 1.1, 0, -0.27643618, 0, -1.0646985, 24.059338, -0.46196496, -20.474623)
+
+[node name="PineTree_1_67" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.92955583, 0, -0.5881545, 0, 1.1, 0, 0.5881545, 0, -0.92955583, 29.781374, -0.46196496, -20.56114)
+
+[node name="PineTree_1_68" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.1920806, 0, 1.0830996, 0, 1.1, 0, -1.0830996, 0, -0.1920806, 35.36654, -0.46196496, -20.851168)
+
+[node name="PineTree_1_69" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.32453024, 0, 1.0510375, 0, 1.1, 0, -1.0510375, 0, 0.32453024, 40.682716, -0.46196496, -20.921515)
+
+[node name="PineTree_1_70" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.22576542, 0, 1.0765824, 0, 1.1, 0, -1.0765824, 0, -0.22576542, 44.908474, -0.46196496, -20.212788)
 
 [node name="PineTree_1_30" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0875363, -0.1951307, -12.336812)
+transform = Transform3D(-0.8958202, 0, 0.44441673, 0, 1, 0, -0.44441673, 0, -0.8958202, 3.0875363, -0.1951307, -12.336812)
 
 [node name="PineTree_1_31" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4927673, -0.1951307, -12.126584)
+transform = Transform3D(-0.8736817, 0, 0.4864979, 0, 1, 0, -0.4864979, 0, -0.8736817, -4.4927673, -0.1951307, -12.126584)
+
+[node name="PineTree_1_102" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.071443215, 0, -0.9974447, 0, 1, 0, 0.9974447, 0, 0.071443215, 0.59303, -0.1951307, -8.3654)
 
 [node name="PineTree_1_32" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.7881775, -0.1951307, -14.776313)
+transform = Transform3D(-0.07738664, 0, -0.9970012, 0, 1, 0, 0.9970012, 0, -0.07738664, -8.7881775, -0.1951307, -14.776313)
 
 [node name="PineTree_1_33" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.300561, -0.1951307, -11.286056)
+transform = Transform3D(0.5813889, 0, -0.81362563, 0, 1, 0, 0.81362563, 0, 0.5813889, -11.300561, -0.1951307, -11.286056)
+
+[node name="PineTree_1_103" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.6579575, 0, 0.7530549, 0, 1, 0, -0.7530549, 0, -0.6579575, -14.562217, -0.1951307, -8.257288)
+
+[node name="PineTree_1_113" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.9448422, 0, 0.32752568, 0, 1, 0, -0.32752568, 0, -0.9448422, -19.760231, -0.1951307, -9.552671)
+
+[node name="PineTree_1_114" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.899966, 0, -0.43596, 0, 1, 0, 0.43596, 0, -0.899966, -22.59649, -0.1951307, -5.844874)
+
+[node name="PineTree_1_115" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.8557094, 0, -0.51745653, 0, 1, 0, 0.51745653, 0, 0.8557094, -25.334642, -0.1951307, -11.2766285)
+
+[node name="PineTree_1_116" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.8120509, 0, 0.58358645, 0, 1, 0, -0.58358645, 0, -0.8120509, -29.450022, -0.1951307, -13.562924)
+
+[node name="PineTree_1_117" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.9760594, 0, 0.21750377, 0, 1, 0, -0.21750377, 0, -0.9760594, -29.354418, -0.1951307, -8.30944)
+
+[node name="PineTree_1_104" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.9377375, 0, 0.34734458, 0, 1, 0, -0.34734458, 0, -0.9377375, -16.832638, -0.1951307, -12.619707)
 
 [node name="PineTree_1_27" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.944496, -0.19513261, -10.939844)
+transform = Transform3D(0.3860195, 0, -0.9224906, 0, 1, 0, 0.9224906, 0, 0.3860195, 42.944496, -0.19513261, -10.939844)
 
 [node name="PineTree_1_2" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.321104, -0.19513261, -7.7959404)
+transform = Transform3D(0.7044066, 0, 0.70979667, 0, 1, 0, -0.70979667, 0, 0.7044066, 16.321104, -0.19513261, -7.7959404)
 
 [node name="PineTree_1_4" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8727074, -0.19513261, -8.479205)
+transform = Transform3D(0.9902948, 0, -0.13898279, 0, 1, 0, 0.13898279, 0, 0.9902948, 7.8727074, -0.19513261, -8.479205)
 
 [node name="PineTree_1_5" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.030479, -0.19513261, -13.800079)
+transform = Transform3D(0.7700832, 0, 0.6379433, 0, 1, 0, -0.6379433, 0, 0.7700832, 8.030479, -0.19513261, -13.800079)
 
 [node name="PineTree_1_6" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.266501, -0.19513261, -14.895706)
+transform = Transform3D(0.40019786, 0, 0.91642874, 0, 1, 0, -0.91642874, 0, 0.40019786, 13.266501, -0.19513261, -14.895706)
 
 [node name="PineTree_1_7" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.604507, -9.536743e-07, -13.157501)
+transform = Transform3D(-0.5881235, 0, 0.80877113, 0, 1, 0, -0.80877113, 0, -0.5881235, 18.604507, -9.536743e-07, -13.157501)
 
 [node name="PineTree_1_8" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.176138, -9.536743e-07, -17.728565)
+transform = Transform3D(-0.99601734, 0, -0.08915927, 0, 1, 0, 0.08915927, 0, -0.99601734, 21.176138, -9.536743e-07, -17.728565)
 
 [node name="PineTree_1_9" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.534477, -9.536743e-07, -14.734808)
+transform = Transform3D(-0.3007155, 0, -0.9537139, 0, 1, 0, 0.9537139, 0, -0.3007155, 25.534477, -9.536743e-07, -14.734808)
 
 [node name="PineTree_1_10" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.799078, -9.536743e-07, -16.889164)
+transform = Transform3D(0.4121737, 0, -0.9111053, 0, 1, 0, 0.9111053, 0, 0.4121737, 28.799078, -9.536743e-07, -16.889164)
 
 [node name="PineTree_1_11" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.950047, -9.536743e-07, -14.570269)
+transform = Transform3D(0.0072001903, 0, -0.999974, 0, 1, 0, 0.999974, 0, 0.0072001903, 31.950047, -9.536743e-07, -14.570269)
 
 [node name="PineTree_1_12" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.259922, -9.536743e-07, -16.505104)
+transform = Transform3D(-0.79028654, 0, -0.61273736, 0, 1, 0, 0.61273736, 0, -0.79028654, 35.259922, -9.536743e-07, -16.505104)
 
 [node name="PineTree_1_13" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.405968, -9.536743e-07, -12.391566)
+transform = Transform3D(0.17919637, 0, 0.98381335, 0, 1, 0, -0.98381335, 0, 0.17919637, 37.405968, -9.536743e-07, -12.391566)
 
 [node name="PineTree_1_14" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.465603, -9.536743e-07, -14.879626)
+transform = Transform3D(-0.4996443, 0, -0.86623067, 0, 1, 0, 0.86623067, 0, -0.4996443, 40.465603, -9.536743e-07, -14.879626)
 
 [node name="PineTree_1_15" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.233685, -0.19513261, 18.061502)
+transform = Transform3D(-0.92895675, 0, -0.3701881, 0, 1, 0, 0.3701881, 0, -0.92895675, 14.233685, -0.19513261, 18.061502)
 
 [node name="PineTree_1_34" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.181711, -0.19513261, 17.345268)
+transform = Transform3D(-0.53697157, 0, 0.8436002, 0, 1, 0, -0.8436002, 0, -0.53697157, 23.181711, -0.19513261, 17.345268)
 
 [node name="PineTree_1_35" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.558565, -0.19513261, 18.269997)
+transform = Transform3D(-0.90252876, 0, -0.4306296, 0, 1, 0, 0.4306296, 0, -0.90252876, 30.558565, -0.19513261, 18.269997)
 
 [node name="PineTree_1_36" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2827511, -0.19513261, 9.570931)
+transform = Transform3D(-0.93655145, 0, 0.3505301, 0, 1, 0, -0.3505301, 0, -0.93655145, 1.2827511, -0.19513261, 9.570931)
 
 [node name="PineTree_1_37" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46875763, -0.19513261, 16.93803)
+transform = Transform3D(0.97561634, 0, 0.21948288, 0, 1, 0, -0.21948288, 0, 0.97561634, 0.46875763, -0.19513261, 16.93803)
 
 [node name="PineTree_1_38" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2254705, -0.19513261, 10.031078)
+transform = Transform3D(0.8311991, 0, 0.55597466, 0, 1, 0, -0.55597466, 0, 0.8311991, -5.2254705, -0.19513261, 10.031078)
 
 [node name="PineTree_1_39" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.426911, -0.19513261, 14.717122)
+transform = Transform3D(-0.50280976, 0, 0.864397, 0, 1, 0, -0.864397, 0, -0.50280976, -8.426911, -0.19513261, 14.717122)
 
 [node name="PineTree_1_40" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.57437, -0.19513261, 7.6670876)
+transform = Transform3D(0.9834298, 0, 0.18128926, 0, 1, 0, -0.18128926, 0, 0.9834298, -14.57437, -0.19513261, 7.6670876)
 
 [node name="PineTree_1_41" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.754614, -0.1951307, 11.087002)
+transform = Transform3D(0.9194738, 0, 0.39315116, 0, 1, 0, -0.39315116, 0, 0.9194738, -19.754614, -0.1951307, 11.087002)
 
 [node name="PineTree_1_42" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.070836, -0.19513166, 16.53069)
+transform = Transform3D(-0.7617944, 0, 0.64781886, 0, 1, 0, -0.64781886, 0, -0.7617944, -14.070836, -0.19513166, 16.53069)
+
+[node name="PineTree_1_88" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.14696954, 0, -0.98914105, 0, 1, 0, 0.98914105, 0, -0.14696954, -18.91854, -0.19513166, 14.182223)
+
+[node name="PineTree_1_89" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.1745365, 0, 0.98465073, 0, 1, 0, -0.98465073, 0, 0.1745365, -24.48009, -0.19513166, 13.770159)
+
+[node name="PineTree_1_90" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(0.9981491, 0, -0.06081433, 0, 1, 0, 0.06081433, 0, 0.9981491, -21.598997, -0.19513166, 18.050606)
+
+[node name="PineTree_1_91" parent="Statics" instance=ExtResource("10_b8wrl")]
+transform = Transform3D(-0.13583308, 0, -0.9907317, 0, 1, 0, 0.9907317, 0, -0.13583308, -4.1343822, -0.19513357, 17.295208)
 
 [node name="PineTree_1_16" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8727074, -0.19513261, 18.970203)
+transform = Transform3D(0.34234178, 0, -0.9395755, 0, 1, 0, 0.9395755, 0, 0.34234178, 7.8727074, -0.19513261, 18.970203)
 
 [node name="PineTree_1_17" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.030479, -0.19513261, 13.64933)
+transform = Transform3D(0.9472808, 0, 0.32040432, 0, 1, 0, -0.32040432, 0, 0.9472808, 8.030479, -0.19513261, 13.64933)
 
 [node name="PineTree_1_18" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.266501, -0.19513261, 12.553703)
+transform = Transform3D(-0.3975372, 0, 0.917586, 0, 1, 0, -0.917586, 0, -0.3975372, 13.266501, -0.19513261, 12.553703)
 
 [node name="PineTree_1_19" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.604507, -9.536743e-07, 14.291908)
+transform = Transform3D(0.99841696, 0, -0.05624597, 0, 1, 0, 0.05624597, 0, 0.99841696, 18.604507, -9.536743e-07, 14.291908)
 
 [node name="PineTree_1_20" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.176138, -9.536743e-07, 9.720844)
+transform = Transform3D(0.043922126, 0, -0.9990349, 0, 1, 0, 0.9990349, 0, 0.043922126, 21.176138, -9.536743e-07, 9.720844)
 
 [node name="PineTree_1_21" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.534477, -9.536743e-07, 12.7146015)
+transform = Transform3D(0.680386, 0, 0.73285383, 0, 1, 0, -0.73285383, 0, 0.680386, 25.534477, -9.536743e-07, 12.7146015)
 
 [node name="PineTree_1_22" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.799078, -9.536743e-07, 10.5602455)
+transform = Transform3D(0.9878057, 0, 0.15569165, 0, 1, 0, -0.15569165, 0, 0.9878057, 28.799078, -9.536743e-07, 10.5602455)
 
 [node name="PineTree_1_23" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.950047, -9.536743e-07, 12.879141)
+transform = Transform3D(0.23398697, 0, -0.9722397, 0, 1, 0, 0.9722397, 0, 0.23398697, 31.950047, -9.536743e-07, 12.879141)
 
 [node name="PineTree_1_24" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.259922, -9.536743e-07, 10.944305)
+transform = Transform3D(-0.83688736, 0, 0.547375, 0, 1, 0, -0.547375, 0, -0.83688736, 35.259922, -9.536743e-07, 10.944305)
 
 [node name="PineTree_1_25" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.405968, -9.536743e-07, 15.057843)
+transform = Transform3D(0.7785548, 0, -0.62757653, 0, 1, 0, 0.62757653, 0, 0.7785548, 37.405968, -9.536743e-07, 15.057843)
 
 [node name="PineTree_1_26" parent="Statics" instance=ExtResource("10_b8wrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.465603, -9.536743e-07, 12.569783)
+transform = Transform3D(-0.44341394, 0, -0.8963169, 0, 1, 0, 0.8963169, 0, -0.44341394, 40.465603, -9.536743e-07, 12.569783)
 
 [node name="PineTree_1_3" parent="Statics" instance=ExtResource("11_s01ir")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.03093, 0.49038422, -4.8789663)
+transform = Transform3D(0.55589384, 0, -0.8312532, 0, 1, 0, 0.8312532, 0, 0.55589384, 27.035854, 0.045740485, -8.22771)
+
+[node name="PineTree_1_147" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.8538595, 0, -0.52050334, 0, 1, 0, 0.52050334, 0, -0.8538595, 30.493528, 0.045740485, -7.851947)
+
+[node name="PineTree_1_148" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.61865586, 0, -0.78566194, 0, 1, 0, 0.78566194, 0, 0.61865586, 40.49347, 0.045740485, -7.862389)
+
+[node name="PineTree_1_146" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.4360809, 0, -0.8999074, 0, 1, 0, 0.8999074, 0, -0.4360809, 37.343018, 0.04574144, -9.204374)
+
+[node name="PineTree_1_43" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.9992429, 0, -0.03890375, 0, 1, 0, 0.03890375, 0, -0.9992429, 30.960155, 0.045740485, -10.232835)
+
+[node name="PineTree_1_44" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.9874594, 0, 0.1578729, 0, 1, 0, -0.1578729, 0, 0.9874594, 34.930134, 0.045740485, -9.474012)
+
+[node name="PineTree_1_149" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.9874594, 0, 0.1578729, 0, 1, 0, -0.1578729, 0, 0.9874594, 35.706005, 0.045740485, -6.8320622)
+
+[node name="PineTree_1_150" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.7316132, 0, -0.68171984, 0, 1, 0, 0.68171984, 0, 0.7316132, 29.850504, 0.045740485, -7.585418)
+
+[node name="PineTree_1_45" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.8086109, 0, -0.5883438, 0, 1, 0, 0.5883438, 0, 0.8086109, 39.457092, 0.045740485, -10.434439)
+
+[node name="PineTree_1_46" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.31575644, 0, -0.94884026, 0, 1, 0, 0.94884026, 0, -0.31575644, 45.2567, 0.04573953, -10.585857)
+
+[node name="PineTree_1_47" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.8452948, 0, 0.5343002, 0, 1, 0, -0.5343002, 0, 0.8452948, 46.648613, 0.04573953, -16.293293)
 
 [node name="TreeStump" parent="Statics" instance=ExtResource("12_w3h5g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.008415, 0.4766256, -3.675447)
+transform = Transform3D(0.9999955, 0, -0.0029670522, 0, 1, 0, 0.0029670522, 0, 0.9999955, 37.534996, 0.26036683, -4.205174)
 
 [node name="DeadTree" parent="Statics" instance=ExtResource("13_maniu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.302317, 0.68468815, -3.805964)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.437923, 0.24525791, -7.7002406)
+
+[node name="DeadTree2" parent="Statics" instance=ExtResource("13_maniu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.494255, 0.24525791, -7.687181)
+
+[node name="DeadTree3" parent="Statics" instance=ExtResource("13_maniu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.941612, 0.24525791, -7.886166)
 
 [node name="SignWindingRoad" parent="Statics" instance=ExtResource("16_e52gq")]
-transform = Transform3D(0.33909562, 0.0036813489, 0.9407447, -0.058089927, 0.99816597, 0.017032722, -0.9389567, -0.060423512, 0.3386876, 27.510818, 0.3559206, -3.2671347)
+transform = Transform3D(0.34188005, 0.0038606073, 0.9397356, -0.05808993, 0.9981661, 0.017032722, -0.93794656, -0.060412332, 0.34147742, 36.80248, 0.23673362, -3.6679003)
 
 [node name="GrassClusterDark" parent="Statics" instance=ExtResource("17_lqvjn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.650593, 0.9399986, -3.7672436)
+transform = Transform3D(0.9999955, 0, -0.0029670522, 0, 1, 0, 0.0029670522, 0, 0.9999955, 38.52778, 0.741843, -4.1798587)
+
+[node name="GrassClusterDark2" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(0.9999955, -0.00015166309, -0.0029631704, -2.0544535e-09, 0.9986929, -0.05111587, 0.0029670822, 0.051115636, 0.9986884, 39.023376, 0.741843, -3.7895875)
+
+[node name="GrassClusterDark6" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(0.9999955, -0.00015166309, -0.0029631704, -2.0544535e-09, 0.9986929, -0.05111587, 0.0029670822, 0.051115636, 0.9986884, 40.562542, 0.7389693, 4.846065)
+
+[node name="GrassClusterDark7" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(0.5050117, -0.044118732, -0.86198413, -2.0544533e-09, 0.99869287, -0.05111585, 0.8631124, 0.02581411, 0.50435156, 39.931404, 0.7389693, 4.8357744)
+
+[node name="GrassClusterDark8" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(0.5974683, 0, -0.80189246, 0, 1.0000001, 0, 0.80189234, 0, 0.5974684, 40.334023, 1.0342525, 5.721836)
+
+[node name="GrassClusterDark9" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(0.5974683, 0, -0.80189246, 0, 1.0000001, 0, 0.80189234, 0, 0.5974684, 41.532093, 1.0342525, 5.2692895)
+
+[node name="GrassClusterDark10" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.26316977, 0, -0.9647495, 0, 1.0000001, 0, 0.96474934, 0, -0.26316983, 41.11022, 1.0342525, 6.107002)
+
+[node name="GrassClusterDark11" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.9134287, 0, -0.4069983, 0, 1.0000001, 0, 0.40699825, 0, -0.9134289, 41.930313, 1.0342525, 4.231335)
+
+[node name="GrassClusterDark12" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.9994828, 0, -0.032152683, 0, 1.0000001, 0, 0.032152675, 0, -0.999483, 42.7583, 1.0342525, 3.4827976)
+
+[node name="GrassClusterDark13" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.32946137, 0, 0.94416904, 0, 1.0000001, 0, -0.94416887, 0, -0.32946143, 42.9093, 1.0342525, 4.269456)
+
+[node name="GrassClusterDark18" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.32946137, 0, 0.94416904, 0, 1.0000001, 0, -0.94416887, 0, -0.32946143, 39.930344, 1.0342525, 6.4057755)
+
+[node name="GrassClusterDark19" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.32946137, 0, 0.94416904, 0, 1.0000001, 0, -0.94416887, 0, -0.32946143, 38.688755, 1.2192396, 7.576326)
+
+[node name="GrassClusterDark20" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.32946137, 0, 0.94416904, 0, 1.0000001, 0, -0.94416887, 0, -0.32946143, 40.360092, 1.2192396, 7.6381097)
+
+[node name="GrassClusterDark21" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.32946137, 0, 0.94416904, 0, 1.0000001, 0, -0.94416887, 0, -0.32946143, 37.515564, 1.2192394, 8.316091)
+
+[node name="GrassClusterDark22" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.32946137, 0, 0.94416904, 0, 1.0000001, 0, -0.94416887, 0, -0.32946143, 39.098392, 1.2192394, 9.397844)
+
+[node name="GrassClusterDark23" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.32946137, 0, 0.94416904, 0, 1.0000001, 0, -0.94416887, 0, -0.32946143, 40.079533, 1.2192396, 8.754281)
+
+[node name="GrassClusterDark24" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.32946137, 0, 0.94416904, 0, 1.0000001, 0, -0.94416887, 0, -0.32946143, 40.477753, 1.2192398, 11.533711)
+
+[node name="GrassClusterDark25" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.32946137, 0, 0.94416904, 0, 1.0000001, 0, -0.94416887, 0, -0.32946143, 37.149017, 1.2192401, 6.555032)
+
+[node name="GrassClusterDark26" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.32946137, 0, 0.94416904, 0, 1.0000001, 0, -0.94416887, 0, -0.32946143, 34.670567, 1.2192401, 7.635277)
+
+[node name="GrassClusterDark14" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(0.5083767, 0, 0.8611347, 0, 1.0000001, 0, -0.8611345, 0, 0.50837684, 43.554916, 1.0342525, 3.409194)
+
+[node name="GrassClusterDark15" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(0.17929849, 0, 0.9837947, 0, 1.0000001, 0, -0.9837945, 0, 0.17929852, 43.907986, 1.0342525, 4.103428)
+
+[node name="GrassClusterDark16" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.39682192, 0, -0.9178956, 0, 1.0000001, 0, 0.91789544, 0, -0.39682198, 44.466038, 1.0342525, 3.4191127)
+
+[node name="GrassClusterDark17" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(-0.97887164, 0, 0.2044747, 0, 1.0000001, 0, -0.20447467, 0, -0.9788718, 45.378315, 1.0342525, 2.793745)
+
+[node name="GrassClusterDark4" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(0.9741062, -0.011556799, -0.22579472, -2.0690054e-09, 0.9986929, -0.05111587, 0.22609028, 0.04979228, 0.9728329, 36.8719, 0.7418431, -4.035788)
+
+[node name="GrassClusterDark5" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(0.9741062, -0.011556799, -0.22579472, -2.0690054e-09, 0.9986929, -0.05111587, 0.22609028, 0.04979228, 0.9728329, 36.33817, 0.7418431, -3.2733345)
+
+[node name="GrassClusterDark3" parent="Statics" instance=ExtResource("17_lqvjn")]
+transform = Transform3D(1, 0, 0, 0, 0.99869275, -0.051115863, 0, 0.051115863, 0.99869275, 30.446201, 0.86187726, -4.0987)
 
 [node name="GrassClusterGreen" parent="Statics" instance=ExtResource("18_qwxix")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.307724, 0.9279663, 4.081602)
 
 [node name="Bush" parent="Statics" instance=ExtResource("19_vi54o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.888418, 0.8791735, -2.6792545)
+transform = Transform3D(0.9999955, 0, -0.0029670522, 0, 1, 0, 0.0029670522, 0, 0.9999955, 37.136368, 0.37642878, -3.4776075)
+
+[node name="Bush2" parent="Statics" instance=ExtResource("19_vi54o")]
+transform = Transform3D(-1.4967961, 0, 0.09798839, 0, 1.5, 0, -0.09798839, 0, -1.4967961, 40.11724, 0.37642878, 3.9397075)
+
+[node name="Bush4" parent="Statics" instance=ExtResource("19_vi54o")]
+transform = Transform3D(1.3588077, 0, -0.63532823, 0, 1.5, 0, 0.63532823, 0, 1.3588077, 39.60323, 0.61639863, 11.066131)
+
+[node name="Bush5" parent="Statics" instance=ExtResource("19_vi54o")]
+transform = Transform3D(1.0432523, 0, 1.077787, 0, 1.5, 0, -1.077787, 0, 1.0432523, 41.724567, 0.61639863, 12.949065)
+
+[node name="Bush6" parent="Statics" instance=ExtResource("19_vi54o")]
+transform = Transform3D(1.0432523, 0, 1.077787, 0, 1.5, 0, -1.077787, 0, 1.0432523, 37.105263, 0.61639863, 9.480465)
+
+[node name="Bush7" parent="Statics" instance=ExtResource("19_vi54o")]
+transform = Transform3D(1.0648754, 0, -1.0564284, 0, 1.5, 0, 1.0564284, 0, 1.0648754, 34.242504, 0.6163979, 9.475227)
+
+[node name="Bush8" parent="Statics" instance=ExtResource("19_vi54o")]
+transform = Transform3D(-0.31940153, 0, -1.4655999, 0, 1.5, 0, 1.4655999, 0, -0.31940153, 30.691498, 0.6163979, 8.609434)
+
+[node name="Bush9" parent="Statics" instance=ExtResource("19_vi54o")]
+transform = Transform3D(1.4937366, 0, -0.1369355, 0, 1.5, 0, 0.1369355, 0, 1.4937366, 27.548527, 0.6163984, 9.103224)
+
+[node name="Bush3" parent="Statics" instance=ExtResource("19_vi54o")]
+transform = Transform3D(0.30219382, 0, -1.4692446, 0, 1.5, 0, 1.4692446, 0, 0.30219382, 39.387424, 0.37642878, 5.114044)
+
+[node name="ElectricSparks" parent="Statics" instance=ExtResource("23_lqvjn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.225601, 1.4972323, 4.14557)
+
+[node name="PineTree_1_48" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.6723983, 0, 0.7401895, 0, 1, 0, -0.7401895, 0, 0.6723983, 15.5916395, 0.4946435, -12.628099)
+
+[node name="PineTree_1_144" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.4774864, 0, 0.87863916, 0, 1, 0, -0.87863916, 0, -0.4774864, 18.006493, 0.4946435, -9.598611)
+
+[node name="PineTree_1_49" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.8852739, 0, 0.4650701, 0, 1, 0, -0.4650701, 0, -0.8852739, 10.558576, 0.4946435, -11.9502735)
+
+[node name="PineTree_1_140" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.51960623, 0, -0.8544058, 0, 1, 0, 0.8544058, 0, -0.51960623, 12.214062, 0.4946435, -9.112576)
+
+[node name="PineTree_1_141" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, 10.670803, 0.49464446, -8.112145)
+
+[node name="PineTree_1_151" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, 13.334023, 0.49464446, -9.025028)
+
+[node name="PineTree_1_152" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, 4.7598963, 0.49464446, -8.032923)
+
+[node name="PineTree_1_153" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -7.8735228, 0.49464446, -9.785294)
+
+[node name="PineTree_1_154" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -5.8054757, 0.49464446, -7.912646)
+
+[node name="PineTree_1_155" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -12.128311, 0.49464446, -6.818463)
+
+[node name="PineTree_1_156" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -17.8261, 0.49464446, -7.9847846)
+
+[node name="PineTree_1_157" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -24.450489, 0.49464446, -4.7994742)
+
+[node name="PineTree_1_159" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -25.848959, 0.49464637, -7.6249447)
+
+[node name="PineTree_1_160" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -30.956911, 0.49464637, -5.3912206)
+
+[node name="PineTree_1_161" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -29.898443, 0.49464637, -2.4869037)
+
+[node name="PineTree_1_162" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -32.910416, 0.49464637, -8.331194)
+
+[node name="PineTree_1_163" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -31.487011, 0.49464637, -12.116834)
+
+[node name="PineTree_1_164" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -32.002197, 0.49464637, -15.922643)
+
+[node name="PineTree_1_165" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -33.928932, 0.49464732, -4.743085)
+
+[node name="PineTree_1_158" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.96218556, 0, 0.27239487, 0, 1, 0, -0.27239487, 0, 0.96218556, -27.027899, 0.381625, -3.5273995)
+
+[node name="PineTree_1_145" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.27387986, 0, -0.9617639, 0, 1, 0, 0.9617639, 0, 0.27387986, 19.567335, 0.49464446, -9.735515)
+
+[node name="PineTree_1_142" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.68228316, 0, 0.73108804, 0, 1, 0, -0.73108804, 0, 0.68228316, 23.316895, 0.4946435, -7.830921)
+
+[node name="PineTree_1_143" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.244366, 0, 0.96968305, 0, 1, 0, -0.96968305, 0, 0.244366, 33.245125, 0.4946435, -11.349199)
+
+[node name="PineTree_1_50" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.82394934, 0, 0.5666633, 0, 1, 0, -0.5666633, 0, 0.82394934, 17.342583, 0.4946435, -18.107672)
+
+[node name="PineTree_1_51" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.8008729, 0, -0.59883434, 0, 1, 0, 0.59883434, 0, 0.8008729, 24.894735, 0.4946435, -18.669436)
+
+[node name="PineTree_1_52" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.7183994, 0, -0.69563085, 0, 1, 0, 0.69563085, 0, -0.7183994, 32.556244, 0.4946435, -18.699118)
+
+[node name="PineTree_1_53" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.65726715, 0, -0.75365764, 0, 1, 0, 0.75365764, 0, -0.65726715, 39.300823, 0.4946435, -18.699118)
+
+[node name="PineTree_1_54" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.15509121, 0, 0.9879001, 0, 1, 0, -0.9879001, 0, -0.15509121, 43.170586, 0.4946435, -18.699118)
+
+[node name="PineTree_1_55" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.16596793, 0, -0.98613113, 0, 1, 0, 0.98613113, 0, 0.16596793, 9.839355, 0.4946435, -18.699118)
+
+[node name="PineTree_1_56" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.61033964, 0, 0.79213977, 0, 1, 0, -0.79213977, 0, 0.61033964, 4.2325, 0.4946435, -16.958132)
+
+[node name="PineTree_1_57" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.09456359, 0, -0.9955188, 0, 1, 0, 0.9955188, 0, -0.09456359, -3.496767, 0.4946435, -16.170124)
+
+[node name="PineTree_1_58" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.79712003, 0, 0.60382074, 0, 1, 0, -0.60382074, 0, 0.79712003, -3.6099243, 0.4946435, -9.30595)
+
+[node name="PineTree_1_100" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.29265508, 0, -0.95621806, 0, 1, 0, 0.95621806, 0, -0.29265508, 3.6749907, 0.4946435, -9.8915)
+
+[node name="PineTree_1_101" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.015202878, 0, -0.9998844, 0, 1, 0, 0.9998844, 0, -0.015202878, -9.712691, 0.4946435, -8.830128)
+
+[node name="PineTree_1_71" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.0038501367, 0, 0.9999926, 0, 1, 0, -0.9999926, 0, -0.0038501367, 5.4574366, 0.49464256, 8.124869)
+
+[node name="PineTree_1_72" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.34212747, 0, 0.9396536, 0, 1, 0, -0.9396536, 0, 0.34212747, 4.78547, 0.49464065, 11.99005)
+
+[node name="PineTree_1_73" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.9994848, 0, 0.032096744, 0, 1, 0, -0.032096744, 0, -0.9994848, 11.134195, 0.4946416, 7.906909)
+
+[node name="PineTree_1_74" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.43966398, 0, -0.8981623, 0, 1, 0, 0.8981623, 0, 0.43966398, 16.454288, 0.49464256, 8.605569)
+
+[node name="PineTree_1_77" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.44816518, 0, 0.8939507, 0, 1, 0, -0.8939507, 0, -0.44816518, 37.530365, 0.49464208, 11.617677)
+
+[node name="PineTree_1_78" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.26261222, 0, -0.96490145, 0, 1, 0, 0.96490145, 0, -0.26261222, 26.455126, 0.49464256, 16.040932)
+
+[node name="PineTree_1_79" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.9589011, 0, 0.2837404, 0, 1, 0, -0.2837404, 0, 0.9589011, 21.758602, 0.49464256, 14.862525)
+
+[node name="PineTree_1_80" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.7763172, 0, 0.6303425, 0, 1, 0, -0.6303425, 0, 0.7763172, 10.6813545, 0.49464256, 14.352813)
+
+[node name="PineTree_1_81" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.966962, 0, -0.25492063, 0, 1, 0, 0.25492063, 0, -0.966962, -2.6142159, 0.49464446, 10.598307)
+
+[node name="PineTree_1_82" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.6262657, 0, -0.7796097, 0, 1, 0, 0.7796097, 0, 0.6262657, -11.219408, 0.49464637, 8.293888)
+
+[node name="PineTree_1_83" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.98508424, 0, -0.17207275, 0, 1, 0, 0.17207275, 0, -0.98508424, -5.505121, 0.49464637, 12.924043)
+
+[node name="PineTree_1_84" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.7535548, 0, 0.65738493, 0, 1, 0, -0.65738493, 0, -0.7535548, -16.240263, 0.4946502, 11.0395975)
+
+[node name="PineTree_1_85" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.88774204, 0, -0.46034124, 0, 1, 0, 0.46034124, 0, 0.88774204, -8.2154875, 0.4946502, 6.783703)
+
+[node name="PineTree_1_86" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.36712694, 0, -0.93017083, 0, 1, 0, 0.93017083, 0, -0.36712694, -18.674805, 0.4946502, 6.097908)
+
+[node name="PineTree_1_118" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(-0.41133657, 0, 0.9114835, 0, 1, 0, -0.9114835, 0, -0.41133657, -23.158833, 0.49464828, 6.7170963)
+
+[node name="PineTree_1_119" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.93988174, 0, -0.3415001, 0, 1, 0, 0.3415001, 0, 0.93988174, -27.701754, 0.4946502, -5.428873)
+
+[node name="PineTree_1_87" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.72208947, 0, -0.6917995, 0, 1, 0, 0.6917995, 0, 0.72208947, -24.676203, 0.4946502, 9.478064)
+
+[node name="PineTree_1_59" parent="Statics" instance=ExtResource("11_s01ir")]
+transform = Transform3D(0.8366697, 0, -0.5477078, 0, 1, 0, 0.5477078, 0, 0.8366697, -13.593584, 0.4946435, -16.060204)
+
+[node name="TireTracksRight" type="Node3D" parent="Statics"]
+
+[node name="Path3D" type="Path3D" parent="Statics/TireTracksRight"]
+curve = SubResource("Curve3D_4d7sb")
+
+[node name="ZN_ChainPath3D" type="Node3D" parent="Statics/TireTracksRight" node_paths=PackedStringArray("path")]
+script = ExtResource("10_xxm8u")
+path = NodePath("../Path3D")
+tension = 1.0
+metadata/_custom_type_script = "uid://cv3m86tnjsecl"
+
+[node name="Pattern" type="Node3D" parent="Statics/TireTracksRight/ZN_ChainPath3D"]
+visible = false
+
+[node name="CSGCylinder3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Pattern" instance=ExtResource("25_447q3")]
+
+[node name="Baked" type="Node3D" parent="Statics/TireTracksRight/ZN_ChainPath3D"]
+
+[node name="Span_000" type="Node3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked"]
+
+[node name="CSGCylinder3D_000" type="CSGBox3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("25_447q3")]
+transform = Transform3D(-0.27912578, 0.85307693, -0.014846068, 9.1738734e-08, -0.015620311, -0.8975678, -0.8532061, -0.27908352, 0.0048567844, 38.460808, 0.26447037, 0.08428936)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="CSGCylinder3D_001" type="CSGBox3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("25_447q3")]
+transform = Transform3D(-0.27912575, 0.8530808, -0.014846131, 8.0566544e-08, -0.015620374, -0.89757144, -0.85321, -0.2790835, 0.0048567946, 37.60773, 0.28009403, 0.36337292)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="CSGCylinder3D_002" type="CSGBox3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("25_447q3")]
+transform = Transform3D(-0.27912578, 0.85307693, -0.014848914, 8.430656e-08, -0.015623307, -0.89756775, -0.85320616, -0.27908352, 0.004857723, 36.754654, 0.29571766, 0.6424564)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="Span_001" type="Node3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked"]
+
+[node name="CSGCylinder3D_000" type="CSGBox3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("25_447q3")]
+transform = Transform3D(-0.10293161, 0.8719178, -0.010519894, -9.176145e-09, -0.010592935, -0.87797153, -0.87198126, -0.10292412, 0.0012418131, 35.892155, 0.30882916, 0.8334602)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="CSGCylinder3D_001" type="CSGBox3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("25_447q3")]
+transform = Transform3D(-0.10293164, 0.87191397, -0.010524226, 9.761055e-08, -0.010597285, -0.8779677, -0.8719775, -0.102924146, 0.0012422226, 35.02024, 0.31942847, 0.93638426)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="CSGCylinder3D_002" type="CSGBox3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("25_447q3")]
+transform = Transform3D(-0.10293161, 0.8719178, -0.010519892, -2.1803908e-08, -0.010592935, -0.87797153, -0.87198126, -0.10292412, 0.0012418256, 34.148323, 0.3300278, 1.0393083)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="Span_002" type="Node3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked"]
+
+[node name="CSGCylinder3D_000" type="CSGBox3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("25_447q3")]
+transform = Transform3D(0.098305576, 1.0171013, -0.00853019, 7.4920775e-10, -0.008569937, -1.0218407, -1.017137, 0.09830212, -0.00082443753, 33.20381, 0.33961326, 1.0416193)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="CSGCylinder3D_001" type="CSGBox3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("25_447q3")]
+transform = Transform3D(0.098305635, 1.0171052, -0.008522946, 3.334423e-09, -0.008562661, -1.0218445, -1.0171409, 0.098302186, -0.00082373753, 32.18671, 0.34818488, 0.943317)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="CSGCylinder3D_002" type="CSGBox3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("25_447q3")]
+transform = Transform3D(0.098305576, 1.0171013, -0.00853019, 7.4920775e-10, -0.008569937, -1.0218407, -1.017137, 0.09830212, -0.00082443753, 31.169607, 0.35675645, 0.84501475)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="CSGCylinder3D_003" type="CSGBox3D" parent="Statics/TireTracksRight/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("25_447q3")]
+transform = Transform3D(0.098305695, 1.0171032, -0.008522931, 1.2929233e-09, -0.008562645, -1.0218426, -1.017139, 0.098302245, -0.00082373596, 30.152504, 0.36532807, 0.7467125)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="TireTracksLeft" type="Node3D" parent="Statics"]
+
+[node name="Path3D" type="Path3D" parent="Statics/TireTracksLeft"]
+curve = SubResource("Curve3D_vi54o")
+
+[node name="ZN_ChainPath3D" type="Node3D" parent="Statics/TireTracksLeft" node_paths=PackedStringArray("path")]
+script = ExtResource("10_xxm8u")
+path = NodePath("../Path3D")
+tension = 1.0
+min_segments = 2
+metadata/_custom_type_script = "uid://cv3m86tnjsecl"
+
+[node name="Pattern" type="Node3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D"]
+visible = false
+
+[node name="CSGCylinder3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D/Pattern" instance=ExtResource("25_447q3")]
+
+[node name="Baked" type="Node3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D"]
+
+[node name="Span_000" type="Node3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D/Baked"]
+
+[node name="CSGCylinder3D_000" type="CSGBox3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("25_447q3")]
+transform = Transform3D(-0.3335748, 0.8856926, -0.022324538, -9.459955e-08, -0.023854481, -0.9463894, -0.8859739, -0.33346885, 0.008405431, 38.381485, 0.26774558, 1.9072914)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="CSGCylinder3D_001" type="CSGBox3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D/Baked/Span_000" instance=ExtResource("25_447q3")]
+transform = Transform3D(-0.3335747, 0.8856887, -0.02232654, -1.3442322e-07, -0.023856647, -0.94638574, -0.88597006, -0.33346877, 0.008406261, 37.495792, 0.2916017, 2.2407603)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="Span_001" type="Node3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D/Baked"]
+
+[node name="CSGCylinder3D_000" type="CSGBox3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("25_447q3")]
+transform = Transform3D(-0.18383476, 1.0942613, -0.010450185, 5.4655036e-08, -0.010596608, -1.1095945, -1.0943111, -0.18382639, 0.0017554851, 36.505817, 0.30882937, 2.4994078)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="CSGCylinder3D_001" type="CSGBox3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("25_447q3")]
+transform = Transform3D(-0.18383476, 1.0942613, -0.010450185, 5.4655036e-08, -0.010596608, -1.1095945, -1.0943111, -0.18382639, 0.0017554851, 35.411556, 0.3194286, 2.6832342)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="CSGCylinder3D_002" type="CSGBox3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D/Baked/Span_001" instance=ExtResource("25_447q3")]
+transform = Transform3D(-0.18383476, 1.0942613, -0.010450185, 5.4655036e-08, -0.010596608, -1.1095945, -1.0943111, -0.18382639, 0.0017554851, 34.317295, 0.33002782, 2.8670607)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="Span_002" type="Node3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D/Baked"]
+
+[node name="CSGCylinder3D_000" type="CSGBox3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("25_447q3")]
+transform = Transform3D(0.038606387, 1.0484201, -0.01769475, -6.895259e-09, -0.01770674, -1.0491304, -1.0485693, 0.03860089, -0.0006514812, 33.245956, 0.3441819, 2.9396734)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="CSGCylinder3D_001" type="CSGBox3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("25_447q3")]
+transform = Transform3D(0.038606457, 1.048422, -0.017694784, -6.8952715e-09, -0.017706772, -1.0491323, -1.0485712, 0.038600963, -0.00065148243, 32.197533, 0.36189082, 2.9010725)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="CSGCylinder3D_002" type="CSGBox3D" parent="Statics/TireTracksLeft/ZN_ChainPath3D/Baked/Span_002" instance=ExtResource("25_447q3")]
+transform = Transform3D(0.038606457, 1.048422, -0.017694784, -2.8003388e-08, -0.017706772, -1.0491323, -1.0485712, 0.038600963, -0.0006514613, 31.149113, 0.37959975, 2.8624716)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="StreetLamp" parent="Statics" instance=ExtResource("29_eigma")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.51021, 0.3269148, -3.595727)
+
+[node name="StreetLamp2" parent="Statics" instance=ExtResource("29_eigma")]
+transform = Transform3D(-0.29884097, 0, 0.9543029, 0, 1, 0, -0.9543029, 0, -0.29884097, 39.94367, 0.32691622, -4.108193)
 
 [node name="Environment" type="Node3D" parent="."]
 
-[node name="SkyNight" parent="Environment" instance=ExtResource("22_rev5j")]
+[node name="SkyNight2" parent="Environment" instance=ExtResource("25_vi54o")]
