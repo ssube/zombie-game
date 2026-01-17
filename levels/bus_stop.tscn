@@ -601,6 +601,9 @@ transform = Transform3D(0.6485015, -0.1476865, 0.74674916, 0.25967348, 0.9650747
 [node name="GrassClusterDark10" parent="Statics" instance=ExtResource("19_825fl")]
 transform = Transform3D(0.3715471, -0.26347417, 0.89024377, 0.33578756, 0.9321084, 0.13572195, -0.8655629, 0.2485057, 0.43479365, -16.12331, 0.6689658, -9.336611)
 
+[node name="GrassClusterDark30" parent="Statics" instance=ExtResource("19_825fl")]
+transform = Transform3D(0.6410972, 0, 0.7674596, 0, 0.9999999, 0, -0.76745945, 0, 0.6410973, -16.12849, 0.6689658, -9.916972)
+
 [node name="GrassClusterDark11" parent="Statics" instance=ExtResource("19_825fl")]
 transform = Transform3D(0.37154704, -0.26347414, 0.8902437, -0.013540655, 0.95724666, 0.28895548, -0.9283151, -0.119415075, 0.3520947, -35.854073, 0.6689658, 3.4564943)
 
