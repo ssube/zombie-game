@@ -88,7 +88,7 @@ layout_mode = 2
 text = "Interaction Target"
 horizontal_alignment = 1
 metadata/diagram_label = "Interaction Target"
-metadata/diagram_outline = Color(0.6392157, 0.6392157, 0.6392157, 1)
+metadata/diagram_outline = Color(0.3764706, 0.7764706, 1, 1)
 
 [node name="HSeparator" type="HSeparator" parent="BottomContainer"]
 layout_mode = 2
@@ -106,7 +106,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Current Weapon"
 horizontal_alignment = 1
-metadata/diagram_outline = Color(0.6392157, 0.6392157, 0.6392157, 1)
+metadata/diagram_outline = Color(0.9372549, 0.30980393, 0.52156866, 1)
 metadata/diagram_label = "Current Weapon"
 
 [node name="AmmoLabel" type="Label" parent="BottomContainer/HBoxContainer"]
@@ -114,7 +114,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Ammo Count"
 horizontal_alignment = 1
-metadata/diagram_outline = Color(0.6392157, 0.6392157, 0.6392157, 1)
+metadata/diagram_outline = Color(0.9372549, 0.30980393, 0.52156866, 1)
 metadata/diagram_label = "Ammo Count"
 
 [node name="HSeparator2" type="HSeparator" parent="BottomContainer"]
@@ -216,3 +216,5 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_ryqxq")
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+metadata/diagram_outline = Color(1, 0.92941177, 0, 1)
+metadata/diagram_label = "Message History"
