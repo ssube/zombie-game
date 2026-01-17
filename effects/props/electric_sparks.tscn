@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://wpqd3o6kxfqj"]
+
+[ext_resource type="Texture2D" uid="uid://b6erthm4w6f7v" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Spark1.png" id="1_47lrh"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gtmoe"]
+particle_flag_align_y = true
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+scale_max = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6gxv"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.99, 0.84744, 0.4554, 1)
+albedo_texture = ExtResource("1_47lrh")
+
+[sub_resource type="QuadMesh" id="QuadMesh_5l4ao"]
+material = SubResource("StandardMaterial3D_m6gxv")
+size = Vector2(0.5, 0.5)
+
+[node name="ElectricSparks" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 12
+lifetime = 1.5
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_gtmoe")
+draw_pass_1 = SubResource("QuadMesh_5l4ao")
