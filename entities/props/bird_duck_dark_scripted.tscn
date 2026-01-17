@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://cc31c1eoi7c35"]
+
+[ext_resource type="Script" uid="uid://br45sl48jr7au" path="res://scripts/entities/props/ZE_Static.gd" id="1_faocu"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_v3dn1"]
+[ext_resource type="Script" uid="uid://0dld8iow0suh" path="res://scripts/components/status/ZC_Interactive.gd" id="3_b635d"]
+[ext_resource type="ArrayMesh" uid="uid://c6juqdjfu8tg0" path="res://entities/props/bird_duck.mesh" id="4_t4wxx"]
+
+[sub_resource type="Resource" id="Resource_helhp"]
+script = ExtResource("3_b635d")
+name = "Duck"
+pickup = false
+crosshair_color = Color(0.3764706, 0.7764706, 1, 1)
+metadata/_custom_type_script = "uid://0dld8iow0suh"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_faocu"]
+resource_name = "DuckBr"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.21, 0.21, 0.21, 1)
+metallic = 0.8
+roughness = 0.5
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v76ho"]
+points = PackedVector3Array(0, 0.22562164, -0.39296973, -0.085948765, 0.08581444, -0.27134252, -0.4455247, 0.2613701, -0.26634288, 0, 0.30279747, -0.37288034, 0.4454308, 0.2613701, -0.26634288, 0.08585486, 0.08581444, -0.27134252, -0.085948765, 0.07176018, -0.2517076, -0.47981027, 0.2621055, -0.234618, -0.4676929, 0.2748524, -0.21980093, -0.43754038, 0.2741987, -0.24770792, -0.3226602, 0.3661642, -0.060085654, -0.30021018, 0.4003602, 0.07290435, 0.30011627, 0.4003602, 0.07290435, 0.3225663, 0.3661642, -0.060085654, 0.43744645, 0.2741987, -0.24770792, 0.47981027, 0.2621055, -0.234618, 0.08585486, 0.07176018, -0.2517076, 0, 0.046470683, 0.008272827, -0.13535759, 0.088592604, -0.22361882, -0.45905104, 0.25099283, -0.14026144, -0.44937593, 0.26508796, -0.13689807, -0.27794802, 0.3315597, 0.17898726, -0.036446035, 0.44521943, 0.42542326, -0.036727846, 0.45845658, 0.39297116, 0, 0.46384948, 0.40806097, 0, 0.46049935, 0.37697238, 0.03663394, 0.45845658, 0.39297116, 0.036352128, 0.44521943, 0.42542326, 0.2778541, 0.3315597, 0.17898726, 0.45895717, 0.25099283, -0.14026144, 0.44928202, 0.26508796, -0.13689807, 0.467599, 0.2748524, -0.21980093, 0.13526365, 0.088592604, -0.22361882, 0, 0.088592604, 0.15198928, -0.09590569, 0.106609836, 0.12926376, -0.1138469, 0.088592604, 0.008272827, 0.11375299, 0.088592604, 0.008272827, 0.095811754, 0.106609836, 0.12926376, -0.23793253, 0.2507477, 0.16071594, -0.009205431, 0.32837296, 0.52723384, -0.017377615, 0.3423455, 0.52150697, -0.01812908, 0.3489641, 0.5227796, 0, 0.45024464, 0.4456036, 0.018035173, 0.3489641, 0.5227796, 0.017283708, 0.3423455, 0.52150697, 0.009111524, 0.32837296, 0.52723384, 0.2378386, 0.2507477, 0.16071594, 0, 0.3245734, 0.53141534, -0.009205431, 0.34030274, 0.5305063, 0, 0.3328262, 0.5347787, 0, 0.33772886, 0.53568774, 0.009111524, 0.34030274, 0.5305063)
+
+[node name="DuckDark" type="StaticBody3D"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+script = ExtResource("1_faocu")
+component_resources = Array[ExtResource("2_v3dn1")]([SubResource("Resource_helhp")])
+
+[node name="DuckBr_Fly" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+mesh = ExtResource("4_t4wxx")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_faocu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_v76ho")
