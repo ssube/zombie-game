@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://grif60udnme2"]
+
+[ext_resource type="Material" uid="uid://da5es6i5mnext" path="res://skies/sky_night.tres" id="1_4hy4p"]
+
+[sub_resource type="Sky" id="Sky_fwpx5"]
+sky_material = ExtResource("1_4hy4p")
+
+[sub_resource type="Environment" id="Environment_4hy4p"]
+background_mode = 2
+sky = SubResource("Sky_fwpx5")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.052800003, 0.2012266, 0.44, 1)
+fog_density = 0.5
+fog_sky_affect = 0.2
+fog_height = 1.0
+fog_height_density = 0.1
+fog_depth_curve = 2.0
+
+[node name="SkyNight" type="Node3D"]
+
+[node name="EnvironmentNight" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4hy4p")
+
+[node name="Moon" type="DirectionalLight3D" parent="." groups=["shadow_low"]]
+transform = Transform3D(1, 0, 0, 0, -0.5000001, 0.8660254, 0, -0.8660254, -0.5000001, 0, 3.4615583, -2.556841)
+light_color = Color(0.24940002, 0.3308133, 0.86, 1)
+light_energy = 0.75
+shadow_enabled = true
+shadow_opacity = 0.6
+
+[node name="Debug" type="Node3D" parent="."]
+visible = false
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Debug"]
