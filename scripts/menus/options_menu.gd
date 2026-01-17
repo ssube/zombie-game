@@ -85,6 +85,8 @@ func on_update() -> void:
 	_current_options = OptionsManager.options
 	_set_cheats_visible(_current_options.cheats.enabled)
 
+	%MouseSensitivitySlider.value = _current_options.controls.mouse_sensitivity
+
 	%PhysicalShellsBox.button_pressed = _current_options.gameplay.physical_casings
 	%PhysicalMagsBox.button_pressed = _current_options.gameplay.physical_mags
 
