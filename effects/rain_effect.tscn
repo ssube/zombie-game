@@ -25,6 +25,7 @@ size = Vector2(0.25, 0.25)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-amount = 128
+amount = 256
+lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_eu4fo")
 draw_pass_1 = SubResource("QuadMesh_aum3j")
