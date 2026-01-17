@@ -108,6 +108,10 @@ PSX Post-Apo Ultimate Prop Pack:
 
 - [https://puszke.itch.io/psx-post-apo-ultimate-prop-pack](https://puszke.itch.io/psx-post-apo-ultimate-prop-pack)
 
+Retro PSX Style Street Assets:
+
+- [https://porkbellygames.itch.io/retro-street-assets](https://porkbellygames.itch.io/retro-street-assets)
+
 Traffic Cone:
 
 - [https://ddv23.itch.io/psx-traffic-cones](https://ddv23.itch.io/psx-traffic-cones)
@@ -143,12 +147,27 @@ Particle Effect Texture Essentials:
 
 - [https://cruizrf.itch.io/60-game-cursors](https://cruizrf.itch.io/60-game-cursors)
 
+Bullet Decal:
+
+- [https://opengameart.org/content/bullet-decal](https://opengameart.org/content/bullet-decal)
+
+WGStudio - Fire Animation Loop:
+
+- [https://opengameart.org/content/wgstudio-fire-animation-loop](https://opengameart.org/content/wgstudio-fire-animation-loop)
+
 #### Sound Effects
+
+Freesound 44428:
+
+- [https://freesound.org/people/thecheeseman/sounds/44428/](https://freesound.org/people/thecheeseman/sounds/44428/)
+- CC-BY 4.0 license
+- `hurt1.wav` by thecheeseman -- [https://freesound.org/s/44428/](https://freesound.org/s/44428/) -- License: Attribution 4.0
 
 Freesound 372021:
 
 - [https://freesound.org/people/kijjaz/sounds/372021/](https://freesound.org/people/kijjaz/sounds/372021/)
 - CC0 license
+- 20161230 Kijjaz - Pattaya Beach - Far 01 by kijjaz -- [https://freesound.org/s/372021/](https://freesound.org/s/372021/) -- License: Creative Commons 0
 
 Freesound 430675:
 
@@ -170,8 +189,9 @@ Freesound 699979:
 
 Freesound 353686:
 
-- [https://freesound.org/people/tec](https://freesound.org/people/tec)_studio/sounds/353686/
+- [https://freesound.org/people/tec_studio/sounds/353686/](https://freesound.org/people/tec_studio/sounds/353686/)
 - CC0 license
+- `drip10.mp3` by tec_studio -- https://freesound.org/s/353686/ -- License: Creative Commons 0
 
 Freesound 270429:
 
