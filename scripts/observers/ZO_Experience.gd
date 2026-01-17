@@ -39,8 +39,7 @@ func on_component_changed(entity: Entity, component: Resource, property: String,
 				if new_level > old_level:
 					message_text += " (Level %d)" % new_level
 
-				var message := ZC_Message.make_system(message_text, Icons.concept_experience)
-				%Menu.append_message(message)
+				%Menu.append_message(ZC_Message.make_system(message_text, Icons.concept_experience))
 
 			%Menu.set_score(new_value)
 
