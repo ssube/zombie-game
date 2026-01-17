@@ -69,163 +69,6 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
-visible = false
-custom_minimum_size = Vector2(400, 250)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-bbcode_enabled = true
-text = "Zombie Game is an open-source game project. The source code is available under the GPL license at Github ([url]https://github.com/ssube/zombie-game[/url]).
-
-Made with the Godot engine ([url]https://godotengine.org/[/url]), using open-source addons and paid assets to help support the community.
-
-[font_size=24][b][center]Assets[/center][/b][/font_size]
-
-[font_size=20][b][center]Asset Packs[/center][/b][/font_size]
-
-- 60 Game Cursors: [url]https://cruizrf.itch.io/60-game-cursors[/url]
-- PSX Barrels Pack: [url]https://ddv23.itch.io/psx-barrel-pack[/url]
-- Books and Scrolls Pack: [url]https://mcsteeg.itch.io/books-and-scrolls-pack[/url]
-- Common Birds Set: [url]https://vertexcat.itch.io/common-birds-set[/url]
-- PSX Home Furniture Kit 1: [url]https://sourpickle35.itch.io/psx-assets-home-furniture-kit[/url]
-- PSX Mailbox: [url]https://pomarf.itch.io/psx-mailbox[/url]
-- PSX Misc Items: [url]https://wildenza.itch.io/psx-misc-items[/url]
-- Modular Retro FPS Kit: [url]https://pizzadoggy.itch.io/modular-retro-fps-kit[/url]
-- PS1PSX Gun Pack: [url]https://morvillo-games.itch.io/police-gun-pack[/url]
-- PSX Bunkers: [url]https://pizzadoggy.itch.io/psx-bunkers[/url]
-- PSX Cars: [url]https://ggbot.itch.io/psx-style-cars[/url]
-- PSX Dungeon Loot Pack: [url]https://mcsteeg.itch.io/psx-dungeon-treasure-props-pack[/url]
-- PSX Fishing: [url]https://dysfunctional-games.itch.io/psx-fishingpack[/url]
-- PSX Gifts & Misc
-- PSX Mega Pack: [url]https://pizzadoggy.itch.io/psx-mega-pack[/url]
-- PSX Mega Pack II: [url]https://pizzadoggy.itch.io/psx-mega-pack-2[/url]
-- PSX Nature: [url]https://pizzadoggy.itch.io/psx-nature[/url]
-- PSX Pickups: [url]https://dysfunctional-games.itch.io/psx-pickups[/url]
-- PSX-Shotgun: [url]https://wildenza.itch.io/psx-shogun[/url]
-- PSX_UrbanTrash: [url]https://acchihaven.itch.io/psx-style-urban-trash-pack[/url]
-- PSX Street Signs: [url]https://pomarf.itch.io/psx-street-signs[/url]
-- PSX Post-Apo Ultimate Prop Pack: [url]https://puszke.itch.io/psx-post-apo-ultimate-prop-pack[/url]
-- Traffic Cone: [url]https://ddv23.itch.io/psx-traffic-cones[/url]
-- ZombieApocalypsePack: [url]https://egorzuyev.itch.io/psx-zombie-apocalypse[/url]
-
-[font_size=20][b][center]Textures[/center][/b][/font_size]
-
-- PSX Textures: [url]https://pizzadoggy.itch.io/psx-textures[/url]
-- PSX Textures 2: [url]https://pizzadoggy.itch.io/psx-textures-2[/url]
-- Foliage Sprites: [url]https://kenney-assets.itch.io/foliage-sprites[/url]
-- Particle Effect Texture Essentials: [url]https://reactorcore.itch.io/particle-effect-texture-essentials[/url]
-- 600 clean and minimal game Icon ultimate pack: [url]https://sungraphica.itch.io/minimal-game-icon-ultimate-pack[/url]
-
-[font_size=20][b][center]Sound Effects[/center][/b][/font_size]
-
-- 20161230 Kijjaz - Pattaya Beach - Far 01 by kijjaz -- [url]https://freesound.org/s/372021/[/url] -- License: Creative Commons 0
-- Exhalaciones.wav by juanj105 -- [url]https://freesound.org/s/430675/[/url] -- License: Creative Commons 0
-- Radio static.mp3 by GrimmReaperSounds -- [url]https://freesound.org/s/588264/[/url] -- License: Attribution 4.0
-- Seagull by henner1964 -- [url]https://freesound.org/s/699979/[/url] -- License: Creative Commons 0
-- drip10.mp3 by tec_studio -- [url]https://freesound.org/s/353686/[/url] -- License: Creative Commons 0
-- Footstep_Water_03.wav by LittleRobotSoundFactory -- [url]https://freesound.org/s/270429/[/url] -- License: Attribution 4.0
-- 6000 Retro Sound Effects: [url]https://subspaceaudio.itch.io/6000-retro-sound-effects[/url]
-- 1000 Retro Sound Effects: [url]https://subspaceaudio.itch.io/1000-retro-sound-effects[/url]
-- Echoes Audio Super Kit: [url]https://pizzadoggy.itch.io/echoes-audio-super-kit[/url]
-
-[font_size=24][b][center]Shaders[/center][/b][/font_size]
-
-3D Item Highlighter
-
-- [url]https://godotshaders.com/shader/3d-item-highlighter-easier-to-adjust-supports-all-directions/[/url]
-- MIT license
-
-PSX/CRT Retro Shader for Godot
-
-- [url]https://godotshaders.com/shader/psx-crt-retro-shader-for-godot/[/url]
-- CC0 license
-
-[font_size=24][b][center]Software[/center][/b][/font_size]
-
-Godot engine
-
-- [url]https://godotengine.org/[/url]
-- MIT license
-
-[font_size=20][b][center]Libraries[/center][/b][/font_size]
-
-DebugDraw3D
-
-- [url]https://github.com/DmitriySalnikov/godot_debug_draw_3d[/url]
-- MIT license
-
-Dialogue Manager
-
-- [url]https://github.com/nathanhoad/godot_dialogue_manager[/url]
-- MIT license
-
-Func Godot
-
-- [url]https://github.com/func-godot/func_godot_plugin[/url]
-- MIT license
-
-GECS
-
-- [url]https://github.com/csprance/gecs/[/url]
-- CC0-1.0 license
-
-Improved Kinematic Character Controller
-
-- [url]https://github.com/DinkeyKing/Improved-KCC[/url]
-- MIT license
-
-QuakeLamp
-
-- [url]https://github.com/ioannis-koukourakis/quake-style-light-animations-for-the-godot-engine[/url]
-- MIT license
-
-Vision Cone 3D
-
-- [url]https://github.com/Tattomoosa/VisionCone3D[/url]
-- MIT license
-
-[font_size=24][b][center]License Text[/center][/b][/font_size]
-
-[font_size=20][b][center]MIT License[/center][/b][/font_size]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-[font_size=20][b][center]CC0[/center][/b][/font_size]
-
-[url]https://creativecommons.org/publicdomain/zero/1.0/legalcode[/url]
-
-1. The person who associated a work with this deed has [b]dedicated[/b] the work to the public domain by waiving all of his or her rights to the work worldwide under copyright law, including all related and neighboring rights, to the extent allowed by law.
-2. You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission. See [b]Other Information[/b] below.
-
-[font_size=16][b][center]Other Information[/center][/b][/font_size]
-
-1. In no way are the patent or trademark rights of any person affected by CC0, nor are the rights that other persons may have in the work or in how the work is used, such as [url=https://creativecommons.org/publicdomain/zero/1.0/#ref-publicity-rights]publicity or privacy[/url] rights.
-2. Unless expressly stated otherwise, the person who associated a work with this deed makes no warranties about the work, and disclaims liability for all uses of the work, to the fullest extent permitted by applicable law.
-3. When using or citing the work, you should not imply [url=https://creativecommons.org/publicdomain/zero/1.0/#ref-endorsement]endorsement[/url] by the author or the affirmer.
-
-The above text is from [url]https://creativecommons.org/publicdomain/zero/1.0/[/url].
-
-[font_size=20][b][center]CC BY[/center][/b][/font_size]
-
-[url]https://creativecommons.org/licenses/by/4.0/[/url]
-
-You are free to:
-
-1. [b]Share[/b] — copy and redistribute the material in any medium or format for any purpose, even commercially.
-2. [b]Adapt[/b] — remix, transform, and build upon the material for any purpose, even commercially.
-3. The licensor cannot revoke these freedoms as long as you follow the license terms.
-
-Under the following terms:
-
-1. [b]Attribution[/b] — You must give [url=https://creativecommons.org/licenses/by/4.0/#ref-appropriate-credit]appropriate credit[/url], provide a link to the license, and [url=https://creativecommons.org/licenses/by/4.0/#ref-indicate-changes]indicate if changes were made[/url]. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
-2. [b]No additional restrictions[/b] — You may not apply legal terms or [url=https://creativecommons.org/licenses/by/4.0/#ref-technological-measures]technological measures[/url] that legally restrict others from doing anything the license permits."
-
 [node name="MarkdownLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
@@ -341,6 +184,10 @@ PSX Post-Apo Ultimate Prop Pack:
 
 - [https://puszke.itch.io/psx-post-apo-ultimate-prop-pack](https://puszke.itch.io/psx-post-apo-ultimate-prop-pack)
 
+Retro PSX Style Street Assets:
+
+- [https://porkbellygames.itch.io/retro-street-assets](https://porkbellygames.itch.io/retro-street-assets)
+
 Traffic Cone:
 
 - [https://ddv23.itch.io/psx-traffic-cones](https://ddv23.itch.io/psx-traffic-cones)
@@ -376,12 +223,27 @@ Particle Effect Texture Essentials:
 
 - [https://cruizrf.itch.io/60-game-cursors](https://cruizrf.itch.io/60-game-cursors)
 
+Bullet Decal:
+
+- [https://opengameart.org/content/bullet-decal](https://opengameart.org/content/bullet-decal)
+
+WGStudio - Fire Animation Loop:
+
+- [https://opengameart.org/content/wgstudio-fire-animation-loop](https://opengameart.org/content/wgstudio-fire-animation-loop)
+
 #### Sound Effects
+
+Freesound 44428:
+
+- [https://freesound.org/people/thecheeseman/sounds/44428/](https://freesound.org/people/thecheeseman/sounds/44428/)
+- CC-BY 4.0 license
+- `hurt1.wav` by thecheeseman -- [https://freesound.org/s/44428/](https://freesound.org/s/44428/) -- License: Attribution 4.0
 
 Freesound 372021:
 
 - [https://freesound.org/people/kijjaz/sounds/372021/](https://freesound.org/people/kijjaz/sounds/372021/)
 - CC0 license
+- 20161230 Kijjaz - Pattaya Beach - Far 01 by kijjaz -- [https://freesound.org/s/372021/](https://freesound.org/s/372021/) -- License: Creative Commons 0
 
 Freesound 430675:
 
@@ -403,8 +265,9 @@ Freesound 699979:
 
 Freesound 353686:
 
-- [https://freesound.org/people/tec](https://freesound.org/people/tec)_studio/sounds/353686/
+- [https://freesound.org/people/tec_studio/sounds/353686/](https://freesound.org/people/tec_studio/sounds/353686/)
 - CC0 license
+- `drip10.mp3` by tec_studio -- https://freesound.org/s/353686/ -- License: Creative Commons 0
 
 Freesound 270429:
 
@@ -537,6 +400,5 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Back"
 
-[connection signal="meta_clicked" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/RichTextLabel" to="." method="_on_url_clicked"]
 [connection signal="unhandled_link_clicked" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/MarkdownLabel" to="." method="_on_url_clicked"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
