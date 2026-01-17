@@ -152,7 +152,7 @@ func load_level(level_name: String, spawn_point: String) -> void:
 	var level_hints := level_data.loading_hints.duplicate()
 	if level_data.hint_mode == level_data.HintMode.APPEND:
 		# TODO: make sure these don't accumulate over multiple level loads
-		level_hints.append_array(campaign.hints)
+		level_hints.append_array(campaign.loading_hints)
 
 	%Menu.set_hints(level_hints)
 	%Menu.set_level(level_data.title, level_data.loading_image, level_data.end_image)
@@ -198,7 +198,7 @@ func load_level(level_name: String, spawn_point: String) -> void:
 		ZombieLogger.error("No fallback spawn point: Markers/Start")
 		return
 
-	var players: Array[Entity] = QueryBuilder.new(ECS.world).with_all([ZC_Player]).execute()
+	var players := EntityUtils.get_players()
 	for player in players:
 		var input := player.get_component(ZC_Input) as ZC_Input
 		input.turn_direction = spawn_node.global_rotation

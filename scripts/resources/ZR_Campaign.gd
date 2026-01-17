@@ -2,11 +2,12 @@ extends Resource
 class_name ZR_Campaign
 
 @export var title: String = "Zombie Game"
-@export var title_screen: Texture2D
-# TODO: add menu level for 3D menus
+@export var title_image: Texture2D
+@export var title_scene: PackedScene
 
 @export var levels: Array[ZR_CampaignLevel] = []
-@export var hints: Array[String] = [
+@export var loading_image: Texture2D
+@export var loading_hints: Array[String] = [
 	"Zombies are bad for your health.",
 	"Zombies are usually green.",
 	"Zombies do not like being shot in the head.",
@@ -33,7 +34,7 @@ func merge_campaign(other: ZR_Campaign) -> ZR_Campaign:
 		if level_keys.has(level.key):
 			ZombieLogger.warning("Campaign {0} is replacing level {1}!", [other.title, level.key])
 
-	self.hints.append_array(other.hints)
+	self.loading_hints.append_array(other.loading_hints)
 	self.levels.append_array(other.levels)
 	self.title = "%s (merged with %s)" % [self.title, other.title]
 

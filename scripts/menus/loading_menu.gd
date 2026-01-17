@@ -1,15 +1,18 @@
 extends ZM_BaseMenu
 
+@export_group("Loading Hints")
 @export var hints: Array[String] = []
 @export var hint_index: int = 0
 @export var hint_interval: float = 2.0
-@export var hint_label: Label
 
+@export_group("Level Info")
 @export var level_name: String
 @export var level_image: Texture2D
 
-@export var level_image_rect: TextureRect
+@export_group("Nodes")
+@export var hint_label: Label
 @export var level_label: Label
+@export var level_image_rect: TextureRect
 
 @onready var default_texture = level_image_rect.texture
 @onready var level_template = level_label.text
