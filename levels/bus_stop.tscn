@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://dirupaj1q5imr" path="res://entities/weapons/shotgun.tscn" id="2_7khm6"]
 [ext_resource type="PackedScene" path="res://entities/statics/car_5_red.tscn" id="3_tu73e"]
 [ext_resource type="PackedScene" uid="uid://ihqifrlv38ih" path="res://entities/statics/car_5_police.tscn" id="4_ccg5v"]
-[ext_resource type="PackedScene" uid="uid://tvmpfdtpvbem" path="res://entities/statics/street_light.tscn" id="5_dtwg0"]
 [ext_resource type="AudioStream" uid="uid://bskendl4eecji" path="res://assets/PSX Cars/Sound effects/Car_Engine_Loop.ogg" id="5_tjpkw"]
 [ext_resource type="PackedScene" uid="uid://dldnu5jwuvjpo" path="res://entities/props/traffic_cone_double_stripe.tscn" id="5_tr8cq"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="5_y6j6u"]
@@ -45,6 +44,7 @@
 [ext_resource type="Script" uid="uid://cv3m86tnjsecl" path="res://scripts/nodes/ZN_ChainPath3D.gd" id="34_ww45u"]
 [ext_resource type="PackedScene" uid="uid://cu5vih6rsg5c3" path="res://entities/props/chains/caution_tape.tscn" id="35_bpdcn"]
 [ext_resource type="Material" uid="uid://cnleaw3xj2l51" path="res://materials/caution_tape.tres" id="37_0rvxh"]
+[ext_resource type="PackedScene" uid="uid://di1uha2y4jgoq" path="res://entities/statics/street_lamp.tscn" id="37_2i4b2"]
 [ext_resource type="Script" uid="uid://b560n5psxwkuk" path="res://scripts/nodes/objectives/ZN_FlagObjective.gd" id="37_825fl"]
 [ext_resource type="PackedScene" uid="uid://bgehdc11cuaa3" path="res://entities/statics/jersey_barrier_0.tscn" id="42_jkntv"]
 [ext_resource type="PackedScene" uid="uid://bx5lh5ad3xbmn" path="res://entities/statics/jersey_barrier_broken_edge_0.tscn" id="43_er34s"]
@@ -658,18 +658,6 @@ transform = Transform3D(0.98582816, -0.13965197, -0.98419523, 0.03626742, 1.3902
 [node name="GrassClusterDark29" parent="Statics" instance=ExtResource("19_825fl")]
 transform = Transform3D(1.3029877, -0.092300475, -0.5036905, 0.03626742, 1.3902457, -0.1609407, 0.51079184, 0.13674015, 1.2963003, -33.23069, 0.7530024, 47.979683)
 
-[node name="StreetLight" parent="Statics" instance=ExtResource("5_dtwg0")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 23.472279, -1.0947828, -9.439066)
-
-[node name="StreetLight2" parent="Statics" instance=ExtResource("5_dtwg0")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15.527721, -1.0947828, -9.439066)
-
-[node name="StreetLight4" parent="Statics" instance=ExtResource("5_dtwg0")]
-transform = Transform3D(1, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, 1, -29.081528, -1.094779, 34.88362)
-
-[node name="StreetLight3" parent="Statics" instance=ExtResource("5_dtwg0")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -53.52772, -1.0947828, -9.439066)
-
 [node name="SignStop" parent="Statics" instance=ExtResource("13_k62ce")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.884563, 0.21824193, 1.4301579)
 
@@ -1248,6 +1236,24 @@ visibility_range_end = 35.0
 visibility_range_end_margin = 2.0
 size = Vector3(0.01, 1, 0.1)
 material = ExtResource("37_0rvxh")
+
+[node name="StreetLamp" parent="Statics" instance=ExtResource("37_2i4b2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15.741542, 0.2539003, -9.613151)
+duration = 5.5
+
+[node name="StreetLamp4" parent="Statics" instance=ExtResource("37_2i4b2")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -29.150646, 0.2539003, 34.97511)
+offset = 0.3
+
+[node name="StreetLamp2" parent="Statics" instance=ExtResource("37_2i4b2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -53.755466, 0.2539003, -9.613151)
+duration = 6.0
+offset = 0.8
+
+[node name="StreetLamp3" parent="Statics" instance=ExtResource("37_2i4b2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 23.380188, 0.2539003, -9.613151)
+duration = 8.0
+offset = 0.25
 
 [node name="Lights" type="Node3D" parent="."]
 
