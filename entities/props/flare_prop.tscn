@@ -1,0 +1,102 @@
+[gd_scene load_steps=13 format=3 uid="uid://cs083ac7ripq8"]
+
+[ext_resource type="Texture2D" uid="uid://b6erthm4w6f7v" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Spark1.png" id="6_u4ucp"]
+[ext_resource type="Texture2D" uid="uid://dj3ik1kwdyd3k" path="res://textures/Particle Effect Texture Essentials/Transparent Versions White Only/fx_Smoke6.png" id="7_1td6p"]
+[ext_resource type="Script" uid="uid://h4hsumlormm8" path="res://scripts/nodes/triggers/ZN_VariableTriggerTimer.gd" id="10_a3h3a"]
+[ext_resource type="Script" uid="uid://dlpeis5tgmelp" path="res://scripts/nodes/actions/ZN_EntityAction.gd" id="11_8voaq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1chp"]
+albedo_color = Color(0.68, 0.0816, 0.0816, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1chp"]
+radius = 0.1
+height = 0.66
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hbaku"]
+particle_flag_align_y = true
+direction = Vector3(0, 0, -1)
+spread = 15.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, -1, 0)
+linear_accel_min = 3.9999976
+linear_accel_max = 5.9999976
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hbaku"]
+transparency = 1
+albedo_color = Color(1, 0.82666665, 0.6, 1)
+albedo_texture = ExtResource("6_u4ucp")
+emission_enabled = true
+emission = Color(0.9, 0.59760004, 0.396, 1)
+emission_energy_multiplier = 2.5
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_mlme4"]
+material = SubResource("StandardMaterial3D_hbaku")
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lkehq"]
+direction = Vector3(0, 0, -1)
+spread = 15.0
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 2, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ns7lc"]
+transparency = 1
+albedo_texture = ExtResource("7_1td6p")
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_i4eog"]
+material = SubResource("StandardMaterial3D_ns7lc")
+
+[node name="Flare" type="RigidBody3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+radius = 0.1
+height = 0.5
+material = SubResource("StandardMaterial3D_r1chp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_r1chp")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03668645)
+cast_shadow = 0
+process_material = SubResource("ParticleProcessMaterial_hbaku")
+draw_pass_1 = SubResource("QuadMesh_mlme4")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D" groups=["shadow_low"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16886926)
+light_color = Color(1, 0.100000024, 0.100000024, 1)
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 30.0
+distance_fade_shadow = 25.0
+distance_fade_length = 20.0
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D"]
+cast_shadow = 0
+process_material = SubResource("ParticleProcessMaterial_lkehq")
+draw_pass_1 = SubResource("QuadMesh_i4eog")
+
+[node name="ZN_VariableTriggerTimer" type="Timer" parent="." node_paths=PackedStringArray("parent_entity")]
+wait_time = 120.0
+one_shot = true
+script = ExtResource("10_a3h3a")
+parent_entity = NodePath("")
+metadata/_custom_type_script = "uid://h4hsumlormm8"
+
+[node name="ZN_EntityAction" type="Node" parent="ZN_VariableTriggerTimer" node_paths=PackedStringArray("entity")]
+script = ExtResource("11_8voaq")
+entity = NodePath("")
+remove = true
+metadata/_custom_type_script = "uid://dlpeis5tgmelp"
