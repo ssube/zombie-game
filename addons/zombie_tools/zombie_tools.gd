@@ -12,6 +12,8 @@ func _disable_plugin() -> void:
 	# Remove autoloads here.
 	pass
 
+
+var set_random_y_rotation_button: Button
 var check_level_button: Button
 var check_lock_keys_button: Button
 var check_objective_keys_button: Button
@@ -27,6 +29,11 @@ var take_level_screenshot_button: Button
 func _enter_tree():
 	if not Engine.is_editor_hint():
 		return
+
+	set_random_y_rotation_button = Button.new()
+	set_random_y_rotation_button.text = "Set Random Y Rotation"
+	set_random_y_rotation_button.pressed.connect(set_random_y_rotation)
+	add_control_to_container(CONTAINER_SPATIAL_EDITOR_MENU, set_random_y_rotation_button)
 
 	fix_mesh_scale_button = Button.new()
 	fix_mesh_scale_button.text = "Fix Collision Mesh Scale"
@@ -80,6 +87,7 @@ func _enter_tree():
 
 
 func _exit_tree():
+	remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, set_random_y_rotation_button)
 	remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_scale_button)
 	remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, fix_mesh_rotation_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, sort_components_button)
@@ -90,6 +98,8 @@ func _exit_tree():
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, generate_diagram_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, set_prefab_path_button)
 	remove_control_from_container(CONTAINER_INSPECTOR_BOTTOM, take_level_screenshot_button)
+
+	set_random_y_rotation_button.queue_free()
 	fix_mesh_scale_button.queue_free()
 	fix_mesh_rotation_button.queue_free()
 	sort_components_button.queue_free()
@@ -100,6 +110,18 @@ func _exit_tree():
 	generate_diagram_button.queue_free()
 	set_prefab_path_button.queue_free()
 	take_level_screenshot_button.queue_free()
+
+
+func set_random_y_rotation() -> void:
+	var selected = get_editor_interface().get_selection().get_selected_nodes()
+	print("Setting random Y rotation for: ", selected)
+
+	for selection in selected:
+		var random_y = randf() * TAU
+		var rotation = selection.rotation_degrees
+		rotation.y = rad_to_deg(random_y)
+		selection.rotation_degrees = rotation
+		print("Set rotation for %s to %v" % [selection.name, selection.rotation_degrees])
 
 
 func fix_collision_mesh_scale() -> void:
