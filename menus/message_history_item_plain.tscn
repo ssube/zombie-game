@@ -44,6 +44,7 @@ custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 texture = SubResource("NoiseTexture2D_j7vo1")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="MessageLabel" type="Label" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
