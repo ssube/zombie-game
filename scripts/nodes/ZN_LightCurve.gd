@@ -3,13 +3,19 @@ extends ZN_LightGroup
 class_name ZN_LightCurve
 
 @export var duration: float = 1.0
+@export var offset: float = 0.0
 @export var loop: bool = true
 @export var run_in_editor: bool = true
 
 @export var energy_curve: Curve
 @export var color_curve: Gradient
 
+
 var _time_elapsed: float = 0.0
+
+
+func _ready() -> void:
+	_time_elapsed += offset
 
 
 func _is_valid() -> bool:
