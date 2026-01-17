@@ -36,11 +36,12 @@ theme_override_constants/v_separation = 16
 alignment = 1
 
 [node name="PostShader" type="CheckBox" parent="MarginContainer/VFlowContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 button_pressed = true
-text = "Post Shader"
+text = "CRT Shader"
 
 [node name="ResumeContainer" type="PanelContainer" parent="MarginContainer/VFlowContainer"]
 layout_mode = 2

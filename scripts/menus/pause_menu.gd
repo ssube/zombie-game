@@ -39,10 +39,11 @@ func _on_exit_pressed() -> void:
 
 
 func on_update() -> void:
-	pass
+	%PostShader.button_pressed = OptionsManager.options.graphics.crt_shader
 
 
 func _on_post_shader_toggled(toggled_on: bool) -> void:
+	OptionsManager.options.graphics.crt_shader = toggled_on
 	shader_toggled.emit(toggled_on)
 
 
