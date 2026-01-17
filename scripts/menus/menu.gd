@@ -10,6 +10,7 @@ var _custom_menu: ZM_BaseMenu = null
 const pause_menus: Dictionary[Menus, bool] = {
 	Menus.NONE: false,
 	Menus.DIALOGUE_BALLOON: false,
+	Menus.MAIN_MENU: false,
 }
 
 const quit_menus: Array[Menus] = [
@@ -214,9 +215,9 @@ func show_menu(menu: Menus, tab_index: int = -1) -> void:
 
 		# If this is the start menu, unload the current level before pausing
 		if menu == Menus.MAIN_MENU:
-			# TODO: prompt to save before unloading
+		#	# TODO: prompt to save before unloading
 			var game := TreeUtils.get_game(self)
-			game.clear_world()
+			game.load_campaign_start()
 
 		if _custom_menu != null and menu != Menus.CUSTOM_MENU:
 			_custom_menu.on_hide()

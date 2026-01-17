@@ -81,7 +81,7 @@ func _ready():
 		var level_args := CommandLineArgs.get_debug_level(user_args, campaign, debug_level, debug_marker)
 		load_level(level_args[0], level_args[1])
 	else:
-		# load_level(start_level, start_marker)
+		load_campaign_start()
 		%Menu.show_menu(ZM_BaseMenu.Menus.MAIN_MENU)
 
 func _process(delta):
@@ -206,6 +206,27 @@ func load_level(level_name: String, spawn_point: String) -> void:
 		var player3d := player.get_node(".") as Node3D
 		player3d.global_position = spawn_node.global_position
 		player3d.global_rotation = spawn_node.global_rotation
+		player3d.visible = true
+
+
+## Load the campaign start scene, if one exists.
+## TODO: add support for the title image
+func load_campaign_start() -> void:
+	clear_world()
+
+	var scene := campaign.title_scene
+	if scene == null:
+		return
+
+	var scene_instance := scene.instantiate()
+	%Level.add_child(scene_instance)
+	_register_level_entities()
+
+	# Hide all of the players
+	var players = EntityUtils.get_players()
+	for player in players:
+		var player3d := player.get_node(".") as Node3D
+		player3d.visible = false
 
 
 func add_entity(node: Node) -> void:

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ZR_Campaign" load_steps=18 format=3 uid="uid://co3r3cmvc6wyg"]
+[gd_resource type="Resource" script_class="ZR_Campaign" load_steps=19 format=3 uid="uid://co3r3cmvc6wyg"]
 
 [ext_resource type="Script" uid="uid://6e7chkl4nt6l" path="res://scripts/resources/ZR_CampaignLevel.gd" id="1_jaugy"]
 [ext_resource type="Texture2D" uid="uid://c4dnxxat0sekt" path="res://levels/fishing_pier_0.png" id="2_eupoo"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://yvupurpwmap4" path="res://levels/level_0.tscn" id="9_t8rcy"]
 [ext_resource type="Texture2D" uid="uid://dcjr225v2r8vf" path="res://levels/level_1_0.png" id="10_jaugy"]
 [ext_resource type="PackedScene" uid="uid://bse6riebwmfln" path="res://levels/level_1.tscn" id="11_x2vpa"]
+[ext_resource type="PackedScene" uid="uid://b66j8kby8r4us" path="res://levels/main_menu.tscn" id="13_2gewr"]
 [ext_resource type="Script" uid="uid://b2epsdmony1gs" path="res://scripts/resources/ZR_Campaign.gd" id="15_fe0ao"]
 
 [sub_resource type="Resource" id="Resource_7xqtk"]
@@ -63,5 +64,6 @@ metadata/_custom_type_script = "uid://6e7chkl4nt6l"
 
 [resource]
 script = ExtResource("15_fe0ao")
+title_scene = ExtResource("13_2gewr")
 levels = Array[ExtResource("1_jaugy")]([SubResource("Resource_7xqtk"), SubResource("Resource_3xt08"), SubResource("Resource_2rk21"), SubResource("Resource_ucckl"), SubResource("Resource_apgre")])
 metadata/_custom_type_script = "uid://b2epsdmony1gs"
