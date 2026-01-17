@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://daugn2cls50mg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80n2p"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.8627451)
+
+[node name="CSGCylinder3D" type="CSGBox3D"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.5, 0, 0)
+visibility_range_end = 50.0
+visibility_range_end_margin = 2.5
+size = Vector3(0.25, 1, 0.01)
+material = SubResource("StandardMaterial3D_80n2p")
+
+[node name="RopeStart" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="RopeEnd" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
