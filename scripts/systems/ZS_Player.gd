@@ -366,6 +366,8 @@ func _play_exhaustion_sound(entity: Entity) -> void:
 	if sound_node.playing:
 		return
 
+	%Menu.append_message(ZC_Message.make_system("You are too exhausted to do that!", Icons.level_warning))
+
 	if sound_node is ZN_AudioSubtitle3D:
 		var subtitle_player := sound_node as ZN_AudioSubtitle3D
 		subtitle_player.play_subtitle()
