@@ -109,7 +109,8 @@ static func use_ammo(actor: Entity, target: Entity, menu) -> HandlerStatus:
 
 	var interactive = target.get_component(ZC_Interactive) as ZC_Interactive
 	var message_text := "Picked up ammo: %s" % interactive.name
-	menu.append_message(ZC_Message.make_interaction(message_text, Icons.item_ammo))
+	var message_icon := interactive.get_icon(Icons.item_ammo)
+	menu.append_message(ZC_Message.make_interaction(message_text, message_icon))
 
 	if interactive.pickup_sound:
 		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
@@ -139,7 +140,8 @@ static func use_armor(actor: Entity, target: Entity, menu) -> HandlerStatus:
 
 	var interactive = armor.get_component(ZC_Interactive) as ZC_Interactive
 	var message_text := "Picked up armor: %s" % interactive.name
-	menu.append_message(ZC_Message.make_interaction(message_text, Icons.item_armor))
+	var message_icon := interactive.get_icon(Icons.item_armor)
+	menu.append_message(ZC_Message.make_interaction(message_text, message_icon))
 
 	# TODO: this should already be handled in the equip item helper
 	var entity3d := target.get_node(".") as RigidBody3D
@@ -166,6 +168,7 @@ static func use_button(_actor: Entity, target: Entity, menu: ZM_Menu) -> Handler
 	# TODO: should add a pressed-by relationship that is used by the button observer
 	var interactive = target.get_component(ZC_Interactive) as ZC_Interactive
 	var message_text := "Used button: %s" % interactive.name
+	var message_icon := interactive.get_icon(Icons.concept_button)
 
 	if button.is_toggle:
 		button.is_pressed = not button.is_pressed
@@ -175,7 +178,7 @@ static func use_button(_actor: Entity, target: Entity, menu: ZM_Menu) -> Handler
 		button.is_pressed = true
 		message_text = "Pressed button: %s" % interactive.name
 
-	menu.append_message(ZC_Message.make_interaction(message_text, Icons.concept_button))
+	menu.append_message(ZC_Message.make_interaction(message_text, message_icon))
 
 	return HandlerStatus.CONTINUE
 
@@ -233,7 +236,8 @@ static func use_food(actor: Entity, target: Entity, menu: ZM_Menu) -> HandlerSta
 
 	var interactive = target.get_component(ZC_Interactive) as ZC_Interactive
 	var message_text := "Used food: %s" % interactive.name
-	menu.append_message(ZC_Message.make_interaction(message_text, Icons.item_food))
+	var message_icon := interactive.get_icon(Icons.item_food)
+	menu.append_message(ZC_Message.make_interaction(message_text, message_icon))
 
 	EntityUtils.remove(target)
 	return HandlerStatus.STOP
@@ -259,7 +263,8 @@ static func use_inventory(actor: Entity, target: Entity, menu) -> HandlerStatus:
 
 		var interactive = item.get_component(ZC_Interactive) as ZC_Interactive
 		var message_text := "Found item: %s" % interactive.name
-		menu.append_message(ZC_Message.make_interaction(message_text, Icons.concept_gift))
+		var message_icon := interactive.get_icon(Icons.concept_gift)
+		menu.append_message(ZC_Message.make_interaction(message_text, message_icon))
 
 	return HandlerStatus.CONTINUE
 
@@ -272,10 +277,12 @@ static func use_key(actor: Entity, target: Entity, menu: ZM_Menu) -> HandlerStat
 	var player := actor.get_component(ZC_Player) as ZC_Player
 	var key = target.get_component(ZC_Key)
 	player.add_key(key.name)
-	var message_text := "Found key: %s" % key.name
-	menu.append_message(ZC_Message.make_interaction(message_text, Icons.concept_key))
-
+	
 	var interactive = target.get_component(ZC_Interactive) as ZC_Interactive
+	var message_text := "Found key: %s" % key.name
+	var message_icon := interactive.get_icon(Icons.concept_key)
+	menu.append_message(ZC_Message.make_interaction(message_text, message_icon))
+
 	if interactive.pickup_sound:
 		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D
 		_add_sound(sound, actor)
@@ -331,7 +338,7 @@ static func use_weapon(actor: Entity, target: Entity, menu) -> HandlerStatus:
 
 	var interactive = weapon.get_component(ZC_Interactive) as ZC_Interactive
 	var message_text := "Found new weapon: %s" % interactive.name
-	var message_icon := Icons.get_weapon_icon(weapon)
+	var message_icon := interactive.get_icon(Icons.get_weapon_icon(weapon))
 	menu.append_message(ZC_Message.make_interaction(message_text, message_icon))
 
 	return HandlerStatus.STOP
@@ -358,10 +365,15 @@ static func pickup_item(actor: Entity, target: Entity, menu) -> HandlerStatus:
 		var body := target.get_node(".") as RigidBody3D
 		CollisionUtils.freeze_body_static(body)
 
+	if target.get_node(".") is PhysicsBody3D:
+		var body := target.get_node(".") as PhysicsBody3D
+		CollisionUtils.disable_shapes(body)
+
 	actor.add_relationship(RelationshipUtils.make_holding(target))
 
 	var message_text := "Picked up item: %s" % interactive.name
-	menu.append_message(ZC_Message.make_interaction(message_text, Icons.concept_gift))
+	var message_icon := interactive.get_icon(Icons.concept_gift)
+	menu.append_message(ZC_Message.make_interaction(message_text, message_icon))
 
 	if interactive.pickup_sound:
 		var sound := interactive.pickup_sound.instantiate() as ZN_AudioSubtitle3D

@@ -9,6 +9,8 @@ enum CrosshairType {
 @export var name: String = "Interactive Object"
 @export var distance: float = 3.0
 @export var pickup: bool = true
+@export var icon: Texture2D
+
 # TODO: implement use time
 # @export var use_time: float = 0.0
 
@@ -43,3 +45,10 @@ enum CrosshairType {
 @export_group("Sounds")
 @export var pickup_sound: PackedScene
 @export var use_sound: PackedScene
+
+
+func get_icon(default: Texture2D) -> Texture2D:
+	if icon != null:
+		return icon
+
+	return default
