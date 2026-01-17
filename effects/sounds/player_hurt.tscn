@@ -1,13 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://cmyplaoxhtlit"]
 
-[ext_resource type="AudioStream" uid="uid://b8ype8jy3yrfn" path="res://sounds/1000 Retro Sound Effects/Death & Damage/Simple Damage Sounds/sfx_damage_hit6.ogg" id="1_jddik"]
-[ext_resource type="Script" uid="uid://mcuf24u8q14t" path="res://scripts/nodes/ZN_AudioSubtitle3D.gd" id="2_s5vsk"]
+[ext_resource type="AudioStream" uid="uid://c6gbn0uwuenk6" path="res://sounds/player_hurt_44428_freesound.ogg" id="1_jddik"]
+[ext_resource type="Script" uid="uid://bf5mlyrquihqy" path="res://scripts/nodes/ZN_AudioVariable3D.gd" id="2_jddik"]
 
 [node name="PlayerHurt" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_jddik")
+volume_db = -6.0
+max_polyphony = 2
 bus = &"Effects"
-script = ExtResource("2_s5vsk")
+script = ExtResource("2_jddik")
+pitch_variation_max = 1.0
+volume_variation_min = 0.4
+volume_variation_max = 0.65
 play_on_ready = true
 subtitle_text = "Player Hurt"
 subtitle_radius = 3.0
-metadata/_custom_type_script = "uid://mcuf24u8q14t"
+metadata/_custom_type_script = "uid://bf5mlyrquihqy"
