@@ -224,6 +224,17 @@ visible = false
 [node name="CreditsMenu" parent="MenuLayer" instance=ExtResource("26_w7blf")]
 visible = false
 
+[node name="CoverLayer" type="CanvasLayer" parent="."]
+
+[node name="BlackRect" type="ColorRect" parent="CoverLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
 [connection signal="back_pressed" from="MenuLayer/GameHud" to="." method="_on_back_pressed"]
 [connection signal="menu_changed" from="MenuLayer/GameHud" to="." method="_on_menu_changed"]
 [connection signal="menu_quit_requested" from="MenuLayer/GameHud" to="." method="_on_quit_requested"]

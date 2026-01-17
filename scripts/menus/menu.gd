@@ -1,6 +1,7 @@
 extends ZM_BaseMenu
 class_name ZM_Menu
 
+@export var fade_in_time: float = 1.5
 @export var visible_menu: Menus = Menus.NONE
 var previous_menu: Menus = Menus.MAIN_MENU
 
@@ -55,6 +56,12 @@ func _ready() -> void:
 	$EffectLayer/HealEffect.modulate.a = 0.0
 	$EffectLayer/VignetteEffect.material.set_shader_parameter("softness", 0.0)
 	$EffectLayer/WaterEffect.modulate.a = 0.0
+
+	$PostLayer.visible = OptionsManager.options.graphics.crt_shader
+
+	var fade_tween := create_tween()
+	fade_tween.tween_property($CoverLayer/BlackRect, "modulate:a", 0.0, fade_in_time)
+	fade_tween.tween_callback($CoverLayer/BlackRect.queue_free)
 
 
 func _unhandled_input(event: InputEvent) -> void:
