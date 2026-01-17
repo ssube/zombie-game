@@ -184,6 +184,9 @@ static func unequip_item(character: ZE_Character, item: ZE_Base) -> bool:
 	if item_body is RigidBody3D:
 		CollisionUtils.freeze_body_static(item_body)
 
+	if item_body is PhysicsBody3D:
+		CollisionUtils.disable_shapes(item_body)
+
 	item.emit_action(Enums.ActionEvent.ITEM_UNEQUIP, character)
 
 	return true
