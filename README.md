@@ -8,7 +8,7 @@ For a complete list of features, see [docs/features.md](docs/features.md).
 
 ### Highlights
 
-- **Dynamic Health and Stamina Systems** - Manage your resources carefully as you sprint, fight, and survive. Health be restored with food while stamina drains with every action and regenerates over time, creating tactical choices in combat.
+- **Dynamic Health and Stamina Systems** - Manage your resources carefully as you sprint, fight, and survive. Health can be restored with food while stamina drains with every action and regenerates over time, creating tactical choices in combat.
 - **Critical Hits and Headshots** 💀 - Aim for the head to deal devastating damage! Body region targeting with configurable damage multipliers rewards precision and skill.
 - **Full Persistence with ECS** - Built on GECS with complete save/load support including entity relationships and deletion tracking. Your progress persists exactly as you left it, down to which zombies you've eliminated.
 - **Mod-Friendly Custom Levels** 🗺️ - Create your own campaigns using Trenchbroom's Quake-style brush mapping through FuncGodot integration. Build entire towns with minimal setup and automatic surface type detection.
@@ -17,19 +17,45 @@ For a complete list of features, see [docs/features.md](docs/features.md).
 - **Node-Based Interaction System** - Build complex triggers and actions with visual node trees. Add interactive doors, pressure plates, timed events, and custom behaviors without writing code.
 - **Intelligent Zombie AI** 🧠 - Zombies use finite state machines integrated with the ECS architecture, complete with persistent blackboards for memory. They hunt, wander, and swarm based on what they see and hear.
 - **Branching Survivor Dialogue** - Encounter friendly survivors with full dialogue trees powered by Dialogue Manager. NPCs react to your choices and remember previous conversations.
+- **Climbable Ladders** 🪜 - Vertical movement zones that transform controls for climbing. Place trigger areas in your levels for intuitive ladder mechanics.
+- **ChainPath3D for Decorative Lines** ⛓️ - Procedurally generate hanging chains, ropes, power lines, and caution tape between anchor points with realistic catenary curves.
+- **Readable Books and Signs** 📖 - Component-based text displays with BBCode and Markdown formatting. Books support multiple pages; signs can show dynamic content from entity data.
+- **Inventory and Containers** 📦 - Full inventory system with equipment slots and lootable world containers. Place crates, lockers, and chests that hold items for players to discover.
+- **Developer Console** 💻 - In-game console with level loading, item spawning, entity inspection, and more. Extensible command system for modders.
+- **Message History Panel** 📜 - Scrolling, color-coded message log with icons for subtitles, interactions, and system messages. Never miss important information.
+- **3D Menu Background** 🎬 - Animated scenes displayed behind the main menu create atmosphere before gameplay begins.
+
+## Debug Tools
+
+- Developer console with commands: `load`, `give`, `spawn`, `debug`, `clear`, `help`
+- Visual overlays for debugging (toggle in cheats menu):
+  - FSM behavior states shown as colored markers with state names
+  - Sound emission radii displayed as green wireframe spheres
+  - Perception lines drawn from entities to detected stimuli
+  - Navigation paths shown as blue arrows with destination spheres
+  - Player interaction raycast visualized as red/green lines
+- Entity inspection with `debug` command draws bounding boxes and prints component summaries
+- Configurable log levels via `--log-level` CLI argument
+- Automatic log level selection based on build type (debug vs release)
 
 ## Addons
 
+- **Debug Draw 3D** - 3D debug shape drawing utilities
+  - https://github.com/DmitriySalnikov/godot_debug_draw_3d
 - **Debug Menu** - Framerate and frame time display
   - https://github.com/godot-extended-libraries/godot-debug-menu
 - **Dialogue Manager** - Dialogue randomization and conversation trees
   - https://github.com/nathanhoad/godot_dialogue_manager
 - **Func Godot** - Quake-style map import from Trenchbroom
   - https://github.com/func-godot/func_godot_plugin
-- **GECS** - Entity Componeknt System framework
+- **gdUnit4** - Unit testing framework for Godot
+  - https://github.com/godot-gdunit-labs/gdUnit4
+- **GECS** - Entity Component System framework
   - https://github.com/csprance/gecs/
 - **Godot Object Serializer** - JSON support for save games
   - https://github.com/Cretezy/godot-object-serializer
+- **Markdown Label** - Markdown support for UI labels
+  - https://github.com/daenvil/MarkdownLabel
 - **Quake-Style Light Animations for Godot** - Light animation support
   - https://github.com/ioannis-koukourakis/quake-style-light-animations-for-the-godot-engine
 - **VisionCone3D** - Vision cone checks for AI detection
@@ -39,13 +65,7 @@ For a complete list of features, see [docs/features.md](docs/features.md).
 
 ## Assets
 
-### Structure
-
-TODO: document asset structure
-
-### Asset Packs
-
-TODO: list paid asset packs
+Please see [the credits document](docs/credits.md) for a full list of assets and attributions.
 
 ## Singletons
 
@@ -142,26 +162,31 @@ These utilities are used throughout the codebase to maintain consistent entity h
 The game includes several ECS components and systems that can be extracted and reused in other projects:
 
 ### Health System
+
 - **ZC_Health** - Component tracking current and maximum health with configurable hurt/death sounds and automatic property change notifications.
 - **ZS_HealthSystem** - Processes damage relationships and applies damage to entities. Supports multiple damage calculation modes (last damage source vs. most damage source) and includes armor multipliers and healing.
 
 ### Movement System
+
 - **ZC_Velocity** - Component storing linear velocity, gravity, and speed multipliers for physics-based movement.
 - **ZS_MovementSystem** - Processes entities with movement targets, calculating directions and applying velocity. Integrates with effect modifiers (speed buffs/debuffs) and supports both 2D ground-based and 3D aerial movement.
 
 ### Footstep System
+
 - **ZC_Footstep** - Component defining footstep intervals for different movement speeds (crouch, walk, sprint) with configurable sound variations.
 - **ZS_FootstepSystem** - Automatically plays surface-appropriate footstep sounds based on entity velocity and raycast collision detection. Adjusts volume and timing based on movement state (sprinting, crouching, walking).
 
 ### Projectile System
+
 - **ZC_Projectile** - Component defining projectile properties including velocity, damage, lifetime, piercing count, and mass for physics interactions.
 - **ZS_ProjectileSystem** - Handles raycast-based projectile collisions with body region damage multipliers, impact decals, surface-specific sounds, and physics impulses. Automatically tracks projectile sources through ECS relationships.
 
 ### Screen Effect System
+
 - **ZC_Screen_Effect** - Component for timed visual effects with configurable strength and duration (damage overlays, screen filters, etc.).
 - **ZS_EffectSystem** - Processes screen effects with automatic expiration, allowing stacking and blending of multiple simultaneous effects.
 
-### And Many More...
+### And Many More
 
 Additional reusable components for common game mechanics:
 
@@ -182,19 +207,28 @@ All systems use GECS query builders for efficient entity filtering and support E
 
 - Melee impact sounds
 - Explosion decals
+- Itch.io page and public demo
 
 ### Completed
 
-- ~~Debug cheats (no clip, god mode, no aggro)~~
+- ~~Debug cheats (god mode, no aggro)~~
 - ~~Ammo system with types and fire modes~~
 - ~~Zombie horde following behavior~~
+- ~~Ladders and vertical movement~~
+- ~~ChainPath3D decorative node~~
+- ~~Books and signs system~~
+- ~~World containers~~
+- ~~Developer console~~
+- ~~Debug visualizations~~
+- ~~Message history panel~~
+- ~~3D menu background~~
+- ~~Save/load with ECS relationships~~
 
 ### Planned
 
 - Stealth mechanics (door peeking, audio detection)
 - Ranged zombie attacks
 - Survivor AI (follow paths, follow player, flee)
-- Public release with itch.io page
 - Additional weapons (stick, rock throwing)
 - Multiple weapon muzzle markers for alternating/simultaneous fire
 
